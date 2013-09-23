@@ -1,0 +1,134 @@
+\chapter{PyRAF}
+\label{ch:pyraf}
+ 
+\section{PyRAF Introduction}
+
+PyRAF calls IRAF tasks from Python.  One of the main motivations for
+creating PyRAF is to create a version of IRAF that is compatible with
+a programming language other than CL. CL has many short comings which
+are more and more apparent in more complicated programs.
+
+PyRAF has its own interactive PyRAF session.  To start it, just type
+`pyraf' in a terminal.  This should look familiar to you if you know
+IRAF.  Type `.exit' to exit.  The remaining part of this chapter will
+have you import PyRAF into Python unless otherwise stated.
+
+\section{A PyRAF Example with {\sf iraf.daofind()}}
+
+Again, create a file in your script directory, and open it in your
+favorite editor.  Add your header.  For your 'ABOUT' section, we will
+be creating a script showing how python can be used to execute
+IRAF/PyRAF tasks. We will use the same example data from
+Chapter~\ref{ch:pyfits}, n9vf01hfq\_ima.fits.
+
+Import the PyRAF module and from within that module import the IRAF
+instance.  The code for importing these functions looks like this:
+
+\begin{verbatim}
+#Load the packages we need 
+import pyraf 
+from pyraf import iraf
+from iraf import noao, digiphot, daophot
+\end{verbatim}
+
+As you can infer `iraf' is something that lives inside of `pyraf'.
+For example, if you want to run {\sf\small phot} on some files you
+need to create a list of coordinates.  To do this we will use
+{\sf\small daofind}.  Since {\sf\small daofind} is an iraf module, we
+execute it using dot notation, like this:
+
+\texttt{iraf.daofind(parameter1,parameter2,parameter3)}
+
+The parameters for a PyRAF task executed in the python environment are
+the same as they would be in the PyRAF environment. Pull up a PyRAF
+window and open the help file to see what the parameters for
+{\sf\small iraf.daofind()} are. Now are going to run {\sf\small
+  iraf.daofind()} on the file n9vf01hfq\_ima.fits.  
+
+\begin{verbatim}
+#Run daofind on one image  
+iraf.daofind(image='n9vf01hfq_ima.fits[1]')  
+\end{verbatim}
+
+The `[1]' is for extension `1'.  You should be prompted for several
+parameters, just hit `enter' to go through the defaults.  Type `ls' in
+the directory where you ran this -- there should now be a file called
+n9vf01hfq\_ima.fits1.coo.1. In PyRAF open up the file and look at the
+output, then compare this with the image on DS9.  Did {\sf\small
+  iraf.daofind()} do a good job?  You can facilitate this process with
+the {\sf\small tvmark} task.
+
+\begin{alltt}
+\termtab pyraf  
+\pyraftab images 
+\pyraftab !ds9 & 
+\pyraftab display n9vf01hfq_ima.fits[1] 1
+\end{alltt}
+
+The last '1' is for which DS9 frame to display in.
+
+\begin{alltt}
+\pyraftab tv  
+\pyraftab tvmark 1 n9vf01hfq_ima.fits1.coo.1
+\end{alltt}
+
+We can see that we did not to too well, but let's ignore that for now
+and work on our program.
+
+Go ahead and run this program again, and you will see that it will
+create a second file called n9vf01hfq\_ima.fits1.coo.2. What if we did
+not want so many files and instead wanted to always write to
+n9vf01hfq\_ima.fits1.coo.1?  IRAF might have a problem overwriting
+this file, so a simple solution would be to remove it.  For this we
+will need to import {\sf\small os}.  Furthermore, if we don't want to
+have to press `enter' at the prompt, we can add to our program the
+extra parameters it is looking for.  Finally, let's write this program
+so that we can run the process on multiple files.  For that we will
+import {\sf\small glob}.
+
+Here is what we have:
+
+\begin{verbatim}
+#! /usr/bin/env python
+# HEADER
+
+#Load the packages we need 
+import pyraf, os, glob  
+from pyraf import iraf
+from iraf import noao, digiphot
+  
+#Generate a list of all the fits files
+file_list = glob.glob('*_ima.fits') 
+print file_list 
+
+#Loops though all the .fits files 
+for file in file_list: 
+    #Test for old files, and remove them if they exist
+    file_query = os.access(file + '1.coo.1', os.R_OK)  
+    if file_query == True: 
+        os.remove(file + '1.coo.1')  
+    #Run daofind on one image  
+    iraf.daofind( 
+        image = file + '[1]',  
+        interactive = 'no',  
+        verify = 'no')  
+\end{verbatim}
+
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+  Write your script that uses {\sf\small iraf.daofind()}.}
+
+Anytime you change the default settings to a PyRAF command it is a
+good idea to change them back.  You can do this with the {\sf\small
+  iraf.unlearn()} command as shown below.
+
+\begin{alltt}
+\pyraftab iraf.daofind.unlearn()
+\pyraftab iraf.unlearn('daofind')
+\end{alltt}
+
+
+
+
+
+

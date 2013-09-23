@@ -1,0 +1,57 @@
+\contentsline {chapter}{\numberline {1}Basic Python Concepts}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Introduction }{1}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}A Few Notes on Python}{1}{subsection.1.1.1}
+\contentsline {section}{\numberline {1.2}Environment and Set Up}{2}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}IRAF and PyRAF Environment}{2}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Interactive Python Environment}{2}{subsection.1.2.2}
+\contentsline {section}{\numberline {1.3}Built-In Data Types}{3}{section.1.3}
+\contentsline {section}{\numberline {1.4}Objects, Instances, Attributes, Functions, and Methods, }{5}{section.1.4}
+\contentsline {section}{\numberline {1.5}Double Underscore}{6}{section.1.5}
+\contentsline {section}{\numberline {1.6}Common Built-In Functions and Statements}{6}{section.1.6}
+\contentsline {subsection}{\numberline {1.6.1} {\sf print } function}{6}{subsection.1.6.1}
+\contentsline {subsection}{\numberline {1.6.2} {\sf help() } function}{7}{subsection.1.6.2}
+\contentsline {subsection}{\numberline {1.6.3} {\sf range() } function}{8}{subsection.1.6.3}
+\contentsline {subsection}{\numberline {1.6.4} {\sf dir() } function}{8}{subsection.1.6.4}
+\contentsline {subsection}{\numberline {1.6.5} {\sf len() } function}{8}{subsection.1.6.5}
+\contentsline {subsection}{\numberline {1.6.6} {\sf for } loop}{9}{subsection.1.6.6}
+\contentsline {subsection}{\numberline {1.6.7} {\sf xrange() } function}{9}{subsection.1.6.7}
+\contentsline {subsection}{\numberline {1.6.8} {\sf try ... except } statement}{10}{subsection.1.6.8}
+\contentsline {section}{\numberline {1.7}Importing Modules, and Common Functions}{11}{section.1.7}
+\contentsline {subsection}{\numberline {1.7.1} {\sf math.sqrt() } function}{11}{subsection.1.7.1}
+\contentsline {subsection}{\numberline {1.7.2} {\sf glob.glob() } function}{11}{subsection.1.7.2}
+\contentsline {subsection}{\numberline {1.7.3} {\sf random.random() } function}{12}{subsection.1.7.3}
+\contentsline {subsection}{\numberline {1.7.4} {\sf re.search() } function}{12}{subsection.1.7.4}
+\contentsline {subsection}{\numberline {1.7.5} {\sf os.getcwd() and os.chdir() } functions}{12}{subsection.1.7.5}
+\contentsline {subsection}{\numberline {1.7.6} {\sf sys.exit()} function}{13}{subsection.1.7.6}
+\contentsline {chapter}{\numberline {2}NumPy and Data Arrays}{15}{chapter.2}
+\contentsline {section}{\numberline {2.1}The Uses of NumPy }{15}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}NumPy's array vs. Python's built-in list}{15}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2} {\sf numpy.array() } function}{16}{subsection.2.1.2}
+\contentsline {section}{\numberline {2.2}What a NumPy array really is and a word of caution}{17}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1} {\sf numpy.copy() } function}{17}{subsection.2.2.1}
+\contentsline {section}{\numberline {2.3}Other Common NumPy Functions}{18}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1} {\sf numpy.arange() } function}{18}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2} {\sf numpy.empty() } function}{18}{subsection.2.3.2}
+\contentsline {subsection}{\numberline {2.3.3} {\sf numpy.where() } function}{19}{subsection.2.3.3}
+\contentsline {subsection}{\numberline {2.3.4} {\sf numpy.loadtxt() } function}{20}{subsection.2.3.4}
+\contentsline {chapter}{\numberline {3}Plotting with PyLab}{23}{chapter.3}
+\contentsline {section}{\numberline {3.1}matplotlib.pylab }{23}{section.3.1}
+\contentsline {section}{\numberline {3.2}Plot with PyLab}{23}{section.3.2}
+\contentsline {chapter}{\numberline {4}Python Scripts and Functions}{27}{chapter.4}
+\contentsline {section}{\numberline {4.1}MyFirstScript.py}{27}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Executing Python Scripts}{29}{subsection.4.1.1}
+\contentsline {section}{\numberline {4.2}Adding Functions}{30}{section.4.2}
+\contentsline {section}{\numberline {4.3}Passing Arguments on the Command Line and {\sf argparse}}{32}{section.4.3}
+\contentsline {section}{\numberline {4.4}Error Handling and {\sf pdb.set\_trace()}}{33}{section.4.4}
+\contentsline {chapter}{\numberline {5}PyFITS and FITS Files}{35}{chapter.5}
+\contentsline {section}{\numberline {5.1}Opening, Reading, and Closing a FITS File }{35}{section.5.1}
+\contentsline {section}{\numberline {5.2}{\sf pyfits.getval()} and {\sf pyfits.setval()} functions}{36}{section.5.2}
+\contentsline {chapter}{\numberline {6}Classes}{39}{chapter.6}
+\contentsline {section}{\numberline {6.1}Class Definition}{39}{section.6.1}
+\contentsline {section}{\numberline {6.2}Class Inheritance}{40}{section.6.2}
+\contentsline {chapter}{\numberline {7}PyRAF}{43}{chapter.7}
+\contentsline {section}{\numberline {7.1}PyRAF Introduction}{43}{section.7.1}
+\contentsline {section}{\numberline {7.2}A PyRAF Example with {\sf iraf.daofind()}}{43}{section.7.2}
+\contentsline {chapter}{\numberline {8}Resources}{47}{chapter.8}
+\contentsline {section}{\numberline {8.1}Useful Links }{47}{section.8.1}
+\contentsline {section}{\numberline {8.2}Mailing Lists}{48}{section.8.2}

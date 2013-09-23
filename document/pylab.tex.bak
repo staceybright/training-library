@@ -1,0 +1,108 @@
+\chapter{Plotting with PyLab}
+\label{ch:pylab}
+%%\thispagestyle{empty}
+
+\section{matplotlib.pylab }
+Matplotlib and its PyLab environment is a versatile Python plotting
+library which produces publication quality figures in a variety of
+hard-copy formats such as EPS, PDF, etc.  With PyLab you can
+generate scatter and line plots, histograms, power spectra, bar
+charts, error-charts, pie charts, and many more with just a few lines
+of code. For the power user, you have full control of line styles,
+font properties, and axes properties, etc.
+
+\section{Plot with PyLab}
+From Section~\ref{ss:loadtxt} we learned how to read in data from a
+file, particularly Gordon2005\_Fig16.txt.  We will reproduce the slope
+plot in Figure~16 of the Gordon 2005 paper. 
+
+\texttt{
+  \begin{tabbing}
+    \pytab \=import numpy as N \\
+    \pytab infile = 'Gordon2005\_Fig16.txt' \\
+    \pytab slope, ran\_slope\_unc, corr\_slope\_unc, both\_slope\_unc,
+    \textbackslash \\
+    \> eqn\_slope\_unc = N.loadtxt(infile, usecols=(0, 1, 2, 3, 4),
+    unpack=True) \\
+  \end{tabbing}
+}
+
+These arrays have nice descriptive names, but to help make the
+plotting process clear, we will assign short names.
+
+\texttt{
+  \pytab xx = slope  \\
+  \pytab yy1 = ran\_slope\_unc  \\
+  \pytab yy2 = corr\_slope\_unc  \\
+  \pytab yy3 = both\_slope\_unc  \\
+  \pytab yy4 = eqn\_slope\_unc \\
+}
+
+Now we will import PyLab and make our first plot.
+
+\texttt{
+  \pytab import pylab as P  \\
+  \pytab P.plot(xx,yy1)  \\
+  \pytab P.plot(xx,yy1,'b--',xx,yy2,'r:',xx,yy3,'g-',xx,yy4,'m-.')  \\
+}
+
+Notice that `b' is for blue, `r' is for red, `g' is for green, and `m'
+is for magenta.  Furthermore, `-' is for a solid line, `--' is for a
+dashed line, `:' is for a dotted line, and `-.' is for a dot-dash
+line.  Several other options are available as well and can be found on
+the PyLab site listed in Chapter~\ref{ch:links}.
+
+The lines are pretty faint, and we also need to add a legend and axis
+labels.
+
+\texttt{
+  \begin{tabbing}
+    \pytab \=P.plot(xx,yy1,'b--',xx,yy2,'r:',xx,yy3,'g-', \textbackslash \\
+    xx,yy4,'m-.',linewidth=3) \\
+    \pytab P.legend(('Random Uncertainty','Correlated Uncertainty',
+    \textbackslash \\
+    \> 'Both','Equation'),'best') \\
+    \pytab P.ylabel('Slope Unc. [e-/s]') \\
+    \pytab P.xlabel('Slope [e-/s]') \\
+  \end{tabbing}
+}
+
+We can save this plot.  The figure will save as a PDF, PNG, TIFF, and
+others depending on the name given.
+
+\texttt{
+  \pytab P.savefig('fig16.pdf') \\
+  \pytab P.close()
+}
+
+Notice that we needed to close the figure.  Open fig16.pdf and take a
+look.  It looks pretty good, right?  If you look at the paper by
+Gordon et al. 2005, you will see that the key thing we are missing is
+logarithmic axis.  Instead of {\sf \small pylab.plot} we will use {\sf
+\small pylab.loglog}.
+
+\texttt{
+  \begin{tabbing}
+    \pytab \=P.loglog(xx,yy1,'b--',xx,yy2,'r:',xx,yy3,'g-',
+    \textbackslash \\
+    \> xx,yy4,'m-.',linewidth=3) \\
+    \pytab P.legend(('Random Uncertainty','Correlated Uncertainty', 
+    \textbackslash \\
+    \> 'Both','Equation'),'best') \\
+    \pytab P.ylabel('Slope Unc. [e-/s]') \\
+    \pytab P.xlabel('Slope [e-/s]') \\
+    \pytab P.savefig('fig16\_log.pdf') \\
+    \pytab P.close()
+  \end{tabbing}
+}
+
+Again, check out the figure you just made.  How does that look?  Check
+out the link \url{http://matplotlib.sourceforge.net/} listed in
+Chapter~\ref{ch:links} for more plotting options with Matplotlib and
+PyLab.  Notice that there is a link to NumPy on this page, as well as
+links to screenshots, thumbnails, and examples.
+
+Our plot is looking good, however this is getting way too messy.
+Isn't there a way we can keep this all nicely in a file, where we can
+type it once correctly and never have to type it again?  Sure there
+is!  We need to write a script.

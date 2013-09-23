@@ -1,0 +1,260 @@
+\chapter{NumPy and Data Arrays}
+\label{ch:numpy}
+
+\section{The Uses of NumPy }
+NumPy is a Python module which adds support for large,
+multi-dimensional arrays and matrices, along with a large library of
+high-level mathematical functions to operate on these arrays. NumPy
+addresses the problems of speed in interpreting languages by providing
+multi-dimensional arrays and lots of functions and operators that
+operate on arrays. Any algorithm that can be expressed primarily as
+operations on arrays and matrices can run almost as fast as the
+equivalent C code.
+
+\subsection{NumPy's array vs. Python's built-in list}
+NumPy introduces new data types, but the most popular, versatile, and
+useful one is the array.  This is similar to arrays in IDL.  There
+are several reasons why you would want to use a NumPy array over
+Python's built-in list.
+\begin{itemize}
+\item NumPy, PyLab, SciPy, PyFITS and other modules' functions often
+  work with NumPy arrays.
+\item Every item in a NumPy array is of the same data type.  This
+  means there is less information to keep track of which makes array
+  computations faster.
+\item NumPy arrays act as vectors and therefore we can do things such
+  as element-wise addition and multiplication.
+\end{itemize}
+
+To convert a list to an array, use {\sf \small numpy.array()}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  numpy.array
+\subsection{ {\sf numpy.array() } function}
+  {\color{blue} {\sf\small USE}} \\
+  The {\sf\small numpy.array()} function converts a list to a NumPy
+  array.  
+
+{\color{blue} {\sf\small EXAMPLES}} \\
+\begin{alltt}
+\pytab import numpy as np
+\pytab a = [1,2,3,4]      #a python built in list 
+\pytab b = np.array(a)     #converted to a NumPy array 
+\pytab print a 
+\pytab print b 
+\pytab indx = [1,2] 
+\pytab print b[indx]  
+\pytab print b[1:3]       #prints elements 1 to 2, NOT 1 to 3.  
+\pytab print b[:3], b[3:] #prints up to the 3rd element, \textbackslash
+\ldots    and then everything after the 3rd element.
+\pytab print b[-1],b[-2] 
+\pytab print b[::-1]      #reverses the array.  
+\pytab c = np.array([[1,2,3,4,5],[6,7,8,9,10]]) 
+\pytab print c 
+\pytab print c[1,3]       #indices for a multi-dimensional array 
+\pytab print c[1][3]      #this is slower than the previous as it \textbackslash
+\ldots    creates a new array, $c[1]$, and then subscripts that array.
+\pytab print c[1,:]  #print the first element in the first \textbackslash
+\ldots    dimension, but all in the second dimension
+\pytab print c[:,1] 
+\end{alltt}
+Notice when we print lists and arrays that the elements in lists are
+separated by commas while the elements in arrays are only separated by
+spaces.
+
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+  Create a list $a$ and a NumPy array $b$.  Multiply each by 2 and
+  explain what happens.  Now add 2 to each array.  Again, explain the
+  result.  } \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+  Create a third list $c$.  Add $c$ to both $a$ and
+  $b$.  Explain the result.}
+
+\section{What a NumPy array really is and a word of caution}
+
+A final note about NumPy arrays is that an array is actually
+an object which points to a block of memory.  For example, in the
+above exercise we created an array $b$.  Try the following:
+
+\texttt{\pytab d = b}
+
+Now we just created a second array, $d$.  Instead of using up twice
+the memory space, $d$ is just a pointer to the memory $b$ also points
+to (remember, we copied an array, and an array is a pointer).  Again,
+try the following:
+\begin{alltt}
+\pytab d[2] = 999 
+\pytab print d 
+\pytab print b 
+\end{alltt}
+Notice what happened to $b$.  While it saves on memory space,
+programmers have to be careful.  If you know you will want to change
+one array and not the other, the correct function to use is {\sf
+  numpy.copy()}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  numpy.copy
+\subsection{ {\sf numpy.copy() } function}
+\label{s:copy}
+{\color{blue} {\sf\small USE}} \\
+The {\sf\small numpy.copy()} function copies the contents of the
+memory space the array points to. 
+
+{\color{blue} {\sf\small EXAMPLES}} \\
+Try the code below and notice the difference in the results from a
+simple $d = b$ assignment.
+\begin{alltt}
+\pytab import numpy as np
+\pytab a = np.array([1,2,3,4,5,6,7]) 
+\pytab b = a.copy()  
+\pytab b[2] = 999  
+\pytab print b  
+\pytab print a
+\pytab a.size
+\pytab a.shape
+\end{alltt}
+
+\section{Other Common NumPy Functions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  numpy.arange
+\subsection{ {\sf numpy.arange() } function}
+{\color{blue} {\sf\small USE}} \\
+The {\sf\small numpy.arange()} function creates an integer array
+from zero to the `stop' parameter given, with a step size of one.
+The `start' and `step' can also be specified.  By setting the parameter
+`dtype' we can change the data type of the array (i.e. to float).
+
+{\color{blue} {\sf\small EXAMPLES}} 
+\begin{alltt}
+\pytab import numpy as np 
+\pytab np.arange(10) 
+\pytab 1 + np.arange(10, dtype=float) * 4 
+\pytab np.arange(1,40,4,dtype=float)
+\end{alltt}
+{\color{blue} {\sf\small SEE ALSO}} \\
+A similar function for lists is {\sf\small range()}.
+
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+Create the  sequence 0.1, 0.2,0.3, ... 1.4  using {\sf\small
+  numpy.arange()}.  Hint: As noted in the NumPy documentation for
+numpy.arange(), it is best to use integer step sizes.} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+Create the  sequence -3.2, -3.0, -2.8, ... -1.0  using {\sf\small
+  numpy.arange()}.  See above hint.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  numpy.empty
+\subsection{ {\sf numpy.empty() } function}
+{\color{blue} {\sf\small USE}} \\
+The {\sf\small numpy.empty()} function creates a float array of the
+specified dimensions. Each element of the array is whatever was left
+in that memory space, therefore it is fast but useful only if you know
+you will assign each element a meaningful value.
+  
+{\color{blue} {\sf\small EXAMPLES}} 
+\begin{alltt}
+\pytab import numpy as np 
+\pytab np.empty(10)   #pass an argument, which is the dimensions
+\pytab np.empty((3,4)) #here it is 2D, so the dimensions \textbackslash
+\ldots    we pass is a tuple
+\end{alltt}
+
+{\color{blue} {\sf\small SEE ALSO}} \\
+Other useful similar functions are {\sf\small numpy.zeros(), numpy.ones()}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  numpy.where
+\subsection{ {\sf numpy.where() } function}
+{\color{blue} {\sf\small USE}} \\
+The {\sf\small numpy.where()} function returns an array (or a tuple of
+arrays) of the indices where the condition is $True$.  Otherwise, if you
+specify substitute values, it will return an array of the same shape as
+the original with the first value substituted where the condition is
+$True$, and the second value substituted where the condition is $False$.
+  
+{\color{blue} {\sf\small EXAMPLES}} 
+\begin{alltt}
+\pytab import numpy as np
+\pytab a = np.arange(11, dtype=float) + 1
+\pytab b = np.where(a >= 8.) 
+\pytab print b 
+\pytab a[b] 
+\pytab a = np.array([1,2,3,1,2,1,1,1,1,4]) 
+\pytab b = np.where(a == 1, 1,0) 
+\pytab print b 
+\end{alltt}
+If we do not need the indices from {\sf\small numpy.where()} then we
+can just use creative indexing for the same effect.
+\begin{alltt}
+\pytab a > 5
+\pytab a[a>5]
+\end{alltt}
+
+{\color{blue} {\sf\small SEE ALSO}} \\
+Other useful similar functions are {\sf\small numpy.any(),
+  numpy.all(), numpy.nonzero(), numpy.choose()}.
+ 
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+Create a random real 10-element array with numbers between 0 and 1.
+Select those with counts lower than 0.5.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  numpy.loadtxt
+\subsection{ {\sf numpy.loadtxt() } function}
+\label{ss:loadtxt}
+
+{\color{blue} {\sf\small USE}} \\
+The {\sf\small numpy.loadtxt()} function reads in a table of data
+from a specified file.  With the `unpack' flag set the output is the
+transverse of the original output and can be assigned to multiple
+arrays.  As an example we will use the file: 
+
+/grp/jwst/wit/miri/randers/PythonTraining/Gordon2005\_Fig16.txt. 
+
+This data is from Figure 16 from Gordon, K. D., et al. 2005, PASP,
+117, 503.  Here we will read in the data, and in
+Chapter~\ref{ch:pylab} we will replicate the plots.
+
+The plots are of the uncertainties in the y-intercept and
+slope calculations respectively.  The lines are the results of 10,000
+trials of simulated data with only random errors included, only
+correlated errors included, and both included.  The circles are the
+results from  equation A30.  The plot demonstrates how well the
+equation fits the simulated data. 
+
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+  Open Gordon2005\_Fig16.txt in your favorite text editor.  Look at the
+  commented line and see if you can understand the labels there given
+  the description above.}
+
+{\color{blue} {\sf\small EXAMPLES}} \\
+\begin{alltt}
+\pytab import numpy as np 
+\pytab infile = 'Gordon2005_Fig16.txt' 
+\pytab data = np.loadtxt(infile) 
+\pytab print data 
+\pytab print 'Data shape: ',data.shape  
+\pytab slope, ran_slope_unc, corr_slope_unc, both_slope_unc,  \textbackslash
+\ldots     eqn_slope_unc, ran_yint_unc, corr_yint_unc, both_yint_unc,  \textbackslash
+\ldots     eqn_yint_unc = np.loadtxt(infile, unpack=True) 
+\pytab print 'Slope: ', slope 
+\pytab print 'Slope shape: ',slope.shape  
+\pytab yint_data = np.loadtxt(infile,usecols=(0,5,6,7,8)) 
+\pytab print 'Y-intercept data only: ',yint_data  
+\pytab print 'Slope: ',yint_data[:,0]  
+\pytab print 'Yint data shape: ',yint_data.shape 
+\pytab yint_data2 =  \textbackslash
+\ldots     np.loadtxt(infile,usecols=(0,5,6,7,8),unpack=True)  
+\pytab print 'Yint data shape with unpack: ',yint_data2.shape
+\end{alltt}
+
+Notice that when we leave $unpack$ set to $False$, the shape is [rows,
+columns], while when we do unpack, the shape is [columns, rows].
+
+{\color{blue} {\sf\small SEE ALSO}} \\
+Other useful similar functions are {\sf\small numpy.savetxt()}.
+
+Now that we have a set of data, we will make a plot of this data in
+Chapter~\ref{ch:pylab}.  
+
+Take a look at
+\url{http://www.scipy.org/Numpy\_Example\_List\_With\_Doc} listed in
+Chapter~\ref{ch:links} for a more complete list of NumPy functions.
