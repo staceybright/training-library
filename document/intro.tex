@@ -1,9 +1,9 @@
 \chapter{Basic Python Concepts}
 \label{ch:intro}
 \section{Introduction }
-Python is a free programming language which is a high level,
-interpreted scripting language, similar to PERL.  However, Python is
-also a high-level programming language and it is also object-oriented,
+Python is a free, open-source, high level interpreted scripting language, similar to PERL. 
+ However, Python is
+also a high-level object-oriented programming language,
 much like C++, Java, and Ruby.
 
 The intention of this tutorial is to provide the Python basics
@@ -31,24 +31,24 @@ python and for checking your code as you write it.
 \end{itemize}
 
 \section{Environment and Set Up}
-\subsection{IRAF and PyRAF Environment}
-There are three different versions of IRAF / PyRAF environments
+\subsection{SSB Environment}
+There are three different versions of the SSB (Science Software Branch) environments
 available at the institute.  They are:
 \begin{itemize}
-\item IRAF -- Updated as needed, standard publicly available release.
-\item IRAFX -- Updated weekly, a testing environment.  Holds latest
+\item SSBREL -- Updated as needed, standard publicly available release.
+\item SSBX -- Updated weekly, a testing environment.  Holds latest
   bug fixes and updates.  Institute only release.
-\item IRAFDEV -- Updated daily.  Development updates intended for
+\item SSBDEV -- Updated daily.  Development updates intended for
   instrument teams to test bug fixes and upgrades.  Institute only
   release. 
 \end{itemize}
-Note that the version of Python related modules depend on the IRAF /
-PyRAF environment, especially if you are using NFS mounts.  To switch
+Note that the version of Python related modules depend on the SSB
+environment, especially if you are using NFS mounts.  To switch
 to a particular version, type one of the following into your terminal: 
 \begin{alltt}
-\termtab iraf
-\termtab irafx
-\termtab irafdev
+\termtab ssbrel
+\termtab ssbx
+\termtab ssbdev
 \end{alltt}
 
 \subsection{Interactive Python Environment}
