@@ -34,9 +34,9 @@
 \BOOKMARK [2][-]{subsection.2.3.2}{ numpy.empty\(\) \040function}{section.2.3}% 34
 \BOOKMARK [2][-]{subsection.2.3.3}{ numpy.where\(\) \040function}{section.2.3}% 35
 \BOOKMARK [2][-]{subsection.2.3.4}{ numpy.loadtxt\(\) \040function}{section.2.3}% 36
-\BOOKMARK [0][-]{chapter.3}{Plotting with PyLab}{}% 37
-\BOOKMARK [1][-]{section.3.1}{matplotlib.pylab }{chapter.3}% 38
-\BOOKMARK [1][-]{section.3.2}{Plot with PyLab}{chapter.3}% 39
+\BOOKMARK [0][-]{chapter.3}{Plotting with PyPlot}{}% 37
+\BOOKMARK [1][-]{section.3.1}{matplotlib.pyplot }{chapter.3}% 38
+\BOOKMARK [1][-]{section.3.2}{Plot with Pyplot}{chapter.3}% 39
 \BOOKMARK [0][-]{chapter.4}{Python Scripts and Functions}{}% 40
 \BOOKMARK [1][-]{section.4.1}{MyFirstScript.py}{chapter.4}% 41
 \BOOKMARK [2][-]{subsection.4.1.1}{Executing Python Scripts}{section.4.1}% 42
