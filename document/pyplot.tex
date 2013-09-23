@@ -24,8 +24,8 @@ plot in Figure~16 of the Gordon 2005 paper.
 \pytab import numpy as np 
 \pytab infile = 'Gordon2005_Fig16.txt' 
 \pytab slope, ran_slope_unc, corr_slope_unc, \textbackslash 
-\ldots     both_slope_unc, eqn_slope_unc = np.loadtxt(infile, 
-\ldots     usecols=(0, 1, 2, 3, 4), unpack=True) 
+\ldots      both_slope_unc, eqn_slope_unc = np.loadtxt(infile, 
+\ldots      usecols=(0, 1, 2, 3, 4), unpack=True) 
 \end{alltt}
 
 These arrays have nice descriptive names, but to help make the
@@ -52,43 +52,43 @@ axis created in the previous step. Each subsequent call to the plt.plot
 method will update the overall plot... 
 
 \begin{alltt}
-\pytab ax.plot(xx, yy1, ls='--', color='b', label='Randon Uncertainty')
-\pytab ax.plot(xx, yy2, ls=':', color='r', label='Correlated Uncertainty')
-\pytab ax.plot(xx, yy3, ls='-', color='g', label='Both')
-\pytab ax.plot(xx, yy4, ls='-.', color='m', label='Equation')
+\pytab ax.plot(xx, yy1, ls='--', color='b')
+\pytab ax.plot(xx, yy2, ls=':', color='r')
+\pytab ax.plot(xx, yy3, ls='-', color='g')
+\pytab ax.plot(xx, yy4, ls='-.', color='m')
 \end{alltt}
 
 Notice that `b' is for blue, `r' is for red, `g' is for green, and `m'
 is for magenta.  Furthermore, `-' is for a solid line, `--' is for a
 dashed line, `:' is for a dotted line, and `-.' is for a dot-dash
 line.  Several other options are available as well and can be found on
-the Matplotlib Pyplot site listed in Chapter~\ref{ch:links}.
-
-**Note** If you are working from the 
-\textit{python} or \textit{ipython} consoles, you will need to type the following 
-after editing you figure with the plt.plot command to force a refresh:
-\begin{alltt}
-\pytab figure.show()
-\end{alltt}
+the Matplotlib Pyplot site listed in Chapter~\ref{ch:links}. 
+\textcolor{red}{Justin, we need to change this in Chapter~\ref{ch:links}, 
+to reflect the matplotlib.pyplot page at } 
+\href{http://matplotlib.org/api/pyplot_summary.html}{matplotlib.org}.
 
 The lines are pretty faint, and we also need to add a legend and axis
-labels.
+labels. Let's start by clearing the \textit{axis} object, replotting, and then 
+force a refresh on our \textit{figure}:
 
 \begin{alltt}
-\pytab pl.plot(xx,yy1,'b--',xx,yy2,'r:',xx,yy3,'g-',  
-\ldots      xx,yy4,'m-.',linewidth=3) 
-\pytab pl.legend(('Random Uncertainty',  
-\ldots      'Correlated Uncertainty', 'Both','Equation'),'best') 
-\pytab pl.ylabel('Slope Unc. [e-/s]')
-\pytab pl.xlabel('Slope [e-/s]')
+\pytab ax.clear()
+\pytab ax.set_xlabel('Slope [e-/s]')
+\pytab ax.set_ylabel('Slope Uncertainty [e-/s]')
+\pytab ax.plot(xx, yy1, ls='--', color='b', label='Randon Unc.')
+\pytab ax.plot(xx, yy2, ls=':', color='r', label='Correlated Unc.')
+\pytab ax.plot(xx, yy3, ls='-', color='g', label='Both')
+\pytab ax.plot(xx, yy4, ls='-.', color='m', label='Equation')
+\pytab ax.legend(loc='best')
+\pytab figure.show()
 \end{alltt}
 
 We can save this plot.  The figure will save as a PDF, PNG, TIFF, and
 others depending on the name given.
 
 \begin{alltt}
-\pytab pl.savefig('fig16.pdf')
-\pytab pl.clf()
+\pytab fig.savefig('fig16.pdf')
+\pytab fig.clf()
 \end{alltt}
 
 Notice that we needed to close the figure.  Open fig16.pdf and take a
