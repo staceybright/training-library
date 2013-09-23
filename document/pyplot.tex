@@ -45,18 +45,31 @@ object...
 \begin{alltt}
 \pytab import matplotlib.pyplot as plt  
 \pytab figure, ax = plt.subplots()
+\end{alltt}
 
-Now we can begin to plot 
+Now we can begin to plot into the \textit{figure} object, via the \textit{ax} 
+axis created in the previous step. Each subsequent call to the plt.plot 
+method will update the overall plot... 
 
-\pytab plt.plot(xx,yy1)  
-\pytab plt.plot(xx,yy1,'b--',xx,yy2,'r:',xx,yy3,'g-', xx,yy4,'m-.')  
+\begin{alltt}
+\pytab ax.plot(xx, yy1, ls='--', color='b', label='Randon Uncertainty')
+\pytab ax.plot(xx, yy2, ls=':', color='r', label='Correlated Uncertainty')
+\pytab ax.plot(xx, yy3, ls='-', color='g', label='Both')
+\pytab ax.plot(xx, yy4, ls='-.', color='m', label='Equation')
 \end{alltt}
 
 Notice that `b' is for blue, `r' is for red, `g' is for green, and `m'
 is for magenta.  Furthermore, `-' is for a solid line, `--' is for a
 dashed line, `:' is for a dotted line, and `-.' is for a dot-dash
 line.  Several other options are available as well and can be found on
-the PyLab site listed in Chapter~\ref{ch:links}.
+the Matplotlib Pyplot site listed in Chapter~\ref{ch:links}.
+
+**Note** If you are working from the 
+\textit{python} or \textit{ipython} consoles, you will need to type the following 
+after editing you figure with the plt.plot command to force a refresh:
+\begin{alltt}
+\pytab figure.show()
+\end{alltt}
 
 The lines are pretty faint, and we also need to add a legend and axis
 labels.

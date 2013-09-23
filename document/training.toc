@@ -34,9 +34,9 @@
 \contentsline {subsection}{\numberline {2.3.2} {\sf numpy.empty() } function}{18}{subsection.2.3.2}
 \contentsline {subsection}{\numberline {2.3.3} {\sf numpy.where() } function}{19}{subsection.2.3.3}
 \contentsline {subsection}{\numberline {2.3.4} {\sf numpy.loadtxt() } function}{20}{subsection.2.3.4}
-\contentsline {chapter}{\numberline {3}Plotting with PyLab}{23}{chapter.3}
-\contentsline {section}{\numberline {3.1}matplotlib.pylab }{23}{section.3.1}
-\contentsline {section}{\numberline {3.2}Plot with PyLab}{23}{section.3.2}
+\contentsline {chapter}{\numberline {3}Plotting with Pyplot}{23}{chapter.3}
+\contentsline {section}{\numberline {3.1}matplotlib.pyplot}{23}{section.3.1}
+\contentsline {section}{\numberline {3.2}Plot with Pyplot}{23}{section.3.2}
 \contentsline {chapter}{\numberline {4}Python Scripts and Functions}{27}{chapter.4}
 \contentsline {section}{\numberline {4.1}MyFirstScript.py}{27}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}Executing Python Scripts}{29}{subsection.4.1.1}
