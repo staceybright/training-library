@@ -25,7 +25,7 @@ plot in Figure~16 of the Gordon 2005 paper.
 \pytab infile = 'Gordon2005_Fig16.txt' 
 \pytab slope, ran_slope_unc, corr_slope_unc, \textbackslash 
 \ldots     both_slope_unc, eqn_slope_unc = np.loadtxt(infile, 
-\ldots    usecols=(0, 1, 2, 3, 4), unpack=True) 
+\ldots     usecols=(0, 1, 2, 3, 4), unpack=True) 
 \end{alltt}
 
 These arrays have nice descriptive names, but to help make the
@@ -35,14 +35,19 @@ plotting process clear, we will assign short names.
 \pytab xx = slope  
 \pytab yy1 = ran_slope_unc  
 \pytab yy2 = corr_slope_unc  
-\pytab yy3 = both_slope_unc  
+\pytab yy3 = both_slope_unc
 \pytab yy4 = eqn_slope_unc 
 \end{alltt}
 
-Now we will import Pyplot and make our first plot.
+Now we will import Pyplot and make our first plot, using a \textit{figure} 
+object...
 
 \begin{alltt}
 \pytab import matplotlib.pyplot as plt  
+\pytab figure, ax = plt.subplots()
+
+Now we can begin to plot 
+
 \pytab plt.plot(xx,yy1)  
 \pytab plt.plot(xx,yy1,'b--',xx,yy2,'r:',xx,yy3,'g-', xx,yy4,'m-.')  
 \end{alltt}
