@@ -20,7 +20,7 @@ ABOUT:
 This is a program that takes this and plots that.
 
 DEPENDS:
-Python 2.5.4
+Python 2.7.3
 
 AUTHOR:
 M.E. MySelf for STScI, 2011
@@ -37,34 +37,44 @@ For the header we show three apostrophes to comment out multiple lines
 of text.  Next thing we will want to have is all of our imports.
 
 \begin{verbatim}
-import numpy as np
-import matplotlib.pyplot as plt 
+  import numpy as np
+  import matplotlib.pyplot as plt 
 \end{verbatim}
 
 Now we are ready!  Look back through your shell and create your script
-from Chapter~\ref{ch:pylab}.  So far you should have something similar
+from Chapter~\ref{ch:pyplot}.  So far you should have something similar
 to the following:
 
 \begin{verbatim}
-infile = 'Gordon2005_Fig16.txt'
-outfile = 'fig16_log.pdf' 
+  infile = 'Gordon2005_Fig16.txt'
+  outfile = 'fig16_log.pdf'
+ 
+  slope, ran_slope_unc, corr_slope_unc, \textbackslash 
+      both_slope_unc, eqn_slope_unc = np.loadtxt(infile, 
+      usecols=(0, 1, 2, 3, 4), unpack=True) 
 
-slope, ran_slope_unc, corr_slope_unc, both_slope_unc,  \
-    eqn_slope_unc = np.loadtxt(infile, 
-    usecols=(0, 1, 2, 3, 4), unpack=True) 
-plt.loglog(slope, ran_slope_unc, 'b--',  
-    slope, corr_slope_unc,'r:' , slope, both_slope_unc, 'g-',  
-    slope, eqn_slope_unc, 'm-.', linewidth=3) 
-plt.legend(('Random Uncertainty','Correlated Uncertainty',  
-    'Both','Equation'),'best')
-plt.ylabel('Slope Unc. [e-/s]') 
-plt.xlabel('Slope [e-/s]') 
-plt.savefig(outfile) 
-plt.clf()
+  figure, ax = plt.subplots()
+
+  ax.loglog(slope, ran_slope_unc, ls='--', lw=3, color='b', 
+      label='Random Unc.')
+  ax.loglog(slope, corr_slope_unc, ls=':', lw=3, color='r', 
+      label='Correlated Unc.')
+  ax.loglog(slope, both_slope_unc, ls='-', lw=3, color='g', 
+      label='Both')
+  ax.loglog(slope, eqn_slope_unc, ls='-.', lw=3, color='m', 
+      label='Equation')
+
+  ax.set_xlabel('Slope [e-/s]')
+  ax.set_ylabel('Slope Uncertainty [e-/s]')
+  ax.legend(loc='best')
+  figure.show()
+ 
+  figure.savefig(outfile)
+  figure.clf()
 \end{verbatim}
 
 Notice that we listed any variables (or things we might want to change
-later) at the top of the program, such as $outfile$ and $infile$.
+later) at the top of the program, such as \textit{outfile} and \textit{infile}.
 Also, since we do not have to type the variables over and over, I
 decided to use the more descriptive names.  This will also help if I
 do not work on this script for awhile and then later come back to it.
@@ -105,15 +115,16 @@ environment.  However, we must first do two things.
 \end{enumerate}
 
 To be able to call your script from anywhere on your computer, add
-your script directory to your executable path by opening your
-.mysetenv file and adding the line (with the correct path substituted
-in):
+your script directory to your executable path by opening your startup 
+script file (such as .cshrc for tc shell or .bashrc for bash shell, or more 
+generally, .mysetenv or .setenv) and adding the line (with the correct 
+path substituted in):
 
 \texttt{setenv PATH .:/my/script/directory:\{\$PATH\}}
 
 Next, in your terminal execute the command:
 
-\texttt{\termtab source .mysetenv}
+\texttt{\termtab source .cshrc}
 
 {\color{blue} {\sf\small EXERCISES}} \\
 {\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
@@ -169,14 +180,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def mkplot(outfile,xx,yy1,yy2,yy3,yy4,ylab='Slope Unc. [e-/s]'):
-    plt.loglog(xx, yy1, 'b--', xx, yy2, 'r:' , xx, yy3, 'g-', xx,  
-        yy4, 'm-.', linewidth=3) 
-    plt.legend(('Random Uncertainty','Correlated Uncertainty',  
-        'Both','Equation'),'best')
-    plt.ylabel(ylab) 
-    plt.xlabel('Slope [e-/s]') 
-    plt.savefig(outfile) 
-    plt.clf()
+    figure, ax = plt.subplots()
+
+    ax.set_xlabel('Slope [e-/s]')
+    ax.set_ylabel('Slope Uncertainty [e-/s]')
+    ax.plot(xx, yy1, ls='--', color='b', label='Randon Unc.')
+    ax.plot(xx, yy2, ls=':', color='r', label='Correlated Unc.')
+    ax.plot(xx, yy3, ls='-', color='g', label='Both')
+    ax.plot(xx, yy4, ls='-.', color='m', label='Equation')
+    ax.legend(loc='best')
+    figure.show()
+
+    figure.savefig(outfile) 
+    figure.clf()
     print 'Saved file to: ',outfile 
     return  
     
@@ -215,14 +231,14 @@ variable `ylab' a default value.  Now we only have to assign a y-axis
 label when we do not want the default (i.e. the y-intercept case).
 Finally, {\sf \small mkplot} is a function, but not a module.
 
-\section{Passing Arguments on the Command Line and {\sf argparse}}
+\section{Passing Arguments on the Command Line and \textit{argparse}}
 What if we wanted to run this program, but for other input files?  A
 simple solution would be to just open up our script and edit the file
 name.  However, a more user friendly method would be to allow it to be
-entered on the command line.  {\sf\small argparse} is a module that
-makes this process easy.  Look at the use of {\sf\small
-  argparse} in the code below.  This code can be run in the following
-ways:
+entered on the command line.  \textit{argparse} is a module that
+makes this process easy.  Look at the use of \textit{argparse} in the code 
+below.  This code can be run in the following ways:
+
 \begin{alltt}
 \termtab MyFirstScript.py 
 \termtab MyFirstScript.py --help
@@ -245,14 +261,19 @@ import matplotlib.pyplot as plt
 import argparse
 
 def mkplot(outfile,xx,yy1,yy2,yy3,yy4,ylab='Slope Unc. [e-/s]'):
-    plt.loglog(xx, yy1, 'b--', xx, yy2, 'r:' , xx, yy3, 'g-', xx,  
-        yy4, 'm-.', linewidth=3) 
-    plt.legend(('Random Uncertainty','Correlated Uncertainty',  
-        'Both','Equation'),'best')
-    plt.ylabel(ylab) 
-    plt.xlabel('Slope [e-/s]') 
-    plt.savefig(outfile) 
-    plt.clf()
+    figure, ax = plt.subplots()
+
+    ax.set_xlabel('Slope [e-/s]')
+    ax.set_ylabel('Slope Uncertainty [e-/s]')
+    ax.plot(xx, yy1, ls='--', color='b', label='Randon Unc.')
+    ax.plot(xx, yy2, ls=':', color='r', label='Correlated Unc.')
+    ax.plot(xx, yy3, ls='-', color='g', label='Both')
+    ax.plot(xx, yy4, ls='-.', color='m', label='Equation')
+    ax.legend(loc='best')
+    figure.show()
+
+    figure.savefig(outfile) 
+    figure.clf()
     print 'Saved file to: ',outfile 
     return  
     

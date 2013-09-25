@@ -41,8 +41,8 @@
 \contentsline {section}{\numberline {4.1}MyFirstScript.py}{27}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}Executing Python Scripts}{29}{subsection.4.1.1}
 \contentsline {section}{\numberline {4.2}Adding Functions}{30}{section.4.2}
-\contentsline {section}{\numberline {4.3}Passing Arguments on the Command Line and {\sf argparse}}{32}{section.4.3}
-\contentsline {section}{\numberline {4.4}Error Handling and {\sf pdb.set\_trace()}}{33}{section.4.4}
+\contentsline {section}{\numberline {4.3}Passing Arguments on the Command Line and \textit {argparse}}{32}{section.4.3}
+\contentsline {section}{\numberline {4.4}Error Handling and {\sf pdb.set\_trace()}}{34}{section.4.4}
 \contentsline {chapter}{\numberline {5}PyFITS and FITS Files}{35}{chapter.5}
 \contentsline {section}{\numberline {5.1}Opening, Reading, and Closing a FITS File }{35}{section.5.1}
 \contentsline {section}{\numberline {5.2}{\sf pyfits.getval()} and {\sf pyfits.setval()} functions}{36}{section.5.2}

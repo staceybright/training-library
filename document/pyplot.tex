@@ -21,41 +21,41 @@ file, particularly Gordon2005\_Fig16.txt.  We will reproduce the slope
 plot in Figure~16 of the Gordon 2005 paper.
 
 \begin{alltt}
-  \pytab import numpy as np 
-  \pytab infile = 'Gordon2005_Fig16.txt' 
-  \pytab slope, ran_slope_unc, corr_slope_unc, \textbackslash 
-  \ldots      both_slope_unc, eqn_slope_unc = np.loadtxt(infile, 
-  \ldots      usecols=(0, 1, 2, 3, 4), unpack=True) 
+\pytab import numpy as np 
+\pytab infile = 'Gordon2005_Fig16.txt' 
+\pytab slope, ran_slope_unc, corr_slope_unc, \textbackslash 
+\ldots      both_slope_unc, eqn_slope_unc = np.loadtxt(infile, 
+\ldots      usecols=(0, 1, 2, 3, 4), unpack=True) 
 \end{alltt}
 
 These arrays have nice descriptive names, but to help make the
 plotting process clear, we will assign short names.
 
 \begin{alltt}
-  \pytab xx = slope  
-  \pytab yy1 = ran_slope_unc  
-  \pytab yy2 = corr_slope_unc  
-  \pytab yy3 = both_slope_unc
-  \pytab yy4 = eqn_slope_unc 
+\pytab xx = slope  
+\pytab yy1 = ran_slope_unc  
+\pytab yy2 = corr_slope_unc  
+\pytab yy3 = both_slope_unc
+\pytab yy4 = eqn_slope_unc 
 \end{alltt}
 
 Now we will import Pyplot and make our first plot, using a \textit{figure} 
 object...
 
 \begin{alltt}
-  \pytab import matplotlib.pyplot as plt  
-  \pytab figure, ax = plt.subplots()
+\pytab import matplotlib.pyplot as plt  
+\pytab figure, ax = plt.subplots()
 \end{alltt}
 
 Now we can begin to plot into the \textit{figure} object, via the \textit{ax} 
-axis created in the previous step. Each subsequent call to the plt.plot 
-method will update the overall plot... 
+axis created in the previous step. Each subsequent call to the inherited 
+\textit{ax.plot} method will update the overall plot... 
 
 \begin{alltt}
-  \pytab ax.plot(xx, yy1, ls='--', color='b')
-  \pytab ax.plot(xx, yy2, ls=':', color='r')
-  \pytab ax.plot(xx, yy3, ls='-', color='g')
-  \pytab ax.plot(xx, yy4, ls='-.', color='m')
+\pytab ax.plot(xx, yy1, ls='--', color='b')
+\pytab ax.plot(xx, yy2, ls=':', color='r')
+\pytab ax.plot(xx, yy3, ls='-', color='g')
+\pytab ax.plot(xx, yy4, ls='-.', color='m')
 \end{alltt}
 
 Notice that `b' is for blue, `r' is for red, `g' is for green, and `m'
@@ -63,32 +63,29 @@ is for magenta.  Furthermore, `-' is for a solid line, `--' is for a
 dashed line, `:' is for a dotted line, and `-.' is for a dot-dash
 line.  Several other options are available as well and can be found on
 the Matplotlib Pyplot site listed in Chapter~\ref{ch:links}. 
-\textcolor{red}{Justin, we need to change this in Chapter~\ref{ch:links}, 
-to reflect the matplotlib.pyplot page at } 
-\href{http://matplotlib.org/api/pyplot_summary.html}{matplotlib.org}.
 
 The lines are pretty faint, and we also need to add a legend and axis
 labels. Let's start by clearing the \textit{axis} object, replotting, and then 
 force a refresh on our \textit{figure}:
 
 \begin{alltt}
-  \pytab ax.clear()
-  \pytab ax.set_xlabel('Slope [e-/s]')
-  \pytab ax.set_ylabel('Slope Uncertainty [e-/s]')
-  \pytab ax.plot(xx, yy1, ls='--', color='b', label='Randon Unc.')
-  \pytab ax.plot(xx, yy2, ls=':', color='r', label='Correlated Unc.')
-  \pytab ax.plot(xx, yy3, ls='-', color='g', label='Both')
-  \pytab ax.plot(xx, yy4, ls='-.', color='m', label='Equation')
-  \pytab ax.legend(loc='best')
-  \pytab figure.show()
+\pytab ax.clear()
+\pytab ax.set_xlabel('Slope [e-/s]')
+\pytab ax.set_ylabel('Slope Uncertainty [e-/s]')
+\pytab ax.plot(xx, yy1, ls='--', color='b', label='Randon Unc.')
+\pytab ax.plot(xx, yy2, ls=':', color='r', label='Correlated Unc.')
+\pytab ax.plot(xx, yy3, ls='-', color='g', label='Both')
+\pytab ax.plot(xx, yy4, ls='-.', color='m', label='Equation')
+\pytab ax.legend(loc='best')
+\pytab figure.show()
 \end{alltt}
 
 We can save this plot.  The figure will save as a PDF, PNG, TIFF, and
 others depending on the name given.
 
 \begin{alltt}
-  \pytab figure.savefig('fig16.pdf')
-  \pytab figure.clf()
+\pytab figure.savefig('fig16.pdf')
+\pytab figure.clf()
 \end{alltt}
 
 Notice that we cleared the figure with \textit{figure.clr()}. This step is not 
@@ -103,21 +100,20 @@ Open fig16.pdf and take a look.  It looks pretty good, right?
 \end{figure}
 
 If you look at the paper by
-Gordon et al. 2005, you will see that the key thing we are missing is
-logarithmic axis.  Instead of {\sf \small matplotlib.pyplot.plot} we will use {\sf
-\small matplotlib.pyplot.loglog}.
+Gordon et al. 2005, though, you will see that the key thing we are missing is
+logarithmic axis.  Instead of \textit{matplotlib.pyplot.plot} we will use \textit{matplotlib.pyplot.loglog}:
 
 \begin{alltt}
-  \pytab ax.clear()      # Clear the axis...
-  \pytab ax.loglog(xx, yy1, ls='--', lw=3, color='b', label='Random Unc.')
-  \pytab ax.loglog(xx, yy2, ls=':', lw=3, color='r', label='Correlated Unc.')
-  \pytab ax.loglog(xx, yy3, ls='-', lw=3, color='g', label='Both')
-  \pytab ax.loglog(xx, yy4, ls='-.', lw=3, color='m', label='Equation')
+\pytab ax.clear()      # Clear the axis...
+\pytab ax.loglog(xx, yy1, ls='--', lw=3, color='b', label='Random Unc.')
+\pytab ax.loglog(xx, yy2, ls=':', lw=3, color='r', label='Correlated Unc.')
+\pytab ax.loglog(xx, yy3, ls='-', lw=3, color='g', label='Both')
+\pytab ax.loglog(xx, yy4, ls='-.', lw=3, color='m', label='Equation')
 
-  \pytab ax.set_xlabel('Slope [e-/s]')
-  \pytab ax.set_ylabel('Slope Uncertainty [e-/s]')
-  \pytab ax.legend(loc='best')
-  \pytab fig.show()
+\pytab ax.set_xlabel('Slope [e-/s]')
+\pytab ax.set_ylabel('Slope Uncertainty [e-/s]')
+\pytab ax.legend(loc='best')
+\pytab figure.show()
 \end{alltt}
 
 Again, open the figure you just made.  How does that look?  
@@ -130,8 +126,8 @@ Again, open the figure you just made.  How does that look?
 \end{figure}
 
 For more
-plotting options with Matplotlib and Pyplot, check out the link
-\url{http://matplotlib.sourceforge.net/} listed in
+plotting options with Matplotlib and Pyplot, check out the 
+\href{http://matplotlib.org/}{matplotlib.org} link listed in
 Chapter~\ref{ch:links}.  Notice that there is a link to NumPy on this
 page, as well as links to screen-shots, thumbnails, and examples.
 
