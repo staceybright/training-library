@@ -24,8 +24,8 @@ and finally making changes to the data.
 \pytab infile = 'n9vf01hfq_ima.fits'
 \pytab import pyfits 
 \pytab pyfits.info(infile)
-\pytab data = pyfits.getdata(infile,1) 
-\pytab hdr = pyfits.getheader(infile,0) 
+\pytab data = pyfits.getdata(infile, 1) 
+\pytab hdr = pyfits.getheader(infile, 0) 
 # get 1st extension's data and header 
 \pytab data, hdr = pyfits.getdata(infile, 1, header=True)
 \pytab data.shape
