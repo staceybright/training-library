@@ -110,7 +110,7 @@ Examples of some of the most common data types are below.
   \texttt{\pytab infile.close()}  
 \item Integer: \\
  \texttt{\pytab a = 1} \\
- \texttt{\pytab a==1}  \\
+ \texttt{\pytab a == 1}  \\
  \texttt{\pytab a.denominator}
 \item Float: \\
   \texttt{\pytab a = 2.0}
@@ -120,17 +120,17 @@ Examples of some of the most common data types are below.
   \texttt{\pytab outfile = infile.replace('.fits', '\_DidWork.fits')} \\
   \texttt{\pytab 'Outfile: ', outfile} 
 \item Tuple: An immutable list; elements can be of any data type. \\
-  \texttt{\pytab a = (1,2,3)}  \\
+  \texttt{\pytab a = (1, 2, 3)}  \\
   \texttt{\pytab a = (1, 2.0, 'three')}
 \item List: A mutable list; elements can be of any data type. \\
-  \texttt{\pytab a = [1,2,3]}  \\
+  \texttt{\pytab a = [1, 2, 3]}  \\
   \texttt{\pytab b = [1, 2.0, 'three']}  \\
   \texttt{\pytab mylist = [] }  \\
   \texttt{\pytab mylist.append(3) } \\
   \texttt{\pytab print mylist } \\
-  \texttt{\pytab mylist = [1,2,3,4] } \\
+  \texttt{\pytab mylist = [1, 2, 3, 4] } \\
   \texttt{\pytab len(mylist)} \\
-  \texttt{\pytab yourlist = [5,6,7,8,9] } \\
+  \texttt{\pytab yourlist = [5, 6, 7, 8, 9] } \\
   \texttt{\pytab mylist + yourlist }  \\
   \texttt{\pytab mylist.append(yourlist) }  \\
   \texttt{\pytab print mylist}  \\
@@ -288,7 +288,7 @@ step you want to use (default of the step is 1).
 {\color{blue} {\sf\small EXAMPLES}} 
 \begin{alltt}
 \pytab range(4) 
-\pytab range(2,8,2) 
+\pytab range(2, 8, 2) 
 \end{alltt}
 {\color{blue} {\sf\small SEE ALSO}} \\
 Other useful similar functions in NumPy (Chapter~\ref{ch:numpy}) are
@@ -368,7 +368,7 @@ you want to use (default of the step is 1).  This is used in iterations.
 Within a function, the {\sf\small for }  statement has the following
 simple structure: 
 \begin{alltt}
-\pytab for x in xrange(1,7): 
+\pytab for x in xrange(1, 7): 
 \ldots    a = x * 3. 
 \ldots    print a 
 \end{alltt}
@@ -390,21 +390,21 @@ but if whatever you assign as the `error' occurs, it will go to the
 {\color{blue} {\sf\small EXAMPLES}} \\
 Try this code below.  Notice the error message you get.
 \begin{alltt}
-\pytab a = [1,2,3,4,5]  
+\pytab a = [1, 2, 3, 4, 5]  
 \pytab for i in xrange(len(a)): 
-\ldots    a[i+1] = 100 + a[i] 
-\ldots    print a[i], a[i+1] 
+\ldots    a[i + 1] = 100 + a[i] 
+\ldots    print a[i], a[i + 1] 
 \end{alltt}
 To solve this problem, we put it in a {\sf\small try ... except}
 statement: 
 \begin{alltt}
-\pytab a = [1,2,3,4,5] 
+\pytab a = [1, 2, 3, 4, 5] 
 \pytab for i in xrange(len(a)): 
 \ldots     try:  
-\ldots         a[i+1] = 100 + a[i] 
-\ldots         print a[i], a[i+1] 
+\ldots         a[i + 1] = 100 + a[i] 
+\ldots         print a[i], a[i + 1] 
 \ldots     except IndexError: 
-\ldots         print 'This index does not work: ',i+1
+\ldots         print 'This index does not work: ',i + 1
 \end{alltt}
 
 {\color{blue} {\sf\small EXERCISES}} \\
