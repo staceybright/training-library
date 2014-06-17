@@ -1,0 +1,336 @@
+\chapter{Useful IRAF Tasks }
+\label{cha:chapter2}
+\thispagestyle{empty}
+
+ 
+\newpage
+ 
+\section{General}
+\subsection{Institute Specific Packages}
+\subsubsection{{\bf stsdas}}
+The {\bf stsdas} package (Space Telescope Science Data Analysis Software Package) is a package put together by the institute. It includes all of the instrument specific calibration packages as well as other helpful tasks. You will most likely load it every time you use PyRAF and may want to consider adding it to your login.cl file.
+
+\subsubsection{{\bf hst\_calib}}
+ The {\bf hst\_calib} package contains all of the HST science instrument calibration packages. These packages contain all of the tasks which are used to calibrate data from each instrument as well as tasks to model the combined response of the various detectors and optical elements. It also contains tasks to derive the instrument calibrations and construct the calibration reference files.
+
+\subsection{{\bf catfits}}
+{\bf catfits} gives you the details of a file. For each extension it tells you the type (table or image), name, dimension, and pixel type.
+
+
+\subsection{Header Information}
+There is a lot of information contained in the header of each file. These tasks will help you view and edit them. I will only describe these briefly as I encourage you to use python or IDL for these tasks. Note a version of {\bf hedit} and {\bf imheader} have been written in Python. Please see the help sections of these tasks for additional information on the parameters and examples of their use.
+\newline
+WARNING: {\bf imheader} and {\bf hselect} only work on the 0th extension of fits binary tables. {\bf thselect} can be used instead of {\bf hselect}.
+\subsubsection{{\bf imheader}}
+{\bf imhead} displays the header information for a given image. If the parameter LONGHEADER = no, the image name, dimensions, pixel type, and title are printed. If LONGHEADER = yes all header data for a given extension is printed. If no extension is specified, the 0th extension is used.
+\subsubsection{{\bf hselect}}
+{\bf hselect} displays a single header keyword. 
+\subsubsection{{\bf hedit}}
+{\bf hedit} updates or adds a given header keyword.
+
+\subsection{Exercises}
+\begin{enumerate}
+\item Use {\bf catfits} to determine how many extensions the file /grp/hst/cdbs/oref/t9a1003so\_tds.fits has. 
+\item Use imhead to determine the dimensions of the file /grp/hst/cdbs/oref/v8918108o\_bia.fits. 
+\item Use thselect to find the value of the DETECTOR keyword in the file \\ /grp/hst/cdbs/oref/ub920085o\_tds.fits.
+\item Copy the file /grp/hst/cdbs/oref/ub920085o\_tds.fits to your computer. Modify the DATE keyword to be today's date
+\end{enumerate}
+
+\section{Images}
+\subsection{{\bf display}}
+This task is used to display images in DS9. You must make sure a DS9 window is open before you use the {\bf display} task. {\bf display} has many options which are detailed in the help section, in general you need to specify an extension and a DS9 frame for the image to be displayed in. When you use {\bf display} to bring up an image in DS9 you cannot use the DS9 options for scale. For this reason you may sometimes find it helpful to open a file directly in DS9 rather than using PyRAF.
+
+EXAMPLE
+
+\begin{minipage}{4.0in}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{0.25 in}
+\begin{tabular}{lll}
+&{\color{RoyalBlue}> ds9 \&} & Open DS9 \\
+&{\color{RoyalBlue}> pyraf} & Open PyRAF \\
+&{\color{RoyalBlue}--> display /grp/hst/cdbs/oref/u211310do\_bia.fits[1] 2}& Display the first extension of the \\ && file in the second DS9 frame. \\
+&{\color{Green}z1=-0.7425513 z2=15.1016} & This is output from {\bf display} which tells \\ && you about your contrast and scaling. \\
+\end{tabular}
+\end{minipage}
+
+\subsection{{\bf imexamine}}
+{\bf imexamine} allows you to display your image in a similar manner to display, however it has additional image analysis capabilities. By placing your cursor over the image and typing certain commands, various types of plots and text output can be created. A complete list tools can be found in the help to the {\bf imexamine} task. I most often use 'e' to create a contour plot, 'c' to create a column plot, 'l' to create a line plot, and 'r' to create a radial profile. Type 'q' when you are in the image window to exit {\bf imexamine} and continue your work.
+
+EXAMPLE
+
+\begin{minipage}{5.0in}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{0.25 in}
+\begin{tabular}{lll}
+&{\color{RoyalBlue}> ds9 \&} & Open DS9 \\
+&{\color{RoyalBlue}> pyraf} & Open PyRAF \\
+&{\color{RoyalBlue}--> imexamine /grp/hst/cdbs/oref/u211310do\_bia.fits[1] 2}& Display the first extension of the \\ && file in the second DS9 frame. \\
+\end{tabular}
+You should now have a circular cursor on top of the DS9 window. Place the cursor over a part of the image and type e. You should see a new window pop up with a contour plot of the area where your cursor is on the image. Press q to exit {\bf imexamine}.
+\end{minipage}
+
+\subsection{{\bf imstatistics}}
+{\bf imstatistics} is a task which computes statistics of the pixel values of images. {\bf imstatistics} can compute the number of pixels, mean, median (called midst), mode, standard deviation, skew, kurtosis, min and max pixel values. Upper and lower sigma clipping can also per performed for a set number of iterations. 
+
+EXAMPLE
+
+
+\begin{minipage}{5.0in}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{0.25 in}
+\begin{tabular}{ll}
+&{\color{RoyalBlue}-->imstatistics /grp/hst/cdbs/oref/u211310do\_bia.fits[1]} \\
+\end{tabular}
+\begin{tabular}{llllllll}
+&{\color{Green} \# }&               {\color{Green}IMAGE}&      {\color{Green}NPIX} &     {\color{Green}MEAN}&    {\color{Green}STDDEV}  &     {\color{Green}MIN}    &   {\color{Green}MAX} \\
+& & {\color{Green}/grp/hst/cdbs/oref/u211310do\_bia.fits[1]}   &{\color{Green}1048576}    & {\color{Green}1.487}   & {\color{Green} 3.747 }&  {\color{Green} -18.41 }  &  {\color{Green}2224.} \\
+\end{tabular}
+\end{minipage}
+
+\subsection{{\bf imcalc}}
+{\bf imcalc} is used to combine images arithmetically pixel by pixel (sum, multiply, divide, etc). A list of images is used in the input field, and then each image is referred to as im1, im2, im3, etc. in the calculation.
+
+EXAMPLE
+
+\begin{minipage}{5.0in}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\evensidemargin}{0.25 in}
+Find the average of the first extensions of j8c0a1011\_drz.fits and j8c0c1011\_drz.fits in their over-lapping regions [1:4211, 1:4232] and call the output out.fits\\
+\begin{tabular}{ll}
+&{\color{RoyalBlue} \footnotesize{--> imcalc j8c0a1011\_drz.fits[1][1:4211,1:4232],j8c0c1011\_drz.fits[1][1:4211,1:4232]  out.fits "(im1+im2)/2."}} \\
+&{\color{Green}Percent done: 10 20 30 40 50 60 70 80 90 100}\\
+\end{tabular}
+\end{minipage}
+
+
+\subsection{Exercises}
+\begin{enumerate}
+\item Download the following datasets from the MAST archive: j8c0a1011, j8c0c1011, j8c0d1011
+\item Display the first extension of j8c0a1011\_drz.fits in the first frame of DS9
+\item Use {\bf imexamine} to make a radial plot of one of the stars in the first extension of j8c0c1011\_drz.fits
+\item What are the maximum and minimum pixel values of the j8c0d1011\_drz.fits? What if you use an upper sigma boundary of 3 and a lower of 2 and repeat the clipping 5 times? How many pixels are eliminated using this sigma clipping?
+\item Find the dimensions of each image. Create a weighted average of the 3 images, weighting by their exposure times.
+\end{enumerate}
+
+\section{Photometry}
+
+\subsection{{\bf daofind}}
+{\bf daofind} is a commonly used tool to locate a bunch of point sources in an image. {\bf daofind} searches images  for  local  density  maxima, which  have a full-width half-maximum of datapars.fwhmpsf and a peak amplitude greater than  findpars.threshold  *  datapars.sigma  above the  local  background, and writes a list of detected objects in the file output. For this reason, the values that you use in these parameters will greatly affect the number of objects missed and the number of object with false detections. Each image is different and usually requires some parameter tweaking.
+
+EXAMPLE:
+
+\begin{table}[tbh]
+ \begin{center}
+ \begin{tabular}{|c|c|c|c|}
+ \hline
+ Parameter & Assignment Value & Maximum Objects Value \\
+ \hline \hline
+ datapars.sigma & 3.6 & 2.0\\
+ \hline
+ datapars.fwhmpsf & 2.0 & 2.0\\
+ \hline
+ datapars.gain & ccdgain  & ccdgain\\
+ \hline
+ findpars.thresh & 50 & 20\\
+ \hline
+ findpars.sharplo & 0.2 & 0.2\\
+ \hline
+ findpars.sharphi & 0.8 & 0.8\\
+ \hline
+ findpars.roundlo & -1.0 & -1.0\\
+ \hline
+ findpars.roundhi & 1.0 & 1.0\\
+ \hline
+ 
+ \end{tabular}
+ \end{center}
+\end{table}
+
+Set the above values in the parameter files using epar.
+\begin{table}
+\begin{tabular}{ll}
+& {\color{RoyalBlue}-->epar datapars } \\
+& {\color{RoyalBlue}--> epar findpars } \\
+& {\color{RoyalBlue}-->daofind   f435w\_drz.fits[1] } \\
+
+& {\color{Green} Input image(s) ('f435w\_drz.fits[1]')}:  \\ 
+
+& {\color{Green}FWHM of features in scale units (2.5) (CR or value): } \\
+&  {\color{Green}	New FWHM of features: 2.5 scale units  2.5 pixels } \\
+& {\color{Green}Standard deviation of background in counts (INDEF) (CR or value):  }  \\
+&  {\color{Green}	New standard deviation of background: INDEF counts } \\
+& {\color{Green}Detection threshold in sigma (6.) (CR or value):  } \\
+&  {\color{Green}	New detection threshold: 6. sigma INDEF counts  } \\
+& {\color{Green}Minimum good data value (INDEF) (CR or value):  } \\
+&  {\color{Green}	New minimum good data value: INDEF counts }  \\
+& {\color{Green}Maximum good data value (INDEF) (CR or value):  }  \\
+&  {\color{Green}	New maximum good data value: INDEF counts } \\
+\end{tabular}
+\end{table}
+
+
+\subsection{{\bf tvmark}}
+{\bf tvmark} will mark the locations given in a text file on an image displayed in DS9. You can specify the shape marked, the size of the marker, and the marker color. This is most often used to check which objects were chosen when one uses a program to manually find stars (such as daofind or star find). 
+
+EXAMPLE
+
+\begin{minipage}{5.0in}
+\begin{tabular}{ll}
+& {\color{RoyalBlue}--> display f435w\_drz.fits[1] 1} \\
+&{\color{RoyalBlue} --> tvmark 1 cood\_file.txt mark = circle  radii = 8 color = 205} \\
+\end{tabular}
+\end{minipage}
+\subsection{{\bf phot}}
+{\bf phot} performs aperture photometry on a list of stars based on a series of parameter files. The parameter files used are photpars@, centerpars@, and fitskypars@. Datapars describes instrument dependent parameters, photpars describes the functions used for computing the photometry, centerpars describes the centering algorithm parameters, and  fitskypars describes the sky fitting parameters.
+
+EXAMPLE
+
+\begin{minipage}{5.0in}
+
+%\begin{table}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Parameter & Value\\
+\hline \hline
+datapars.exposure&EXPTIME\\
+\hline
+fitskypars.annulus&10.0\\
+\hline
+fitskypars.dannulus&5.0\\
+\hline
+fitskypars.salgoithm&mode\\
+\hline
+fitskypars.skyvalue&0.0\\
+\hline
+photpars.apertures&3.0, 10.0\\
+\hline
+centerpars.calgorithm&centroid\\
+\hline
+centerpars.cbox& 10.\\
+\hline
+centerpars.maxshift&6\\
+\hline
+\end{tabular}
+\end{center}
+%\end{table}
+Set the above values in the parameter files using epar. \\
+\begin{tabular}{ll}
+& {\color{RoyalBlue}--> epar datapars} \\
+& {\color{RoyalBlue}--> epar fitskypars} \\
+& {\color{RoyalBlue}--> epar photpars }\\
+& {\color{RoyalBlue}--> epar centerpars } \\
+\end{tabular}
+
+Run {\bf phot} \\
+
+\begin{tabular}{ll}
+& {\color{RoyalBlue}--> phot f435w\_drz.fits[1] f435w\_drz.fits1.coo.1 } \\
+\end{tabular}
+\end{minipage}
+
+
+
+\subsection{Exercises}
+\begin{enumerate}
+\item Run daofind on j8c0a1011\_drz.fits. Play with the parameters to try at least 3 runs. Choose your best run (most correctly marked stars and least incorrectly marked stars) for 2 and 3.
+\item Mark the location of the stars found in 1 with green squares.
+\item Perform aperture photometry on j8c0a1011\_drz.fits using the same parameter values as were used in the example
+\end{enumerate}
+
+\section{Tables}
+\subsection{{\bf tdump}}
+{\bf tdump} takes a table from PyRAF memory and writes it to an ASCII file. This can be especially helpful for global edits which are difficult using tedit.
+
+
+EXAMPLE
+
+\begin{tabular}{ll}
+& {\color{RoyalBlue} --> tdump f435w\_drz.fits1.mag.1 colum=c7,8,15,29,30,31,38,39,40 datafil=f435w.phota} \\
+\end{tabular}
+
+\subsection{{\bf tmerge}}
+{\bf tmerge} is used to merge two tables or to append one to the other. 
+
+EXAMPLE
+
+\begin{tabular}{ll}
+& {\color{RoyalBlue}--> tmerge f435w.phota,j8c0d101160\_dao\_ascii.tab    phot\_all.tab option="merge"}
+\end{tabular}
+
+\subsection{{\bf tcalc}}
+Similar to {\bf imcalc}, {\bf tcalc} performs arithmetic operations on table columns.
+
+EXAMPLE
+
+\begin{tabular}{ll}
+& {\color{RoyalBlue} --> tcalc  phot\_all.tab     435\_apcor   "mag3\_435-mag10\_435"  colfmt=\%6.5g}
+\end{tabular}
+
+\subsection{Exercises}
+\begin{enumerate}
+\item Look in the help files for tcalc for all of the arithmetic options. 
+\end{enumerate} 
+
+\section{Spectroscopy}
+Note also that many IRAF spectral functions (including scopy and scombine) accept the optional parameters w1 and w2, where w1 refers to the minimum wavelength and w2 the maximum wavelength. Thus, to copy the wavelength range from 1700 - 3200 \AA, the command would be 
+
+{\color{RoyalBlue} --> scopy input.fits output.fits w1=1700 w2=3200}
+
+The {\bf sarith} task also has many of the same functions as {\bf imarith}, except that, by default, it will apply those functions in wavelength rather than pixel space.
+
+Most of these tasks require a one-dimensional image rather than a fits binary table. Therefore you will need to use {\bf tomultispec} to convert your table into an image before using {\bf scombine}, {\bf splot},  and {\bf continuum}.
+
+\subsection{{\bf tomultispec}}
+The {\bf tomultispec} command, available in the {\bf hst calib.ctools} package, is the canonical way to move from STIS 1-dimensional spectra (sx1.fits or x1d.fits, which are stored as FITS binary tables) to standard spectra stored as one-dimensional images (which may then be plotted using splot or an equivalent tool). Note that tomultispec produces imh rather than FITS files, and these can be converted back into FITS files (e.g. so that they can be sent or copied elsewhere more easily) through the use of the {\bf imcopy} command. Be sure that the imdir in your login.cl file is set to "\$HDR"
+
+EXAMPLE
+
+\begin{tabular}{ll}
+& {\color{RoyalBlue}--> tomultispec obmzl1020\_sx1.fits obmzl1020\_sx1.imh}
+\end{tabular}
+
+\subsection{{\bf scombine}}
+{\bf scombine} is a good tool for combining multiple spectra (in order to improve the final signal-to-noise ratio when several spectra were taken with the same settings). It allows any number of spectra to be combined by taking the average, the median, or the sum of the input spectra (using the combine parameter). 
+
+EXAMPLE
+
+To combine "obmzl1020\_sx1.imh" and "obmzl2020\_sx1.imh" into "out.fits", using the median of the input spectra, the command would be:
+
+\begin{tabular}{ll}
+& {\color{RoyalBlue} --> scombine obmzl1020\_sx1.imh,obmzl2020\_sx1.imh out.imh comb=median}
+\end{tabular}
+
+\subsection{{\bf continuum}}
+
+{\bf continuum} is a task intended for normalizing spectra (it has many other functions, but that is the most important one when working with spectra here). {\bf continuum} allows fit regions to be selected with the "s" key (pressing the first time to establish the start of the fit region, and the second time for the end, and using "z" to delete a fit region. Note that the continuum should not be fit across the line of interest, as this might distort the line's shape or equivalent width.
+Other useful commands in continuum include ":func", allowing the fitting function to be set (e.g. to "chebyshev", "legendre", "spline3"), ":o N", setting the order of the fitting function to N, and "f" to see the new fit after changing the order and fitting function.
+
+EXAMPLE
+
+\begin{tabular}{ll}
+&{\color{RoyalBlue} --> continuum obmzl1020\_sx1.imh obmzl1020\_sub1.imh} \\
+& {\color{Green}Fit [1,1] of obmzl1020\_sx1.imh w/ graph? (yes|no|skip|YES|NO|SKIP) ('yes'): yes}
+\end{tabular}
+
+\subsection{{\bf splot}}
+splot is a tool that does many spectroscopy-related tasks. In addition to displaying spectra, it also allows you to fit spectral lines, determine signal-to-noise ratios, and even de-blend overlapping lines. splot has many other capabilities in addition to those described here, but these at least provide some information. Below are a very few of the extensive capabilities of splot. I encourage you to look at the help file to see what else is available.
+
+WINDOWING: Press {\bf w} to enter windowing mode. To autoscale the data between a range of values (basically zooming) move your cursor to one edge of the range you wish to use and press {\bf a} then move your cursor to the other end of the range and press {\bf a} again. Press {\bf c} to clear all windowing and return to your original spectrum.
+
+SIGNAL-TO-NOISE: Move your pointer to the leftmost part of the area you wish to check and press {\bf m}, then move your pointer to the rightmost part of the area and press {\bf m} again. In addition to SNR, you also get the average value and the rms.
+
+LINE FITTING: Move your pointer to the leftmost edge of the line and press {\bf k}. Then move your pointer to the rightmost edge of the line, and press {\bf k} again for a simple fit, {\bf g} for a Gaussian fit, {\bf l} for a Lorentzian fit, and {\bf v} for a Voigt profile fit. This gives you the line center, flux, equivalent width, and fwhm.
+
+EQUIVALENT WIDTH: Move your pointer to the leftmost point of the area and press e, then move the pointer to the rightmost point of the area and press e again. This yields the line center, equivalent widths, continuum, and flux. You can also use k for different profile fitting options and h for the most flexibility.
+
+DEBLENDING: Move your pointer to the leftmost part of the line group and press {\bf d}, then move your pointer to the rightmost part of the group and press {\bf d} again. Now move your pointer to the centre of each line in the group, each time pressing {\bf g} for a Gaussian fit, {\bf l} for a Lorentzian fit, and {\bf v} for a Voigt profile fit. Press {\bf q} when all lines have been marked. Then press {\bf s} to fit a single line, or a to fit all lines. Do the same for Gaussian, Lorentzian, and Voigt profile lines. Press {\bf y} to fit and subtract the background, or {\bf n} to leave it in place in the fit. You can now press {\bf +} and {\bf -} to move between fits, and {\bf q} to exit the deblend fitting mode.
+
+
+\subsection{Exercises}
+\begin{enumerate}
+
+\item Combine the datasets obmzl3030\_sx1.fits and obmzl4030\_sx1.fits .
+\item Take your combined spectrum from 1 and remove the continuum
+\item Display the continuum subtracted combined spectrum in splot. Fit a line with a Gaussian and a Voigt profile. What changes in the reported values?
+\end{enumerate}

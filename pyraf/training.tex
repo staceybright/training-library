@@ -1,0 +1,225 @@
+ 
+%-------------------------------------------
+% FILE:    thesis.tex
+% AUTHOR:  Leonardo Ubeda
+% DATE:    2003
+%
+% Master latex file for whole thesis
+%
+%-------------------------------------------
+
+
+% Define style of document
+%\documentclass[a4,12pt,english,fleqn]{report}
+%\documentclass[11pt]{book}  
+\documentclass[12pt,letter]{book}% for A4 paper
+
+%\documentclass[10pt]{article}  
+
+ 
+% Include packages
+\usepackage{graphicx,palatino,palatcm}
+\usepackage{amsmath,amssymb,amsfonts} % Typical maths resource packages
+\usepackage{graphics}                 % Packages to allow inclusion of graphics
+%\usepackage{superfig}
+%\usepackage{setspace,dropping,section,relsize}
+\usepackage{caption2,topcapt}
+%\usepackage{astron}
+\usepackage{rotating}
+\usepackage{natbib}
+\usepackage{wrapfig}
+%\usepackage[english]{babel}
+\usepackage{apjfonts}
+\usepackage{amssymb}
+\usepackage{multicol}
+ %\usepackage{epstopdf}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{hyperref}
+%\usepackage{makeindex}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+
+
+
+
+% Set the page layout
+\setlength{\parindent}{0mm}      %sangria
+\setlength{\textwidth}{161mm}
+\setlength{\topmargin}{0mm}
+\setlength{\textheight}{210mm}
+\setlength{\oddsidemargin}{5mm}
+\setlength{\evensidemargin}{-\oddsidemargin}
+\setlength{\parskip}{3mm}     %espacio entre paragraphs
+\linespread{1.0}   %determina el espacio entre lineas 1.6 = doble espacio
+
+ %\documentclass{book}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]%
+   {\markboth{\uppercase{\thechapter.\ #1}}{}}
+\renewcommand{\sectionmark}[1]%
+   {\markright{\uppercase{\thesection.\ #1}}}
+%\setlength{\headrulewidth}{0.5pt}
+%\setlength{\footrulewidth}{0pt}
+\newcommand{\helv}{%
+   \fontfamily{phv}\fontseries{b}\fontsize{9}{11}\selectfont}
+\lhead[\helv \thepage]{\helv \rightmark}
+\rhead[\helv \leftmark]{\helv \thepage}
+\cfoot{}
+
+
+\usepackage[Leonardo]{fncychap}
+
+\ChNameVar{\fontsize{14}{16}\usefont{OT1}{phv}{m}{n}\selectfont} 
+\ChNumVar{\fontsize{60}{62}\usefont{OT1}{ptm}{m}{n}\selectfont} 
+\ChTitleVar{\Huge\bfseries\rm}
+\ChRuleWidth{1pt} 
+ 
+
+ 
+% Extra definitions
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+\renewcommand{\chaptermark}[1]{\markboth{Chapter   \thechapter.  {#1}}{Chapter
+		   \thechapter.  {#1}}}
+
+%\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+%\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\captionlabeldelim}{---}
+\renewcommand{\captionfont}{\footnotesize}
+\renewcommand{\captionlabelfont}{\small \sc}
+%\newcounter{savesection}
+%\newenvironment{appchap}                        % appendix to a chapter
+%  {\setcounter{savesection}{\value{section}}%
+%   \setcounter{section}{0}%
+%   \renewcommand\thesection{\thechapter.\Alph{section}}}%
+%  {\setcounter{section}{\value{savesection}}}
+%\captionstyle{normal}
+%\setlength{\headrulewidth}{0.5pt}
+
+
+
+%Definitions
+\def\teff{$T_\mathrm{eff}$ }
+\def\ebv{$E(B-V)$ }
+
+\def\mpa{  $M_{\odot}$\;a$^{-1}$}
+
+
+
+ \def\kms{$\rm km\;s^{-1}$}
+%  \lta and \gta : produce > and < signs with twiddle underneath
+\def\spose#1{\hbox to 0pt{#1\hss}}
+\def\lta{\mathrel{\spose{\lower 3pt\hbox{$\sim$}}
+    \raise 2.0pt\hbox{$<$}}}
+\def\gta{\mathrel{\spose{\lower 3pt\hbox{$\sim$}}
+    \raise 2.0pt\hbox{$>$}}}
+
+ 
+
+\makeatletter
+\newcommand\figcaption{\def\@captype{figure}\caption}
+\newcommand\tabcaption{\def\@captype{table}\caption}
+\makeatother
+\makeindex
+
+%
+\flushbottom
+%\input defs.tex
+\setcounter{tocdepth}{2}
+
+% Start of document
+\begin{document}
+
+\pagenumbering{arabic}
+\title{NGC4214}
+
+\author{Leonardo Ubeda}
+
+%\include{front}
+%\newpage
+%\include{quote}
+%\newpage
+\addtocounter{page}{-2}
+ 
+\include{cover}
+
+
+% Counter commands
+\setcounter{page}{1}
+\setcounter{chapter}{0}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3}
+%\pagestyle{headings}
+
+%Table of Contents
+%\tableofcontents
+
+
+% Figures and Tables
+%\newtheorem{fig}{Figure}
+%\newtheorem{tab}{Table}
+
+
+% BODY OF TEXT 
+% Include the following files in main document
+ 
+
+% START OF THESIS
+
+
+%\addcontentsline{toc}{chapter}{Resumen}
+
+% CONTENTS, FIGURES, TABLES
+\pagenumbering{roman} \setcounter{page}{1}
+
+\markboth{Content}{Content}
+%\addcontentsline{toc}{chapter}{\'Indice General}
+\tableofcontents
+%\pagebreak
+\newpage
+
+%\markboth{\'Indice de Figuras}{\'Indice de Figuras}
+%\addcontentsline{toc}{chapter}{\'Indice de Figuras}
+%\listoffigures
+%\pagebreak
+%\newpage
+
+%\markboth{\'Indice de Tablas}{\'Indice de Tablas}
+%\addcontentsline{toc}{chapter}{\'Indice de Tablas}
+%\listoftables
+%\pagebreak
+%\newpage
+
+
+% MAIN FILES
+ 
+\pagenumbering{arabic} \setcounter{page}{1}
+
+\include{pyraf}
+\include{plots}
+
+% LIST OF ABBREVIATIONS
+
+%\addcontentsline{toc}{chapter}{List of Abbreviations}
+%\include{abbrev_body}
+ 
+
+% BIBTEX
+\input{aas_macros.tex} 
+
+%\addcontentsline{toc}{chapter}{Bibliography} 
+\addcontentsline{toc}{chapter}{Bibliograf\'ia} 
+% Bibliography style
+\bibliography{general}
+\bibliographystyle{cupconf}
+%\bibliographystyle{plain}
+%\bibliographystyle{prsty}
+%\bibliographystyle{apj}
+
+%\printindex
+
+%\addcontentsline{toc}{chapter}{Agradecimientos}
+%\include{thesis/acknowledgements}
+
+
+\end{document}
