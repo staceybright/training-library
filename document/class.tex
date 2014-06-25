@@ -1,0 +1,101 @@
+\chapter{Classes}
+\label{ch:classes}
+
+\section{Class Definition}
+\label{s:classes}
+Classes are a very useful tool of Python.  They can mainly be seen as
+a way to organize and simplify code.  You know you need to build a
+class if:
+\begin{itemize}
+\item For a particular data type (i.e. FITS files, spectra, light
+  curves, etc.) you are always calling the same functions.
+\item You are having to pass these functions several variables.
+\end{itemize}
+
+The general format of a class, which I will call `SquareClass', and a
+program that uses it, is given in the example below.  
+
+\begin{verbatim}
+class SquareClass(object):
+    def __init__(self, s):  #s is a passed parameter
+        self.side = s
+
+    def GetArea(self):
+        area = self.side * self.side
+        return area
+
+if __name__==`__main__':
+    a = SquareClass(10)
+    area = a.GetArea()
+    print `The area of my square of side length: ', \
+        a.side,'is: ',area
+\end{verbatim}
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+  From the above code, give an example of an instance, an attribute,
+  a method, and a function.}
+
+Note that class definitions, like function definitions (def
+statements), must be executed before they have any effect.  In
+practice, the statements inside a class definition will usually be
+function definitions.
+
+In general, a class is initialized with a function {\sf \small
+  \_\_init\_\_()}, which has at least one argument called $self$ (the
+name self has absolutely no special meaning to Python, this is just a
+convention).  When an {\sf \small \_\_init\_\_()} method has been
+defined, class instantiation automatically invokes {\sf \small
+  \_\_init\_\_()} for the newly-created class instance.
+
+Notice that we do not have to pass the length of the side of the
+square to the {\sf small GetArea} function.  This one of the benefits
+of using classes.
+
+\section{Class Inheritance}
+Another ability of classes is class inheritance.  If you notice the
+use of {\sf \small object} in {\sf \small SquareClass}, this is
+actually the class inheriting from {\sf \small object}, which is the
+default.  Class inheritance can also be used to extend existing
+methods, or to overwrite functionalities of old classes.  For example,
+say we have a new type of data, a cube for example, where the {\sf
+  \small \_\_init\_\_()} method will work, but we will need a new {\sf
+  \small GetArea()} method.  We can create a {\sf \small CubeClass}
+which inherits from {\sf \small SquareClass} (which inherits from {\sf
+  \small object}).
+
+\begin{verbatim}
+class SquareClass(object):
+    def __init__(self, s):  #s is a passed parameter
+        self.side = s
+
+    def GetArea(self):
+        area = self.side * self.side
+        return area
+
+class CubeClass(SquareClass):
+    def GetArea(self): #Now surface area
+        area = 6 * self.side * self.side
+        return area
+
+if __name__==`__main__':
+    a = CubeClass(10)
+    area = a.GetArea()
+    print `The area of my cube of side length: ' \
+        ,a.side,'is: ',area
+\end{verbatim}
+
+Notice that $CubeClass$ inherits $SquareClass$ just by passing the
+class.  Since a new {\sf \small \_\_init\_\_()} method is not defined,
+the old one is used.  We re-define {\sf \small GetArea()} which
+overwrites the old one.
+
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+  An excellent example of when you might want to write a class is for
+  FITS files.  Create a FitsClass.  For the {\sf \small
+    \_\_init\_\_()} method, pass the filename.  Initialize your header
+  and data (self.header and self.data).  Create another method in that
+  class which will save a FITS file to a new filename, which you pass
+  it.}
+
+

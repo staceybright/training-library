@@ -1,0 +1,315 @@
+\chapter{Python Scripts and Functions}
+\label{ch:scripts}
+
+\section{Script Directory and PATH}
+
+Make a directory where you will keep all of your scripts.  Add this
+directory to your executable path by opening your .mysetenv file and
+adding the line:
+
+\texttt{setenv PATH .:/my/script/directory:\{\$PATH\}}
+
+Next, in your terminal execute the command:
+
+\texttt{\termtab source .mysetenv}
+
+Now you will be able to call your script from anywhere on your machine
+once you make it executable (instructions in next section).  
+
+You will also need to choose a text editor, such as Emacs, TextWrangler, NEdit,
+or others.  You will be using this to edit your scripts.
+ 
+\section{MyFirstScript.py}
+
+Create a file called MyFirstScript.py in your script directory, and
+open it in your favorite editor.  Comments in scripts are very
+important, not just to help you remember what exactly you were
+thinking, but to help others as well should they ever use your code.
+Therefore, to start off on the right foot, let's create a header that
+looks something like this:
+
+\begin{verbatim}
+' ' '
+ABOUT:
+This is a program that takes this and plots that.
+
+DEPENDS:
+Python 2.5.4
+
+AUTHOR:
+M.E. MySelf for STScI, 2011
+
+HISTORY:
+2011: Trial program.
+
+USE:
+python MyFirstScript.py
+' ' '
+\end{verbatim}
+
+For the header we show three apostrophes to comment out multiple lines
+of text.  Next thing we will want to have is all of our imports.
+
+\begin{verbatim}
+import numpy as np
+import pylab as pl 
+\end{verbatim}
+
+Now we are ready!  Look back through your shell and create your script
+from Chapter~\ref{ch:pylab}.  So far you should have something similar
+to the following:
+
+\begin{verbatim}
+infile = 'Gordon2005_Fig16.txt'
+outfile = 'fig16_log.pdf' 
+
+slope, ran_slope_unc, corr_slope_unc, both_slope_unc,  \
+    eqn_slope_unc = np.loadtxt(infile, 
+    usecols=(0, 1, 2, 3, 4), unpack=True) 
+pl.loglog(slope, ran_slope_unc, 'b--',  
+    slope, corr_slope_unc,'r:' , slope, both_slope_unc, 'g-',  
+    slope, eqn_slope_unc, 'm-.', linewidth=3) 
+pl.legend(('Random Uncertainty','Correlated Uncertainty',  
+    'Both','Equation'),'best')
+pl.ylabel('Slope Unc. [e-/s]') 
+pl.xlabel('Slope [e-/s]') 
+pl.savefig(outfile) 
+pl.clf()
+\end{verbatim}
+
+Notice that we listed any variables (or things we might want to change
+later) at the top of the program, such as $outfile$ and $infile$.
+Also, since we do not have to type the variables over and over, I
+decided to use the more descriptive names.  This will also help if I
+do not work on this script for awhile and then later come back to it.
+Now our program is ready to execute.
+
+There are a few ways to run a Python program.  One is to type:
+
+\texttt{\termtab python MyFirstScript.py}
+
+Or, if you are already inside the Python interactive environment, just
+type:
+
+\texttt{\pytab import MyFirstScript}
+
+For the last example, if you want to re-run the script, type:
+
+\texttt{\pytab reload(MyFirstScript)}
+
+Another way is to make the program executable and then type:
+
+\texttt{\termtab MyFirstScript.py}
+
+This is nice.  You do not have to type `python', you can run it from
+anywhere, and you do not have to be in the Python interactive
+environment.  However, we must first do two things.
+\begin{enumerate}
+\item To tell your computer which shell or interpreter should be used
+  for executing this file, at the very top of your file add:
+
+  \texttt{\#! /usr/bin/env python}
+
+\item You will need to make your script executable.  In the terminal,
+  type:
+
+  \texttt{\termtab chmod a+x MyFirstScript.py}  
+\end{enumerate}
+
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+  Write your script MyFirstScript.py and execute it.
+}
+
+\section{Adding Functions}
+\label{s:fun}
+MyFirstScript.py is short and easy to read.  However, we can imagine a
+case where we have such a large program and many repeated tasks that
+it will become difficult.  For example, if we want to create the
+y-intercept uncertainty plot as well as the slope uncertainty plot we
+can either repeat several lines of our program (and if we change one
+copy remember to change the other), or we can create a plotting
+function and just call that function twice.  The general format of
+declaring a function and then using it is shown below.
+
+\begin{verbatim}
+#! /usr/bin/env python
+
+# Header
+
+def mkplot(data): 
+    # Make plot here
+    return
+
+if __name__=='__main__':
+    data = SomeFunctionThatGetsData()
+    mkplot(data)
+    print 'Now I have a beautiful plot!'
+\end{verbatim}
+
+Notice the line \texttt{if \_\_name\_\_=='\_\_main\_\_':}.  It is often useful
+to start the main program with this statement.  In this way you can
+make the file usable as a script as well as an importable module,
+because the code that parses the command line only runs if the module
+is executed as the `main' file, i.e. `MyFirstScript.py'.  In this way,
+from another program (or a Python prompt) we could call
+
+\texttt{from MyFirstScript import mkplot}.   
+
+Let's modify our program to look like this:
+
+\begin{verbatim}
+#! /usr/bin/env python
+
+#Header
+
+__author__ = 'M.E. MySelf'
+__version__ = 0.2
+
+import numpy as np
+import pylab as pl
+
+def mkplot(outfile,xx,yy1,yy2,yy3,yy4,ylab='Slope Unc. [e-/s]'):
+    pl.loglog(xx, yy1, 'b--', xx, yy2, 'r:' , xx, yy3, 'g-', xx,  
+        yy4, 'm-.', linewidth=3) 
+    pl.legend(('Random Uncertainty','Correlated Uncertainty',  
+        'Both','Equation'),'best')
+    pl.ylabel(ylab) 
+    pl.xlabel('Slope [e-/s]') 
+    pl.savefig(outfile) 
+    pl.clf()
+    print 'Saved file to: ',outfile 
+    return  
+    
+if __name__=='__main__': 
+    infile = 'Gordon2005_Fig16.txt' 
+    slope_outfile = 'fig16_slope.pdf'  
+    yint_outfile = 'fig16_yint.pdf'  
+    
+    slope, ran_slope_unc, corr_slope_unc, both_slope_unc,  \
+        eqn_slope_unc, ran_yint_unc, corr_yint_unc,  \
+        both_yint_unc, eqn_yint_unc = np.loadtxt(infile, 
+        unpack=True) 
+    mkplot(slope_outfile, slope, ran_slope_unc, corr_slope_unc,  
+        both_slope_unc, eqn_slope_unc) 
+    mkplot(yint_outfile, slope, ran_yint_unc, corr_yint_unc,  
+        both_yint_unc, eqn_yint_unc,
+        ylab='Y-Intercept Unc. [e-]')
+\end{verbatim}
+
+I also added \texttt{\_\_author\_\_ = 'M.E. MySelf'} and
+\texttt{\_\_version\_\_ = 0.2}.  These lines are not necessary, but
+they mean I can do the following:
+\begin{alltt}
+\pytab import MyFirstScript
+\pytab MyFirstScript.__version__
+\pytab MyFirstScript.__author__
+\end{alltt}
+
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+  What version of NumPy are you using?  Does NumPy list an author?
+}
+
+Notice in the definition of our mkplot function that we give the
+variable `ylab' a default value.  Now we only have to assign a y-axis
+label when we do not want the default (i.e. the y-intercept case).
+Finally, {\sf \small mkplot} is a function, but not a module.
+
+\section{Passing Arguments on the Command Line and {\sf argparse}}
+What if we wanted to run this program, but for other input files?  A
+simple solution would be to just open up our script and edit the file
+name.  However, a more user friendly method would be to allow it to be
+entered on the command line.  {\sf\small argparse} is a module that
+makes this process easy.  Look at the use of {\sf\small
+  argparse} in the code below.  This code can be run in the following
+ways:
+\begin{alltt}
+\termtab MyFirstScript.py 
+\termtab MyFirstScript.py --help
+\termtab MyFirstScript.py -f 'Gordon2005_Fig16.txt'
+\termtab MyFirstScript.py --file 'Gordon2005_Fig16.txt'
+\end{alltt}
+For more information, check out the link
+\url{http://docs.python.org/dev/library/argparse.html}
+
+\begin{verbatim}
+#! /usr/bin/env python
+
+#Header
+
+__author__ = 'M.E. MySelf'
+__version__ = 0.2
+
+import numpy as np
+import pylab as pl
+import argparse
+
+def mkplot(outfile,xx,yy1,yy2,yy3,yy4,ylab='Slope Unc. [e-/s]'):
+    pl.loglog(xx, yy1, 'b--', xx, yy2, 'r:' , xx, yy3, 'g-', xx,  
+        yy4, 'm-.', linewidth=3) 
+    pl.legend(('Random Uncertainty','Correlated Uncertainty',  
+        'Both','Equation'),'best')
+    pl.ylabel(ylab) 
+    pl.xlabel('Slope [e-/s]') 
+    pl.savefig(outfile) 
+    pl.clf()
+    print 'Saved file to: ',outfile 
+    return  
+    
+if __name__=='__main__': 
+
+    parser = argparse.ArgumentParser(description='Make a plot.')
+    parser.add_argument('-f','--file', default='Gordon2005_Fig16.txt', 
+        type=str, help='Input file.')
+    options = parser.parse_args()
+
+    infile = options.file 
+    slope_outfile = 'fig16_slope.pdf'  
+    yint_outfile = 'fig16_yint.pdf'  
+    
+    slope, ran_slope_unc, corr_slope_unc, both_slope_unc,  \
+        eqn_slope_unc, ran_yint_unc, corr_yint_unc,  \
+        both_yint_unc, eqn_yint_unc = np.loadtxt(infile, 
+        unpack=True) 
+    mkplot(slope_outfile, slope, ran_slope_unc, corr_slope_unc,  
+        both_slope_unc, eqn_slope_unc) 
+    mkplot(yint_outfile, slope, ran_yint_unc, corr_yint_unc,  
+        both_yint_unc, eqn_yint_unc,
+        ylab='Y-Intercept Unc. [e-]')
+\end{verbatim}
+
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+  Write your script MyFirstScript.py and execute it using all of the
+  examples above.  See what happens if you enter something that is not
+  allowed.  Edit your mkplot function so that it is more versatile.  }
+
+\section{Error Handling and {\sf pdb.set\_trace()}}
+Debugging can be a difficult and long process, but the {\sf\small pdb}
+module can help.  {\sf\small pdb} is the Python debugger.  There are
+many ways to use it, but a common method is with {\sf\small
+  pdb.set\_trace()}.  To debug your code using this function, import
+{\sf\small pdb} and insert the line \texttt{pdb.set\_trace()} into your
+code before the part you are unsure about.  Execute the program.  Once
+the interpreter reaches the {\sf\small pdb.set\_trace()} mark, it will
+allow you to inter act with the code and print variables as they are
+defined, as well as enter other commands, such as:
+\begin{itemize}
+\item (n)ext:    continue to the next line
+\item (l)ist:      list a few steps
+\item (b)reak:  give line and file to break at
+\item (s)tep:    moves into deeper calls (i.e. a function in NumPy, or
+  our function {\sf\small mkplot}).
+\item (c)ontinue: continue the program like normal.
+\end{itemize}
+
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+  Add \texttt{import pdb} to your list of imports in your
+  MyFirstScript.py file.  Insert the line \texttt{pdb.set\_trace()}.
+  Execute your code and step through the program, print out variables
+  to make sure they are what they are supposed to be, and step into
+  your mkplot function.  Let the program continue. }
+
+
