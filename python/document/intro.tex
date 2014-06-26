@@ -17,12 +17,13 @@ python and for checking your code as you write it.
 \begin{itemize}
 \item Python is case sensitive.  This turns out not to be that
   difficult as Python is almost always written in lowercase.   
-\item Python does not have curly brackets, or `BEGIN' and `END'
-  statements.  It does however depend on indents.  Make sure to indent
-  your code!
+\item Python does not have `BEGIN' and `END'
+  statements.  It does however depend on indents.  It is best practice
+  to indent with four spaces.
 \item Comments in code are useful to help you remember what is going
   on, but also so that others know what you are doing.  In Python,
-  comments begin with the \# symbol.
+  comments begin with the \# symbol. Multi-line comments can be nested
+  in three quotes. 
 \item The line continuation symbol ` \textbackslash ' can be used to
   spread a command out over multiple lines.  This is not necessary
   inside parenthesis, brackets, or curly brackets as Python will wait
@@ -35,7 +36,7 @@ python and for checking your code as you write it.
 There are three different versions of the SSB (Science Software Branch) environments
 available at the institute.  They are:
 \begin{itemize}
-\item SSBREL -- Updated as needed, standard publicly available release.
+\item  SSBREL -- Updated as needed, standard publicly available release.
 \item SSBX -- Updated weekly, a testing environment.  Holds latest
   bug fixes and updates.  Institute only release.
 \item SSBDEV -- Updated daily.  Development updates intended for
@@ -46,9 +47,9 @@ Note that the version of Python related modules depend on the SSB
 environment, especially if you are using NFS mounts.  To switch
 to a particular version, type one of the following into your terminal: 
 \begin{alltt}
-\termtab ssbrel
-\termtab ssbx
-\termtab ssbdev
+\termtab ur_setup common ssbrel
+\termtab ur_setup common ssbx
+\termtab ur_setup common ssbdev
 \end{alltt}
 
 \subsection{Interactive Python Environment}
@@ -67,6 +68,8 @@ two popular options.
   named ipython.log.py.  The log-file follows a formatting convention
   of iPython and may not, on a first glance, look readable. However,
   iPython knows how to repeat the commands in your log-file when ran.
+ \item iPython Notebook: \\
+  [[... Heather will summarize...]]
 \end{itemize}
 To exit either, type `exit()'.  Only once do we use the shell command
 `cp', for which you would need to use iPython (or just do it in the
