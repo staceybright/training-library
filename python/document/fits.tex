@@ -1,0 +1,107 @@
+\chapter{Handeling FITS files and ASCII data tables using Astropy}
+\label{ch:fits}
+Astropy is a python library for astronomy developed by professional astronomers
+and software developers from around the world, some of which work here at STScI
+in the Science Software Branch.  It is under continuous development and is quickly
+becoming a powerful library, especially for handeling FITS files and ASCII tables.
+Visit the website listed in Chapter~\ref{ch:links} for more information and useful
+documentation.
+
+The astropy.io.fits module provides an interface to FITS formatted files under the 
+Python scripting language.  astropy.io.fits data structures are a subclass of NumPy 
+arrays, which means that they can use NumPy arrays' methods and attributes.  The
+astropy.io.ascii module provides flexible and easy-to-use methods for reading and 
+writing ASCII data tables.  In the following sections, we will explore these two modules.
+ 
+\section{Opening, Reading, and Closing a FITS File}
+As an example, we will use data from the \emph{NICMOS} instrument located here:  \\
+/grp/jwst/wit/miri/randers/PythonTraining/n9vf01hfq\_ima.fits \\ 
+Please copy this file to your working directory. 
+
+Below we show an example of opening a FITS file, getting
+the data and the header, closing the file, printing out the shape of
+the data using {\sf \small numpy.shape}, printing out header values,
+and finally making changes to the data.
+
+\begin{alltt}
+\pytab from astropy.io import fits
+\pytab infile = 'n9vf01hfq_ima.fits'
+\pytab fits.info(infile)
+\pytab data = fits.getdata(infile, 1) 
+\pytab hdr = fits.getheader(infile, 0) 
+\pytab data.shape
+\pytab print hdr 
+\pytab hdr['DARKCORR'] 
+\pytab hdr['DARKCORR'] = 'PERFORM'
+\pytab hdr['DARKCORR']
+\pytab print data[-2:]  #print the last two lines.
+\pytab data[-1:][0][0] = 0
+\pytab print data[-1]
+\end{alltt}
+
+Notice that $hdr$ behaves like a dictionary.  We did some
+bad things to this file, but let's save it anyway to a new file.
+
+\begin{alltt}
+\pytab outfile = 'mybad.fits'
+\pytab fits.writeto(outfile, data, hdr)
+\pytab print 'Saved FITS file to: {}'.format(outfile)
+\end{alltt}
+
+Alternatively, if we want to modify the original file directly,
+we can do the following:
+
+\texttt{\pytab fits.update(infile, data, 1)}
+
+\section{{\sf fits.getval()} and {\sf fits.setval()} functions}
+
+If you are familiar with IRAF, you are probably familiar with IRAF's
+{\sf\small hedit} function, which allows you to add, delete, and
+modify keywords in a FITS header.  
+
+First, lets take a look of our example file's header using {\sf\small
+  imheader} in PyRAF.  In PyRAF navigate to the folder where your
+n9vf01hfq\_ima.fits file is located, and try the following:
+
+\begin{alltt}
+--> imheader n9vf01hfq_ima.fits[0] l+ | page 
+\end{alltt}
+
+We see that there is a 'NSLEWCON' keyword, and it is set to 'Clear.'
+Using {\sf\small hedit} we can change the 'NSLEWCON' keyword from
+'Clear' to 'Set' as shown here:
+
+\begin{alltt}
+--> hedit n9vf01hfq_ima.fits[0] NSLEWCON 'Set'  \textbackslash
+\ldots     verify=no update=yes
+\end{alltt}
+
+In the above example we made sure the 'update' parameter was set to
+'yes.'  We can check that our edit was successful by using  {\sf\small
+  imheader} again:
+
+\begin{alltt}
+--> imheader n9vf01hfq_ima.fits[0] l+ | page 
+\end{alltt}
+
+Without using IRAF, there is a simple way to do this in astropy using
+{\sf\small fits.getval()} and {\sf\small fits.setval()}, shown in
+the example below.
+
+\begin{alltt}
+\pytab from astropy.io import fits
+\pytab infile = 'n9vf01hfq_ima.fits' 
+\pytab key = 'NSLEWCON'
+\pytab fits.getval(infile, key, 0)
+\pytab fits.setval(infile, key, value='Clear', ext=0)
+\pytab fits.getval(infile, key, 0)
+\end{alltt}
+
+Now our FITS file is back to its 'initial' state.  No harm done.
+
+
+\section{Reading and Writing ASCII Data Files}
+
+The astropy.io.ascii module provides two robust methods, ascii.read() and
+ascii.write(), for reading and writing multi-column delimited data tables,
+respectively.
