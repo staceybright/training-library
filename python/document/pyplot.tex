@@ -181,8 +181,23 @@ error bars using the \textit{errorbar} function:
 \section{Display Dates on X-axis}
 
 MJD is a convenient format for plotting time. But who 
-thinks in MJD? Let's convert it to dates and display them 
+thinks in MJD? Let's convert MJD to day-month-year and display them 
 on the x-axis. In python this is a little tricky.
+
+\begin{alltt}
+\pytab from astropy.time import Time
+\pytab time_MJD = [float(item.get_text()) for item in ax.get_xticklabels()]
+\pytab time_convert = Time(time_MJD, format='mjd', scale='utc')
+\pytab time_ymd_long = time_convert.iso
+\pytab time_ymd_short = []
+\pytab for date in time_ymd_long:
+\ldots    time_ymd_short.append(date.split(' ')[0])
+\pytab ax.set_xticklabels(time_ymd_short)
+\pytab figure.show()
+\end{alltt}
+
+
+See \href{http://astropy.readthedocs.org/en/latest/time/}{http://astropy.readthedocs.org/en/latest/time/} for more examples.
 
 
 
