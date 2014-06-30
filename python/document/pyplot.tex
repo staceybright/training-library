@@ -2,16 +2,209 @@
 \label{ch:pyplot}
 
 \section{matplotlib.pyplot}
-Matplotlib and its Pyplot environment is a versatile Python plotting
+Matplotlib and its PyPlot environment is a versatile Python plotting
 library which produces publication quality figures in a variety of
-hard-copy formats such as EPS, PDF, etc.  With PyPlot you can
+hard-copy formats such as EPS, PDF, and PNG.  With PyPlot you can
 generate scatter and line plots, histograms, power spectra, bar
 charts, error-charts, pie charts, and many more with just a few lines
 of code. For the power user, you have full control of line styles,
-font properties, and axes properties, etc. For useful examples of 
-astronomy plots that can be generated with pyplot, see Leonardo 
+font properties, axes properties, and so on. For useful examples of 
+astronomy plots that can be generated with PyPlot, see Leonardo 
 Ubeda's astroplotlib library at \href{http://astroplotlib.stsci.edu/}
 {http://astroplotlib.stsci.edu/}
+
+
+\section{Create a Simple Scatter Plot}
+
+We'll start by making a simple scatter plot, demonstrating some of 
+the PyPlot options, and saving our plot in a PDF format. 
+
+First, we need to read in some data, as we learned in Chapter~[[...]].
+
+\begin{alltt}
+\pytab from astropy.io import ascii
+\pytab data_A = ascii.read('flux_vs_time_A.dat', names=['Time',  \textbackslash 
+\ldots 'Flux_pcnt_diff', 'Flux_err', 'Flux_linear_fit'])
+\pytab data_C = ascii.read('flux_vs_time_C.dat', names=['Time',  \textbackslash 
+\ldots 'Flux_pcnt_diff', 'Flux_err', 'Flux_linear_fit'])
+\end{alltt}
+
+The time is in Modified Julian Date (MJD) and the remaining 
+columns are flux percent differences and are dimensionless. 
+(The fluxes are of a standard white dwarf for a WFC3 monitoring 
+program. The two datasets are from different amplifiers
+on the WFC3 two-chip mosaic.)
+
+Now we will import PyPlot and make our first plot, 
+using a \textit{figure} object...
+
+\begin{alltt}
+\pytab import matplotlib.pyplot as pyplot
+\pytab figure, ax = pyplot.subplots()
+\end{alltt}
+
+Now we can begin to plot into the \textit{figure} object, via the \textit{ax} 
+axis created in the previous step. Each subsequent call to the inherited 
+\textit{ax.plot} method will update the overall plot. The next two calls
+plot the two sets of flux differences as scatter plots in blue and red,
+respectively.
+
+\begin{alltt}
+\pytab ax.scatter(data_A['Time'], data_A['Flux_pcnt_diff'], c='blue')
+\pytab ax.scatter(data_C['Time'], data_C['Flux_pcnt_diff'], c='red')
+\pytab figure.show()
+\end{alltt}
+
+The \textit{figure.show()} command displays our changes onto the \textit{figure}
+object.
+
+We should add axis labels...
+
+\begin{alltt}
+\pytab ax.set_xlabel('Time [MJD]', fontsize=20)
+\pytab ax.set_ylabel('Flux Diff [%]',  fontsize=20)
+\pytab figure.show()
+\end{alltt}
+
+Finally let's save the figure. We can save as a PDF, PNG, TIFF, and
+other file types; we need only to type the appropriate extension.
+
+\begin{alltt}
+\pytab figure.savefig('flux_vs_time_1.pdf')
+\end{alltt}
+
+
+%%%%%%%%%%%%%%%%
+\begin{figure}[tbp]
+  \centering
+    \includegraphics[scale=0.55]{flux_vs_time_1.pdf}
+    \caption{Our first plot.}
+  \label{fig:splot}
+\end{figure}
+%%%%%%%%%%%%%%%%
+
+\section{Markers, Lines, and Legends}  %Plot customizations
+
+We have a plot! But we are not yet finished.
+PyPlot has many, many options available for you to customize
+your plot. We'll demonstrate just a few for markers, lines, and legends. 
+
+We can play with the marker type (\textit{marker}), size (\textit{s}), and 
+transparency (\textit{alpha}) of our of scatter plots' points. We first
+need to clear the figure with the \textit{ax.clear()} command.
+
+\begin{alltt}
+\pytab ax.clear()
+\pytab ax.scatter(data_A['Time'], data_A['Flux_pcnt_diff'], \textbackslash 
+\ldots   c='blue', marker='x', s=30, alpha=0.75)
+\pytab ax.scatter(data_C['Time'], data_C['Flux_pcnt_diff'], \textbackslash 
+\ldots   c='red', marker='d', s=30, alpha=0.75)
+\pytab ax.set_xlabel('Time [MJD]', fontsize=20)
+\pytab ax.set_ylabel('Flux Diff [%]', fontsize=20)
+\pytab figure.show()
+\end{alltt}
+
+The plot would be clearer if we added a legend.
+
+\begin{alltt}
+\pytab ax.clear()
+\pytab ax.scatter(data_A['Time'], data_A['Flux_pcnt_diff'], \textbackslash 
+\ldots   c='blue', marker='x', s=25, alpha=0.75, label='Amp A')
+\pytab ax.scatter(data_C['Time'], data_C['Flux_pcnt_diff'], \textbackslash 
+\ldots   c='red', marker='d', s=25, alpha=0.75, label='Amp C')
+\pytab ax.set_xlabel('Time [MJD]', fontsize=20)
+\pytab ax.set_ylabel('Flux Diff [%]', fontsize=20)
+\pytab ax.legend(loc='best', scatterpoints=1)
+\pytab figure.show()
+\end{alltt}
+
+The \textit{ax.legend(loc='best')} command will try to find the least busy section 
+of your plot and stick the legend there. 
+
+Next let's plot lines with the linear fits from our data:
+
+\begin{alltt}
+\pytab ax.plot(data_A['Time'], data_A['Flux_linear_fit'], \textbackslash 
+\ldots  c='blue', ls='--', linewidth=2, label='Amp A Fit')
+\pytab ax.plot(data_C['Time'], data_C['Flux_linear_fit'], \textbackslash 
+\ldots  c='red', ls=':', linewidth=2, label='Amp C Fit')
+\pytab ax.legend(loc='best', scatterpoints=1)
+\pytab figure.show()
+\end{alltt}
+
+Suppose we want to denote the 0.0 flux difference with a dashed line and the
+MJD date 56250.0 with a green line:
+
+\begin{alltt}
+\pytab ax.axhline(0.0, color='k', ls='--', linewidth=1)  
+\pytab ax.axvline(56250.0, color='green', ls='-', linewidth=2) 
+\pytab figure.show()
+\end{alltt}
+
+%%%%%%%%%%%%%%%%
+\begin{figure}[tbp]
+  \centering
+    \includegraphics[scale=0.55]{flux_vs_time_2.pdf}
+    \caption{Our customized plot.}
+  \label{fig:splot}
+\end{figure}
+%%%%%%%%%%%%%%%%
+
+We now have a personalized plot! (It doesn't have to be pretty.) Let's save it.
+
+\begin{alltt}
+\pytab figure.savefig('flux_vs_time_2.pdf')
+\end{alltt}
+
+Other options can be found on the Matplotlib PyPlot site listed in Chapter~\ref{ch:links}. 
+
+For different color names, see \href{http://www.w3schools.com/html/html_colornames.asp}
+{http://www.w3schools.com/html/html\_colornames.asp}
+
+%http://matplotlib.org/1.2.1/examples/pylab_examples/show_colormaps.html
+
+
+\section{Error Bars}
+
+We have columns giving our error. We can display them on our plot as
+error bars using the \textit{errorbar} function:
+
+\begin{alltt}
+\pytab ax.clear()
+\pytab ax.scatter(data_A['Time'], data_A['Flux_pcnt_diff'], c='blue')
+\pytab ax.errorbar(data_A['Time'], data_A['Flux_pcnt_diff'], \textbackslash 
+\ldots yerr=data_A['Flux_err'], c='grey', marker=None, ls='None')
+\pytab figure.show()
+\end{alltt}
+
+
+\section{Display Dates on X-axis}
+
+MJD is a convenient format for plotting time. But who 
+thinks in MJD? Let's convert it to dates and display them 
+on the x-axis. In python this is a little tricky.
+
+
+
+\section{Plot Figures Side-by-Side}
+
+%many examples from ...
+
+
+\section{Fitting Lines}
+
+
+
+\section{Display a FITS Image}
+%Different examples of drawing over image.
+
+
+\section{Plot Spectra}
+
+
+
+
+
 
 
 
