@@ -19,7 +19,7 @@ Ubeda's astroplotlib library at \href{http://astroplotlib.stsci.edu/}
 We'll start by making a simple scatter plot, demonstrating some of 
 the PyPlot options, and saving our plot in a PDF format. 
 
-First, we need to read in some data, as we learned in Chapter~[[...]].
+First, we need to read in some data, as we learned in Chapter~\ref{ch:fits}.
 
 \begin{alltt}
 \pytab from astropy.io import ascii
@@ -31,9 +31,9 @@ First, we need to read in some data, as we learned in Chapter~[[...]].
 
 The time is in Modified Julian Date (MJD) and the remaining 
 columns are flux percent differences and are dimensionless. 
-(The fluxes are of a standard white dwarf for a WFC3 monitoring 
-program. The two datasets are from different amplifiers
-on the WFC3 two-chip mosaic.)
+%(The fluxes are of a standard white dwarf for a WFC3 monitoring 
+%program. The two datasets are from different amplifiers
+%on the WFC3 two-chip mosaic.)
 
 Now we will import PyPlot and make our first plot, 
 using a \textit{figure} object...
@@ -236,12 +236,12 @@ See \href{http://astropy.readthedocs.org/en/latest/time/}{http://astropy.readthe
 \end{figure}
 %%%%%%%%%%%%%%%%
 
-\section{Fitting Routines}
+%\section{Fitting Routines}
 
-We do not recommend using python's fitting routines, as they have been 
-known to have issues. In general, you will want to write your own or use
-tried-and-true routines from IRAF/PYRAF.  (For instance, the linear fit lines 
-we plotted earlier were calculated with IRAF's TLINEAR task.)
+%We do not recommend using python's fitting routines, as they have been 
+%known to have issues. In general, you will want to write your own or use
+%tried-and-true routines from IRAF/PYRAF.  (For instance, the linear fit lines 
+%we plotted earlier were calculated with IRAF's TLINEAR task.)
 
 
 \section{Display Plots Side-by-Side}
@@ -253,7 +253,7 @@ a simple 2$\times$1 multiple plot with the \textit{subplot()} method.
 Let's make a new figure, resizing it so we can better see our plots.
 Then we'll place on the first plot at position 211. The first number (2) denotes 
 how many plots are to be placed vertically; the second number (1) denotes
-how many plates are to be placed horizontally; and the third number (1) denotes
+how many plots are to be placed horizontally; and the third number (1) denotes
 where to the current plot is to be placed in this grid (in this case, the first position). 
 
 \begin{alltt}
@@ -286,8 +286,6 @@ We'll finish by setting the x and y axes labels and saving the figure.
 \pytab figure.savefig('flux_vs_time_4.pdf')
 \end{alltt}
 
-Many more examples can be found at ...
-
 %%%%%%%%%%%%%%%%
 \begin{figure}[tbp]
   \centering
@@ -299,14 +297,54 @@ Many more examples can be found at ...
 
 
 \section{Display a FITS Image}
-%Different examples of drawing over image.
 
+Copy the FITS file \textit{ibsa01fpq\_flt.fits} from \textit{/user/gunning/Python\_Training/} to your current working directory. It
+is a WFC3/IR image of a corner of the galaxy M51.
+% Note that the image is non-proprietary. From Prop ID 12490, Visit 01. 
 
+We will use astropy's \textit{fits} package to open the file, as we learned in Chapter~\ref{ch:fits},
+and extract the image data from the SCI extension.  
 
+\begin{alltt}
+\pytab import astropy.io.fits as fits
+\pytab image = fits.open('ibsa01fpq_flt.fits')
+\pytab sci_data = image['sci'].data
+\pytab pylab.clf()
+\pytab pyplot.imshow(sci_data, vmin=0, vmax=60)
+\pytab image.close()
+\end{alltt}
+
+How does that look? You should mess around with the \textit{vmin} and \textit{vmax} to see if you can improve the scaling.
+
+We can add labels to the image plot.  
+
+\begin{alltt}
+\pytab pyplot.title('M51', fontsize=20)
+\pytab pyplot.xlabel('x pixels', fontsize=15)
+\pytab pyplot.ylabel('y pixels', fontsize=15)
+\end{alltt}
+
+Before saving, we can try annotating features in our image. In this example,
+we point to a star near pixel coordinates (640, 810) with an arrow.
+
+\begin{alltt}
+\pytab pyplot.annotate('star', xy=(640,810),  xytext=(520,770), \textbackslash
+\ldots color='white', arrowprops=dict(facecolor='white'))
+\pytab pyplot.savefig('M51.pdf')
+\end{alltt}
+
+%%%%%%%%%%%%%%%%
+\begin{figure}[tbp]
+  \centering
+    \includegraphics[scale=0.55]{M51.pdf}
+    \caption{A corner of the galaxy M51, displayed using \textit{pyplot.imshow()}.}
+  \label{fig:M51}
+\end{figure}
+%%%%%%%%%%%%%%%%
 
 
 For more
-plotting options with Matplotlib and Pyplot, check out the 
+plotting options with Matplotlib and PyPlot, check out the 
 \href{http://matplotlib.org/}{matplotlib.org} link listed in
 Chapter~\ref{ch:links}.  Notice that there is a link to NumPy on this
 page, as well as links to screen-shots, thumbnails, and examples.
