@@ -7,15 +7,17 @@ becoming a powerful library, especially for handeling FITS files and ASCII table
 Visit the website listed in Chapter~\ref{ch:links} for more information and useful
 documentation.
 
-The astropy.io.fits module provides an interface to FITS formatted files under the 
-Python scripting language.  astropy.io.fits data structures are a subclass of NumPy 
+The {\sf \small astropy.io.fits} module provides an interface to FITS formatted files under the 
+Python scripting language.  {\sf \small astropy.io.fits} data structures are a subclass of NumPy 
 arrays, which means that they can use NumPy arrays' methods and attributes.  The
-astropy.io.ascii module provides flexible and easy-to-use methods for reading and 
+{\sf \small astropy.io.ascii} module provides flexible and easy-to-use methods for reading and 
 writing ASCII data tables.  In the following sections, we will explore these two modules.
  
 \section{Opening, Reading, and Closing a FITS File}
-As an example, we will use data from the \emph{WFC3} instrument located here:  \\
-/user/gunning/Python_Training/icft01crq\_flt.fits \\ 
+As an example, we will use data from the \emph{WFC3} instrument located here:
+
+/user/gunning/Python\_Training/icft01crq\_flt.fits
+
 Please copy this file to your working directory. 
 
 Below we show an example of opening a FITS file, getting
@@ -35,7 +37,7 @@ and finally making changes to the data.
 \pytab hdr['FLSHCORR'] 
 \pytab hdr['FLSHCORR'] = 'PERFORM'
 \pytab hdr['FLSHCORR']
-\pytab print data[-2:]  a# Print the last two lines.
+\pytab print data[-2:]  # Print the last two lines.
 \pytab data[-1:][0][0] = 0
 \pytab print data[-1]
 \end{alltt}
@@ -54,13 +56,13 @@ we can do the following:
 
 \texttt{\pytab fits.update(infile, data, 1)}
 
-As a word of caution, note that astropy.io.fits reads in FITS images
-as (rows, cols) or (y, x), not (x, y).  This is often a 'gotcha' for 
-users who are indexing spacific areas of the array.
+As a word of caution, note that {\sf \small astropy.io.fits} reads in FITS images
+as {\sf \small(rows, cols)} or {\sf \small (y, x)}, not {\sf \small (x, y)}.  
+This is often a `gotcha' for users who are indexing spacific areas of the array.
 
 \section{{\sf fits.getval()} and {\sf fits.setval()} functions}
 
-If you are familiar with IRAF, you are probably familiar with IRAF's
+If you are familiar with IRAF/PyRAF, you are probably familiar with IRAF's
 {\sf\small hedit} function, which allows you to add, delete, and
 modify keywords in a FITS header.  
 
@@ -72,8 +74,8 @@ icft01crq\_raw.fits file is located, and try the following:
 --> imheader icft01crq_raw.fits[0] l+ | page 
 \end{alltt}
 
-We see that there is a 'DARKFILE' keyword, and it is set to 'iref$y2j13512i_drk.fits.'
-Say we wanted to recalibrate this file using a different 'DARKFILE'.  The value of this
+We see that there is a `DARKFILE' keyword, and it is set to `iref\$y2j13512i\_drk.fits.'
+Say we wanted to recalibrate this file using a different `DARKFILE'.  The value of this
 keyword can be changed using {\sf\small hedit}, as shown here:
 
 \begin{alltt}
@@ -81,16 +83,16 @@ keyword can be changed using {\sf\small hedit}, as shown here:
 \ldots     verify=no update=yes
 \end{alltt}
 
-In the above example we made sure the 'update' parameter was set to
-'yes.'  We can check that our edit was successful by using  {\sf\small
-  imheader} again and checking the value of the 'DARKFILE' keyword:
+In the above example we made sure the `update' parameter was set to
+`yes.'  We can check that our edit was successful by using  {\sf\small
+  imheader} again and checking the value of the `DARKFILE' keyword:
 
 \begin{alltt}
 --> imheader icft01crq_raw.fits[0] l+ | page 
 \end{alltt}
 
-Using Python, there is a simple way to do this with astropy.io.fits using
-{\sf\small fits.getval()} and {\sf\small fits.setval()}, shown in
+Using Python, there is a simple way to do this with {\sf \small astropy.io.fits} 
+using {\sf \small fits.getval()} and {\sf\small fits.setval()}, shown in
 the example below.
 
 \begin{alltt}
@@ -102,13 +104,13 @@ the example below.
 \pytab fits.getval(infile, key, 0)
 \end{alltt}
 
-Now our FITS file is back to its 'initial' state.  No harm done.
+Now our FITS file is back to its `initial' state.  No harm done.
 
 \section{Reading and Writing ASCII Data Files}
 
-The astropy.io.ascii module provides two robust methods, ascii.read() and
-ascii.write(), for reading and writing multi-column delimited data tables,
-respectively.
+The {\sf \small astropy.io.ascii} module provides two robust methods, 
+{\sf \small ascii.read()} and {\sf \small ascii.write()}, for reading and 
+writing multi-column delimited data tables, respectively.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ascii.read
 \subsection{ {\sf astropy.io.ascii.read()} function}
@@ -118,8 +120,8 @@ from a specified file and returns an astropy.Table object.
 
 As an example, we will use these files:
 
-/user/gunning/Python_Training/flux_vs_time_A.dat
-/user/gunning/Python_Training/flux_vs_time_C.dat
+/user/gunning/Python\_Training/flux\_vs\_time\_A.dat \newline
+/user/gunning/Python\_Training/flux\_vs\_time\_C.dat
 
 These data are used to plot the flux versus time for a standard star and serves as a
 monitor of the WFC3/UVIS photometric stability for amps A and C, respectively.  In 
@@ -130,7 +132,8 @@ the plots.
 \begin{alltt}
 \pytab from astropy.io import ascii
 \pytab infile = 'flux_vs_time_A.dat'
-\pytab data = ascii.read('flux_vs_time_A.dat', names=['MJD', 'Flux_diff', 'Flux_err', 'Flux_linear_fit'])
+\pytab data = ascii.read('flux_vs_time_A.dat', 
+                names=['MJD', 'Flux_diff', 'Flux_err', 'Flux_linear_fit'])
 \pytab print data
 \pytab print data['MJD']
 \pytab print data['MJD', 'Flux_diff']
@@ -141,20 +144,21 @@ the plots.
 
 {\color{blue} {\sf\small EXERCISES}} \\
 {\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
-Try reading in the data from 'flux_vs_time_C.dat' using ascii.read()}
+Try reading in the data from `flux\_vs\_time\_C.dat' using {\sf \small ascii.read()}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ascii.write
 \subsection{ {\sf astropy.io.ascii.write() } function}
 {\color{blue} {\sf\small USE}} \\
 Similar to {\sf\small ascii.read()}, the {\sf\small astropy.io.ascii.write()} function writes a table of data 
-to a specified file.  For fun, lets try taking the MJDs from 'flux_vs_time_A.dat', 
+to a specified file.  For fun, lets try taking the MJDs from `flux\_vs\_time\_A.dat', 
 normalizing them to the first observation date, and writing the new table to a new text file:
 
 {\color{blue} {\sf\small EXAMPLES}} 
 \begin{alltt}
 \pytab from astropy.io import ascii
 \pytab infile = 'flux_vs_time_A.dat'
-\pytab data = ascii.read('flux_vs_time_A.dat', names=['MJD', 'Flux_diff', 'Flux_err', 'Flux_linear_fit'])
+\pytab data = ascii.read('flux_vs_time_A.dat', 
+              names=['MJD', 'Flux_diff', 'Flux_err', 'Flux_linear_fit'])
 \pytab first_date = min(data['MJD'])
 \pytab data['MJD'] = data['MJD'] - first_date
 \pytab print data
@@ -163,4 +167,4 @@ normalizing them to the first observation date, and writing the new table to a n
 
 {\color{blue} {\sf\small EXERCISES}} \\
 {\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
-Try making a MJD-normalized text file for the 'flux_vs_time_C.dat' data using ascii.write()}
+Try making a MJD-normalized text file for the `flux\_vs\_time\_C.dat' data using {\sf \small ascii.write()}}
