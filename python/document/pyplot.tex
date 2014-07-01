@@ -19,14 +19,16 @@ Ubeda's astroplotlib library at \href{http://astroplotlib.stsci.edu/}
 We'll start by making a simple scatter plot, demonstrating some of 
 the PyPlot options, and saving our plot in a PDF format. 
 
-First, we need to read in some data, as we learned in Chapter~\ref{ch:fits}.
+First, we need to read in some data, as we learned in Chapter~\ref{ch:fits},
+using the two files `flux\_vs\_time\_A.dat' and `flux\_vs\_time\_C.dat' found
+in /user/gunning/Python\_Training/.
 
 \begin{alltt}
 \pytab from astropy.io import ascii
 \pytab data_A = ascii.read('flux_vs_time_A.dat', names=['Time',  \textbackslash 
-\ldots 'Flux_pcnt_diff', 'Flux_err', 'Flux_linear_fit'])
+\ldots 'Flux_diff', 'Flux_err', 'Flux_linear_fit'])
 \pytab data_C = ascii.read('flux_vs_time_C.dat', names=['Time',  \textbackslash 
-\ldots 'Flux_pcnt_diff', 'Flux_err', 'Flux_linear_fit'])
+\ldots 'Flux_diff', 'Flux_err', 'Flux_linear_fit'])
 \end{alltt}
 
 The time is in Modified Julian Date (MJD) and the remaining 
@@ -50,8 +52,8 @@ plot the two sets of flux differences as scatter plots in blue and red,
 respectively.
 
 \begin{alltt}
-\pytab ax.scatter(data_A['Time'], data_A['Flux_pcnt_diff'], c='blue')
-\pytab ax.scatter(data_C['Time'], data_C['Flux_pcnt_diff'], c='red')
+\pytab ax.scatter(data_A['Time'], data_A['Flux_diff'], c='blue')
+\pytab ax.scatter(data_C['Time'], data_C['Flux_diff'], c='red')
 \pytab figure.show()
 \end{alltt}
 
@@ -95,9 +97,9 @@ need to clear the  \textit{axis} object with the \textit{ax.clear()} command.
 
 \begin{alltt}
 \pytab ax.clear()
-\pytab ax.scatter(data_A['Time'], data_A['Flux_pcnt_diff'], \textbackslash 
+\pytab ax.scatter(data_A['Time'], data_A['Flux_diff'], \textbackslash 
 \ldots   c='blue', marker='x', s=30, alpha=0.75)
-\pytab ax.scatter(data_C['Time'], data_C['Flux_pcnt_diff'], \textbackslash 
+\pytab ax.scatter(data_C['Time'], data_C['Flux_diff'], \textbackslash 
 \ldots   c='red', marker='d', s=30, alpha=0.75)
 \pytab ax.set_xlabel('Time [MJD]', fontsize=20)
 \pytab ax.set_ylabel('Flux Diff [%]', fontsize=20)
@@ -108,9 +110,9 @@ The plot would be cleaner if we added a legend.
 
 \begin{alltt}
 \pytab ax.clear()
-\pytab ax.scatter(data_A['Time'], data_A['Flux_pcnt_diff'], \textbackslash 
+\pytab ax.scatter(data_A['Time'], data_A['Flux_diff'], \textbackslash 
 \ldots   c='blue', marker='x', s=25, alpha=0.75, label='Amp A')
-\pytab ax.scatter(data_C['Time'], data_C['Flux_pcnt_diff'], \textbackslash 
+\pytab ax.scatter(data_C['Time'], data_C['Flux_diff'], \textbackslash 
 \ldots   c='red', marker='d', s=25, alpha=0.75, label='Amp C')
 \pytab ax.set_xlabel('Time [MJD]', fontsize=20)
 \pytab ax.set_ylabel('Flux Diff [%]', fontsize=20)
@@ -166,14 +168,14 @@ For different color names, see \href{http://www.w3schools.com/html/html_colornam
 
 \section{Error Bars}
 
-We have columns giving our error. We can display them on our plot as
+We have columns giving our error in flux percent difference. We can display them on our plot as
 error bars using the \textit{errorbar} function:
 
 \begin{alltt}
 \pytab ax.clear()
-\pytab ax.scatter(data_A['Time'], data_A['Flux_pcnt_diff'], \textbackslash
+\pytab ax.scatter(data_A['Time'], data_A['Flux_diff'], \textbackslash
 \ldots c='blue', s=10)
-\pytab ax.errorbar(data_A['Time'], data_A['Flux_pcnt_diff'], \textbackslash 
+\pytab ax.errorbar(data_A['Time'], data_A['Flux_diff'], \textbackslash 
 \ldots yerr=data_A['Flux_err'], c='k', marker=None, ls='None')
 \pytab figure.show()
 \end{alltt}
@@ -183,12 +185,12 @@ error bars using the \textit{errorbar} function:
 
 MJD is a convenient format for plotting time. But who 
 thinks in MJD? Let's convert MJD to year-month-day and display them 
-on the x-axis. In python this is a little tricky. We will show one way to do
+on the x-axis. In Python this is a little tricky. We will show one way to do
 it; you may be able to find a better way.
 
 Let's continue working on the plot we began in the Error Bars section.
 We first need to import \textit{Time} from \textit{astropy}, and then save
-into a list the MJD dates displayed as tick labels (converting them into
+into a list the MJD dates that are currently displayed as tick labels (converting them into
 floats as we do so).
 
 \begin{alltt}
@@ -238,28 +240,28 @@ See \href{http://astropy.readthedocs.org/en/latest/time/}{http://astropy.readthe
 
 %\section{Fitting Routines}
 
-%We do not recommend using python's fitting routines, as they have been 
+%We do not recommend using Python's fitting routines, as they have been 
 %known to have issues. In general, you will want to write your own or use
-%tried-and-true routines from IRAF/PYRAF.  (For instance, the linear fit lines 
+%tried-and-true routines from IRAF/PyRAF.  (For instance, the linear fit lines 
 %we plotted earlier were calculated with IRAF's TLINEAR task.)
 
 
 \section{Display Plots Side-by-Side}
 
-As with most plotting matters in python, there's more than one way to 
+As with most plotting matters in Python, there's more than one way to 
 display multiple plots on the same figure. We will demonstrate making
-a simple 2$\times$1 multiple plot with the \textit{subplot()} method. 
+a simple 2$\times$1 multiple plot with just the \textit{subplot()} method. 
 
-Let's make a new figure, resizing it so we can better see our plots.
+Let's make a new figure, resizing it to 10$\times$10 inches so we can better see our plots.
 Then we'll place on the first plot at position 211. The first number (2) denotes 
 how many plots are to be placed vertically; the second number (1) denotes
 how many plots are to be placed horizontally; and the third number (1) denotes
-where to the current plot is to be placed in this grid (in this case, the first position). 
+where the current plot is to be placed in this grid (in our case, the first position). 
 
 \begin{alltt}
 \pytab figure = pyplot.figure(figsize = (10,10))
 \pytab ax1 = pyplot.subplot(211, title='Amp A')
-\pytab ax1.scatter(data_A['Time'], data_A['Flux_pcnt_diff'], c='blue')
+\pytab ax1.scatter(data_A['Time'], data_A['Flux_diff'], c='blue')
 \end{alltt}
 
 We can make the top plot's x-axis invisible... 
@@ -273,7 +275,7 @@ to force the second plot's  axes to match the first's.
 
 \begin{alltt}
 \pytab ax2 = pyplot.subplot(212, title='Amp C', sharex=ax1, sharey=ax1)
-\pytab ax2.scatter(data_C['Time'], data_C['Flux_pcnt_diff'], c='red')
+\pytab ax2.scatter(data_C['Time'], data_C['Flux_diff'], c='red')
 \end{alltt}
 
 We'll finish by setting the x and y axes labels and saving the figure.
@@ -298,7 +300,7 @@ We'll finish by setting the x and y axes labels and saving the figure.
 
 \section{Display a FITS Image}
 
-Copy the FITS file \textit{ibsa01fpq\_flt.fits} from \textit{/user/gunning/Python\_Training/} to your current working directory. It
+Copy the FITS file `ibsa01fpq\_flt.fits' from /user/gunning/Python\_Training/ to your current working directory. It
 is a WFC3/IR image of a corner of the galaxy M51.
 % Note that the image is non-proprietary. From Prop ID 12490, Visit 01. 
 
@@ -309,12 +311,13 @@ and extract the image data from the SCI extension.
 \pytab import astropy.io.fits as fits
 \pytab image = fits.open('ibsa01fpq_flt.fits')
 \pytab sci_data = image['sci'].data
-\pytab pylab.clf()
+\pytab pylplot.clf()
+\pytab pyplot.gray()
 \pytab pyplot.imshow(sci_data, vmin=0, vmax=60)
 \pytab image.close()
 \end{alltt}
 
-How does that look? You should mess around with the \textit{vmin} and \textit{vmax} to see if you can improve the scaling.
+How does that look? Mess with the \textit{vmin} and \textit{vmax} to see if you can improve the scaling.
 
 We can add labels to the image plot.  
 
@@ -329,14 +332,14 @@ we point to a star near pixel coordinates (640, 810) with an arrow.
 
 \begin{alltt}
 \pytab pyplot.annotate('star', xy=(640,810),  xytext=(520,770), \textbackslash
-\ldots color='white', arrowprops=dict(facecolor='white'))
+\ldots color='white', arrowprops=dict(facecolor='white'), width=3.5)
 \pytab pyplot.savefig('M51.pdf')
 \end{alltt}
 
 %%%%%%%%%%%%%%%%
 \begin{figure}[tbp]
   \centering
-    \includegraphics[scale=0.55]{M51.pdf}
+    \includegraphics[scale=0.70]{M51.pdf}
     \caption{A corner of the galaxy M51, displayed using \textit{pyplot.imshow()}.}
   \label{fig:M51}
 \end{figure}
@@ -349,3 +352,8 @@ plotting options with Matplotlib and PyPlot, check out the
 Chapter~\ref{ch:links}.  Notice that there is a link to NumPy on this
 page, as well as links to screen-shots, thumbnails, and examples.
 
+
+% CONSIDER ADDING:
+% Plotting Spectra
+% Histograms
+% Fitting Lines
