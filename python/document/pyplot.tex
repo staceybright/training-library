@@ -134,6 +134,7 @@ Next let's plot lines with the linear fits from our data:
 \pytab figure.show()
 \end{alltt}
 
+Notice the \textit{ls} option is how we select our line type. 
 Suppose we want to denote the 0.0 flux difference with a dashed line and the
 MJD date 56250.0 with a green line:
 
@@ -253,10 +254,10 @@ display multiple plots on the same figure. We will demonstrate making
 a simple 2$\times$1 multiple plot with just the \textit{subplot()} method. 
 
 Let's make a new figure, resizing it to 10$\times$10 inches so we can better see our plots.
-Then we'll place on the first plot at position 211. The first number (2) denotes 
+Then we'll place the first plot at position 211. The first number (2) denotes 
 how many plots are to be placed vertically; the second number (1) denotes
 how many plots are to be placed horizontally; and the third number (1) denotes
-where the current plot is to be placed in this grid (in our case, the first position). 
+where the current plot is to be placed in this grid (in this case, the first position). 
 
 \begin{alltt}
 \pytab figure = pyplot.figure(figsize = (10,10))
@@ -318,8 +319,9 @@ and extract the image data from the SCI extension.
 \end{alltt}
 
 How does that look? Mess with the \textit{vmin} and \textit{vmax} to see if you can improve the scaling.
+The \textit{pyplot.gray()} command sets the plot to greyscale. Take a look at the plot without it.
 
-We can add labels to the image plot.  
+We can add labels:  
 
 \begin{alltt}
 \pytab pyplot.title('M51', fontsize=20)
@@ -340,7 +342,7 @@ we point to a star near pixel coordinates (640, 810) with an arrow.
 \begin{figure}[tbp]
   \centering
     \includegraphics[scale=0.70]{M51.pdf}
-    \caption{A corner of the galaxy M51, displayed using \textit{pyplot.imshow()}.}
+    \caption{A corner of the galaxy M51, displayed in greyscale using \textit{pyplot.imshow()}.}
   \label{fig:M51}
 \end{figure}
 %%%%%%%%%%%%%%%%
