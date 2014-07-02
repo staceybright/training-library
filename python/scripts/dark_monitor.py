@@ -5,9 +5,9 @@
 This module serves as a simple yet practical example of a
 calibration/monitoring script that one might write for work on an
 instrument team (generally speaking).  Of course, if this script were
-to be used as part of a real calibration, it would likely be expended
+to be used as part of a real calibration, it would likely be expanded
 and reconfigured to be more robust.  In addition, this module attempts
-to use python 'best practices' that promote redabilty, consistency,
+to use python 'best practices' that promote readabilty, consistency,
 reusability, etc.  It uses PEP-8 standards, docstrings, and minimal
 overlap as it attempts to be a D.R.Y. (Don't repeat yourself) code.
 By no means should this style be used as a hard rule or guideline,
@@ -76,7 +76,7 @@ def get_percentage_hotpix(image, threshold):
             The percentage of hot pixels in SCI extension of the image.
 
     Outputs:
-        none
+        nothing
     """
 
     # Open the file
@@ -106,14 +106,14 @@ def parse_args():
     """Parse command line arguments.
 
     Parameters:
-        none
+        nothing
 
     Returns:
         args : argparse.Namespace object
             An argparse object containing all of the added arguments.
 
     Outputs:
-        none
+        nothing
     """
 
     parser = argparse.ArgumentParser()
