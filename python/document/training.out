@@ -39,37 +39,27 @@
 \BOOKMARK [1][-]{section.3.3}{Reading and Writing ASCII Data Files}{chapter.3}% 39
 \BOOKMARK [2][-]{subsection.3.3.1}{ astropy.io.ascii.read\(\) function}{section.3.3}% 40
 \BOOKMARK [2][-]{subsection.3.3.2}{ astropy.io.ascii.write\(\) \040function}{section.3.3}% 41
-\BOOKMARK [0][-]{chapter.4}{Plotting with Pyplot}{}% 42
+\BOOKMARK [0][-]{chapter.4}{Plotting with PyPlot}{}% 42
 \BOOKMARK [1][-]{section.4.1}{matplotlib.pyplot}{chapter.4}% 43
 \BOOKMARK [1][-]{section.4.2}{Create a Simple Scatter Plot}{chapter.4}% 44
 \BOOKMARK [1][-]{section.4.3}{Markers, Lines, and Legends}{chapter.4}% 45
 \BOOKMARK [1][-]{section.4.4}{Error Bars}{chapter.4}% 46
-\BOOKMARK [1][-]{section.4.5}{Display Dates on X-axis}{chapter.4}% 47
-\BOOKMARK [1][-]{section.4.6}{Plot Figures Side-by-Side}{chapter.4}% 48
-\BOOKMARK [1][-]{section.4.7}{Fitting Lines}{chapter.4}% 49
-\BOOKMARK [1][-]{section.4.8}{Display a FITS Image}{chapter.4}% 50
-\BOOKMARK [1][-]{section.4.9}{Plot Spectra}{chapter.4}% 51
-\BOOKMARK [1][-]{section.4.10}{Plot with Pyplot}{chapter.4}% 52
-\BOOKMARK [0][-]{chapter.5}{Plotting with Pyplot}{}% 53
-\BOOKMARK [1][-]{section.5.1}{matplotlib.pyplot}{chapter.5}% 54
-\BOOKMARK [1][-]{section.5.2}{Create a Simple Scatter Plot}{chapter.5}% 55
-\BOOKMARK [1][-]{section.5.3}{Markers, Lines, and Legends}{chapter.5}% 56
-\BOOKMARK [1][-]{section.5.4}{Error Bars}{chapter.5}% 57
-\BOOKMARK [1][-]{section.5.5}{Display Dates on X-axis}{chapter.5}% 58
-\BOOKMARK [1][-]{section.5.6}{Plot Figures Side-by-Side}{chapter.5}% 59
-\BOOKMARK [1][-]{section.5.7}{Fitting Lines}{chapter.5}% 60
-\BOOKMARK [1][-]{section.5.8}{Display a FITS Image}{chapter.5}% 61
-\BOOKMARK [1][-]{section.5.9}{Plot Spectra}{chapter.5}% 62
-\BOOKMARK [1][-]{section.5.10}{Plot with Pyplot}{chapter.5}% 63
-\BOOKMARK [0][-]{chapter.6}{PyRAF}{}% 64
-\BOOKMARK [1][-]{section.6.1}{PyRAF Introduction}{chapter.6}% 65
-\BOOKMARK [1][-]{section.6.2}{A PyRAF Example with iraf.daofind\(\)}{chapter.6}% 66
-\BOOKMARK [0][-]{chapter.7}{Python Scripts and Functions}{}% 67
-\BOOKMARK [1][-]{section.7.1}{MyFirstScript.py}{chapter.7}% 68
-\BOOKMARK [2][-]{subsection.7.1.1}{Executing Python Scripts}{section.7.1}% 69
-\BOOKMARK [1][-]{section.7.2}{Adding Functions}{chapter.7}% 70
-\BOOKMARK [1][-]{section.7.3}{Passing Arguments on the Command Line and argparse}{chapter.7}% 71
-\BOOKMARK [1][-]{section.7.4}{Error Handling and pdb.set\137trace\(\)}{chapter.7}% 72
-\BOOKMARK [0][-]{chapter.8}{Resources}{}% 73
-\BOOKMARK [1][-]{section.8.1}{Useful Links }{chapter.8}% 74
-\BOOKMARK [1][-]{section.8.2}{Mailing Lists}{chapter.8}% 75
+\BOOKMARK [1][-]{section.4.5}{Display Year-Month-Day Dates as Tick Labels}{chapter.4}% 47
+\BOOKMARK [1][-]{section.4.6}{Display Plots Side-by-Side}{chapter.4}% 48
+\BOOKMARK [1][-]{section.4.7}{Display a FITS Image}{chapter.4}% 49
+\BOOKMARK [0][-]{chapter.5}{IPython Notebook}{}% 50
+\BOOKMARK [1][-]{section.5.1}{Getting Started}{chapter.5}% 51
+\BOOKMARK [1][-]{section.5.2}{Plotting Inline}{chapter.5}% 52
+\BOOKMARK [1][-]{section.5.3}{Notebook Examples}{chapter.5}% 53
+\BOOKMARK [0][-]{chapter.6}{Python Scripts and Functions}{}% 54
+\BOOKMARK [1][-]{section.6.1}{MyFirstScript.py}{chapter.6}% 55
+\BOOKMARK [2][-]{subsection.6.1.1}{Executing Python Scripts}{section.6.1}% 56
+\BOOKMARK [1][-]{section.6.2}{Adding Functions}{chapter.6}% 57
+\BOOKMARK [1][-]{section.6.3}{Passing Arguments on the Command Line and argparse}{chapter.6}% 58
+\BOOKMARK [1][-]{section.6.4}{Error Handling and pdb.set\137trace\(\)}{chapter.6}% 59
+\BOOKMARK [0][-]{chapter.7}{PyRAF}{}% 60
+\BOOKMARK [1][-]{section.7.1}{PyRAF Introduction}{chapter.7}% 61
+\BOOKMARK [1][-]{section.7.2}{A PyRAF Example with iraf.daofind\(\)}{chapter.7}% 62
+\BOOKMARK [0][-]{chapter.8}{Resources}{}% 63
+\BOOKMARK [1][-]{section.8.1}{Useful Links }{chapter.8}% 64
+\BOOKMARK [1][-]{section.8.2}{Mailing Lists}{chapter.8}% 65
