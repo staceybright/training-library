@@ -315,6 +315,7 @@ and extract the image data from the SCI extension.
 \pytab pylplot.clf()
 \pytab pyplot.gray()
 \pytab pyplot.imshow(sci_data, vmin=0, vmax=60)
+\pytab pyplot.show()
 \pytab image.close()
 \end{alltt}
 
@@ -334,7 +335,7 @@ we point to a star near pixel coordinates (640, 810) with an arrow.
 
 \begin{alltt}
 \pytab pyplot.annotate('star', xy=(640,810),  xytext=(520,770), \textbackslash
-\ldots color='white', arrowprops=dict(facecolor='white'), width=3.5)
+\ldots color='white', arrowprops=dict(facecolor='white', width=3.5))
 \pytab pyplot.savefig('M51.pdf')
 \end{alltt}
 

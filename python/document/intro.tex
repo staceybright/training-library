@@ -96,7 +96,7 @@ widened to that of the other.  Example:
 \begin{alltt}
 \pytab a = 2.0
 \pytab b = 3
-\pytab a * b
+\pytab print a * b
 \end{alltt}
 
 Any Python object can be tested for truth value with $in$, $if$ or
@@ -334,16 +334,21 @@ Other useful similar functions in NumPy (Chapter~\ref{ch:numpy}) are
 \subsection{ {\sf for } loop}
 {\color{blue} {\sf\small USE}} \\
 The {\sf\small for } statement is used to execute one or more
-statements repeatedly, while incrementing or decrementing a variable
-with each repetition, until a condition is met.
+statements repeatedly.
 
 {\color{blue} {\sf\small EXAMPLES}} 
 \begin{alltt}
 \pytab a = range(11)
 \pytab for x in a: print x
-\pytab c = ['2005', '2006', '2007']
-\pytab for x in c: print x + '-01'
-\pytab b = [x*2 for x in a]  #Create a list in one line
+\pytab b = ['2005', '2006', '2007']
+\pytab for x in b: print x + '-01'
+\end{alltt}
+
+One can create a list with a for loop in one line.  This is known as list
+comprehension.
+
+\begin{alltt}
+\pytab  c = [x*2 for x in range(11)]
 \end{alltt}
   
 {\color{blue} {\sf\small SEE ALSO}} \\
@@ -351,7 +356,7 @@ Other useful similar statements are {\sf\small if...elif...else, while}.  \\
 
 {\color{blue} {\sf\small EXERCISES}} \\
 {\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
-Create a vector with 10 values equal to the square of the index.
+Create a list with 10 values equal to the square of the index.
 
 Exercise \arabic{exercise} \stepcounter{exercise}:  \\
 Create the following sequence using a {\sf\small for} statement:
@@ -377,7 +382,7 @@ Within a function, the {\sf\small for }  statement has the following
 simple structure: 
 \begin{alltt}
 \pytab for x in xrange(1, 7): 
-\ldots    a = x * 3. 
+\ldots    a = x * 3.0
 \ldots    print a 
 \end{alltt}
   
@@ -417,14 +422,14 @@ statement:
 
 {\color{blue} {\sf\small EXERCISES}} \\
 {\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
-  Imagine a situation where your code passes a function a variable,
-  and that variable might be zero.  The only problem is that this
-  function divides by that variable.
-  
-  Write a simple loop which calculates 1/$n$, where $n$ is what is
-  passed.  What happens if $n=0$?  Write an error handling for this loop
-  (hint: use {\sf\small try ... except} statement with
-  ZeroDivisionError).}
+Imagine a situation where your code passes a function a variable,
+and that variable might be zero.  The only problem is that this
+function divides by that variable.
+
+Write a simple loop which calculates 1/$n$, where $n$ is a number
+in range(11).  What happens when $n=0$?  Write an error handling for this loop
+(hint: use {\sf\small try ... except} statement with
+ZeroDivisionError).}
 
 \section{Importing Modules, and Common Functions}
 \label{s:mod}
@@ -463,15 +468,16 @@ overwrite the function, we can do this:
 {\color{blue} {\sf\small USE}} \\
 The {\sf\small glob.glob()} function searches for files that match
 the given path-name.  The path-name you give is a string similar to
-the search strings used for the UNIX/Linux `ls'.
+the search strings used for the UNIX/Linux `ls'.  A list is returned
+containing any matching files.
 
 {\color{blue} {\sf\small EXAMPLES}} 
 \begin{alltt}
 \pytab import glob 
 \pytab glob.glob('*') 
 \pytab glob.glob('*.pdf')  
-\pytab datadir = '/Users/username/data/'  #insert a usable path
-\pytab glob.glob(datadir + 'MIR*12-03*ref??.fits')
+\pytab datadir = '/Users/gunning/Python_Training/'  #insert a usable path
+\pytab glob.glob(datadir + 'flux_vs_time_?.fits')
 \end{alltt}
 {\color{blue} {\sf\small EXERCISES}} \\
 {\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\

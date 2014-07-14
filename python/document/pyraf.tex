@@ -25,7 +25,6 @@ Import the PyRAF module and from within that module import the IRAF
 instance.  The code for importing these functions looks like this:
 
 \begin{verbatim}
-#Load the packages we need 
 import pyraf 
 from pyraf import iraf
 from iraf import noao, digiphot, daophot
@@ -46,7 +45,6 @@ window and open the help file to see what the parameters for
   iraf.daofind()} on the file n9vf01hfq\_ima.fits.  
 
 \begin{verbatim}
-#Run daofind on one image  
 iraf.daofind(image='n9vf01hfq_ima.fits[1]')  
 \end{verbatim}
 
@@ -101,15 +99,15 @@ from iraf import noao, digiphot
 file_list = glob.glob('*_ima.fits') 
 print file_list 
 
-#Loops though all the .fits files 
-for file in file_list: 
+#Loops through all the .fits files 
+for ima in file_list: 
     #Test for old files, and remove them if they exist
-    file_query = os.access(file + '1.coo.1', os.R_OK)  
+    file_query = os.access(ima + '1.coo.1', os.R_OK)  
     if file_query == True: 
-        os.remove(file + '1.coo.1')  
+        os.remove(ima + '1.coo.1')  
     #Run daofind on one image  
     iraf.daofind( 
-        image = file + '[1]',  
+        image = ima + '[1]',  
         interactive = 'no',  
         verify = 'no')  
 \end{verbatim}

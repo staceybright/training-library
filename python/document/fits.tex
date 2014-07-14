@@ -16,7 +16,7 @@ writing ASCII data tables.  In the following sections, we will explore these two
 \section{Opening, Reading, and Closing a FITS File}
 As an example, we will use data from the \emph{WFC3} instrument located here:
 
-/user/gunning/Python\_Training/icft01crq\_flt.fits
+/user/gunning/Python\_Training/icft01crq\_raw.fits
 
 Please copy this file to your working directory. 
 
@@ -33,7 +33,7 @@ and finally making changes to the data.
 \pytab hdr = hdulist[0].header  # Get the primary header
 \pytab data = hdulist[1].data  # Get the data from the 1st extension 
 \pytab data.shape
-\pytab print hdr 
+\pytab hdr
 \pytab hdr['FLSHCORR'] 
 \pytab hdr['FLSHCORR'] = 'PERFORM'
 \pytab hdr['FLSHCORR']
@@ -97,7 +97,7 @@ the example below.
 
 \begin{alltt}
 \pytab from astropy.io import fits
-\pytab infile = 'icft01crq_raw.fits[0]' 
+\pytab infile = 'icft01crq_raw.fits' 
 \pytab key = 'DARKFILE'
 \pytab fits.getval(infile, key, 0)
 \pytab fits.setval(infile, key, value='iref$y2j13512i_drk.fits', ext=0)
@@ -132,7 +132,7 @@ the plots.
 \begin{alltt}
 \pytab from astropy.io import ascii
 \pytab infile = 'flux_vs_time_A.dat'
-\pytab data = ascii.read('flux_vs_time_A.dat', 
+\pytab data = ascii.read(infile, 
                 names=['MJD', 'Flux_diff', 'Flux_err', 'Flux_linear_fit'])
 \pytab print data
 \pytab print data['MJD']

@@ -20,7 +20,7 @@
 \contentsline {subsection}{\numberline {1.7.1} {\sf math.sqrt() } function}{11}{subsection.1.7.1}
 \contentsline {subsection}{\numberline {1.7.2} {\sf glob.glob() } function}{12}{subsection.1.7.2}
 \contentsline {subsection}{\numberline {1.7.3} {\sf random.random() } function}{12}{subsection.1.7.3}
-\contentsline {subsection}{\numberline {1.7.4} {\sf re.search() } function}{12}{subsection.1.7.4}
+\contentsline {subsection}{\numberline {1.7.4} {\sf re.search() } function}{13}{subsection.1.7.4}
 \contentsline {subsection}{\numberline {1.7.5} {\sf os.getcwd() and os.chdir() } functions}{13}{subsection.1.7.5}
 \contentsline {subsection}{\numberline {1.7.6} {\sf sys.exit()} function}{13}{subsection.1.7.6}
 \contentsline {chapter}{\numberline {2}NumPy and Data Arrays}{15}{chapter.2}
