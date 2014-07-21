@@ -31,18 +31,19 @@ Use:
 
         >>> python dark_monitor.py
 
-    The hot pixel threshold can be specified with the -t or --threshold
-    argument.  For example:
+    The hot pixel threshold (in counts) can be specified with the -t 
+    or --threshold argument.  For example:
 
         >>> python dark_monitor.py -t 8.5
 
-    If no threshold is specified, the default value of 9.0 is used.
+    If no threshold is specified, the default value of 9.0 counts is 
+    used.
 
 Outputs:
 
-    hotpix.png -- A plot showing the number of hot pixels in each dark
-                  as a function of MJD, placed in the current working
-                  directory.
+    hotpix_<threshold>.png -- A plot showing the number of hot pixels 
+                              in each dark as a function of MJD, 
+                              placed in the current working directory.
 
 References:
 
@@ -122,7 +123,7 @@ def parse_args():
         action='store',
         type=float,
         required=False,
-        help='Pixel value to be used as hot pixel threshold',
+        help='Pixel value to be used as hot pixel threshold (in counts)',
         default=9.0)
     args = parser.parse_args()
 
@@ -145,8 +146,8 @@ def plot_hot_pixels(threshold):
         hotpix.png - A plot showing the number of hot pixels over time
     """
 
-    # Set anneal date
-    anneal = 56687.4698727
+    # Define image list
+    dark_files = glob.glob('/user/gunning/Python_Training/uvis_darks/*.fits')
 
     # Initialize plot
     figure, ax = plt.subplots()
@@ -156,11 +157,10 @@ def plot_hot_pixels(threshold):
     ax.set_xlabel('Days from anneal')
     ax.set_ylabel('Number of Hot Pixels (% of Chip)')
 
-    # Plot the anneal
-    ax.axvline(x=0, c='r', ls='--', lw=2, label='Anneal')
+    # Set the anneal date
+    anneal = 56687.4698727
 
     # Plot the percentage of hot pixels
-    dark_files = glob.glob('/user/gunning/Python_Training/uvis_darks/*.fits')
     for dark_file in dark_files:
 
         print 'Processing {}'.format(dark_file)
@@ -168,12 +168,17 @@ def plot_hot_pixels(threshold):
         # Determine observation time and number of hot pixels
         time, hotpix = get_percentage_hotpix(dark_file, threshold)
 
-        # Plot the # of hot pixels vs time
+        # Plot the number of hot pixels vs time
         ax.scatter(time - anneal, hotpix, s=50, c='k', marker='+')
 
-    # Save figure
+    # Plot the anneal
+    ax.axvline(x=0, c='r', ls='--', lw=2, label='Anneal')
+
+    # Place the legend
     ax.legend(loc='best')
-    savefile = 'hotpix.png'
+
+    # Save the figure
+    savefile = 'hotpix_{}.png'.format(str(threshold))
     plt.savefig(savefile)
     print 'Saved figure to {}'.format(savefile)
 
