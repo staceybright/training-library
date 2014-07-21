@@ -52,14 +52,13 @@
 \BOOKMARK [1][-]{section.5.2}{Plotting Inline}{chapter.5}% 52
 \BOOKMARK [1][-]{section.5.3}{Notebook Examples}{chapter.5}% 53
 \BOOKMARK [0][-]{chapter.6}{Python Scripts and Functions}{}% 54
-\BOOKMARK [1][-]{section.6.1}{MyFirstScript.py}{chapter.6}% 55
-\BOOKMARK [2][-]{subsection.6.1.1}{Executing Python Scripts}{section.6.1}% 56
-\BOOKMARK [1][-]{section.6.2}{Adding Functions}{chapter.6}% 57
-\BOOKMARK [1][-]{section.6.3}{Passing Arguments on the Command Line and argparse}{chapter.6}% 58
-\BOOKMARK [1][-]{section.6.4}{Error Handling and pdb.set\137trace\(\)}{chapter.6}% 59
-\BOOKMARK [0][-]{chapter.7}{PyRAF}{}% 60
-\BOOKMARK [1][-]{section.7.1}{PyRAF Introduction}{chapter.7}% 61
-\BOOKMARK [1][-]{section.7.2}{A PyRAF Example with iraf.daofind\(\)}{chapter.7}% 62
-\BOOKMARK [0][-]{chapter.8}{Resources}{}% 63
-\BOOKMARK [1][-]{section.8.1}{Useful Links }{chapter.8}% 64
-\BOOKMARK [1][-]{section.8.2}{Mailing Lists}{chapter.8}% 65
+\BOOKMARK [1][-]{section.6.1}{hotpix\137monitor.py}{chapter.6}% 55
+\BOOKMARK [1][-]{section.6.2}{Executing Python Scripts}{chapter.6}% 56
+\BOOKMARK [1][-]{section.6.3}{Error Handling and pdb.set\137trace\(\)}{chapter.6}% 57
+\BOOKMARK [1][-]{section.6.4}{More about Python Coding Styles and Best Practices}{chapter.6}% 58
+\BOOKMARK [0][-]{chapter.7}{PyRAF}{}% 59
+\BOOKMARK [1][-]{section.7.1}{PyRAF Introduction}{chapter.7}% 60
+\BOOKMARK [1][-]{section.7.2}{A PyRAF Example with iraf.daofind\(\)}{chapter.7}% 61
+\BOOKMARK [0][-]{chapter.8}{Resources}{}% 62
+\BOOKMARK [1][-]{section.8.1}{Useful Links }{chapter.8}% 63
+\BOOKMARK [1][-]{section.8.2}{Mailing Lists}{chapter.8}% 64

@@ -52,14 +52,13 @@
 \contentsline {section}{\numberline {5.2}Plotting Inline}{38}{section.5.2}
 \contentsline {section}{\numberline {5.3}Notebook Examples}{38}{section.5.3}
 \contentsline {chapter}{\numberline {6}Python Scripts and Functions}{41}{chapter.6}
-\contentsline {section}{\numberline {6.1}MyFirstScript.py}{41}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}Executing Python Scripts}{43}{subsection.6.1.1}
-\contentsline {section}{\numberline {6.2}Adding Functions}{44}{section.6.2}
-\contentsline {section}{\numberline {6.3}Passing Arguments on the Command Line and \textit {argparse}}{46}{section.6.3}
-\contentsline {section}{\numberline {6.4}Error Handling and {\sf pdb.set\_trace()}}{48}{section.6.4}
-\contentsline {chapter}{\numberline {7}PyRAF}{49}{chapter.7}
-\contentsline {section}{\numberline {7.1}PyRAF Introduction}{49}{section.7.1}
-\contentsline {section}{\numberline {7.2}A PyRAF Example with {\sf iraf.daofind()}}{49}{section.7.2}
-\contentsline {chapter}{\numberline {8}Resources}{53}{chapter.8}
-\contentsline {section}{\numberline {8.1}Useful Links }{53}{section.8.1}
-\contentsline {section}{\numberline {8.2}Mailing Lists}{54}{section.8.2}
+\contentsline {section}{\numberline {6.1}hotpix\_monitor.py}{41}{section.6.1}
+\contentsline {section}{\numberline {6.2}Executing Python Scripts}{57}{section.6.2}
+\contentsline {section}{\numberline {6.3}Error Handling and {\sf pdb.set\_trace()}}{57}{section.6.3}
+\contentsline {section}{\numberline {6.4}More about Python Coding Styles and Best Practices}{58}{section.6.4}
+\contentsline {chapter}{\numberline {7}PyRAF}{59}{chapter.7}
+\contentsline {section}{\numberline {7.1}PyRAF Introduction}{59}{section.7.1}
+\contentsline {section}{\numberline {7.2}A PyRAF Example with {\sf iraf.daofind()}}{59}{section.7.2}
+\contentsline {chapter}{\numberline {8}Resources}{63}{chapter.8}
+\contentsline {section}{\numberline {8.1}Useful Links }{63}{section.8.1}
+\contentsline {section}{\numberline {8.2}Mailing Lists}{64}{section.8.2}
