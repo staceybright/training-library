@@ -1,7 +1,8 @@
 \chapter{Plotting with PyPlot}
 \label{ch:pyplot}
 
-\section{matplotlib.pyplot}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  intro
+\section{matplotlib.pyplot}\label{s:pyplot_intro}
 Matplotlib and its PyPlot environment is a versatile Python plotting
 library which produces publication quality figures in a variety of
 hard-copy formats such as EPS, PDF, and PNG.  With PyPlot you can
@@ -14,7 +15,8 @@ Ubeda's astroplotlib library at \href{http://astroplotlib.stsci.edu/}
 {http://astroplotlib.stsci.edu/}
 
 
-\section{Create a Simple Scatter Plot}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Create simple scatter plot
+\section{Create a Simple Scatter Plot}\label{s:simple_plot}
 
 We'll start by making a simple scatter plot, demonstrating some of 
 the PyPlot options, and saving our plot in a PDF format. 
@@ -85,7 +87,8 @@ other file types; we need only to type the appropriate extension.
 \end{figure}
 %%%%%%%%%%%%%%%%
 
-\section{Markers, Lines, and Legends}  %Plot customizations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Markers, lines, and legends
+\section{Markers, Lines, and Legends}\label{s:markers_lines_legends}  %Plot customizations
 
 We have a plot! But we are not yet finished.
 PyPlot has many, many options available for you to customize
@@ -164,10 +167,15 @@ Other options can be found on the Matplotlib PyPlot site listed in Chapter~\ref{
 For different color names, see \href{http://www.w3schools.com/html/html_colornames.asp}
 {http://www.w3schools.com/html/html\_colornames.asp}
 
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+Play with different colors, markers, lines, etc.}
+
+
 %http://matplotlib.org/1.2.1/examples/pylab_examples/show_colormaps.html
 
-
-\section{Error Bars}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Error bars
+\section{Error Bars}\label{s:error_bars}
 
 We have columns giving our error in flux percent difference. We can display them on our plot as
 error bars using the \textit{errorbar} function:
@@ -181,8 +189,8 @@ error bars using the \textit{errorbar} function:
 \pytab figure.show()
 \end{alltt}
 
-
-\section{Display Year-Month-Day Dates as Tick Labels}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Display year-month-day
+\section{Display Year-Month-Day Dates as Tick Labels}\label{s:dates}
 
 MJD is a convenient format for plotting time. But who 
 thinks in MJD? Let's convert MJD to year-month-day and display them 
@@ -239,6 +247,13 @@ See \href{http://astropy.readthedocs.org/en/latest/time/}{http://astropy.readthe
 \end{figure}
 %%%%%%%%%%%%%%%%
 
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+Assume you do not have the MJD list. Starting from the list of year-month-day, convert your axis to days from the start date
+and display the tick labels. 
+So your first tick label should be 0, and your x-axis title should be something like `Days since 2008-02-04'.}
+
+
 %\section{Fitting Routines}
 
 %We do not recommend using Python's fitting routines, as they have been 
@@ -247,7 +262,8 @@ See \href{http://astropy.readthedocs.org/en/latest/time/}{http://astropy.readthe
 %we plotted earlier were calculated with IRAF's TLINEAR task.)
 
 
-\section{Display Plots Side-by-Side}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Display plots side-by-side
+\section{Display Plots Side-by-Side}\label{s:mulitplots}
 
 As with most plotting matters in Python, there's more than one way to 
 display multiple plots on the same figure. We will demonstrate making
@@ -258,6 +274,9 @@ Then we'll place the first plot at position 211. The first number (2) denotes
 how many plots are to be placed vertically; the second number (1) denotes
 how many plots are to be placed horizontally; and the third number (1) denotes
 where the current plot is to be placed in this grid (in this case, the first position). 
+If, say, we wanted a 2$\times$2 grid and wanted to place a plot in the lower right corner,
+we would write 224.
+
 
 \begin{alltt}
 \pytab figure = pyplot.figure(figsize = (10,10))
@@ -298,8 +317,14 @@ We'll finish by setting the x and y axes labels and saving the figure.
 \end{figure}
 %%%%%%%%%%%%%%%%
 
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+Create a 2$\times$2 grid and display the above two plots in the upper two areas. Then display our first plot
+ from Section \ref{s:simple_plot} below them, filling the entire lower area.}
 
-\section{Display a FITS Image}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  Display a FITS image
+\section{Display a FITS Image}\label{s:display_fits}
 
 Copy the FITS file `ibsa01fpq\_flt.fits' from /user/gunning/Python\_Training/ to your current working directory. It
 is a WFC3/IR image of a corner of the galaxy M51.
@@ -319,8 +344,10 @@ and extract the image data from the SCI extension.
 \pytab image.close()
 \end{alltt}
 
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
 How does that look? Mess with the \textit{vmin} and \textit{vmax} to see if you can improve the scaling.
-The \textit{pyplot.gray()} command sets the plot to greyscale. Take a look at the plot without it.
+The \textit{pyplot.gray()} command sets the plot to greyscale. Take a look at the plot without it.}
 
 We can add labels:  
 
@@ -348,12 +375,18 @@ we point to a star near pixel coordinates (640, 810) with an arrow.
 \end{figure}
 %%%%%%%%%%%%%%%%
 
-
 For more
 plotting options with Matplotlib and PyPlot, check out the 
 \href{http://matplotlib.org/}{matplotlib.org} link listed in
 Chapter~\ref{ch:links}.  Notice that there is a link to NumPy on this
 page, as well as links to screen-shots, thumbnails, and examples.
+
+
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+Try plotting a 450$\times$450 pixel cutout of the image (say, the galaxy disk in the lower left corner).
+Hint: see Leonardo Ubeda's image plot examples on \href{http://astroplotlib.stsci.edu/}
+{http://astroplotlib.stsci.edu/}}
 
 
 % CONSIDER ADDING:
