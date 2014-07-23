@@ -47,7 +47,7 @@ Outputs:
 
 References:
 
-    The Python RIAB Traning Document
+    The Python RIAB Training Document
     (https://confluence.stsci.edu/display/INSRIA/RIA+training)
 """
 

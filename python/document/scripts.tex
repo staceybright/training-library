@@ -13,9 +13,8 @@ conventions, docstrings, and minimal redundancy.  By no means should this style 
 a hard rule or guideline, but rather a suggestion for producing high-level,
 easy-to-use python code.
 
-Make a directory where you will keep all your script.  You will also need to 
-choose a text editor, such as SublimeText, Emacs, TextWrangler, NEdit,
-or others.  You will be using this to edit your script.
+Please choose a text editor for editing your script, such as SublimeText, Emacs, TextWrangler, 
+NEdit, or others.
  
 \section{hotpix\_monitor.py}
 
@@ -102,7 +101,7 @@ This could prove to be useful if we ever want to use the functionality that this
 offer in other scripts.  The following shows an example of how to declare a function:
 
 \begin{verbatim}
-def some_function()
+def some_function():
     # Some code
 \end{verbatim}
 
@@ -115,7 +114,7 @@ Thus, for our script, we want our code to follow this generic workflow:
 Module docstring
 """
 
-def main_function()
+def main_function():
     """
     Function docstring
     """
@@ -167,7 +166,7 @@ are needed or returned by the function.  Thus, in the function docstring, we inc
 (1) what the function does, (2) the parameters that the function requires, (3) the object(s) returned 
 by the function, and (4) any output(s) that the function produces upon execution.  Also notice that we 
 split the {\sf\small parser.add\_argument} command into several lines.  This is
-because it is best practice to limit non-docstring lines to 80 characters.
+because it is best practice to limit non-docstring lines to 79 characters.
 
 By grabbing what is returned from the {\sf\small parse\_args()} function, we can now
 utilize the threshold parameter.  Add a call to the {\sf\small parse\_args()} function,
@@ -388,7 +387,7 @@ if __name__=='__main__':
 Notice that the {\sf\small get\_percentage\_hotpix()} function is placed before the {\sf\small parse\_args()}
 function, even though the {\sf\small parse\_args()} function is executed before {\sf\small get\_percentage\_hotpix()}.
 This is because it is good practice to put functions in alphabetical order for readability
-pruposes.  Similarly, it is best practice to leave the {\sf\small if \_\_name\_\_=='\_\_main\_\_'} codeblock
+purposes.  Similarly, it is best practice to leave the {\sf\small if \_\_name\_\_=='\_\_main\_\_'} codeblock
 at the end of the program.
 
 Now we are ready to implement the core functionality; gathering hot pixel statistics and
@@ -396,7 +395,7 @@ plotting them versus time.  Again, we will do this in a separate function.  Let'
 In the function, we will have to (1) define the list of DARK images to process, (2) find the percentage
 of hot pixels for each image using the threshold parameter, (3) plot the percentage of hot 
 pixels versus time, and (4) save the figure.  For fun, we will also plot a vertical line 
-representing when a UVIS anneal occured, in which the detector was warmed up to reduce the 
+representing when a UVIS anneal occurred, in which the detector was warmed up to reduce the 
 number of hot pixels.  Our function should look something like this:
 
 \begin{verbatim}
@@ -496,7 +495,7 @@ Outputs:
 
 References:
 
-    The Python RIAB Traning Document
+    The Python RIAB Training Document
     (https://confluence.stsci.edu/display/INSRIA/RIA+training)
 """
 \end{verbatim}
@@ -533,7 +532,7 @@ Outputs:
 
 References:
 
-    The Python RIAB Traning Document
+    The Python RIAB Training Document
     (https://confluence.stsci.edu/display/INSRIA/RIA+training)
 """
 
@@ -704,6 +703,12 @@ your script directory to your executable PATH:
 {\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
   Try executing {\sf\small hotpix\_monitor.py} with a different threshold.  Did the plot
   change?
+} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+  Add another command line argument called {\sf\small -s} or {\sf\small --savefile},
+  which stores the plot saving location.  Use this new argument to replace the hard-coded
+  save location.  Then, try executing the script and saving to a location that you pass
+  as an argument.
 }
 
 \section{Error Handling and {\sf pdb.set\_trace()}}
@@ -738,7 +743,5 @@ In this chapter, we have touched on some of the ``best practices'' that are
 recommended when coding in Python.  Two good resources for learning about
 these best practices are PEP-8 (\url {http://legacy.python.org/dev/peps/pep-0008/}),
 which covers general conventions, and PEP-257 (\url {http://legacy.python.org/dev/peps/pep-0257/}),
-which discusses docstrings.  Below is a summary of some of the conventions discussed in these 
-documents, but please consider reading PEP-8 and PEP-257 for further details.
-
-
+which discusses docstrings.  If you have an interest in scripting in python, please take the time
+to review these two documents.
