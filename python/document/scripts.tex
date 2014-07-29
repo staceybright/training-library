@@ -415,7 +415,8 @@ def plot_hot_pixels(threshold):
     """
 
     # Define image list
-    dark_files = glob.glob('/user/gunning/Python_Training/uvis_darks/*.fits')
+    dark_path = '/user/gunning/Python_Training/uvis_darks/'
+    dark_files = glob.glob(dark_path+'*.fits')
 
     # Initialize plot
     figure, ax = plt.subplots()
@@ -629,7 +630,8 @@ def plot_hot_pixels(threshold):
     """
 
     # Define image list
-    dark_files = glob.glob('/user/gunning/Python_Training/uvis_darks/*.fits')
+    dark_path = '/user/gunning/Python_Training/uvis_darks/'
+    dark_files = glob.glob(dark_path+'*.fits')
 
     # Initialize plot
     figure, ax = plt.subplots()
@@ -637,7 +639,7 @@ def plot_hot_pixels(threshold):
     ax.minorticks_on()
     ax.set_title('WFC3/UVIS Hot Pixel Evolution')
     ax.set_xlabel('Days from anneal')
-    ax.set_ylabel('Number of Hot Pixels (% of Chip)')
+    ax.set_ylabel('Number of Hot Pixels (\% of Chip)')
 
     # Set the anneal date
     anneal = 56687.4698727

@@ -45,20 +45,20 @@
 \contentsline {section}{\numberline {4.3}Markers, Lines, and Legends}{29}{section.4.3}
 \contentsline {section}{\numberline {4.4}Error Bars}{31}{section.4.4}
 \contentsline {section}{\numberline {4.5}Display Year-Month-Day Dates as Tick Labels}{31}{section.4.5}
-\contentsline {section}{\numberline {4.6}Display Plots Side-by-Side}{32}{section.4.6}
-\contentsline {section}{\numberline {4.7}Display a FITS Image}{34}{section.4.7}
+\contentsline {section}{\numberline {4.6}Display Plots Side-by-Side}{33}{section.4.6}
+\contentsline {section}{\numberline {4.7}Display a FITS Image}{35}{section.4.7}
 \contentsline {chapter}{\numberline {5}IPython Notebook}{37}{chapter.5}
 \contentsline {section}{\numberline {5.1}Getting Started}{37}{section.5.1}
 \contentsline {section}{\numberline {5.2}Plotting Inline}{38}{section.5.2}
 \contentsline {section}{\numberline {5.3}Notebook Examples}{38}{section.5.3}
-\contentsline {chapter}{\numberline {6}Python Scripts and Functions}{41}{chapter.6}
-\contentsline {section}{\numberline {6.1}hotpix\_monitor.py}{41}{section.6.1}
-\contentsline {section}{\numberline {6.2}Executing Python Scripts}{57}{section.6.2}
-\contentsline {section}{\numberline {6.3}Error Handling and {\sf pdb.set\_trace()}}{57}{section.6.3}
-\contentsline {section}{\numberline {6.4}More about Python Coding Styles and Best Practices}{58}{section.6.4}
-\contentsline {chapter}{\numberline {7}PyRAF}{59}{chapter.7}
-\contentsline {section}{\numberline {7.1}PyRAF Introduction}{59}{section.7.1}
-\contentsline {section}{\numberline {7.2}A PyRAF Example with {\sf iraf.daofind()}}{59}{section.7.2}
+\contentsline {chapter}{\numberline {6}Python Scripts and Functions}{42}{chapter.6}
+\contentsline {section}{\numberline {6.1}hotpix\_monitor.py}{42}{section.6.1}
+\contentsline {section}{\numberline {6.2}Executing Python Scripts}{58}{section.6.2}
+\contentsline {section}{\numberline {6.3}Error Handling and {\sf pdb.set\_trace()}}{58}{section.6.3}
+\contentsline {section}{\numberline {6.4}More about Python Coding Styles and Best Practices}{59}{section.6.4}
+\contentsline {chapter}{\numberline {7}PyRAF}{60}{chapter.7}
+\contentsline {section}{\numberline {7.1}PyRAF Introduction}{60}{section.7.1}
+\contentsline {section}{\numberline {7.2}A PyRAF Example with {\sf iraf.daofind()}}{60}{section.7.2}
 \contentsline {chapter}{\numberline {8}Resources}{63}{chapter.8}
 \contentsline {section}{\numberline {8.1}Useful Links }{63}{section.8.1}
 \contentsline {section}{\numberline {8.2}Mailing Lists}{64}{section.8.2}
