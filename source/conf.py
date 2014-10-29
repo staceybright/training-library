@@ -211,8 +211,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'RIATraining.tex', u'RIA Training Documentation',
-   u'The RIA Branch', 'manual'),
+  ('index', 'RIATraining.tex', u'RIA Training Documentation', u'The RIA Branch', 'manual'),
+  ('computer_setup', 'computer_setup.tex', u'RIA Training: Computer Setup', u'Space Telescope Science Institute (internal use only)', 'howto'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
