@@ -43,7 +43,7 @@ Setting up your own Central Storage directory
 
 Users can store files under their username at ``/user/myusername``. This is useful for sharing large files with your colleagues. In fact, you'll be using your Central Storage directory to send your training exercises to your trainers later on.
 
-Send an email to the STScI *internal* helpdesk at support@stsci.edu, and ask them to make you a Central Storage directory. (There's an *external* helpdesk too, help@stsci.edu. For IT issues, though, you want the internal one.)
+Send an email to the STScI *internal* helpdesk at support@stsci.edu, and ask them to make you a Central Storage directory. [#externalhelpdesk]_
 
 Configuring STScI-specific environment variables
 =================================================
@@ -87,13 +87,15 @@ Caveats for ``ur_update``
 
 SSBREL cannot be updated with ``ur_update``. Even on ``SSBX`` and ``SSBDEV``, ``ur_update`` only updates parts of the Ureka install. (TODO: which?)
 
-
-
 On to the training exercises!
 ================================
 
 The next chapters explain useful tools with exercises interspered with the text. Save the results of your exercises as you go; you will submit them to your trainer once you've completed the section. If you get stuck, you can always ask your trainer for help!
 
-Wondering who your trainer is for a particular section? Check the Confluence wiki page for your training group. Other current RIAs have also done this training, so they're a good resource for quick questions if your trainer is busy.
+Wondering who your trainer is for a particular section? Check the `Confluence wiki page <https://confluence.stsci.edu/display/INSRIA/RIA+training>`_ for your training group (find your training group in the sidebar, after expanding the "RIA training" category). Other current RIAs have also done this training, so they're a good resource for quick questions if your trainer is busy.
 
 Without further ado, it's time to learn about :doc:`archives`.
+
+.. rubric:: Footnotes
+
+.. [#externalhelpdesk] There's an *external* helpdesk too, help@stsci.edu. For IT issues, though, you want the internal one. The external one is for astronomers to ask questions about things like the archive, SSB software, data characteristics, and the like.
