@@ -1,0 +1,11 @@
+*****************************************
+Using IDL for astronomical data analysis
+*****************************************
+
+IDL stands for "Interactive Data Language." It is a complete computer language geared toward the interactive analysis and visualization of scientific and engineering data. It is used widely in astronomy, as well as many other fields, such as medical imaging, etc.
+
+The intention of this tutorial is to provide the IDL basics to understand how to perform simple astronomical data analysis. We assume no previous knowledge of IDL, but at least a simple understanding of any other computer language.
+
+.. note::
+
+   This guide is maintained as a PDF document. :download:`Download it <pdf_guides/IDL_training_28jul2014.pdf>` and get started.
