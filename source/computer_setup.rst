@@ -39,7 +39,7 @@ New computers set up by ITSD automatically connect certain folders to servers on
 ... then you need to talk to ITSD.)
 
 Setting up your own Central Storage directory
-------------------------------------------
+==============================================
 
 Users can store files under their username at ``/user/myusername``. This is useful for sharing large files with your colleagues. In fact, you'll be using your Central Storage directory to send your training exercises to your trainers later on.
 
@@ -82,15 +82,70 @@ You can read the `installation instructions <http://ssb.stsci.edu/ssb_software.s
     curl -O http://ssb.stsci.edu/ssb_installer
     sh ssb_installer
 
-Setting your ``pip install`` location
---------------------------------------
+You will be given the choice of which release to install. It's a good idea to install both SSBX and SSBDEV. (Simply run the installer again to install the other release.) You will be prompted to add a few lines to your login scripts. This will make available some new commands.
 
-You may eventually need to install additional Python packages. By setting an installation location, you ensure that your packages won't be touched if you have to reinstall Ureka.
+Open a new terminal and use ``ur_setup common ssbx`` to enable the SSBX release. Alternatively, ``ur_setup common ssbdev`` enables SSBDEV. To update some parts of the release, use ``ur_update``. If you want to undo the Ureka changes for a particular window, use ``ur_forget``.
+
+To automatically activate Ureka in new terminal windows, add the ``ur_setup common ssbx`` (or ``ssbdev``) line to the end of ``~/.cshrc``.
 
 Caveats for ``ur_update``
 --------------------------
 
-SSBREL cannot be updated with ``ur_update``. Even on ``SSBX`` and ``SSBDEV``, ``ur_update`` only updates parts of the Ureka install. Python packages developed at STScI are updated, along with the STScI IRAF distribution, aXe, HSTCAL, and JWST libraries. Notably this does *not* include NumPy, SciPy, matplotlib, IPython, or AstroPy. To update those, you will have to remove and reinstall the Ureka "core" as described in :ref:`update-ureka-core`
+Ureka keeps getting better, but it's still got some rough edges. For instance, SSBREL cannot be updated with ``ur_update``. Even on ``SSBX`` and ``SSBDEV``, ``ur_update`` only updates parts of the Ureka install. Python packages developed at STScI are updated, along with the STScI IRAF distribution, aXe, HSTCAL, and JWST libraries. 
+
+Notably this does **not** include NumPy, SciPy, matplotlib, IPython, or AstroPy. To update those, you will have to remove and reinstall the Ureka "core" as described in :ref:`update-ureka-core`. 
+
+Verify IDL is installed
+========================
+
+IDL should be pre-installed on new Institute machines. To check, open a terminal window and type ``idl``. You should see something like this::
+
+   $ idl
+   IDL Version 8.2.3, Mac OS X (darwin x86_64 m64). (c) 2013, Exelis Visual Information Solutions, Inc.
+   Installation number: 90853.
+   Licensed for use by: Space Telescope
+
+   IDL>
+
+Create a MAST (archive) account
+================================
+
+MAST is the archive for HST science images and data from various other missions, operated by Space Telescope. You need a separate account to access it, which you can obtain by filling out the `online registration form <http://archive.stsci.edu/registration/registration_form.html>`_.
+
+You'll be assigned a temporary password when you register. You should change it to something **different* from your STScI password using the `password change form <http://archive.stsci.edu/registration/change.html>`_ after verifying that you're able to log in.
+
+Subscribe to mailing lists
+===========================
+
+The Institute has more than one way to subscribe to mailing lists, which is a bit confusing.
+
+jDomo subscriptions
+--------------------
+
+Subscribe to ``sci_tech`` and ``tips_announce`` through the jDomo interface at http://www.stsci.edu/cgi-bin/jDomo.tcl. You will get a confirmation email from jDomo. To complete the subscription, reply to it with the authorization code in the message (e.g. ``auth 3198f7d8 subscribe sci_tech myname@stsci.edu``).
+
+Outlook subscriptions
+----------------------
+
+Subscribe to ``ins_staff``, ``ins_aura``, and ``ins_riab`` through the Outlook Web Access interface at http://mail.stsci.edu/. Log in with your AD username and password. The way to subscribe to lists is well hidden; you must log in, choose "Options", then "See all options", select "Groups" from the sidebar, search for the mailing list name and click "Join".
+
+The lists ``pylunch``, ``python-interested`` and ``macx_users`` can also be subscribed to in the same way. ITSD also provides `more information on Exchange <http://www.stsci.edu/institute/itsd/collaboration/exchange/exchangeLists>`_, if you're interested.
+
+Make sure you can log in to Cisco Jabber
+=========================================
+
+Cisco Jabber should already be installed on your machine. (Contact ITSD if it's not.) Open the Cisco Jabber application and sign in with your AD username and password. Cisco Jabber connects with your calendar and phone, and will tell you if the person you're trying to message is in a meeting or does not want to be disturbed. You can also set it up to receive calls through your computer (for example, for teleworking).
+
+ITSD maintains a guide with more information here: http://www.stsci.edu/institute/itsd/phone/jabber
+
+Log in to the Confluence wiki
+==============================
+
+Log in to the Confluence wiki at https://confluence.stsci.edu/ using your AD credentials. Some important links to bookmark are:
+
+* the `RIA branch wiki page <https://confluence.stsci.edu/pages/viewpage.action?pageId=32015091>`_ 
+* the `RIA training hub <https://confluence.stsci.edu/display/INSRIA/RIA+training>`_
+* the training page for your hiring group (click "RIA training" in the sidebar to expand the list)
 
 On to the training exercises!
 ================================
@@ -101,12 +156,14 @@ Wondering who your trainer is for a particular section? Check the `Confluence wi
 
 Without further ado, it's time to learn about :doc:`archives`.
 
+(If you're following along on paper, visit http://TODO/ and choose the link for MAST archive training.)
+
+Additional resources
+=====================
+
+* The Institute maintains a list of approved software, which you should consult if you need something else for your machine: http://www.stsci.edu/institute/itsd/software
+* There are computer :doc:`tricks` that you may find useful in this training library.
+
 .. rubric:: Footnotes
 
-<<<<<<< HEAD
-Without further ado, it's time to learn about :doc:`archives`.
-
-(If you're following along on paper, visit http://TODO/ and choose the link for MAST archive training.)
-=======
 .. [#externalhelpdesk] There's an *external* helpdesk too, help@stsci.edu. For IT issues, though, you want the internal one. The external one is for astronomers to ask questions about things like the archive, SSB software, data characteristics, and the like.
->>>>>>> af799c2ee6c9eb20b8d1e6e3496888e8a2ee13fd
