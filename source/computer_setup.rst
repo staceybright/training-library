@@ -2,6 +2,8 @@
 Setting Up Your Computer
 *************************
 
+*Authors: Joseph Long, Matthew Bourque, Sara Ogaz, Amber Armstrong, Michael Dulude, and Tiffany Borders*
+
 The Institute provides you a computer when you are hired, and sets it up with a core set of software. (Some new hires get a loaner computer while a new machine is ordered and prepared for them.) They'll buy you a new one every three years, if you're good. Even though ITSD is responsible for installing important things like Office and antivirus software for all, it's up to each RIA to set their system up the way they want. For science-related uses, most new Institute machines are Macs, so this guide will assume that's what you have.
 
 You should have a computer, an ActiveDirectory (AD) username, and a password from ITSD. Let's get started.
