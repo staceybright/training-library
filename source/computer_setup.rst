@@ -9,7 +9,7 @@ You should have a computer, an ActiveDirectory (AD) username, and a password fro
 Configuring your email
 =======================
 
-Space Telescope uses Microsoft Exchange for email. Web-based access is available at http://mail.stsci.edu/. For daily use, you should set up a mail client like Outlook on your computer.
+Space Telescope uses Microsoft Exchange for email. Web-based access is available at https://mail.stsci.edu/. For daily use, you should set up a mail client like Outlook on your computer.
 
 ITSD maintains some `guides for common mail clients <http://www.stsci.edu/institute/itsd/collaboration/exchange/clients>`_.
 
@@ -82,12 +82,15 @@ You can read the `installation instructions <http://ssb.stsci.edu/ssb_software.s
     curl -O http://ssb.stsci.edu/ssb_installer
     sh ssb_installer
 
+Setting your ``pip install`` location
+--------------------------------------
+
+You may eventually need to install additional Python packages. By setting an installation location, you ensure that your packages won't be touched if you have to reinstall Ureka.
+
 Caveats for ``ur_update``
 --------------------------
 
-SSBREL cannot be updated with ``ur_update``. Even on ``SSBX`` and ``SSBDEV``, ``ur_update`` only updates parts of the Ureka install. (TODO: which?)
-
-
+SSBREL cannot be updated with ``ur_update``. Even on ``SSBX`` and ``SSBDEV``, ``ur_update`` only updates parts of the Ureka install. Python packages developed at STScI are updated, along with the STScI IRAF distribution, aXe, HSTCAL, and JWST libraries. Notably this does *not* include NumPy, SciPy, matplotlib, IPython, or AstroPy. To update those, you will have to remove and reinstall the Ureka "core" as described in :ref:`update-ureka-core`
 
 On to the training exercises!
 ================================
@@ -97,3 +100,5 @@ The next chapters explain useful tools with exercises interspered with the text.
 Wondering who your trainer is for a particular section? Check the Confluence wiki page for your training group. Other current RIAs have also done this training, so they're a good resource for quick questions if your trainer is busy.
 
 Without further ado, it's time to learn about :doc:`archives`.
+
+(If you're following along on paper, visit http://TODO/ and choose the link for MAST archive training.)
