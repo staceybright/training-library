@@ -49,7 +49,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'RIA Training'
-copyright = u'2014, Space Telescope Science Institute. Not for external distribution'
+copyright = u'2014, Space Telescope Science Institute. These documents are designed for internal use only, and are not an official AURA/STScI publication. Information may be out of date, irrelevant, or contradict published documentation. Use at your own risk'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

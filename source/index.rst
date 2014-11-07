@@ -2,17 +2,43 @@
 Welcome to the RIA Training Library!
 #####################################
 
+.. warning::
+
+   **To non-RIA readers:** These documents are designed for internal use only, and are not an official AURA/STScI publication. Information may be out of date, irrelevant, or contradict published documentation. Use at your own risk!
+
 New Research & Instrument Analysts at STScI work with a variety of tools, depending on their instrument team and (for some) their research assignments. Nevertheless, some things are so generally useful to RIAs that we've drawn up training documents to bring you up to speed on anything you haven't used before. (Perhaps you'll even learn new tricks for things you *have* used before!)
 
 This library also contains a collection of :doc:`tricks`, generally computing related. When you reach the end of your training, your final task will be to contribute an improvement to the training library. This could be a tip, a clarification for part of the training that you found confusing, or something else.
 
-*******************
-Training Documents
-*******************
+*******************************************
+Training guides and exercises for new RIAs
+*******************************************
 
-1. :doc:`computer_setup`
-2. :doc:`archives`
-3. :doc:`improvements`
+#. :doc:`computer_setup`
+#. :doc:`archives`
+#. :doc:`version_control`
+#. IDL Training
+#. Python Training
+#. PyRAF Training
+#. AstroDrizzle presentation and exercises
+#. Photometry presentation and exercises
+#. Spectroscopy exercises
+#. :doc:`improvements`
+
+*******************************************
+Supplemental training guides and exercises
+*******************************************
+
+#. Introduction to JWST
+#. JWST Training, read modes, reference output and pixels
+#. Introduction to Gerchberg-Saxton Phase Retrieval (INS/TEL)
+
+****************************************
+Reference information and presentations
+****************************************
+
+#. `Using APT (the Astronomer's Proposal Tool) <http://www.stsci.edu/hst/proposing/apt/using_apt>`_
+#. Archive of past RIA training reports
 
 *************
 Extra Wisdom
@@ -26,5 +52,6 @@ Extra Wisdom
 
    computer_setup
    archives
+   version_control
    improvements
    tricks
