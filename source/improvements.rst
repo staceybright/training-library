@@ -1,5 +1,6 @@
+**************************
 Improving These Documents
-==========================
+**************************
 
 These documents live in a Git repository, making it easy for you to modify them and share your changes with other RIAs. The first step to making a change is clone the repository, giving you a local copy to work with::
 

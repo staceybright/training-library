@@ -17,7 +17,7 @@ Training guides and exercises for new RIAs
 #. :doc:`computer_setup`
 #. :doc:`archives`
 #. :doc:`version_control`
-#. IDL Training
+#. :doc:`using_idl`
 #. Python Training
 #. PyRAF Training
 #. AstroDrizzle presentation and exercises
@@ -53,5 +53,6 @@ Extra Wisdom
    computer_setup
    archives
    version_control
+   using_idl
    improvements
    tricks
