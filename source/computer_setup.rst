@@ -156,7 +156,7 @@ The next chapters explain useful tools with exercises interspered with the text.
 
 Wondering who your trainer is for a particular section? Check the `Confluence wiki page <https://confluence.stsci.edu/display/INSRIA/RIA+training>`_ for your training group (find your training group in the sidebar, after expanding the "RIA training" category). Other current RIAs have also done this training, so they're a good resource for quick questions if your trainer is busy.
 
-Without further ado, it's time to learn about :doc:`archives`.
+Without further ado, it's time to learn about MAST (a.k.a. the Archive).
 
 (If you're following along on paper, visit https://confluence.stsci.edu/display/INSRIA/RIA+training and choose the link for MAST archive training.)
 
