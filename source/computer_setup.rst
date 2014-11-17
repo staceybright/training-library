@@ -158,13 +158,12 @@ Wondering who your trainer is for a particular section? Check the `Confluence wi
 
 Without further ado, it's time to learn about :doc:`archives`.
 
-(If you're following along on paper, visit http://TODO/ and choose the link for MAST archive training.)
+(If you're following along on paper, visit https://confluence.stsci.edu/display/INSRIA/RIA+training and choose the link for MAST archive training.)
 
 Additional resources
 =====================
 
 * The Institute maintains a list of approved software, which you should consult if you need something else for your machine: http://www.stsci.edu/institute/itsd/software
-* There are computer :doc:`tricks` that you may find useful in this training library.
 
 .. rubric:: Footnotes
 
