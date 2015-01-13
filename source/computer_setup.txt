@@ -79,23 +79,19 @@ The Institute's Science Software Branch distributes a package containing all of 
 
 There are three release channels of the SSB IRAF + Python distribution: SSBDEV, SSBX, and SSBREL. SSBDEV is updated nightly, SSBX weekly, and SSBREL infrequently as it is the most stable option.
 
-You can read the `installation instructions <http://ssb.stsci.edu/ssb_software.shtml#install_yourself>`_, but they're short enough to be reproduced here. Open a terminal and run::
+Follow the `directions for using SSBREL, SSBX, and SSBDEV at STScI <http://ssb.stsci.edu/internal_ssb_software_installations.shtml>`_ to install the ``sync_ssb`` utility.
 
-    curl -O http://ssb.stsci.edu/ssb_installer
-    sh ssb_installer
+After going through the steps in the downloaded installer, the program ``/Users/Shared/sync_ssb`` will be available. Run that command in the terminal to perform the initial sync and complete the installation.
 
-You will be given the choice of which release to install. It's a good idea to install both SSBX and SSBDEV. (Simply run the installer again to install the other release.) You will be prompted to add a few lines to your login scripts. This will make available some new commands.
+.. note::
 
-Open a new terminal and use ``ur_setup common ssbx`` to enable the SSBX release. Alternatively, ``ur_setup common ssbdev`` enables SSBDEV. To update some parts of the release, use ``ur_update``. If you want to undo the Ureka changes for a particular window, use ``ur_forget``.
+    Running ``sync_ssb`` may take up to 45 minutes the first time you do it. To see useful output as it runs, use the command ``/Users/Shared/sync_ssb -v``.
 
-To automatically activate Ureka in new terminal windows, add the ``ur_setup common ssbx`` (or ``ssbdev``) line to the end of ``~/.cshrc``.
+When that completes, open a *new* terminal window and type ``ssbx`` to activate the SSBX environment. (SSBDEV and SSBREL work similarly.) You must choose an environment to activate each time you open a new Terminal window.
 
-Caveats for ``ur_update``
---------------------------
+.. note::
 
-Ureka keeps getting better, but it's still got some rough edges. For instance, SSBREL cannot be updated with ``ur_update``. Even on ``SSBX`` and ``SSBDEV``, ``ur_update`` only updates parts of the Ureka install. Python packages developed at STScI are updated, along with the STScI IRAF distribution, aXe, HSTCAL, and JWST libraries. 
-
-Notably this does **not** include NumPy, SciPy, matplotlib, IPython, or AstroPy. To update those, you will have to remove and reinstall the Ureka "core" as described in :ref:`update-ureka-core`. 
+    If you are a laptop user, make a habit of running ``/Users/Shared/sync_ssb`` while you are connected to the Institute network, at least once a week. Desktops will automatically sync nightly at 6:30 AM, unless the computer is off.
 
 Verify IDL is installed
 ========================
@@ -108,6 +104,8 @@ IDL should be pre-installed on new Institute machines. To check, open a terminal
    Licensed for use by: Space Telescope
 
    IDL>
+
+If not, contact computer support.
 
 Create a MAST (archive) account
 ================================
