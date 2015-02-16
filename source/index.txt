@@ -39,6 +39,7 @@ Reference information and presentations
 
 #. `Using APT (the Astronomer's Proposal Tool) <http://www.stsci.edu/hst/proposing/apt/using_apt>`_
 #. Archive of past RIA training reports
+#. :doc:`trainees`
 
 *************
 Extra Wisdom

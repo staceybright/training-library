@@ -9,30 +9,11 @@ What can version control do for me?
 
 It might be instructive to motivate these exercises with some examples. After completing this training, you will know how to do all of these for any given ``git`` repository. Here are a few examples of things version control can do for you.
 
-Figuring out who to ask
-------------------------
-
-You notice a calibration pipeline script is failing on a line of code you're not familiar with. By going into the version control system, you can see not only when that line was added to the script, but who wrote it.
-
-Collaborate without clobbering each other's work
--------------------------------------------------
-
-You and a collaborator are both editing a report written in LaTeX on your own computers. She updates a figure in section 1 at the same time as you updating a sentence in that section. Rather than just taking the latest edited version, the version control system combines your edits to make a new report with both her updated figure and your updated sentence. (No more sending ``technical_report_292_revC_final_2_draft2_SmithEdit.tex`` back and forth, trying to figure out what changed!)
-
-Work on two things at once, without going nuts
------------------------------------------------
-
-You have a script you're working on, and you want to add two major features. Rather than having to work on them one at a time, or risk breaking the script by changing two major things at once, you can use two *branches* to isolate your changes and switch which branch you're working on with a simple command. When you're done, you simply *merge* each branch with the master copy.
-
-Selectively undo specific changes
-----------------------------------
-
-Back in 2012, your instrument team decided that all coefficients on a particular model should be normalized to a maximum value of one. Today, they decide that the original constants were better after all, and want you to change the coefficients back to the old values everywhere they appear in the code. By using the repository history, you can find the exact set of changes that normalized the coefficients, and easily undo *only* that set without rolling the whole code back to a 2012 version.
-
-Contributing your changes to the community
--------------------------------------------
-
-You find a great open-source package that implements a source-finding algorithm for science images. You want to extend it with an option to modify the algorithm, without reimplementing it from scratch. By making your own *clone* of their version control repository, you can make your changes there and easily contribute them back to the original project.
+1. **Figuring out who to ask** -- Look at the *history* of a particular file to find out who to ask about a particular section and when it was written
+2. **Collaborate without clobbering** -- Edit a file someone else is also working on, without overwriting their changes
+3. **Work on two things at once** -- Explore adding a major new feature, but keep those changes separate from your routine work
+4. **Undo exactly what you changed** -- Sometimes things stop working and you don't know what you changed. If you track changes in a version control system, you can see exactly what changed.
+5. **Copy, change, contribute back** -- Modify open-source software and share your changes with the wider community
 
 Getting started with ``git``
 ==============================
@@ -48,7 +29,7 @@ Every sub-command has thorough documentation accessible through ``git nameofcomm
 
 The first thing we want to do is make a workspace for these exercises. Git commands operate on a **repository**, which is a folder on your computer that contains both the files you want to track and the internal git bookkeeping data #[gitdirectory]_ .
 
-.. admonition:: Exercise
+.. admonition:: Exercise: Creating a new repository
 
    Create a new git repository in a folder called ``git_training`` using the ``git init`` commmand. (Skim ``git init --help`` to figure out the syntax.)
 
@@ -60,7 +41,65 @@ The first thing we want to do is make a workspace for these exercises. Git comma
    merging
    merging with conflicts
 
+Getting started with GitHub
+---------------------------
+
+If you're new to GitHub, you'll need to register for a free account and set up your computer to authenticate you with GitHub when using git.
+
+1. **Make a free GitHub account**
+
+   The registration form is on the `GitHub homepage <https://github.com/>`_
+
+2. **Generate an SSH key**
+
+   Without getting too detailed, an SSH key is a bit like a username and password combined. GitHub needs your SSH key to know who you are when you want to make changes to shared documents. Usually, you'd want a *passphrase* on top of that, but for this case it's unnecessary so you can just hit :kbd:`Enter` when prompted. [#passphrase]_
+
+   Open a new terminal and type the command shown below. (Remember to put in your STScI email!) ::
+
+       $ ssh-keygen -t rsa -C "your_email@example.com"
+       Generating public/private rsa key pair.
+       Enter file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
+       Enter passphrase (empty for no passphrase): [Press enter]
+       Enter same passphrase again: [Press enter]
+       Your identification has been saved in /Users/you/.ssh/id_rsa.
+       Your public key has been saved in /Users/you/.ssh/id_rsa.pub.
+       The key fingerprint is:
+       01:0f:f4:3b:ca:85:d6:17:a1:7d:f0:68:9d:f0:a2:db your_email@example.com
+       The key's randomart image is:
+       +--[ RSA 2048]----+
+       |       o+ oo=..  |
+       |       . ..+ o . |
+       |        .   o .  |
+       |       .   o +   |
+       |        S   = =  |
+       |             * . |
+       |              . .|
+       |               = |
+       |            E.+o+|
+       +-----------------+
+
+3. **Tell GitHub about your new SSH key**
+
+   First, copy the contents of ``~/.ssh/id_rsa.pub`` to your clipboard using this command::
+
+   $ pbcopy < ~/.ssh/id_rsa.pub  # (you could do this by hand with a text editor too)
+
+   Now you want to go to https://github.com/settings/ssh and follow these instructions to `add your SSH key to your account <https://help.github.com/articles/generating-ssh-keys/#step-3-add-your-ssh-key-to-your-account>`_.
+
+4. **Verify that your computer can talk to GitHub**
+
+   ::
+
+      $ ssh -T git@github.com
+
+   If you're prompted with ``Are you sure you want to continue connecting (yes/no)?``, type "yes" and hit :kbd:`Enter`. You should see a message indicating you have successfully authenticated.
+
+**You're all set!** Now when you make your improvements, your computer will be set up to let you share them on GitHub.
+
 .. rubric:: Footnotes
 
 .. [#gitproject] `git <http://git-scm.com/>`_ is free and open source software developed by the creator of Linux (Linus Torvalds) and many others. He once said that "git" (British English for "an unpleasant person") was a good name for a project of his, as he names all of his projects after himself.
 .. [#gitdirectory] The vast majority of git repositories you will come across will have a hidden subdirectory named ``.git``, as well as the "working copy" of any files you're editing. To be nit-picky, the ``.git`` directory is the actual *repository*. (For example, you can delete the files of the working copy completely and get a fresh version as long as the ``.git`` directory is intact.)
+.. [#passphrase] Passphrases ensure that someone with physical access to your computer still cannot impersonate you online with your SSH key. The down side is that you have to supply a passphrase each time you use the key, or else configure the SSH agent (which can result in additional frustration).
+
+   Since Institute laptops have full-disk encryption, the risk of a malicious actor coming into your office to steal your encryption keys while you're away from your desk is low, and the keys aren't protecting anything more sensitive than training documents, you can forgo the passphrase in this case. If your situation is different, you should absolutely generate a new key with a passphrase.

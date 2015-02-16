@@ -2,15 +2,23 @@
 Improving These Documents
 **************************
 
-These documents live in a Git repository, making it easy for you to modify them and share your changes with other RIAs. The first step to making a change is clone the repository, giving you a local copy to work with::
+These documents live in a ``git`` repository, making it easy for you to modify them and share your changes with other RIAs. GitHub is the service we use to coordinate sharing and reviewing the changes.
+
+.. _making_and_previewing_changes:
+
+Making and previewing changes
+-----------------------------
+
+The first step to making a change is to clone the repository, giving you a local copy to work with::
 
    git clone git@github.com:josePhoenix/riatraining.git
 
-This creates a ``riatraining`` directory. The web pages are automatically generated from the ``.rst`` files in the ``source`` subdirectory. Before you can do that, you need to install required packages from ``requirements.txt``::
+This creates a ``riatraining`` directory in whatever folder you're in. The web pages you're reading now are automatically generated from the ``.txt`` files in the ``source`` subdirectory. To generate them on your computer, you need to install required packages from ``requirements.txt``::
 
-  pip install -r requirements.txt
+   cd riatraining/
+   pip install -r requirements.txt
 
-This installs the program that builds the web pages from the source files, as well as components it depends on. To make a change, edit the ``.rst`` source for the document and then run::
+This installs the program that builds the web pages from the source files, as well as components it depends on. To make a change, edit the ``.txt`` source for the document and then run::
 
    make html
 
@@ -18,19 +26,48 @@ The generated HTML for the webpages is now in ``build/html/``. You can open ``bu
 
 See :ref:`sharing_doc_changes` for how to incorporate your changes in the published version.
 
+.. _autobuilder:
+
 A simpler workflow
--------------------
+^^^^^^^^^^^^^^^^^^
 
 There's a helper script that will rebuild (``make html``) the pages every time you edit and save a file. Run ``python autobuilder.py`` from your terminal, and a browser window will pop open pointing to http://127.0.0.1:8000/.
 
-While the autobuilder is running, any changes to .rst files will trigger a rebuild when you save them. Make your edits, save, and refresh the page in your browser to see your changes.
+While the autobuilder is running, any changes to .txt files will trigger a rebuild when you save them. Make your edits, save, and refresh the page in your browser to see your changes.
 
 Quit the autobuilder by interrupting it with :kbd:`Control-c`.
+
+Finishing your RIA training
+---------------------------
+
+For the last part of your training, you will make a small change to these documents and publish your changes for all to see.
+
+Editing the trainee list
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+:doc:`trainees` is a page on this site listing all the RIAs who have completed this training. You will edit this page to add your name to the list. Recall from :doc:`version_control` that it's a good idea to make changes on a separate branch. Make a new branch called ``last_exercise_yourlastname``.
+
+.. admonition:: Exercise: Add your name to "Past RIA Trainees"
+   :class: note
+
+   Edit the source file to add your name in the appropriate section.
+
+Verify your changes worked using either the :ref:`autobuilder script <autobuilder>` or ``make html``. Once you're satisfied, commit the changes to your branch.
+
+.. admonition:: Exercise: Push your changes for review
+   :class: note
+
+   Push your changes to a new branch on the origin repository. (i.e. ``git push origin last_exercise_yourlastname``).
+
+Making a pull request on GitHub
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+GitHub would not stop you from merging your own edits, but it is considered good practice to give other collaborators a chance to review your changes.
 
 Writing with reST
 ------------------
 
-Writing with reST is a lot like writing a plain-text email. Bullet points are asterisks at the beginning of a line, emphasis is accomplished by putting asterisks on either side of a word, and so forth. If you're not sure how some formatting was achieved in these documents, just have a look at the ``.rst`` source file!
+Writing with reST (reStructuredText) is a lot like writing a plain-text email. Bullet points are just asterisks at the beginning of a line, emphasis is accomplished by putting asterisks on either side of a word, and so forth. If you're not sure how some formatting was achieved in these documents, just have a look at the ``.txt`` source file!
 
 Here are some very common patterns for quick reference:
 
@@ -52,15 +89,51 @@ Here are some very common patterns for quick reference:
 +-----------------------------------+-------------------------------------------------------------+
 | Link to a web page                | | ```text of link <http://example.com/>`_``                 |
 +-----------------------------------+-------------------------------------------------------------+
-| Exercise prompt                   | | ``.. admonition:: Exercise``                              |
-|                                   | |                                                           |
-|                                   | | Indent your exercise instructions with three spaces, and  |
-|                                   | | leave a blank line after the ``admonition`` line but      |
-|                                   | | before the instructions                                   |
-+-----------------------------------+-------------------------------------------------------------+
+
+You can also insert an exercise prompt with this code::
+
+   .. admonition:: Exercise: Add a new prompt
+      :class: note
+
+      Indent your exercise instructions with three spaces, and
+      leave a blank line after the ``admonition`` line but
+      before the instructions
+
+Which would look like this:
+
+.. admonition:: Exercise: Add a new prompt
+   :class: note
+
+   Indent your exercise instructions with three spaces, and leave a blank line
+   after the ``admonition`` line but before the instructions
+
+To include a code listing (e.g. a snippet of python or terminal output), use the ``::`` marker at the end of the preceding paragraph, as in the following example::
+
+
+   Blah blah preceding paragraph or sentence. Now refer to this code::
+
+      if __name__ == "__main__":
+          app = Application()
+          app.run()
+
+   Continuing prose description following after a blank line.
+
+
+Which would look like this:
+
+--------------------------------------------
+
+Blah blah preceding paragraph or sentence. Now refer to this code::
+
+   if __name__ == "__main__":
+       app = Application()
+       app.run()
+
+Continuing prose description following after a blank line.
+
+--------------------------------------------
 
 For more advanced formatting information, there's a very good `syntax quickstart guide <http://sphinx-doc.org/rest.html>`_ maintained by the Sphinx project.
-
 
 .. _sharing_doc_changes:
 
@@ -68,3 +141,12 @@ Sharing your changes
 ---------------------
 
 You may wish to review :doc:`version_control` for more information on Git.
+
+Push to github
+
+Compare and pull request
+
+
+
+.. rubric:: Footnotes
+
