@@ -69,11 +69,11 @@ singlehtml:
 	@echo "Build finished. The HTML page is in $(BUILDDIR)/singlehtml."
 
 gh-pages:
-	# fail early if deps are missing
-	python -c "import sphinx; import sphinx_rtd_theme"
+	make html
 	git diff --exit-code
 	git diff --cached --exit-code
 	git checkout gh-pages
+	git pull
 	rm -rf build _sources _static _downloads
 	git checkout master $(GH_PAGES_SOURCES)
 	git reset HEAD
