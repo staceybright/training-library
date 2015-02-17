@@ -23,7 +23,7 @@ Training guides and exercises for new RIAs
 #. AstroDrizzle presentation and exercises
 #. Photometry presentation and exercises
 #. Spectroscopy exercises
-#. :doc:`improvements`
+#. :doc:`editing_these_documents`
 
 *******************************************
 Supplemental training guides and exercises
@@ -55,6 +55,6 @@ Extra Wisdom
    archives
    version_control
    using_idl
-   improvements
+   editing_these_documents
    tricks
    trainees

@@ -1,10 +1,14 @@
-**************************
-Improving These Documents
-**************************
+***********************
+Editing These Documents
+***********************
 
 These documents live in a ``git`` repository, making it easy for you to modify them and share your changes with other RIAs. GitHub is the service we use to coordinate sharing and reviewing the changes. You can find the web interface to the repository at https://github.com/josephoenix/riatraining.
 
 To conclude your RIA training, we want you to add your name to the :doc:`list of trainees <trainees>`.
+
+.. warning::
+
+   For now, the documents are at https://github.com/josephoenix/riatraining, and you need someone to add you as a collaborator before you can access them. Follow the instructions in :ref:`getting_started_github` and ask someone to add you as a collaborator.
 
 .. _making_and_previewing_changes:
 
