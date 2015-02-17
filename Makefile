@@ -83,10 +83,6 @@ gh-pages:
 	git add -A
 	git commit --no-verify -m "Generated gh-pages for `git log master -1 --pretty=short --abbrev-commit`" && git push origin gh-pages ; git checkout master
 
-clean-gh-pages:
-	rm -rf $(GH_PAGES_SOURCES) build
-	git checkout master
-
 pickle:
 	$(SPHINXBUILD) -b pickle $(ALLSPHINXOPTS) $(BUILDDIR)/pickle
 	@echo
