@@ -2,12 +2,12 @@
 Improving These Documents
 **************************
 
-These documents live in a ``git`` repository, making it easy for you to modify them and share your changes with other RIAs. GitHub is the service we use to coordinate sharing and reviewing the changes.
+These documents live in a ``git`` repository, making it easy for you to modify them and share your changes with other RIAs. GitHub is the service we use to coordinate sharing and reviewing the changes. You can find the web interface to the repository at https://github.com/josephoenix/riatraining.
 
 .. _making_and_previewing_changes:
 
 Making and previewing changes
------------------------------
+=============================
 
 The first step to making a change is to clone the repository, giving you a local copy to work with::
 
@@ -29,7 +29,7 @@ See :ref:`sharing_doc_changes` for how to incorporate your changes in the publis
 .. _autobuilder:
 
 A simpler workflow
-^^^^^^^^^^^^^^^^^^
+------------------
 
 There's a helper script that will rebuild (``make html``) the pages every time you edit and save a file. Run ``python autobuilder.py`` from your terminal, and a browser window will pop open pointing to http://127.0.0.1:8000/.
 
@@ -38,12 +38,12 @@ While the autobuilder is running, any changes to .txt files will trigger a rebui
 Quit the autobuilder by interrupting it with :kbd:`Control-c`.
 
 Finishing your RIA training
----------------------------
+===========================
 
 For the last part of your training, you will make a small change to these documents and publish your changes for all to see.
 
 Editing the trainee list
-^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------
 
 :doc:`trainees` is a page on this site listing all the RIAs who have completed this training. You will edit this page to add your name to the list. Recall from :doc:`version_control` that it's a good idea to make changes on a separate branch. Make a new branch called ``last_exercise_yourlastname``.
 
@@ -60,14 +60,37 @@ Verify your changes worked using either the :ref:`autobuilder script <autobuilde
    Push your changes to a new branch on the origin repository. (i.e. ``git push origin last_exercise_yourlastname``).
 
 Making a pull request on GitHub
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------
 
 GitHub would not stop you from merging your own edits, but it is considered good practice to give other collaborators a chance to review your changes.
 
-Writing with reST
-------------------
+**Congratulations! You've finished the exercise-based part of the training. Next up, talk to your trainer about your project and report.**
 
-Writing with reST (reStructuredText) is a lot like writing a plain-text email. Bullet points are just asterisks at the beginning of a line, emphasis is accomplished by putting asterisks on either side of a word, and so forth. If you're not sure how some formatting was achieved in these documents, just have a look at the ``.txt`` source file!
+Bonus: fix a problem you noticed in these documents
+===================================================
+
+Sometimes, things in the training documents are out of date by the time the newest hires see them. Other times, certain topics need clarification or a typo needs to be corrected. If you noticed something to improve during the training, you are highly encouraged to make your own edits and propose them through a pull request!
+
+.. admonition:: Exercise: Improve something in these documents
+   :class: note
+
+   Find something that needs improvement, make your edits on a new branch, and open a pull request to the training repository.
+
+   (Not sure how to format something? See :ref:`rest_primer`, below.)
+
+Creating an entirely new document
+=================================
+
+Simply create a new ``.txt`` file in the ``source/`` directory with the desired name. To have it show up from the homepage, you will also want to make a link to it in ``index.txt`` (for ``foo.txt``, the link would be ``:doc:`foo```), and add it to the "toctree" at the end of that file (again, without the ``.txt`` extension).
+
+.. _rest_primer:
+
+Writing with reST
+=================
+
+The training documents are formatted in *reST* (reStructuredText). reST is a markup language (like e.g. LaTeX), meaning that there are "source" files and a program that "compiles" them into pages with your formatting applied.
+
+Writing with reST (reStructuredText) is a lot like writing a plain-text email. Bullet points are just asterisks at the beginning of a line, emphasis is accomplished by putting asterisks on either side of a word, and so forth. If you're not sure how some formatting was achieved in these documents, just have a look at the ``.txt`` source file for that document!
 
 Here are some very common patterns for quick reference:
 
@@ -86,6 +109,17 @@ Here are some very common patterns for quick reference:
 |                                   | | ``=================``                                     |
 +-----------------------------------+-------------------------------------------------------------+
 | Link to another training document | | ``:doc:`filename_without_extension```                     |
++-----------------------------------+-------------------------------------------------------------+
+| Link to a section heading         | At the heading you want to link to:                         |
+|                                   |                                                             |
+|                                   | | ``.. _your_reference_name:``                              |
+|                                   | |                                                           |
+|                                   | | ``Section Heading``                                       |
+|                                   | | ``=================``                                     |
+|                                   |                                                             |
+|                                   | For the link itself:                                        |
+|                                   |                                                             |
+|                                   | | ``:ref:`link text <your_reference_name>```                |
 +-----------------------------------+-------------------------------------------------------------+
 | Link to a web page                | | ```text of link <http://example.com/>`_``                 |
 +-----------------------------------+-------------------------------------------------------------+
@@ -145,8 +179,4 @@ You may wish to review :doc:`version_control` for more information on Git.
 Push to github
 
 Compare and pull request
-
-
-
-.. rubric:: Footnotes
 
