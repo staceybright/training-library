@@ -64,6 +64,8 @@ Making a pull request on GitHub
 
 GitHub would not stop you from merging your own edits, but it is considered good practice to give other collaborators a chance to review your changes.
 
+Once you have pushed to a new branch, when you visit https://github.com/josephoenix/riatraining you will see a new green icon to "compare and pull request".
+
 **Congratulations! You've finished the exercise-based part of the training. Next up, talk to your trainer about your project and report.**
 
 Bonus: fix a problem you noticed in these documents
