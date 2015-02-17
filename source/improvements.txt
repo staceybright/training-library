@@ -4,6 +4,8 @@ Improving These Documents
 
 These documents live in a ``git`` repository, making it easy for you to modify them and share your changes with other RIAs. GitHub is the service we use to coordinate sharing and reviewing the changes. You can find the web interface to the repository at https://github.com/josephoenix/riatraining.
 
+To conclude your RIA training, we want you to add your name to the :doc:`list of trainees <trainees>`.
+
 .. _making_and_previewing_changes:
 
 Making and previewing changes
@@ -24,7 +26,7 @@ This installs the program that builds the web pages from the source files, as we
 
 The generated HTML for the webpages is now in ``build/html/``. You can open ``build/html/index.html`` (or another file) to see your handiwork.
 
-See :ref:`sharing_doc_changes` for how to incorporate your changes in the published version.
+See :ref:`publishing_changes` for how to incorporate your changes in the published version.
 
 .. _autobuilder:
 
@@ -64,9 +66,35 @@ Making a pull request on GitHub
 
 GitHub would not stop you from merging your own edits, but it is considered good practice to give other collaborators a chance to review your changes.
 
-Once you have pushed to a new branch, when you visit https://github.com/josephoenix/riatraining you will see a new green icon to "compare and pull request".
+Once you have pushed to a new branch, when you visit https://github.com/josephoenix/riatraining you will see a new green icon to "Compare & pull request".
+
+.. figure:: figures/compare_and_pull_request.png
+   :scale: 50 %
+   :alt: GitHub's two buttons for "Compare & pull request"
+
+Click the big green "Compare & pull request" button. (The smaller green pull request icon next to the branch selector will also work, but you will have to remember to select the right branch.)
+
+At the bottom of the page, you'll see the changes you're asking to pull in. Ensure you're only pulling in changes you mean to!
+
+.. figure:: figures/pull_request_files.png
+   :scale: 50 %
+   :alt: View of the changes in the pull request diff
+
+.. warning::
+
+   If you see a message saying that the branches cannot be automatically merged, you need to "pull in upstream changes". All that means is that someone else edited the same thing as you, and you need to incorporate their changes in your pull request.
+
+   To do this, go to your repository in the terminal and execute ``git pull`` and ``git merge master``. You will see a message about which files have conflicts. Open them in your editor, look for the ``<<<<<<`` and ``>>>>>>`` markers, and combine the changes in a way that makes sense (e.g. include your name *and* that of another trainee that just added theirs).
+
+   Add, commit, push to your branch, and your pull request should gain the green "Able to merge" icon!
+
+Give your pull request a brief title and description, then click "Create pull request." Tell your trainer for this section, and they will merge it in if it all looks good! Once it is merged, either you or they can publish it using the directions in :ref:`publishing_changes`.
+
+--------------------------------------------
 
 **Congratulations! You've finished the exercise-based part of the training. Next up, talk to your trainer about your project and report.**
+
+--------------------------------------------
 
 Bonus: fix a problem you noticed in these documents
 ===================================================
@@ -84,6 +112,23 @@ Creating an entirely new document
 =================================
 
 Simply create a new ``.txt`` file in the ``source/`` directory with the desired name. To have it show up from the homepage, you will also want to make a link to it in ``index.txt`` (for ``foo.txt``, the link would be ``:doc:`foo```), and add it to the "toctree" at the end of that file (again, without the ``.txt`` extension).
+
+.. _publishing_changes:
+
+Publishing changes
+==================
+
+This training site is set up using GitHub Pages, a service of GitHub that hosts static web pages for free. The way you add things to GitHub Pages is through a specially named branch called ``gh-pages`` in this repository.
+
+To simplify copying the built HTML pages from one branch to another, there is a target in the Makefile called ``gh-pages``. To use it, make sure you have no uncommitted changes on ``master`` and do::
+
+   $ make gh-pages
+
+That will build the latest copy of the docs, copy them to the ``gh-pages`` branch, commit them, and push them to the origin's ``gh-pages`` branch. Within 5-10 minutes, you should see your changes online at http://josephoenix.github.io/riatraining/.
+
+.. warning::
+
+   If the build fails partway through, you will have to make ``git`` happy again yourself. That means unstaging everything, removing everything but the ``.git`` directory, and running ``git checkout master`` before you can try to build again. (It's kind of a pain, but you shouldn't typically encounter this.)
 
 .. _rest_primer:
 
@@ -170,15 +215,3 @@ Continuing prose description following after a blank line.
 --------------------------------------------
 
 For more advanced formatting information, there's a very good `syntax quickstart guide <http://sphinx-doc.org/rest.html>`_ maintained by the Sphinx project.
-
-.. _sharing_doc_changes:
-
-Sharing your changes
----------------------
-
-You may wish to review :doc:`version_control` for more information on Git.
-
-Push to github
-
-Compare and pull request
-

@@ -57,3 +57,4 @@ Extra Wisdom
    using_idl
    improvements
    tricks
+   trainees
