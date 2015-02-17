@@ -11,3 +11,6 @@ pip-delete-this-directory.txt
 
 # Sphinx documentation
 build/
+
+# Mac OS X
+.DS_Store
