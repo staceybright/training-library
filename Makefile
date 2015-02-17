@@ -74,7 +74,7 @@ gh-pages:
 	git diff --cached --exit-code
 	git checkout gh-pages
 	git pull
-	rm -rf build _sources _static _downloads
+	rm -rf build _sources _static _downloads _images
 	git checkout master $(GH_PAGES_SOURCES)
 	git reset HEAD
 	make html
@@ -82,6 +82,11 @@ gh-pages:
 	rm -rf $(GH_PAGES_SOURCES) build
 	git add -A
 	git commit --no-verify -m "Generated gh-pages for `git log master -1 --pretty=short --abbrev-commit`" && git push origin gh-pages ; git checkout master
+
+gh-pages-clean:
+	git checkout -- .
+	rm -rf $(GH_PAGES_SOURCES) build
+	git checkout master
 
 pickle:
 	$(SPHINXBUILD) -b pickle $(ALLSPHINXOPTS) $(BUILDDIR)/pickle
