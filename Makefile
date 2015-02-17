@@ -27,6 +27,7 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
 	@echo "  html       to make standalone HTML files"
+	@echo "  gh-pages   to update the GitHub gh-pages branch of this repository"
 	@echo "  dirhtml    to make HTML files named index.html in directories"
 	@echo "  singlehtml to make a single large HTML file"
 	@echo "  pickle     to make pickle files"
@@ -68,6 +69,8 @@ singlehtml:
 	@echo "Build finished. The HTML page is in $(BUILDDIR)/singlehtml."
 
 gh-pages:
+	# fail early if deps are missing
+	python -c "import sphinx; import sphinx_rtd_theme"
 	git diff --exit-code
 	git diff --cached --exit-code
 	git checkout gh-pages
@@ -79,6 +82,10 @@ gh-pages:
 	rm -rf $(GH_PAGES_SOURCES) build
 	git add -A
 	git commit -m "Generated gh-pages for `git log master -1 --pretty=short --abbrev-commit`" && git push origin gh-pages ; git checkout master
+
+clean-gh-pages:
+	rm -rf $(GH_PAGES_SOURCES) build
+	git checkout master
 
 pickle:
 	$(SPHINXBUILD) -b pickle $(ALLSPHINXOPTS) $(BUILDDIR)/pickle
