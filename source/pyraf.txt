@@ -1,0 +1,9 @@
+***********
+Basic PyRAF
+***********
+
+PyRAF is a command language for running IRAF tasks in a Python like environment. It works very similarly to IRAF, but has been updated to allow such things as importing Python modules, starting in any directory, GUI parameter editing, and GUI help. Most importantly, it can be imported into Python allowing you to run IRAF commands from within a larger script. PyRAF is a product of the Science Software Branch right here at STScI. All of the STScI calibration pipelines can be run from PyRAF although they are now written in Python and more recent pipelines (e.g. Calcos) can be run as stand-alone programs.
+
+.. note::
+
+   This guide is maintained as a PDF document. :download:`Download it <pdf_guides/pyraf_training.pdf>` and get started.

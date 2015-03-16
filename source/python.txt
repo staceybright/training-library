@@ -1,0 +1,9 @@
+*******************************************
+Using Python for Astronomical Data Analysis
+*******************************************
+
+Python is a scripting language with excellent support for common scientific tasks. This training guide will cover the use of the Python language itself, as well as some of the packages written for Python that are commonly used for astronomical data analysis (e.g. NumPy, Astropy, PyRAF).
+
+.. note::
+
+   This guide is maintained as a PDF document. :download:`Download it <pdf_guides/python_training.pdf>` and get started.

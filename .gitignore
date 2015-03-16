@@ -21,3 +21,12 @@ build/
 *.out
 *.toc
 *.idx
+
+# Intermediate copies from LaTeX build
+latexdocs/python/document/training.pdf
+latexdocs/pyraf/training.pdf
+
+# Intermediate copies from Sphinx build
+# (we're tracking the source files, so we don't need the PDFs)
+source/pdf_guides/pyraf_training.pdf
+source/pdf_guides/python_training.pdf
