@@ -53,7 +53,7 @@ class RequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         return path
 
 def build_docs():
-    proc = subprocess.Popen(['make', 'html'], stdout=subprocess.PIPE,
+    proc = subprocess.Popen(['make', 'riadocs'], stdout=subprocess.PIPE,
                             bufsize=1, cwd=PROJECT_DIR)
     for line in iter(proc.stdout.readline, ''):
         print line,
@@ -62,13 +62,20 @@ def build_docs():
 
 class SphinxRebuildHandler(FileSystemEventHandler):
     def on_any_event(self, event):
-        build_docs()
+        if '.pdf' not in event.src_path:
+            build_docs()
+
+class LaTeXRebuildHandler(FileSystemEventHandler):
+    def on_any_event(self, event):
+        if '.tex' in event.src_path:
+            build_docs()
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s - %(message)s',
                         datefmt='%Y-%m-%d %H:%M:%S')
     path = os.path.join(PROJECT_DIR, 'source')
+    latex_path = os.path.join(PROJECT_DIR, 'latexdocs')
     # Serve static files
     server = BaseHTTPServer.HTTPServer(BIND_TO, RequestHandler)
     server_thread = threading.Thread(target=server.serve_forever)
@@ -78,9 +85,11 @@ if __name__ == "__main__":
     # Watch for filesystem events and rebuild docs as necessary
     event_handler = LoggingEventHandler()
     rebuild_handler = SphinxRebuildHandler()
+    latex_rebuild_handler = LaTeXRebuildHandler()
     observer = Observer()
     observer.schedule(event_handler, path, recursive=True)
     observer.schedule(rebuild_handler, path, recursive=True)
+    observer.schedule(latex_rebuild_handler, latex_path, recursive=True)
     observer.start()
     
     # Do an initial build, and open a browser window
