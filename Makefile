@@ -53,6 +53,22 @@ help:
 clean:
 	rm -rf $(BUILDDIR)/*
 
+riadocs:
+	# Python training LaTeX build
+	cd latexdocs/python/document/; pdflatex training.tex
+	# a second time to resolve refs
+	cd latexdocs/python/document/; pdflatex training.tex
+	# PyRAF training LaTeX build
+	cd latexdocs/pyraf/; pdflatex training.tex
+	# a second time to resolve refs
+	cd latexdocs/pyraf/; pdflatex training.tex
+	# Copy Python training into pdf_guides
+	cp latexdocs/python/document/training.pdf source/pdf_guides/python_training.pdf
+	# Copy PyRAF training into pdf_guides
+	cp latexdocs/pyraf/training.pdf source/pdf_guides/pyraf_training.pdf
+	# Execute the Sphinx build
+	make html
+
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
@@ -69,7 +85,7 @@ singlehtml:
 	@echo "Build finished. The HTML page is in $(BUILDDIR)/singlehtml."
 
 gh-pages:
-	make html
+	make riadocs
 	git diff --exit-code
 	git diff --cached --exit-code
 	git checkout gh-pages
