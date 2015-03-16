@@ -26,6 +26,7 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
+	@echo "  riadocs    to make the LaTeX PDFs and standalone HTML files"
 	@echo "  html       to make standalone HTML files"
 	@echo "  gh-pages   to update the GitHub gh-pages branch of this repository"
 	@echo "  dirhtml    to make HTML files named index.html in directories"
