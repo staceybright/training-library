@@ -24,11 +24,11 @@ This creates a ``riatraining`` directory in whatever folder you're in. The web p
    cd riatraining/
    pip install -r requirements.txt
 
-This installs the program that builds the web pages from the source files, as well as components it depends on. To make a change, edit the ``.txt`` source for the document and then run::
+This installs the program that builds the web pages from the source files, as well as components it depends on. To make a change, edit the ``.txt`` or ``.tex`` source for the document and then run::
 
-   make html
+   make riadocs
 
-The generated HTML for the webpages is now in ``build/html/``. You can open ``build/html/index.html`` (or another file) to see your handiwork.
+This builds HTML files for the webpages, as well as PDFs for those documents written in LaTeX. The generated HTML for the webpages is now in ``build/html/``. You can open ``build/html/index.html`` (or another file) to see your handiwork.
 
 See :ref:`publishing_changes` for how to incorporate your changes in the published version.
 
@@ -37,9 +37,9 @@ See :ref:`publishing_changes` for how to incorporate your changes in the publish
 A simpler workflow
 ------------------
 
-There's a helper script that will rebuild (``make html``) the pages every time you edit and save a file. Run ``python autobuilder.py`` from your terminal, and a browser window will pop open pointing to http://127.0.0.1:8000/.
+There's a helper script that will rebuild (``make riadocs``) the pages every time you edit and save a file. Run ``python autobuilder.py`` from your terminal, and a browser window will pop open pointing to a local preview copy at http://127.0.0.1:8000/.
 
-While the autobuilder is running, any changes to .txt files will trigger a rebuild when you save them. Make your edits, save, and refresh the page in your browser to see your changes.
+While the autobuilder is running, any changes to ``.txt`` files will trigger a rebuild when you save them. Make your edits, save, and refresh the page in your browser to see your changes.
 
 Quit the autobuilder by interrupting it with :kbd:`Control-c`.
 

@@ -18,8 +18,8 @@ Training guides and exercises for new RIAs
 #. :doc:`archives`
 #. :doc:`version_control`
 #. :doc:`using_idl`
-#. Python Training
-#. PyRAF Training
+#. :doc:`python`
+#. :doc:`pyraf`
 #. AstroDrizzle presentation and exercises
 #. Photometry presentation and exercises
 #. Spectroscopy exercises
@@ -53,6 +53,8 @@ Extra Wisdom
 
    computer_setup
    archives
+   python
+   pyraf
    version_control
    using_idl
    editing_these_documents
