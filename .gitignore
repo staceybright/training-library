@@ -14,3 +14,8 @@ build/
 
 # Mac OS X
 .DS_Store
+
+# LaTeX
+*.log
+*.aux
+*.out

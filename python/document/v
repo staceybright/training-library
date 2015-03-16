@@ -1,0 +1,3 @@
+#!/bin/csh -f
+#acroread slope.pdf &
+open training.pdf &

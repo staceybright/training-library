@@ -1,0 +1,562 @@
+\chapter{Basic Python Concepts}
+\label{ch:intro}
+\section{Introduction }
+Python is a free, open-source, high level interpreted scripting language, similar to PERL. 
+ However, Python is
+also a high-level object-oriented programming language,
+much like C++, Java, and Ruby.
+
+The intention of this tutorial is to provide the Python basics
+to understand how to perform simple astronomical data analysis.
+
+We will discuss how to write and run Python scripts in Chapter~\ref{ch:scripts}.
+Until then we will use python interactively, which is best for learning
+python and for checking your code as you write it.
+
+\subsection{A Few Notes on Python}
+\begin{itemize}
+\item Python is case sensitive.  This turns out not to be that
+  difficult as Python is almost always written in lowercase.   
+\item Python does not have `BEGIN' and `END'
+  statements.  It does however depend on indents.  It is best practice
+  to indent with four spaces.
+\item Comments in code are useful to help you remember what is going
+  on, but also so that others know what you are doing.  In Python,
+  comments begin with the \# symbol. Multi-line comments can be nested
+  in three quotes. 
+\item The line continuation symbol ` \textbackslash ' can be used to
+  spread a command out over multiple lines.  This is not necessary
+  inside parenthesis, brackets, or curly brackets as Python will wait
+  for the closing symbol before assuming the end of the line.
+\item Python indices start with zero.  
+\end{itemize}
+
+\section{Environment and Set Up}
+\subsection{SSB Environment}
+There are three different versions of the SSB (Science Software Branch) environments
+available at the institute.  They are:
+\begin{itemize}
+\item  SSBREL -- Updated as needed, standard publicly available release.
+\item SSBX -- Updated weekly, a testing environment.  Holds latest
+  bug fixes and updates.  Institute only release.
+\item SSBDEV -- Updated daily.  Development updates intended for
+  instrument teams to test bug fixes and upgrades.  Institute only
+  release. 
+\end{itemize}
+Note that the version of Python related modules depend on the SSB
+environment, especially if you are using NFS mounts.  To switch
+to a particular version, type one of the following into your terminal: 
+\begin{alltt}
+\termtab ur_setup common ssbrel
+\termtab ur_setup common ssbx
+\termtab ur_setup common ssbdev
+\end{alltt}
+
+\subsection{Interactive Python Environment}
+You will need to choose an interactive Python environment.  There are
+two popular options.
+\begin{itemize}
+\item Python: \\
+  To start the Python interactive environment, just type `python' at
+  the prompt in your terminal.
+\item iPython: \\
+  To use the iPython interactive environment, type `ipython' instead.
+  The advantage of iPython is that besides Python code, you are also
+  able to execute UNIX commands such as `ls' and `cp'.  Furthermore,
+  you can also log your session.  To start the log, type `\%logstart'
+  in your iPython shell.  This will start logging into a default file
+  named ipython.log.py.  The log-file follows a formatting convention
+  of iPython and may not, on a first glance, look readable. However,
+  iPython knows how to repeat the commands in your log-file when ran.
+ 	\begin{itemize}
+		\item iPython Notebook: \\
+  	iPython Notebook can be called in the terminal by adding 'notebook' after ipython.
+  	The notebook is an interactive web based interface. It combines code,
+	text, math, plots, and rich media into a single document with all the functionality of ipython.
+	\end{itemize}
+
+\end{itemize}
+To exit either, type `exit()'.  Only once do we use the shell command
+`cp', for which you would need to use iPython (or just do it in the
+UNIX shell).  Otherwise either environment would work.
+
+\section{Built-In Data Types}
+\label{s:dtype}
+The principal built-in types of Python are numerics, sequences,
+mappings, files, classes, instances and exceptions.  Other data types
+are available through importing modules (Example: the datetime
+module).
+
+There are four distinct numeric types in Python: plain integers, long
+integers, floating point numbers, and complex numbers.  In addition,
+Booleans are a subtype of plain integers.  Python fully supports mixed
+arithmetic: when a binary arithmetic operator has operands of
+different numeric types, the operand with the ``smaller'' type is
+widened to that of the other.  Example:
+\begin{alltt}
+\pytab a = 2.0
+\pytab b = 3
+\pytab print a * b
+\end{alltt}
+
+Any Python object can be tested for truth value with $in$, $if$ or
+$while$ condition or as an operand of the Boolean operations.  Python
+supports a vast number of truth values, but for simplicity I recommend
+using $True$ and $False$.  General Boolean operations $or$, $and$, and
+$not$ are also supported. Comparison operations are supported by all
+objects.  They all have the same priority, which is higher than that
+of the Boolean operations.  In Python, comparisons are done with
+characters e.g. <, >=, ==, ! = (not like in IDL, where comparisons
+are done with shortened keywords e.g. $eq$).
+
+Examples of some of the most common data types are below.
+\begin{itemize}
+\item File: \\
+  \texttt{\pytab infile = open('PythonTraining.pdf')} \\
+  \texttt{\pytab infile.name} \\
+  \texttt{\pytab infile.readline()}  \\
+  \texttt{\pytab infile.close()}  
+\item Integer: \\
+ \texttt{\pytab a = 1} \\
+ \texttt{\pytab a == 1}  \\
+ \texttt{\pytab a.denominator}
+\item Float: \\
+  \texttt{\pytab a = 2.0}
+\item String:  \\
+  \texttt{\pytab a = 'three'} \\
+  \texttt{\pytab infile = 'infile.fits'} \\
+  \texttt{\pytab outfile = infile.replace('.fits', '\_DidWork.fits')} \\
+  \texttt{\pytab 'Outfile: ', outfile} 
+\item Tuple: An immutable list; elements can be of any data type. \\
+  \texttt{\pytab a = (1, 2, 3)}  \\
+  \texttt{\pytab a = (1, 2.0, 'three')}
+\item List: A mutable list; elements can be of any data type. \\
+  \texttt{\pytab a = [1, 2, 3]}  \\
+  \texttt{\pytab b = [1, 2.0, 'three']}  \\
+  \texttt{\pytab mylist = [] }  \\
+  \texttt{\pytab mylist.append(3) } \\
+  \texttt{\pytab print mylist } \\
+  \texttt{\pytab mylist = [1, 2, 3, 4] } \\
+  \texttt{\pytab len(mylist)} \\
+  \texttt{\pytab yourlist = [5, 6, 7, 8, 9] } \\
+  \texttt{\pytab mylist + yourlist }  \\
+  \texttt{\pytab mylist.append(yourlist) }  \\
+  \texttt{\pytab print mylist}  \\
+  Notice that appending a list just adds one more element to `mylist',
+  and this element is of type list (remember, an element in a list can
+  be of any type).
+\item Dictionary: A mapping which stores objects by a `key' and not
+  position.  Below we show an example of a dictionary, and a
+  dictionary of dictionaries.  We could also create a dictionary of
+  lists.
+\begin{alltt}
+\pytab a = \{1:'one', 2:'two', 3:'three'\}
+\pytab galaxy_dict = \{\} 
+\pytab galaxy_dict 
+\pytab galaxy_dict['M31'] = \{'RA':'00 42 44.33',
+\ldots     'DEC':'+41 16 07.5','Vmag':3.44,'nickname':'Andromeda'\} 
+\pytab galaxy_dict 
+\pytab galaxy_dict['M104'] = \{'RA':'12 39 59.43185', 
+\ldots    'DEC':'-11 37 22.9954','Vmag':3.44,'nickname':'Sombrero'\} 
+\pytab galaxy_dict.keys()  
+\pytab galaxy_dict['M31'].keys() 
+\pytab galaxy_dict['M31']['Vmag']
+\end{alltt}
+\end{itemize}
+
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+Create a dictionary with strings as the keys.
+}
+
+\section{Objects, Instances, Attributes, Functions, and Methods, }
+\label{s:attribute}
+
+Python is an object oriented programming language and before we go any
+further, it is important to note the differences and uses of objects,
+instances, attributes, functions, and methods.
+\begin{itemize}
+\item Objects: \\
+  Data carriers that also carry functions and attributes that work on
+  that data.  In Section~\ref{s:dtype}, integers, floats, lists,
+  tuples, and dictionaries are all objects.
+\item Instance: \\
+  In Section~\ref{s:dtype} when we said \texttt{galaxy\_dict = \{\}}
+  we created an instance of a dictionary, $galaxy\_dict$, while
+  \texttt{infile} is an instance of a $file$.
+\item Attributes: \\
+  {\sf \small denominator} is an attribute of an instance of a Python
+  integer.  Therefore in Section~\ref{s:dtype} we used
+  \texttt{a.denominator}.  Attributes do not have the `()' like
+  functions do.  Also in Section~\ref{s:dtype} we used the file
+  attribute {\sf\small name} when we said \texttt{infile.name}.
+\item Functions: \\
+  A function is a named piece of code that performs an operation and
+  has open and closed parenthesis at the end (sometimes with variables
+  inside).  {\sf \small len()} is a function, and in
+  Section~\ref{s:dtype} we pass it the list, $mylist$.
+\item Methods: \\
+  A method is a function attached to an object that then has access to
+  all other methods and attributes of that object.  Therefore we
+  usually do not have to pass as much information to methods, and
+  methods are easier to read.  All methods are functions, but not all
+  functions are methods.  For example, in Section~\ref{s:dtype}, after
+  we created the instance $mylist$, we append a number to that list
+  using the method {\sf\small append()} with the line
+  \texttt{mylist.append(3)}.  In Section~\ref{s:dtype} we also used
+  the methods {\sf\small readline()} and {\sf\small close()} which
+  belong to the file class.
+\end{itemize}
+Notice that we use dot notation to call an attribute or a method of a
+particular instance.  As we will see in Section~\ref{s:mod}, dot
+notation will also be used to call a method or a function from a
+particular module.
+
+\section{Double Underscore}
+In Python you will notice certain names beginning and ending with
+double underscores.  These names are used for attributes and methods
+that are used or created by the interpreter (for a discussion on the
+definition of attributes and methods see Section~\ref{s:attribute}).
+Examples include:
+\begin{itemize}
+\item  \_\_file\_\_ :  an attribute automatically created by the interpreter
+\item  \_\_add\_\_ : an attribute with special meaning to the interpreter
+\item  \_\_init\_\_ : a method implicitly called by the interpreter,
+  defined by the programmer
+\end{itemize}
+We will see examples of a few of these in Chapter~\ref{ch:scripts}.
+
+\section{Common Built-In Functions and Statements}
+For a complete list of Python built-in modules, see
+\url{http://docs.python.org/library/index.html}, also listed in
+Chapter~\ref{ch:links}.  Below we provide descriptions of some of the
+most useful functions and statements.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  print
+\subsection{ {\sf print } function}
+{\color{blue} {\sf\small USE}} \\
+The  {\sf\small print} function performs formatted output. 
+
+{\color{blue} {\sf\small EXAMPLES}} 
+\begin{alltt}
+\pytab a = 3 
+\pytab print a 
+\pytab b = 2 
+\pytab print a + b
+\pytab print a / b
+\pytab b = 2. 
+\pytab print a / b
+\pytab c = 'hi' 
+\pytab print c + ' there' 
+\pytab print 'I brought home \{\} flowers for \textbackslash 
+\ldots    \$\{\} and all she said was \{\}.'.format(a,b+0.5,c)
+\end{alltt}
+This last statement is a bit more complicated.  The `\{\}' symbol says
+to insert a variable from one of the arguments we give at the end.  In
+the brackets we could specify data type, or which variable (0, 1, or
+2), but we left it as default, which just takes the next argument in
+line.  Notice the float does not print out exactly as we want.  We
+would rather it say \$2.50.  Try this:
+
+\texttt{\pytab print 'I brought home \{\} flowers for \$\{:.2f\} and all
+  \textbackslash  \\
+  \ldots    she said was \{\}.'.format(a, b+0.5, c)}
+  
+In this last example the `f' stands for `float', and the `.2'
+says to include two decimal places.  For more information see: \\
+\url{http://docs.python.org/library/string.html#formatstrings}.
+
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+Print out your own creative sentence.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  help
+\subsection{ {\sf help() } function}
+{\color{blue} {\sf\small USE}} \\
+The {\sf\small help()}  function gives the user information on many
+aspects of the current Python session.  Type `q' to quit. 
+
+{\color{blue} {\sf\small EXAMPLES}} 
+\begin{alltt}
+\pytab a = 3 
+\pytab help(a) 
+\end{alltt}
+
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+Type `help()' and explore the options.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  range
+\subsection{ {\sf range() } function}
+{\color{blue} {\sf\small USE}} \\
+The {\sf\small range()} function creates a list starting at zero of
+the length you give it.  You may also pass the start, stop, and the
+step you want to use (default of the step is 1).
+
+{\color{blue} {\sf\small EXAMPLES}} 
+\begin{alltt}
+\pytab range(4) 
+\pytab range(2, 8, 2) 
+\end{alltt}
+{\color{blue} {\sf\small SEE ALSO}} \\
+Other useful similar functions in NumPy (Chapter~\ref{ch:numpy}) are
+{\sf\small numpy.linspace}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  dir
+\subsection{ {\sf dir() } function}
+{\color{blue} {\sf\small USE}} \\
+The {\sf\small dir()} function returns the methods and attributes of
+an object.
+  
+{\color{blue} {\sf\small EXAMPLES}} 
+\begin{alltt}
+\pytab a = range(10) 
+\pytab dir(a) 
+\end{alltt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  len
+\subsection{ {\sf len() } function}
+{\color{blue} {\sf\small USE}} \\
+The {\sf\small len()} function returns the number of elements
+contained in an expression or variable.
+
+{\color{blue} {\sf\small EXAMPLES}} 
+\begin{alltt}
+\pytab a = range(11) 
+\pytab len(a) 
+\end{alltt}
+{\color{blue} {\sf\small SEE ALSO}} \\
+Other useful similar functions in NumPy (Chapter~\ref{ch:numpy}) are
+{\sf\small numpy.shape, numpy.size}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  for loop
+\subsection{ {\sf for } loop}
+{\color{blue} {\sf\small USE}} \\
+The {\sf\small for } statement is used to execute one or more
+statements repeatedly.
+
+{\color{blue} {\sf\small EXAMPLES}} 
+\begin{alltt}
+\pytab a = range(11)
+\pytab for x in a: print x
+\pytab b = ['2005', '2006', '2007']
+\pytab for x in b: print x + '-01'
+\end{alltt}
+
+One can create a list with a for loop in one line.  This is known as list
+comprehension.
+
+\begin{alltt}
+\pytab  c = [x*2 for x in range(11)]
+\end{alltt}
+  
+{\color{blue} {\sf\small SEE ALSO}} \\
+Other useful similar statements are {\sf\small if...elif...else, while}.  \\
+
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+Create a list with 10 values equal to the square of the index.
+
+Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+Create the following sequence using a {\sf\small for} statement:
+2001-01-01, 2001-02-01, 2001-03-01, 2001-04-01.}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  xrange
+\subsection{ {\sf xrange() } function}
+{\color{blue} {\sf\small USE}} \\
+
+The {\sf\small xrange()} function is similar to {\sf \small range()}
+except that it does not create a new list (saving on memory) but
+instead acts as a generator of numbers starting at zero up to the stop
+value you pass it.  You may also pass the start, stop, and the step
+you want to use (default of the step is 1).  This is used in iterations.
+
+{\color{blue} {\sf\small EXAMPLES}} 
+\begin{alltt}
+\pytab for x in xrange(3): print x, x ** 2
+\end{alltt}
+Within a function, the {\sf\small for }  statement has the following
+simple structure: 
+\begin{alltt}
+\pytab for x in xrange(1, 7): 
+\ldots    a = x * 3.0
+\ldots    print a 
+\end{alltt}
+  
+{\color{blue} {\sf\small SEE ALSO}} \\
+Other useful similar statements are {\sf\small range}.  \\
+
+Notice that we use {\sf \small range()} when we use the actual list
+created, but {\sf \small xrange()} when we just need an iterator.  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  try
+\subsection{ {\sf try ... except } statement}
+{\color{blue} {\sf\small USE}} \\
+The {\sf\small try ... except} statement is used as an error
+handler.  It will try whatever we put in the {\sf\small try} block,
+but if whatever you assign as the `error' occurs, it will go to the
+{\sf\small except} block.
+
+{\color{blue} {\sf\small EXAMPLES}} \\
+Try this code below.  Notice the error message you get.
+\begin{alltt}
+\pytab a = [1, 2, 3, 4, 5]  
+\pytab for i in xrange(len(a)): 
+\ldots    a[i + 1] = 100 + a[i] 
+\ldots    print a[i], a[i + 1] 
+\end{alltt}
+To solve this problem, we put it in a {\sf\small try ... except}
+statement: 
+\begin{alltt}
+\pytab a = [1, 2, 3, 4, 5] 
+\pytab for i in xrange(len(a)): 
+\ldots     try:  
+\ldots         a[i + 1] = 100 + a[i] 
+\ldots         print a[i], a[i + 1] 
+\ldots     except IndexError: 
+\ldots         print 'This index does not work: ',i + 1
+\end{alltt}
+
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+Imagine a situation where your code passes a function a variable,
+and that variable might be zero.  The only problem is that this
+function divides by that variable.
+
+Write a simple loop which calculates 1/$n$, where $n$ is a number
+in range(11).  What happens when $n=0$?  Write an error handling for this loop
+(hint: use {\sf\small try ... except} statement with
+ZeroDivisionError).}
+
+\section{Importing Modules, and Common Functions}
+\label{s:mod}
+Python's built-in functions are limited.  The diversity of Python's
+abilities come when we import modules.  The following syntax can be
+used: 
+
+\begin{alltt}
+\pytab import <module>
+\pytab from <module> import <function_in_module>
+\pytab import <module> as <short_name>
+\end{alltt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  math.sqrt
+\subsection{ {\sf math.sqrt() } function} 
+{\color{blue} {\sf\small USE}} \\
+If we want to take the square root of a number, we could
+use the function {\sf\small sqrt()} in the module {\sf \small math}.  The following is two
+examples of how to do this:
+  
+{\color{blue} {\sf\small EXAMPLES}} 
+\begin{alltt}
+\pytab import math
+\pytab math.sqrt(100)
+\end{alltt}
+Notice we did not need the `.py' extension. If we do not need any other
+math module, and we know we will not name a variable `sqrt' and
+overwrite the function, we can do this:
+\begin{alltt}
+\pytab from math import sqrt
+\pytab sqrt(100)
+\end{alltt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  glob.glob
+\subsection{ {\sf glob.glob() } function}
+{\color{blue} {\sf\small USE}} \\
+The {\sf\small glob.glob()} function searches for files that match
+the given path-name.  The path-name you give is a string similar to
+the search strings used for the UNIX/Linux `ls'.  A list is returned
+containing any matching files.
+
+{\color{blue} {\sf\small EXAMPLES}} 
+\begin{alltt}
+\pytab import glob 
+\pytab glob.glob('*') 
+\pytab glob.glob('*.pdf')  
+\pytab datadir = '/Users/gunning/Python_Training/'  #insert a usable path
+\pytab glob.glob(datadir + 'flux_vs_time_?.fits')
+\end{alltt}
+{\color{blue} {\sf\small EXERCISES}} \\
+{\it Exercise \arabic{exercise} \stepcounter{exercise}:  \\
+Search for a set of files on your desktop.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  random.random
+\subsection{ {\sf random.random() } function}
+{\color{blue} {\sf\small USE}} \\
+The {\sf\small random.random()} function returns a random floating point
+number in the range [0.0, 1.0). 
+  
+{\color{blue} {\sf\small EXAMPLES}} 
+\begin{alltt}
+\pytab import random 
+\pytab random.random() 
+\pytab print 'My random number between 2 and 8: ', \textbackslash
+\ldots    2 + (8-2) * random.random()
+\end{alltt}
+{\color{blue} {\sf\small SEE ALSO}} \\
+Other useful similar statements are {\sf\small random.uniform(), random.gaus()}.  \\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  re.search
+\subsection{ {\sf re.search() } function}
+{\color{blue} {\sf\small USE}} \\
+The {\sf\small re} module is for `Regular Expression' operations.
+It is used to work with strings, including sophisticated pattern
+matching, as in the case of {\sf \small re.search()}.
+
+{\color{blue} {\sf\small EXAMPLES}}  \\
+\texttt{\pytab import re}  \\
+\texttt{\pytab m = re.search('(?<=\_)$\textbackslash$d+','MIRI\_2011.fits')} \\
+\texttt{\pytab m.group(0)}
+
+In the above example we are looking for digits following an
+underscore, `\_'.  The `\textbackslash d' is for digit, and the `+' is
+for one or more.  The `(?<= \ldots )' matches if the position in the
+string is proceeded by `\ldots'.
+ 
+{\color{blue} {\sf\small SEE ALSO}} \\
+Other useful similar statements are {\sf\small re.match()}. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  os.ls
+\subsection{ {\sf os.getcwd() and os.chdir() } functions}
+{\color{blue} {\sf\small USE}} \\
+The {\sf\small os} module is for `Operating System' operations.
+Examples include {\sf \small os.getcwd()} which returns the current
+working directory and {\sf \small os.chdir()} which changes the current
+working directory.
+
+{\color{blue} {\sf\small EXAMPLES}} 
+\begin{alltt}
+\pytab import os 
+\pytab datadir = '/Users/username/data/'  #insert a usable path 
+\pytab mydir = os.getcwd()  
+\pytab if (mydir != datadir): os.chdir(datadir) 
+\end{alltt}
+{\color{blue} {\sf\small SEE ALSO}} \\
+Other useful similar statements are {\sf\small os.open(),
+  os.close()}. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  sys.
+\subsection{ {\sf sys.exit()} function}
+{\color{blue} {\sf\small USE}} \\
+The {\sf\small sys} module is for system-specific parameters and
+functions.  It provides a way to interact with the interpreter.
+{\sf\small sys.exit()} is different than {\sf\small exit()} in that it
+will honor {\sf\small try} statements and you can
+intercept the exit attempt.
+
+{\color{blue} {\sf\small EXAMPLES}} 
+\begin{alltt}
+\pytab import sys
+\pytab for i in xrange(10):
+\ldots        if i <= 5:
+\ldots            continue
+\ldots        else:
+\ldots            sys.exit('We do not need a number above 5.')
+\end{alltt}
+
+
+
+

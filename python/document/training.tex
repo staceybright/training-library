@@ -1,0 +1,132 @@
+ 
+%-------------------------------------------
+% FILE:    training.tex
+% AUTHOR:  Rachel Anderson
+% DATE:    2012
+%
+% Master latex file for python training.
+%
+%-------------------------------------------
+
+
+% Define style of document
+\documentclass[12pt,letter]{book}% for A4 paper
+
+% Include packages
+\usepackage{graphicx,palatino,palatcm}
+\usepackage{amsmath,amssymb,amsfonts} % Typical maths resource packages
+\usepackage{graphics}                 % Packages to allow inclusion of graphics
+\usepackage{caption,topcapt}
+\usepackage{rotating}
+\usepackage{natbib}
+\usepackage{wrapfig}
+\usepackage{apjfonts}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{color}
+\usepackage[colorlinks=true, urlcolor=blue]{hyperref}
+\usepackage{float}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+% Set the page layout
+\setlength{\parindent}{0mm}      %sangria
+\setlength{\textwidth}{161mm}
+\setlength{\topmargin}{0mm}
+\setlength{\textheight}{210mm}
+\setlength{\oddsidemargin}{5mm}
+\setlength{\evensidemargin}{-\oddsidemargin}
+\setlength{\parskip}{3mm}     %espacio entre paragraphs
+\linespread{1.0}   %determina el espacio entre lineas 1.6 = doble espacio
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]%
+   {\markboth{\uppercase{\thechapter.\ #1}}{}}
+\renewcommand{\sectionmark}[1]%
+   {\markright{\uppercase{\thesection.\ #1}}}
+\newcommand{\helv}{%
+   \fontfamily{phv}\fontseries{b}\fontsize{9}{11}\selectfont}
+\lhead[\helv \thepage]{\helv \rightmark}
+\rhead[\helv \leftmark]{\helv \thepage}
+\cfoot{}
+\newcommand{\captionlabeldelim}{---}
+
+\usepackage[Leonardo]{fncychap}
+
+\ChNameVar{\fontsize{14}{16}\usefont{OT1}{phv}{m}{n}\selectfont} 
+\ChNumVar{\fontsize{60}{62}\usefont{OT1}{ptm}{m}{n}\selectfont} 
+\ChTitleVar{\Huge\bfseries\rm}
+\ChRuleWidth{1pt} 
+ 
+
+ 
+% Extra definitions
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+\renewcommand{\chaptermark}[1]{\markboth{Chapter   \thechapter.
+    {#1}}{Chapter  \thechapter.  {#1}}}
+
+\renewcommand{\captionfont}{\footnotesize}
+\renewcommand{\captionlabelfont}{\small \sc}
+
+\makeatletter
+\newcommand\figcaption{\def\@captype{figure}\caption}
+\newcommand\tabcaption{\def\@captype{table}\caption}
+\makeatother
+\makeindex
+
+%I added these:
+
+\newcommand{\pytab}{python> }
+\newcommand{\termtab}{$\gg$ }
+\newcommand{\pyraftab}{pyraf> }
+\newcounter{exercise}
+\setcounter{exercise}{1}
+\usepackage{alltt}
+
+%
+\flushbottom
+\setcounter{tocdepth}{2}
+
+% Start of document
+\begin{document}
+
+\pagenumbering{arabic}
+\title{Python Training}
+
+\author{Rachel Anderson}
+
+\addtocounter{page}{-2}
+ 
+\include{cover}
+
+
+% Counter commands
+\setcounter{page}{1}
+\setcounter{chapter}{0}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3}
+
+%% BODY OF TEXT
+
+\pagenumbering{roman} \setcounter{page}{1}
+
+\markboth{Content}{Content}
+\tableofcontents
+\newpage
+
+
+% MAIN FILES
+ 
+\pagenumbering{arabic} \setcounter{page}{1}
+
+\include{intro}
+\include{numpy}
+\include{fits}
+\include{pyplot}
+\include{ipython_notebook}
+\include{scripts}
+\include{pyraf}
+\include{links}
+%\include{class}
+
+\end{document}
