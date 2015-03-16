@@ -9,6 +9,7 @@ BUILDDIR      = build
 
 # For building GitHub Pages branch
 GH_PAGES_SOURCES = source Makefile
+GH_PAGES_EXCLUDE = build _sources _static _downloads _images latexdocs
 
 # User-friendly check for sphinx-build
 ifeq ($(shell which $(SPHINXBUILD) >/dev/null 2>&1; echo $$?), 1)
@@ -91,7 +92,7 @@ gh-pages:
 	git diff --cached --exit-code
 	git checkout gh-pages
 	git pull
-	rm -rf build _sources _static _downloads _images
+	rm -rf $(GH_PAGES_EXCLUDE)
 	git checkout master $(GH_PAGES_SOURCES)
 	git reset HEAD
 	make html
