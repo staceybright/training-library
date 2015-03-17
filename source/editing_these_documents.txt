@@ -2,13 +2,13 @@
 Editing These Documents
 ***********************
 
-These documents live in a ``git`` repository, making it easy for you to modify them and share your changes with other RIAs. GitHub is the service we use to coordinate sharing and reviewing the changes. You can find the web interface to the repository at https://github.com/josephoenix/riatraining.
+These documents live in a ``git`` repository, making it easy for you to modify them and share your changes with other RIAs. GitHub is the service we use to coordinate sharing and reviewing the changes. You can find the web interface to the repository at https://github.com/stsci-riab/riatraining.
 
 To conclude your RIA training, we want you to add your name to the :doc:`list of trainees <trainees>`.
 
 .. warning::
 
-   For now, the documents are at https://github.com/josephoenix/riatraining, and you need someone to add you as a collaborator before you can access them. Follow the instructions in :ref:`getting_started_github` and ask someone to add you as a collaborator.
+   For now, the documents are at https://github.com/stsci-riab/riatraining, and you need someone to add you as a collaborator before you can access them. Follow the instructions in :ref:`getting_started_github` and ask someone to add you as a collaborator.
 
 .. _making_and_previewing_changes:
 
@@ -17,7 +17,7 @@ Making and previewing changes
 
 The first step to making a change is to clone the repository, giving you a local copy to work with::
 
-   git clone git@github.com:josePhoenix/riatraining.git
+   git clone git@github.com:stsci-riab/riatraining.git
 
 This creates a ``riatraining`` directory in whatever folder you're in. The web pages you're reading now are automatically generated from the ``.txt`` files in the ``source`` subdirectory. To generate them on your computer, you need to install required packages from ``requirements.txt``::
 
@@ -70,7 +70,7 @@ Making a pull request on GitHub
 
 GitHub would not stop you from merging your own edits, but it is considered good practice to give other collaborators a chance to review your changes.
 
-Once you have pushed to a new branch, when you visit https://github.com/josephoenix/riatraining you will see a new green icon to "Compare & pull request".
+Once you have pushed to a new branch, when you visit https://github.com/stsci-riab/riatraining you will see a new green icon to "Compare & pull request".
 
 .. figure:: figures/compare_and_pull_request.png
    :scale: 50 %
@@ -128,7 +128,7 @@ To simplify copying the built HTML pages from one branch to another, there is a 
 
    $ make gh-pages
 
-That will build the latest copy of the docs, copy them to the ``gh-pages`` branch, commit them, and push them to the origin's ``gh-pages`` branch. Within 5-10 minutes, you should see your changes online at http://josephoenix.github.io/riatraining/.
+That will build the latest copy of the docs, copy them to the ``gh-pages`` branch, commit them, and push them to the origin's ``gh-pages`` branch. Within 5-10 minutes, you should see your changes online at http://stsci-riab.github.io/riatraining/.
 
 .. warning::
 
