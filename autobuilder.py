@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+from __future__ import print_function
 """
 riatraining autobuilder
 ========================
@@ -52,13 +54,23 @@ class RequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             path += '/'
         return path
 
-def build_docs():
-    proc = subprocess.Popen(['make', 'riadocs'], stdout=subprocess.PIPE,
+def build_docs(target='html'):
+    print('Building target "{}"...'.format(target))
+    proc = subprocess.Popen(['make', target], stdout=subprocess.PIPE,
                             bufsize=1, cwd=PROJECT_DIR)
+    buf = []
     for line in iter(proc.stdout.readline, ''):
-        print line,
+        buf.append(line)
+        # print(line, end='')  # uncomment this to enable output
     proc.stdout.close()
-    proc.wait()
+    returncode = proc.wait()
+    if returncode != 0:
+        print('*'*72)
+        print('make exited with returncode != 0 (was {})'.format(returncode))
+        print('*'*72)
+        print('\n'.join(buf))
+        print('*'*72)
+    print('Build completed.')
 
 class SphinxRebuildHandler(FileSystemEventHandler):
     def on_any_event(self, event):
@@ -68,7 +80,7 @@ class SphinxRebuildHandler(FileSystemEventHandler):
 class LaTeXRebuildHandler(FileSystemEventHandler):
     def on_any_event(self, event):
         if '.tex' in event.src_path:
-            build_docs()
+            build_docs(target='riadocs')
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO,
@@ -97,9 +109,9 @@ if __name__ == "__main__":
     url = "http://{}:{}/".format(*BIND_TO)
     import webbrowser
     webbrowser.open(url)
-    print "*"*72
-    print "\tNow serving the docs preview at ", url
-    print "*"*72
+    print("*"*72)
+    print("\tNow serving the docs preview at ", url)
+    print("*"*72)
     try:
         while True:
             time.sleep(1)
