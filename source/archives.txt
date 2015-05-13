@@ -50,25 +50,22 @@ navigate the various archives that can be found in MAST (the Mikulski
 Archive for Space Telescopes), which covers a plethora of space
 telescope missions. We will be using MAST, Hubble Legacy Archive (HLA),
 and Starview to retrieve data from the Hubble Space Telescope (HST). So
-let’s begin! Along the way, I will ask you to answer some questions and
+let's begin! Along the way, I will ask you to answer some questions and
 perform some exercises. **Please keep a record of your answers to show
 when completed.**
 
 The MAST/HST archive can be searched from the following interface found at http://archive.stsci.edu/hst/search.php.
 
-a) Part one
-b) Part two
-
 Search for ACS data (using the "Standard Form")
 -----------------------------------------------
 
-a) Type *47Tuc* in the *Target* box, with *Resolver* set to *Resolve*. In the *Filters/Gratings* box, enter ``*606*``. The asterisk (``*``) works as a wild card and can be used when you don’t know the exact syntax of the field. To specify the detector, enter ``*wfc*`` in the *Aperture* field. Note that you can also click each entry title for more information on the proper syntax. Save a list of these datasets in an *HTML\_Table* (which is the default setting for the *Output Format*).
+a) Type *47Tuc* in the *Target* box, with *Resolver* set to *Resolve*. In the *Filters/Gratings* box, enter ``*606*``. The asterisk (``*``) works as a wild card and can be used when you don't know the exact syntax of the field. To specify the detector, enter ``*wfc*`` in the *Aperture* field. Note that you can also click each entry title for more information on the proper syntax. Save a list of these datasets in an *HTML\_Table* (which is the default setting for the *Output Format*).
 
    Figure 1 portrays what the MAST search form should look like:
 
    |image0|
 
-   *Figure 1: This is a facsimile of what the “Standard Form” MAST search
+   *Figure 1: This is a facsimile of what the "Standard Form" MAST search
    request should look like.*
 
    Click on the *Search* button and you should get a new page with *HST
@@ -88,8 +85,8 @@ a) Type *47Tuc* in the *Target* box, with *Resolver* set to *Resolve*. In the *F
       J8F864020
 
 b) Using the same search criteria, change the *Target Name* field to
-   *ngc104* with *Resolver* set to *Don’t Resolve* and *Records per Page*
-   set to *500*. Please pay attention to the “number of rows returned” at
+   *ngc104* with *Resolver* set to *Don't Resolve* and *Records per Page*
+   set to *500*. Please pay attention to the "number of rows returned" at
    the top of the search results page.
 
    .. admonition:: Question 1
@@ -133,36 +130,36 @@ e) Using the *Output Columns* selector box, try adjusting the search
    clickable. The link will open a new page containing a preview image and
    exposure information, which can be quite useful!
 
-Search for STIS data (using the “File Upload Form”)
+Search for STIS data (using the "File Upload Form")
 ---------------------------------------------------
 
 a) Create a text file that contains the following Datasets (one per
-line) to be used as your input list::
+   line) to be used as your input list::
 
-   O8J502280
-   O8J502290
-   O8J5022A0
-   O8J5022B0
-   O8J5022C0
-   O8J5022D0
-   O8J5022E0
+      O8J502280
+      O8J502290
+      O8J5022A0
+      O8J5022B0
+      O8J5022C0
+      O8J5022D0
+      O8J5022E0
 
 b) On the HST Search Form, click on the *File Upload Form*. This will
-bring up the search form as shown in Figure 3.
+   bring up the search form as shown in Figure 3.
 
 c) Pay attention to the following: *Local File Name* (this will point to
-the text file containing the Datasets), the button *File Contents*,
-which allows for mining MAST using Coordinates, Target Names, and Data
-ID, and the button *RA, Target or Data ID Column*, which defines what
-kind of data is in the first column or another column (you select on 1
-of 10 columns in the upload text file). Figure 3 shows the parameter
-settings needed for the MAST search that is required for retrieval of
-the STIS data in your text file.
+   the text file containing the Datasets), the button *File Contents*,
+   which allows for mining MAST using Coordinates, Target Names, and Data
+   ID, and the button *RA, Target or Data ID Column*, which defines what
+   kind of data is in the first column or another column (you select on 1
+   of 10 columns in the upload text file). Figure 3 shows the parameter
+   settings needed for the MAST search that is required for retrieval of
+   the STIS data in your text file.
 
-    |image2|
+   |image2|
 
-*Figure 3: This is a facsimile of what the “File Upload Form” MAST
-search request should look like.*
+   *Figure 3: This is a facsimile of what the "File Upload Form" MAST
+   search request should look like.*
 
 PART II: Retrieving Data
 ========================
@@ -184,18 +181,18 @@ webpage is shown in Figure 5.
 
 |image4|
 
-*Figure 5: This is what the “Retrieval Options” web page looks like.*
+*Figure 5: This is what the "Retrieval Options" web page looks like.*
 
 There are several options for the type of delivery, the type of data
 requested, and an option for overriding default parameters. For this
 training exercise we want to retrieve the calibrated data and the
 uncalibrated data, which includes the *raw* and *wav* extensions (needed
-to reduce STIS data with calstis later in the training). You request the
-data by ticking the “\ *Calibrated*\ ” and “\ *Uncalibrated*\ ” boxes
-under “Science Files Requested” or by entering the specific extensions
-you want in the “or enter a specific extension” box.
+to reduce STIS data with ``calstis`` later in the training). You request the
+data by ticking the "\ *Calibrated*\ " and "\ *Uncalibrated*\ " boxes
+under "Science Files Requested" or by entering the specific extensions
+you want in the "or enter a specific extension" box.
 
-We will review two delivery options, *STAGE* and *FTP*. The first
+We will review two delivery options, **STAGE** and **FTP**. The first
 delivery option is to stage the data. For this option, the data will be
 written to the Archive staging disk. You will be able to pull from the
 staging disk using FTP and logging in with your archive username and
@@ -204,42 +201,37 @@ destination you provide.
 
 STAGE option: To get data via the stage option, enter your Archive
 username and password, make your desired science file selections and
-click the “\ *Send retrieval request to ST-DADS”* to submit your
+click the "\ *Send retrieval request to ST-DADS"* to submit your
 request. After your request is processed by MAST, you should get two
 emails: the first will tell you that your data is being retrieved and
 the second will tell you that your data is staged (once the retrieval is
 complete). The second email will give you instructions on how and where
 to get your data. Because of the options that we chose for retrieval, we
-will have to use ftp to get the data from the MAST servers. The
-following commands show how to do this. Assuming that you are in your
-working directory:
+will have to use ftp to get the data from the MAST servers.
 
-**> ftp stdatu.stsci.edu**
+The following commands show how to do this. Assuming that you are in your
+working directory::
 
-**Name (Enter archive username)**
-
-**Password: (Enter archive password)**
-
-**ftp > binary** (if binary is not set, the retrieved data will be
-corrupted)
-
-**ftp > prompt**
-
-**ftp > cd /stage/<username>/<data location>**
-
-**ftp > mget \*.fits**
+   > ftp stdatu.stsci.edu
+   Name (Enter archive username)
+   Password: (Enter archive password)
+   ftp> binary
+   (n.b. if binary is not set, the retrieved data will be corrupted)
+   ftp> prompt
+   ftp> cd /stage/<username>/<data location>
+   ftp> mget *.fits
 
 Entering these commands should download all of the raw and wav files
 from the ftp server to your current working directory. To exit the ftp
-connection, simply type, “exit”.
+connection, simply type, "exit".
 
 FTP option: Enter your Archive username and password and make your
-science file selections as before. Now select “\ *FTP: FTP the data to
-the destination shown”* and, if using a MAC, tick “\ *Use sftp
-(OpenSSHv2)*\ ”. In the “\ *Destination”* column, enter your IP address
-next to “\ *Hostname”*, the directory you want the data placed, and the
+science file selections as before. Now select "\ *FTP: FTP the data to
+the destination shown"* and, if using a MAC, tick "\ *Use sftp
+(OpenSSHv2)*\ ". In the "\ *Destination"* column, enter your IP address
+next to "\ *Hostname"*, the directory you want the data placed, and the
 username and password for the machine where the directory is located.
-Click the “\ *Send retrieval request to ST-DADS”* to submit your
+Click the "\ *Send retrieval request to ST-DADS"* to submit your
 request. A test file will show up in the destination you specified
 (deleted automatically). An email will be sent letting you know your
 request was received and another email is sent when the data has been
@@ -265,7 +257,7 @@ data has been fully calibrated, aligned and drizzled within the same
 visit, and mosaics have been produced from multiple visits. Preliminary
 photometry and astrometry has also been performed on detections within
 the field of view using DAOphot and SExtractor. There are essentially 6
-product “levels” found within the HLA and they are:
+product "levels" found within the HLA and they are:
 
 -  *Level 1 -* data are the individual exposures, projected ("drizzled")
        onto a common frame for each visit.
@@ -287,7 +279,7 @@ product “levels” found within the HLA and they are:
        searches but may often by found using the
        `*More...* <#morefiles>`__ link.
 
-A “Frequently Asked Questions” section and instructions on how to search
+A "Frequently Asked Questions" section and instructions on how to search
 the archive can be found at
 `*http://hla.stsci.edu/hla\_helpcenter.html* <http://hla.stsci.edu/hla_helpcenter.html>`__.
 
@@ -303,8 +295,8 @@ Source lists can ultimately be used to make color-magnitude diagrams
 data with two different filters within the same visit. Let us retrieve
 such data. The first step is to go to the web page at
 `*http://hla.stsci.edu/hlaview.html* <http://hla.stsci.edu/hlaview.html>`__
-and click on the “advanced search” button. Enter the proposal ID number
-“10775” next to “Proposal ID”. The web page should look like Figure 6.
+and click on the "advanced search" button. Enter the proposal ID number
+"10775" next to "Proposal ID". The web page should look like Figure 6.
 If you are happy with your search parameters, then click on the *Search*
 button. Note that despite the fact that we have requested a search on
 all the HST instruments, we will only get results that pertain to the
@@ -314,7 +306,7 @@ particular proposal.
 |image6|
 
 *Figure 6: This is what the search form should look like before you
-click on the “Search” button. *
+click on the "Search" button. *
 
 After you click on the *Search* button, you will get a web page that has
 the same set-up as Figure 6 but with the search results below it. Figure
@@ -323,7 +315,7 @@ the same set-up as Figure 6 but with the search results below it. Figure
 |image7|
 
 *Figure 7: This is what the search form should look like after you click
-on the “Search” button. Note that this is only a lower portion of the
+on the "Search" button. Note that this is only a lower portion of the
 actual web page.*
 
 Since we want two filters from the same visit and within a particular
@@ -333,7 +325,7 @@ Although it is preferable to have NExposures and ExpTime to be the same
 in making a CMD, this does not have to be the case for our purposes.
 
 Use the search forms under the column names to located data for Target
-‘NGC6809’ and Spectral\_Elt ‘F606W’ or ‘F814W’. When you have found
+'NGC6809' and Spectral\_Elt 'F606W' or 'F814W'. When you have found
 appropriate datasets, you can retrieve them by clicking on either the
 DAOphot or SExtractor links and these will be put into a shopping cart.
 Figure 8 shows where the shopping cart is located (middle of web page).
@@ -391,9 +383,9 @@ selected. In Figure 11, the *Screens* tab is chosen, while in Figure 12
 the *Fields* tab is chosen. This is because we can add fields to the
 search form if they are not in the default settings. The second
 difference can be found in the two bottom diagrams in Figures 11 and 12.
-This second difference is seen in the red “X”s that are found in Figure
-12’s bottom diagram but not in the bottom diagram of Figure 11. These
-red “X”s allow us to delete parameters that we do not want to use in our
+This second difference is seen in the red "X"s that are found in Figure
+12's bottom diagram but not in the bottom diagram of Figure 11. These
+red "X"s allow us to delete parameters that we do not want to use in our
 search form. What we will do now is to remove any parameters that we do
 not need (note that we do not *have to* delete parameters that we do not
 want, this example is for illustrative purposes only). We will be
@@ -486,9 +478,9 @@ cd iraf
 
 mkiraf
 
-(choose ‘xterm’)
+(choose 'xterm')
 
-We will do this using the SSBX version of PyRAF. If you’re not already
+We will do this using the SSBX version of PyRAF. If you're not already
 in the SSBX environment, switch to it:
 
 ur\_setup common ssbx
@@ -707,16 +699,16 @@ Figure 24.
 
 |image23|
 
-*Figure 24: After clicking on “Search” you should get the above partial
+*Figure 24: After clicking on "Search" you should get the above partial
 web page.*
 
 Notice the yellow highlighted datasets. This signifies that these
 datasets are still in their proprietary status and can only be retrieved
-by the principle investigator or by someone who has “superuser”
+by the principle investigator or by someone who has "superuser"
 privileges. Now that we have a list of datasets to retrieve, we need to
-“Mark” the datasets that pertain to a particular date. You will take the
+"Mark" the datasets that pertain to a particular date. You will take the
 second part of the dataset name and match this to the time stamp in the
-fourth column in Figure 24. If the time stamp requires that you “Mark” a
+fourth column in Figure 24. If the time stamp requires that you "Mark" a
 yellow dataset, then do so. When you are done selecting the appropriate
 datasets, you will get an analogous web page that is similar to Figures
 3 and 4. Make sure that all datasets are marked for retrieval and click
@@ -724,12 +716,12 @@ on *Submit marked data for retrieval from STDADS*. You should get what
 is in Figure 25. Note that some of the datasets are proprietary as
 defined by the yellow background in column 2. Do not worry about any of
 the other columns, but make sure that all datasets are marked under the
-column named “Mark”.
+column named "Mark".
 
 |image24|
 
 *Figure 25: This is what the web page should look like after clicking on
-“Submit marked data for retrieval from STDADS”*
+"Submit marked data for retrieval from STDADS"*
 
 When you are satisfied that all of the proper datasets are marked click
 on *Submit marked data for retrieval from STDADS*. This will bring up
@@ -748,8 +740,8 @@ instructions on how and where to get your data.
 
 |image25|
 
-*Figure 26: This is what the “Retrieval Options” web page should look
-like exactly. Note that we are using the “or enter specific extension”
+*Figure 26: This is what the "Retrieval Options" web page should look
+like exactly. Note that we are using the "or enter specific extension"
 option.*
 
 Once you have retrieved the light curve data and you are in your working
@@ -808,9 +800,9 @@ dataset). For example, the first dataset
 (kplr002557430-2009201121230\_slc.fits) the OBJECT and OBSMODE header
 keyword values will be:
 
-OBJECT = ‘KIC 002557430’
+OBJECT = 'KIC 002557430'
 
-OBSMODE = ‘short cadence’
+OBSMODE = 'short cadence'
 
 What we will be doing is putting hyphens in between the spaces in KIC
 002557430 and short cadence so that the new header keyword will look
@@ -825,7 +817,7 @@ analogous GUI to Figure 29.
 |image28|
 
 *Figure 29: This is what the GUI should look like when editing the
-header keyword “OBJECT”.*
+header keyword "OBJECT".*
 
 If you are satisfied with your entries, click on *Execute* and you will
 get the following output in PyRAF window command line:
@@ -905,7 +897,7 @@ and
 `*http://iraf.noao.edu/docs/spectra.html* <http://iraf.noao.edu/docs/spectra.html>`__.
 All of the IRAF/PyRAF documents can be found at:
 `*http://iraf.noao.edu/docs/docmain.html* <http://iraf.noao.edu/docs/docmain.html>`__.
-There are, of course, varying opinions on IRAF’s abilities to perform
+There are, of course, varying opinions on IRAF's abilities to perform
 the aforementioned tasks, but this is an excellent place to start, and
 as I am sure you are aware, how the data is reduced depends on what the
 scientific requirements demand.
@@ -913,7 +905,7 @@ scientific requirements demand.
 Thank you for completing the Archives Training! Please send your trainer
 the various materials that were asked of you to provide (i.e. answers to
 questions, the tab-separated query results file, and the source list),
-preferably in an email. Also, please ‘comment’ on the RIA Training
+preferably in an email. Also, please 'comment' on the RIA Training
 Summer 2014 Confluence page
 (`*https://confluence.stsci.edu/display/INSRIA/RIA+training+Summer+2014* <https://confluence.stsci.edu/display/insria/ria+training+summer+2014>`__)
 stating that you have completed this training, as well as any feelings
