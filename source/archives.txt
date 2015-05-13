@@ -199,7 +199,7 @@ staging disk using FTP and logging in with your archive username and
 password. The other delivery option is to FTP the data directly to a
 destination you provide.
 
-STAGE option: To get data via the stage option, enter your Archive
+**STAGE option:** To get data via the stage option, enter your Archive
 username and password, make your desired science file selections and
 click the "\ *Send retrieval request to ST-DADS"* to submit your
 request. After your request is processed by MAST, you should get two
@@ -225,7 +225,7 @@ Entering these commands should download all of the raw and wav files
 from the ftp server to your current working directory. To exit the ftp
 connection, simply type, "exit".
 
-FTP option: Enter your Archive username and password and make your
+**FTP option:** Enter your Archive username and password and make your
 science file selections as before. Now select "\ *FTP: FTP the data to
 the destination shown"* and, if using a MAC, tick "\ *Use sftp
 (OpenSSHv2)*\ ". In the "\ *Destination"* column, enter your IP address
@@ -251,7 +251,7 @@ Hubble Legacy Archive
 ---------------------
 
 The HLA can be found at
-`*http://hla.stsci.edu/* <http://hla.stsci.edu/>`__. This archive
+`http://hla.stsci.edu/ <http://hla.stsci.edu/>`__. This archive
 contains all of the same data you can retrieve through MAST, but the
 data has been fully calibrated, aligned and drizzled within the same
 visit, and mosaics have been produced from multiple visits. Preliminary
@@ -259,29 +259,14 @@ photometry and astrometry has also been performed on detections within
 the field of view using DAOphot and SExtractor. There are essentially 6
 product "levels" found within the HLA and they are:
 
--  *Level 1 -* data are the individual exposures, projected ("drizzled")
-       onto a common frame for each visit.
+ - *Level 1* - data are the individual exposures, projected ("drizzled") onto a common frame for each visit.
+ - *Level 2* - data are the combined images (exposures with the same filter, same camera, and within the same visit).
+ - *Level 3* - images are deep combined images or mosaics creating by combining data taken in different visits to the target.
+ - *Level 4* - data are false color images (a combination of two or three colors, depending on what is available). They are included with other selections to help users assess data quality.
+ - *Level 5* - data are the community-contributed high-level science products (HLSP).
+ - *Level 0* - (calibrated, unprocessed) are not available for direct searches but may often by found using the *More...* link.
 
--  *Level 2 -* data are the combined images (exposures with the same
-       filter, same camera, and within the same visit).
-
--  *Level 3 -* images are deep combined images or mosaics creating by
-       combining data taken in different visits to the target.
-
--  *Level 4 -* data are false color images (a combination of two or
-       three colors, depending on what is available). They are included
-       with other selections to help users assess data quality.
-
--  *Level 5* - data are the community-contributed high-level science
-       products (HLSP).
-
--  *Level 0* - (calibrated, unprocessed) are not available for direct
-       searches but may often by found using the
-       `*More...* <#morefiles>`__ link.
-
-A "Frequently Asked Questions" section and instructions on how to search
-the archive can be found at
-`*http://hla.stsci.edu/hla\_helpcenter.html* <http://hla.stsci.edu/hla_helpcenter.html>`__.
+A "Frequently Asked Questions" section and instructions on how to search the archive can be found at `http://hla.stsci.edu/hla\_helpcenter.html <http://hla.stsci.edu/hla_helpcenter.html>`__.
 
 What we are going to do now is retrieve source lists from the HLA. These
 source lists contain astrometric and photometric data that has been
@@ -294,7 +279,7 @@ Source lists can ultimately be used to make color-magnitude diagrams
 (CMDs). If we were to make CMDs using the source lists, we would need
 data with two different filters within the same visit. Let us retrieve
 such data. The first step is to go to the web page at
-`*http://hla.stsci.edu/hlaview.html* <http://hla.stsci.edu/hlaview.html>`__
+`http://hla.stsci.edu/hlaview.html <http://hla.stsci.edu/hlaview.html>`__
 and click on the "advanced search" button. Enter the proposal ID number
 "10775" next to "Proposal ID". The web page should look like Figure 6.
 If you are happy with your search parameters, then click on the *Search*
@@ -306,7 +291,7 @@ particular proposal.
 |image6|
 
 *Figure 6: This is what the search form should look like before you
-click on the "Search" button. *
+click on the "Search" button.*
 
 After you click on the *Search* button, you will get a web page that has
 the same set-up as Figure 6 but with the search results below it. Figure
@@ -346,9 +331,10 @@ portion of the actual web page.*
 
 Make sure that you have the data that you want and click on *Fetch HLA
 Data*. This will be downloaded as a zip. The file should look something
-like this: HLADATA-<numbers>.zip. Unzip the data and view the contents.
+like this: ``HLADATA-<numbers>.zip``. Unzip the data and view the contents.
 You should see some text files in there that contain the source lists.
 Again, these source lists could be useful, for example, to make CMDs.
+
 After completing this training, please **give one of the source lists
 that you retrieved to your instructor**.
 
@@ -360,7 +346,7 @@ tool allows a user to search on numerous parameters that are not
 available through the HST MAST search form. The basic web page can be
 found in Figure 10, which shows a STIS Instrument search form. The web
 address is:
-`*http://starview.stsci.edu/web/* <http://starview.stsci.edu/web/>`__.
+`http://starview.stsci.edu/web/ <http://starview.stsci.edu/web/>`__.
 
 |image10|
 
@@ -376,7 +362,9 @@ copy that we just made is highlighted in blue in the top diagram of
 Figure 11 and this copy is what is shown in the bottom diagram of Figure
 11. Working from the copy search form, we can edit this form to search
 on only certain parameters. We click on the *Edit* button and get what
-is found in Figure 12. You will notice two immediate differences between
+is found in Figure 12.
+
+You will notice two immediate differences between
 Figures 11 and 12. The first difference can be found in the top diagrams
 of both figures. There are two tabs (*Screens* and *Fields*) that can be
 selected. In Figure 11, the *Screens* tab is chosen, while in Figure 12
@@ -386,13 +374,17 @@ difference can be found in the two bottom diagrams in Figures 11 and 12.
 This second difference is seen in the red "X"s that are found in Figure
 12's bottom diagram but not in the bottom diagram of Figure 11. These
 red "X"s allow us to delete parameters that we do not want to use in our
-search form. What we will do now is to remove any parameters that we do
+search form.
+
+What we will do now is to remove any parameters that we do
 not need (note that we do not *have to* delete parameters that we do not
 want, this example is for illustrative purposes only). We will be
 searching on proposal ID, amplifier, dataset name, and exposure time.
 However, notice that when we have deleted all of the parameters except
 for these four, we find that there is no parameter entry for the
-amplifier. This is where the *Fields* tab becomes useful. Under the
+amplifier.
+
+This is where the *Fields* tab becomes useful. Under the
 *Fields* tab, we find three directories: *catalog*, *cdbs*, and
 *proposaldb*. Click on the sideways triangle to the left of *catalog*
 and you will get a list of numerous directories. The directory that we
@@ -463,42 +455,36 @@ From here you can download the data like you would from MAST. (Note:
 This was just an exercise showing how starview works. You do not need to
 actually download the data).
 
-**PART IV: Understanding Calibration Header Keywords and Calibrating
-Data using PyRAF **
+PART IV: Understanding Calibration Header Keywords and Calibrating Data using PyRAF
+===================================================================================
 
 Now we turn our attention to the calibration of the STIS data that we
 retrieved in Part II. First, we must initialize IRAF/PyRAF. In a
-terminal, type the following commands:
+terminal, type the following commands::
 
-cd ~
-
-mkdir iraf
-
-cd iraf
-
-mkiraf
-
-(choose 'xterm')
+   cd ~
+   mkdir iraf
+   cd iraf
+   mkiraf
+   (choose 'xterm')
 
 We will do this using the SSBX version of PyRAF. If you're not already
-in the SSBX environment, switch to it:
+in the SSBX environment, switch to it::
 
-ur\_setup common ssbx
+   ssbx
 
 We will need a few additional environment variables configured in order
 for the calibration to work. If the following are not already in your
-environment, set them in the terminal or in your ~/.cshrc file:
+environment, set them in the terminal or in your ``~/.cshrc`` file::
 
-setenv oref /grp/hst/cdbs/oref/
+   setenv oref /grp/hst/cdbs/oref/
+   setenv mtab grp/hst/cdbs/mtab/
+   setenv crrefer /grp/hst/cdbs/
 
-setenv mtab grp/hst/cdbs/mtab/
-
-setenv crrefer /grp/hst/cdbs/
-
-If this is not configured correctly calstis will crash. If you have any
+If this is not configured correctly ``calstis`` will crash. If you have any
 problems with this, feel free to ask for help from your instructor.
 
-To start PyRAF, simply type *pyraf* in the terminal.
+To start PyRAF, simply type ``pyraf`` in the terminal.
 
 You should get a screen in your terminal window that is similar to what
 is found in Figure 16.
@@ -508,23 +494,20 @@ is found in Figure 16.
 *Figure 16: An example of the PyRAF screen.*
 
 After PyRAF starts up, ensure that the needed packages are loaded by
-typing:
+typing::
 
-stsdas
+   stsdas
+   hst\_calib
+   stis
+   onedspec
 
-hst\_calib
-
-stis
-
-onedspec
-
-Now *cd* to the directory in which you downloaded the STIS data. We need
+Now ``cd`` to the directory in which you downloaded the STIS data. We need
 to inspect the headers of the raw files (at this point you should only
 have raw and wav extension files in the directory).
 
-Perform a catfits on the image o8j502280\_raw.fits:
+Perform a ``catfits`` on the image ``o8j502280_raw.fits``::
 
---> catfits o8j502280\_raw.fits
+   --> catfits o8j502280_raw.fits
 
 This will tell us what the FITS extension structure is for this file
 (see Figure 17). Notice that this file has 7 extensions (0 through 6);
@@ -541,9 +524,9 @@ keywords and metadata associated with the particular observation.
 *Figure 17: The FITS extension structure of o8j502280\_raw.fits as given
 by the catfits command*
 
-We use imhead to inspect the primary header:
+We use imhead to inspect the primary header::
 
---> imhead o8j502280\_raw.fits[0] l+
+   --> imhead o8j502280_raw.fits[0] l+
 
 For our purposes, we only want to check that the calibration switches
 and the pathways for the calibration reference files are set correctly.
@@ -562,9 +545,9 @@ that will produce calibrated STIS data.*
 
 Let us now calibrate some raw STIS data (remember that you need both the
 raw and wav extension files in the same directory). This is easy to do
-and requires only one command line entry:
+and requires only one command line entry::
 
---> calstis \*raw.fits
+   --> calstis *raw.fits
 
 When calstis has finished running, there will be new files in your
 directory with the extensions: *flt*, *crj*, *sx1*, and *sx2*. There are
@@ -580,13 +563,13 @@ Now we will use PyRAF to look at the reduced spectrum. First, we must
 convert the one-dimensional spectra (*sx1* file) to a standard
 one-dimensional spectral image (*imh* file) using the *tomultispec*
 task. Choose a *sx1* file to operate on and convert the spectra. For
-example:
+example::
 
---> tomultispec o8j502280\_sx1.fits o8j502280\_sx1.imh
+   --> tomultispec o8j502280_sx1.fits o8j502280_sx1.imh
 
-Now plot the spectra using the *splot* task:
+Now plot the spectra using the *splot* task::
 
---> splot o8j502280\_sx1.imh
+   --> splot o8j502280_sx1.imh
 
 Figure 19 shows the displayed spectra for this example. We will learn
 more about tomultispec and splot in future PyRAF trainings.
@@ -604,10 +587,9 @@ have barely scratched the surface of what can be done with MAST and
 PyRAF. Feel free to examine any other datasets or databases that you are
 interested in and if you have any questions please feel free to ask.
 
-**OPTIONAL**
 
-**PART V: Retrieving Kepler Data and Editing Kepler Header Keyword
-Values **
+PART V (optional): Retrieving Kepler Data and Editing Kepler Header Keyword Values
+==================================================================================
 
 We will explore one more database found within MAST. The database we
 will search is the Kepler database. This database contains data taken by
@@ -620,31 +602,20 @@ been propagated correctly. During this exercise you will learn about
 hedit and hselect (two of the most useful PyRAF commands).
 
 First of all, how do we retrieve Kepler data? First we need to know
-which datasets to retrieve. You will retrieve the Kepler light curves:
+which datasets to retrieve. You will retrieve the Kepler light curves::
 
-    002557430-2009201121230\_slc.fits
-
-    003526481-2009131105131\_llc.fits
-
-    003971507-2011303113607\_slc.fits
-
-    004671547-2009259162342\_slc.fits
-
-    006192231-2009166043257\_llc.fits
-
-    007047141-2010265121752\_llc.fits
-
-    007940546-2009231120729\_slc.fits
-
-    008515227-2010265121752\_llc.fits
-
-    009116222-2009259160929\_llc.fits
-
-    009446742-2011271113734\_slc.fits
-
-    010666510-2009259160929\_llc.fits
-
-    011551430-2009201121230\_slc.fits
+   002557430-2009201121230_slc.fits
+   003526481-2009131105131_llc.fits
+   003971507-2011303113607_slc.fits
+   004671547-2009259162342_slc.fits
+   006192231-2009166043257_llc.fits
+   007047141-2010265121752_llc.fits
+   007940546-2009231120729_slc.fits
+   008515227-2010265121752_llc.fits
+   009116222-2009259160929_llc.fits
+   009446742-2011271113734_slc.fits
+   010666510-2009259160929_llc.fits
+   011551430-2009201121230_slc.fits
 
 The different parts of the dataset names are: the part before the hyphen
 is the Kepler ID, the part after the hyphen is the time the data was
@@ -656,34 +627,23 @@ fits file (a table fits file in this case).
 As you learned before (see STIS example) we can make a text file that
 has the dataset names that we want to retrieve. You can make this text
 file from the list of Kepler IDs (the leading zeros are not needed for
-the search):
+the search)::
 
-    2557430
-
-    3526481
-
-    3971507
-
-    4671547
-
-    6192231
-
-    7047141
-
-    7940546
-
-    8515227
-
-    9116222
-
-    9446742
-
-    10666510
-
-    11551430
+   2557430
+   3526481
+   3971507
+   4671547
+   6192231
+   7047141
+   7940546
+   8515227
+   9116222
+   9446742
+   10666510
+   11551430
 
 After this completed go to web page
-`*http://archive.stsci.edu/kepler/data\_search/search.php* <http://archive.stsci.edu/kepler/data_search/search.php>`__
+`http://archive.stsci.edu/kepler/data\_search/search.php <http://archive.stsci.edu/kepler/data_search/search.php>`__
 and click on *File Upload Form* in the upper right corner (should be
 analogous to Figure 2). The entries that you will make will again be
 analogous to what is seen in Figure 2 and your screen should look
@@ -750,10 +710,9 @@ the *hselect* IRAF command while we are in PyRAF. We will acquire these
 header keywords and put them into a text file called
 *kepler\_header\_keyword\_values.txt*. Within your working directory,
 enter PyRAF. After you have done this and PyRAF is initialized correctly
-type the following in the command line:
+type the following in the command line::
 
-hselect \*.fits[0]
-$I,object,obsmode,kepmag,teff,logg,feh,ebminusv,av,radius yes
+   hselect *.fits[0] $I,object,obsmode,kepmag,teff,logg,feh,ebminusv,av,radius yes
 
 and after pressing enter you should get the following as shown in Figure
 27:
@@ -765,20 +724,24 @@ hselect as shown above.*
 
 Now we want to put this information into a text file. This is easily
 done with the following line command (this will all be on one command
-line despite what is shown immediately below):
+line despite what is shown immediately below)::
 
---> hselect \*.fits[0]
-$I,object,obsmode,kepmag,teff,logg,feh,ebminusv,av,radius yes >
-kepler\_header\_keyword\_values.txt
+   --> hselect *.fits[0] $I,object,obsmode,kepmag,teff,logg,feh,ebminusv,av,radius yes > kepler_header_keyword_values.txt
 
 This should produce a text file in your working directory.
 
 Editing header keyword values is also of extreme importance. The *hedit*
 command is the way to do exactly this. Like the h\ *select* command you
 can enter arguments on the command line or you can edit hedit by typing
-epar hedit in the command line:
+epar hedit in the command line::
 
---> epar hedit
+   --> epar hedit
+
+
+    |image27|
+
+*Figure 28: This is what the hedit GUI interface will look like within
+PyRAF. Note that the header keyword values are blank.*
 
 If you are in PyRAF, you will get a GUI that looks like Figure 28. This
 makes for easy editing of the *images*, *fields*, and *value* entries.
@@ -786,23 +749,16 @@ What we will do first is click on *Unlearn* button so that the header
 keyword values will be blank as shown in Figure 28. The first entry is
 the name of the dataset (and the extension); the second entry is the
 header keyword whose value is to be changed (in this example at
-
-    |image27|
-
-*Figure 28: This is what the hedit GUI interface will look like within
-PyRAF. Note that the header keyword values are blank.*
-
 least), and the third entry is the new value of the header keyword. The
 two header keywords that we will edit are OBJECT (Kepler ID) and OBSMODE
 (short cadence or long cadence). The initial value of each of these
 header keywords is as follows (these values will be different for each
 dataset). For example, the first dataset
 (kplr002557430-2009201121230\_slc.fits) the OBJECT and OBSMODE header
-keyword values will be:
+keyword values will be::
 
-OBJECT = 'KIC 002557430'
-
-OBSMODE = 'short cadence'
+   OBJECT = 'KIC 002557430'
+   OBSMODE = 'short cadence'
 
 What we will be doing is putting hyphens in between the spaces in KIC
 002557430 and short cadence so that the new header keyword will look
@@ -820,16 +776,15 @@ analogous GUI to Figure 29.
 header keyword "OBJECT".*
 
 If you are satisfied with your entries, click on *Execute* and you will
-get the following output in PyRAF window command line:
+get the following output in PyRAF window command line::
 
---> epar hedit
+   --> epar hedit
 
-Task hedit is running...
+   Task hedit is running...
 
-kplr002557430-2009201121230\_slc.fits[0],OBJECT: "KIC 002557430" ->
-KIC-002557430
+   kplr002557430-2009201121230_slc.fits[0],OBJECT: "KIC 002557430" -> KIC-002557430
 
-kplr002557430-2009201121230\_slc.fits[0] updated
+   kplr002557430-2009201121230_slc.fits[0] updated
 
 This shows that *hedit* has edited the appropriate header keyword with
 the correct change. You will follow the same procedure when editing the
@@ -839,75 +794,61 @@ header keyword values correctly and then put your results into a text
 file. You have now been introduced to hselect and hedit. Now you can
 make the light curves if you wish.
 
-**PART VI: Some Additional Information**
+PART VI: Some Additional Information
+====================================
 
 It should be obvious that we have neglected and glossed over many
 details and abilities of both MAST and PyRAF. There are several PyRAF
 commands that RIAs often use (not necessarily in conjunction with
 calibration of data), namely:
 
-catfits
+ * catfits
+ * imexam
+ * imhead
+ * imcalc
+ * imarith
+ * imstat
+ * tread
+ * tprint
+ * imreplace
 
-imexam
-
-imhead
-
-imcalc
-
-imarith
-
-imstat
-
-tread
-
-tprint
-
-imreplace
-
-help is easy to find by typing *help imhead*, for instance, in the
+help is easy to find by typing ``help imhead``, for instance, in the
 command line within PyRAF.
 
 There are numerous documents that give instructions on how to reduce,
 extract, and analysis astronomical data. Below is list (not complete by
 any means) of useful IRAF/PyRAF documents:
 
-A Beginner's Guide to Using *IRAF*
-
-    A User's Guide to CCD Reductions with *IRAF*
-
-    A User's Guide to Stellar CCD Photometry with *IRAF*
-
-    Specifications for the Aperture Photometry Package
-
-    A User's Guide to the *IRAF* Apphot Package
-
-    A Reference Guide to the *IRAF*/DAOPHOT Package
-
-    A User's Guide to Reducing Slit Spectra with *IRAF*
-
-    A User's Guide to Reducing Echelle Spectra With *IRAF*
-
-    Guide to the Slit Spectra Reduction Task DOSLIT
-
-    Guide to the Slit Spectra Reduction Task DOECSLIT
+ * A Beginner's Guide to Using *IRAF*
+ * A User's Guide to CCD Reductions with *IRAF*
+ * A User's Guide to Stellar CCD Photometry with *IRAF*
+ * Specifications for the Aperture Photometry Package
+ * A User's Guide to the *IRAF* Apphot Package
+ * A Reference Guide to the *IRAF*/DAOPHOT Package
+ * A User's Guide to Reducing Slit Spectra with *IRAF*
+ * A User's Guide to Reducing Echelle Spectra With *IRAF*
+ * Guide to the Slit Spectra Reduction Task DOSLIT
+ * Guide to the Slit Spectra Reduction Task DOECSLIT
 
 All of the above documents can be found at:
-`*http://iraf.noao.edu/docs/photom.html* <http://iraf.noao.edu/docs/photom.html>`__
+`http://iraf.noao.edu/docs/photom.html <http://iraf.noao.edu/docs/photom.html>`__
 and
-`*http://iraf.noao.edu/docs/spectra.html* <http://iraf.noao.edu/docs/spectra.html>`__.
+`http://iraf.noao.edu/docs/spectra.html <http://iraf.noao.edu/docs/spectra.html>`__.
 All of the IRAF/PyRAF documents can be found at:
-`*http://iraf.noao.edu/docs/docmain.html* <http://iraf.noao.edu/docs/docmain.html>`__.
+`http://iraf.noao.edu/docs/docmain.html <http://iraf.noao.edu/docs/docmain.html>`__.
 There are, of course, varying opinions on IRAF's abilities to perform
 the aforementioned tasks, but this is an excellent place to start, and
 as I am sure you are aware, how the data is reduced depends on what the
 scientific requirements demand.
 
+Conclusion
+==========
+
 Thank you for completing the Archives Training! Please send your trainer
 the various materials that were asked of you to provide (i.e. answers to
 questions, the tab-separated query results file, and the source list),
 preferably in an email. Also, please 'comment' on the RIA Training
-Summer 2014 Confluence page
-(`*https://confluence.stsci.edu/display/INSRIA/RIA+training+Summer+2014* <https://confluence.stsci.edu/display/insria/ria+training+summer+2014>`__)
+Confluence page for your cohort
 stating that you have completed this training, as well as any feelings
 you have towards this training exercise in particular or any questions
 you may have.
@@ -941,3 +882,4 @@ you may have.
 .. |image26| image:: ./figures/archives/image27.png
 .. |image27| image:: ./figures/archives/image28.png
 .. |image28| image:: ./figures/archives/image29.png
+e
