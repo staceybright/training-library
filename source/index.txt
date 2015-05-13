@@ -37,6 +37,7 @@ Supplemental training guides and exercises
 Reference information and presentations
 ****************************************
 
+#. :doc:`appendices/editing_training_docs`
 #. `Using APT (the Astronomer's Proposal Tool) <http://www.stsci.edu/hst/proposing/apt/using_apt>`_
 #. Archive of past RIA training reports
 #. :doc:`trainees`
@@ -60,3 +61,4 @@ Extra Wisdom
    editing_these_documents
    tricks
    trainees
+   appendices/editing_training_docs
