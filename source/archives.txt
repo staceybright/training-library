@@ -478,7 +478,7 @@ for the calibration to work. If the following are not already in your
 environment, set them in the terminal or in your ``~/.cshrc`` file::
 
    setenv oref /grp/hst/cdbs/oref/
-   setenv mtab grp/hst/cdbs/mtab/
+   setenv mtab /grp/hst/cdbs/mtab/
    setenv crrefer /grp/hst/cdbs/
 
 If this is not configured correctly ``calstis`` will crash. If you have any
@@ -497,7 +497,7 @@ After PyRAF starts up, ensure that the needed packages are loaded by
 typing::
 
    stsdas
-   hst\_calib
+   hst_calib
    stis
    onedspec
 
@@ -738,7 +738,7 @@ epar hedit in the command line::
    --> epar hedit
 
 
-    |image27|
+|image27|
 
 *Figure 28: This is what the hedit GUI interface will look like within
 PyRAF. Note that the header keyword values are blank.*
@@ -882,4 +882,3 @@ you may have.
 .. |image26| image:: ./figures/archives/image27.png
 .. |image27| image:: ./figures/archives/image28.png
 .. |image28| image:: ./figures/archives/image29.png
-e
