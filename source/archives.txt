@@ -63,19 +63,19 @@ a) Type *47Tuc* in the *Target* box, with *Resolver* set to *Resolve*. In the *F
 
    Figure 1 portrays what the MAST search form should look like:
 
-   |image0|
+   .. figure:: figures/archives/mast_standard_form.png
 
-   *Figure 1: This is a facsimile of what the "Standard Form" MAST search
-   request should look like.*
+      Figure 1: This is a facsimile of what the "Standard Form" MAST search
+      request should look like.
 
    Click on the *Search* button and you should get a new page with *HST
    Search Results* at the top with the datasets that match your search
    criterion. You will notice in the search results that this target is
    also called *NGC104*. Figure 2 shows the search results for this query.
 
-       |image1|
+   .. figure:: figures/archives/acs_search_results.png
 
-   *Figure 2: This figure shows the results from the NGC104 ACS search.*
+      Figure 2: This figure shows the results from the NGC104 ACS search.
 
    Your search should have returned a list containing these Datasets::
 
@@ -156,10 +156,9 @@ c) Pay attention to the following: *Local File Name* (this will point to
    settings needed for the MAST search that is required for retrieval of
    the STIS data in your text file.
 
-   |image2|
+   .. figure:: figures/archives/mast_file_upload.png
 
-   *Figure 3: This is a facsimile of what the "File Upload Form" MAST
-   search request should look like.*
+      Figure 3: This is a facsimile of what the "File Upload Form" MAST search request should look like.
 
 PART II: Retrieving Data
 ========================
@@ -169,9 +168,9 @@ then click on the *Search* button. This will result in a new screen with
 *HST Search Results* at the top of the web page. Figure 4 show the
 results for this STIS query.
 
-    |image3|
+.. figure:: figures/archives/stis_search_results.png
 
-*Figure 4: This figure shows the results from the STIS search.*
+   Figure 4: This figure shows the results from the STIS search.
 
 Note that in Figure 4 all of the datasets are marked for retrieval,
 which is done by clicking on the *Mark All* button. If you are satisfied
@@ -179,9 +178,9 @@ with the datasets that are marked for retrieval, then click on the
 *Submit marked data for retrieval from STDADS* button. The resulting
 webpage is shown in Figure 5.
 
-|image4|
+.. figure:: figures/archives/hst_retrieval_options.png
 
-*Figure 5: This is what the "Retrieval Options" web page looks like.*
+   Figure 5: This is what the "Retrieval Options" web page looks like.
 
 There are several options for the type of delivery, the type of data
 requested, and an option for overriding default parameters. For this
@@ -192,11 +191,11 @@ data by ticking the "\ *Calibrated*\ " and "\ *Uncalibrated*\ " boxes
 under "Science Files Requested" or by entering the specific extensions
 you want in the "or enter a specific extension" box.
 
-We will review two delivery options, **STAGE** and **FTP**. The first
+We will review two delivery options, **STAGE** and **SFTP**. The first
 delivery option is to stage the data. For this option, the data will be
 written to the Archive staging disk. You will be able to pull from the
 staging disk using FTP and logging in with your archive username and
-password. The other delivery option is to FTP the data directly to a
+password. The other delivery option is to SFTP the data directly to a
 destination you provide.
 
 **STAGE option:** To get data via the stage option, enter your Archive
@@ -225,27 +224,27 @@ Entering these commands should download all of the raw and wav files
 from the ftp server to your current working directory. To exit the ftp
 connection, simply type, "exit".
 
-**FTP option:** Enter your Archive username and password and make your
-science file selections as before. Now select "\ *FTP: FTP the data to
-the destination shown"* and, if using a MAC, tick "\ *Use sftp
-(OpenSSHv2)*\ ". In the "\ *Destination"* column, enter your IP address
-next to "\ *Hostname"*, the directory you want the data placed, and the
+**SFTP option:** Enter your Archive username and password and make your
+science file selections as before. Now select "*sftp (OpenSSH v2)*".
+In the "*Destination*" column, enter your IP address (or, if you know it, ``yourcomputername.stsci.edu``)
+next to "*Hostname*", the directory you want the data placed, and the
 username and password for the machine where the directory is located.
-Click the "\ *Send retrieval request to ST-DADS"* to submit your
+Click the "*Send retrieval request to ST-DADS*" to submit your
 request. A test file will show up in the destination you specified
 (deleted automatically). An email will be sent letting you know your
 request was received and another email is sent when the data has been
-delivered. The selections needed to retrieve data using FTP are shown in
-the screenshot below:
+delivered.
 
-|image5|
+.. figure:: figures/archives/hst_retrieval_options_sftp.png
+
+   The selections needed to retrieve data over SFTP.
 
 You should now be familiar with searching for, and retrieving HST data
 through MAST. Good job! Next, we will explore a few additional ways to
 search for and retrieve HST data.
 
-PART III: HLA and Starview
-==========================
+PART III: Alternative Archive Interfaces
+========================================
 
 Hubble Legacy Archive
 ---------------------
@@ -288,20 +287,18 @@ all the HST instruments, we will only get results that pertain to the
 proposal ID that we have entered and any instrument used within a
 particular proposal.
 
-|image6|
+.. figure:: figures/archives/hla_search.png
 
-*Figure 6: This is what the search form should look like before you
-click on the "Search" button.*
+   Figure 6: This is what the search form should look like before you
+   click on the "Search" button.
 
 After you click on the *Search* button, you will get a web page that has
 the same set-up as Figure 6 but with the search results below it. Figure
 7 shows a subset of the search results.
 
-|image7|
+.. figure:: figures/archives/hla_search_results.png
 
-*Figure 7: This is what the search form should look like after you click
-on the "Search" button. Note that this is only a lower portion of the
-actual web page.*
+   Figure 7: This is what the search form should look like after you click on the "Search" button. Note that this is only a lower portion of the actual web page.
 
 Since we want two filters from the same visit and within a particular
 proposal, all the columns in Figure 7 (RA, Dec, Level, etc.) must have
@@ -315,23 +312,20 @@ appropriate datasets, you can retrieve them by clicking on either the
 DAOphot or SExtractor links and these will be put into a shopping cart.
 Figure 8 shows where the shopping cart is located (middle of web page).
 
-|image8|
+.. figure:: figures/archives/hla_shopping_cart.png
 
-*Figure 8: This figure shows the shopping cart in yellow. This can be
-found in roughly the middle of the web page. Note that this is only a
-portion of the actual web page.*
+   Figure 8: This figure shows the shopping cart in yellow. This can be found in roughly the middle of the web page. Note that this is only a portion of the actual web page.
 
 Click on the shopping cart to get Figure 9.
 
-|image9|
+.. figure:: figures/archives/hla_shopping_cart2.png
 
-*Figure 9: This figure shows what is in the shopping cart. This can be
-found in roughly the middle of the web page. Note that this is only a
-portion of the actual web page.*
+   Figure 9: This figure shows what is in the shopping cart. This can be found in roughly the middle of the web page. Note that this is only a portion of the actual web page.
 
 Make sure that you have the data that you want and click on *Fetch HLA
 Data*. This will be downloaded as a zip. The file should look something
 like this: ``HLADATA-<numbers>.zip``. Unzip the data and view the contents.
+
 You should see some text files in there that contain the source lists.
 Again, these source lists could be useful, for example, to make CMDs.
 
@@ -348,10 +342,10 @@ found in Figure 10, which shows a STIS Instrument search form. The web
 address is:
 `http://starview.stsci.edu/web/ <http://starview.stsci.edu/web/>`__.
 
-|image10|
+.. figure:: figures/archives/starview_default.png
+   :alt: The Starview search form for STIS
 
-*Figure 10: This is the default configuration for Starview with a STIS
-Instrument search form.*
+   Figure 10: This is the default configuration for Starview with a STIS Instrument search form.
 
 Under the STIS folder on the left side of the window, select the *STIS
 Instrument* search form and make a copy of it by clicking on the button
@@ -394,24 +388,17 @@ the same row. Now click on the row with the correct label or keyword
 that you are looking for and then drag to the search form at the right.
 You should get what is found in Figure 13.
 
-|image11|
+.. figure:: figures/archives/starview_form_view.png
 
-|image12|
+   Figure 11: The left pane contains the list of available query "Screens". The right pane shows the "STIS Instrument (copy)" form we made.
 
-*Figure 11: The top diagram shows what you will see in the left hand
-side of the web page and the bottom diagram shows the right hand side of
-the web page. *
+.. figure:: figures/archives/starview_form_edit.png
 
-|image13|\ |image14|
+   Figure 12: The left pane now shows "Fields" you can add to your query form. The right pane has been put in "Edit" mode from the *Screen Toolbar*, adding red delete buttons for each field.
 
-*Figure 12: The top diagram shows what you will see in the left hand
-side of the web page and the bottom diagram shows the right hand side of
-the web page. Note the differences between Figures 11 and 12.*
+.. figure:: figures/archives/starview_form_add_field.png
 
-|image15|
-
-*Figure 13: This is what the edited search form should look like. Note
-that is partial view of the web page.*
+   Figure 13: This is what the edited search form should look like.
 
 Now what we will do is use this abbreviated search form to search HST
 archives for the data that we want. The parameter values that we will
@@ -433,9 +420,9 @@ datasets and then hold the shift key down on the keyboard and select the
 last dataset entry. This will select all of the datasets and the rows
 will have a blue background.
 
-|image16|
+.. figure:: figures/archives/starview_search_results.png
 
-*Figure 14: This figure shows what datasets are available for download.*
+   Figure 14: This figure shows what datasets are available for download.
 
 After the desired datasets have been selected (all of them in this case)
 click on the *Download Cart* button in the upper right of the web page
@@ -446,14 +433,26 @@ will get a GUI in the top center of the web page. Select *Proceed to
 Checkout…* and then you will get the following web page shown in Figure
 15.
 
-|image17|
+.. figure:: figures/archives/starview_search_retrieval.png
 
-*Figure 15: This figure shows what datasets are marked for retrieval.
-This is only a portion of the web page.*
+   Figure 15: This figure shows what datasets are marked for retrieval.
 
 From here you can download the data like you would from MAST. (Note:
 This was just an exercise showing how starview works. You do not need to
-actually download the data).
+actually download the data.)
+
+MAST Data Discovery Portal
+--------------------------
+
+The `MAST Data Discovery Portal <http://mast.stsci.edu/>`_ (http://mast.stsci.edu/) is a newer, slicker interface to the Archive optimized for exploring existing archival data. If you're interested in a part of the sky, and are curious whether any MAST-affiliated missions observed it, this tool will show you.
+
+.. figure:: figures/archives/mast_ddp_example.png
+
+   Here's an `example query <http://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html?searchQuery=M83>`_ showing the galaxy M83 with matching HST data sets selected.
+
+There are sophisticated features for faceting ("narrowing-down") and visualizing (FOV overlays on sky survey imagery, dataset thumbnails) HST, GALEX, SWIFT, and other missions' archives.
+
+If that sounds like it might be useful to your work, have a look at their user guide: http://mast.stsci.edu/portal/Mashup/Clients/Mast/data/html/MastHelp.html. (There are also video tutorials for common tasks at the bottom of that page.)
 
 PART IV: Understanding Calibration Header Keywords and Calibrating Data using PyRAF
 ===================================================================================
@@ -489,9 +488,9 @@ To start PyRAF, simply type ``pyraf`` in the terminal.
 You should get a screen in your terminal window that is similar to what
 is found in Figure 16.
 
-|image18|
+.. figure:: figures/archives/pyraf_startup.png
 
-*Figure 16: An example of the PyRAF screen.*
+   Figure 16: An example of the PyRAF screen after starting up.
 
 After PyRAF starts up, ensure that the needed packages are loaded by
 typing::
@@ -519,10 +518,9 @@ image. For this exercise, we are primarily concerned with the
 0\ :sup:`th` extension, which contains the primary header containing
 keywords and metadata associated with the particular observation.
 
-|image19|
+.. figure:: figures/archives/pyraf_catfits.png
 
-*Figure 17: The FITS extension structure of o8j502280\_raw.fits as given
-by the catfits command*
+   Figure 17: The FITS extension structure of o8j502280\_raw.fits as given by the catfits command.
 
 We use imhead to inspect the primary header::
 
@@ -538,10 +536,9 @@ completed). Inspection of the calibration switches show that they are
 set correctly (for more information on each calibration step, see the
 STIS Data Handbook reference).
 
-|image20|
+.. figure:: figures/archives/pyraf_calstis_header_switches.png
 
-*Figure 18: This shows the correct configuration in the raw image header
-that will produce calibrated STIS data.*
+   Figure 18: This shows the correct configuration in the raw image header that will produce calibrated STIS data.
 
 Let us now calibrate some raw STIS data (remember that you need both the
 raw and wav extension files in the same directory). This is easy to do
@@ -574,9 +571,9 @@ Now plot the spectra using the *splot* task::
 Figure 19 shows the displayed spectra for this example. We will learn
 more about tomultispec and splot in future PyRAF trainings.
 
-    |image21|
+.. figure:: figures/archives/pyraf_splot.png
 
-*Figure 19: The plotted spectra for the o8j502280 dataset.*
+   Figure 19: The plotted spectra for the o8j502280 dataset.
 
 We have now retrieved STIS data from the archive, downloading only *raw*
 and *wav* extension fits files. We inspected the calibration switches
@@ -649,18 +646,17 @@ analogous to Figure 2). The entries that you will make will again be
 analogous to what is seen in Figure 2 and your screen should look
 something like what is seen in Figure 23.
 
-|image22|
+.. figure:: figures/archives/kepler_search_form.png
 
-*Figure 23: This is what the retrieval form should look like before you
-request retrieval of your datasets.*
+   Figure 23: This is what the retrieval form should look like before you
+request retrieval of your datasets.
 
 Once you click on *Search*, you will get something that looks like
 Figure 24.
 
-|image23|
+.. figure:: figures/archives/kepler_search_results.png
 
-*Figure 24: After clicking on "Search" you should get the above partial
-web page.*
+   Figure 24: After clicking on "Search" you should get a web page that looks like this.
 
 Notice the yellow highlighted datasets. This signifies that these
 datasets are still in their proprietary status and can only be retrieved
@@ -678,10 +674,9 @@ defined by the yellow background in column 2. Do not worry about any of
 the other columns, but make sure that all datasets are marked under the
 column named "Mark".
 
-|image24|
+.. figure:: figures/archives/kepler_data_retrieval.png
 
-*Figure 25: This is what the web page should look like after clicking on
-"Submit marked data for retrieval from STDADS"*
+   Figure 25: This is what the web page should look like after clicking on "Submit marked data for retrieval from STDADS"
 
 When you are satisfied that all of the proper datasets are marked click
 on *Submit marked data for retrieval from STDADS*. This will bring up
