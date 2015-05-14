@@ -1,0 +1,9 @@
+******************
+Basic Spectroscopy
+******************
+
+This document gives an overview of the Hubble Space Telescope Spectrographs--COS and STIS. 
+
+.. note::
+
+   This guide is maintained as a PDF document. :download:`Download it <pdf_guides/spectroscopy_training.pdf>` and get started.

@@ -22,7 +22,7 @@ Training guides and exercises for new RIAs
 #. :doc:`pyraf`
 #. AstroDrizzle presentation and exercises
 #. Photometry presentation and exercises
-#. Spectroscopy exercises
+#. :doc:`spectroscopy`
 #. :doc:`editing_these_documents`
 
 *******************************************
@@ -58,6 +58,7 @@ Extra Wisdom
    pyraf
    version_control
    using_idl
+   spectroscopy   
    editing_these_documents
    tricks
    trainees
