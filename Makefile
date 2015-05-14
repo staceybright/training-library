@@ -60,18 +60,26 @@ riadocs:
 	cd latexdocs/python/document/; pdflatex training.tex
 	# a second time to resolve refs
 	cd latexdocs/python/document/; pdflatex training.tex
+	# Copy Python training into pdf_guides
+	cp latexdocs/python/document/training.pdf source/pdf_guides/python_training.pdf
+	#
+	#
 	# PyRAF training LaTeX build
 	cd latexdocs/pyraf/; pdflatex training.tex
 	# a second time to resolve refs
 	cd latexdocs/pyraf/; pdflatex training.tex
-	# Copy Python training into pdf_guides
-	cp latexdocs/python/document/training.pdf source/pdf_guides/python_training.pdf
 	# Copy PyRAF training into pdf_guides
 	cp latexdocs/pyraf/training.pdf source/pdf_guides/pyraf_training.pdf
+	#
+	#
 	# Spectroscopy training LaTeX build
+	cd latexdocs/spectroscopy/; pdflatex training.tex
+	# a second time to resolve refs
 	cd latexdocs/spectroscopy/; pdflatex training.tex
 	# Copy Spectroscopy training into pdf_guides
 	cp latexdocs/spectroscopy/training.pdf source/pdf_guides/spectroscopy_training.pdf
+	#
+	#
 	# Execute the Sphinx build
 	make html
 
