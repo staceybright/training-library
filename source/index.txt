@@ -8,26 +8,25 @@ The RIA Training Library
 
 New Research & Instrument Analysts at STScI work with a variety of tools, depending on their instrument team and research assignments. Nevertheless, some things are so generally useful to RIAs that we've drawn up training documents to bring you up to speed on anything you haven't used before.
 
-This library also contains a collection of :doc:`tricks`, generally computing related. When you reach the end of your training, your final task will be to contribute an improvement to the training library. This could be a tip, a clarification for part of the training that you found confusing, or something else.
-
 *******************************************
 Training guides and exercises for new RIAs
 *******************************************
 
 #. :doc:`computer_setup`
 #. :doc:`archives`
-#. :doc:`version_control`
 #. :doc:`using_idl`
 #. :doc:`python`
 #. :doc:`pyraf`
 #. AstroDrizzle presentation and exercises
 #. Photometry presentation and exercises
 #. :doc:`spectroscopy`
-#. :doc:`editing_these_documents`
+#. :doc:`version_control`
 
 *******************************************
 Supplemental training guides and exercises
 *******************************************
+
+*Only the guides listed above are generally required of all trainees, but the following guides and links are provided for reference.*
 
 #. Introduction to JWST
 #. JWST Training, read modes, reference output and pixels
@@ -37,7 +36,7 @@ Supplemental training guides and exercises
 Reference information and presentations
 ****************************************
 
-#. :doc:`appendices/editing_training_docs`
+#. :doc:`editing_these_documents`
 #. `Using APT (the Astronomer's Proposal Tool) <http://www.stsci.edu/hst/proposing/apt/using_apt>`_
 #. Archive of past RIA training reports
 #. :doc:`trainees`
@@ -54,12 +53,11 @@ Extra Wisdom
 
    computer_setup
    archives
+   using_idl
    python
    pyraf
+   spectroscopy
    version_control
-   using_idl
-   spectroscopy   
    editing_these_documents
    tricks
    trainees
-   appendices/editing_training_docs

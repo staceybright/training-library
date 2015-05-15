@@ -4,42 +4,68 @@ Version Control with git
 
 Version control systems keep track of changes to code, documents, and other files as you work. While this document will discuss one particular version control system, ``git`` [#gitproject]_ , the *concept* of version control shows up everywhere from iCloud to Wikipedia to NASA project management. That's because the simple idea of tracking changes is very powerful, giving authors and programmers great flexibility in their work.
 
+.. note::
+
+   There will be exercises in this training that ask you questions. Keep your answers in a text file somewhere convenient, and send them to your trainer when you finish the training.
+
 What can version control do for me?
 ====================================
 
-It might be instructive to motivate these exercises with some examples. After completing this training, you will know how to do all of these for any given ``git`` repository. Here are a few examples of things version control can do for you.
+Here are things that a good version control system will enable you to do.
 
-1. **Figuring out who to ask** -- Look at the *history* of a particular file to find out who to ask about a particular section and when it was written
-2. **Collaborate without clobbering** -- Edit a file someone else is also working on, without overwriting their changes
-3. **Work on two things at once** -- Explore adding a major new feature, but keep those changes separate from your routine work
+1. **Figuring out who to ask** -- Look at the *history* of a particular file to find out who to ask about a particular section and when it was written.
+2. **Collaborate without clobbering** -- Edit a file someone else is also working on, without overwriting their changes.
+3. **Work on two things at once** -- Explore a major change to code or a document, but keep those changes separate from your routine work.
 4. **Undo exactly what you changed** -- Sometimes things stop working and you don't know what you changed. If you track changes in a version control system, you can see exactly what changed.
-5. **Copy, change, contribute back** -- Modify open-source software and share your changes with the wider community
 
-Getting started with ``git``
-==============================
+We won't cover all of these in detail in this training. Rather, we hope to expose you to the basics. That way if you join an instrument team or research collaboration that makes use of ``git``, it won't be completely unfamiliar.
 
-First, make sure ``git`` is installed: open a Terminal window, type ``git``, and hit :kbd:`Enter`. (If you see ``command not found``, you need to make sure git is installed and available in your Terminal.) This will print out a somewhat intimidating list of all the things you can do with git, most of which are exposed through "sub-commands". Think of it like this: the first two "words" when you type a git command are the real name of the command, and anything after is interpreted as modifiers to that command.
+Concepts and first steps with ``git``
+=====================================
 
-For example, ``git add ./test`` means "add files in the test directory to be committed" and ``git init ./test`` means "initialize a repository in the test directory". On the other hand, if you typed ``git ./test``... ::
+First things first, we want to make sure ``git`` is installed.
 
-   $ git ./test
-   git: './test' is not a git command. See 'git --help'.
+.. admonition:: Exercise: Verify that you have ``git`` installed
+   :class: note
 
-Every sub-command has thorough documentation accessible through ``git nameofcommand --help``. (You can scroll the help pagewith the arrow keys and exit with :kbd:`q`.)
+   Open a new terminal window, type ``git``, and hit :kbd:`Enter`. If git is installed, it will show a somewhat intimidating list of all the things you can do with git. Can you figure out the version number of the ``git`` installed on your computer?
 
-The first thing we want to do is make a workspace for these exercises. Git commands operate on a **repository**, which is a folder on your computer that contains both the files you want to track and the internal git bookkeeping data #[gitdirectory]_ .
+You may have noticed that typing ``git`` on its own didn't do anything exciting. That's because most of ``git``\ 's functionality is available through "commands" given after the word git. To make it do something, you must provide the name of a command and, optionally, additional arguments.
 
-.. admonition:: Exercise: Creating a new repository
+For example, ``git add ./test`` means "add files in the test directory to be committed" and ``git commit`` means "save the changes I requested to the project history".
 
-   Create a new git repository in a folder called ``git_training`` using the ``git init`` commmand. (Skim ``git init --help`` to figure out the syntax.)
+Every sub-command has thorough documentation accessible through ``git nameofcommand --help``. (You can scroll the help page with the arrow keys and exit with :kbd:`q`.)
 
+.. admonition:: Excercise: Look at the documentation for a git command
+   :class: note
 
-..
-   TODO list
-   add, commit, revert
-   branches
-   merging
-   merging with conflicts
+   Open up the help page for ``clone``. Skim the description. In a sentence or two, what do you think ``git clone`` does?
+
+   (There's a lot of jargon in the git help, so don't worry if it's not clear yet what all that means.)
+
+Git has a special name for directories of files that it keeps histories of (we call those files "tracked" or "versioned"). Folders that git understands how to manipulate are called "repositories", and contain the current state of the files, as well as a copy of their history at certain "snapshots" in time.
+
+Git commands generally only work when you have ``cd``\ -ed into a repository directory in your terminal. The two main exceptions are ``git init``, which initializes a new repository in the current directory, and ``git clone``, which creates a new local copy of a repository.
+
+Enough conceptual stuff, let's do something more hands-on.
+
+Getting set up to collaborate
+=============================
+
+Since most RIAs come across ``git`` in the context of joining an existing project, we will structure these exercises around making an edit to the ``git`` repository that stores these training documents.
+
+There's a :doc:`trainees` document listing everyone who completes the training [#wellkinda]_. To complete this training, you will add your name to the list, and learn some essential ``git`` commands in the process.
+
+Git, GitHub, Grit, and GitLab
+-----------------------------
+
+You may have heard some of these terms bandied around. For clarity's sake, here's what they mean:
+
+ * **git** -- A command-line tool to manage versions of files. (Free and open-source)
+ * **GitHub** -- A service to share and collaborate on repositories using ``git``. (Commercial, with exceptions for nonprofits)
+ * **GitLab** (Grit) -- Software similar to GitHub, but running internally at STScI (http://grit.stsci.edu/). Used by some instrument teams. (Free community edition, commercial version available)
+
+We use GitHub to collaborate on these training documents. In the next section, you will set up a user account and key to let your computer talk to GitHub.
 
 .. _getting_started_github:
 
@@ -48,17 +74,20 @@ Getting started with GitHub
 
 If you're new to GitHub, you'll need to register for a free account and set up your computer to authenticate you with GitHub when using git.
 
-1. **Make a free GitHub account**
+.. admonition:: Exercise: Sign up for a GitHub Account
+   :class: note
 
-   The registration form is on the `GitHub homepage <https://github.com/>`_
+   GitHub sign-up is free, and the registration form is on their homepage: https://github.com/. If you already have a GitHub account, you can skip this.
 
-2. **Generate an SSH key**
+If you haven't had to generate an SSH key already, the next exercise will be to generate one for use with GitHub. Without getting too detailed, an SSH key is a bit like a password. GitHub uses your SSH key to know who you are when you want to make changes to shared documents, and to check that you have permission to do so. (Usually, you'd want a *passphrase* on your key, but for this case it's unnecessary so you can just hit :kbd:`Enter` when prompted in the next exercise.) [#passphrase]_
 
-   Without getting too detailed, an SSH key is a bit like a username and password combined. GitHub needs your SSH key to know who you are when you want to make changes to shared documents. Usually, you'd want a *passphrase* on top of that, but for this case it's unnecessary so you can just hit :kbd:`Enter` when prompted. [#passphrase]_
+.. admonition:: Exercise: Create an SSH key
+   :class: note
 
-   Open a new terminal and type the command shown below. (Remember to put in your STScI email!) ::
+   Open a new terminal and type the ``ssh-keygen`` command shown below. Omit the ``$``. (Remember to put in your STScI email!) ::
 
        $ ssh-keygen -t rsa -C "your_email@example.com"
+
        Generating public/private rsa key pair.
        Enter file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
        Enter passphrase (empty for no passphrase): [Press enter]
@@ -80,28 +109,107 @@ If you're new to GitHub, you'll need to register for a free account and set up y
        |            E.+o+|
        +-----------------+
 
-3. **Tell GitHub about your new SSH key**
+This makes a two-part key, with a "private" and "public" half. We need to give the "public" half (the file ``~/.ssh/id_rsa.pub``) to GitHub so they can match it up with the private part to verify our account later. Now, we need to tell GitHub that this key is connected to the account you just made.
+
+.. admonition:: Exercise: Add a new SSH public key to your GitHub account
+   :class: note
 
    First, copy the contents of ``~/.ssh/id_rsa.pub`` to your clipboard using this command::
 
-   $ pbcopy < ~/.ssh/id_rsa.pub  # (you could do this by hand with a text editor too)
+      $ pbcopy < ~/.ssh/id_rsa.pub
 
    Now you want to go to https://github.com/settings/ssh and follow these instructions to `add your SSH key to your account <https://help.github.com/articles/generating-ssh-keys/#step-3-add-your-ssh-key-to-your-account>`_.
 
-4. **Verify that your computer can talk to GitHub**
+.. warning::
+
+   It's worth mentioning that Grit does this slightly differently. You still need to add a key (at https://grit.stsci.edu/profile/keys/new), but you can log in with your AD username and password. You can use the same public key for GitHub and Grit.
+
+If all went well, your computer will now securely identify itself to GitHub automatically. Before we move on, let's check that everything's in place.
+
+.. admonition:: Exercise: Verify that your computer can talk to GitHub
+   :class: note
+
+   The following command attempts to connect to GitHub with the key we set up.
 
    ::
 
       $ ssh -T git@github.com
 
-   If you're prompted with ``Are you sure you want to continue connecting (yes/no)?``, type "yes" and hit :kbd:`Enter`. You should see a message indicating you have successfully authenticated.
+   If you're prompted with ``Are you sure you want to continue connecting (yes/no)?``, type "yes" and hit :kbd:`Enter`.
 
-**You're all set!** Now when you make your improvements, your computer will be set up to let you share them on GitHub.
+   You should see a message indicating you have successfully authenticated (and saying GitHub doesn't provide shell access, which we don't care about).
+
+**You're all set!** At this point, you will need to ask your trainer for access to the repository we'll use in the next section.
+
+.. admonition:: Exercise: Get access to the stsci-riab/riatraining repository
+   :class: note
+
+   Send your trainer the username for your GitHub account. They will give you access to the ``stsci-riab/riatraining`` repository, which we use in the next section.
+
+Phew! That was a long prelude to the main event. Fortunately, once you've set this up once for a computer, you rarely have to touch it again.
+
+Making your mark on the RIA training documents
+==============================================
+
+You should now have access to https://github.com/stsci-riab/riatraining, a.k.a. `stsci-riab/riatraining <https://github.com/stsci-riab/riatraining>`_. [#abbreviatedgithub]_
+
+Cloning the repository to make your own copy
+--------------------------------------------
+
+Cloning copies the contents and the history of a repository over the network or on disk. When cloning from GitHub, there are multiple ways ``git`` can talk to the central server. We're interested in talking over **SSH**, since it's simpler for sending your changes back to the central copy. Plus, we just set up an SSH key for this.
+
+If you look at the main page for the repository on GitHub, there's a box on the right sidebar with a "clone URL". Click "SSH" to select it, if it's not already selected.
+
+.. figure:: figures/version_control/ssh_clone_url.png
+
+   The main repository page, with the clone URL highlighted.
+
+.. admonition:: Exercise: Copy the SSH clone URL and clone the repository
+   :class: note
+
+   Click the clipboard button shown in the screenshot to copy the text box contents to your system clipboard for pasting into a terminal.
+
+   Clone the repository into a directory on your computer. The command to clone a repository is ``git clone [clone url]``, where ``[clone url]`` is the URL you just copied. This will copy the repository into  a new directory called ``riatraining`` under whatever directory you're in.
+
+Editing the trainees list
+-------------------------
+
+Now you have a git repository to manipulate on your own computer. The command ``clone`` is aptly named: the entire history of the repository is there, but it's entirely self contained. Don't worry about screwing it up; if you get stuck it's possible to delete the whole folder and make a "fresh" clone without affecting anyone else's work.
+
+.. admonition:: Exercise: Check the status of your repository
+   :class: note
+
+   Even though we haven't made any changes yet, let's try our first real git command. ``git status`` shows which files you have edited, which are ready to commit to the history, and which files ``git`` doesn't know about yet.
+
+   Run ``git status`` in a terminal window. What does it say?
+
+   *(If you got a message saying "fatal: Not a git repository", remember that git wants you to "cd" into the repository first!)*
+
+Since this is a fresh copy, hopefully you'll see that the working directory is "clean" (meaning no changes have been made). Let's make some.
+
+It's generally a good idea to make changes on a separate "branch" within the repository. Branches are a key part of how git tracks history internally, but require a bit of explanation.
+
+A brief digression on branches
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+The source documents for these pages are stored in the ``source`` directory. The document we want to edit is called ``trainees.txt``. Open it up in your favorite text editor.
+
+.. admonition:: Exercise: Add your name to ``trainees.txt``
+   :class: note
+
+   Find the appropriate section for your training cohort, and add your name. (Be sure to format your entry like the other names in the list.)
+
+   Save the file. What does ``git status`` say now?
+
+
 
 .. rubric:: Footnotes
 
 .. [#gitproject] `git <http://git-scm.com/>`_ is free and open source software developed by the creator of Linux (Linus Torvalds) and many others. He once said that "git" (British English for "an unpleasant person") was a good name for a project of his, as he names all of his projects after himself.
 .. [#gitdirectory] The vast majority of git repositories you will come across will have a hidden subdirectory named ``.git``, as well as the "working copy" of any files you're editing. To be nit-picky, the ``.git`` directory is the actual *repository*. (For example, you can delete the files of the working copy completely and get a fresh version as long as the ``.git`` directory is intact.)
+.. [#wellkinda] Since we started keeping this list, anyway!
 .. [#passphrase] Passphrases ensure that someone with physical access to your computer still cannot impersonate you online with your SSH key. The down side is that you have to supply a passphrase each time you use the key, or else configure the SSH agent (which can result in additional frustration).
 
    Since Institute laptops have full-disk encryption, the risk of a malicious actor coming into your office to steal your encryption keys while you're away from your desk is low, and the keys aren't protecting anything more sensitive than training documents, you can forgo the passphrase in this case. If your situation is different, you should absolutely generate a new key with a passphrase.
+.. [#abbreviatedgithub] GitHub is so ubiquitous in the software world that it's common to abbreviate URLs as ``<username>/<reponame>`` and omit the ``https://github.com/`` entirely in documents. It's not common at STScI, but you may see this elsewhere on e.g. StackOverflow.
