@@ -105,7 +105,7 @@ if __name__ == "__main__":
     observer.start()
     
     # Do an initial build, and open a browser window
-    build_docs()
+    build_docs(target='riadocs')
     url = "http://{}:{}/".format(*BIND_TO)
     import webbrowser
     webbrowser.open(url)
