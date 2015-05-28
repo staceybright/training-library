@@ -328,7 +328,6 @@ Give your pull request a brief title and description, then click "Create pull re
 .. rubric:: Footnotes
 
 .. [#gitproject] `git <http://git-scm.com/>`_ is free and open source software developed by the creator of Linux (Linus Torvalds) and many others. He once said that "git" (British English for "an unpleasant person") was a good name for a project of his, as he names all of his projects after himself.
-.. [#gitdirectory] The vast majority of git repositories you will come across will have a hidden subdirectory named ``.git``, as well as the "working copy" of any files you're editing. To be nit-picky, the ``.git`` directory is the actual *repository*. (For example, you can delete the files of the working copy completely and get a fresh version as long as the ``.git`` directory is intact.)
 .. [#wellkinda] Since we started keeping this list, anyway!
 .. [#passphrase] Passphrases ensure that someone with physical access to your computer still cannot impersonate you online with your SSH key. The down side is that you have to supply a passphrase each time you use the key, or else configure the SSH agent (which can result in additional frustration).
 
