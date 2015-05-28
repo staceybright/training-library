@@ -85,94 +85,46 @@ If you're new to GitHub, you'll need to register for a free account and set up y
 
    GitHub sign-up is free, and the registration form is on their homepage: https://github.com/. If you already have a GitHub account, you can skip this.
 
-If you haven't had to generate an SSH key already, the next exercise will be to generate one for use with GitHub. Without getting too detailed, an SSH key is a bit like a password. GitHub uses your SSH key to know who you are when you want to make changes to shared documents, and to check that you have permission to do so. (Usually, you'd want a *passphrase* on your key, but for this case it's unnecessary so you can just hit :kbd:`Enter` when prompted in the next exercise.) [#passphrase]_
-
-.. admonition:: Exercise: Create an SSH key
-   :class: note
-
-   Open a new terminal and type the ``ssh-keygen`` command shown below. (Remember to put in your STScI email!) ::
-
-       $ ssh-keygen -t rsa -C "your_email@example.com"
-
-       Generating public/private rsa key pair.
-       Enter file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
-       Enter passphrase (empty for no passphrase): [Press enter]
-       Enter same passphrase again: [Press enter]
-       Your identification has been saved in /Users/you/.ssh/id_rsa.
-       Your public key has been saved in /Users/you/.ssh/id_rsa.pub.
-       The key fingerprint is:
-       01:0f:f4:3b:ca:85:d6:17:a1:7d:f0:68:9d:f0:a2:db your_email@example.com
-       The key's randomart image is:
-       +--[ RSA 2048]----+
-       |       o+ oo=..  |
-       |       . ..+ o . |
-       |        .   o .  |
-       |       .   o +   |
-       |        S   = =  |
-       |             * . |
-       |              . .|
-       |               = |
-       |            E.+o+|
-       +-----------------+
-
-This makes a two-part key, with a "private" and "public" half. We need to give the "public" half (the file ``~/.ssh/id_rsa.pub``) to GitHub so they can match it up with the private part to verify our account later. Now, we need to tell GitHub that this key is connected to the account you just made.
-
-.. admonition:: Exercise: Add a new SSH public key to your GitHub account
-   :class: note
-
-   First, copy the contents of ``~/.ssh/id_rsa.pub`` to your clipboard using this command::
-
-      $ pbcopy < ~/.ssh/id_rsa.pub
-
-   Now you want to go to https://github.com/settings/ssh and follow these instructions to `add your SSH key to your account <https://help.github.com/articles/generating-ssh-keys/#step-3-add-your-ssh-key-to-your-account>`_.
-
-.. warning::
-
-   It's worth mentioning that Grit does this slightly differently. You still need to add a key (at https://grit.stsci.edu/profile/keys/new), but you can log in with your AD username and password. You can use the same public key for GitHub and Grit.
-
-If all went well, your computer will now securely identify itself to GitHub automatically. Before we move on, let's check that everything's in place.
-
-.. admonition:: Exercise: Verify that your computer can talk to GitHub
-   :class: note
-
-   The following command attempts to connect to GitHub with the key we set up.
-
-   ::
-
-      $ ssh -T git@github.com
-
-   If you're prompted with ``Are you sure you want to continue connecting (yes/no)?``, type "yes" and hit :kbd:`Enter`.
-
-   You should see a message indicating you have successfully authenticated (and saying GitHub doesn't provide shell access, which we don't care about).
-
-**You're all set!** At this point, you will need to ask your trainer for access to the repository we'll use in the next section.
+At this point, you will need to ask your trainer for access to the repository we'll use in the next section.
 
 .. admonition:: Exercise: Get access to the stsci-riab/riatraining repository
    :class: note
 
    Send your trainer the username for your GitHub account. They will give you access to the ``stsci-riab/riatraining`` repository, which we use in the next section.
 
-Phew! That was a long prelude to the main event. Fortunately, once you've set this up once for a computer, you rarely have to touch it again.
-
 Cloning the training document repository
 ========================================
 
 You should now have access to https://github.com/stsci-riab/riatraining, a.k.a. `stsci-riab/riatraining <https://github.com/stsci-riab/riatraining>`_. [#abbreviatedgithub]_
 
-Cloning copies the contents and the history of a repository over the network or on disk. When cloning from GitHub, there are multiple ways ``git`` can talk to the central server. We're interested in talking over **SSH**, since it's simpler for sending your changes back to the central copy. Plus, we just set up an SSH key for this.
+Cloning copies the contents and the history of a repository over the network or on disk. When cloning from GitHub, there are multiple ways ``git`` can talk to the central server. We're interested in talking over **HTTPS**, since it's simpler to set up.
 
-If you look at the main page for the repository on GitHub, there's a box on the right sidebar with a "clone URL". Click "SSH" to select it, if it's not already selected.
+.. tip::
+   You can also set up git to sign you in automatically, which might be useful if you find yourself typing your GitHub password all the time. See :ref:`git-push-ssh`. If you set this up, choose the "SSH clone URL" option below.
 
-.. figure:: figures/version_control/ssh_clone_url.png
+If you look at the main page for the repository on GitHub, there's a box on the right sidebar with a "clone URL". Click "HTTPS" to select it, if it's not already selected.
+
+.. figure:: figures/version_control/https_clone_url.png
 
    The main repository page, with the clone URL highlighted.
 
-.. admonition:: Exercise: Copy the SSH clone URL and clone the repository
+.. admonition:: Exercise: Copy the HTTPS clone URL and clone the repository
    :class: note
 
    Click the clipboard button shown in the screenshot to copy the text box contents to your system clipboard for pasting into a terminal.
 
-   Clone the repository into a directory on your computer. The command to clone a repository is ``git clone [clone url]``, where ``[clone url]`` is the URL you just copied. This will copy the repository into  a new directory called ``riatraining`` under whatever directory you're in.
+   Clone the repository into a directory on your computer. The command to clone a repository is ``git clone [clone url]``, where ``[clone url]`` is the URL you just copied. This will copy the repository into  a new directory called ``riatraining`` under whatever directory you're in. (You'll be prompted for your GitHub username and password.) ::
+
+      $ git clone https://github.com/stsci-riab/riatraining.git
+      Cloning into 'riatraining'...
+      Username for 'https://github.com': [your username]
+      Password for 'https://yourusername@github.com':
+      remote: Counting objects: 1187, done.
+      remote: Compressing objects: 100% (8/8), done.
+      remote: Total 1187 (delta 3), reused 0 (delta 0), pack-reused 1179
+      Receiving objects: 100% (1187/1187), 23.98 MiB | 7.44 MiB/s, done.
+      Resolving deltas: 100% (641/641), done.
+      Checking connectivity... done.
 
 Creating a branch for your changes
 ==================================
@@ -216,7 +168,7 @@ When making changes, especially in a collaborative setting (or when you're explo
 
    You only need the ``-b`` when you are checking out a branch that does not already exist. Try switching to ``master`` with ``git checkout master``. What does ``git status`` say?
 
-   Switch back to your branch before continuing.
+   Switch back to the branch you just made before continuing.
 
 At this point, ``master`` and your new branch point to the same commit (or snapshot).
 
@@ -286,13 +238,11 @@ To incorporate your changes in the main history, you issue a "pull request" thro
 If your branch looks like this (note that more commits have been added to ``master``)...
 
 .. figure:: figures/version_control/branching_4.png
-   :scale: 50 %
    :alt: The repository history. The master branch now has another commit, illustrating how "newbranch" and master evolved in parallel.
 
 ... a pull request asks to combine the branches to look something like this:
 
 .. figure:: figures/version_control/branching_5.png
-   :scale: 50 %
    :alt: The repository history after "newbranch" has been merged into master.
 
 Pull requests are a term invented by GitHub, but similar features exist in other version control systems by other names (e.g. "merge request"). Once you have pushed to a new branch, when you visit https://github.com/stsci-riab/riatraining you will see a new green icon to "Compare & pull request".
@@ -329,7 +279,4 @@ Give your pull request a brief title and description, then click "Create pull re
 
 .. [#gitproject] `git <http://git-scm.com/>`_ is free and open source software developed by the creator of Linux (Linus Torvalds) and many others. He once said that "git" (British English for "an unpleasant person") was a good name for a project of his, as he names all of his projects after himself.
 .. [#wellkinda] Since we started keeping this list, anyway!
-.. [#passphrase] Passphrases ensure that someone with physical access to your computer still cannot impersonate you online with your SSH key. The down side is that you have to supply a passphrase each time you use the key, or else configure the SSH agent (which can result in additional frustration).
-
-   Since Institute laptops have full-disk encryption, the risk of a malicious actor coming into your office to steal your encryption keys while you're away from your desk is low, and the keys aren't protecting anything more sensitive than training documents, you can forgo the passphrase in this case. If your situation is different, you should absolutely generate a new key with a passphrase.
 .. [#abbreviatedgithub] GitHub is so ubiquitous in the software world that it's common to abbreviate URLs as ``<username>/<reponame>`` and omit the ``https://github.com/`` entirely in documents. It's not common at STScI, but you may see this elsewhere on e.g. StackOverflow.
