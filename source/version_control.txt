@@ -105,6 +105,7 @@ Cloning copies the contents and the history of a repository over the network or 
 If you look at the main page for the repository on GitHub, there's a box on the right sidebar with a "clone URL". Click "HTTPS" to select it, if it's not already selected.
 
 .. figure:: figures/version_control/https_clone_url.png
+   :scale: 50 %
 
    The main repository page, with the clone URL highlighted.
 
@@ -149,7 +150,6 @@ At its simplest, git's version history is a series of snapshots in time. ("On Ja
 Most of the time, the main timeline (for the publication-ready version of a document, or the latest development version of some software, for example) is a branch called ``master``. New snapshots ("commits") are added on to the end of ``master``, and the latest up-to-date version is computed from the last commit on the branch.
 
 .. figure:: figures/version_control/branching_1.png
-   :scale: 50 %
    :alt: The master branch evolving in time as a series of commits.
 
    The master branch evolving in time as a series of commits.
@@ -173,7 +173,6 @@ When making changes, especially in a collaborative setting (or when you're explo
 At this point, ``master`` and your new branch point to the same commit (or snapshot).
 
 .. figure:: figures/version_control/branching_2.png
-   :scale: 50%
    :alt: A second branch called "newbranch" coming off of master.
 
    A second branch called "newbranch" coming off of master.
@@ -210,7 +209,6 @@ Editing and saving a file is not enough to commit it to history. (This is intent
 Now your repository history looks a bit like this:
 
 .. figure:: figures/version_control/branching_3.png
-   :scale: 50%
    :alt: A new commit on "newbranch" shown coming off of master.
 
    A new commit on "newbranch" shown coming off of master.
@@ -235,29 +233,31 @@ A git repository remembers where you cloned it from, and calls it the "origin". 
 
 To incorporate your changes in the main history, you issue a "pull request" through the GitHub website. A "pull request" is a request to pull in changes from a branch to the main history. (GitHub would not stop you from merging your own edits, but it is considered good practice to give other collaborators a chance to review your changes.)
 
-If your branch looks like this (note that more commits have been added to ``master``)...
-
 .. figure:: figures/version_control/branching_4.png
    :alt: The repository history. The master branch now has another commit, illustrating how "newbranch" and master evolved in parallel.
 
-... a pull request asks to combine the branches to look something like this:
+   If your branch looks like this (note that more commits have been added to ``master``)...
 
 .. figure:: figures/version_control/branching_5.png
    :alt: The repository history after "newbranch" has been merged into master.
 
+   ... a pull request asks to combine the branches to look something like this.
+
 Pull requests are a term invented by GitHub, but similar features exist in other version control systems by other names (e.g. "merge request"). Once you have pushed to a new branch, when you visit https://github.com/stsci-riab/riatraining you will see a new green icon to "Compare & pull request".
 
 .. figure:: figures/compare_and_pull_request.png
-   :scale: 50 %
    :alt: GitHub's two buttons for "Compare & pull request"
+
+   GitHub's two buttons for "Compare & pull request"
 
 Click the big green "Compare & pull request" button. (The smaller green pull request icon next to the branch selector will also work, but you will have to remember to select the right branch.)
 
 At the bottom of the page, you'll see the changes you're asking to pull in. Ensure you're only pulling in changes you mean to!
 
 .. figure:: figures/pull_request_files.png
-   :scale: 50 %
-   :alt: View of the changes in the pull request diff
+   :alt: Color-coded view of the changes in the pull request
+
+   Color-coded view of the changes in the pull request
 
 .. warning::
 
