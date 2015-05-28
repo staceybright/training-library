@@ -67,6 +67,23 @@ If all went well, your computer will now securely identify itself to GitHub auto
 
    You should see a message indicating you have successfully authenticated (and saying GitHub doesn't provide shell access, which we don't care about).
 
+Now to use your key to connect with GitHub, you should be sure to clone with the "SSH clone URL", highlighted in the following figure.
+
+.. figure:: figures/tips/ssh_clone_url.png
+   :alt: Where to find the SSH clone URL on a GitHub Page
+
+   Where to find the SSH clone URL on a GitHub Page
+
+To convert a repository you have already cloned via HTTPS to use SSH, you have to edit the "remotes" for your clone. The command to examine the remotes for a repository is ``git remote``. For a repository cloned from ``stsci-riab/riatraining`` via HTTPS, the output of ``git remote -v`` is::
+
+   $ git remote -v
+   origin	https://github.com/stsci-riab/riatraining.git (fetch)
+   origin	https://github.com/stsci-riab/riatraining.git (push)
+
+Note the ``https`` in the URL. We want to change that to tell git to use SSH, which takes the form ``git@github.com:[username]/[reponame].git``. For the example above, the command would be::
+
+   $ git remote set-url origin git@github.com:stsci-riab/riatraining.git
+
 .. rubric:: Footnotes
 
 .. [#passphrase] Passphrases ensure that someone with physical access to your computer still cannot impersonate you online with your SSH key. The down side is that you have to supply a passphrase each time you use the key, or else configure the SSH agent (which can result in additional frustration).
