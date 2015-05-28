@@ -154,13 +154,10 @@ If all went well, your computer will now securely identify itself to GitHub auto
 
 Phew! That was a long prelude to the main event. Fortunately, once you've set this up once for a computer, you rarely have to touch it again.
 
-Making your mark on the RIA training documents
-==============================================
+Cloning the training document repository
+========================================
 
 You should now have access to https://github.com/stsci-riab/riatraining, a.k.a. `stsci-riab/riatraining <https://github.com/stsci-riab/riatraining>`_. [#abbreviatedgithub]_
-
-Cloning the repository to make your own copy
---------------------------------------------
 
 Cloning copies the contents and the history of a repository over the network or on disk. When cloning from GitHub, there are multiple ways ``git`` can talk to the central server. We're interested in talking over **SSH**, since it's simpler for sending your changes back to the central copy. Plus, we just set up an SSH key for this.
 
@@ -177,8 +174,8 @@ If you look at the main page for the repository on GitHub, there's a box on the 
 
    Clone the repository into a directory on your computer. The command to clone a repository is ``git clone [clone url]``, where ``[clone url]`` is the URL you just copied. This will copy the repository into  a new directory called ``riatraining`` under whatever directory you're in.
 
-Editing the trainees list
--------------------------
+Creating a branch for your changes
+==================================
 
 Now you have a git repository to manipulate on your own computer. The command ``clone`` is aptly named: the entire history of the repository is there, but it's entirely self contained. Don't worry about screwing it up; if you get stuck it's possible to delete the whole folder and make a "fresh" clone without affecting anyone else's work.
 
@@ -194,9 +191,6 @@ Now you have a git repository to manipulate on your own computer. The command ``
 Since this is a fresh copy, hopefully you'll see that the working directory is "clean" (meaning no changes have been made). Let's make some.
 
 It's generally a good idea to make changes on a separate "branch" within the repository. Branches are a key part of how git tracks history internally, but require a bit of explanation.
-
-Creating a branch for your changes
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 At its simplest, git's version history is a series of snapshots in time. ("On January 10th, the file looked like this. On January 12th, lines 2 and 4 changed, and now it looks like this. On January 15th, ...") This allows you to travel backwards in time and retrieve the state of your project on a certain day.
 
@@ -235,7 +229,7 @@ At this point, ``master`` and your new branch point to the same commit (or snaps
 However, because you have selected a new branch, changes you make will be added to the history on their own separate timeline. Thus prepared, let's edit the trainees list.
 
 Editing and committing changes
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==============================
 
 These pages are stored in the ``source`` directory. The document we want to edit is called ``trainees.txt``. Open it up in your favorite text editor.
 
@@ -272,7 +266,7 @@ Now your repository history looks a bit like this:
 This may seem academic (it's still a connected line to the main history!), but keep in mind that ``master`` can continue evolving while you work on your branch. Also, if you and another trainee both branch off of ``master`` at the same point, your work can proceed in parallel on your own branches.
 
 Incorporating your changes in the GitHub copy
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=============================================
 
 Your changes are now committed to your local copy of the history. The next step is to send them to the copy on GitHub, where your trainer will review and sign off on your changes.
 
@@ -287,19 +281,21 @@ A git repository remembers where you cloned it from, and calls it the "origin". 
 
    This updates GitHub's copy to look like yours: a new branch from master called "yourlastname_trainee" is now present with your changes.
 
-Once you have pushed to a new branch, when you visit https://github.com/stsci-riab/riatraining you will see a new green icon to "Compare & pull request". A "pull request" is a request to pull in changes from a branch to the main history. (GitHub would not stop you from merging your own edits, but it is considered good practice to give other collaborators a chance to review your changes.)
+To incorporate your changes in the main history, you issue a "pull request" through the GitHub website. A "pull request" is a request to pull in changes from a branch to the main history. (GitHub would not stop you from merging your own edits, but it is considered good practice to give other collaborators a chance to review your changes.)
 
 If your branch looks like this (note that more commits have been added to ``master``)...
 
 .. figure:: figures/version_control/branching_4.png
    :scale: 50 %
-   :alt: GitHub's two buttons for "Compare & pull request"
+   :alt: The repository history. The master branch now has another commit, illustrating how "newbranch" and master evolved in parallel.
 
-... a pull request asks to combine the branches to look something like this ...
+... a pull request asks to combine the branches to look something like this:
 
 .. figure:: figures/version_control/branching_5.png
    :scale: 50 %
-   :alt: GitHub's two buttons for "Compare & pull request"
+   :alt: The repository history after "newbranch" has been merged into master.
+
+Pull requests are a term invented by GitHub, but similar features exist in other version control systems by other names (e.g. "merge request"). Once you have pushed to a new branch, when you visit https://github.com/stsci-riab/riatraining you will see a new green icon to "Compare & pull request".
 
 .. figure:: figures/compare_and_pull_request.png
    :scale: 50 %
