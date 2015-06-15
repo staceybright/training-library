@@ -68,7 +68,7 @@ Here is an example ``.cshrc``::
     setenv crrefer /grp/hst/cdbs/
     setenv mtab /grp/hst/cdbs/mtab/
 
-As you may have guessed, setting variables in ``tcsh`` takes the form of ``setenv NAMEOFVAR /value/for/var``.
+As you may have guessed, setting variables in ``tcsh`` takes the form of ``setenv NAMEOFVAR /value/for/var``. (You should set all of these variables, even if you are not on one of the listed instrument teams, as later training exercises will depend on them being set.)
 
 To check that your changes have taken effect, open a **new terminal window** and type ``echo $mtab``. You should see the value for ``mtab`` from above printed out in the terminal.
 
@@ -117,17 +117,9 @@ You'll be assigned a temporary password when you register. You should change it 
 Subscribe to mailing lists
 ===========================
 
-The Institute has more than one way to subscribe to mailing lists, which is a bit confusing.
+Subscribe to ``ins_staff``, ``ins_aura``, ``ins_riab``, ``sci_tech``, and ``tips_announce`` through the Outlook Web Access interface at http://mail.stsci.edu/. Log in with your AD username and password. The way to subscribe to lists is well hidden; you must log in, choose "Options", then "See all options", select "Groups" from the sidebar, click "Join"  under "Public Groups I Belong To". In the window that pops open, search for the mailing list name and click "Join".
 
-jDomo subscriptions
---------------------
-
-Subscribe to ``sci_tech`` and ``tips_announce`` through the jDomo interface at http://www.stsci.edu/cgi-bin/jDomo.tcl. You will get a confirmation email from jDomo. To complete the subscription, reply to it with the authorization code in the message (e.g. ``auth 3198f7d8 subscribe sci_tech myname@stsci.edu``).
-
-Outlook subscriptions
-----------------------
-
-Subscribe to ``ins_staff``, ``ins_aura``, and ``ins_riab`` through the Outlook Web Access interface at http://mail.stsci.edu/. Log in with your AD username and password. The way to subscribe to lists is well hidden; you must log in, choose "Options", then "See all options", select "Groups" from the sidebar, search for the mailing list name and click "Join".
+If you will be working on JWST or WFIRST, ask your team lead if you should sign up for ``jwst_all``, ``wfirst_all``, or another appropriate list.
 
 The lists ``pylunch``, ``python-interested`` and ``macx_users`` can also be subscribed to in the same way. ITSD also provides `more information on Exchange <http://www.stsci.edu/institute/itsd/collaboration/exchange/exchangeLists>`_, if you're interested.
 
