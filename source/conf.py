@@ -211,8 +211,9 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'RIATraining.tex', u'RIA Training Documentation', u'The RIA Branch', 'manual'),
   ('computer_setup', 'computer_setup.tex', u'RIA Training: Computer Setup', u'Space Telescope Science Institute (internal use only)', 'howto'),
+  ('archives', 'archives.tex', u'RIA Training: Using MAST (a.k.a. the Archive)', u'Space Telescope Science Institute (internal use only)', 'howto'),
+  ('version_control', 'version_control.tex', u'RIA Training: Version Control with git', u'Space Telescope Science Institute (internal use only)', 'howto'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -240,10 +241,10 @@ latex_documents = [
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [
-    ('index', 'riatraining', u'RIA Training Documentation',
-     [u'The RIA Branch'], 1)
-]
+# man_pages = [
+#     ('index', 'riatraining', u'RIA Training Documentation',
+#      [u'The RIA Branch'], 1)
+# ]
 
 # If true, show URL addresses after external links.
 #man_show_urls = False
@@ -254,11 +255,11 @@ man_pages = [
 # Grouping the document tree into Texinfo files. List of tuples
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
-texinfo_documents = [
-  ('index', 'RIATraining', u'RIA Training Documentation',
-   u'The RIA Branch', 'RIATraining', 'One line description of project.',
-   'Miscellaneous'),
-]
+# texinfo_documents = [
+#   ('index', 'RIATraining', u'RIA Training Documentation',
+#    u'The RIA Branch', 'RIATraining', 'One line description of project.',
+#    'Miscellaneous'),
+# ]
 
 # Documents to append as an appendix to all manuals.
 #texinfo_appendices = []

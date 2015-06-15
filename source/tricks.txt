@@ -2,13 +2,90 @@
 Tips and Tricks
 ****************
 
-.. _update-ureka-core:
+.. _git-push-ssh:
 
-Updating the Ureka core
-------------------------
+Pushing to GitHub (or Grit/GitLab) via SSH
+------------------------------------------
 
-Ureka contains a ``ur_update`` command to update components developed at the Institute, but you will periodically need to update the Ureka core. This includes the scripts that set up your terminal sessions to use Ureka, as well as important packages from outside the Institute like IPython, SciPy, AstroPy, etc. and the Python interpreter itself.
+If you haven't had to generate an SSH key already, the next exercise will be to generate one for use with GitHub. Without getting too detailed, an SSH key is a bit like a password. GitHub uses your SSH key to know who you are when you want to make changes to shared documents, and to check that you have permission to do so. (Usually, you'd want a *passphrase* on your key, but for this case it's unnecessary so you can just hit :kbd:`Enter` when prompted in the next exercise.) [#passphrase]_
+
+.. admonition:: Exercise: Create an SSH key
+   :class: note
+
+   Open a new terminal and type the ``ssh-keygen`` command shown below. (Remember to put in your STScI email!) ::
+
+       $ ssh-keygen -t rsa -C "your_email@example.com"
+
+       Generating public/private rsa key pair.
+       Enter file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
+       Enter passphrase (empty for no passphrase): [Press enter]
+       Enter same passphrase again: [Press enter]
+       Your identification has been saved in /Users/you/.ssh/id_rsa.
+       Your public key has been saved in /Users/you/.ssh/id_rsa.pub.
+       The key fingerprint is:
+       01:0f:f4:3b:ca:85:d6:17:a1:7d:f0:68:9d:f0:a2:db your_email@example.com
+       The key's randomart image is:
+       +--[ RSA 2048]----+
+       |       o+ oo=..  |
+       |       . ..+ o . |
+       |        .   o .  |
+       |       .   o +   |
+       |        S   = =  |
+       |             * . |
+       |              . .|
+       |               = |
+       |            E.+o+|
+       +-----------------+
+
+This makes a two-part key, with a "private" and "public" half. We need to give the "public" half (the file ``~/.ssh/id_rsa.pub``) to GitHub so they can match it up with the private part to verify our account later. Now, we need to tell GitHub that this key is connected to the account you just made.
+
+.. admonition:: Exercise: Add a new SSH public key to your GitHub account
+   :class: note
+
+   First, copy the contents of ``~/.ssh/id_rsa.pub`` to your clipboard using this command::
+
+      $ pbcopy < ~/.ssh/id_rsa.pub
+
+   Now you want to go to https://github.com/settings/ssh and follow these instructions to `add your SSH key to your account <https://help.github.com/articles/generating-ssh-keys/#step-3-add-your-ssh-key-to-your-account>`_.
 
 .. warning::
 
-   If you have installed Python packages with ``pip install`` without configuring an install prefix, you will lose these packages and have to reinstall them. The command ``pip freeze`` will emit a list of all currently installed packages for your reference.
+   It's worth mentioning that Grit does this slightly differently. You still need to add a key (at https://grit.stsci.edu/profile/keys/new), but you can log in with your AD username and password. You can use the same public key for GitHub and Grit.
+
+If all went well, your computer will now securely identify itself to GitHub automatically. Before we move on, let's check that everything's in place.
+
+.. admonition:: Exercise: Verify that your computer can talk to GitHub
+   :class: note
+
+   The following command attempts to connect to GitHub with the key we set up.
+
+   ::
+
+      $ ssh -T git@github.com
+
+   If you're prompted with ``Are you sure you want to continue connecting (yes/no)?``, type "yes" and hit :kbd:`Enter`.
+
+   You should see a message indicating you have successfully authenticated (and saying GitHub doesn't provide shell access, which we don't care about).
+
+Now to use your key to connect with GitHub, you should be sure to clone with the "SSH clone URL", highlighted in the following figure.
+
+.. figure:: figures/tips/ssh_clone_url.png
+   :alt: Where to find the SSH clone URL on a GitHub Page
+
+   Where to find the SSH clone URL on a GitHub Page
+
+To convert a repository you have already cloned via HTTPS to use SSH, you have to edit the "remotes" for your clone. The command to examine the remotes for a repository is ``git remote``. For a repository cloned from ``stsci-riab/riatraining`` via HTTPS, the output of ``git remote -v`` is::
+
+   $ git remote -v
+   origin	https://github.com/stsci-riab/riatraining.git (fetch)
+   origin	https://github.com/stsci-riab/riatraining.git (push)
+
+Note the ``https`` in the URL. We want to change that to tell git to use SSH, which takes the form ``git@github.com:[username]/[reponame].git``. For the example above, the command would be::
+
+   $ git remote set-url origin git@github.com:stsci-riab/riatraining.git
+
+.. rubric:: Footnotes
+
+.. [#passphrase] Passphrases ensure that someone with physical access to your computer still cannot impersonate you online with your SSH key. The down side is that you have to supply a passphrase each time you use the key, or else configure the SSH agent (which can result in additional frustration).
+
+   Since Institute laptops have full-disk encryption, the risk of a malicious actor coming into your office to steal your encryption keys while you're away from your desk is low, and the keys aren't protecting anything more sensitive than training documents, you can forgo the passphrase in this case. If your situation is different, you should absolutely generate a new key with a passphrase.

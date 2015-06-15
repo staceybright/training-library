@@ -4,42 +4,74 @@ Version Control with git
 
 Version control systems keep track of changes to code, documents, and other files as you work. While this document will discuss one particular version control system, ``git`` [#gitproject]_ , the *concept* of version control shows up everywhere from iCloud to Wikipedia to NASA project management. That's because the simple idea of tracking changes is very powerful, giving authors and programmers great flexibility in their work.
 
+.. note::
+
+   In this text, when discussing commands to be typed at a command prompt, ``$`` is a placeholder for your command prompt (which may be something like ``yourname@localhost $``). You don't need to type it, just the commands following it.
+
+   Some commands will ask questions or require input. Hints for those prompts are given in ``[square brackets]`` where relevant.
+
 What can version control do for me?
 ====================================
 
-It might be instructive to motivate these exercises with some examples. After completing this training, you will know how to do all of these for any given ``git`` repository. Here are a few examples of things version control can do for you.
+Here are things that a good version control system will enable you to do.
 
-1. **Figuring out who to ask** -- Look at the *history* of a particular file to find out who to ask about a particular section and when it was written
-2. **Collaborate without clobbering** -- Edit a file someone else is also working on, without overwriting their changes
-3. **Work on two things at once** -- Explore adding a major new feature, but keep those changes separate from your routine work
+1. **Figuring out who to ask** -- Look at the *history* of a particular file to find out who to ask about a particular section and when it was written.
+2. **Collaborate without clobbering** -- Edit a file someone else is also working on, without overwriting their changes.
+3. **Work on two things at once** -- Explore a major change to code or a document, but keep those changes separate from your routine work.
 4. **Undo exactly what you changed** -- Sometimes things stop working and you don't know what you changed. If you track changes in a version control system, you can see exactly what changed.
-5. **Copy, change, contribute back** -- Modify open-source software and share your changes with the wider community
 
-Getting started with ``git``
-==============================
+We won't cover all of these in detail in this training. Rather, we hope to expose you to the basics. That way if you join an instrument team or research collaboration that makes use of ``git``, it won't be completely unfamiliar.
 
-First, make sure ``git`` is installed: open a Terminal window, type ``git``, and hit :kbd:`Enter`. (If you see ``command not found``, you need to make sure git is installed and available in your Terminal.) This will print out a somewhat intimidating list of all the things you can do with git, most of which are exposed through "sub-commands". Think of it like this: the first two "words" when you type a git command are the real name of the command, and anything after is interpreted as modifiers to that command.
+.. note::
 
-For example, ``git add ./test`` means "add files in the test directory to be committed" and ``git init ./test`` means "initialize a repository in the test directory". On the other hand, if you typed ``git ./test``... ::
+   There will be exercises in this training that ask you questions. Keep your answers in a text file somewhere convenient, and send them to your trainer when you finish the training.
 
-   $ git ./test
-   git: './test' is not a git command. See 'git --help'.
+Concepts and first steps with ``git``
+=====================================
 
-Every sub-command has thorough documentation accessible through ``git nameofcommand --help``. (You can scroll the help pagewith the arrow keys and exit with :kbd:`q`.)
+First things first, we want to make sure ``git`` is installed.
 
-The first thing we want to do is make a workspace for these exercises. Git commands operate on a **repository**, which is a folder on your computer that contains both the files you want to track and the internal git bookkeeping data #[gitdirectory]_ .
+.. admonition:: Exercise: Verify that you have ``git`` installed
+   :class: note
 
-.. admonition:: Exercise: Creating a new repository
+   Open a new terminal window, type ``git``, and hit :kbd:`Enter`. If git is installed, it will show a somewhat intimidating list of all the things you can do with git. Can you figure out the options to find the version number for the ``git`` installed on your computer?
 
-   Create a new git repository in a folder called ``git_training`` using the ``git init`` commmand. (Skim ``git init --help`` to figure out the syntax.)
+You may have noticed that typing ``git`` on its own didn't do anything exciting. That's because most of ``git``\ 's functionality is available through "commands" given after the word git. To make it do something, you must provide the name of a command and, optionally, additional arguments.
 
+For example, ``git add ./test`` means "add files in the test directory to be committed" and ``git commit`` means "save the changes I requested to the project history".
 
-..
-   TODO list
-   add, commit, revert
-   branches
-   merging
-   merging with conflicts
+Every sub-command has thorough documentation accessible through ``git nameofcommand --help``. (You can scroll the help page with the arrow keys and exit with :kbd:`q`.)
+
+.. admonition:: Excercise: Look at the documentation for a git command
+   :class: note
+
+   Open up the help page for ``clone``. Skim the description. In a sentence or two, what do you think ``git clone`` does?
+
+   (There's a lot of jargon in the git help, so don't worry if it's not clear yet what all that means.)
+
+Git has a special name for directories of files that it keeps histories of (we call those files "tracked" or "versioned"). Folders that git understands how to manipulate are called "repositories", and contain the current state of the files, as well as a copy of their history at certain "snapshots" in time.
+
+Git commands generally only work when you have ``cd``\ -ed into a repository directory in your terminal. The two main exceptions are ``git init``, which initializes a new repository in the current directory, and ``git clone``, which creates a new local copy of a repository.
+
+Enough conceptual stuff, let's do something more hands-on.
+
+Getting set up to collaborate
+=============================
+
+Since most RIAs come across ``git`` in the context of joining an existing project, we will structure these exercises around making an edit to the ``git`` repository that stores these training documents.
+
+There's a :doc:`trainees` document listing everyone who completes the training [#wellkinda]_. To complete this training, you will add your name to the list, and learn some essential ``git`` commands in the process.
+
+Git, GitHub, Grit, and GitLab
+-----------------------------
+
+You may have heard some of these terms bandied around. For clarity's sake, here's what they mean:
+
+ * **git** -- A command-line tool to manage versions of files. (Free and open-source)
+ * **GitHub** -- A service to share and collaborate on repositories using ``git``. (Commercial, with exceptions for nonprofits)
+ * **GitLab** (Grit) -- Software similar to GitHub, but running internally at STScI (http://grit.stsci.edu/). Used by some instrument teams. (Free community edition, commercial version available)
+
+We use GitHub to collaborate on these training documents. In the next section, you will set up a user account and key to let your computer talk to GitHub.
 
 .. _getting_started_github:
 
@@ -48,60 +80,203 @@ Getting started with GitHub
 
 If you're new to GitHub, you'll need to register for a free account and set up your computer to authenticate you with GitHub when using git.
 
-1. **Make a free GitHub account**
+.. admonition:: Exercise: Sign up for a GitHub Account
+   :class: note
 
-   The registration form is on the `GitHub homepage <https://github.com/>`_
+   GitHub sign-up is free, and the registration form is on their homepage: https://github.com/. If you already have a GitHub account, you can skip this.
 
-2. **Generate an SSH key**
+At this point, you will need to ask your trainer for access to the repository we'll use in the next section.
 
-   Without getting too detailed, an SSH key is a bit like a username and password combined. GitHub needs your SSH key to know who you are when you want to make changes to shared documents. Usually, you'd want a *passphrase* on top of that, but for this case it's unnecessary so you can just hit :kbd:`Enter` when prompted. [#passphrase]_
+.. admonition:: Exercise: Get access to the stsci-riab/riatraining repository
+   :class: note
 
-   Open a new terminal and type the command shown below. (Remember to put in your STScI email!) ::
+   Send your trainer the username for your GitHub account. They will give you access to the ``stsci-riab/riatraining`` repository, which we use in the next section.
 
-       $ ssh-keygen -t rsa -C "your_email@example.com"
-       Generating public/private rsa key pair.
-       Enter file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
-       Enter passphrase (empty for no passphrase): [Press enter]
-       Enter same passphrase again: [Press enter]
-       Your identification has been saved in /Users/you/.ssh/id_rsa.
-       Your public key has been saved in /Users/you/.ssh/id_rsa.pub.
-       The key fingerprint is:
-       01:0f:f4:3b:ca:85:d6:17:a1:7d:f0:68:9d:f0:a2:db your_email@example.com
-       The key's randomart image is:
-       +--[ RSA 2048]----+
-       |       o+ oo=..  |
-       |       . ..+ o . |
-       |        .   o .  |
-       |       .   o +   |
-       |        S   = =  |
-       |             * . |
-       |              . .|
-       |               = |
-       |            E.+o+|
-       +-----------------+
+Cloning the training document repository
+========================================
 
-3. **Tell GitHub about your new SSH key**
+You should now have access to https://github.com/stsci-riab/riatraining, a.k.a. `stsci-riab/riatraining <https://github.com/stsci-riab/riatraining>`_. [#abbreviatedgithub]_
 
-   First, copy the contents of ``~/.ssh/id_rsa.pub`` to your clipboard using this command::
+Cloning copies the contents and the history of a repository over the network or on disk. When cloning from GitHub, there are multiple ways ``git`` can talk to the central server. We're interested in talking over **HTTPS**, since it's simpler to set up.
 
-   $ pbcopy < ~/.ssh/id_rsa.pub  # (you could do this by hand with a text editor too)
+.. tip::
+   You can also set up git to sign you in automatically, which might be useful if you find yourself typing your GitHub password all the time. See :ref:`git-push-ssh`. If you set this up, choose the "SSH clone URL" option below.
 
-   Now you want to go to https://github.com/settings/ssh and follow these instructions to `add your SSH key to your account <https://help.github.com/articles/generating-ssh-keys/#step-3-add-your-ssh-key-to-your-account>`_.
+If you look at the main page for the repository on GitHub, there's a box on the right sidebar with a "clone URL". Click "HTTPS" to select it, if it's not already selected.
 
-4. **Verify that your computer can talk to GitHub**
+.. figure:: figures/version_control/https_clone_url.png
+   :scale: 50 %
 
-   ::
+   The main repository page, with the clone URL highlighted.
 
-      $ ssh -T git@github.com
+.. admonition:: Exercise: Copy the HTTPS clone URL and clone the repository
+   :class: note
 
-   If you're prompted with ``Are you sure you want to continue connecting (yes/no)?``, type "yes" and hit :kbd:`Enter`. You should see a message indicating you have successfully authenticated.
+   Click the clipboard button shown in the screenshot to copy the text box contents to your system clipboard for pasting into a terminal.
 
-**You're all set!** Now when you make your improvements, your computer will be set up to let you share them on GitHub.
+   Clone the repository into a directory on your computer. The command to clone a repository is ``git clone [clone url]``, where ``[clone url]`` is the URL you just copied. This will copy the repository into  a new directory called ``riatraining`` under whatever directory you're in. (You'll be prompted for your GitHub username and password.) ::
+
+      $ git clone https://github.com/stsci-riab/riatraining.git
+      Cloning into 'riatraining'...
+      Username for 'https://github.com': [your username]
+      Password for 'https://yourusername@github.com':
+      remote: Counting objects: 1187, done.
+      remote: Compressing objects: 100% (8/8), done.
+      remote: Total 1187 (delta 3), reused 0 (delta 0), pack-reused 1179
+      Receiving objects: 100% (1187/1187), 23.98 MiB | 7.44 MiB/s, done.
+      Resolving deltas: 100% (641/641), done.
+      Checking connectivity... done.
+
+Creating a branch for your changes
+==================================
+
+Now you have a git repository to manipulate on your own computer. The command ``clone`` is aptly named: the entire history of the repository is there, but it's entirely self contained. Don't worry about screwing it up; if you get stuck it's possible to delete the whole folder and make a "fresh" clone without affecting anyone else's work.
+
+.. admonition:: Exercise: Check the status of your repository
+   :class: note
+
+   Even though we haven't made any changes yet, let's try our first real git command. ``git status`` shows which files you have edited, which are ready to commit to the history, and which files ``git`` doesn't know about yet.
+
+   Run ``git status`` in a terminal window. What does it say?
+
+   *(If you got a message saying "fatal: Not a git repository", remember that git wants you to "cd" into the repository first!)*
+
+Since this is a fresh copy, hopefully you'll see that the working directory is "clean" (meaning no changes have been made). Let's make some.
+
+It's generally a good idea to make changes on a separate "branch" within the repository. Branches are a key part of how git tracks history internally, but require a bit of explanation.
+
+At its simplest, git's version history is a series of snapshots in time. ("On January 10th, the file looked like this. On January 12th, lines 2 and 4 changed, and now it looks like this. On January 15th, ...") This allows you to travel backwards in time and retrieve the state of your project on a certain day.
+
+Most of the time, the main timeline (for the publication-ready version of a document, or the latest development version of some software, for example) is a branch called ``master``. New snapshots ("commits") are added on to the end of ``master``, and the latest up-to-date version is computed from the last commit on the branch.
+
+.. figure:: figures/version_control/branching_1.png
+   :alt: The master branch evolving in time as a series of commits.
+
+   The master branch evolving in time as a series of commits.
+
+When making changes, especially in a collaborative setting (or when you're exploring an idea you're not sure about), a branch allows you to add new commits to the history without changing the master copy.
+
+.. admonition:: Exercise: Create a branch for your changes
+   :class: note
+
+   Create a new branch with a descriptive name, like ``yourlastname_trainee``::
+
+      $ git checkout -b yourlastname_trainee
+      Switched to a new branch 'yourlastname_trainee'
+
+   The ``-b`` means "new branch". If you do ``git status`` now, you'll see a message saying you are on the branch ``yourlastname_trainee``.
+
+   You only need the ``-b`` when you are checking out a branch that does not already exist. Try switching to ``master`` with ``git checkout master``. What does ``git status`` say?
+
+   Switch back to the branch you just made before continuing.
+
+At this point, ``master`` and your new branch point to the same commit (or snapshot).
+
+.. figure:: figures/version_control/branching_2.png
+   :alt: A second branch called "newbranch" coming off of master.
+
+   A second branch called "newbranch" coming off of master.
+
+However, because you have selected a new branch, changes you make will be added to the history on their own separate timeline. Thus prepared, let's edit the trainees list.
+
+Editing and committing changes
+==============================
+
+These pages are stored in the ``source`` directory. The document we want to edit is called ``trainees.txt``. Open it up in your favorite text editor.
+
+.. admonition:: Exercise: Add your name to ``trainees.txt``
+   :class: note
+
+   Find the appropriate section for your training cohort, and add your name. (Be sure to format your entry like the other names in the list.)
+
+   Save the file. What does ``git status`` say now?
+
+Editing and saving a file is not enough to commit it to history. (This is intentional, as in practice you may decide you don't like your changes after all, and want to restore the original copy.) To commit your change to history, use the ``git add`` and ``git commit`` commands.
+
+.. admonition:: Exercise: Commit your changes to the repository
+   :class: note
+
+   The ``git add`` command tells git which file you changed and want to save changes to. It doesn't show any messages if it succeeds, but you can see what changed by running ``git status`` before and after. Run these commands and save the output for your trainer::
+
+      $ git status
+      $ git add source/trainees.txt
+      $ git status
+
+   After "staging" a file with ``git add``, use ``git commit`` to save it to the history. Use ``-m`` to specify a short message describing what you changed::
+
+      $ git commit -m "Added my name to trainees.txt"
+
+Now your repository history looks a bit like this:
+
+.. figure:: figures/version_control/branching_3.png
+   :alt: A new commit on "newbranch" shown coming off of master.
+
+   A new commit on "newbranch" shown coming off of master.
+
+This may seem academic (it's still a connected line to the main history!), but keep in mind that ``master`` can continue evolving while you work on your branch. Also, if you and another trainee both branch off of ``master``, your work can proceed in parallel on your own branches.
+
+Incorporating your changes in the GitHub copy
+=============================================
+
+Your changes are now committed to your local copy of the history. The next step is to send them to the copy on GitHub, where your trainer will review and sign off on your changes.
+
+A git repository remembers where you cloned it from, and calls it the "origin". The command to send your commits to a remote copy (like GitHub's) is called ``git push``.
+
+.. admonition:: Exercise: Push your commits to a branch on GitHub
+   :class: note
+
+   The syntax of the ``git push`` command is ``git push [remote name] [remote branch name]``. In this case, the remote name is "origin", since we're pushing changes back to the copy we originally cloned from. The remote branch name can be anything you want, but for simplicity's sake use the same branch name as above. For example::
+
+   $ git push origin yourlastname_trainee
+
+   This updates GitHub's copy to look like yours: a new branch from master called "yourlastname_trainee" is now present with your changes.
+
+To incorporate your changes in the main history, you issue a "pull request" through the GitHub website. A "pull request" is a request to pull in changes from a branch to the main history. (GitHub would not stop you from merging your own edits, but it is considered good practice to give other collaborators a chance to review your changes.)
+
+.. figure:: figures/version_control/branching_4.png
+   :alt: The repository history. The master branch now has another commit, illustrating how "newbranch" and master evolved in parallel.
+
+   If your branch looks like this (note that more commits have been added to ``master``)...
+
+.. figure:: figures/version_control/branching_5.png
+   :alt: The repository history after "newbranch" has been merged into master.
+
+   ... a pull request asks to combine the branches to look something like this.
+
+Pull requests are a term invented by GitHub, but similar features exist in other version control systems by other names (e.g. "merge request"). Once you have pushed to a new branch, when you visit https://github.com/stsci-riab/riatraining you will see a new green icon to "Compare & pull request".
+
+.. figure:: figures/compare_and_pull_request.png
+   :alt: GitHub's two buttons for "Compare & pull request"
+
+   GitHub's two buttons for "Compare & pull request"
+
+Click the big green "Compare & pull request" button. (The smaller green pull request icon next to the branch selector will also work, but you will have to remember to select the right branch.)
+
+At the bottom of the page, you'll see the changes you're asking to pull in. Ensure you're only pulling in changes you mean to!
+
+.. figure:: figures/pull_request_files.png
+   :alt: Color-coded view of the changes in the pull request
+
+   Color-coded view of the changes in the pull request
+
+.. warning::
+
+   If you see a message saying that the branches cannot be automatically merged, you need to "pull in upstream changes". All that means is that someone else edited the same thing as you, and you need to incorporate their changes in your pull request.
+
+   To do this, go to your repository in the terminal and execute ``git pull`` and ``git merge master``. You will see a message about which files have conflicts. Open them in your editor, look for the ``<<<<<<`` and ``>>>>>>`` markers, and combine the changes in a way that makes sense (e.g. include your name *and* that of another trainee that just added theirs).
+
+   Add, commit, push to your branch, and your pull request should gain the green "Able to merge" icon!
+
+Give your pull request a brief title and description, then click "Create pull request." Tell your trainer for this section, and they will merge it in if it all looks good!
+
+--------------------------------------------
+
+**Congratulations! You've finished the exercise-based part of the training. Next up, talk to your trainer about your project and report.**
+
+--------------------------------------------
 
 .. rubric:: Footnotes
 
 .. [#gitproject] `git <http://git-scm.com/>`_ is free and open source software developed by the creator of Linux (Linus Torvalds) and many others. He once said that "git" (British English for "an unpleasant person") was a good name for a project of his, as he names all of his projects after himself.
-.. [#gitdirectory] The vast majority of git repositories you will come across will have a hidden subdirectory named ``.git``, as well as the "working copy" of any files you're editing. To be nit-picky, the ``.git`` directory is the actual *repository*. (For example, you can delete the files of the working copy completely and get a fresh version as long as the ``.git`` directory is intact.)
-.. [#passphrase] Passphrases ensure that someone with physical access to your computer still cannot impersonate you online with your SSH key. The down side is that you have to supply a passphrase each time you use the key, or else configure the SSH agent (which can result in additional frustration).
-
-   Since Institute laptops have full-disk encryption, the risk of a malicious actor coming into your office to steal your encryption keys while you're away from your desk is low, and the keys aren't protecting anything more sensitive than training documents, you can forgo the passphrase in this case. If your situation is different, you should absolutely generate a new key with a passphrase.
+.. [#wellkinda] Since we started keeping this list, anyway!
+.. [#abbreviatedgithub] GitHub is so ubiquitous in the software world that it's common to abbreviate URLs as ``<username>/<reponame>`` and omit the ``https://github.com/`` entirely in documents. It's not common at STScI, but you may see this elsewhere on e.g. StackOverflow.
