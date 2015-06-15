@@ -107,13 +107,6 @@ IDL should be pre-installed on new Institute machines. To check, open a terminal
 
 If not, contact computer support.
 
-Create a MAST (archive) account
-================================
-
-MAST is the archive for HST science images and data from various other missions, operated by Space Telescope. You need a separate account to access it, which you can obtain by filling out the `online registration form <http://archive.stsci.edu/registration/registration_form.html>`_.
-
-You'll be assigned a temporary password when you register. You should change it to something **different* from your STScI password using the `password change form <http://archive.stsci.edu/registration/change.html>`_ after verifying that you're able to log in.
-
 Subscribe to mailing lists
 ===========================
 
