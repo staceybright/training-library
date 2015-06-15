@@ -8,45 +8,38 @@ The RIA Training Library
 
 New Research & Instrument Analysts at STScI work with a variety of tools, depending on their instrument team and research assignments. Nevertheless, some things are so generally useful to RIAs that we've drawn up training documents to bring you up to speed on anything you haven't used before.
 
-This library also contains a collection of :doc:`tricks`, generally computing related. When you reach the end of your training, your final task will be to contribute an improvement to the training library. This could be a tip, a clarification for part of the training that you found confusing, or something else.
-
 *******************************************
 Training guides and exercises for new RIAs
 *******************************************
 
 #. :doc:`computer_setup`
 #. :doc:`archives`
-#. :doc:`version_control`
 #. :doc:`using_idl`
 #. :doc:`python`
 #. :doc:`pyraf`
 #. :doc:`astrodrizzle`
 #. :doc:`photometry`
 #. :doc:`spectroscopy`
-#. :doc:`editing_these_documents`
+#. :doc:`jwst_intro`
+#. :doc:`version_control`
 
 *******************************************
 Supplemental training guides and exercises
 *******************************************
 
-#. Introduction to JWST
-#. JWST Training, read modes, reference output and pixels
+#. :doc:`jwst_training`
+#. :doc:`jwst_read_modes`
+#. :doc:`jwst_reference_output`
 #. Introduction to Gerchberg-Saxton Phase Retrieval (INS/TEL)
 
-****************************************
-Reference information and presentations
-****************************************
+*********************
+Reference information
+*********************
 
-#. :doc:`appendices/editing_training_docs`
+#. :doc:`editing_these_documents`
+#. :doc:`tricks`
 #. `Using APT (the Astronomer's Proposal Tool) <http://www.stsci.edu/hst/proposing/apt/using_apt>`_
-#. Archive of past RIA training reports
 #. :doc:`trainees`
-
-*************
-Extra Wisdom
-*************
-
-* :doc:`tricks`
 
 .. toctree::
    :maxdepth: 2
@@ -54,12 +47,17 @@ Extra Wisdom
 
    computer_setup
    archives
+   using_idl
    python
    pyraf
+   astrodrizzle
+   photometry
+   spectroscopy
+   jwst_intro
    version_control
-   using_idl
-   spectroscopy   
+   jwst_training
+   jwst_read_modes
+   jwst_reference_output
    editing_these_documents
    tricks
    trainees
-   appendices/editing_training_docs

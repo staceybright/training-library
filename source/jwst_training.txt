@@ -1,0 +1,9 @@
+***********************
+JWST Training Exercises
+***********************
+
+This is a set of exercises to be completed with sample JWST data.
+
+.. note::
+
+   This guide is maintained as a PDF document. :download:`Download it <pdf_guides/jwst_training.pdf>` and get started.
