@@ -20,8 +20,8 @@ Training guides and exercises for new RIAs
 #. :doc:`using_idl`
 #. :doc:`python`
 #. :doc:`pyraf`
-#. AstroDrizzle presentation and exercises
-#. Photometry presentation and exercises
+#. :doc:`astrodrizzle`
+#. :doc:`photometry`
 #. :doc:`spectroscopy`
 #. :doc:`editing_these_documents`
 

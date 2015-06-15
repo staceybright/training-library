@@ -1,0 +1,7 @@
+**********
+Photometry
+**********
+
+Roberto Avila has prepared some :download:`slides <pdf_guides/phot_training20120820.pdf>` about photometry on Hubble images.
+
+There are also :download:`exercises <pdf_guides/photometry_exercises.pdf>` that complement the slides and will introduce you to photometry on HST images with PyRAF.

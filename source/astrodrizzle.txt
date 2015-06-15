@@ -1,0 +1,7 @@
+************
+Astrodrizzle
+************
+
+Roberto Avila has prepared some :download:`slides <pdf_guides/drizzle_slides_2014.pdf>` about `DrizzlePac <http://www.stsci.edu/hst/HST_overview/drizzlepac>`_ and the image processing techniques it enables.
+
+There are also :download:`exercises <pdf_guides/Intro_to_AstroDrizzle.pdf>` that complement the slides and will introduce you to drizzling HST images.
