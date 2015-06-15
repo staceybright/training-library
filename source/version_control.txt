@@ -213,7 +213,7 @@ Now your repository history looks a bit like this:
 
    A new commit on "newbranch" shown coming off of master.
 
-This may seem academic (it's still a connected line to the main history!), but keep in mind that ``master`` can continue evolving while you work on your branch. Also, if you and another trainee both branch off of ``master`` at the same point, your work can proceed in parallel on your own branches.
+This may seem academic (it's still a connected line to the main history!), but keep in mind that ``master`` can continue evolving while you work on your branch. Also, if you and another trainee both branch off of ``master``, your work can proceed in parallel on your own branches.
 
 Incorporating your changes in the GitHub copy
 =============================================
