@@ -1,0 +1,93 @@
+************************************************
+Introduction to Gerchberg-Saxton phase retrieval
+************************************************
+
+**Research & Instrument Analysis Branch**
+
+Versions:
+
+ | 0.2: Joseph Long (June 15 2015, converted to reST)
+ | 0.1: Charles-Philippe Lajoie (August 27 2014)
+
+Introduction
+============
+
+This training is designed to get you familiar with the WebbPSF tool and
+the underlying principles of numerical Fourier Transforms (at a basic
+level). WebbPSF is written in Python and it is recommended that you also
+use Python for the exercises.
+
+In particular, the second part of this training is aimed at
+understanding how to perform numerical Fourier Transforms and includes
+an application for phase retrieval. Phase retrieval is key to the JWST
+mission and hopefully this exercise will provide some insights into the
+actual planned process. Note that the algorithms discussed here are
+basic in implementation and do not represent the state-of-the-art
+designs found in the JWST Wavefront Sensing software.
+
+You can download WebbPSF at: http://www.stsci.edu/jwst/software/webbpsf
+
+For Problem 2, you can download the pupil and an OPD at:
+``/grp/jwst/wit/miri/lajoie``
+
+Exercises
+=========
+
+Problem 1: WebbPSF GUI and Script
+---------------------------------
+
+1) Install WebbPSF on your computer and make sure all the
+   buttons/options/etc are functional.
+
+2) Explore its functionalities and create various PSFs for the different
+   instruments.
+
+3) Basically, how do you think WebbPSF creates PSFs?
+
+4) WebbPSF can also be used inside a Python script; try to import the
+   module and recreate one of the PSFs you created with the GUI.
+
+Problem 2: Fourier Transform and Phase Retrieval
+------------------------------------------------
+
+1) Starting from the JWST pupil, calculate its Fourier Transform and
+   plot it’s PSF (intensity squared). You will need the NumPy functions
+   :py:func:`numpy.fft.fft2`, :py:func:`numpy.fft.fftshift` and their inverse, as well as
+   :py:func:`numpy.pad`.
+
+2) Can you explain/show why we can’t simply use :py:func:`numpy.fft.fft2`?
+
+.. figure:: figures/jwst_telescopes_project/gerchberg_saxton_cartoon.png
+
+   Cartoon of Gerchberg-Saxton algorithm. The only pieces of information we have
+   are the pupil shape and the image intensity, so we iterate on the phase until
+   we converge. Pupil plane is on the left; Image plane is on the right.
+
+3) When you are comfortable enough with numerical Fourier
+   Transforms, design a Gerchberg-Saxton algorithm to retrieve the phase of
+   an image. At this point, do not worry about the angular and wavelength
+   scaling (:math:`\lambda = 1`).
+
+   Refer to the figure for the steps described
+   below.
+
+   i.   Create a PSF (your observable) from the JWST pupil and a given
+        wavefront error, from one of the OPD (Optical Path Difference) maps
+        provided.
+
+        The electric field in the pupil plane is defined by:
+        :math:`E = Pupil * \exp \left( i*2\pi*\frac{\text{OPD}}{\lambda} \right)`. You will
+        try to recover the phase map from the image created by this pupil.
+
+   ii.  To start the G-S loop, you need an initial guess for the phase map:
+        use random numbers from :math:`-\pi` to :math:`+\pi`.
+
+   iii. Go back and forth between the pupil plane and the image plane using
+        FFT and IFFT, and always fixing the part of the electric field that
+        you know is right (i.e. the pupil shape and the image intensity)
+        and keeping the calculated phase.
+
+   iv.  You can simply loop over for *n* iterations and see how well the
+        phase map that you get matches the one you used to create your
+        initial image (step **1**).
+
