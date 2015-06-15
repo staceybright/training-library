@@ -1,0 +1,9 @@
+**********************************
+JWST General Training (Data Cubes)
+**********************************
+
+This document gives an overview of JWST data analysis, including manipulating data cubes.
+
+.. note::
+
+   This guide is maintained as a PDF document. :download:`Download it <pdf_guides/jwst_intro.pdf>` and get started.

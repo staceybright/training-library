@@ -1,0 +1,9 @@
+****************************
+Infrared Detector Read Modes
+****************************
+
+This presentation gives an overview of infrared detector read modes.
+
+.. note::
+
+   These slides are provided as a PDF document. :download:`Download it <pdf_guides/jwst_read_modes.pdf>` and get started.
