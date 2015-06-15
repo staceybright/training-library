@@ -27,6 +27,8 @@ Training guides and exercises for new RIAs
 Supplemental training guides and exercises
 *******************************************
 
+*Only the guides listed above are generally required of all trainees, but the following guides and links are provided for reference.*
+
 #. :doc:`jwst_training`
 #. :doc:`jwst_read_modes`
 #. :doc:`jwst_reference_output`
