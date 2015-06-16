@@ -225,7 +225,7 @@ A git repository remembers where you cloned it from, and calls it the "origin". 
 .. admonition:: Exercise: Push your commits to a branch on GitHub
    :class: note
 
-   The syntax of the ``git push`` command is ``git push [remote name] [remote branch name]``. In this case, the remote name is "origin", since we're pushing changes back to the copy we originally cloned from. The remote branch name can be anything you want, but for simplicity's sake use the same branch name as above. For example::
+   The syntax of the ``git push`` command is ``git push [remote name] [source branch name]``. In this case, the remote name is "origin", since we're pushing changes back to the copy we originally cloned from. The source branch name is the same branch name as above. For example::
 
    $ git push origin yourlastname_trainee
 
