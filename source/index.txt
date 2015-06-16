@@ -32,7 +32,7 @@ Supplemental training guides and exercises
 #. :doc:`jwst_training`
 #. :doc:`jwst_read_modes`
 #. :doc:`jwst_reference_output`
-#. Introduction to Gerchberg-Saxton Phase Retrieval (INS/TEL)
+#. :doc:`jwst_telescopes_project`
 
 *********************
 Reference information
@@ -60,6 +60,7 @@ Reference information
    jwst_training
    jwst_read_modes
    jwst_reference_output
+   jwst_telescopes_project
    editing_these_documents
    tricks
    trainees
