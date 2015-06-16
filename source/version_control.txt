@@ -107,7 +107,7 @@ If you look at the main page for the repository on GitHub, there's a box on the 
 .. figure:: figures/version_control/https_clone_url.png
    :scale: 50 %
 
-   The main repository page, with the clone URL highlighted.
+   Detail of the main repository page with the HTTPS clone URL.
 
 .. admonition:: Exercise: Copy the HTTPS clone URL and clone the repository
    :class: note
@@ -119,7 +119,7 @@ If you look at the main page for the repository on GitHub, there's a box on the 
       $ git clone https://github.com/stsci-riab/riatraining.git
       Cloning into 'riatraining'...
       Username for 'https://github.com': [your username]
-      Password for 'https://yourusername@github.com':
+      Password for 'https://yourusername@github.com': [your password]
       remote: Counting objects: 1187, done.
       remote: Compressing objects: 100% (8/8), done.
       remote: Total 1187 (delta 3), reused 0 (delta 0), pack-reused 1179
