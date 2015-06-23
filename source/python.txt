@@ -1,9 +1,2310 @@
-*******************************************
-Using Python for Astronomical Data Analysis
-*******************************************
+*********************
+Basic Python Concepts
+*********************
 
-Python is a scripting language with excellent support for common scientific tasks. This training guide will cover the use of the Python language itself, as well as some of the packages written for Python that are commonly used for astronomical data analysis (e.g. NumPy, Astropy, PyRAF).
+**Revision History**
 
-.. note::
+| 5.5 - June 2015: Joseph LONG, Meredith DURBIN
+| 5.0 - June 2014: Katie GOSMEYER, Heather GUNNING, Matthew BOURQUE
+| 4.0 - September 2013: Justin ELY, Thompson LEBLANC
+| 3.0 - January 2012: Rachel ANDERSON
+| 2.0 - October 2009: Sami-Matias NIEMI
+| 1.0 - September 2008: Alex VIANA
 
-   This guide is maintained as a PDF document. :download:`Download it <pdf_guides/python_training.pdf>` and get started.
+\
+
+Introduction
+============
+
+Python is a free, open-source, high level interpreted scripting
+language, similar to PERL. However, Python is also a high-level
+object-oriented programming language, much like C++, Java, and Ruby.
+
+The intention of this tutorial is to provide the Python basics to
+understand how to perform simple astronomical data analysis.
+
+We will discuss how to write and run Python scripts in
+:ref:`python_scripts`. Until then we will use python interactively, which
+is best for learning python and for checking your code as you write it.
+
+A Few Notes on Python
+---------------------
+
+-  Python is case sensitive. This turns out not to be that difficult as
+   Python is almost always written in lowercase.
+
+-  Python does not have 'BEGIN' and 'END' statements. It does however
+   depend on indents. It is best practice to indent with four spaces.
+
+-  Comments in code are useful to help you remember what is going on,
+   but also so that others know what you are doing. In Python, comments
+   begin with the # symbol. Multi-line comments can be nested in three
+   quotes.
+
+-  The line continuation symbol ' \\' can be used to spread a command
+   out over multiple lines. This is not necessary inside parenthesis,
+   brackets, or curly brackets as Python will wait for the closing
+   symbol before assuming the end of the line.
+
+-  Python indices start with zero.
+
+Environment and Set Up
+======================
+
+SSB Environment
+---------------
+
+There are three different versions of the SSB (Science Software Branch)
+environments available at the institute. They are:
+
+-  SSBREL – Updated as needed, standard publicly available release.
+
+-  SSBX – Updated weekly, a testing environment. Holds latest bug fixes
+   and updates. Institute only release.
+
+-  SSBDEV – Updated daily. Development updates intended for instrument
+   teams to test bug fixes and upgrades. Institute only release.
+
+Note that the version of Python related modules depend on the SSB
+environment, especially if you are using NFS mounts. To switch to a
+particular version, type one of the following into your terminal::
+
+   $ ur_setup common ssbrel
+   $ ur_setup common ssbx
+   $ ur_setup common ssbdev
+
+Interactive Python Environment
+------------------------------
+
+You will need to choose an interactive Python environment. There are two
+popular options.
+
+- **Python**
+  To start the Python interactive environment, just type 'python' at
+  the prompt in your terminal.
+
+- **iPython**
+
+  To use the iPython interactive environment, type 'ipython' instead.
+  The advantage of iPython is that besides Python code, you are also
+  able to execute UNIX commands such as 'ls' and 'cp'. Furthermore, you
+  can also log your session. To start the log, type '%logstart' in your
+  iPython shell. This will start logging into a default file named
+  ipython.log.py. The log-file follows a formatting convention of
+  iPython and may not, on a first glance, look readable. However,
+  iPython knows how to repeat the commands in your log-file when ran.
+
+   - **iPython Notebook**
+
+     iPython Notebook can be called in the terminal by adding
+     'notebook' after ipython. The notebook is an interactive web based
+     interface. It combines code, text, math, plots, and rich media
+     into a single document with all the functionality of ipython.
+
+To exit either, type 'exit()'. Only once do we use the shell command
+'cp', for which you would need to use iPython (or just do it in the UNIX
+shell). Otherwise either environment would work.
+
+.. _python_dtype:
+
+Built-In Data Types
+===================
+
+The principal built-in types of Python are numerics, sequences,
+mappings, files, classes, instances and exceptions. Other data types are
+available through importing modules (Example: the datetime module).
+
+There are four distinct numeric types in Python: plain integers, long
+integers, floating point numbers, and complex numbers. In addition,
+Booleans are a subtype of plain integers. Python fully supports mixed
+arithmetic: when a binary arithmetic operator has operands of different
+numeric types, the operand with the "smaller" type is widened to that of
+the other. Example:
+
+   >>> a = 2.0
+   >>> b = 3
+   >>> print a * b
+
+Any Python object can be tested for truth value with ``in``,
+``if`` or ``while`` condition or as an operand of the Boolean
+operations. Python supports a vast number of truth values, but for
+simplicity I recommend using ``True`` and ``False``. General
+Boolean operations ``or``, ``and``, and ``not`` are also
+supported. Comparison operations are supported by all objects. They all have the same priority, which is higher than that of the Boolean
+operations. In Python, comparisons are done with characters e.g. ``<``, ``>``, ``>=``, ``<=``,
+``==``, ``!=`` (not like in IDL, where comparisons are done with shortened
+keywords e.g. ``eq``).
+
+Examples of some of the most common data types are below.
+
+-  File::
+
+      >>> infile = open('PythonTraining.pdf')
+      >>> infile.name
+      >>> infile.readline()
+      >>> infile.close()
+
+-  Integer::
+
+      >>> a = 1
+      >>> a == 1
+      >>> a.denominator
+
+-  Float::
+
+      >>> a = 2.0
+
+-  String::
+
+      >>> a = 'three'
+      >>> infile = 'infile.fits'
+      >>> outfile = infile.replace('.fits', '_DidWork.fits')
+      >>> 'Outfile: ', outfile
+
+-  Tuple: An immutable list; elements can be of any data type. ::
+
+      >>> a = (1, 2, 3)
+      >>> a = (1, 2.0, 'three')
+
+-  List: A mutable list; elements can be of any data type. ::
+
+      >>> a = [1, 2, 3]
+      >>> b = [1, 2.0, 'three']
+      >>> mylist = []
+      >>> mylist.append(3)
+      >>> print mylist
+      >>> mylist = [1, 2, 3, 4]
+      >>> len(mylist)
+      >>> yourlist = [5, 6, 7, 8, 9]
+      >>> mylist + yourlist
+      >>> mylist.append(yourlist)
+      >>> print mylist
+
+   Notice that appending a list just adds one more element to
+   'mylist', and this element is of type list (remember, an element in a
+   list can be of any type).
+
+-  Dictionary: A mapping which stores objects by a 'key' and not
+   position. Below we show an example of a dictionary, and a dictionary
+   of dictionaries. We could also create a dictionary of lists. ::
+
+      >>> a = {1:'one', 2:'two', 3:'three'}
+      >>> galaxy_dict = {}
+      >>> galaxy_dict
+      >>> galaxy_dict['M31'] = {'RA':'00 42 44.33',
+      ...     'DEC':'+41 16 07.5','Vmag':3.44,'nickname':'Andromeda'}
+      >>> galaxy_dict
+      >>> galaxy_dict['M104'] = {'RA':'12 39 59.43185',
+      ...    'DEC':'-11 37 22.9954','Vmag':3.44,'nickname':'Sombrero'}
+      >>> galaxy_dict.keys()
+      >>> galaxy_dict['M31'].keys()
+      >>> galaxy_dict['M31']['Vmag']
+
+.. admonition:: Exercise
+   :class: note
+
+   Create a dictionary with strings as the keys.
+
+Objects, Instances, Attributes, Functions, and Methods
+======================================================
+
+Python is an object oriented programming language and before we go any
+further, it is important to note the differences and uses of objects,
+instances, attributes, functions, and methods.
+
+-  | Objects:
+   | Data carriers that also carry functions and attributes that work on
+   | that data. In :ref:`python_dtype`, integers, floats, lists, tuples, and
+   | dictionaries are all objects.
+
+-  | Instance:
+   | In :ref:`python_dtype` when we said ``galaxy_dict = {}`` we created
+   | an instance of a dictionary, ``galaxy_dict``, while ``infile``
+   | is an instance of a ``file``.
+
+-  | Attributes:
+   | denominator is an attribute of an instance of a Python integer.
+   | Therefore in :ref:`python_dtype` we used ``a.denominator``. Attributes
+   | do not have the '()' like functions do. Also in :ref:`python_dtype` we
+   | used the file attribute name when we said ``infile.name``.
+
+-  | Functions:
+   | A function is a named piece of code that performs an operation and
+   | has open and closed parenthesis at the end (sometimes with variables
+   | inside). len() is a function, and in :ref:`python_dtype` we pass it the
+   | list, ``mylist``.
+
+-  | Methods:
+   | A method is a function attached to an object that then has access
+   | to all other methods and attributes of that object. Therefore we
+   | usually do not have to pass as much information to methods, and
+   | methods are easier to read. All methods are functions, but not all
+   | functions are methods. For example, in :ref:`python_dtype`, after we
+   | created the instance ``mylist``, we append a number to that list
+   | using the method :ref:`list.append() <python:tut-morelists>` with the line ``mylist.append(3)``. In
+   | :ref:`python_dtype` we also used the methods readline() and close()
+   | which belong to the file class.
+
+Notice that we use dot notation to call an attribute or a method of a
+particular instance. As we will see in :ref:`python_modules`, dot notation
+will also be used to call a method or a function from a particular
+module.
+
+Double Underscore
+=================
+
+In Python you will notice certain names beginning and ending with double
+underscores. These names are used for attributes and methods that are
+used or created by the interpreter (for a discussion on the definition
+of attributes and methods see Section [s:attribute]). Examples include:
+
+-  ``__file__`` : an attribute automatically created by the interpreter
+
+-  ``__add__`` : an attribute with special meaning to the interpreter
+
+-  ``__init__`` : a method implicitly called by the interpreter, defined
+   by the programmer
+
+We will see examples of a few of these in :ref:`python_scripts`.
+
+Common Built-In Functions and Statements
+========================================
+
+For a complete list of Python built-in modules, see
+http://docs.python.org/library/index.html, also listed in
+:ref:`python_links`. Below we provide descriptions of some of the most
+useful functions and statements.
+
+print function
+--------------
+
+**Use:** The print function performs formatted output.
+
+Examples::
+
+   >>> a = 3
+   >>> print a
+   >>> b = 2
+   >>> print a + b
+   >>> print a / b
+   >>> b = 2.
+   >>> print a / b
+   >>> c = 'hi'
+   >>> print c + ' there'
+   >>> print 'I brought home {} flowers for \
+   ...    ${} and all she said was {}.'.format(a,b+0.5,c)
+
+This last statement is a bit more complicated. The ``{}`` symbol says to
+insert a variable from one of the arguments we give at the end. In the
+brackets we could specify data type, or which variable (0, 1, or 2), but
+we left it as default, which just takes the next argument in line.
+Notice the float does not print out exactly as we want. We would rather
+it say $2.50. Try this::
+
+   >>> print 'I brought home {} flowers for ${:.2f} and all \
+   ... she said was {}.'.format(a, b+0.5, c)
+
+In this last example the 'f' stands for 'float', and the '.2' says to include two decimal places. For more information see: http://docs.python.org/library/string.html#formatstrings.
+
+.. admonition:: Exercise
+   :class: note
+
+   Print out your own creative sentence.
+
+help() function
+---------------
+
+**Use:** The help() function gives the user information on many aspects of the
+current Python session. Type 'q' to quit.
+
+Examples::
+
+   >>> a = 3
+   >>> help(a)
+
+.. admonition:: Exercise
+   :class: note
+
+   Type ``help()`` and explore the options.
+
+range() function
+----------------
+
+**Use:** The range() function creates a list starting at zero of the length you
+give it. You may also pass the start, stop, and the step you want to use
+(default of the step is 1).
+
+Examples::
+
+   >>> range(4)
+   >>> range(2, 8, 2)
+
+See also:
+
+Other useful similar functions in NumPy (see :ref:`python_numpy`) are
+numpy.linspace.
+
+dir() function
+--------------
+
+**Use:** The dir() function returns the methods and attributes of an object.
+
+Examples::
+
+   >>> a = range(10)
+   >>> dir(a)
+
+len()  function
+---------------
+
+**Use:** The len() function returns the number of elements contained in an
+expression or variable.
+
+Examples::
+
+   >>> a = range(11)
+   >>> len(a)
+
+See also:
+
+Other useful similar functions in NumPy (see :ref:`python_numpy`) are
+numpy.shape, numpy.size.
+
+for loop
+--------
+
+**Use:** The for statement is used to execute one or more statements
+repeatedly.
+
+Examples::
+
+   >>> a = range(11)
+   >>> for x in a: print x
+   >>> b = ['2005', '2006', '2007']
+   >>> for x in b: print x + '-01'
+
+One can create a list with a for loop in one line. This is known as list
+comprehension. ::
+
+   >>>  c = [x*2 for x in range(11)]
+
+See also:
+
+Other useful similar statements are ``if``, ``elif``, ``else``, ``while``.
+
+
+.. admonition:: Exercise
+   :class: note
+
+   Create a list with 10 values equal to the square of the index.
+
+.. admonition:: Exercise
+   :class: note
+
+   Create the following sequence using a for statement: 2001-01-01, 2001-02-01, 2001-03-01, 2001-04-01.
+
+xrange() function
+-----------------
+
+**Use:**
+
+The xrange() function is similar to range() except that it does not
+create a new list (saving on memory) but instead acts as a generator of
+numbers starting at zero up to the stop value you pass it. You may also
+pass the start, stop, and the step you want to use (default of the step
+is 1). This is used in iterations.
+
+Examples::
+
+   >>> for x in xrange(3): print x, x * 2
+
+Within a function, the for statement has the following simple structure:
+
+   >>> for x in xrange(1, 7):
+   ...    a = x  3.0
+   ...    print a
+
+See also:
+
+Other useful similar statements are range().
+
+Notice that we use range() when we use the actual list created, but
+xrange() when we just need an iterator.
+
+try ... except statement
+------------------------
+
+**Use:** The try ... except statement is used as an error handler. It will try
+whatever we put in the try block, but if whatever you assign as the
+'error' occurs, it will go to the except block.
+
+Examples: Try this code below. Notice the error message you get. ::
+
+   >>> a = [1, 2, 3, 4, 5]
+   >>> for i in xrange(len(a)):
+   ...    a[i + 1] = 100 + a[i]
+   ...    print a[i], a[i + 1]
+
+To solve this problem, we put it in a try ... except statement::
+
+   >>> a = [1, 2, 3, 4, 5]
+   >>> for i in xrange(len(a)):
+   ...     try:
+   ...         a[i + 1] = 100 + a[i]
+   ...         print a[i], a[i + 1]
+   ...     except IndexError:
+   ...         print 'This index does not work: ',i + 1
+
+.. admonition:: Exercise
+   :class: note
+
+   Imagine a situation where your code passes a function a variable, and
+   that variable might be zero. The only problem is that this function
+   divides by that variable.
+
+   Write a simple loop which calculates 1/\ :math:`n`, where :math:`n` is a
+   number in range(11). What happens when :math:`n=0`? Write an error
+   handling for this loop (hint: use try ... except statement with
+   ZeroDivisionError).
+
+.. _python_modules:
+
+Importing Modules, and Common Functions
+=======================================
+
+Python's built-in functions are limited. The diversity of Python's
+abilities come when we import modules. The following syntax can be used:
+
+   >>> import <module>
+   >>> from <module> import <function_in_module>
+   >>> import <module> as <short_name>
+
+math.sqrt() function
+--------------------
+
+**Use:** If we want to take the square root of a number, we could use the
+function sqrt() in the module math. The following is two examples of how
+to do this:
+
+Examples::
+
+   >>> import math
+   >>> math.sqrt(100)
+
+Notice we did not need the '.py' extension. If we do not need any other
+math module, and we know we will not name a variable 'sqrt' and
+overwrite the function, we can do this::
+
+   >>> from math import sqrt
+   >>> sqrt(100)
+
+glob.glob() function
+--------------------
+
+**Use:** The glob.glob() function searches for files that match the given
+path-name. The path-name you give is a string similar to the search
+strings used for the UNIX/Linux 'ls'. A list is returned containing any
+matching files.
+
+Examples::
+
+   >>> import glob
+   >>> glob.glob('*')
+   >>> glob.glob('*.pdf')
+   >>> datadir = '/Users/gunning/Python_Training/'  #insert a usable path
+   >>> glob.glob(datadir + 'flux_vs_time_?.fits')
+
+.. admonition:: Exercise
+   :class: note
+
+   Search for a set of files on your desktop.
+
+random.random() function
+------------------------
+
+**Use:** The random.random() function returns a random floating point number in
+the range [0.0, 1.0).
+
+Examples::
+
+   >>> import random
+   >>> random.random()
+   >>> print 'My random number between 2 and 8: ', \
+   ...    2 + (8-2) * random.random()
+
+See also:
+
+Other useful similar statements are random.uniform(), random.gaus().
+
+re.search() function
+--------------------
+
+**Use:** The re module is for 'Regular Expression' operations. It is used to
+work with strings, including sophisticated pattern matching, as in the
+case of re.search().
+
+Examples::
+
+   >>> import re
+   >>> m = re.search('(?<=_)\d+','MIRI_2011.fits')
+   >>> m.group(0)
+
+In the above example we are looking for digits following an underscore,
+'\_'. The '\\d' is for digit, and the '+' is for one or more. The '(?<=_)' matches if the position in the string is proceeded by '_'.
+
+See also:
+
+Other useful similar statements are re.match().
+
+os.getcwd() and os.chdir() functions
+------------------------------------
+
+**Use:** The os module is for 'Operating System' operations. Examples include
+os.getcwd() which returns the current working directory and os.chdir()
+which changes the current working directory.
+
+Examples::
+
+   >>> import os
+   >>> datadir = '/Users/username/data/'  #insert a usable path
+   >>> mydir = os.getcwd()
+   >>> if (mydir != datadir): os.chdir(datadir)
+
+See also:
+
+Other useful similar statements are os.open(), os.close().
+
+sys.exit() function
+-------------------
+
+**Use:** The sys module is for system-specific parameters and functions. It
+provides a way to interact with the interpreter. sys.exit() is different
+than exit() in that it will honor try statements and you can intercept
+the exit attempt.
+
+Examples::
+
+   >>> import sys
+   >>> for i in xrange(10):
+   ...        if i <= 5:
+   ...            continue
+   ...        else:
+   ...            sys.exit('We do not need a number above 5.')
+
+.. _python_numpy:
+
+NumPy and Data Arrays
+=====================
+
+The Uses of NumPy
+------------------
+
+NumPy is a Python module which adds support for large, multi-dimensional
+arrays and matrices, along with a large library of high-level
+mathematical functions to operate on these arrays. NumPy addresses the
+problems of speed in interpreted languages by providing
+multi-dimensional arrays and lots of functions and operators that
+operate on arrays. Any algorithm that can be expressed primarily as
+operations on arrays and matrices can run almost as fast as the
+equivalent C code.
+
+NumPy's array vs. Python's built-in list
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+NumPy introduces new data types, but the most popular, versatile, and
+useful one is the array. This is similar to arrays in IDL. There are
+several reasons why you would want to use a NumPy array over Python's
+built-in list.
+
+-  NumPy, PyLab, SciPy, PyFITS and other modules' functions often work
+   with NumPy arrays.
+
+-  Every item in a NumPy array is of the same data type. This means
+   there is less information to keep track of which makes array
+   computations faster.
+
+-  NumPy arrays act as vectors and therefore we can do things such as
+   element-wise addition and multiplication.
+
+To convert a list to an array, use numpy.array().
+
+numpy.array() function
+~~~~~~~~~~~~~~~~~~~~~~
+
+**Use:** The numpy.array() function converts a list to a NumPy array.
+
+Examples::
+
+   >>> import numpy as np
+   >>> a = [1,2,3,4]      #a python built in list
+   >>> b = np.array(a)     #converted to a NumPy array
+   >>> print a
+   >>> print b
+   >>> indx = [1,2]
+   >>> print b[indx]
+   >>> print b[1:3]       #prints elements 1 to 2, NOT 1 to 3.
+   >>> print b[:3], b[3:] #prints up to the 3rd element, \
+   ...    and then everything after the 3rd element.
+   >>> print b[-1],b[-2]
+   >>> print b[::-1]      #reverses the array.
+   >>> c = np.array([[1,2,3,4,5],[6,7,8,9,10]])
+   >>> print c
+   >>> print c[1,3]       #indices for a multi-dimensional array
+   >>> print c[1][3]      #this is slower than the previous as it \
+   ...    creates a new array, c[1], and then subscripts that array.
+   >>> print c[1,:]  #print the first element in the first \
+   ...    dimension, but all in the second dimension
+   >>> print c[:,1]
+
+Notice when we print lists and arrays that the elements in lists are
+separated by commas while the elements in arrays are only separated by
+spaces.
+
+.. admonition:: Exercise
+   :class: note
+
+   Create a list ``a`` and a NumPy array ``b``. Multiply each by 2
+   and explain what happens. Now add 2 to each array. Again, explain the
+   result.
+
+.. admonition:: Exercise
+   :class: note
+
+   Create a third list ``c``. Add ``c`` to both ``a`` and
+   ``b``. Explain the result.
+
+What a NumPy array really is and a word of caution
+--------------------------------------------------
+
+A final note about NumPy arrays is that an array is actually an object
+which points to a block of memory. For example, in the above exercise we
+created an array ``b``. Try the following::
+
+   >>> d = b
+
+Now we just created a second array, ``d``. Instead of using up twice
+the memory space, ``d`` is just a pointer to the memory ``b``
+also points to (remember, we copied an array, and an array is a
+pointer). Again, try the following::
+
+   >>> d[2] = 999
+   >>> print d
+   >>> print b
+
+Notice what happened to ``b``. While it saves on memory space,
+programmers have to be careful. If you know you will want to change one
+array and not the other, the correct function to use is numpy.copy().
+
+numpy.copy() function
+~~~~~~~~~~~~~~~~~~~~~
+
+**Use:** The numpy.copy() function copies the contents of the memory space the
+array points to.
+
+Examples: Try the code below and notice the difference in the results from a
+simple ``d = b`` assignment. ::
+
+   >>> import numpy as np
+   >>> a = np.array([1,2,3,4,5,6,7])
+   >>> b = a.copy()
+   >>> b[2] = 999
+   >>> print b
+   >>> print a
+   >>> a.size
+   >>> a.shape
+
+Other Common NumPy Functions
+----------------------------
+
+numpy.arange() function
+~~~~~~~~~~~~~~~~~~~~~~~
+
+**Use:** The numpy.arange() function creates an integer array from zero to the
+'stop' parameter given, with a step size of one. The 'start' and 'step'
+can also be specified. By setting the parameter 'dtype' we can change
+the data type of the array (i.e. to float).
+
+Examples::
+
+   >>> import numpy as np
+   >>> np.arange(10)
+   >>> 1 + np.arange(10, dtype=float) * 4
+   >>> np.arange(1,40,4,dtype=float)
+
+See also:
+
+A similar function for lists is range().
+
+.. admonition:: Exercise
+   :class: note
+
+   Create the sequence 0.1, 0.2,0.3, ... 1.4 using numpy.arange(). Hint: As
+   noted in the NumPy documentation for numpy.arange(), it is best to use
+   integer step sizes.
+
+.. admonition:: Exercise
+   :class: note
+
+   Create the sequence -3.2, -3.0, -2.8, ... -1.0 using numpy.arange(). See
+   above hint.
+
+numpy.empty() function
+~~~~~~~~~~~~~~~~~~~~~~
+
+**Use:** The numpy.empty() function creates a float array of the specified
+dimensions. Each element of the array is whatever was left in that
+memory space, therefore it is fast but useful only if you know you will
+assign each element a meaningful value.
+
+Examples::
+
+   >>> import numpy as np
+   >>> np.empty(10)   #pass an argument, which is the dimensions
+   >>> np.empty((3,4)) #here it is 2D, so we pass the dimensions as a tuple
+
+See also:
+
+Other useful similar functions are numpy.zeros(), numpy.ones().
+
+numpy.where() function
+~~~~~~~~~~~~~~~~~~~~~~
+
+**Use:** The numpy.where() function returns an array (or a tuple of arrays) of
+the indices where the condition is ``True``. Otherwise, if you
+specify substitute values, it will return an array of the same shape as
+the original with the first value substituted where the condition is
+``True``, and the second value substituted where the condition is
+``False``.
+
+Examples::
+
+   >>> import numpy as np
+   >>> a = np.arange(11, dtype=float) + 1
+   >>> b = np.where(a >= 8.)
+   >>> print b
+   >>> a[b]
+   >>> a = np.array([1,2,3,1,2,1,1,1,1,4])
+   >>> b = np.where(a == 1, 1,0)
+   >>> print b
+
+If we do not need the indices from numpy.where() then we can just use
+creative indexing for the same effect. ::
+
+   >>> a > 5
+   >>> a[a>5]
+
+See also:
+
+Other useful similar functions are numpy.any(), numpy.all(),
+numpy.nonzero(), numpy.choose().
+
+.. admonition:: Exercise
+   :class: note
+
+   Create a random real 10-element array with numbers between 0 and 1.
+   Select those with counts lower than 0.5.
+
+.. _python_fits_ascii:
+
+Handling FITS files and ASCII data tables using Astropy
+=======================================================
+
+Astropy is a python library for astronomy developed by professional
+astronomers and software developers from around the world, some of which
+work here at STScI in the Science Software Branch. It is under
+continuous development and is quickly becoming a powerful library,
+especially for handling FITS files and ASCII tables. Visit the website
+listed in :ref:`python_links` for more information and useful
+documentation.
+
+The astropy.io.fits module provides an interface to FITS formatted files
+under the Python scripting language. astropy.io.fits data structures are
+a subclass of NumPy arrays, which means that they can use NumPy arrays'
+methods and attributes. The astropy.io.ascii module provides flexible
+and easy-to-use methods for reading and writing ASCII data tables. In
+the following sections, we will explore these two modules.
+
+Opening, Reading, and Closing a FITS File
+-----------------------------------------
+
+As an example, we will use data from the *WFC3* instrument located here::
+
+   /user/gunning/Python_Training/icft01crq_raw.fits
+
+Please copy this file to your working directory.
+
+Below we show an example of opening a FITS file, getting the data and
+the header, closing the file, printing out the shape of the data using
+numpy.shape, printing out header values, and finally making changes to
+the data. ::
+
+   >>> from astropy.io import fits
+   >>> infile = 'icft01crq_raw.fits'
+   >>> fits.info(infile)
+   >>> hdulist = fits.open(infile)
+   >>> hdr = hdulist[0].header  # Get the primary header
+   >>> data = hdulist[1].data  # Get the data from the 1st extension
+   >>> data.shape
+   >>> hdr
+   >>> hdr['FLSHCORR']
+   >>> hdr['FLSHCORR'] = 'PERFORM'
+   >>> hdr['FLSHCORR']
+   >>> print data[-2:]  # Print the last two lines.
+   >>> data[-1:][0][0] = 0
+   >>> print data[-1]
+
+Notice that ``hdr`` behaves like a dictionary. We did some bad
+things to this file, but let's save it anyway to a new file. ::
+
+   >>> outfile = 'mybad.fits'
+   >>> fits.writeto(outfile, data, hdr)
+   >>> print 'Saved FITS file to: {}'.format(outfile)
+
+Alternatively, if we want to modify the original file directly, we can
+do the following::
+
+   >>> fits.update(infile, data, 1)
+
+As a word of caution, note that astropy.io.fits reads in FITS images as
+(rows, cols) or (y, x), not (x, y). This is often a 'gotcha' for users
+who are indexing spacific areas of the array.
+
+fits.getval() and fits.setval() functions
+-----------------------------------------
+
+If you are familiar with IRAF/PyRAF, you are probably familiar with
+IRAF's hedit function, which allows you to add, delete, and modify
+keywords in a FITS header.
+
+First, lets take a look of our example file's header using imheader in
+PyRAF. In PyRAF navigate to the folder where your icft01crq\_raw.fits
+file is located, and try the following::
+
+   --> imheader icft01crq_raw.fits[0] l+ | page
+
+We see that there is a 'DARKFILE' keyword, and it is set to
+'iref$y2j13512i\_drk.fits.' Say we wanted to recalibrate this file using
+a different 'DARKFILE'. The value of this keyword can be changed using
+hedit, as shown here::
+
+   --> hedit icft01crq_raw.fits[0] DARKFILE 'iref$y2p1831ci_drk.fits' \
+          verify=no update=yes
+
+In the above example we made sure the 'update' parameter was set to
+'yes.' We can check that our edit was successful by using imheader again
+and checking the value of the 'DARKFILE' keyword::
+
+   --> imheader icft01crq_raw.fits[0] l+ | page
+
+Using Python, there is a simple way to do this with astropy.io.fits
+using fits.getval() and fits.setval(), shown in the example below. ::
+
+   >>> from astropy.io import fits
+   >>> infile = 'icft01crq_raw.fits'
+   >>> key = 'DARKFILE'
+   >>> fits.getval(infile, key, 0)
+   >>> fits.setval(infile, key, value='iref$y2j13512i_drk.fits', ext=0)
+   >>> fits.getval(infile, key, 0)
+
+Now our FITS file is back to its 'initial' state. No harm done.
+
+Reading and Writing ASCII Data Files
+------------------------------------
+
+The astropy.io.ascii module provides two robust methods, ascii.read()
+and ascii.write(), for reading and writing multi-column text format data
+tables.
+
+astropy.io.ascii.read() function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Use:** The astropy.io.ascii.read() function reads in a table of data from a
+specified file and returns an astropy.Table object.
+
+As an example, we will use these files::
+
+   /user/gunning/Python_Training/flux_vs_time_A.dat
+   /user/gunning/Python_Training/flux_vs_time_C.dat
+
+These data are used to plot the flux versus time for a standard star and
+serves as a monitor of the WFC3/UVIS photometric stability for amps A
+and C, respectively. In this section, we will read in the data, and in
+chapter 4, we will use it to produce the plots.
+
+Examples::
+
+   >>> from astropy.io import ascii
+   >>> infile = 'flux_vs_time_A.dat'
+   >>> data = ascii.read(infile,
+   ...             names=['MJD', 'Flux_diff', 'Flux_err', 'Flux_linear_fit'])
+   >>> print data
+   >>> print data['MJD']
+   >>> print data['MJD', 'Flux_diff']
+   >>> print data['Flux_diff']  10
+   >>> pos_flux = data['Flux_diff'] > 0
+   >>> print data[pos_flux]
+
+.. admonition:: Exercise
+   :class: note
+
+   Try reading in the data from ``flux_vs_time_C.dat`` using ascii.read()
+
+astropy.io.ascii.write() function
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Use:** Similar to ascii.read(), the astropy.io.ascii.write() function writes
+a table of data to a specified file. For fun, lets try taking the MJDs
+from ``flux_vs_time_A.dat``, normalizing them to the first observation
+date, and writing the new table to a new text file:
+
+Examples::
+
+   >>> from astropy.io import ascii
+   >>> infile = 'flux_vs_time_A.dat'
+   >>> data = ascii.read('flux_vs_time_A.dat',
+   ...                   names=['MJD', 'Flux_diff', 'Flux_err', 'Flux_linear_fit'])
+   >>> first_date = min(data['MJD'])
+   >>> data['MJD'] = data['MJD'] - first_date
+   >>> print data
+   >>> ascii.write(data, 'flux_vs_time_A_mjdnorm.dat')
+
+.. admonition:: Exercise
+   :class: note
+
+   Try making a MJD-normalized text file for the ``flux_vs_time_C.dat``
+   data using ascii.write()
+
+Plotting with PyPlot
+====================
+
+matplotlib.pyplot
+-----------------
+
+Matplotlib and its PyPlot environment is a versatile Python plotting
+library which produces publication quality figures in a variety of
+hard-copy formats such as EPS, PDF, and PNG. With PyPlot you can
+generate scatter and line plots, histograms, power spectra, bar charts,
+error-charts, pie charts, and many more with just a few lines of code.
+For the power user, you have full control of line styles, font
+properties, axes properties, and so on. For useful examples of astronomy
+plots that can be generated with PyPlot, see Leonardo Ubeda's
+astroplotlib library at http://astroplotlib.stsci.edu/
+
+.. _python_simple_scatter:
+
+Create a Simple Scatter Plot
+----------------------------
+
+We'll start by making a simple scatter plot, demonstrating some of the
+PyPlot options, and saving our plot in a PDF format.
+
+First, we need to read in some data, as we learned in :ref:`python_fits_ascii`,
+using the two files ``flux_vs_time_A.dat`` and ``flux_vs_time_C.dat``
+found in ``/user/gunning/Python_Training/``.
+
+   >>> from astropy.io import ascii
+   >>> data_A = ascii.read('flux_vs_time_A.dat', names=['Time',
+   ...                     'Flux_diff', 'Flux_err', 'Flux_linear_fit'])
+   >>> data_C = ascii.read('flux_vs_time_C.dat', names=['Time',
+   ...                     'Flux_diff', 'Flux_err', 'Flux_linear_fit'])
+
+The time is in Modified Julian Date (MJD) and the remaining columns are
+flux percent differences and are dimensionless. Now we will import
+PyPlot and make our first plot, using a *figure* object...
+
+   >>> import matplotlib.pyplot as pyplot
+   >>> figure, ax = pyplot.subplots()
+
+Now we can begin to plot into the *figure* object, via the *ax* axis
+created in the previous step. Each subsequent call to the inherited
+*ax.plot* method will update the overall plot. The next two calls plot
+the two sets of flux differences as scatter plots in blue and red,
+respectively.
+
+   >>> ax.scatter(data_A['Time'], data_A['Flux_diff'], c='blue')
+   >>> ax.scatter(data_C['Time'], data_C['Flux_diff'], c='red')
+   >>> figure.show()
+
+The *figure.show()* command displays our changes onto the *figure*
+object.
+
+We should add axis labels...
+
+   >>> ax.set_xlabel('Time [MJD]', fontsize=20)
+   >>> ax.set_ylabel('Flux Diff [%]',  fontsize=20)
+   >>> figure.show()
+
+Finally let's save the figure. We can save as a PDF, PNG, TIFF, and
+other file types; we need only to type the appropriate extension. ::
+
+   >>> figure.savefig('flux_vs_time_1.png')
+
+.. figure:: figures/python/flux_vs_time_1.png
+   :alt: Our first plot.
+
+   Our first plot.
+
+Markers, Lines, and Legends
+---------------------------
+
+We have a plot! But we are not yet finished. PyPlot has many, many
+options available for you to customize your plot. We'll demonstrate just
+a few for markers, lines, and legends.
+
+We can play with the marker type (*marker*), size (*s*), and
+transparency (*alpha*) of our of scatter plots' points. We first need to
+clear the *axis* object with the *ax.clear()* command.
+
+   >>> ax.clear()
+   >>> ax.scatter(data_A['Time'], data_A['Flux_diff'],
+   ...            c='blue', marker='x', s=30, alpha=0.75)
+   >>> ax.scatter(data_C['Time'], data_C['Flux_diff'],
+   ...            c='red', marker='d', s=30, alpha=0.75)
+   >>> ax.set_xlabel('Time [MJD]', fontsize=20)
+   >>> ax.set_ylabel('Flux Diff [%]', fontsize=20)
+   >>> figure.show()
+
+The plot would be cleaner if we added a legend.
+
+   >>> ax.clear()
+   >>> ax.scatter(data_A['Time'], data_A['Flux_diff'],
+   ...            c='blue', marker='x', s=25, alpha=0.75, label='Amp A')
+   >>> ax.scatter(data_C['Time'], data_C['Flux_diff'],
+   ...            c='red', marker='d', s=25, alpha=0.75, label='Amp C')
+   >>> ax.set_xlabel('Time [MJD]', fontsize=20)
+   >>> ax.set_ylabel('Flux Diff [%]', fontsize=20)
+   >>> ax.legend(loc='best', scatterpoints=1)
+   >>> figure.show()
+
+The *ax.legend(loc='best')* command will try to find the least busy
+section of your plot and stick the legend there.
+
+Next let's plot lines with the linear fits from our data:
+
+   >>> ax.plot(data_A['Time'], data_A['Flux_linear_fit'],
+   ...         c='blue', ls='-.', linewidth=2, label='Amp A Fit')
+   >>> ax.plot(data_C['Time'], data_C['Flux_linear_fit'],
+   ...         c='red', ls=':', linewidth=2, label='Amp C Fit')
+   >>> ax.legend(loc='best', scatterpoints=1)
+   >>> figure.show()
+
+Notice the *ls* option is how we select our line type. Suppose we want
+to denote the 0.0 flux difference with a dashed line and the MJD date
+56250.0 with a green line:
+
+   >>> ax.axhline(0.0, color='k', ls='–', linewidth=1)
+   >>> ax.axvline(56250.0, color='green', ls='-', linewidth=2)
+   >>> figure.show()
+
+.. figure:: figures/python/flux_vs_time_2.png
+   :alt: Our customized plot.
+
+   Our customized plot.
+
+We now have a personalized plot! (It doesn't have to be pretty.) Let's
+save it. ::
+
+   >>> figure.savefig('flux_vs_time_2.png')
+
+Other options can be found on the Matplotlib PyPlot site listed in
+:ref:`python_links`.
+
+For different color names, see
+http://www.w3schools.com/html/html_colornames.asp
+
+.. admonition:: Exercise
+   :class: note
+
+   Play with different colors, markers, lines, etc.
+
+Error Bars
+----------
+
+We have columns giving our error in flux percent difference. We can
+display them on our plot as error bars using the *errorbar* function:
+
+   >>> ax.clear()
+   >>> ax.scatter(data_A['Time'], data_A['Flux_diff'],
+   ...            c='blue', s=10)
+   >>> ax.errorbar(data_A['Time'], data_A['Flux_diff'],
+   ...             yerr=data_A['Flux_err'], c='k', marker=None, ls='None')
+   >>> figure.show()
+
+Display Year-Month-Day Dates as Tick Labels
+-------------------------------------------
+
+MJD is a convenient format for plotting time. But who thinks in MJD?
+Let's convert MJD to year-month-day and display them on the x-axis. In
+Python this is a little tricky. We will show one way to do it; you may
+be able to find a better way.
+
+Let's continue working on the plot we began in the Error Bars section.
+We first need to import *Time* from *astropy*, and then save into a list
+the MJD dates that are currently displayed as tick labels (converting
+them into floats as we do so).
+
+   >>> from astropy.time import Time
+   >>> time_MJD = [float(item.get_text()) for item in ax.get_xticklabels()]
+
+We next need to convert the MJD date list into a *Time* object::
+
+   >>> time_convert = Time(time_MJD, format='mjd', scale='utc')
+
+Now we can convert the MJD dates into year-month-day dates. Because the
+conversion also includes minutes and seconds, which we do not want in
+this example, we will use the *split()* method to extract just the
+year-month-days and append them into a new list.
+
+   >>> time_ymd_long = time_convert.iso
+   >>> time_ymd_short = []
+   >>> for date in time_ymd_long:
+   ...    time_ymd_short.append(date.split(' ')[0])
+
+Finally we can display our new tick labels on the x-axis and save the
+figure.
+
+   >>> ax.set_xticklabels(time_ymd_short)
+   >>> ax.set_xlabel('Time', fontsize=20)
+   >>> ax.set_ylabel('Flux Diff [%]', fontsize=20)
+   >>> figure.show()
+   >>> figure.savefig('flux_vs_time_3.png')
+
+See http://astropy.readthedocs.org/en/latest/time/ for more examples.
+
+.. figure:: figures/python/flux_vs_time_3.png
+   :alt: Our error bar plot with x-axis tick labels converted from MJD to year-month-day.
+
+   Our error bar plot with x-axis tick labels converted from MJD to
+   year-month-day.
+
+.. admonition:: Exercise
+   :class: note
+
+   Assume you do not have the MJD list. Starting from the list of
+   year-month-day, convert your axis to days from the start date and
+   display the tick labels. So your first tick label should be 0, and your
+   x-axis title should be something like 'Days since 2008-02-04'.
+
+Display Plots Side-by-Side
+--------------------------
+
+As with most plotting matters in Python, there's more than one way to
+display multiple plots on the same figure. We will demonstrate making a
+simple 2\ :math:`\times`\ 1 multiple plot with just the *subplot()*
+method.
+
+Let's make a new figure, resizing it to 10\ :math:`\times`\ 10 inches so
+we can better see our plots. Then we'll place the first plot at position
+211. The first number (2) denotes how many plots are to be placed
+vertically; the second number (1) denotes how many plots are to be
+placed horizontally; and the third number (1) denotes where the current
+plot is to be placed in this grid (in this case, the first position).
+If, say, we wanted a 2\ :math:`\times`\ 2 grid and wanted to place a
+plot in the lower right corner, we would write 224.
+
+   >>> figure = pyplot.figure(figsize = (10,10))
+   >>> ax1 = pyplot.subplot(211, title='Amp A')
+   >>> ax1.scatter(data_A['Time'], data_A['Flux_diff'], c='blue')
+
+We can make the top plot's x-axis invisible...
+
+``>>> pyplot.setp(ax1.get_xticklabels(), visible=False)``
+
+We next place the second plot at position 212. We use the *sharex* and
+*sharey* options to force the second plot's axes to match the first's.
+
+   >>> ax2 = pyplot.subplot(212, title='Amp C', sharex=ax1, sharey=ax1)
+   >>> ax2.scatter(data_C['Time'], data_C['Flux_diff'], c='red')
+
+We'll finish by setting the x and y axes labels and saving the figure.
+
+   >>> ax1.set_ylabel('Flux Diff [%]', fontsize=15)
+   >>> ax2.set_ylabel('Flux Diff [%]', fontsize=15)
+   >>> ax2.set_xlabel('Time [MJD]', fontsize=15)
+   >>> figure.show()
+   >>> figure.savefig('flux_vs_time_4.png')
+
+.. figure:: figures/python/flux_vs_time_4.png
+   :alt: Our 2x1 multiple plot.
+
+   Our 2\ :math:`\times`\ 1 multiple plot.
+
+.. admonition:: Exercise
+   :class: note
+
+   Create a 2\ :math:`\times`\ 2 grid and display the above two plots in
+   the upper two areas. Then display our first plot from
+   :ref:`python_simple_scatter` below them, filling the entire lower area.
+
+Display a FITS Image
+--------------------
+
+Copy the FITS file ``ibsa01fpq_flt.fits`` from
+``/user/gunning/Python_Training/`` to your current working directory. It is
+a WFC3/IR image of a corner of the galaxy M51. We will use astropy's
+*fits* package to open the file, as we learned in :ref:`python_fits_ascii`, and
+extract the image data from the ``SCI`` extension. ::
+
+   >>> import astropy.io.fits as fits
+   >>> image = fits.open('ibsa01fpq_flt.fits')
+   >>> sci_data = image['sci'].data
+   >>> pylplot.clf()
+   >>> pyplot.gray()
+   >>> pyplot.imshow(sci_data, vmin=0, vmax=60)
+   >>> pyplot.show()
+   >>> image.close()
+
+.. admonition:: Exercise
+   :class: note
+
+   How does that look? Mess with the *vmin* and *vmax* to see if you can
+   improve the scaling. The *pyplot.gray()* command sets the plot to
+   greyscale. Take a look at the plot without it.
+
+We can add labels::
+
+   >>> pyplot.title('M51', fontsize=20)
+   >>> pyplot.xlabel('x pixels', fontsize=15)
+   >>> pyplot.ylabel('y pixels', fontsize=15)
+
+Before saving, we can try annotating features in our image. In this
+example, we point to a star near pixel coordinates (640, 810) with an
+arrow.
+
+   >>> pyplot.annotate('star', xy=(640, 810), xytext=(520, 770),
+   ...                 color='white', arrowprops=dict(facecolor='white', width=3.5))
+   >>> pyplot.savefig('M51.png')
+
+.. figure:: figures/python/M51.png
+   :alt: A corner of the galaxy M51, displayed in greyscale using *pyplot.imshow()*.
+
+   A corner of the galaxy M51, displayed in greyscale using
+   *pyplot.imshow()*
+
+For more plotting options with Matplotlib and PyPlot, check out the
+`matplotlib.org <http://matplotlib.org/>`__ link listed in
+:ref:`python_links`. Notice that there is a link to NumPy on this page,
+as well as links to screen-shots, thumbnails, and examples.
+
+.. admonition:: Exercise
+   :class: note
+
+   Try plotting a 450\ :math:`\times`\ 450 pixel cutout of the image (say,
+   the galaxy disk in the lower left corner). Hint: see Leonardo Ubeda's
+   image plot examples on http://astroplotlib.stsci.edu/
+
+IPython Notebook
+================
+
+Getting Started
+---------------
+
+IPython Notebook is an interactive web-based tool which combines code
+execution, mathematics, and rich media output.
+
+You can find a plethora of information at
+http://ipython.org/ipython-doc/dev/notebook/index.html
+
+Let's get started. The data needed for this chapter can be found in
+``/user/gunning/Python_Training/``.
+
+To open a notebook window, open a terminal and initialize Ureka::
+
+   $ ur_setup common ssbx
+   $ ipython notebook
+
+Opening the notebook this way will create a new tab in your browser. All
+subsequent interactions will now be through the browser and the terminal
+will be running the server that the browser interacts with.
+
+IPython Notebook will look for notebook files (``.ipynb``) in the directory
+where you started the notebook in. Once in the notebook window, to
+execute a cell you must hit :kbd:`Shift-Enter`.
+
+Plotting Inline
+---------------
+
+A unique feature that the notebook has is the ability to plot inline.
+
+You can initialize inline plotting two ways.
+
+From the terminal::
+
+   $ ur_setup common ssbx
+   $ ipython notebook –pylab inline
+
+From the notebook window:
+
+   >>> %pylab inline --no-import-all
+
+Without telling the notebook to plot inline, plots will pop up in a
+separate window just as they normally would plotting in the python
+terminal.
+
+Notebook Examples
+-----------------
+
+.. image:: figures/python/notebook1.png
+
+.. image:: figures/python/notebook2.png
+
+.. image:: figures/python/notebook3.png
+
+.. image:: figures/python/notebook4.png
+
+.. image:: figures/python/notebook5.png
+
+.. admonition:: Exercise
+   :class: note
+
+   Change the colormap for the figure in line 7 to whatever map you prefer.
+   (a quick google of 'matplotlib colormap' will give you the list of
+   available maps)
+
+.. admonition:: Exercise
+   :class: note
+
+   Use the same colormap for the figure in line 8. Add '\_r' to the end of
+   your colormap name. What did this do to your image? - Write answer in
+   your notebook
+
+.. admonition:: Exercise
+   :class: note
+
+   Pick different rows to plot for the figure in line 18 and change the
+   line colors.
+   Save your notebook (``lastname_training.ipynb``) and place it in
+   ``/user/gunning/Python_Training/notebooks/``
+
+.. _python_scripts:
+
+Python Scripts and Functions
+============================
+
+In this chapter, we will create a python script that performs some basic
+calibration/monitoring tasks for WFC3/UVIS "hot pixels" found in DARK
+images. The goal is to create a module that serves as simple yet
+practical example of a script that one might write for work on an
+instrument team (generally speaking of course – if this script were to
+be used as part of a real calibration, it would likely be expanded and
+reconfigured to be more robust). In addition, we will explore some of
+python's "best practices" that promote code readability, consistency,
+reusability, etc. Our example will use standard conventions, docstrings,
+and minimal redundancy. By no means should this style be used as a hard
+rule or guideline, but rather a suggestion for producing high-level,
+easy-to-use python code.
+
+Please choose a text editor for editing your script, such as
+SublimeText, Emacs, TextWrangler, NEdit, or others.
+
+hotpix\_monitor.py
+------------------
+
+Our task at hand is to create a script that will construct a plot of the
+number of hot pixels found in a collection of WFC3/UVIS DARK images
+versus time. To determine if a pixel is "hot" or not, we will implement
+a threshold that the user of the script can supply via a command-line
+argument; if a pixel's value is greater than this threshold, it is
+considered to be a hot pixel. The dark images are located in
+``/user/gunning/Python_Training/uvis_darks/``, and like all full-frame
+UVIS images, they contain a primary header (extension 0), two SCI
+extensions (extensions 1 and 4), two ERR extensions (extensions 2 and
+5), and two DQ extensions (extensions 3 and 6). However, we will only
+concern ourselves with extensions 0, 1, and 3 in this example.
+
+Create a file called ``hotpix_monitor.py`` in your script directory, and
+open it in your favorite editor. It is best practice to name scripts (or
+modules) with all-lowercase, using underscores to separate words. The
+name of your script should describe what the script does. In this case,
+we chose ``hotpix_monitor.py`` because our script will monitor hot pixels!
+
+The first thing we will put in our script is this line:
+
+::
+
+    #!/usr/bin/env python
+
+This tells the computer that the python interpreter should be used for
+executing this file.
+
+Comments, or "docstrings" in scripts are very important, not just to
+help you remember what exactly you were thinking, but to help others as
+well should they ever use your code. Therefore, to start off on the
+right foot, let's create a docstring. For our module docstring for our
+module. We will include:
+
+1. A description of what the script does
+2. The author(s) of the script
+3. How the script is used, and
+4. A description of any output products.
+
+Our docstring should look something like this:
+
+::
+
+    """Monitors the hot pixel evolution of WFC3/UVIS darks.
+
+    Authors:
+        First Last, MMM YYYY
+
+    Use:
+
+    Outputs:
+
+    """
+
+We don't quite know how the script will be used yet, or what the output
+products will be, so we will fill those sections in after we have
+written the script. It is best practice to use three quotes (""") at the
+beginning and end of your docstring, and to keep the lines in the
+docstrings to maximum of 72 characters long.
+
+Next, after the module docstring, we will import the various modules
+that we will need::
+
+    import argparse
+    from astropy.io import fits
+    import glob
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+Notice that the import statements are in alphabetical order. This is yet
+another "best practice"; each import should be on its own line and in
+alphabetical order.
+
+Now we need to make our script useable from the command line. To do
+this, we will add the following line after the import statements::
+
+    if __name__ == '__main__':
+        # Code goes here.
+
+This allows any code placed under the ``if __name__ == '__main__':``
+statement to be executed when the script is called from the command
+line. Technically, we could put all of our code that we will type under
+this code block, and it would be executed when the script is called from
+the command line. However, it is better practice to make the code more
+flexible by adding separate functions, each of which perform a separate
+task. By having separate functions, not only could our module be
+executed from the command line, but its individual functions could also
+be imported by other python modules and/or used within the python
+environment itself. This could prove to be useful if we ever want to use
+the functionality that this module has to offer in other scripts. The
+following shows an example of how to declare a function::
+
+    def some_function():
+        # Some code
+
+Thus, for our script, we want our code to follow this generic workflow::
+
+    #! /usr/bin/env python
+
+    """
+    Module docstring
+    """
+
+    def main_function():
+        """
+        Function docstring
+        """
+        # some code
+
+    if __name__=='__main__':
+        main_function()
+
+In this way, the code contained in the main function will be executed
+when the script is called from the command line *and also* can be
+imported by other modules.
+
+Before we start adding code to find hot pixels and make plots, let's add
+a function that implements the threshold command line argument. We will
+do this using the argparse module. Add the following code block between
+your import statements and the ``if __name__ == '__main__':`` block::
+
+    def parse_args():
+        """Parse command line arguments.
+
+        Parameters:
+            nothing
+
+        Returns:
+            args : argparse.Namespace object
+                An argparse object containing all of the added arguments.
+
+        Outputs:
+            nothing
+        """
+
+        parser = argparse.ArgumentParser()
+        parser.add_argument('-t --threshold',
+            dest='threshold',
+            action='store',
+            type=float,
+            required=False,
+            help='Pixel value to be used as hot pixel threshold (in counts)',
+            default=9.0)
+        args = parser.parse_args()
+
+        return args
+
+Notice that our function docstrings are a little different from our
+module docstring. Typically, users are not concerned with how individual
+functions are used, but rather what parameters/variables are needed or
+returned by the function. Thus, in the function docstring, we include
+descriptions of (1) what the function does, (2) the parameters that the
+function requires, (3) the object(s) returned by the function, and (4)
+any output(s) that the function produces upon execution.
+
+Also notice that we split the parser.add\_argument command into several lines.
+This is because it is best practice to limit non-docstring lines to 79
+characters.
+
+By grabbing what is returned from the parse\_args() function, we can now
+utilize the threshold parameter. Add a call to the parse\_args()
+function, as such::
+
+    if __name__ == '__main__':
+        args = parse_args()
+
+This should leave our script looking something like this::
+
+    #!/usr/bin/env python
+
+    """Monitors the hot pixel evolution of WFC3/UVIS darks.
+
+    Authors:
+        First Last, MMM YYYY
+
+    Use:
+
+    Outputs:
+
+    """
+
+    import argparse
+    from astropy.io import fits
+    import glob
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+
+    def parse_args():
+        """Parse command line arguments.
+
+        Parameters:
+            nothing
+
+        Returns:
+            args : argparse.Namespace object
+                An argparse object containing all of the added arguments.
+
+        Outputs:
+            nothing
+        """
+
+        parser = argparse.ArgumentParser()
+        parser.add_argument('-t --threshold',
+            dest='threshold',
+            action='store',
+            type=float,
+            required=False,
+            help='Pixel value to be used as hot pixel threshold (in counts)',
+            default=9.0)
+        args = parser.parse_args()
+
+        return args
+
+
+    if __name__ == '__main__':
+        args = parse_args()
+
+We know that the script must calculate the number of hot pixels in a
+several images, so adding another function that will take an image and
+the threshold as parameters and return the number of hot pixels and
+image's observation date would be useful; we could then simply call this
+function for each image in our image list and obtain the information
+that we need to produce the plot. For convenience, we will calculate the
+percentage of the detector occupied by hot pixels, instead of just
+returning the total number of hot pixels. Thus, let's call our new
+function get\_percentage\_hotpix(), and place it into our script::
+
+    def get_percentage_hotpix(image, threshold):
+        """Determine the observation date and number of hot pixels for the
+        image.
+
+        Parameters:
+            image : string
+                The path to the image to process.
+            threshold : float
+                The threshold above which pixels will be considered hot
+                pixels.
+
+        Returns:
+            mjd : float
+                The Modified Julian Date of the image.
+            percentage_hotpix : float
+                The percentage of hot pixels in SCI extension of the image.
+
+        Outputs:
+            nothing
+        """
+
+        # Open the file
+        hdulist = fits.open(image)
+
+        # Get data from the SCI and DQ extensions
+        sci = hdulist[1].data
+        dq = hdulist[3].data
+
+        # Get the MJD of observation
+        mjd = hdulist[0].header['EXPSTART']
+
+        # Determine which pixels are hot pixels
+        good_data = sci[np.where(dq == 0)]
+        hotpix = good_data[np.where(good_data > threshold)]
+
+        # Calculate the percentage of hot pixels
+        num_pix = float(sci.size)
+        num_hotpix = float(hotpix.size)
+        percentage_hotpix = (num_hotpix / num_pix) * 100.
+
+        return mjd, percentage_hotpix
+
+Now our script should look something like this::
+
+    #!/usr/bin/env python
+
+    """Monitors the hot pixel evolution of WFC3/UVIS darks.
+
+    Authors:
+        First Last, MMM YYYY
+
+    Use:
+
+    Outputs:
+
+    """
+
+    import argparse
+    from astropy.io import fits
+    import glob
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+
+    def get_percentage_hotpix(image, threshold):
+        """Determine the observation date and number of hot pixels for the
+        image.
+
+        Parameters:
+            image : string
+                The path to the image to process.
+            threshold : float
+                The threshold above which pixels will be considered hot
+                pixels.
+
+        Returns:
+            mjd : float
+                The Modified Julian Date of the image.
+            percentage_hotpix : float
+                The percentage of hot pixels in SCI extension of the image.
+
+        Outputs:
+            nothing
+        """
+
+        # Open the file
+        hdulist = fits.open(image)
+
+        # Get data from the SCI and DQ extensions
+        sci = hdulist[1].data
+        dq = hdulist[3].data
+
+        # Get the MJD of observation
+        mjd = hdulist[0].header['EXPSTART']
+
+        # Determine which pixels are hot pixels
+        good_data = sci[np.where(dq == 0)]
+        hotpix = good_data[np.where(good_data > threshold)]
+
+        # Calculate the percentage of hot pixels
+        num_pix = float(sci.size)
+        num_hotpix = float(hotpix.size)
+        percentage_hotpix = (num_hotpix / num_pix) * 100.
+
+        return mjd, percentage_hotpix
+
+
+    def parse_args():
+        """Parse command line arguments.
+
+        Parameters:
+            nothing
+
+        Returns:
+            args : argparse.Namespace object
+                An argparse object containing all of the added arguments.
+
+        Outputs:
+            nothing
+        """
+
+        parser = argparse.ArgumentParser()
+        parser.add_argument('-t --threshold',
+            dest='threshold',
+            action='store',
+            type=float,
+            required=False,
+            help='Pixel value to be used as hot pixel threshold (in counts)',
+            default=9.0)
+        args = parser.parse_args()
+
+        return args
+
+
+    if __name__ == '__main__':
+        args = parse_args()
+
+Notice that the get\_percentage\_hotpix() function is placed before the
+parse\_args() function, even though the parse\_args() function is
+executed before get\_percentage\_hotpix(). This is because it is good
+practice to put functions in alphabetical order for readability
+purposes. Similarly, it is best practice to leave the ``if __name__ == '__main__':``
+codeblock at the end of the program.
+
+Now we are ready to implement the core functionality; gathering hot
+pixel statistics and plotting them versus time. Again, we will do this
+in a separate function. Let's call it plot\_hot\_pixels(). In the
+function, we will have to (1) define the list of DARK images to process,
+(2) find the percentage of hot pixels for each image using the threshold
+parameter, (3) plot the percentage of hot pixels versus time, and (4)
+save the figure. For fun, we will also plot a vertical line representing
+when a UVIS anneal occurred, in which the detector was warmed up to
+reduce the number of hot pixels. Our function should look something like
+this::
+
+    def plot_hot_pixels(threshold):
+        """Plots WFC3/UVIS hot pixel evolution.
+
+        Parameters:
+            threshold : float
+                The threshold above which pixels will be considered hot
+                pixels.
+
+        Returns:
+            nothing
+
+        Outputs:
+            hotpix.png - A plot showing the number of hot pixels over time
+        """
+
+        # Define image list
+        dark_path = '/user/gunning/Python_Training/uvis_darks/'
+        dark_files = glob.glob(dark_path+'*.fits')
+
+        # Initialize plot
+        figure, ax = plt.subplots()
+        ax.grid()
+        ax.minorticks_on()
+        ax.set_title('WFC3/UVIS Hot Pixel Evolution')
+        ax.set_xlabel('Days from anneal')
+        ax.set_ylabel('Number of Hot Pixels (% of Chip)')
+
+        # Set the anneal date
+        anneal = 56687.4698727
+
+        # Plot the percentage of hot pixels
+        for dark_file in dark_files:
+
+            print 'Processing {}'.format(dark_file)
+
+            # Determine observation time and number of hot pixels
+            time, hotpix = get_percentage_hotpix(dark_file, threshold)
+
+            # Plot the number of hot pixels vs time
+            ax.scatter(time - anneal, hotpix, s=50, c='k', marker='+')
+
+        # Plot the anneal
+        ax.axvline(x=0, c='r', ls='--', lw=2, label='Anneal')
+
+        # Place the legend
+        ax.legend(loc='best')
+
+        # Save the figure
+        savefile = 'hotpix_{}.png'.format(str(threshold))
+        plt.savefig(savefile)
+        print 'Saved figure to {}'.format(savefile)
+
+Great! Now we just need to call this function in our ``__main__`` code
+block with our threshold parameter::
+
+    if __name__ == '__main__':
+
+        args = parse_args()
+        plot_hot_pixels(args.threshold)
+
+We now have all of the pieces in place, and know what our script does.
+Thus, we can update our module docstrings to provide futher
+explanation::
+
+    #!/usr/bin/env python
+
+    """Monitors the hot pixel evolution of WFC3/UVIS darks.
+
+    Authors:
+        First Last, MMM YYYY
+
+    Use:
+        This script is inteded to be executed from the command line as
+        such:
+
+            >>> python dark_monitor.py
+
+        The hot pixel threshold (in counts) can be specified with the -t
+        or --threshold argument.  For example:
+
+            >>> python dark_monitor.py -t 8.5
+
+        If no threshold is specified, the default value of 9.0 counts is
+        used.
+
+    Outputs:
+
+        hotpix_<threshold>.png -- A plot showing the number of hot pixels
+                                  in each dark as a function of MJD,
+                                  placed in the current working directory.
+
+    References:
+
+        The Python RIAB Training Document
+        (https://confluence.stsci.edu/display/INSRIA/RIA+training)
+    """
+
+So, our entire script should look something like this::
+
+    #!/usr/bin/env python
+
+    """Monitors the hot pixel evolution of WFC3/UVIS darks.
+
+    Authors:
+        First Last, MMM YYYY
+
+    Use:
+        This script is inteded to be executed from the command line as
+        such:
+
+            >>> python dark_monitor.py
+
+        The hot pixel threshold (in counts) can be specified with the -t
+        or --threshold argument.  For example:
+
+            >>> python dark_monitor.py -t 8.5
+
+        If no threshold is specified, the default value of 9.0 counts is
+        used.
+
+    Outputs:
+
+        hotpix_<threshold>.png -- A plot showing the number of hot pixels
+                                  in each dark as a function of MJD,
+                                  placed in the current working directory.
+
+    References:
+
+        The Python RIAB Training Document
+        (https://confluence.stsci.edu/display/INSRIA/RIA+training)
+    """
+
+    import argparse
+    from astropy.io import fits
+    import glob
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+
+    def get_percentage_hotpix(image, threshold):
+        """Determine the observation date and number of hot pixels for the
+        image.
+
+        Parameters:
+            image : string
+                The path to the image to process.
+            threshold : float
+                The threshold above which pixels will be considered hot
+                pixels.
+
+        Returns:
+            mjd : float
+                The Modified Julian Date of the image.
+            percentage_hotpix : float
+                The percentage of hot pixels in SCI extension of the image.
+
+        Outputs:
+            nothing
+        """
+
+        # Open the file
+        hdulist = fits.open(image)
+
+        # Get data from the SCI and DQ extensions
+        sci = hdulist[1].data
+        dq = hdulist[3].data
+
+        # Get the MJD of observation
+        mjd = hdulist[0].header['EXPSTART']
+
+        # Determine which pixels are hot pixels
+        good_data = sci[np.where(dq == 0)]
+        hotpix = good_data[np.where(good_data > threshold)]
+
+        # Calculate the percentage of hot pixels
+        num_pix = float(sci.size)
+        num_hotpix = float(hotpix.size)
+        percentage_hotpix = (num_hotpix / num_pix) * 100.
+
+        return mjd, percentage_hotpix
+
+
+    def parse_args():
+        """Parse command line arguments.
+
+        Parameters:
+            nothing
+
+        Returns:
+            args : argparse.Namespace object
+                An argparse object containing all of the added arguments.
+
+        Outputs:
+            nothing
+        """
+
+        parser = argparse.ArgumentParser()
+        parser.add_argument('-t --threshold',
+            dest='threshold',
+            action='store',
+            type=float,
+            required=False,
+            help='Pixel value to be used as hot pixel threshold (in counts)',
+            default=9.0)
+        args = parser.parse_args()
+
+        return args
+
+
+    def plot_hot_pixels(threshold):
+        """Plots WFC3/UVIS hot pixel evolution.
+
+        Parameters:
+            threshold : float
+                The threshold above which pixels will be considered hot
+                pixels.
+
+        Returns:
+            nothing
+
+        Outputs:
+            hotpix.png - A plot showing the number of hot pixels over time
+        """
+
+        # Define image list
+        dark_path = '/user/gunning/Python_Training/uvis_darks/'
+        dark_files = glob.glob(dark_path+'*.fits')
+
+        # Initialize plot
+        figure, ax = plt.subplots()
+        ax.grid()
+        ax.minorticks_on()
+        ax.set_title('WFC3/UVIS Hot Pixel Evolution')
+        ax.set_xlabel('Days from anneal')
+        ax.set_ylabel('Number of Hot Pixels (\% of Chip)')
+
+        # Set the anneal date
+        anneal = 56687.4698727
+
+        # Plot the percentage of hot pixels
+        for dark_file in dark_files:
+
+            print 'Processing {}'.format(dark_file)
+
+            # Determine observation time and number of hot pixels
+            time, hotpix = get_percentage_hotpix(dark_file, threshold)
+
+            # Plot the # of hot pixels vs time
+            ax.scatter(time - anneal, hotpix, s=50, c='k', marker='+')
+
+        # Plot the anneal
+        ax.axvline(x=0, c='r', ls='--', lw=2, label='Anneal')
+
+        # Place the legend
+        ax.legend(loc='best')
+
+        # Save the figure
+        savefile = 'hotpix_{}.png'.format(str(threshold))
+        plt.savefig(savefile)
+        print 'Saved figure to {}'.format(savefile)
+
+
+    if __name__ == '__main__':
+
+        args = parse_args()
+        plot_hot_pixels(args.threshold)
+
+Executing Python Scripts
+------------------------
+
+There are a few ways to run a Python program. One is to type from your
+terminal::
+
+   $ python hotpix_monitor.py
+
+Or, if you are already inside the Python interactive environment, just
+import the module and call its main function:
+
+   >>> import hotpix_monitor
+   >>> hotpix_monitor.plot_hot_pixels(9.0)
+
+Lastly, since we put ``#!/usr/bin/env python`` at the top of our program, we
+can execute it directly::
+
+   $ ./hotpix_monitor.py
+
+This is nice. You do not have to type 'python', you can run it from
+anywhere, and you do not have to be in the Python interactive
+environment. To be able to call your script from anywhere on your
+computer, add your script directory to your executable PATH::
+
+   setenv PATH .:/my/script/directory:{$PATH}
+
+.. admonition:: Exercise
+   :class: note
+
+   Write the script ``hotpix_monitor.py`` and execute it.
+
+.. admonition:: Exercise
+   :class: note
+
+   Try executing ``hotpix_monitor.py`` with a different threshold. Did the
+   plot change?
+
+.. admonition:: Exercise
+   :class: note
+
+   Add another command line argument called ``-s`` or ``-–savefile``, which stores
+   the plot saving location. Use this new argument to replace the
+   hard-coded save location. Then, try executing the script and saving to a
+   location that you pass as an argument.
+
+Error Handling and ``pdb.set_trace()``
+-----------------------------------
+
+Debugging can be a difficult and long process, but the pdb module can
+help. pdb is the Python debugger. There are many ways to use it, but a
+common method is with ``pdb.set_trace()``. To debug your code using this
+function, import ``pdb`` and insert the line ``pdb.set_trace()`` into your
+code before the part you are unsure about. Execute the program. Once the
+interpreter reaches the ``pdb.set_trace()`` mark, it will allow you to
+interact with the code and print variables as they are defined. Common
+``pdb.set_trace()`` commands include:
+
+-  (n)ext: continue to the next line
+
+-  (l)ist: list a few steps
+
+-  (b)reak: give line and file to break at
+
+-  (s)tep: moves into deeper calls (i.e. a function in NumPy, or our
+   function mkplot).
+
+-  (c)ontinue: continue the program like normal.
+
+.. admonition:: Exercise
+   :class: note
+
+   Add ``import pdb`` to your list of imports in your ``hotpix_monitor.py``
+   file. Insert the line ``pdb.set_trace()``. Execute your code and step
+   through the program, print out variables to make sure they are what they
+   are supposed to be. If they are, let the program continue.
+
+More about Python Coding Styles and Best Practices
+--------------------------------------------------
+
+In this chapter, we have touched on some of the "best practices" that
+are recommended when coding in Python. Two good resources for learning
+about these best practices are PEP-8
+(https://www.python.org/dev/peps/pep-0008/), which covers general
+conventions, and PEP-257 (https://www.python.org/dev/peps/pep-0257/),
+which discusses docstrings. If you have an interest in scripting in
+python, please take the time to review these two documents.
+
+PyRAF
+=====
+
+PyRAF Introduction
+------------------
+
+PyRAF calls IRAF tasks from Python. One of the main motivations for
+creating PyRAF is to create a version of IRAF that is compatible with a
+programming language other than CL. CL has many short comings which are
+more and more apparent in more complicated programs.
+
+PyRAF has its own interactive PyRAF session. To start it, just type
+``pyraf`` in a terminal. This should look familiar to you if you know
+IRAF. Type ``.exit`` to exit. The remaining part of this chapter will have
+you import PyRAF into Python unless otherwise stated.
+
+A PyRAF Example with iraf.daofind()
+-----------------------------------
+
+Again, create a file in your script directory, and open it in your
+favorite editor. Add your header. For your 'ABOUT' section, we will be
+creating a script showing how python can be used to execute IRAF/PyRAF
+tasks. We will use some JWST/MIRI data, ``n9vf01hfq_ima.fits``, which can
+be found in ``/user/gunning/Python_Training/``.
+
+Import the PyRAF module and from within that module import the IRAF
+instance. The code for importing these functions looks like this:
+
+::
+
+    import pyraf
+    from pyraf import iraf
+    from iraf import noao, digiphot, daophot
+
+As you can infer 'iraf' is something that lives inside of 'pyraf'. For
+example, if you want to run phot on some files you need to create a list
+of coordinates. To do this we will use daofind. Since daofind is an iraf
+module, we execute it using dot notation, like this::
+
+   iraf.daofind(parameter1, parameter2, parameter3)
+
+The parameters for a PyRAF task executed in the python environment are
+the same as they would be in the PyRAF environment. Pull up a PyRAF
+window and open the help file to see what the parameters for
+iraf.daofind() are. Now are going to run iraf.daofind() on the file
+``n9vf01hfq_ima.fits``::
+
+    iraf.daofind(image='n9vf01hfq_ima.fits[1]')
+
+The ``[1]`` is for extension 1. You should be prompted for several
+parameters, just hit 'enter' to go through the defaults. Type ``ls`` in
+the directory where you ran this – there should now be a file called
+``n9vf01hfq_ima.fits1.coo.1``. In PyRAF open up the file and look at the
+output, then compare this with the image on DS9. Did ``iraf.daofind()`` do a
+good job? You can facilitate this process with the ``tvmark`` task::
+
+   $ pyraf
+   --> images
+   --> !ds9 &
+   --> display n9vf01hfq_ima.fits[1] 1
+
+The last '1' is for which DS9 frame to display in::
+
+   --> tv
+   --> tvmark 1 n9vf01hfq_ima.fits1.coo.1
+
+We can see that we did not to too well, but let's ignore that for now
+and work on our program.
+
+Go ahead and run this program again, and you will see that it will
+create a second file called ``n9vf01hfq_ima.fits1.coo.2``. What if we did
+not want so many files and instead wanted to always write to
+``n9vf01hfq_ima.fits1.coo.1``? IRAF might have a problem overwriting this
+file, so a simple solution would be to remove it. For this we will need
+to import os. Furthermore, if we don't want to have to press :kbd:`Enter` at
+the prompt, we can add to our program the extra parameters it is looking
+for. Finally, let's write this program so that we can run the process on
+multiple files. For that we will import ``glob``.
+
+Here is what we have::
+
+    #!/usr/bin/env python
+    # HEADER
+
+    #Load the packages we need
+    import pyraf, os, glob
+    from pyraf import iraf
+    from iraf import noao, digiphot
+
+    #Generate a list of all the fits files
+    file_list = glob.glob('*_ima.fits')
+    print file_list
+
+    #Loops through all the .fits files
+    for ima in file_list:
+        #Test for old files, and remove them if they exist
+        file_query = os.access(ima + '1.coo.1', os.R_OK)
+        if file_query == True:
+            os.remove(ima + '1.coo.1')
+        #Run daofind on one image
+        iraf.daofind(
+            image = ima + '[1]',
+            interactive = 'no',
+            verify = 'no')
+
+.. admonition:: Exercise
+   :class: note
+
+   Write your script that uses iraf.daofind(). Anytime you change the default settings to a PyRAF command it is a good
+   idea to change them back. You can do this with the iraf.unlearn()
+   command as shown below. ::
+
+      --> iraf.daofind.unlearn()
+      --> iraf.unlearn('daofind')
+
+
+
+Resources
+=========
+
+.. _python_links:
+
+Useful Links
+-------------
+
+Below is a list of links to be used as a reference.
+
+-  http://docs.python.org/
+
+-  http://legacy.python.org/dev/peps/pep-0008/
+
+-  http://www.astropy.org/
+
+-  http://wiki.python.org/moin/HowTo/Sorting
+
+-  http://ipython.scipy.org/moin/Documentation
+
+-  http://matplotlib.sourceforge.net/
+
+-  http://www.scipy.org/Numpy_Example_List_With_Doc
+
+-  http://docs.scipy.org/doc/
+
+-  http://www.scipy.org/Cookbook
+
+The following links are for further training and building of your Python
+skills.
+
+-  http://stsdas.stsci.edu/perry/pydatatut.pdf
+
+-  http://www.scipy.org/Additional_Documentation/Astronomy_Tutorial?action=show
+
+-  http://python4astronomers.github.com/
+
+-  http://code.google.com/edu/languages/google-python-class/
+
+-  http://learnpythonthehardway.org/book/
+
+-  http://www.pythonchallenge.com/
+
+Mailing Lists
+-------------
+
+These python themed STScI e-mail lists are available through the Outlook
+Web App (OWA):
+
+-  pylunch: A mailing list for a lunch group that presents and discusses
+   python related material.
+
+-  python-interested: A mailing list usually used to discuss bugs,
+   fixes, and how to do some outrageous tasks that astronomers come up
+   with.

@@ -16,6 +16,7 @@ Training guides and exercises for new RIAs
 #. :doc:`archives`
 #. :doc:`using_idl`
 #. :doc:`python`
+#. :doc:`python_rest`
 #. :doc:`pyraf`
 #. :doc:`astrodrizzle`
 #. :doc:`photometry`
@@ -51,6 +52,7 @@ Reference information
    archives
    using_idl
    python
+   python_rest
    pyraf
    astrodrizzle
    photometry
