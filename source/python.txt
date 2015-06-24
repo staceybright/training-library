@@ -2,16 +2,8 @@
 Basic Python Concepts
 *********************
 
-**Revision History**
+*Version 5.5: June 2015, Joseph Long* [#revisions]_
 
-| 5.5 - June 2015: Joseph LONG, Meredith DURBIN
-| 5.0 - June 2014: Katie GOSMEYER, Heather GUNNING, Matthew BOURQUE
-| 4.0 - September 2013: Justin ELY, Thompson LEBLANC
-| 3.0 - January 2012: Rachel ANDERSON
-| 2.0 - October 2009: Sami-Matias NIEMI
-| 1.0 - September 2008: Alex VIANA
-
-\
 
 Introduction
 ============
@@ -54,24 +46,14 @@ Environment and Set Up
 SSB Environment
 ---------------
 
-There are three different versions of the SSB (Science Software Branch)
-environments available at the institute. They are:
+The easiest way to access up-to-date versions of Python and related tools is with the :ref:`Institute's SSB packages <computer_setup_ureka>`. For the purposes of this training, we will use ``ssbx``, which you activate in a terminal by typing::
 
--  SSBREL – Updated as needed, standard publicly available release.
+   $ ssbx
 
--  SSBX – Updated weekly, a testing environment. Holds latest bug fixes
-   and updates. Institute only release.
+.. note::
 
--  SSBDEV – Updated daily. Development updates intended for instrument
-   teams to test bug fixes and upgrades. Institute only release.
+   In this text, when discussing commands to be typed at a command prompt, ``$`` is a placeholder for your command prompt (which may be something like ``yourname@localhost $``). You don't need to type it, just the commands following it.
 
-Note that the version of Python related modules depend on the SSB
-environment, especially if you are using NFS mounts. To switch to a
-particular version, type one of the following into your terminal::
-
-   $ ur_setup common ssbrel
-   $ ur_setup common ssbx
-   $ ur_setup common ssbdev
 
 Interactive Python Environment
 ------------------------------
@@ -2308,3 +2290,15 @@ Web App (OWA):
 -  **python-interested**: A mailing list usually used to discuss bugs,
    fixes, and how to do some outrageous tasks that astronomers come up
    with.
+
+.. rubric:: Footnotes
+
+.. [#revisions] Revision History
+
+   | 5.5 - June 2015: Joseph LONG, Meredith DURBIN
+   | 5.0 - June 2014: Katie GOSMEYER, Heather GUNNING, Matthew BOURQUE
+   | 4.0 - September 2013: Justin ELY, Thompson LEBLANC
+   | 3.0 - January 2012: Rachel ANDERSON
+   | 2.0 - October 2009: Sami-Matias NIEMI
+   | 1.0 - September 2008: Alex VIANA
+.. [#pythontutorial] An extensive Python tutorial is available from the Python developers themselves: https://docs.python.org/2/tutorial/introduction.html. (For Python 3, the updated tutorial is at https://docs.python.org/3/tutorial/introduction.html.)

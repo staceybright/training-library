@@ -72,6 +72,8 @@ As you may have guessed, setting variables in ``tcsh`` takes the form of ``seten
 
 To check that your changes have taken effect, open a **new terminal window** and type ``echo $mtab``. You should see the value for ``mtab`` from above printed out in the terminal.
 
+.. _computer_setup_ureka:
+
 Installing Ureka for internal users
 ====================================
 
