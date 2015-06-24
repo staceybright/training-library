@@ -24,8 +24,8 @@ The intention of this tutorial is to provide the Python basics to
 understand how to perform simple astronomical data analysis.
 
 We will discuss how to write and run Python scripts in
-:ref:`python_scripts`. Until then we will use python interactively, which
-is best for learning python and for checking your code as you write it.
+:ref:`python_scripts`. Until then we will use Python interactively, which
+is best for learning Python and for checking your code as you write it.
 
 A Few Notes on Python
 ---------------------
@@ -83,26 +83,26 @@ popular options.
   To start the Python interactive environment, just type 'python' at
   the prompt in your terminal.
 
-- **iPython**
+- **IPython**
 
-  To use the iPython interactive environment, type 'ipython' instead.
-  The advantage of iPython is that besides Python code, you are also
-  able to execute UNIX commands such as 'ls' and 'cp'. Furthermore, you
-  can also log your session. To start the log, type '%logstart' in your
-  iPython shell. This will start logging into a default file named
-  ipython.log.py. The log-file follows a formatting convention of
-  iPython and may not, on a first glance, look readable. However,
-  iPython knows how to repeat the commands in your log-file when ran.
+  To use the IPython interactive environment, type ``ipython`` instead.
+  The advantage of IPython is that besides Python code, you are also
+  able to execute UNIX commands such as ``ls`` and ``cp``. Furthermore, you
+  can also log your session. To start the log, type ``%logstart`` in your
+  IPython shell. This will start logging into a default file named
+  ``ipython.log.py``. The log-file follows a formatting convention of
+  IPython and may not, on a first glance, look readable. However,
+  IPython knows how to repeat the commands in your log-file when ran.
 
-   - **iPython Notebook**
+   - **IPython Notebook**
 
-     iPython Notebook can be called in the terminal by adding
-     'notebook' after ipython. The notebook is an interactive web based
+     IPython Notebook can be called in the terminal by adding
+     ``notebook`` after ``ipython``. The notebook is an interactive web based
      interface. It combines code, text, math, plots, and rich media
-     into a single document with all the functionality of ipython.
+     into a single document with all the functionality of IPython.
 
 To exit either, type 'exit()'. Only once do we use the shell command
-'cp', for which you would need to use iPython (or just do it in the UNIX
+'cp', for which you would need to use IPython (or just do it in the UNIX
 shell). Otherwise either environment would work.
 
 .. _python_dtype:
@@ -636,7 +636,7 @@ numpy.array() function
 Examples::
 
    >>> import numpy as np
-   >>> a = [1,2,3,4]      #a python built in list
+   >>> a = [1,2,3,4]      #a Python built in list
    >>> b = np.array(a)     #converted to a NumPy array
    >>> print a
    >>> print b
@@ -809,7 +809,7 @@ numpy.nonzero(), numpy.choose().
 Handling FITS files and ASCII data tables using Astropy
 =======================================================
 
-Astropy is a python library for astronomy developed by professional
+Astropy is a Python library for astronomy developed by professional
 astronomers and software developers from around the world, some of which
 work here at STScI in the Science Software Branch. It is under
 continuous development and is quickly becoming a powerful library,
@@ -1338,7 +1338,7 @@ From the notebook window:
    >>> %pylab inline --no-import-all
 
 Without telling the notebook to plot inline, plots will pop up in a
-separate window just as they normally would plotting in the python
+separate window just as they normally would plotting in the Python
 terminal.
 
 Notebook Examples
@@ -1381,18 +1381,18 @@ Notebook Examples
 Python Scripts and Functions
 ============================
 
-In this chapter, we will create a python script that performs some basic
+In this chapter, we will create a Python script that performs some basic
 calibration/monitoring tasks for WFC3/UVIS "hot pixels" found in DARK
 images. The goal is to create a module that serves as simple yet
 practical example of a script that one might write for work on an
 instrument team (generally speaking of course – if this script were to
 be used as part of a real calibration, it would likely be expanded and
 reconfigured to be more robust). In addition, we will explore some of
-python's "best practices" that promote code readability, consistency,
+Python's "best practices" that promote code readability, consistency,
 reusability, etc. Our example will use standard conventions, docstrings,
 and minimal redundancy. By no means should this style be used as a hard
 rule or guideline, but rather a suggestion for producing high-level,
-easy-to-use python code.
+easy-to-use Python code.
 
 Please choose a text editor for editing your script, such as
 SublimeText, Emacs, TextWrangler, NEdit, or others.
@@ -1424,7 +1424,7 @@ The first thing we will put in our script is this line:
 
     #!/usr/bin/env python
 
-This tells the computer that the python interpreter should be used for
+This tells the computer that the Python interpreter should be used for
 executing this file.
 
 Comments, or "docstrings" in scripts are very important, not just to
@@ -1486,7 +1486,7 @@ the command line. However, it is better practice to make the code more
 flexible by adding separate functions, each of which perform a separate
 task. By having separate functions, not only could our module be
 executed from the command line, but its individual functions could also
-be imported by other python modules and/or used within the python
+be imported by other Python modules and/or used within the Python
 environment itself. This could prove to be useful if we ever want to use
 the functionality that this module has to offer in other scripts. The
 following shows an example of how to declare a function::
@@ -2134,7 +2134,7 @@ about these best practices are PEP-8
 (https://www.python.org/dev/peps/pep-0008/), which covers general
 conventions, and PEP-257 (https://www.python.org/dev/peps/pep-0257/),
 which discusses docstrings. If you have an interest in scripting in
-python, please take the time to review these two documents.
+Python, please take the time to review these two documents.
 
 PyRAF
 =====
@@ -2157,7 +2157,7 @@ A PyRAF Example with iraf.daofind()
 
 Again, create a file in your script directory, and open it in your
 favorite editor. Add your header. For your 'ABOUT' section, we will be
-creating a script showing how python can be used to execute IRAF/PyRAF
+creating a script showing how Python can be used to execute IRAF/PyRAF
 tasks. We will use some JWST/MIRI data, ``n9vf01hfq_ima.fits``, which can
 be found in ``/user/gunning/Python_Training/``.
 
@@ -2177,7 +2177,7 @@ module, we execute it using dot notation, like this::
 
    iraf.daofind(parameter1, parameter2, parameter3)
 
-The parameters for a PyRAF task executed in the python environment are
+The parameters for a PyRAF task executed in the Python environment are
 the same as they would be in the PyRAF environment. Pull up a PyRAF
 window and open the help file to see what the parameters for
 iraf.daofind() are. Now are going to run iraf.daofind() on the file
@@ -2299,12 +2299,12 @@ skills.
 Mailing Lists
 -------------
 
-These python themed STScI e-mail lists are available through the Outlook
+These Python themed STScI e-mail lists are available through the Outlook
 Web App (OWA):
 
--  pylunch: A mailing list for a lunch group that presents and discusses
-   python related material.
+-  **pylunch**: A mailing list for a lunch group that presents and discusses
+   Python related material.
 
--  python-interested: A mailing list usually used to discuss bugs,
+-  **python-interested**: A mailing list usually used to discuss bugs,
    fixes, and how to do some outrageous tasks that astronomers come up
    with.
