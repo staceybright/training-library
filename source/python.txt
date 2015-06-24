@@ -2095,7 +2095,7 @@ computer, add your script directory to your executable PATH::
    location that you pass as an argument.
 
 Error Handling and ``pdb.set_trace()``
------------------------------------
+--------------------------------------
 
 Debugging can be a difficult and long process, but the pdb module can
 help. pdb is the Python debugger. There are many ways to use it, but a

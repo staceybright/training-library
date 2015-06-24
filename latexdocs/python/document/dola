@@ -1,4 +1,0 @@
-#!/bin/csh -f
-pdflatex training.tex
-#latex training.tex
-#dvips training -t letter -o training.ps
