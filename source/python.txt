@@ -2,8 +2,16 @@
 Basic Python Concepts
 *********************
 
-*Version 5.5: June 2015, Joseph Long* [#revisions]_
+**Revision History**
 
+| 5.5 - June 2015: Joseph Long, Meredith Durbin
+| 5.0 - June 2014: Katie Gosmeyer, Heather Gunning, Matthew Bourque
+| 4.0 - September 2013: Justin Ely, Thompson LeBlanc
+| 3.0 - January 2012: Rachel Anderson
+| 2.0 - October 2009: Sami-Matias Niemi
+| 1.0 - September 2008: Alex Viana
+
+\
 
 Introduction
 ============
@@ -22,23 +30,73 @@ is best for learning Python and for checking your code as you write it.
 A Few Notes on Python
 ---------------------
 
--  Python is case sensitive. This turns out not to be that difficult as
-   Python is almost always written in lowercase.
+For those who already know a programming language or two, an important part of learning a new language is finding out which parts of your knowledge will carry over and which won't. Rather than providing an exhaustive tutorial on syntax [#pythontutorial]_, we will point out some key ideas (and traps for users used to other languages).
 
--  Python does not have 'BEGIN' and 'END' statements. It does however
-   depend on indents. It is best practice to indent with four spaces.
+-  If you're coming from a **C or Java-like background**, note that Python does not use curly braces to denote "blocks" of code (e.g. the body of a loop or a conditional). Instead, blocks are indented by four spaces, and Python detects the end of a block when you return to the "outer" level of indentation.
+
+   For example, this C code::
+
+      if (myinteger > 0) {
+         handle_over_zero_case();
+      }
+      do_something_else();
+
+   Would look like this in Python::
+
+      if myinteger > 0:
+          handle_over_zero_case()
+      do_something_else()
+
+-  Similarly, semicolons are unnecessary to end lines.
+   (In fact, it is considered poor style to use semicolons in Python code, though it is not a syntax error.)
+
+   \
+
+-  If you're coming from an **IDL background**, be aware that there is no equivalent to the common ``proc_name, argument1, argument2`` syntax. (Function calls in Python will always look like ``function_name(argument1, argument2)``.)
+
+   \
+
+- Similarly, there are no ``begin`` and ``endif`` keywords. Blocks are introduced with a colon and indentation, and ended by returning to the previous indentation level. (See the example code above.)
+
+\
+
+-  When referring to an element of a sequence, the indices count from zero.
+   (That is, the first element of ``mylist`` would be ``mylist[0]``.)
+
+   \
+
+- Accessing an element of an array in row "y" and column "x" looks like ``myarray[y,x]`` (rather than ``myarray(x,y)`` or ``myarray[x,y]``).
+
+   \
+
+-  Python is case sensitive. That is, a variable named ``varONE`` cannot be referred to as ``varone``. Language keywords like ``if``, ``for``, ``while``, etc. are always lowercase.
+
+   \
 
 -  Comments in code are useful to help you remember what is going on,
-   but also so that others know what you are doing. In Python, comments
-   begin with the # symbol. Multi-line comments can be nested in three
-   quotes.
+   but also so that others know what you are doing. In Python, comment text
+   begins with the ``#`` symbol and goes to the end of the line.
 
--  The line continuation symbol ' \\' can be used to spread a command
-   out over multiple lines. This is not necessary inside parenthesis,
-   brackets, or curly brackets as Python will wait for the closing
-   symbol before assuming the end of the line.
+   For example::
 
--  Python indices start with zero.
+      # a comment
+
+   ::
+
+      do_something()  # a comment sharing a line
+
+   ::
+
+      # a multi
+      # line
+      # comment
+
+   \
+
+-  The line continuation symbol ``\`` can be used to spread an expression
+   out over multiple lines. There are constructs in Python that use parentheses,
+   square brackets (``[]``), or curly braces (``{}``). Inside those, Python will
+   wait for the closing symbol before assuming the end of the line.
 
 Environment and Set Up
 ======================
@@ -46,7 +104,7 @@ Environment and Set Up
 SSB Environment
 ---------------
 
-The easiest way to access up-to-date versions of Python and related tools is with the :ref:`Institute's SSB packages <computer_setup_ureka>`. For the purposes of this training, we will use ``ssbx``, which you activate in a terminal by typing::
+On your work computer, the easiest way to access up-to-date versions of Python and related tools is with the :ref:`Institute's SSB packages <computer_setup_ureka>`. For the purposes of this training, we will use ``ssbx``, which you activate in a terminal by typing::
 
    $ ssbx
 
@@ -62,19 +120,15 @@ You will need to choose an interactive Python environment. There are two
 popular options.
 
 - **Python**
-  To start the Python interactive environment, just type 'python' at
+  To start the Python interactive environment, just type ``python`` at
   the prompt in your terminal.
 
 - **IPython**
 
   To use the IPython interactive environment, type ``ipython`` instead.
-  The advantage of IPython is that besides Python code, you are also
-  able to execute UNIX commands such as ``ls`` and ``cp``. Furthermore, you
-  can also log your session. To start the log, type ``%logstart`` in your
-  IPython shell. This will start logging into a default file named
-  ``ipython.log.py``. The log-file follows a formatting convention of
-  IPython and may not, on a first glance, look readable. However,
-  IPython knows how to repeat the commands in your log-file when ran.
+  One advantage of IPython is that besides Python code, you are also
+  able to execute UNIX commands such as ``ls`` and ``cp`` without special syntax,
+  or any UNIX shell command by including a ``!`` prefix at the beginning of a line.
 
    - **IPython Notebook**
 
@@ -83,9 +137,11 @@ popular options.
      interface. It combines code, text, math, plots, and rich media
      into a single document with all the functionality of IPython.
 
-To exit either, type 'exit()'. Only once do we use the shell command
-'cp', for which you would need to use IPython (or just do it in the UNIX
-shell). Otherwise either environment would work.
+To exit either Python or IPython, type 'exit()'. To close the notebook, ensure you've saved your work, then :kbd:`Ctrl-C` in the terminal window to interrupt it and "y" to confirm you want to quit.
+
+.. note::
+
+   In this text, when discussing commands to be typed at a Python interactive interpreter prompt, ``>>>`` is a placeholder for your command prompt (which will look like ``>>>``, or ``In [#]:`` if you're using IPython). An ellipsis (``...``) indicates a continuation of the preceding block or expression. (Enter a blank line to conclude the block or expression.)
 
 .. _python_dtype:
 
@@ -96,26 +152,224 @@ The principal built-in types of Python are numerics, sequences,
 mappings, files, classes, instances and exceptions. Other data types are
 available through importing modules (Example: the datetime module).
 
-There are four distinct numeric types in Python: plain integers, long
-integers, floating point numbers, and complex numbers. In addition,
-Booleans are a subtype of plain integers. Python fully supports mixed
-arithmetic: when a binary arithmetic operator has operands of different
-numeric types, the operand with the "smaller" type is widened to that of
-the other. Example:
+Numeric types
+-------------
 
-   >>> a = 2.0
-   >>> b = 3
-   >>> print a * b
+There are four distinct numeric types in Python:
 
-Any Python object can be tested for truth value with ``in``,
-``if`` or ``while`` condition or as an operand of the Boolean
-operations. Python supports a vast number of truth values, but for
-simplicity I recommend using ``True`` and ``False``. General
-Boolean operations ``or``, ``and``, and ``not`` are also
-supported. Comparison operations are supported by all objects. They all have the same priority, which is higher than that of the Boolean
-operations. In Python, comparisons are done with characters e.g. ``<``, ``>``, ``>=``, ``<=``,
-``==``, ``!=`` (not like in IDL, where comparisons are done with shortened
-keywords e.g. ``eq``).
+- plain integers, or "ints"
+- long integers, or "longs" (specified with an ``L`` suffix, or created automatically)
+- floating-point numbers, or "floats" (which have ``double`` precision, in C terms)
+- complex numbers, or "complexes", which are composed a floating point real and imaginary part (e.g. ``1.2 + 3.4j``)
+
+The Python interpreter will try to do "the right thing" when you operate on numeric values with different types.
+
+If a sum exceeds the maximum value a "plain integer" can represent, the result will be a long integer. When doing arithmetic with integers and floating point numbers, the result will always be floating point. When complex numbers are added to the mix, the result will always be complex. ::
+
+   >>> 1 + 1
+   2
+   >>> 1 + 1L
+   2L
+   >>> 1 + 1.0
+   2.0
+   >>> 1 + (1.0 + 0.0j)
+   (2+0j)
+
+.. warning::
+
+   One "gotcha", corrected in Python 3, is that dividing two integers will discard the fractional part.
+
+      >>> 5 / 2 == 2.5
+      False
+      >>> 5 / 2
+      2
+
+   To get a floating-point result, ensure that one or both operands is a float.
+
+      >>> 7.0 / 3
+      2.3333333333333335
+      >>> float(7) / 3
+      2.3333333333333335
+
+   In the (unlikely?) event that you want the integer division behavior, use the ``//`` operator to ensure the meaning of your code does not change when run on newer versions of Python. ::
+
+      >>> 7 // 3
+      2
+
+   See :ref:`python_3_vs_2` for details.
+
+Boolean types and expressions
+-----------------------------
+
+Any expression that can be interpreted as a boolean value can be used in an ``if``/``elif`` statement, ``while`` loop test, or other places boolean values are needed.
+
+Equality/inequality statements are perhaps the most common and useful. The operators are ``<``, ``>``, ``>=``, ``<=``, ``==``, ``!=`` (not like in IDL or FORTRAN, where comparisons are done with shortened keywords like ``eq``). These work for numeric types (except complex numbers, which have no ordering relation)::
+
+   >>> 3 < 4.0
+   True
+   >>> 3 >= 3.0
+   True
+   >>> 3 == 3.0
+   True
+
+String types can also be compared in this way, but that's more of a curiosity than something you will regularly need. The following is equivalent to asking if "JWST" comes after "Hubble" alphabetically::
+
+   >>> "JWST" > "Hubble"
+   True
+
+For strings, you usually want to identify identical strings, or strings containing a substring using ``in``:
+
+   >>> "Hubble" != "Hubble"
+   False
+   >>> "JWST" == "JWST"
+   True
+   >>> "science" in "JWST"
+   False
+   >>> "ST" in "STScI"
+   True
+
+The special value ``None`` can be returned from functions to indicate a missing result. The proper way to test for ``None`` is using the ``is`` keyword. In this example, we try to get a non-existent key from a dictionary (covered in more detail below)::
+
+   >>> empty_dictionary = {}
+   >>> empty_dictionary.get('thing_you_want')
+   >>> empty_dictionary.get('thing_you_want') is None
+   True
+
+Combining conditions is done with the boolean operators ``and`` and ``or``, and negation with ``not``::
+
+   >>> not "science" in "JWST"
+   True
+   >>> "ST" in "STScI" and 3 > 4.0
+   False
+   >>> "science" in "JWST" or 3 == 3.0
+   True
+
+These boolean operators in Python are what is called "short-circuiting". This means that if Python can determine the truth value of ``expr1 and expr2`` or ``expr1 or expr2`` from the value of ``expr1`` alone, it will not evaluate ``expr2`` at all. You can use this to your advantage, for example when ``expr2`` takes a long time to compute::
+
+   >>> True or compute_ten_thousand_factorial() > 1000000
+   True
+   >>> False and compute_ten_thousand_factorial() > 1000000
+   False
+
+In the first expression, Python won't bother computing ten-thousand factorial, since the expression must be True regardless. In the second, the expression must be False regardless.
+
+Tuples, lists, and sequences in general
+---------------------------------------
+
+Python provides two main built-in sequence types: ``tuple`` and ``list``. Lists are variable-length collections of entries that need not all be the same data type, and tuples are their immutable cousins.
+
+To make a new tuple, you need parentheses and a comma::
+
+   >>> ('first element', 'second element')
+   ('first element', 'second element')
+   >>> type(('first element', 'second element'))
+   <type 'tuple'>
+
+There's no requirement that all elements in a sequence have the same data type. Imagine a tuple describing a dataset by filename, extension number, and mean pixel value::
+
+   >>> mydataset = ('icft01crq_raw.fits', 1, 340.0)
+
+This tuple contains a string, an integer, and a floating point number without any special treatment on the part of the programmer. (If you're used to interpreted scripting languages, this is probably not very novel or exciting.)
+
+Tuples, like most sequences you'll see in Python, have a defined length::
+
+   >>> len(('first element', 'second element'))
+   2
+
+Indexing into sequences uses square brackets. Consider a tuple of integers, assigned to a new variable called ``mynumbers``. Accessing its elements would look like this::
+
+   >>> mynumbers = (4, 8, 1, 2, 9, 3, 4, 7, 5)
+   >>> mynumbers[0]
+   4
+   >>> mynumbers[3]
+   2
+   >>> mynumbers[-1]
+   5
+
+In Python, indexes count from zero (the first element is element 0, the second is element 1, etc.). For most sequence types in Python, it is legal to use negative numbers to index counting back from the end (element ``-1`` is the last, ``-2`` second-to-last, etc.).
+
+Sequences can also be used on the right hand side of an assignment operation. Suppose we want to break our ``mydataset`` tuple from before up into its constituent pieces (filename, extension, mean value)::
+
+   >>> mydataset = ('icft01crq_raw.fits', 1, 340.0)
+   >>> filename = mydataset[0]
+   >>> extension = mydataset[1]
+   >>> mean = mydataset[2]
+   >>> print filename, extension, mean
+   icft01crq_raw.fits 1 340.0
+
+That's a bit verbose. As long as we know the number of elements we're getting, Python lets us do this instead::
+
+   >>> filename, extension, mean = mydataset
+   >>> print filename, extension, mean
+   icft01crq_raw.fits 1 340.0
+
+What happens if we try to go the other way, and assign something to the third position?
+
+   >>> mydataset[2] = 199.9
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   TypeError: 'tuple' object does not support item assignment
+
+This is what is meant when we say tuples are "immutable". There are good reasons you might want to have immutable data, but when you need to be able to modify a sequence in-place you need a *list*. ::
+
+   >>> mydataset_list = ['test.fits', 1, 100.0]
+   >>> mydataset_list[2] = 199.9
+   >>> print mydataset_list
+   ['test.fits', 1, 199.9]
+
+Lists implement all of the behaviors described above for tuples, but additionally support modification in place with assignment (as shown above) and with *methods* that manipulate a particular list variable. We'll look at three of the most commonly used methods, but a full reference is available :py:ref:`in the Python reference manual <python:typesseq-mutable>`.
+
+Let's start with a list of floating point values. Pretend they're PSF encircled energies, or something.
+
+   >>> psf_ee_vals = [0.101, 0.413, 0.219, 0.713]
+
+Appending to a list
+^^^^^^^^^^^^^^^^^^^
+
+Popping items off a list
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Sorting a list
+^^^^^^^^^^^^^^
+
+Deleting an item
+^^^^^^^^^^^^^^^^
+
+Manipulating sequences with loops and slices
+--------------------------------------------
+
+If you've programmed in other languages before, you are probably familiar with looping over a sequence using a "loop variable" that counts from 0, 1, 2, ... up to the last element in your sequence. In Python, that's possible, but there's a shortcut::
+
+   >>> mytuple = ('first element', 'second element')
+   >>> for item in mytuple:
+   ...     print item
+   ...
+   first element
+   second element
+
+Here we've introduced our first use of an indented block. See how the ``print`` line is indented four spaces following the ``for item in mytuple:`` line? Currently we're just printing the current item at each iteration of the loop, but more lines of code can be added as long as the indentation is maintained. Within the indented block, the name ``item`` takes on the value of the current item in the sequence.
+
+.. warning::
+
+   In Python 3, the statement ``print item`` will be written as a function call like ``print(item)``!
+
+   See :ref:`python_3_vs_2` for details.
+
+There **are** cases where you might want the "loop variable" giving the numerical index of each item explicitly. For that, wrap your tuple in the ``enumerate()`` helper function::
+
+   >>> mytuple = ('first element', 'second element')
+   >>> for idx, item in enumerate(mytuple):
+   ...     print idx, item
+   ...
+   0 first element
+   1 second element
+
+Note how the first expression after the for keyword now reads ``idx, item`` instead of ``item``. When looping with an "enumerated" sequence, the index and item are provided to the loop body as a pair. [#iterationtuple]_
+
+List comprehension
+
+Sequence slicing
+
 
 Examples of some of the most common data types are below.
 
@@ -1379,6 +1633,62 @@ easy-to-use Python code.
 Please choose a text editor for editing your script, such as
 SublimeText, Emacs, TextWrangler, NEdit, or others.
 
+.. _python_3_vs_2:
+
+What a new Python user should know about Python 2 vs. Python 3
+--------------------------------------------------------------
+
+Python is developed by a community of volunteers and distributed for free. In 2008, this community decided to fix some long-standing bugs in the previous major version of Python (the ``2.x`` branch, which had been developed from 2000 onwards), and call the new version "Python 3". The nature of these fixes meant that users couldn't simply install Python 3 and expect everything to work immediately.
+
+In theory, automated migration tools and great new features would encourage people to update their code to work with the latest version. In practice, there was a lot of resistance from people who didn't see the added benefits as worth the time required to update their code.
+
+The creators of Python have decreed that Python 2 will no longer be updated, and Python 3 is the way forward. The Institute has started migrating to Python 3, but during this transitional period you should be aware that you may encounter code that works with only Python 2 (or only Python 3).
+
+New code should be written to be forwards compatible with Python 3, *especially* if it will be used by other members of your team! There are more comprehensive guides elsewhere, but we want to call your attention to two important things that will change with Python 3. In Python 2, this code is fine::
+
+   >>> print "Hello world"
+   Hello world
+
+In Python 3, ``print`` is a function, invoked with parentheses like every other. The above syntax won't work any more. ::
+
+   >>> print "Hello world"
+     File "<stdin>", line 1
+       print "Hello world"
+                         ^
+   SyntaxError: Missing parentheses in call to 'print'
+
+Add parentheses to make Python 3 happy::
+
+   >>> print("Hello world")
+   Hello world
+
+Also, in Python 3, division will work less like computer scientists expect, and more like everyone else expects. Python 2 used "integer division", which truncated any fractional part to make the result of dividing two integers an integer. For example::
+
+   >>> 7 / 3
+   2
+   >>> 7.0 / 3  # floating point division used when either operand is a float
+   2.3333333333333335
+
+In Python 3, the behavior is as follows::
+
+   >>> 7 / 3
+   2.3333333333333335
+   >>> 7.0 / 3
+   2.3333333333333335
+
+The old behavior can be used with the new ``//`` operator::
+
+   >>> 7 // 3
+   2
+   >>> 7.0 // 3
+   2.0
+
+You can make your code future-proof by "importing" functionality from the future. :ref:`python_scripts` will discuss this more, but in general when writing scripts that stand alone, it is a good idea to include this at the top::
+
+   from __future__ import print_function, division
+
+...and that will give you the new behavior in Python 2. (In Python 3, which already has the new behavior by default, it will have no effect.)
+
 hotpix\_monitor.py
 ------------------
 
@@ -2293,12 +2603,5 @@ Web App (OWA):
 
 .. rubric:: Footnotes
 
-.. [#revisions] Revision History
-
-   | 5.5 - June 2015: Joseph LONG, Meredith DURBIN
-   | 5.0 - June 2014: Katie GOSMEYER, Heather GUNNING, Matthew BOURQUE
-   | 4.0 - September 2013: Justin ELY, Thompson LEBLANC
-   | 3.0 - January 2012: Rachel ANDERSON
-   | 2.0 - October 2009: Sami-Matias NIEMI
-   | 1.0 - September 2008: Alex VIANA
 .. [#pythontutorial] An extensive Python tutorial is available from the Python developers themselves: https://docs.python.org/2/tutorial/introduction.html. (For Python 3, the updated tutorial is at https://docs.python.org/3/tutorial/introduction.html.)
+.. [#iterationtuple] Under the hood, ``enumerate()`` is really making an ``(index, element)`` *tuple* for every element in ``mytuple``! By putting ``idx, item`` in the ``for`` statement, you're "unpacking" the tuple into two separate variables, just like we did in the variable assignment example with multiple left-hand-side values.
