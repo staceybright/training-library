@@ -269,12 +269,6 @@ At the bottom of the page, you'll see the changes you're asking to pull in. Ensu
 
 Give your pull request a brief title and description, then click "Create pull request." Tell your trainer for this section, and they will merge it in if it all looks good!
 
---------------------------------------------
-
-**Congratulations! You've finished the exercise-based part of the training. Next up, talk to your trainer about your project and report.**
-
---------------------------------------------
-
 .. rubric:: Footnotes
 
 .. [#gitproject] `git <http://git-scm.com/>`_ is free and open source software developed by the creator of Linux (Linus Torvalds) and many others. He once said that "git" (British English for "an unpleasant person") was a good name for a project of his, as he names all of his projects after himself.
