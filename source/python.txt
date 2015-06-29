@@ -1446,7 +1446,7 @@ Opening, Reading, and Closing a FITS File
 
 As an example, we will use data from the *WFC3* instrument located here::
 
-   /user/gunning/Python_Training/icft01crq_raw.fits
+   /grp/hst/riab/training/python/icft01crq_raw.fits
 
 Please copy this file to your working directory.
 
@@ -1533,15 +1533,15 @@ and ascii.write(), for reading and writing multi-column text format data
 tables.
 
 astropy.io.ascii.read() function
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **Use:** The astropy.io.ascii.read() function reads in a table of data from a
 specified file and returns an astropy.Table object.
 
 As an example, we will use these files::
 
-   /user/gunning/Python_Training/flux_vs_time_A.dat
-   /user/gunning/Python_Training/flux_vs_time_C.dat
+   /grp/hst/riab/training/python/flux_vs_time_A.dat
+   /grp/hst/riab/training/python/flux_vs_time_C.dat
 
 These data are used to plot the flux versus time for a standard star and
 serves as a monitor of the WFC3/UVIS photometric stability for amps A
@@ -1567,7 +1567,7 @@ Examples::
    Try reading in the data from ``flux_vs_time_C.dat`` using ascii.read()
 
 astropy.io.ascii.write() function
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **Use:** Similar to ascii.read(), the astropy.io.ascii.write() function writes
 a table of data to a specified file. For fun, lets try taking the MJDs
@@ -1615,7 +1615,7 @@ PyPlot options, and saving our plot in a PDF format.
 
 First, we need to read in some data, as we learned in :ref:`python_fits_ascii`,
 using the two files ``flux_vs_time_A.dat`` and ``flux_vs_time_C.dat``
-found in ``/user/gunning/Python_Training/``.
+found in ``/grp/hst/riab/training/python/``.
 
    >>> from astropy.io import ascii
    >>> data_A = ascii.read('flux_vs_time_A.dat', names=['Time',
@@ -1862,7 +1862,7 @@ Display a FITS Image
 --------------------
 
 Copy the FITS file ``ibsa01fpq_flt.fits`` from
-``/user/gunning/Python_Training/`` to your current working directory. It is
+``/grp/hst/riab/training/python/`` to your current working directory. It is
 a WFC3/IR image of a corner of the galaxy M51. We will use astropy's
 *fits* package to open the file, as we learned in :ref:`python_fits_ascii`, and
 extract the image data from the ``SCI`` extension. ::
@@ -1928,7 +1928,7 @@ You can find a plethora of information at
 http://ipython.org/ipython-doc/dev/notebook/index.html
 
 Let's get started. The data needed for this chapter can be found in
-``/user/gunning/Python_Training/``.
+``/grp/hst/riab/training/python/``.
 
 To open a notebook window, open a terminal and initialize Ureka::
 
@@ -1992,7 +1992,7 @@ Notebook Examples
    Pick different rows to plot for the figure in line 18 and change the
    line colors.
    Save your notebook (``lastname_training.ipynb``) and place it in
-   ``/user/gunning/Python_Training/notebooks/``
+   ``/grp/hst/riab/training/python/notebooks/``
 
 .. _python_scripts:
 
@@ -2081,7 +2081,7 @@ versus time. To determine if a pixel is "hot" or not, we will implement
 a threshold that the user of the script can supply via a command-line
 argument; if a pixel's value is greater than this threshold, it is
 considered to be a hot pixel. The dark images are located in
-``/user/gunning/Python_Training/uvis_darks/``, and like all full-frame
+``/grp/hst/riab/training/python/uvis_darks/``, and like all full-frame
 UVIS images, they contain a primary header (extension 0), two SCI
 extensions (extensions 1 and 4), two ERR extensions (extensions 2 and
 5), and two DQ extensions (extensions 3 and 6). However, we will only
@@ -2478,7 +2478,7 @@ this::
         """
 
         # Define image list
-        dark_path = '/user/gunning/Python_Training/uvis_darks/'
+        dark_path = '/grp/hst/riab/training/python/uvis_darks/'
         dark_files = glob.glob(dark_path+'*.fits')
 
         # Initialize plot
@@ -2687,7 +2687,7 @@ So, our entire script should look something like this::
         """
 
         # Define image list
-        dark_path = '/user/gunning/Python_Training/uvis_darks/'
+        dark_path = '/grp/hst/riab/training/python/uvis_darks/'
         dark_files = glob.glob(dark_path+'*.fits')
 
         # Initialize plot
@@ -2842,7 +2842,7 @@ Again, create a file in your script directory, and open it in your
 favorite editor. Add your header. For your 'ABOUT' section, we will be
 creating a script showing how Python can be used to execute IRAF/PyRAF
 tasks. We will use some JWST/MIRI data, ``n9vf01hfq_ima.fits``, which can
-be found in ``/user/gunning/Python_Training/``.
+be found in ``/grp/hst/riab/training/python/``.
 
 Import the PyRAF module and from within that module import the IRAF
 instance. The code for importing these functions looks like this:
