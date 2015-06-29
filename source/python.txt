@@ -267,6 +267,14 @@ These boolean operators in Python are what is called "short-circuiting". This me
 
 In the first expression, Python won't bother computing ten-thousand factorial, since the expression must be True regardless. In the second, the expression must be False regardless.
 
+.. note::
+
+   **What about &&, ||, !, ~, &, and |?**
+
+   If you've programmed in a C-like language before, you're probably used to ``&&``, ``||``, and ``!`` in your boolean expressions. Good news: Python ``and``, ``or``, and ``not`` work just like them.
+
+   C-like languages have the notion of *bitwise* operators like ``~`` (complement), ``&`` (bitwise and), and ``|`` (bitwise or). Those operators exist in Python, but are reserved for "special occasions". (We will see an example later on with NumPy arrays, where you can use ``&`` and ``|`` to filter a data set in sophisticated ways.)
+
 .. _python_different_sequences:
 
 Different kinds of sequences in Python
