@@ -267,7 +267,7 @@ These boolean operators in Python are what is called "short-circuiting". This me
 
 In the first expression, Python won't bother computing ten-thousand factorial, since the expression must be True regardless. In the second, the expression must be False regardless.
 
-.. _python_different_sequences::
+.. _python_different_sequences:
 
 Different kinds of sequences in Python
 --------------------------------------
@@ -371,7 +371,7 @@ That's a bit verbose. As long as we know the number of elements we're getting, P
    >>> print mean
    340.0
 
-.. _python_immutable_tuples_mutable_lists::
+.. _python_immutable_tuples_mutable_lists:
 
 Immutable tuples vs. mutable lists
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -664,7 +664,7 @@ Suppose we only wanted the first two digits after the decimal point. We use a "f
 
    (Keep in mind that the parts you get from ``.split()`` are strings, not numbers! If you want to get fancy formatting the numeric values, you'll have to use something like ``float(mypart[0])`` to convert them to a numeric type *before* you pass them to ``.format()``.)
 
-.. _python_dictionaries::
+.. _python_dictionaries:
 
 Dictionaries
 ------------
@@ -751,7 +751,7 @@ One thing that trips up a lot of new Python users is that dictionaries have **no
 
    (Hint: What type should the ``catalog`` variable be? What type(s) should its contents be? If there are dictionaries, what are their keys?)
 
-.. _python_file_operations::
+.. _python_file_operations:
 
 Lower-level file operations
 ---------------------------
@@ -1226,7 +1226,7 @@ operations on arrays and matrices can run almost as fast as the
 equivalent C code.
 
 NumPy's array vs. Python's built-in list
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 NumPy introduces new data types, but the most popular, versatile, and
 useful one is the array. This is similar to arrays in IDL. There are
@@ -1246,7 +1246,7 @@ built-in list.
 To convert a list to an array, use numpy.array().
 
 numpy.array() function
-~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^
 
 **Use:** The numpy.array() function converts a list to a NumPy array.
 
@@ -1313,7 +1313,7 @@ programmers have to be careful. If you know you will want to change one
 array and not the other, the correct function to use is numpy.copy().
 
 numpy.copy() function
-~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^
 
 **Use:** The numpy.copy() function copies the contents of the memory space the
 array points to.
@@ -1334,7 +1334,7 @@ Other Common NumPy Functions
 ----------------------------
 
 numpy.arange() function
-~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^
 
 **Use:** The numpy.arange() function creates an integer array from zero to the
 'stop' parameter given, with a step size of one. The 'start' and 'step'
@@ -1366,7 +1366,7 @@ A similar function for lists is range().
    above hint.
 
 numpy.empty() function
-~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^
 
 **Use:** The numpy.empty() function creates a float array of the specified
 dimensions. Each element of the array is whatever was left in that
@@ -1384,7 +1384,7 @@ See also:
 Other useful similar functions are numpy.zeros(), numpy.ones().
 
 numpy.where() function
-~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^
 
 **Use:** The numpy.where() function returns an array (or a tuple of arrays) of
 the indices where the condition is ``True``. Otherwise, if you
