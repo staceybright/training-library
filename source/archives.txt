@@ -472,16 +472,7 @@ in the SSBX environment, switch to it::
 
    ssbx
 
-We will need a few additional environment variables configured in order
-for the calibration to work. If the following are not already in your
-environment, set them in the terminal or in your ``~/.cshrc`` file::
-
-   setenv oref /grp/hst/cdbs/oref/
-   setenv mtab /grp/hst/cdbs/mtab/
-   setenv crrefer /grp/hst/cdbs/
-
-If this is not configured correctly ``calstis`` will crash. If you have any
-problems with this, feel free to ask for help from your instructor.
+Ensure you've set up your ``.cshrc`` as detailed in :ref:`computer_setup_environment`. If your environment variables are not configured correctly, ``calstis`` will crash. (If you have any problems with this, feel free to ask for help from your instructor.)
 
 To start PyRAF, simply type ``pyraf`` in the terminal.
 
