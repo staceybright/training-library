@@ -1128,7 +1128,7 @@ Examples::
    >>> import glob
    >>> glob.glob('*')
    >>> glob.glob('*.pdf')
-   >>> datadir = '/Users/gunning/Python_Training/'  #insert a usable path
+   >>> datadir = '/grp/hst/riab/training/python/'
    >>> glob.glob(datadir + 'flux_vs_time_?.fits')
 
 .. admonition:: Exercise
@@ -1603,9 +1603,7 @@ hard-copy formats such as EPS, PDF, and PNG. With PyPlot you can
 generate scatter and line plots, histograms, power spectra, bar charts,
 error-charts, pie charts, and many more with just a few lines of code.
 For the power user, you have full control of line styles, font
-properties, axes properties, and so on. For useful examples of astronomy
-plots that can be generated with PyPlot, see Leonardo Ubeda's
-astroplotlib library at http://astroplotlib.stsci.edu/
+properties, axes properties, and so on.
 
 .. _python_simple_scatter:
 
@@ -1629,8 +1627,15 @@ The time is in Modified Julian Date (MJD) and the remaining columns are
 flux percent differences and are dimensionless. Now we will import
 PyPlot and make our first plot, using a *figure* object...
 
-   >>> import matplotlib.pyplot as pyplot
-   >>> figure, ax = pyplot.subplots()
+   >>> import matplotlib.pyplot as plt
+   >>> figure, ax = plt.subplots()
+
+.. tip::
+
+   Are you doing the exercises in an IPython notebook? You can have your plots show up in the same window, in line with your code. Use ``%matplotlib inline`` before importing pyplot, like this::
+
+      %matplotlib inline
+      import matplotlib.pyplot as plt
 
 Now we can begin to plot into the *figure* object, via the *ax* axis
 created in the previous step. Each subsequent call to the inherited
@@ -1819,7 +1824,7 @@ plot is to be placed in this grid (in this case, the first position).
 If, say, we wanted a 2\ :math:`\times`\ 2 grid and wanted to place a
 plot in the lower right corner, we would write 224.
 
-   >>> figure = pyplot.figure(figsize = (10,10))
+   >>> figure = plt.figure(figsize = (10,10))
    >>> ax1 = pyplot.subplot(211, title='Amp A')
    >>> ax1.scatter(data_A['Time'], data_A['Flux_diff'], c='blue')
 
@@ -1943,20 +1948,16 @@ Plotting Inline
 
 A unique feature that the notebook has is the ability to plot inline.
 
-You can initialize inline plotting two ways.
+At the top of your notebook, add a cell containing::
 
-From the terminal::
+   %matplotlib inline
 
-   $ ur_setup common ssbx
-   $ ipython notebook –pylab inline
+Then import matplotlib and numpy as usual::
 
-From the notebook window:
+   from matplotlib import pyplot as plt
+   import numpy as np
 
-   >>> %pylab inline --no-import-all
-
-Without telling the notebook to plot inline, plots will pop up in a
-separate window just as they normally would plotting in the Python
-terminal.
+Now, when you create a figure, it will appear in the notebook!
 
 Notebook Examples
 -----------------
@@ -2021,8 +2022,6 @@ What a new Python user should know about Python 2 vs. Python 3
 
 Python is developed by a community of volunteers and distributed for free. In 2008, this community decided to fix some long-standing bugs in the previous major version of Python (the ``2.x`` branch, which had been developed from 2000 onwards), and call the new version "Python 3". The nature of these fixes meant that users couldn't simply install Python 3 and expect everything to work immediately.
 
-In theory, automated migration tools and great new features would encourage people to update their code to work with the latest version. In practice, there was a lot of resistance from people who didn't see the added benefits as worth the time required to update their code.
-
 The creators of Python have decreed that Python 2 will no longer be updated, and Python 3 is the way forward. The Institute has started migrating to Python 3, but during this transitional period you should be aware that you may encounter code that works with only Python 2 (or only Python 3).
 
 New code should be written to be forwards compatible with Python 3, *especially* if it will be used by other members of your team! There are more comprehensive guides elsewhere, but we want to call your attention to two important things that will change with Python 3. In Python 2, this code is fine::
@@ -2064,7 +2063,10 @@ The old behavior can be used with the new ``//`` operator::
    >>> 7.0 // 3
    2.0
 
-You can make your code future-proof by "importing" functionality from the future. :ref:`python_scripts` will discuss this more, but in general when writing scripts that stand alone, it is a good idea to include this at the top::
+What you should do about it
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can make your code future-proof by "importing" functionality from the future. When writing stand-alone scripts (as opposed to snippets in the interactive environment), it is a good idea to include this at the top (after any ``#!`` line)::
 
    from __future__ import print_function, division
 
@@ -2100,11 +2102,16 @@ The first thing we will put in our script is this line:
 This tells the computer that the Python interpreter should be used for
 executing this file.
 
-Comments, or "docstrings" in scripts are very important, not just to
-help you remember what exactly you were thinking, but to help others as
-well should they ever use your code. Therefore, to start off on the
-right foot, let's create a docstring. For our module docstring for our
-module. We will include:
+Secondly, we're writing our script to be "future-proof" for the transition to Python 3. Just after the ``#!`` line, import the new syntax from the future::
+
+   from __future__ import print_function, division
+
+Next, we will add a "docstring" to the beginning of the file. A docstring in Python is a string that lives at the beginning of your file (or a function, or a class) and provides guidance for people using and reading your code. They differ from comments in two ways:
+
+- Comments are typically brief, and explain a few lines of code in context. Docstrings may be a little longer, and explain a "unit" of code (function, class, or module) at a higher level (e.g. how to use it, why you would want to).
+- Docstrings are treated specially by Python. For example. when you use ``help()`` on an object, its docstring will be shown (if it has one). You can access the docstring programmatically with the ``__doc__`` attribute.
+
+Therefore, to start off on the right foot, let's create a docstring. For our module docstring for our module. We will include:
 
 1. A description of what the script does
 2. The author(s) of the script
@@ -2241,7 +2248,7 @@ function, as such::
 This should leave our script looking something like this::
 
     #!/usr/bin/env python
-
+    from __future__ import print_function, division
     """Monitors the hot pixel evolution of WFC3/UVIS darks.
 
     Authors:
@@ -2345,7 +2352,7 @@ function get\_percentage\_hotpix(), and place it into our script::
 Now our script should look something like this::
 
     #!/usr/bin/env python
-
+    from __future__ import print_function, division
     """Monitors the hot pixel evolution of WFC3/UVIS darks.
 
     Authors:
@@ -2520,7 +2527,7 @@ Thus, we can update our module docstrings to provide futher
 explanation::
 
     #!/usr/bin/env python
-
+    from __future__ import print_function, division
     """Monitors the hot pixel evolution of WFC3/UVIS darks.
 
     Authors:
@@ -2555,7 +2562,7 @@ explanation::
 So, our entire script should look something like this::
 
     #!/usr/bin/env python
-
+    from __future__ import print_function, division
     """Monitors the hot pixel evolution of WFC3/UVIS darks.
 
     Authors:
@@ -2741,12 +2748,15 @@ can execute it directly::
 
    $ ./hotpix_monitor.py
 
+.. tip::
+
+   Seeing "permission denied"? You have to mark the script file as "executable"::
+
+      $ chmod +x ./hotpix_monitor.py
+
 This is nice. You do not have to type 'python', you can run it from
 anywhere, and you do not have to be in the Python interactive
-environment. To be able to call your script from anywhere on your
-computer, add your script directory to your executable PATH::
-
-   setenv PATH .:/my/script/directory:{$PATH}
+environment.
 
 .. admonition:: Exercise
    :class: note
