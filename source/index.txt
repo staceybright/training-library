@@ -51,7 +51,6 @@ Reference information
    archives
    using_idl
    python
-   python_rest
    pyraf
    astrodrizzle
    photometry
