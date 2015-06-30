@@ -1046,7 +1046,7 @@ Examples::
 Within a function, the for statement has the following simple structure:
 
    >>> for x in xrange(1, 7):
-   ...    a = x  3.0
+   ...    a = x * 3.0
    ...    print a
 
 See also:
@@ -1606,7 +1606,7 @@ matplotlib.pyplot
 -----------------
 
 Matplotlib and its PyPlot environment is a versatile Python plotting
-library which produces publication quality figures in a variety of
+library capable of producing publication quality figures in a variety of
 hard-copy formats such as EPS, PDF, and PNG. With PyPlot you can
 generate scatter and line plots, histograms, power spectra, bar charts,
 error-charts, pie charts, and many more with just a few lines of code.
@@ -1615,28 +1615,21 @@ properties, axes properties, and so on.
 
 .. _python_simple_scatter:
 
-Create a Simple Scatter Plot
-----------------------------
+Create Some Plots
+-----------------
 
-We'll start by making a simple scatter plot, demonstrating some of the
-PyPlot options, and saving our plot in a PDF format.
+The most basic plotting function is ``plt.plot()``, which generally takes 
+two arguments ``x`` and ``y``::
 
-First, we need to read in some data, as we learned in :ref:`python_fits_ascii`,
-using the two files ``flux_vs_time_A.dat`` and ``flux_vs_time_C.dat``
-found in ``/grp/hst/riab/training/python/``.
+   x = np.arange(0,10,0.5)
+   y = x**2
+   plt.plot(x,y)
+   plt.show()
 
-   >>> from astropy.io import ascii
-   >>> data_A = ascii.read('flux_vs_time_A.dat', names=['Time',
-   ...                     'Flux_diff', 'Flux_err', 'Flux_linear_fit'])
-   >>> data_C = ascii.read('flux_vs_time_C.dat', names=['Time',
-   ...                     'Flux_diff', 'Flux_err', 'Flux_linear_fit'])
-
-The time is in Modified Julian Date (MJD) and the remaining columns are
-flux percent differences and are dimensionless. Now we will import
-PyPlot and make our first plot, using a *figure* object...
-
-   >>> import matplotlib.pyplot as plt
-   >>> figure, ax = plt.subplots()
+.. figure:: figures/python/xsquared.png
+   :width: 50%
+   :align: center
+   :alt: Our first plot.
 
 .. tip::
 
@@ -1645,362 +1638,331 @@ PyPlot and make our first plot, using a *figure* object...
       %matplotlib inline
       import matplotlib.pyplot as plt
 
-Now we can begin to plot into the *figure* object, via the *ax* axis
-created in the previous step. Each subsequent call to the inherited
-*ax.plot* method will update the overall plot. The next two calls plot
-the two sets of flux differences as scatter plots in blue and red,
-respectively.
+   If you have a retina display, an additional bit of magic will make your plots much easier on the eyes::
 
-   >>> ax.scatter(data_A['Time'], data_A['Flux_diff'], c='blue')
-   >>> ax.scatter(data_C['Time'], data_C['Flux_diff'], c='red')
-   >>> figure.show()
+      %config InlineBackend.figure_format='retina'
 
-The *figure.show()* command displays our changes onto the *figure*
-object.
+Let's look at some more things Matplotlib can do.
+
+
+.. _multi_subplots:
+
+Example: Multiple Subplots and Different Plot Functions
+-------------------------------------------------------
+
+::
+
+   # make figure with two rows and two columns of subplots
+   fig, [(ax0, ax1), (ax2, ax3)] = plt.subplots(2,2, figsize=(8,8))
 
-We should add axis labels...
+   # generate two arrays of 5000 points each
+   # np.random.randn pulls from normal dist centered at 0 with stddev 1
+   data_x = np.random.randn(5000)
+   data_y = np.random.randn(5000)
 
-   >>> ax.set_xlabel('Time [MJD]', fontsize=20)
-   >>> ax.set_ylabel('Flux Diff [%]',  fontsize=20)
-   >>> figure.show()
+   # scatterplot
+   ax0.scatter(data_x, data_y)
+   ax0.set_title('plt.scatter()')
 
-Finally let's save the figure. We can save as a PDF, PNG, TIFF, and
-other file types; we need only to type the appropriate extension. ::
+   # set number of bins for histograms
+   nbins = 20
 
-   >>> figure.savefig('flux_vs_time_1.png')
+   # histogram of 1D dataset
+   ax1.hist(data_x, bins=nbins)
+   ax1.set_title('plt.hist()')
 
-.. figure:: figures/python/flux_vs_time_1.png
-   :alt: Our first plot.
+   # histogram of 2D dataset
+   # we assign hist2d output to variables for use in the contour plot
+   H, xedges, yedges, patches = ax2.hist2d(data_x, data_y, cmap='Blues', bins=(nbins,nbins))
+   ax2.set_title('plt.hist2d()')
 
-   Our first plot.
+   # convert dataset to a format contourf accepts
+   # don't worry if you don't understand this;
+   # the point is matplotlib does contour plots
+   x_bin_sizes = (xedges[1:] - xedges[:-1]).reshape((1,nbins))
+   y_bin_sizes = (yedges[1:] - yedges[:-1]).reshape((nbins,1))
+   pdf = (H*(x_bin_sizes*y_bin_sizes))
+   X, Y = 0.5*(xedges[1:]+xedges[:-1]), 0.5*(yedges[1:]+yedges[:-1])
+   Z = pdf.T
 
-Markers, Lines, and Legends
----------------------------
+   # plot filled contour map
+   cs = ax3.contourf(X, Y, Z, origin="lower", cmap='Blues')
+   ax3.set_title('plt.contourf()')
 
-We have a plot! But we are not yet finished. PyPlot has many, many
-options available for you to customize your plot. We'll demonstrate just
-a few for markers, lines, and legends.
+   # adjust plot spacing
+   fig.tight_layout()
 
-We can play with the marker type (*marker*), size (*s*), and
-transparency (*alpha*) of our of scatter plots' points. We first need to
-clear the *axis* object with the *ax.clear()* command.
+.. figure:: figures/python/subplot_examples.png
+   :width: 75%
+   :align: center
 
-   >>> ax.clear()
-   >>> ax.scatter(data_A['Time'], data_A['Flux_diff'],
-   ...            c='blue', marker='x', s=30, alpha=0.75)
-   >>> ax.scatter(data_C['Time'], data_C['Flux_diff'],
-   ...            c='red', marker='d', s=30, alpha=0.75)
-   >>> ax.set_xlabel('Time [MJD]', fontsize=20)
-   >>> ax.set_ylabel('Flux Diff [%]', fontsize=20)
-   >>> figure.show()
 
-The plot would be cleaner if we added a legend.
+Example: Plotting FITS Figures & Using Colormaps
+------------------------------------------------
 
-   >>> ax.clear()
-   >>> ax.scatter(data_A['Time'], data_A['Flux_diff'],
-   ...            c='blue', marker='x', s=25, alpha=0.75, label='Amp A')
-   >>> ax.scatter(data_C['Time'], data_C['Flux_diff'],
-   ...            c='red', marker='d', s=25, alpha=0.75, label='Amp C')
-   >>> ax.set_xlabel('Time [MJD]', fontsize=20)
-   >>> ax.set_ylabel('Flux Diff [%]', fontsize=20)
-   >>> ax.legend(loc='best', scatterpoints=1)
-   >>> figure.show()
+In Matplotlib any 2D array of floats or integers can be displayed as an image. 
+This is extremely convenient for displaying data from FITS files. ::
 
-The *ax.legend(loc='best')* command will try to find the least busy
-section of your plot and stick the legend there.
+   from astropy.io import fits
 
-Next let's plot lines with the linear fits from our data:
+   f = fits.open('fits_images/ibsa01fpq_flt.fits')
+   data = f['sci'].data
+   f.close()
 
-   >>> ax.plot(data_A['Time'], data_A['Flux_linear_fit'],
-   ...         c='blue', ls='-.', linewidth=2, label='Amp A Fit')
-   >>> ax.plot(data_C['Time'], data_C['Flux_linear_fit'],
-   ...         c='red', ls=':', linewidth=2, label='Amp C Fit')
-   >>> ax.legend(loc='best', scatterpoints=1)
-   >>> figure.show()
+   # display the data
+   # you may have to manually fiddle with vmin and vmax
+   plt.imshow(data, vmin=3, vmax=20)
+
+.. figure:: figures/python/fits_image.png
+   :width: 50%
+   :align: center
+
+Here ``vmin`` and ``vmax`` specify the image values for which to set the minimum and maximum of the colormap.
 
-Notice the *ls* option is how we select our line type. Suppose we want
-to denote the 0.0 flux difference with a dashed line and the MJD date
-56250.0 with a green line:
+Speaking of colormaps, let's compare some different types of colormaps. ::
+
+   # set up figure; specify size
+   fig = plt.figure(figsize=(12,5))
+   
+   # add three subplots
+   ax1 = fig.add_subplot(1,3,1)
+   ax2 = fig.add_subplot(1,3,2)
+   ax3 = fig.add_subplot(1,3,3)
+   
+   # display the image in each subplot with different colormaps
+   ax1.imshow(data, vmin=3,vmax=20)
+   ax2.imshow(data, vmin=3,vmax=20,cmap='RdBu_r')
+   ax3.imshow(data, vmin=3,vmax=20,cmap='bone')
+   
+   # get rid of tick marks
+   for ax in (ax1, ax2, ax3):
+       ax.set_xticks([])
+       ax.set_yticks([])
+   
+   # add titles to subplots
+   ax1.set_title('Default colormap')
+   ax2.set_title('Diverging colormap')
+   ax3.set_title('Sequential colormap')
+   fig.tight_layout()
+   
+   # get rid of extra spacing between subplots
+   fig.subplots_adjust(hspace=0.01,wspace=0.01)
 
-   >>> ax.axhline(0.0, color='k', ls='–', linewidth=1)
-   >>> ax.axvline(56250.0, color='green', ls='-', linewidth=2)
-   >>> figure.show()
+.. figure:: figures/python/colormaps.png
+   :width: 100%
+   :align: center
 
-.. figure:: figures/python/flux_vs_time_2.png
-   :alt: Our customized plot.
+When displaying an image, there are very few instances in which you want to use anything other than a sequential colormap. Diverging colormaps are good for displaying the deviation of data from a mean or median, and qualitative colormaps such as the default "jet" should almost never be used for anything other than categorization of discrete data types. (If you don't already dislike jet, see `this blog post <https://jakevdp.github.io/blog/2014/10/16/how-bad-is-your-colormap/>`_.)
 
-   Our customized plot.
+For a quick reference of all built-in colormaps in Matplotlib, see this `colormap reference chart <http://matplotlib.org/examples/color/colormaps_reference.html>`_.
 
-We now have a personalized plot! (It doesn't have to be pretty.) Let's
-save it. ::
 
-   >>> figure.savefig('flux_vs_time_2.png')
+Making Attractive Plots
+-----------------------
 
-Other options can be found on the Matplotlib PyPlot site listed in
-:ref:`python_links`.
+As you may have noticed, the Matplotlib fonts, colors, and general 
+formatting defaults are rather unattractive. Fortunately, almost 
+everything in Matplotlib is customizable with a little know-how.
 
-For different color names, see
-http://www.w3schools.com/html/html_colornames.asp
+TeXify Your Text
+^^^^^^^^^^^^^^^^
 
-.. admonition:: Exercise
-   :class: note
+If you are preparing a document in LaTeX for publication, 
+your figures will blend in very nicely (and look so much better in general!) 
+if you use LaTeX formatting, not only for symbols and equations 
+but for all figure text. This is the simplest method for doing so::
 
-   Play with different colors, markers, lines, etc.
+    # import function that allows you to adjust formatting parameters
+    from matplotlib import rc
+    # change default font for all plot text to LaTeX font; also change font size
+    rc('font', **{'family': 'serif', 'serif': ['Computer Modern Roman'], 'size':14})
+    # allow TeX commands to be used in text strings
+    rc('text', usetex=True)
 
-Error Bars
-----------
+It is also possible to edit these preferences in your `matplotlibrc 
+<http://matplotlib.org/users/customizing.html>`_ file directly; 
+however, this may cause issues if you use scripts that weren't 
+written with this in mind.
 
-We have columns giving our error in flux percent difference. We can
-display them on our plot as error bars using the *errorbar* function:
+If you want to see everything you can possibly modify with ``rc``, 
+do the following::
 
-   >>> ax.clear()
-   >>> ax.scatter(data_A['Time'], data_A['Flux_diff'],
-   ...            c='blue', s=10)
-   >>> ax.errorbar(data_A['Time'], data_A['Flux_diff'],
-   ...             yerr=data_A['Flux_err'], c='k', marker=None, ls='None')
-   >>> figure.show()
+    from matplotlib import rcParams
+    rcParams.keys()
 
-Display Year-Month-Day Dates as Tick Labels
--------------------------------------------
+For more information, see Matplotlib's documentation on `text 
+rendering with LaTeX <http://matplotlib.org/users/usetex.html>`_.
 
-MJD is a convenient format for plotting time. But who thinks in MJD?
-Let's convert MJD to year-month-day and display them on the x-axis. In
-Python this is a little tricky. We will show one way to do it; you may
-be able to find a better way.
+High-DPI Rasterized Figures
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Let's continue working on the plot we began in the Error Bars section.
-We first need to import *Time* from *astropy*, and then save into a list
-the MJD dates that are currently displayed as tick labels (converting
-them into floats as we do so).
+Typically, if you want to save a high-resolution figure it's easiest to just 
+save it as a pdf or eps. However, the disadvantage of these formats for figures 
+with large datasets is that their graphics are in vector format and thus very 
+information-dense, which means that if you have upwards of a few hundred data 
+points the file will quickly become bloated and you'll end up wasting twenty 
+minutes while Preview struggles to open it.
 
-   >>> from astropy.time import Time
-   >>> time_MJD = [float(item.get_text()) for item in ax.get_xticklabels()]
+Fortunately, there is a workaround. Rasterization is a process that maps vector 
+graphics to pixel format, typically resulting in much less information being stored. 
+In Matplotlib one can rasterize the entire figure with one simple command::
 
-We next need to convert the MJD date list into a *Time* object::
+    # set up your figure
+    fig = plt.figure()
+    # plot some things here
+    # set rasterization for the entire figure before saving
+    fig.set_rasterized(True)
+    # save the figure and specify the dpi
+    fig.savefig('rasterized.eps', dpi=144)
 
-   >>> time_convert = Time(time_MJD, format='mjd', scale='utc')
+A DPI of 144 should be good enough for most screens, and 300-400 for publication 
+quality, although a high DPI also results in large files.
 
-Now we can convert the MJD dates into year-month-day dates. Because the
-conversion also includes minutes and seconds, which we do not want in
-this example, we will use the *split()* method to extract just the
-year-month-days and append them into a new list.
+Alternatively, if you want to keep as much of the figure resolution-independent as 
+possible, you can set rasterization only for the plotted objects in the plotting call::
 
-   >>> time_ymd_long = time_convert.iso
-   >>> time_ymd_short = []
-   >>> for date in time_ymd_long:
-   ...    time_ymd_short.append(date.split(' ')[0])
+    # set up your figure
+    fig = plt.figure()
+    # plot some things here and set rasterization
+    plt.plot(x, y, rasterized=True)
+    # save the figure and specify the dpi
+    fig.savefig('partially_rasterized.eps', dpi=144)
 
-Finally we can display our new tick labels on the x-axis and save the
-figure.
 
-   >>> ax.set_xticklabels(time_ymd_short)
-   >>> ax.set_xlabel('Time', fontsize=20)
-   >>> ax.set_ylabel('Flux Diff [%]', fontsize=20)
-   >>> figure.show()
-   >>> figure.savefig('flux_vs_time_3.png')
+.. _general_mpl_tricks:
 
-See http://astropy.readthedocs.org/en/latest/time/ for more examples.
+General Tricks/Quick Reference
+------------------------------
 
-.. figure:: figures/python/flux_vs_time_3.png
-   :alt: Our error bar plot with x-axis tick labels converted from MJD to year-month-day.
+Legends
+^^^^^^^
 
-   Our error bar plot with x-axis tick labels converted from MJD to
-   year-month-day.
+The function to create a legend for your plot is quite simple, although some of the details of customizing it are a bit tricky.
 
-.. admonition:: Exercise
-   :class: note
+All you need to make a legend is at least one plotted object with the keyword argument ``label='(your label here)'``. The legend call is::
 
-   Assume you do not have the MJD list. Starting from the list of
-   year-month-day, convert your axis to days from the start date and
-   display the tick labels. So your first tick label should be 0, and your
-   x-axis title should be something like 'Days since 2008-02-04'.
+   # general
+   plt.legend()
+   # for a specific subplot object
+   ax.legend()
 
-Display Plots Side-by-Side
---------------------------
+This will make a boxed legend appear on top of your plot. The default legend formatting is perhaps one of Matplotlib's least attractive features, which is saying something; fortunately, it is easily customizable. For example, you can change the location, size, and handle length with the legend keyword arguments ``loc``, ``prop``, and ``handlelength`` respectively. ::
 
-As with most plotting matters in Python, there's more than one way to
-display multiple plots on the same figure. We will demonstrate making a
-simple 2\ :math:`\times`\ 1 multiple plot with just the *subplot()*
-method.
+    plt.legend(loc=0, prop={'size':14}, handlelength=1)
 
-Let's make a new figure, resizing it to 10\ :math:`\times`\ 10 inches so
-we can better see our plots. Then we'll place the first plot at position
-211. The first number (2) denotes how many plots are to be placed
-vertically; the second number (1) denotes how many plots are to be
-placed horizontally; and the third number (1) denotes where the current
-plot is to be placed in this grid (in this case, the first position).
-If, say, we wanted a 2\ :math:`\times`\ 2 grid and wanted to place a
-plot in the lower right corner, we would write 224.
+Here ``loc=0`` tells Matplotlib to determine the optimal location for the legend. The numbering system for legend locations in Matplotlib can be confusing; the `documentation <http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.legend>`_, lists all numbered positions. If you need more specificity than any of these provide, you can also use ``loc=(x,y)`` where x and y specify the location of the lower left corner of the legend box in the coordinates of your axis object.
 
-   >>> figure = plt.figure(figsize = (10,10))
-   >>> ax1 = pyplot.subplot(211, title='Amp A')
-   >>> ax1.scatter(data_A['Time'], data_A['Flux_diff'], c='blue')
+Logarithmic Axes
+^^^^^^^^^^^^^^^^
 
-We can make the top plot's x-axis invisible...
+If you need one or both axes to be log scale, the quickest way to do so is::
 
-``>>> pyplot.setp(ax1.get_xticklabels(), visible=False)``
+    # general
+    plt.yscale('log')
+    # for a specific subplot object
+    ax.set_yscale('log')
 
-We next place the second plot at position 212. We use the *sharex* and
-*sharey* options to force the second plot's axes to match the first's.
+Be careful when you have axis limits that are close to 0; your plots will come out very funky if you don't take care to adjust your axis limits to be log-compatible. If you have any negative data, ``plt.yscale('symlog')`` is your best option.
 
-   >>> ax2 = pyplot.subplot(212, title='Amp C', sharex=ax1, sharey=ax1)
-   >>> ax2.scatter(data_C['Time'], data_C['Flux_diff'], c='red')
+Alternately, you can use ``plt.semilogx(x,y)``, ``plt.semilogy(x,y)``, or ``plt.loglog(x,y)``; however, these give you slightly less flexibility.
 
-We'll finish by setting the x and y axes labels and saving the figure.
 
-   >>> ax1.set_ylabel('Flux Diff [%]', fontsize=15)
-   >>> ax2.set_ylabel('Flux Diff [%]', fontsize=15)
-   >>> ax2.set_xlabel('Time [MJD]', fontsize=15)
-   >>> figure.show()
-   >>> figure.savefig('flux_vs_time_4.png')
+When To Explicitly Create Figure and Axes Objects
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. figure:: figures/python/flux_vs_time_4.png
-   :alt: Our 2x1 multiple plot.
+So far in this training we've been somewhat lax about explicit figure creation; sometimes we just do ``plt.plot(x,y)``, and sometimes we create a figure object ``fig = plt.figure()`` with or without an axes object ``ax = fig.add_subplot()``. (There's also the option ``fig, ax = plt.subplots()``). When do you need explicit figure and axes objects, and when it is okay to skip straight to the plot function?
 
-   Our 2\ :math:`\times`\ 1 multiple plot.
+Essentially, it depends on the complexity of your figure, although it's generally good form to use the object-oriented figure and axis calls ``fig = plt.figure()`` and ``ax = fig.add_subplot()`` when you can. For quick-and-dirty plotting, ``plt.plot()`` is generally sufficient; however, if you have multiple subplots or an otherwise complicated figure, explicitly creating figure and axis objects is easier to work with.
 
-.. admonition:: Exercise
-   :class: note
 
-   Create a 2\ :math:`\times`\ 2 grid and display the above two plots in
-   the upper two areas. Then display our first plot from
-   :ref:`python_simple_scatter` below them, filling the entire lower area.
+.. _curve_fitting:
 
-Display a FITS Image
---------------------
+Example: Fitting a Curve With SciPy
+-----------------------------------
 
-Copy the FITS file ``ibsa01fpq_flt.fits`` from
-``/grp/hst/riab/training/python/`` to your current working directory. It is
-a WFC3/IR image of a corner of the galaxy M51. We will use astropy's
-*fits* package to open the file, as we learned in :ref:`python_fits_ascii`, and
-extract the image data from the ``SCI`` extension. ::
+As astronomers, a large part of our job is to fit lines to things, 
+regardless of the consequences. SciPy's `optimize 
+<http://docs.scipy.org/doc/scipy-0.14.0/reference/optimize.html>`_ 
+package has many useful tools for doing this;
+here we will demonstrate the use of one of its most versatile functions, ``curve_fit``. ::
 
-   >>> import astropy.io.fits as fits
-   >>> image = fits.open('ibsa01fpq_flt.fits')
-   >>> sci_data = image['sci'].data
-   >>> pylplot.clf()
-   >>> pyplot.gray()
-   >>> pyplot.imshow(sci_data, vmin=0, vmax=60)
-   >>> pyplot.show()
-   >>> image.close()
+   # adapted from http://python4esac.github.io/fitting/example_blackbody.html
 
-.. admonition:: Exercise
-   :class: note
-
-   How does that look? Mess with the *vmin* and *vmax* to see if you can
-   improve the scaling. The *pyplot.gray()* command sets the plot to
-   greyscale. Take a look at the plot without it.
-
-We can add labels::
-
-   >>> pyplot.title('M51', fontsize=20)
-   >>> pyplot.xlabel('x pixels', fontsize=15)
-   >>> pyplot.ylabel('y pixels', fontsize=15)
-
-Before saving, we can try annotating features in our image. In this
-example, we point to a star near pixel coordinates (640, 810) with an
-arrow.
-
-   >>> pyplot.annotate('star', xy=(640, 810), xytext=(520, 770),
-   ...                 color='white', arrowprops=dict(facecolor='white', width=3.5))
-   >>> pyplot.savefig('M51.png')
-
-.. figure:: figures/python/M51.png
-   :alt: A corner of the galaxy M51, displayed in greyscale using *pyplot.imshow()*.
-
-   A corner of the galaxy M51, displayed in greyscale using
-   *pyplot.imshow()*
-
-For more plotting options with Matplotlib and PyPlot, check out the
-`matplotlib.org <http://matplotlib.org/>`__ link listed in
-:ref:`python_links`. Notice that there is a link to NumPy on this page,
-as well as links to screen-shots, thumbnails, and examples.
-
-.. admonition:: Exercise
-   :class: note
-
-   Try plotting a 450\ :math:`\times`\ 450 pixel cutout of the image (say,
-   the galaxy disk in the lower left corner). Hint: see Leonardo Ubeda's
-   image plot examples on http://astroplotlib.stsci.edu/
-
-IPython Notebook
-================
-
-Getting Started
----------------
-
-IPython Notebook is an interactive web-based tool which combines code
-execution, mathematics, and rich media output.
-
-You can find a plethora of information at
-http://ipython.org/ipython-doc/dev/notebook/index.html
-
-Let's get started. The data needed for this chapter can be found in
-``/grp/hst/riab/training/python/``.
-
-To open a notebook window, open a terminal and initialize Ureka::
-
-   $ ur_setup common ssbx
-   $ ipython notebook
-
-Opening the notebook this way will create a new tab in your browser. All
-subsequent interactions will now be through the browser and the terminal
-will be running the server that the browser interacts with.
-
-IPython Notebook will look for notebook files (``.ipynb``) in the directory
-where you started the notebook in. Once in the notebook window, to
-execute a cell you must hit :kbd:`Shift-Enter`.
-
-Plotting Inline
----------------
-
-A unique feature that the notebook has is the ability to plot inline.
-
-At the top of your notebook, add a cell containing::
-
-   %matplotlib inline
-
-Then import matplotlib and numpy as usual::
-
-   from matplotlib import pyplot as plt
    import numpy as np
+   from scipy.optimize import curve_fit
+   from matplotlib import pyplot as plt
+   from matplotlib import rc
+   rc('font', **{'family': 'serif', 'serif': ['Computer Modern Roman'], 'size':14})
+   rc('text', usetex=True)
 
-Now, when you create a figure, it will appear in the notebook!
+   # define the blackbody function
+   # arguments: wavelength (array-like) in microns, temp (int or float) in K
+   # returns: spectral radiance over specified wavelength range
+   def blackbody(wavelength, T):
+       from scipy.constants import h,k,c
+       wav = wavelength / 10**6
+       exponential = np.exp(h*c / (wav*k*T))
+       coeff = 2*h*c**2 / wav**5
+       return coeff / (exponential - 1)
 
-Notebook Examples
------------------
+   # create an ideal blackbody spectrum
+   # np.linspace is similar to np.arange except its third argument is an integer
+   # specifying how many values the resulting array should have, instead of the 
+   # size of the increment between values
+   wa = np.linspace(0.02, 4, 200)
+   T = 7000.
+   y = blackbody(wa, T)
 
-.. image:: figures/python/notebook1.png
+   # make it noisy; add both baseline and 
+   # amplitude-dependent noise
+   add_noise = np.random.randn(200) * np.mean(y) / 2
+   multiply_noise = (np.random.randn(200) + 4) / 4
 
-.. image:: figures/python/notebook2.png
+   noisy_data = y * multiply_noise + add_noise
 
-.. image:: figures/python/notebook3.png
+   # fit the blackbody function to the noisy data
+   # arguments: function to be fit, x and y data, initial parameter guess(es)
+   # returns: optimized parameters, covariance matrix
+   # curve_fit output is named popt, pcov by convention;
+   # stand for optimized parameters and covariance of parameters
+   popt, pcov = curve_fit(blackbody, wa, noisy_data, p0=(7000.))
 
-.. image:: figures/python/notebook4.png
+   # get temperature + stdev of temperature;
+   # stdev is square root of diagonal of covariance matrix
+   # (we only have one free parameter here so the matrix is 1x1,
+   # but it's good form to take the diagonal anyway)
+   fitT = popt[0]
+   sigmaT = np.sqrt(np.diag(pcov))[0]
 
-.. image:: figures/python/notebook5.png
+   # fit blackbody with new temperature
+   yfit = blackbody(wa, fitT)
+
+   print 'Observed blackbody temperature: {:.2f} +/- {:.2f} K'.\
+         format(fitT, sigmaT)
+
+   # plot all functions
+   fig = plt.figure()
+   plt.plot(wa, y, label='True blackbody')
+   plt.plot(wa, noisy_data, alpha=0.7, label='Noisy data')
+   plt.plot(wa, yfit, '--', label='Fitted blackbody', lw=1)
+
+   plt.xlabel(r'Wavelength ($\mu$m)')
+   plt.ylabel('Spectral radiance (erg s$^{-1}$ cm$^3$ sr$^{-1}$)')
+
+   plt.legend(prop={'size':14})
+
+.. figure:: figures/python/blackbody.png
+   :width: 60%
+   :align: center
+   :alt: Blackbody spectrum.
+
 
 .. admonition:: Exercise
    :class: note
 
-   Change the colormap for the figure in line 7 to whatever map you prefer.
-   (a quick google of 'matplotlib colormap' will give you the list of
-   available maps)
+   Use ``curve_fit`` to define your own function and fit it to some noisy data.
+   How do the ideal and fitted function compare?
 
-.. admonition:: Exercise
-   :class: note
-
-   Use the same colormap for the figure in line 8. Add '\_r' to the end of
-   your colormap name. What did this do to your image? - Write answer in
-   your notebook
-
-.. admonition:: Exercise
-   :class: note
-
-   Pick different rows to plot for the figure in line 18 and change the
-   line colors.
-   Save your notebook (``lastname_training.ipynb``) and place it in
-   ``/grp/hst/riab/training/python/notebooks/``
 
 .. _python_scripts:
 
@@ -2986,6 +2948,19 @@ skills.
 -  http://learnpythonthehardway.org/book/
 
 -  http://www.pythonchallenge.com/
+
+-  http://www.astro.washington.edu/users/vanderplas/Astr599_2014/notebooks/
+
+And, a few libraries to help make your plots pretty:
+
+-  https://github.com/yhat/ggplot
+
+-  https://plot.ly/
+
+-  https://github.com/olgabot/prettyplotlib
+
+-  http://stanford.edu/~mwaskom/software/seaborn/index.html
+
 
 Mailing Lists
 -------------
