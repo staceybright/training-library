@@ -18,6 +18,7 @@ Training guides and exercises for new RIAs
 #. :doc:`python`
 #. :doc:`python_rest`
 #. :doc:`pyraf`
+#. :doc:`pysynphot`
 #. :doc:`astrodrizzle`
 #. :doc:`photometry`
 #. :doc:`spectroscopy`
@@ -54,6 +55,7 @@ Reference information
    python
    python_rest
    pyraf
+   pysynphot
    astrodrizzle
    photometry
    spectroscopy

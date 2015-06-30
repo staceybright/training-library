@@ -1,0 +1,122 @@
+***************
+Using Pysynphot
+***************
+
+*Authors: Deepashri Thatte, Varun Bajaj*
+
+Pysynphot is versatile python package that replaces the IRAF package Synphot.  Synphot is a package used for performing synthetic photometery calculations for Hubble (and also James Webb in the case of pysynphot) instruments.  Pysynphot was created to as an object-oriented replacement to Synphot, allowing for much easier integration with other python code when compared to using Synphot via Pyraf.
+
+This tutorial will cover the basics of using Pysynphot to create spectra, bandpasses, and synthetic observations for both Hubble and James Webb instruments.  You will encounter a few exercises in this training, please save your plots and record you answers so your trainer(s) can review them.  For more technical documentation (including more information on the various Pysynphot objects) see `SSB's documentation <http://ssb.stsci.edu/pysynphot/docs/>`_.
+
+Configuring environment variables
+=================================
+
+Pysynphot requires access to CDBS to pull the required reference files for calculations, as the software itself contains no observatory specific data.  When connected to the STScI network, you simply have to point it to the CDBS path.  In your terminal type: ::
+
+    % setenv PYSYN_CDBS /grp/hst/cdbs/
+    
+Typing this every time you want to use Pysynphot in your code is rather tedious, so feel free to add the above line to your .cshrc file.  Alternatively, you could do this in python (or add the following code to your .pythonrc file): ::
+
+    >>> import os
+    >>> os.environ['PYSYN_CDBS']='/grp/hst/cdbs/'
+    
+Plotting a spectrum
+===================
+
+Essentially, Pysynphot computes photometric results by multiplying the various parts of a bandpass (transmission for a certain filter, detector sensitivities etc.) onto a a target spectrum.  Therefore, we will start by acquiring a target spectrum and plotting it. ::
+
+Using target spectra
+--------------------
+Pysynphot gives user the ability to calculate photometric results from an input spectrum file. CDBS contains a large number of spectra files for various targets used for calibration in the *calspec* directory.
+
+    >>> import pysynphot as S
+    >>> import matplotlib.pyplot as plt
+    >>> vega = S.FileSpectrum('/grp/hst/cdbs/calspec/alpha_lyr_stis_008.fits')
+    
+The variable vega is actually an object containing much information, not limited to the actual spectrum itself.  To plot it, we simply access the relevant attributes: ::
+    
+    >>> plt.plot(vega.wave, vega.flux)
+
+.. figure:: figures/pysynphot/vega_spec.png
+   :scale: 80 %
+   :alt: Vega spectrum
+   
+.. admonition:: Exercise: Plot a spectrum
+   :class: note
+
+   | Make a plot similar to the one above using a different target spectrum.  Include axes labels, units and a title. Plot the spectrum in terms of Jy.
+   | **Hint:** Look at the .waveunits, .fluxunits, and .name attributes to get the correct labels and the .convert() method to change the flux unit to Jansky.
+   
+Using analytic spectra
+----------------------
+Pysynphot also gives the user the ability to generate analytic spectra.  For example: ::
+
+    >>> bb = S.Blackobdy(10000)
+    >>> pow = S.PowerLaw(8000, -2)
+    >>> composite_spec = bb + pow
+    
+See the documentation for more details on usage of the various analytic spectrum options.
+
+
+Creating a bandpass
+===================
+The other main functionality of Pysynphot is creating bandpasses by convolving sensitivities of the various parts of the optical path.  To compute a bandpass, Pysynphot requires an obsmode string containing the instrument, detector, and filter to passed.  For example, to calculate the bandpass for F218W in chip one of the WFC3/UVIS detector ::
+    
+    >>> bp1 = S.ObsBandpass('wfc3,uvis1,f218w')
+    >>> bp2 = S.ObsBandpass('wfc3,uvis1,f218w,aper#0.4')
+
+
+The *aper#x* keyword indicates the bandpass should be calculated with an aperture of size *x* arcseconds.
+
+Unlike spectra, bandpass objects contain throughput rather than flux attributes.  Plotting them is equally straightforward, however: ::
+    
+    >>> plt.plot(bp1.wave, bp1.throughput)
+    
+    
+.. figure:: figures/pysynphot/wfc3uvis1f218w.png
+   :scale: 80 %
+   :alt: F218W Bandpass
+ 
+.. admonition:: Note: Obsmode with multiple-chip detectors
+   :class: note
+
+   The general format for an obsmode is: '<instrument>,<channel>,<filter>'.  Some channels, such as WFC3/UVIS and ACS/WFC have multiple CCDs.  Since each chip generally has a different sensitivity, you must indicate which chip is used in the obsmode string.  For a tw-chip detector like WFC3/UVIS, this is done by using 'uvis1' or 'uvis2' in the obsmode string.  For single chip detectors, the number is not necessary.
+   
+You can also extract the bandpasses of specific components in the optical path: ::
+
+    >>> ota_bp = S.FileBandpass('/grp/hst/cdbs/comp/ota/hst_ota_007_syn.fits')
+    
+
+.. admonition:: Exercise: Plot a bandpass
+   :class: note
+   
+   Plot a bandpass using a different obsmode.  Feel free to use whichever instrument/detector/filter you like.  Include labels, units, and a title.
+   
+
+Creating observations
+=====================
+
+Perhaps the most useful function of Pysynphot is the creation of 'observations', which are synthetic photometric measurements.  To create an observation, you need a spectrum and bandpass.  We will use the ones we have calculated in the previous sections.  Creating an observation is rather simple: ::
+
+    >>> obs = S.Observation(vega, bp1)
+    
+
+
+    
+The observation overlaps the input spectrum with the input bandpass.  The observation object contains much useful information, perhaps the most useful being the countrate (counts per second) predicted for the detector.  This is calculated by integrating the overlapped spectrum across the entire wavelength range, and should match real photometry very closely..  The *.countrate()* method returns this synthetic photometric measurement.  Other useful quantities include the effective wavelength, effective stimulus, and pivot wavelength.  See the documentation for more details on this.
+
+The observation object also contains the *.wave* and *.flux* attributes, which you can use to see the final overlapped spectrum.
+
+.. admonition:: Exercise: Crate an observation
+   :class: note
+   
+   Create an observation using the spectrum and bandpass you created in the previous sections.  Plot the final spectrum and record the countrate.
+ 
+ 
+   
+
+---------------------------
+
+**Congrats! You have finished the essential Pysynphot training.  The following sections contain additional examples and usage with other software, as well as the caveats of using Pysynphot with JWST instruments.  If you have not been advised to review the following sections contact your trainer to review your work and move on to the next part of your training.**
+
+---------------------------
