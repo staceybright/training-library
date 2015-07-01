@@ -1615,18 +1615,22 @@ properties, axes properties, and so on.
 
 .. _python_simple_scatter:
 
-Create Some Plots
------------------
+Basic Plotting
+--------------
 
-The most basic plotting function is ``plt.plot()``, which generally takes 
+The most-used plotting function is ``plt.plot()``, which generally takes 
 two arguments ``x`` and ``y``::
 
+   import numpy as np
+   from matplotlib import pyplot as plt
+   
    x = np.arange(0,10,0.5)
    y = x**2
+   
    plt.plot(x,y)
    plt.show()
 
-.. figure:: figures/python/xsquared.png
+.. figure:: figures/python/basicplot.png
    :width: 50%
    :align: center
    :alt: Our first plot.
@@ -1642,17 +1646,76 @@ two arguments ``x`` and ``y``::
 
       %config InlineBackend.figure_format='retina'
 
-Let's look at some more things Matplotlib can do.
+
+You can call ``plt.plot()`` multiple times and the data will show up on the same plot::
+
+   y2 = np.e**(x/2)
+
+   plt.plot(x,y)
+   plt.plot(x,y2)
+
+.. figure:: figures/python/basicplot2.png
+   :width: 50%
+   :align: center
+
+If you don't want two datasets showing up on the same plot, you can use ``fig = plt.figure()`` to explicitly create separate plots, and ``ax = add_subplot()`` to create a subplot object for each figure. You can then call ``ax.plot()``, which will ensure that the dataset appears on the correct plot. We will also see a different way of creating subplots, ``plt.subplots()``, later. ::
+
+   fig1 = plt.figure()
+   ax1 = fig1.add_subplot(1,1,1)
+   ax1.plot(x,y)
+
+   fig2 = plt.figure()
+   ax2 = fig2.add_subplot(1,1,1)
+   ax2.plot(x,y2)
+
+.. figure:: figures/python/basicplot.png
+   :width: 50%
+   :align: center
+
+.. figure:: figures/python/basicplot3.png
+   :width: 50%
+   :align: center
+
+Matplotlib's `marker properties <http://matplotlib.org/api/markers_api.html>`_ are extremely customizable; say we want each point marked with an individual dot rather than a line, and we want the line to be red::
+
+   plt.plot(x,y,'.',color='r')
+
+.. figure:: figures/python/markers.png
+   :width: 50%
+   :align: center
+
+What if we want a functionality that ``plt.plot()`` doesn't have, such as adding error bars? Luckily, there's more than just ``plt.plot()`` to work with; for example, ``plt.errorbar()`` is a very useful function for astronomers. ::
+
+   yerr = np.sqrt(y)
+   plt.errorbar(x,y,yerr)
+
+.. figure:: figures/python/errorbar.png
+   :width: 50%
+   :align: center
+
+We've been very bad scientists so far and have failed to label our axes! Let's do that now. ::
+
+   plt.errorbar(x,y,yerr)
+   plt.xlabel('x')
+   plt.ylabel('y')
+   plt.title('Quadratic with Poissonian error in y')
+
+.. figure:: figures/python/plot_labels.png
+   :width: 50%
+   :align: center
+
+
+Now that you've got the basics, let's look at some more complicated things Matplotlib can do.
 
 
 .. _multi_subplots:
 
-Example: Multiple Subplots and Different Plot Functions
--------------------------------------------------------
+Example: Multiple Subplots and Different Plotting Functions
+-----------------------------------------------------------
 
 ::
 
-   # make figure with two rows and two columns of subplots
+   # make figure with two rows and two columns of subplots, specify size in inches
    fig, [(ax0, ax1), (ax2, ax3)] = plt.subplots(2,2, figsize=(8,8))
 
    # generate two arrays of 5000 points each
@@ -1696,6 +1759,13 @@ Example: Multiple Subplots and Different Plot Functions
    :width: 75%
    :align: center
 
+.. admonition:: Exercise
+   :class: note
+
+   Create a figure with 3 subplots in one row and make a different kind of plot in each.
+   If you want to explore plotting options beyond what's been presented here so far, 
+   check out the `PyPlot documentation <http://matplotlib.org/api/pyplot_summary.html>`_.
+
 
 Example: Plotting FITS Figures & Using Colormaps
 ------------------------------------------------
@@ -1721,7 +1791,7 @@ Here ``vmin`` and ``vmax`` specify the image values for which to set the minimum
 
 Speaking of colormaps, let's compare some different types of colormaps for this image. ::
 
-   # set up figure; specify size
+   # set up figure; specify size in inches
    fig = plt.figure(figsize=(12,5))
    
    # add three subplots
@@ -1730,9 +1800,9 @@ Speaking of colormaps, let's compare some different types of colormaps for this 
    ax3 = fig.add_subplot(1,3,3)
    
    # display the image in each subplot with different colormaps
-   ax1.imshow(data, vmin=3,vmax=20)
-   ax2.imshow(data, vmin=3,vmax=20,cmap='RdBu_r')
-   ax3.imshow(data, vmin=3,vmax=20,cmap='bone')
+   ax1.imshow(data, vmin=3, vmax=20)
+   ax2.imshow(data, vmin=3, vmax=20, cmap='RdBu_r')
+   ax3.imshow(data, vmin=3, vmax=20, cmap='bone')
    
    # get rid of tick marks
    for ax in (ax1, ax2, ax3):
@@ -1746,15 +1816,22 @@ Speaking of colormaps, let's compare some different types of colormaps for this 
    fig.tight_layout()
    
    # get rid of extra spacing between subplots
-   fig.subplots_adjust(hspace=0.01,wspace=0.01)
+   fig.subplots_adjust(hspace=0.01, wspace=0.01)
 
 .. figure:: figures/python/colormaps.png
    :width: 100%
    :align: center
 
-When displaying an image, there are very few instances in which you want to use anything other than a sequential colormap. Diverging colormaps are good for displaying the deviation of data from a mean or median, and qualitative colormaps such as the default "jet" should almost never be used for anything other than categorization of discrete data types. (If you don't already dislike jet, see `this blog post <https://jakevdp.github.io/blog/2014/10/16/how-bad-is-your-colormap/>`_.)
+When displaying an image, there are very few instances in which you want to use anything other than a sequential colormap. Diverging colormaps are good for displaying the deviation of data from a mean or median, and qualitative colormaps such as the default "jet" should almost never be used for anything other than categorization of discrete data types. (For more on why jet is a bad choice for continuous/image-like data, see `this blog post <https://jakevdp.github.io/blog/2014/10/16/how-bad-is-your-colormap/>`_.)
 
 For a quick reference of all built-in colormaps in Matplotlib, see this `colormap reference chart <http://matplotlib.org/examples/color/colormaps_reference.html>`_.
+
+
+.. admonition:: Exercise
+   :class: note
+
+   Try plotting a 500x500 pixel cutout of the image (say, the galaxy disk in the lower left corner). Hint: refer to the previous section on slicing sequences.
+   Next, apply your favorite colormap to the image. Can you adjust vmin and vmax for this region to get a better dynamic range?
 
 
 Making Attractive Plots
@@ -1770,9 +1847,11 @@ TeXify Your Text
 If you are preparing a document in LaTeX for publication, 
 your figures will blend in very nicely (and look so much better in general!) 
 if you use LaTeX formatting, not only for symbols and equations 
-but for all figure text. This is the simplest method for doing so::
+but for all figure text. `This 
+<http://matplotlib.org/api/matplotlib_configuration_api.html#matplotlib.rc>`_ 
+is the simplest method for doing so::
 
-    # import function that allows you to adjust formatting parameters
+    # import module that sets formatting parameters
     from matplotlib import rc
     # change default font for all plot text to LaTeX font; also change font size
     rc('font', **{'family': 'serif', 'serif': ['Computer Modern Roman'], 'size':14})
@@ -1804,7 +1883,7 @@ points the file will quickly become bloated and you'll end up wasting twenty
 minutes while Preview struggles to open it.
 
 Fortunately, there is a workaround. Rasterization is a process that maps vector 
-graphics to pixel format, typically resulting in much less information being stored. 
+graphics to pixel format, resulting in much less information being stored. 
 In Matplotlib one can rasterize the entire figure with one simple command::
 
     # set up your figure
@@ -1834,19 +1913,28 @@ possible, you can set rasterization only for the plotted objects in the plotting
 General Tricks/Quick Reference
 ------------------------------
 
+When To Explicitly Create Figure and Axis Objects
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+So far in this training we've been somewhat lax about explicit figure creation; sometimes we just do ``plt.plot(x,y)``, and sometimes we create a figure object ``fig = plt.figure()`` with or without an axes object ``ax = fig.add_subplot()``. (There's also the option ``fig, ax = plt.subplots()``). When do you need explicit figure and axes objects, and when it is okay to skip straight to the plot function?
+
+Essentially, it depends on the complexity of your figure, although it's generally good form to use the object-oriented figure and axis calls ``fig = plt.figure()`` and ``ax = fig.add_subplot()`` when you can. For quick-and-dirty plotting, ``plt.plot()`` is generally sufficient; however, if you have multiple subplots or an otherwise complicated figure, explicitly creating figure and axis objects is easier to work with.
+
+General vs. Axis-Specific Commands
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Some commands are different for general (``plt.plot()``) vs. object-oriented (``ax.plot()``) plotting. For the basic plotting functions ``plot()``, ``errorbar()``, ``hist()`` and so on, there is no name difference between the general and object-oriented names. However, for other things such as adding x- and y-labels, the function you have to call to achieve the same effect changes. Often if you have a function ``plt.<do_some_thing>`` that modifies a plot's axis, the corresponding function for a specific axis object will be ``ax.set_<do_some_thing``.
+
 Legends
 ^^^^^^^
 
 The function to create a legend for your plot is quite simple, although some of the details of customizing it are a bit tricky.
 
-All you need to make a legend is at least one plotted object with the keyword argument ``label='(your label here)'``. The legend call is::
+All you need to make a legend is at least one plotted object with the keyword argument ``label='(your label here)'`` in the plotting call. The legend call is simply::
 
-   # general
    plt.legend()
-   # for a specific subplot object
-   ax.legend()
 
-This will make a boxed legend appear on top of your plot. The default legend formatting is perhaps one of Matplotlib's least attractive features, which is saying something; fortunately, it is easily customizable. For example, you can change the location, size, and handle length with the legend keyword arguments ``loc``, ``prop``, and ``handlelength`` respectively. ::
+This will make a boxed legend appear on your plot. The default legend formatting is perhaps one of Matplotlib's least attractive features, which is saying something; fortunately, it is easily customizable. For example, you can change the location, size, and handle length with the legend keyword arguments ``loc``, ``prop``, and ``handlelength`` respectively. ::
 
     plt.legend(loc=0, prop={'size':14}, handlelength=1)
 
@@ -1865,14 +1953,6 @@ If you need one or both axes to be log scale, the quickest way to do so is::
 Be careful when you have axis limits that are close to 0; your plots will come out very funky if you don't take care to adjust your axis limits to be log-compatible. If you have any negative data, ``plt.yscale('symlog')`` is your best option.
 
 Alternately, you can use ``plt.semilogx(x,y)``, ``plt.semilogy(x,y)``, or ``plt.loglog(x,y)``; however, these give you slightly less flexibility.
-
-
-When To Explicitly Create Figure and Axes Objects
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-So far in this training we've been somewhat lax about explicit figure creation; sometimes we just do ``plt.plot(x,y)``, and sometimes we create a figure object ``fig = plt.figure()`` with or without an axes object ``ax = fig.add_subplot()``. (There's also the option ``fig, ax = plt.subplots()``). When do you need explicit figure and axes objects, and when it is okay to skip straight to the plot function?
-
-Essentially, it depends on the complexity of your figure, although it's generally good form to use the object-oriented figure and axis calls ``fig = plt.figure()`` and ``ax = fig.add_subplot()`` when you can. For quick-and-dirty plotting, ``plt.plot()`` is generally sufficient; however, if you have multiple subplots or an otherwise complicated figure, explicitly creating figure and axis objects is easier to work with.
 
 
 .. _curve_fitting:
@@ -1942,12 +2022,13 @@ here we will demonstrate the use of one of its most versatile functions, ``curve
 
    # plot all functions
    fig = plt.figure()
-   plt.plot(wa, y, label='True blackbody')
-   plt.plot(wa, noisy_data, alpha=0.7, label='Noisy data')
-   plt.plot(wa, yfit, '--', label='Fitted blackbody', lw=1)
+   ax = fig.add_subplot(1,1,1)
+   ax.plot(wa, y, label='True blackbody')
+   ax.plot(wa, noisy_data, alpha=0.7, label='Noisy data')
+   ax.plot(wa, yfit, '--', label='Fitted blackbody', lw=1)
 
-   plt.xlabel(r'Wavelength ($\mu$m)')
-   plt.ylabel('Spectral radiance (erg s$^{-1}$ cm$^3$ sr$^{-1}$)')
+   ax.set_xlabel(r'Wavelength ($\mu$m)')
+   ax.set_ylabel('Spectral radiance (erg s$^{-1}$ cm$^3$ sr$^{-1}$)')
 
    plt.legend(prop={'size':14})
 
@@ -1961,7 +2042,8 @@ here we will demonstrate the use of one of its most versatile functions, ``curve
    :class: note
 
    Use ``curve_fit`` to define your own function and fit it to some noisy data.
-   How do the ideal and fitted function compare?
+   How do the ideal and fitted function compare? How does this change when you change
+   the noise properties?
 
 
 .. _python_scripts:
