@@ -1719,7 +1719,7 @@ This is extremely convenient for displaying data from FITS files. ::
 
 Here ``vmin`` and ``vmax`` specify the image values for which to set the minimum and maximum of the colormap.
 
-Speaking of colormaps, let's compare some different types of colormaps. ::
+Speaking of colormaps, let's compare some different types of colormaps for this image. ::
 
    # set up figure; specify size
    fig = plt.figure(figsize=(12,5))
