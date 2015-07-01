@@ -2050,7 +2050,7 @@ Now we plot the ideal blackbody, noisy data, and fitted blackbody for comparison
 .. admonition:: Exercise
    :class: note
 
-   Use ``curve_fit`` to define your own function and fit it to some noisy data.
+   Define your own function and use ``curve_fit`` to fit it to some noisy data.
    How do the ideal and fitted function compare? How does this change when you change
    the noise properties?
 
