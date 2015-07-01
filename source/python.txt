@@ -1492,42 +1492,22 @@ do the following::
 
 As a word of caution, note that astropy.io.fits reads in FITS images as
 (rows, cols) or (y, x), not (x, y). This is often a 'gotcha' for users
-who are indexing spacific areas of the array.
+who are indexing specific areas of the array.
 
 fits.getval() and fits.setval() functions
 -----------------------------------------
 
-If you are familiar with IRAF/PyRAF, you are probably familiar with
-IRAF's hedit function, which allows you to add, delete, and modify
-keywords in a FITS header.
-
-First, lets take a look of our example file's header using imheader in
-PyRAF. In PyRAF navigate to the folder where your icft01crq\_raw.fits
-file is located, and try the following::
-
-   --> imheader icft01crq_raw.fits[0] l+ | page
-
-We see that there is a 'DARKFILE' keyword, and it is set to
-'iref$y2j13512i\_drk.fits.' Say we wanted to recalibrate this file using
-a different 'DARKFILE'. The value of this keyword can be changed using
-hedit, as shown here::
-
-   --> hedit icft01crq_raw.fits[0] DARKFILE 'iref$y2p1831ci_drk.fits' \
-          verify=no update=yes
-
-In the above example we made sure the 'update' parameter was set to
-'yes.' We can check that our edit was successful by using imheader again
-and checking the value of the 'DARKFILE' keyword::
-
-   --> imheader icft01crq_raw.fits[0] l+ | page
-
-Using Python, there is a simple way to do this with astropy.io.fits
-using fits.getval() and fits.setval(), shown in the example below. ::
+Above, we edited a FITS header by assigning to dictionary keys in Python (e.g. ``hdr['FLSHCORR'] = 'PERFORM'``). If you're manipulating headers a lot, astropy.io.fits provides shorthand for getting and setting the values of header keywords using fits.getval() and fits.setval(). In the example below, we check the header value for ``DARKFILE`` in extension ``0``, set it to a new value, and then check it again to make sure::
 
    >>> from astropy.io import fits
    >>> infile = 'icft01crq_raw.fits'
    >>> key = 'DARKFILE'
    >>> fits.getval(infile, key, 0)
+   >>> fits.setval(infile, key, value='iref$bogus_dark.fits', ext=0)
+   >>> fits.getval(infile, key, 0)
+
+You should see the ``iref$bogus_dark.fits`` value. Let's put it back::
+
    >>> fits.setval(infile, key, value='iref$y2j13512i_drk.fits', ext=0)
    >>> fits.getval(infile, key, 0)
 
