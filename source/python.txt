@@ -347,6 +347,9 @@ You can omit the ``start``... ::
 
 Those are the basics. There are more slicing tricks like the extra ``:step`` syntax, negative step sizes, and multi-dimensional indexing that we'll leave for you to discover as you learn Python.
 
+
+.. _multiassignment:
+
 Multiple assignment with sequences
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -1624,7 +1627,7 @@ two arguments ``x`` and ``y``::
    import numpy as np
    from matplotlib import pyplot as plt
    
-   x = np.arange(0,10,0.5)
+   x = np.arange(0, 10, 0.5)
    y = x**2
    
    plt.plot(x,y)
@@ -1721,8 +1724,10 @@ Here we'll be making a scatter plot, 1D and 2D histograms, and a contour plot fr
    # make figure with two rows and two columns of subplots, specify size in inches
    fig, [(ax0, ax1), (ax2, ax3)] = plt.subplots(2,2, figsize=(8,8))
 
-   # generate two arrays of 5000 points each
-   # np.random.randn pulls from normal dist centered at 0 with stddev 1
+We assign the figure and four axis objects to their own variables; see :ref:`multiassignment`.
+
+Now we need some data. We'll use ``np.random.randn``, which generates an array of user-specified length with values pulled from the normal distribution centered at 0 with a standard deviation of 1. Let's generate two arrays with 5000 points each. ::
+
    data_x = np.random.randn(5000)
    data_y = np.random.randn(5000)
 
@@ -1745,7 +1750,7 @@ For the next two plots, we'll be making two different types of histograms::
    H, xedges, yedges, patches = ax2.hist2d(data_x, data_y, cmap='Blues', bins=(nbins,nbins))
    ax2.set_title('plt.hist2d()')
 
-For the filled contour plot, we need to convert the data to a format ``contourf`` accepts. Don't worry if you don't understand this particular bit of code; essentially what it does is get a density map from the 2D histogram output. The point is that Matplotlib can do filled contour maps.
+For the filled contour plot, we need to convert the data to a format ``contourf`` accepts. Don't worry if you don't understand this particular bit of code; essentially what it does is get a density map from the 2D histogram output. ::
 
    x_bin_sizes = (xedges[1:] - xedges[:-1]).reshape((1,nbins))
    y_bin_sizes = (yedges[1:] - yedges[:-1]).reshape((nbins,1))
@@ -1793,9 +1798,9 @@ This is extremely convenient for displaying data from FITS files. ::
    :width: 50%
    :align: center
 
-Here ``vmin`` and ``vmax`` specify the image values for which to set the minimum and maximum of the colormap.
+Here ``vmin`` and ``vmax`` specify the image values for which to set the minimum and maximum of the colormap. A colormap assigns a color to pixels in the plot based on the values in the array. The simplest color map is grayscale (higher array values mean brighter pixels), but other color map choices can be useful to show patterns in the data.
 
-Speaking of colormaps, let's compare some different types of colormaps for this image. ::
+Let's compare some different types of colormaps for this image. ::
 
    # set up figure; specify size in inches
    fig = plt.figure(figsize=(12,5))
