@@ -1715,6 +1715,7 @@ Now that you've got the basics, let's look at some more complicated things Matpl
 Example: Multiple Subplots and Different Plotting Functions
 -----------------------------------------------------------
 
+Here we'll be making a scatter plot, 1D and 2D histograms, and a contour plot from the same dataset.
 ::
 
    # make figure with two rows and two columns of subplots, specify size in inches
@@ -1725,9 +1726,12 @@ Example: Multiple Subplots and Different Plotting Functions
    data_x = np.random.randn(5000)
    data_y = np.random.randn(5000)
 
-   # scatterplot
+On the first subplot, we add a scatter plot::
+
    ax0.scatter(data_x, data_y)
    ax0.set_title('plt.scatter()')
+
+For the next two plots, we'll be making two different types of histograms::
 
    # set number of bins for histograms
    nbins = 20
@@ -1737,13 +1741,12 @@ Example: Multiple Subplots and Different Plotting Functions
    ax1.set_title('plt.hist()')
 
    # histogram of 2D dataset
-   # we assign hist2d output to variables for use in the contour plot
+   # we assign hist2d output to variables for use in the next plot
    H, xedges, yedges, patches = ax2.hist2d(data_x, data_y, cmap='Blues', bins=(nbins,nbins))
    ax2.set_title('plt.hist2d()')
 
-   # convert dataset to a format contourf accepts
-   # don't worry if you don't understand this;
-   # the point is matplotlib does contour plots
+For the filled contour plot, we need to convert the data to a format ``contourf`` accepts. Don't worry if you don't understand this particular bit of code; essentially what it does is get a density map from the 2D histogram output. The point is that Matplotlib can do filled contour maps.
+
    x_bin_sizes = (xedges[1:] - xedges[:-1]).reshape((1,nbins))
    y_bin_sizes = (yedges[1:] - yedges[:-1]).reshape((nbins,1))
    pdf = (H*(x_bin_sizes*y_bin_sizes))
@@ -1807,18 +1810,21 @@ Speaking of colormaps, let's compare some different types of colormaps for this 
    ax2.imshow(data, vmin=3, vmax=20, cmap='RdBu_r')
    ax3.imshow(data, vmin=3, vmax=20, cmap='bone')
    
-   # get rid of tick marks
+This isn't strictly necessary, but the tick marks are a distraction and take up space, so let's get rid of them::
+
    for ax in (ax1, ax2, ax3):
        ax.set_xticks([])
        ax.set_yticks([])
    
-   # add titles to subplots
+Let's give each subplot a title::
+
    ax1.set_title('Default colormap')
    ax2.set_title('Diverging colormap')
    ax3.set_title('Sequential colormap')
-   fig.tight_layout()
    
-   # get rid of extra spacing between subplots
+Finally, let's tweak the spacing between subplots so that they're closer together::
+
+   fig.tight_layout()
    fig.subplots_adjust(hspace=0.01, wspace=0.01)
 
 .. figure:: figures/python/colormaps.png
@@ -1978,9 +1984,8 @@ here we will demonstrate the use of one of its most versatile functions, ``curve
    rc('font', **{'family': 'serif', 'serif': ['Computer Modern Roman'], 'size':14})
    rc('text', usetex=True)
 
-   # define the blackbody function
-   # arguments: wavelength (array-like) in microns, temp (int or float) in K
-   # returns: spectral radiance over specified wavelength range
+First, we define a blackbody function ``blackbody`` that takes an array-like input of wavelengths in microns and an integer or float temperature value in Kelvin and returns the spectral radiance blackbody values over the specified wavelength range. ::
+
    def blackbody(wavelength, T):
        from scipy.constants import h,k,c
        wav = wavelength / 10**6
@@ -1988,32 +1993,24 @@ here we will demonstrate the use of one of its most versatile functions, ``curve
        coeff = 2*h*c**2 / wav**5
        return coeff / (exponential - 1)
 
-   # create an ideal blackbody spectrum
-   # np.linspace is similar to np.arange except its third argument is an integer
-   # specifying how many values the resulting array should have, instead of the 
-   # size of the increment between values
+Next, we use the ``blackbody`` function to create an ideal blackbody spectrum for a given set of wavelengths. The function ``np.linspace()`` used here is similar to np.arange except its third argument is an integer specifying how many values the resulting array should have, instead of the size of the increment between values. ::
+
    wa = np.linspace(0.02, 4, 200)
    T = 7000.
    y = blackbody(wa, T)
 
-   # make it noisy; add both baseline and 
-   # amplitude-dependent noise
+Now we add some noise to this perfect blackbody. We're creating two different types of noise here: a baseline "additive" noise, and noise that is dependent on the amplitude of the blackbody function. Note that the noise arrays must have the same number of values as the wavelength range above. ::
+
    add_noise = np.random.randn(200) * np.mean(y) / 2
    multiply_noise = (np.random.randn(200) + 4) / 4
 
    noisy_data = y * multiply_noise + add_noise
 
-   # fit the blackbody function to the noisy data
-   # arguments: function to be fit, x and y data, initial parameter guess(es)
-   # returns: optimized parameters, covariance matrix
-   # curve_fit output is named popt, pcov by convention;
-   # stand for optimized parameters and covariance of parameters
+Now we use ``curve_fit`` to fit the blackbody function to the noisy data, with temperature as the only free parameter.
+Here the arguments for ``curve_fit`` are the function to be used for fitting, the x- and y-data, and optional initial parameter guesses. It returns the optimized parameters for the function as well as a covariance matrix for those parameters. Output is called ``popt,pcov`` by convention. To get the standard deviations of the optimized parameters, we take the square root of the diagonal values of the covariance matrix. (Although we only have one free parameter here, it's good form to still take the diagonal.) ::
+
    popt, pcov = curve_fit(blackbody, wa, noisy_data, p0=(7000.))
 
-   # get temperature + stdev of temperature;
-   # stdev is square root of diagonal of covariance matrix
-   # (we only have one free parameter here so the matrix is 1x1,
-   # but it's good form to take the diagonal anyway)
    fitT = popt[0]
    sigmaT = np.sqrt(np.diag(pcov))[0]
 
@@ -2022,6 +2019,10 @@ here we will demonstrate the use of one of its most versatile functions, ``curve
 
    print 'Observed blackbody temperature: {:.2f} +/- {:.2f} K'.\
          format(fitT, sigmaT)
+
+Observed blackbody temperature: 6926.61 +/- 35.57 K
+
+Now we plot the ideal blackbody, noisy data, and fitted blackbody for comparison. ::
 
    # plot all functions
    fig = plt.figure()
