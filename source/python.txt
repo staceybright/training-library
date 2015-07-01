@@ -1658,7 +1658,9 @@ You can call ``plt.plot()`` multiple times and the data will show up on the same
    :width: 50%
    :align: center
 
-If you don't want two datasets showing up on the same plot, you can use ``fig = plt.figure()`` to explicitly create separate plots, and ``ax = add_subplot()`` to create a subplot object for each figure. You can then call ``ax.plot()``, which will ensure that the dataset appears on the correct plot. We will also see a different way of creating subplots, ``plt.subplots()``, later. ::
+If you don't want two datasets showing up on the same plot, you can use ``fig = plt.figure()`` to explicitly create separate plots, and ``ax = fig.add_subplot(1,1,1)`` to create a subplot object for the figure. The ``1,1,1`` arguments here indicate the number of rows of subplots you want to create, number of columns, and what the number of this particular subplot is; if you had, say, ``2,3,4`` as your argument instead, you'd then have 2 rows and 3 columns for 6 total subplots, and the particular subplot you just created would be the fourth out of those.
+
+After creating the subplot, you can then call ``ax.plot()``, which will ensure that the dataset appears on the correct plot. We will also see a different way of creating subplots, ``plt.subplots()``, later. ::
 
    fig1 = plt.figure()
    ax1 = fig1.add_subplot(1,1,1)
@@ -1762,7 +1764,8 @@ Example: Multiple Subplots and Different Plotting Functions
 .. admonition:: Exercise
    :class: note
 
-   Create a figure with 3 subplots in one row and make a different kind of plot in each.
+   Create a figure with at least three subplots (in whatever grid shape you choose) 
+   and make a different kind of plot in each.
    If you want to explore plotting options beyond what's been presented here so far, 
    check out the `PyPlot documentation <http://matplotlib.org/api/pyplot_summary.html>`_.
 
@@ -1775,7 +1778,7 @@ This is extremely convenient for displaying data from FITS files. ::
 
    from astropy.io import fits
 
-   f = fits.open('fits_images/ibsa01fpq_flt.fits')
+   f = fits.open('ibsa01fpq_flt.fits')
    data = f['sci'].data
    f.close()
 
@@ -1794,7 +1797,7 @@ Speaking of colormaps, let's compare some different types of colormaps for this 
    # set up figure; specify size in inches
    fig = plt.figure(figsize=(12,5))
    
-   # add three subplots
+   # add three subplots in a row
    ax1 = fig.add_subplot(1,3,1)
    ax2 = fig.add_subplot(1,3,2)
    ax3 = fig.add_subplot(1,3,3)
@@ -1830,7 +1833,7 @@ For a quick reference of all built-in colormaps in Matplotlib, see this `colorma
 .. admonition:: Exercise
    :class: note
 
-   Try plotting a 500x500 pixel cutout of the image (say, the galaxy disk in the lower left corner). Hint: refer to the previous section on slicing sequences.
+   Get the FITS image used above from /grp/hst/riab/training/python/ and try plotting a 500x500 pixel cutout of it (say, the galaxy disk in the lower left corner). Hint: refer to the previous section on slicing sequences.
    Next, apply your favorite colormap to the image. Can you adjust vmin and vmax for this region to get a better dynamic range?
 
 
