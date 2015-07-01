@@ -12,6 +12,12 @@ New Research & Instrument Analysts at STScI work with a variety of tools, depend
 Training guides and exercises for new RIAs
 *******************************************
 
+.. tip::
+
+   We do our best to keep these documents up to date, but they can diverge from reality occasionally. If you spot an error, `let us know <https://github.com/stsci-riab/riatraining/issues/new>`_ by telling your trainer or `reporting an issue on GitHub <https://github.com/stsci-riab/riatraining/issues/new>`_.
+
+   (You'll get access to the RIAB GitHub site in the training module on :doc:`version_control`.)
+
 #. :doc:`computer_setup`
 #. :doc:`version_control`
 #. :doc:`archives`
