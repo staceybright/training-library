@@ -2004,7 +2004,7 @@ Next, we use the ``blackbody`` function to create an ideal blackbody spectrum fo
    T = 7000.
    y = blackbody(wa, T)
 
-Now we add some noise to this perfect blackbody. We're creating two different types of noise here: a baseline "additive" noise, and noise that is dependent on the amplitude of the blackbody function. Note that the noise arrays must have the same number of values as the wavelength range above. ::
+Now we add some noise to this perfect blackbody. We're creating two different types of noise here: a baseline "additive" noise scaled to half the mean of the blackbody function, and noise that we will multiply the blackbody function by in order to have it vary with the amplitude of the blackbody. Note that the noise arrays must have the same number of values as the wavelength range above. ::
 
    add_noise = np.random.randn(200) * np.mean(y) / 2
    multiply_noise = (np.random.randn(200) + 4) / 4
@@ -2022,8 +2022,7 @@ Here the arguments for ``curve_fit`` are the function to be used for fitting, th
    # fit blackbody with new temperature
    yfit = blackbody(wa, fitT)
 
-   print 'Observed blackbody temperature: {:.2f} +/- {:.2f} K'.\
-         format(fitT, sigmaT)
+   print 'Observed blackbody temperature: {:.2f} +/- {:.2f} K'.format(fitT, sigmaT)
 
 Observed blackbody temperature: 6926.61 +/- 35.57 K
 
@@ -2052,7 +2051,8 @@ Now we plot the ideal blackbody, noisy data, and fitted blackbody for comparison
 
    Define your own function and use ``curve_fit`` to fit it to some noisy data.
    How do the ideal and fitted function compare? How does this change when you change
-   the noise properties?
+   the noise properties (for example, if you use only additive or only multiplicative
+   noise, or change the scale of the additive noise to twice the mean rather than half)?
 
 
 .. _python_scripts:
