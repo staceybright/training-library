@@ -903,42 +903,6 @@ http://docs.python.org/library/index.html, also listed in
 :ref:`python_links`. Below we provide descriptions of some of the most
 useful functions and statements.
 
-print function
---------------
-
-**Use:** The print function performs formatted output.
-
-Examples::
-
-   >>> a = 3
-   >>> print a
-   >>> b = 2
-   >>> print a + b
-   >>> print a / b
-   >>> b = 2.
-   >>> print a / b
-   >>> c = 'hi'
-   >>> print c + ' there'
-   >>> print 'I brought home {} flowers for \
-   ...    ${} and all she said was {}.'.format(a,b+0.5,c)
-
-This last statement is a bit more complicated. The ``{}`` symbol says to
-insert a variable from one of the arguments we give at the end. In the
-brackets we could specify data type, or which variable (0, 1, or 2), but
-we left it as default, which just takes the next argument in line.
-Notice the float does not print out exactly as we want. We would rather
-it say $2.50. Try this::
-
-   >>> print 'I brought home {} flowers for ${:.2f} and all \
-   ... she said was {}.'.format(a, b+0.5, c)
-
-In this last example the 'f' stands for 'float', and the '.2' says to include two decimal places. For more information see: http://docs.python.org/library/string.html#formatstrings.
-
-.. admonition:: Exercise
-   :class: note
-
-   Print out your own creative sentence.
-
 help() function
 ---------------
 
@@ -953,7 +917,7 @@ Examples::
 .. admonition:: Exercise
    :class: note
 
-   Type ``help()`` and explore the options.
+   Type ``help(varname)`` where varname is a variable you've defined (or a new variable of your favorite type) and explore the options.
 
 range() function
 ----------------
@@ -969,8 +933,7 @@ Examples::
 
 See also:
 
-Other useful similar functions in NumPy (see :ref:`python_numpy`) are
-numpy.linspace.
+NumPy (see :ref:`python_numpy`) offers ``np.arange`` and ``np.linspace`` which are often more useful for scientific computing purposes.
 
 dir() function
 --------------
@@ -997,39 +960,6 @@ See also:
 
 Other useful similar functions in NumPy (see :ref:`python_numpy`) are
 numpy.shape, numpy.size.
-
-for loop
---------
-
-**Use:** The for statement is used to execute one or more statements
-repeatedly.
-
-Examples::
-
-   >>> a = range(11)
-   >>> for x in a: print x
-   >>> b = ['2005', '2006', '2007']
-   >>> for x in b: print x + '-01'
-
-One can create a list with a for loop in one line. This is known as list
-comprehension. ::
-
-   >>>  c = [x*2 for x in range(11)]
-
-See also:
-
-Other useful similar statements are ``if``, ``elif``, ``else``, ``while``.
-
-
-.. admonition:: Exercise
-   :class: note
-
-   Create a list with 10 values equal to the square of the index.
-
-.. admonition:: Exercise
-   :class: note
-
-   Create the following sequence using a for statement: 2001-01-01, 2001-02-01, 2001-03-01, 2001-04-01.
 
 xrange() function
 -----------------
@@ -1059,12 +989,14 @@ Other useful similar statements are range().
 Notice that we use range() when we use the actual list created, but
 xrange() when we just need an iterator.
 
+.. tip::
+
+   In Python 3, ``xrange()`` is named ``range()``, and the old ``range()`` behavior no longer exists. In general, this won't make any difference for your programs.
+
 try ... except statement
 ------------------------
 
-**Use:** The try ... except statement is used as an error handler. It will try
-whatever we put in the try block, but if whatever you assign as the
-'error' occurs, it will go to the except block.
+**Use:** The try ... except statement is used as an exception (error) handler. It will try whatever we put in the try block, but if an exception occurs, it will go to the except block. As long as the kind of exception that happens matches what the except block says it handles, you can handle the error and your program can continue.
 
 Examples: Try this code below. Notice the error message you get. ::
 
@@ -1091,9 +1023,9 @@ To solve this problem, we put it in a try ... except statement::
    divides by that variable.
 
    Write a simple loop which calculates 1/\ :math:`n`, where :math:`n` is a
-   number in range(11). What happens when :math:`n=0`? Write an error
-   handling for this loop (hint: use try ... except statement with
-   ZeroDivisionError).
+   number in range(11). What happens when :math:`n=0`? Write an exception handling block for this loop.
+
+   (Hint: use the ``try ... except`` statement with ``ZeroDivisionError``).
 
 .. _python_modules:
 
@@ -1163,26 +1095,6 @@ Examples::
 See also:
 
 Other useful similar statements are random.uniform(), random.gaus().
-
-re.search() function
---------------------
-
-**Use:** The re module is for 'Regular Expression' operations. It is used to
-work with strings, including sophisticated pattern matching, as in the
-case of re.search().
-
-Examples::
-
-   >>> import re
-   >>> m = re.search('(?<=_)\d+','MIRI_2011.fits')
-   >>> m.group(0)
-
-In the above example we are looking for digits following an underscore,
-'\_'. The '\\d' is for digit, and the '+' is for one or more. The '(?<=_)' matches if the position in the string is proceeded by '_'.
-
-See also:
-
-Other useful similar statements are re.match().
 
 os.getcwd() and os.chdir() functions
 ------------------------------------
@@ -1310,10 +1222,10 @@ created an array ``b``. Try the following::
 
    >>> d = b
 
-Now we just created a second array, ``d``. Instead of using up twice
-the memory space, ``d`` is just a pointer to the memory ``b``
-also points to (remember, we copied an array, and an array is a
-pointer). Again, try the following::
+When we assign our array ``b`` to the variable ``d``, instead of using up twice
+the memory space, ``d`` is just becomes a pointer to the memory used by ``b``.
+
+To illustrate this, try assigning a value in ``d``::
 
    >>> d[2] = 999
    >>> print d
@@ -1321,7 +1233,7 @@ pointer). Again, try the following::
 
 Notice what happened to ``b``. While it saves on memory space,
 programmers have to be careful. If you know you will want to change one
-array and not the other, the correct function to use is numpy.copy().
+array and not the other, the correct function to use is ``numpy.copy()``.
 
 numpy.copy() function
 ^^^^^^^^^^^^^^^^^^^^^
@@ -1762,7 +1674,7 @@ Example: Plotting FITS Figures & Using Colormaps
 ------------------------------------------------
 
 In Matplotlib any 2D array of floats or integers can be displayed as an image. 
-This is extremely convenient for displaying data from FITS files. ::
+This is extremely convenient for displaying data from FITS files. In this example, we use a FITS file called ``ibsa01fpq_flt.fits`` (you can find a copy in ``/grp/hst/riab/training/python/``)::
 
    from astropy.io import fits
 
@@ -1824,7 +1736,8 @@ For a quick reference of all built-in colormaps in Matplotlib, see this `colorma
 .. admonition:: Exercise
    :class: note
 
-   Get the FITS image used above from /grp/hst/riab/training/python/ and try plotting a 500x500 pixel cutout of it (say, the galaxy disk in the lower left corner). Hint: refer to the previous section on slicing sequences.
+   Copy the FITS image used above from ``/grp/hst/riab/training/python/`` to your working directory and try plotting a 500x500 pixel cutout of it (say, the galaxy disk in the lower left corner). (Hint: refer to the previous section on slicing sequences.)
+
    Next, apply your favorite colormap to the image. Can you adjust vmin and vmax for this region to get a better dynamic range?
 
 
