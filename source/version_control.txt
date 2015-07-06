@@ -127,6 +127,8 @@ If you look at the main page for the repository on GitHub, there's a box on the 
       Resolving deltas: 100% (641/641), done.
       Checking connectivity... done.
 
+.. _version_control_branching:
+
 Creating a branch for your changes
 ==================================
 
@@ -178,6 +180,8 @@ At this point, ``master`` and your new branch point to the same commit (or snaps
    A second branch called "newbranch" coming off of master.
 
 However, because you have selected a new branch, changes you make will be added to the history on their own separate timeline. Thus prepared, let's edit the trainees list.
+
+.. _version_control_committing:
 
 Editing and committing changes
 ==============================
