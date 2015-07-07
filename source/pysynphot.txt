@@ -4,30 +4,41 @@ Using Pysynphot
 
 *Authors: Deepashri Thatte, Varun Bajaj*
 
-Pysynphot is versatile python package that replaces the IRAF package Synphot.  Synphot is a package used for performing synthetic photometery calculations for Hubble (and also James Webb in the case of pysynphot) instruments.  Pysynphot was created to as an object-oriented replacement to Synphot, allowing for much easier integration with other python code when compared to using Synphot via Pyraf.
+Version 1.1 July 2015
 
-This tutorial will cover the basics of using Pysynphot to create spectra, bandpasses, and synthetic observations for both Hubble and James Webb instruments.  You will encounter a few exercises in this training, please save your plots and record you answers so your trainer(s) can review them.  For more technical documentation (including more information on the various Pysynphot objects) see `SSB's documentation <http://ssb.stsci.edu/pysynphot/docs/>`_.
+Astrolib PySynphot (referred to as pysynphot) is a Python package and an  object oriented replacement for STSDAS SYNPHOT synthetic photometry package in IRAF. Pysynphot simulates photometric data and spectra as they are observed with the Hubble Space Telescope (HST). It allows for much easier integration with other python code when compared to using Synphot via Pyraf. It can also be used for JWST with user’s own data files (eg filter throughputs) and reference data. The current distribution of pysynphot does not support JWST observing modes in a similar manner as HST because the necessary JWST data files are not yet available for public distribution. 
+
+This tutorial will cover the basics of using pysynphot to create spectra, bandpasses, and synthetic observations for both Hubble and James Webb instruments.  You will encounter a few exercises in this training, please save your plots and record you answers so your trainer(s) can review them. For more technical documentation and installation instructions for pysynphot please refer to the `Pysynphot User Guide <http://ssb.stsci.edu/pysynphot/docs/>`_ , 2015, Lim, P. L., Diaz, R. I., & Laidler, V. , (Baltimore, STScI).
 
 Configuring environment variables
 =================================
-
-Pysynphot requires access to CDBS to pull the required reference files for calculations, as the software itself contains no observatory specific data.  When connected to the STScI network, you simply have to point it to the CDBS path.  In your terminal type: ::
+Pysynphot requires access to data files that are distributed separately by `Calibration Reference Data System <http://www.stsci.edu/hst/observatory/crds/cdbs_throughput.html>`_ (CRDS). These files are required for calculations involving HST bandpasses. The path to these files is identified by PYSYN_CDBS variable. When connected to the STScI network, you simply have to point PYSYN_CDBS to the path.  In your terminal type: ::
 
     % setenv PYSYN_CDBS /grp/hst/cdbs/
     
-Typing this every time you want to use Pysynphot in your code is rather tedious, so feel free to add the above line to your .cshrc file.  Alternatively, you could do this in python (or add the following code to your .pythonrc file): ::
+Typing this every time you want to use pysynphot in your code is rather tedious, so you can add the above line to your .cshrc file.  Alternatively, you can do this in python (or add the following code to your .pythonrc file): ::
 
     >>> import os
     >>> os.environ['PYSYN_CDBS']='/grp/hst/cdbs/'
-    
-Plotting a spectrum
-===================
 
-Essentially, Pysynphot computes photometric results by multiplying the various parts of a bandpass (transmission for a certain filter, detector sensitivities etc.) onto a a target spectrum.  Therefore, we will start by acquiring a target spectrum and plotting it. ::
+All the information that pysynphot needs to compute the throughput of an HST instrument mode, is contained within three types of data files.*_tmg.fits, *_tmc.fits and *_tmt.fits. The master graph table ("_tmg") describes all the possible light paths through the telescope and instruments. It describes which component files should be combined to find the throughput of the instrument configuration. Thermal component lookup table ("_tmt") contains the full directory path and
+name of each component thermal element to be used i.e. it is the lookup table for HST component thermal characteristics. Master component lookup table ("_tmc") contains the full directory path and name of each component throughput table to be used. These files get updated when new components are added, replaced or keywords are edited and when a new thermal emissivity table or a throughput table is delivered to the database.
+    
+Construct and plot a spectrum
+=============================
+
+A spectrum can be read from an existing file containing lists of fluxes as a function of wavelength or can be generated analytically.
+
 
 Using target spectra
 --------------------
-Pysynphot gives user the ability to calculate photometric results from an input spectrum file. CDBS contains a large number of spectra files for various targets used for calibration in the *calspec* directory.
+Pysynphot gives user the ability to calculate photometric results from an input spectrum file. CRDS contains the composite stellar spectra that are flux standards on the HST system and are stored in the *calspec* directory (/grp/hst/crds/calspec). Also there are many spectral atlases consisting of both observed and model data that are available for use with pysynphot. For more details about creating a source spectrum please refer to `http://ssb.stsci.edu/pysynphot/docs/spectrum.html#pysynphot-spectrum <http://ssb.stsci.edu/pysynphot/docs/spectrum.html#pysynphot-spectrum>`_.
+
+If you are using ipython shell start by typing. ::
+
+    >>> ipython -pylab
+
+We will start by acquiring a target spectrum and plotting it. ::
 
     >>> import pysynphot as S
     >>> import matplotlib.pyplot as plt
@@ -36,6 +47,10 @@ Pysynphot gives user the ability to calculate photometric results from an input 
 The variable vega is actually an object containing much information, not limited to the actual spectrum itself.  To plot it, we simply access the relevant attributes: ::
     
     >>> plt.plot(vega.wave, vega.flux)
+    >>> plt.xlim(0, 12000)
+    >>> plt.xlabel(vega.waveunits)  
+    >>> plt.ylabel(vega.fluxunits)   #default unit is flam (ergs/s/cm**2/Å)
+    >>> plt.title(os.path.basename(vega.name))
 
 .. figure:: figures/pysynphot/vega_spec.png
    :scale: 80 %
@@ -51,8 +66,8 @@ Using analytic spectra
 ----------------------
 Pysynphot also gives the user the ability to generate analytic spectra.  For example: ::
 
-    >>> bb = S.Blackobdy(10000)
-    >>> pow = S.PowerLaw(8000, -2)
+    >>> bb = S.Blackobdy(10000)     #Creates a blackbody spectrum at 10000 Kelvin
+    >>> pow = S.PowerLaw(8000, -2)  #Creates a power law spectrum with a reference wavelength of 8000 Å and index of 2
     >>> composite_spec = bb + pow
     
 See the documentation for more details on usage of the various analytic spectrum options.
@@ -60,7 +75,7 @@ See the documentation for more details on usage of the various analytic spectrum
 
 Creating a bandpass
 ===================
-The other main functionality of Pysynphot is creating bandpasses by convolving sensitivities of the various parts of the optical path.  To compute a bandpass, Pysynphot requires an obsmode string containing the instrument, detector, and filter to passed.  For example, to calculate the bandpass for F218W in chip one of the WFC3/UVIS detector ::
+The other main functionality of pysynphot is creating bandpasses by convolving sensitivities of the various parts of the optical path.  The Observation Mode (obsmode) parameter defines the banspass and is usually given as a string of keyword arguments (e.g. instrument, detector, filter) identifying the light path. For example, to calculate the bandpass of filter F218W in chip one of the WFC3/UVIS detector ::
     
     >>> bp1 = S.ObsBandpass('wfc3,uvis1,f218w')
     >>> bp2 = S.ObsBandpass('wfc3,uvis1,f218w,aper#0.4')
@@ -96,14 +111,32 @@ You can also extract the bandpasses of specific components in the optical path: 
 Creating observations
 =====================
 
-Perhaps the most useful function of Pysynphot is the creation of 'observations', which are synthetic photometric measurements.  To create an observation, you need a spectrum and bandpass.  We will use the ones we have calculated in the previous sections.  Creating an observation is rather simple: ::
+The most useful function of pysynphot is the creation of 'observations', which are synthetic photometric measurements.  To create an observation, you need a spectrum and bandpass (observation is source spectrum convolved with the bandpass).  We will use the ones we have calculated in the previous sections.  Creating an observation is rather simple: ::
 
     >>> obs = S.Observation(vega, bp1)
     
 
 
-    
-The observation overlaps the input spectrum with the input bandpass.  The observation object contains much useful information, perhaps the most useful being the countrate (counts per second) predicted for the detector.  This is calculated by integrating the overlapped spectrum across the entire wavelength range, and should match real photometry very closely..  The *.countrate()* method returns this synthetic photometric measurement.  Other useful quantities include the effective wavelength, effective stimulus, and pivot wavelength.  See the documentation for more details on this.
+By default the spectrum and bandpass must overlap completely. Partial overlap is allowed if *force* is set to '*extrap*' or '*taper*': ::
+ 
+    >>> obs = S.Observation(vega, bp1, force='taper')   #Taper the spectrum by adding zero flux to each end
+    >>> obs = S.Observation(vega, bp1, force='extrap')  #Extrapolate the spectrum
+
+
+The observation object contains several methods, the most often used is the countrate (counts per second) predicted for the detector.  It calculates the total counts of a source spectrum, integrated over the bandpass defined by the observation mode. For the above observation the *countrate* is given by: ::
+
+    >>> obs.countrate()
+
+The default unit for countrate is counts/s for a point source or counts per second per square arcsec for an extended source. Also the count rate is integrated over the area of HST Primary mirror specified in cm^2.
+
+To get the countrate in specified units use the *effstim* method: ::
+
+    >>> obs.effstim('counts')     #counts/sec integrated over the area of HST Primary mirror
+    >>> obs.effstim('flam')       #ergs/s/cm**2/Å
+    >>> obs.effstim('jy')         #Jy
+
+
+
 
 The observation object also contains the *.wave* and *.flux* attributes, which you can use to see the final overlapped spectrum.
 
@@ -117,6 +150,123 @@ The observation object also contains the *.wave* and *.flux* attributes, which y
 
 ---------------------------
 
-**Congrats! You have finished the essential Pysynphot training.  The following sections contain additional examples and usage with other software, as well as the caveats of using Pysynphot with JWST instruments.  If you have not been advised to review the following sections contact your trainer to review your work and move on to the next part of your training.**
+**Congrats! You have finished the essential pysynphot training.  The following section contains additional examples of using pysynphot for JWST instruments.**
 
 ---------------------------
+
+Using Pysynphot for JWST
+========================
+
+In the examples below we will use some functions from the packages POPPY (Physical Optics Propagation in PYthon (POPPY) and WebbPSF (JWST PSF Simulation Tool) with pysynphot. As mentioned earlier the current distribution of pysynphot does not support JWST observing modes in a similar manner as HST. Using some of the WebbPSF functionality makes use of pysynphot relatively easier.
+
+Import necessary modules: ::
+
+    >>> import pysynphot as S
+    >>> import poppy            #Physical Optics Propagation in PYthon (POPPY)
+    >>> import webbpsf as wp    #JWST PSF Simulation Tool
+    >>> import numpy as np
+
+
+Import the function to retrieve an appropriate pysynphot.Spectrum object for a given stellar spectral type from the PHOENIX or Castelli & Kurucz model libraries: :: 
+     
+    >>> from poppy import specFromSpectralType  
+
+  
+Calculate the raw countrate through NIRISS filter F430M
+-------------------------------------------------------
+In this example we will use some WebbPSF functions ::
+
+    >>> niriss = wp.NIRISS()
+    >>> FILTER = 'F430M'
+    >>> niriss.filter = FILTER
+
+Set telescope area (JWST primary mirror) ::
+
+    >>> Atel = 25.0*10000 # sq cm    #Area of the telescope has to be in centimeters  
+    >>> pysynphot.setref(area=Atel)
+
+
+The folowing two functions from WebbPSF can be used to generate source spectrum and to get bandpass of NIRISS filter
+::
+
+    >>> src_spectrum = specFromSpectralType("A0V")
+    >>> bandpass = niriss._getSynphotBandpass(niriss.filter)
+
+.. admonition:: Exercise: Calculate the countrate
+   :class: note
+
+   | Now create an observation using the above source spectrum and bandpass and calculate the count rate.
+
+
+Other ways to get the spectrum and the bandpass
+--------------------------------------------------
+
+The $PYSYN_CDBS/grid/ directory contains stellar atmosphere models. They are available in FITS table format for use with pysynphot and can be accessed with class *Icat*.
+
+
+This example generates a spectrum of an A0V star (metallicity log Z = 0.0, effective temperature = 9500  Kelvin and surface gravity log g = 4.0) using Phoenix model: ::
+
+    >>> src_spectrum = pysynphot.Icat('phoenix', 9500, 0.0, 4.0)
+
+To write the spectrum in a fits file use ::
+
+    >>> src_spectrum.writefits('phoenix_a0v.fits')
+
+Use the following to read the spectrum from already existing fits file. Here we are using the file that we created above, so sp_a0v and src_spectrum are the same.  You can also use full path here. ::
+
+    >>> sp_a0v = pysynphot.FileSpectrum('phoenix_a0v.fits') 
+
+.. admonition:: Exercise: 
+   :class: note
+
+   | Using the bandpass of the filter created above create a FITS throughtput table that has wavelength and throughput in two columns. Then using any method of your choice create an ascii file f430m.txt that has wavelength in one column and throughput in the other column. We will use this text file in the example below.
+
+
+You can create bandpass from arrays in an ascii file (with one column for wavelength in angstroms and one for throughput. You can also use a throughput file provided by your instrument team) ::
+
+    >>> wavelength_ang, thrufrac = np.loadtxt('f430m.txt', comments='#', usecols=(0,1), unpack=True)  #use columns that match your text file.
+    >>> bandpass = pysynphot.ArrayBandpass(wave = wavelength_ang, throughput =thrufrac, waveunits = 'angstrom', name = 'F430M')
+
+
+You can also use numpy arrays ::
+
+    >>> wavelength_ang = np.array([900, 1000, 1500, 2000, 2500, 3000])  # Angstroms 
+    >>> thrufrac = np.array([0, 0.1, -0.2, 0.35, 0.3, 0])
+    >>> bandpass = pysynphot.ArrayBandpass(wavelength_ang, thrufrac, waveunits = 'angstrom', name = 'F430M')
+
+
+
+Renormalize the spectrum to vegamag=7.5
+----------------------------------------
+
+We can renormalize the spectrum of A0V star to Vegamag = 7.5 in the given bandpass. ::
+
+    >>> sp = src_spectrum.renorm(7.5, 'vegamag', bandpass)
+    >>> obs = pysynphot.Observation(sp, bandpass)
+
+Use this observation to calculate the count rate of 7.5 magnitude A0V star in NIRISS F430M filter ::
+
+    >>> countrateFullAperture = obs.countrate()
+    >>> print countrateFullAperture
+
+
+Calculate the zeropoint of  F430M filter
+----------------------------------------
+
+Normalize the spectrum to 1 count/sec to calculate zeropoint of the filter.
+
+    >>> sp_zeropoint=src_spectrum.renorm(1,'counts',bandpass)  #renormalize the spectrum to 1 count/sec
+    >>> obs_zeropoint = pysynphot.Observation(sp_zeropoint, bandpass)
+
+The lines below verify that the count rate is 1 count/sec ::
+
+    >>> countrateFullAperture_zeropoint = obs_zeropoint.countrate()
+    >>> print countrateFullAperture_zeropoint
+    >>> #0.999911875033
+
+Get the magnitude (zero point) that gives 1 count/sec ::
+
+    >>> zp = obs_zeropoint.effstim('vegamag') 
+    >>> print zp
+    >>> #23.7854821572
+
