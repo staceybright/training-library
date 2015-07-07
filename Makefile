@@ -56,14 +56,6 @@ clean:
 	rm -rf $(BUILDDIR)/*
 
 riadocs:
-	# Python training LaTeX build
-	cd latexdocs/python/document/; pdflatex training.tex
-	# a second time to resolve refs
-	cd latexdocs/python/document/; pdflatex training.tex
-	# Copy Python training into pdf_guides
-	cp latexdocs/python/document/training.pdf source/pdf_guides/python_training.pdf
-	#
-	#
 	# PyRAF training LaTeX build
 	cd latexdocs/pyraf/; pdflatex training.tex
 	# a second time to resolve refs

@@ -127,6 +127,8 @@ If you look at the main page for the repository on GitHub, there's a box on the 
       Resolving deltas: 100% (641/641), done.
       Checking connectivity... done.
 
+.. _version_control_branching:
+
 Creating a branch for your changes
 ==================================
 
@@ -178,6 +180,8 @@ At this point, ``master`` and your new branch point to the same commit (or snaps
    A second branch called "newbranch" coming off of master.
 
 However, because you have selected a new branch, changes you make will be added to the history on their own separate timeline. Thus prepared, let's edit the trainees list.
+
+.. _version_control_committing:
 
 Editing and committing changes
 ==============================
@@ -268,12 +272,6 @@ At the bottom of the page, you'll see the changes you're asking to pull in. Ensu
    Add, commit, push to your branch, and your pull request should gain the green "Able to merge" icon!
 
 Give your pull request a brief title and description, then click "Create pull request." Tell your trainer for this section, and they will merge it in if it all looks good!
-
---------------------------------------------
-
-**Congratulations! You've finished the exercise-based part of the training. Next up, talk to your trainer about your project and report.**
-
---------------------------------------------
 
 .. rubric:: Footnotes
 

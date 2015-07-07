@@ -4,8 +4,6 @@ Editing These Documents
 
 These documents live in a ``git`` repository, making it easy for you to modify them and share your changes with other RIAs. GitHub is the service we use to coordinate sharing and reviewing the changes. You can find the web interface to the repository at https://github.com/stsci-riab/riatraining.
 
-To conclude your RIA training, we want you to add your name to the :doc:`list of trainees <trainees>`.
-
 .. warning::
 
    For now, the documents are at https://github.com/stsci-riab/riatraining, and you need someone to add you as a collaborator before you can access them. Follow the instructions in :ref:`getting_started_github` and ask someone to add you as a collaborator.
@@ -43,27 +41,16 @@ While the autobuilder is running, any changes to ``.txt`` files will trigger a r
 
 Quit the autobuilder by interrupting it with :kbd:`Control-c`.
 
-Finishing your RIA training
-===========================
+Changing an existing document
+=============================
 
-For the last part of your training, you will make a small change to these documents and publish your changes for all to see.
+Recall from :doc:`version_control` that it's a good idea to make changes on a separate branch. Make a new branch with a descriptive name, like ``durbin-matplotlib-edits`` or ``fix-setup-typo``. (See :ref:`version_control_branching` for a refresher.)
 
-Editing the trainee list
-------------------------
+Edit the ``.txt`` source file (found in the ``source/`` directory) corresponding to the page you want to change. For formatting syntax tips, see :ref:`rest_primer` at the end of this document.
 
-:doc:`trainees` is a page on this site listing all the RIAs who have completed this training. You will edit this page to add your name to the list. Recall from :doc:`version_control` that it's a good idea to make changes on a separate branch. Make a new branch called ``last_exercise_yourlastname``.
+Verify your changes worked using either the :ref:`autobuilder script <autobuilder>` or ``make html`` followed by opening the HTML file produced. Once you're satisfied, commit the changes to your branch. (See :ref:`version_control_committing` for a refresher.)
 
-.. admonition:: Exercise: Add your name to "Past RIA Trainees"
-   :class: note
-
-   Edit the source file to add your name in the appropriate section.
-
-Verify your changes worked using either the :ref:`autobuilder script <autobuilder>` or ``make html``. Once you're satisfied, commit the changes to your branch.
-
-.. admonition:: Exercise: Push your changes for review
-   :class: note
-
-   Push your changes to a new branch on the origin repository. (i.e. ``git push origin last_exercise_yourlastname``).
+Lastly, push your commits to a new branch on the origin repository. (``git push origin your-branchname``)
 
 Making a pull request on GitHub
 -------------------------------
@@ -92,30 +79,43 @@ At the bottom of the page, you'll see the changes you're asking to pull in. Ensu
 
    Add, commit, push to your branch, and your pull request should gain the green "Able to merge" icon!
 
-Give your pull request a brief title and description, then click "Create pull request." Tell your trainer for this section, and they will merge it in if it all looks good! Once it is merged, either you or they can publish it using the directions in :ref:`publishing_changes`.
+Give your pull request a brief title (e.g. "Updates to Computer Setup to fix X, Y, and Z") and description, then click "Create pull request." Ask one of the other RIA trainers to review your changes, and if it all looks good, they can merge it in.
 
---------------------------------------------
+If they recommend revisions, simply follow the above instructions to edit, add, commit, and push again. New commits on the same branch will automatically show up in your pull request.
 
-**Congratulations! You've finished the exercise-based part of the training. Next up, talk to your trainer about your project and report.**
-
---------------------------------------------
-
-Bonus: fix a problem you noticed in these documents
-===================================================
-
-Sometimes, things in the training documents are out of date by the time the newest hires see them. Other times, certain topics need clarification or a typo needs to be corrected. If you noticed something to improve during the training, you are highly encouraged to make your own edits and propose them through a pull request!
-
-.. admonition:: Exercise: Improve something in these documents
-   :class: note
-
-   Find something that needs improvement, make your edits on a new branch, and open a pull request to the training repository.
-
-   (Not sure how to format something? See :ref:`rest_primer`, below.)
+Once it is merged, either you or they can publish it using the directions in :ref:`publishing_changes`.
 
 Creating an entirely new document
 =================================
 
-Simply create a new ``.txt`` file in the ``source/`` directory with the desired name. To have it show up from the homepage, you will also want to make a link to it in ``index.txt`` (for ``foo.txt``, the link would be ``:doc:`foo```), and add it to the "toctree" at the end of that file (again, without the ``.txt`` extension).
+1. Add a new ``.txt`` file under ``source/``
+
+   Begin your document with a heading. This is the title that will show up it is linked to. For example::
+
+      ***********************
+      Editing These Documents
+      ***********************
+
+
+2. Add the base name of the file to ``index.txt``
+
+   There are two places in ``index.txt`` where you must add the base name of your document (e.g. for ``python.txt``, the base name is ``python``). First, include a link to it in the numbered lists like this::
+
+      #. :doc:`base_name`
+
+   Second, include a link in the sidebar by adding it under the ``toctree`` at the end of ``index.txt``::
+
+      .. toctree::
+         :maxdepth: 2
+         :hidden:
+
+         [ ... ]
+         base_name
+         [ ... ]
+
+3. Be sure to ``git add`` your new ``.txt`` file so git will track it
+
+4. Commit, push, and pull request just as you would editing an existing document
 
 .. _publishing_changes:
 
@@ -177,7 +177,7 @@ Here are some very common patterns for quick reference:
 
 You can also insert an exercise prompt with this code::
 
-   .. admonition:: Exercise: Add a new prompt
+   .. admonition:: Exercise
       :class: note
 
       Indent your exercise instructions with three spaces, and
@@ -186,7 +186,7 @@ You can also insert an exercise prompt with this code::
 
 Which would look like this:
 
-.. admonition:: Exercise: Add a new prompt
+.. admonition:: Exercise
    :class: note
 
    Indent your exercise instructions with three spaces, and leave a blank line

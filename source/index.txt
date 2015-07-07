@@ -12,18 +12,24 @@ New Research & Instrument Analysts at STScI work with a variety of tools, depend
 Training guides and exercises for new RIAs
 *******************************************
 
+.. tip::
+
+   We do our best to keep these documents up to date, but they can diverge from reality occasionally. If you spot an error, `let us know <https://github.com/stsci-riab/riatraining/issues/new>`_ by telling your trainer or `reporting an issue on GitHub <https://github.com/stsci-riab/riatraining/issues/new>`_.
+
+   (You'll get access to the RIAB GitHub site in the training module on :doc:`version_control`.)
+
 #. :doc:`computer_setup`
+#. :doc:`version_control`
 #. :doc:`archives`
-#. :doc:`using_idl`
 #. :doc:`python`
-#. :doc:`python_rest`
 #. :doc:`pyraf`
 #. :doc:`pysynphot`
+#. :doc:`using_idl`
+#. :doc:`spectroscopy`
 #. :doc:`astrodrizzle`
 #. :doc:`photometry`
-#. :doc:`spectroscopy`
-#. :doc:`jwst_intro`
-#. :doc:`version_control`
+
+*Also, once you have finished the training exercises, you will be assigned a project that relates to your instrument team assignment.*
 
 *******************************************
 Supplemental training guides and exercises
@@ -31,6 +37,7 @@ Supplemental training guides and exercises
 
 *Only the guides listed above are generally required of all trainees, but the following guides and links are provided for reference.*
 
+#. :doc:`jwst_intro`
 #. :doc:`jwst_training`
 #. :doc:`jwst_read_modes`
 #. :doc:`jwst_reference_output`
@@ -50,17 +57,16 @@ Reference information
    :hidden:
 
    computer_setup
+   version_control
    archives
-   using_idl
    python
-   python_rest
    pyraf
    pysynphot
+   using_idl
+   spectroscopy
    astrodrizzle
    photometry
-   spectroscopy
    jwst_intro
-   version_control
    jwst_training
    jwst_read_modes
    jwst_reference_output

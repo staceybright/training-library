@@ -47,6 +47,8 @@ Users can store files under their username at ``/user/myusername``. This is usef
 
 Send an email to the STScI *internal* helpdesk at support@stsci.edu, and ask them to make you a Central Storage directory. [#externalhelpdesk]_
 
+.. _computer_setup_environment:
+
 Configuring STScI-specific environment variables
 =================================================
 
@@ -64,13 +66,12 @@ Here is an example ``.cshrc``::
     setenv lref /grp/hst/cdbs/lref/
     # For STIS
     setenv oref /grp/hst/cdbs/oref/
-    setenv otab /grp/hst/cdbs/otab/
-    setenv crrefer /grp/hst/cdbs/
-    setenv mtab /grp/hst/cdbs/mtab/
 
-As you may have guessed, setting variables in ``tcsh`` takes the form of ``setenv NAMEOFVAR /value/for/var``. (You should set all of these variables, even if you are not on one of the listed instrument teams, as later training exercises will depend on them being set.)
+As you may have guessed, setting variables in ``tcsh`` takes the form of ``setenv NAMEOFVAR /value/for/var``. You should set all of these variables, even if you are not on one of the listed instrument teams, as later training exercises will depend on them being set.
 
-To check that your changes have taken effect, open a **new terminal window** and type ``echo $mtab``. You should see the value for ``mtab`` from above printed out in the terminal.
+To check that your changes have taken effect, open a **new terminal window** and type ``echo $oref``. You should see the value for ``oref`` from above printed out in the terminal.
+
+.. _computer_setup_ureka:
 
 Installing Ureka for internal users
 ====================================
