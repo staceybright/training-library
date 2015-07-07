@@ -23,9 +23,6 @@ Training guides and exercises for new RIAs
 #. :doc:`archives`
 #. :doc:`python`
 #. :doc:`pyraf`
-<<<<<<< HEAD
-=======
->>>>>>> master
 #. :doc:`pysynphot`
 #. :doc:`using_idl`
 #. :doc:`spectroscopy`
@@ -64,9 +61,6 @@ Reference information
    archives
    python
    pyraf
-<<<<<<< HEAD
-=======
->>>>>>> master
    pysynphot
    using_idl
    spectroscopy
