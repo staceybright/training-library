@@ -23,6 +23,7 @@ Training guides and exercises for new RIAs
 #. :doc:`archives`
 #. :doc:`python`
 #. :doc:`pyraf`
+#. :doc:`pysynphot`
 #. :doc:`using_idl`
 #. :doc:`spectroscopy`
 #. :doc:`astrodrizzle`
@@ -60,6 +61,7 @@ Reference information
    archives
    python
    pyraf
+   pysynphot
    using_idl
    spectroscopy
    astrodrizzle
