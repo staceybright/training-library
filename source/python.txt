@@ -2782,56 +2782,46 @@ Resources
 
 .. _python_links:
 
-Useful Links
--------------
+References
+----------
 
-Below is a list of links to be used as a reference.
+-  http://docs.python.org/ --- The official Python documentation
 
--  http://docs.python.org/
+-  https://www.python.org/dev/peps/pep-0008/ --- PEP8, the Python style guide
 
--  http://legacy.python.org/dev/peps/pep-0008/
+-  http://www.astropy.org/ --- Astropy, a module being developed at STScI and elsewhere to support astronomical uses of Python
 
--  http://www.astropy.org/
+-  http://wiki.python.org/moin/HowTo/Sorting --- A topic guide to sorting lists of objects in Python
 
--  http://wiki.python.org/moin/HowTo/Sorting
+-  http://ipython.org/ipython-doc/stable/interactive/tutorial.html --- The official IPython tutorial
 
--  http://ipython.scipy.org/moin/Documentation
+-  http://matplotlib.org/ --- The matplotlib website
 
--  http://matplotlib.sourceforge.net/
+-  http://docs.scipy.org/doc/scipy/reference/ --- The official SciPy documentation
 
--  http://www.scipy.org/Numpy_Example_List_With_Doc
+-  http://wiki.scipy.org/Cookbook - The SciPy community cookbook, with "recipes" to accomplish common tasks with NumPy/SciPy *(n.b. these are unofficial, and may not always be correct or optimal)*
 
--  http://docs.scipy.org/doc/
+Tutorials and texts
+-------------------
 
--  http://www.scipy.org/Cookbook
+-  http://python4astronomers.github.com/ --- Workshop materials from "Practical Python for Astronomers"
 
-The following links are for further training and building of your Python
-skills.
+-  http://code.google.com/edu/languages/google-python-class/ --- Google's Python Class materials
 
--  http://stsdas.stsci.edu/perry/pydatatut.pdf
+-  http://learnpythonthehardway.org/book/ --- "Learn Python the Hard Way" is an online textbook that starts from the very basics of programming and builds up to Python proficiency
 
--  http://www.scipy.org/Additional_Documentation/Astronomy_Tutorial?action=show
+-  http://www.astro.washington.edu/users/vanderplas/Astr599_2014/notebooks/ -- Jake VanderPlas' IPython notebooks from a Python workshop he taught (start with ``00_intro``)
 
--  http://python4astronomers.github.com/
+Advanced plotting tools
+-----------------------
 
--  http://code.google.com/edu/languages/google-python-class/
+-  https://github.com/yhat/ggplot --- make your plots look like ggplot from the R data analysis environment
 
--  http://learnpythonthehardway.org/book/
+-  https://github.com/olgabot/prettyplotlib --- better defaults and prettification for matplotlib plots
 
--  http://www.pythonchallenge.com/
+-  http://stanford.edu/~mwaskom/software/seaborn/index.html --- another approach to prettifying matplotlib
 
--  http://www.astro.washington.edu/users/vanderplas/Astr599_2014/notebooks/
-
-And, a few libraries to help make your plots pretty:
-
--  https://github.com/yhat/ggplot
-
--  https://plot.ly/
-
--  https://github.com/olgabot/prettyplotlib
-
--  http://stanford.edu/~mwaskom/software/seaborn/index.html
-
+-  https://plot.ly/ --- a commercial online plot hosting service with a free tier
 
 Mailing Lists
 -------------
