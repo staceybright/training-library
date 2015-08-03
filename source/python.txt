@@ -2735,24 +2735,28 @@ Error Handling and ``pdb.set_trace()``
 --------------------------------------
 
 Debugging can be a difficult and long process, but the pdb module can
-help. pdb is the Python debugger. There are many ways to use it, but a
+help. :py:mod:`pdb` is the Python debugger. There are many ways to use it, but a
 common method is with ``pdb.set_trace()``. To debug your code using this
 function, import ``pdb`` and insert the line ``pdb.set_trace()`` into your
 code before the part you are unsure about. Execute the program. Once the
 interpreter reaches the ``pdb.set_trace()`` mark, it will allow you to
-interact with the code and print variables as they are defined. Common
-``pdb.set_trace()`` commands include:
+interact with the code and print variables as they are defined.
 
--  (n)ext: continue to the next line
+The interactive prompt is not *quite* like the interactive interpreter prompt we were using before. It has special commands to navigate in the code and control Python one line at a time.
 
--  (l)ist: list a few steps
+Common ``pdb`` commands include:
 
--  (b)reak: give line and file to break at
+-  **next** (n): continue to the next line of your program (starting after the ``set_trace()`` call)
 
--  (s)tep: moves into deeper calls (i.e. a function in NumPy, or our
-   function mkplot).
+-  **list** (l): list a few steps
 
--  (c)ontinue: continue the program like normal.
+-  **break** (b): give line and file to "break" (pause) at
+
+-  **step** (s): moves into deeper calls (i.e. a function in NumPy, or our function ``mkplot``).
+
+-  **continue** (c): continue the program like normal (until we reach an exception, a breakpoint, or the end)
+
+As suggested by the parentheses, these commands can be written out in full or abbreviated to a single character. A full ``pdb`` reference is available in the `Python documentation <https://docs.python.org/2/library/pdb.html>`_ (or `here <https://docs.python.org/3.4/library/pdb.html>`_ for Python 3.4.x).
 
 .. admonition:: Exercise
    :class: note
