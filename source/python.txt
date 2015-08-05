@@ -157,6 +157,71 @@ To exit either Python or IPython, type 'exit()'. To close the notebook, ensure y
 
    For command line IPython or the ``python`` interactive interpreter, you should copy your input and the interpreter's output to a text file. At the end of the training, submit the text file with your exercise solutions to your trainer.
 
+.. _python_3_vs_2:
+
+What a new Python user should know about Python 2 vs. Python 3
+--------------------------------------------------------------
+
+Python is developed by a community of volunteers and distributed for free. In 2008, this community decided to fix some long-standing bugs in the previous major version of Python (the ``2.x`` branch, which had been developed from 2000 onwards), and call the new version "Python 3". The nature of these fixes meant that users couldn't simply install Python 3 and expect everything to work immediately.
+
+The creators of Python have decreed that Python 2 will no longer be updated, and Python 3 is the way forward. The Institute has started migrating to Python 3, but during this transitional period you should be aware that you may encounter code that works with only Python 2 (or only Python 3).
+
+New code should be written to be forwards compatible with Python 3, *especially* if it will be used by other members of your team! There are more comprehensive guides elsewhere, but we want to call your attention to two important things that will change with Python 3. In Python 2, this code is fine::
+
+   >>> print "Hello world"
+   Hello world
+
+In Python 3, ``print`` is a function, invoked with parentheses like every other. The above syntax won't work any more. ::
+
+   >>> print "Hello world"
+     File "<stdin>", line 1
+       print "Hello world"
+                         ^
+   SyntaxError: Missing parentheses in call to 'print'
+
+Add parentheses to make Python 3 happy::
+
+   >>> print("Hello world")
+   Hello world
+
+Also, in Python 3, division will work less like computer scientists expect, and more like everyone else expects. Python 2 used "integer division", which truncated any fractional part to make the result of dividing two integers an integer. For example::
+
+   >>> 7 / 3
+   2
+   >>> 7.0 / 3  # floating point division used when either operand is a float
+   2.3333333333333335
+
+In Python 3, the behavior is as follows::
+
+   >>> 7 / 3
+   2.3333333333333335
+   >>> 7.0 / 3
+   2.3333333333333335
+
+The old behavior can be used with the new ``//`` operator::
+
+   >>> 7 // 3
+   2
+   >>> 7.0 // 3
+   2.0
+
+What you should do about it
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can make your code future-proof by "importing" functionality from the future. When writing stand-alone scripts (as opposed to snippets in the interactive environment), it is a good idea to include this at the top (after any ``#!`` line)::
+
+   from __future__ import print_function, division
+
+...and that will give you the new behavior in Python 2. (In Python 3, which already has the new behavior by default, it will have no effect.)
+
+.. warning::
+
+   In examples that should be run in an interactive environment (``python``, ``ipython``, or the IPython Notebook), this guide uses the old ``print`` syntax since we expect you to be running Python 2.7.
+
+   In the :ref:`python_scripts` section, you will see an example of using ``__future__`` imports in a stand-alone script.
+
+
+
 .. _python_dtype:
 
 Built-In Data Types
@@ -322,6 +387,8 @@ There's no requirement that your index be a literal number, either. This is perf
    >>> mynumbers[index]
    2
 
+.. _python_slicing:
+
 Slicing up a sequence
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -366,12 +433,6 @@ Sequences can also be used on the right hand side of an assignment operation. Su
    >>> print mean
    340.0
 
-.. warning::
-
-   In Python 3, the statement ``print mything`` will be written as a function call like ``print(mything)``!
-
-   See :ref:`python_3_vs_2` for details.
-
 That's a bit verbose. As long as we know the number of elements we're getting, Python lets us do this instead::
 
    >>> filename, extension, mean = mydataset
@@ -381,6 +442,12 @@ That's a bit verbose. As long as we know the number of elements we're getting, P
    1
    >>> print mean
    340.0
+
+.. warning::
+
+   In Python 3, the statement ``print mything`` will be written as a function call like ``print(mything)``!
+
+   Refer back to :ref:`python_3_vs_2` for details.
 
 .. _python_immutable_tuples_mutable_lists:
 
@@ -826,6 +893,49 @@ Imagine your ``k2_catalog.csv`` were actually several gigabytes of target data, 
 
 Also, it bears mentioning, both ``.readlines()`` and ``for ... in fileobject`` will only help you when your file is "plain text" broken up into lines. Reading binary files with ``open()`` is an advanced topic, but Python can do that just as well. See :ref:`python:tut-filemethods` in the official Python tutorial for more details on file objects.
 
+Error Handling
+==============
+
+Python supports exception-based error handling. This means that rather than exiting the program, or proceeding with undefined behavior when an error occurs, an **exception** is **raised** up through the program. If you have a function that calls a function that calls a function (or some arbitrarily nested structure), you can "catch" the exception at any level from the innermost function to the top. (If the exception is "uncaught" at every level, it will reach the topmost level of the program, and Python will exit with an error.)
+
+Exception handling in Python is done with ``try ... except`` blocks.
+
+try ... except
+--------------
+
+**Use:** The ``try ... except`` block is used as an exception (error) handler. It will try whatever we put in the try block, but if an exception occurs, it will go to the except block. As long as the kind of exception that happens matches what the except block says it handles, you can handle the error and your program can continue.
+
+Examples: Try this code below. Notice the error message you get. ::
+
+   >>> a = [1, 2, 3, 4, 5]
+   >>> for i in xrange(len(a)):
+   ...    a[i + 1] = 100 + a[i]
+   ...    print a[i], a[i + 1]
+
+To solve this problem, we put it in a try ... except statement::
+
+   >>> a = [1, 2, 3, 4, 5]
+   >>> for i in xrange(len(a)):
+   ...     try:
+   ...         a[i + 1] = 100 + a[i]
+   ...         print a[i], a[i + 1]
+   ...     except IndexError:
+   ...         print 'This index does not work: ',i + 1
+
+.. admonition:: Exercise
+   :class: note
+
+   Imagine a situation where your code passes a function a variable, and
+   that variable might be zero. The only problem is that this function
+   divides by that variable.
+
+   Write a simple loop which calculates 1/\ :math:`n`, where :math:`n` is a
+   number in range(11). What happens when :math:`n=0`? Write an exception handling block for this loop.
+
+   (Hint: use the ``try ... except`` statement with ``ZeroDivisionError``).
+
+.. _python_objects_attributes:
+
 Objects, Instances, Attributes, Functions, and Methods
 ======================================================
 
@@ -884,24 +994,27 @@ Double Underscore
 In Python you will notice certain names beginning and ending with double
 underscores. These names are used for attributes and methods that are
 used or created by the interpreter (for a discussion on the definition
-of attributes and methods see Section [s:attribute]). Examples include:
+of attributes and methods see :ref:`python_objects_attributes`). Examples include:
 
 -  ``__file__`` : an attribute automatically created by the interpreter
 
--  ``__add__`` : an attribute with special meaning to the interpreter
+-  ``__add__`` : a method with special meaning to the interpreter
 
 -  ``__init__`` : a method implicitly called by the interpreter, defined
    by the programmer
 
-We will see examples of a few of these in :ref:`python_scripts`.
+(We will see examples of a few of these later on :ref:`python_scripts`.)
 
-Common Built-In Functions and Statements
-========================================
+***********************************************
+Built-in functionality and the Standard Library
+***********************************************
 
-For a complete list of Python built-in modules, see
-http://docs.python.org/library/index.html, also listed in
-:ref:`python_links`. Below we provide descriptions of some of the most
-useful functions and statements.
+Python has some functionality "built-in", besides the syntax and data types we have already discussed. This functionality takes the form of functions that are always available in any Python program.
+
+There is also a "standard library" of Python **modules** that can be **imported** into your program. Importing a module makes its functions and classes available for use in your own program. The standard library modules are available anywhere you can run Python, but they must be imported to be used.
+
+Built-in functions
+==================
 
 help() function
 ---------------
@@ -993,51 +1106,26 @@ xrange() when we just need an iterator.
 
    In Python 3, ``xrange()`` is named ``range()``, and the old ``range()`` behavior no longer exists. In general, this won't make any difference for your programs.
 
-try ... except statement
-------------------------
-
-**Use:** The try ... except statement is used as an exception (error) handler. It will try whatever we put in the try block, but if an exception occurs, it will go to the except block. As long as the kind of exception that happens matches what the except block says it handles, you can handle the error and your program can continue.
-
-Examples: Try this code below. Notice the error message you get. ::
-
-   >>> a = [1, 2, 3, 4, 5]
-   >>> for i in xrange(len(a)):
-   ...    a[i + 1] = 100 + a[i]
-   ...    print a[i], a[i + 1]
-
-To solve this problem, we put it in a try ... except statement::
-
-   >>> a = [1, 2, 3, 4, 5]
-   >>> for i in xrange(len(a)):
-   ...     try:
-   ...         a[i + 1] = 100 + a[i]
-   ...         print a[i], a[i + 1]
-   ...     except IndexError:
-   ...         print 'This index does not work: ',i + 1
-
-.. admonition:: Exercise
-   :class: note
-
-   Imagine a situation where your code passes a function a variable, and
-   that variable might be zero. The only problem is that this function
-   divides by that variable.
-
-   Write a simple loop which calculates 1/\ :math:`n`, where :math:`n` is a
-   number in range(11). What happens when :math:`n=0`? Write an exception handling block for this loop.
-
-   (Hint: use the ``try ... except`` statement with ``ZeroDivisionError``).
-
 .. _python_modules:
 
-Importing Modules, and Common Functions
-=======================================
+Importing modules, and the Python Standard Library
+==================================================
 
-Python's built-in functions are limited. The diversity of Python's
-abilities come when we import modules. The following syntax can be used:
+Python's standard library extends the basics of what is built-in to the language with functionality ranging from communicating with web servers to manipulating files and directories through the operating system. It's highly likely that you'll find something you need already exists in the standard library, though there are a few notable exceptions.
+
+NumPy, SciPy, matplotlib, and AstroPy are essential for the kind of data analysis we do with Python, and they are **not** part of the standard library. In practice, every computer at the Institute will have them set up already through Ureka, so you can assume they will be available.
+
+To bring in functionality from a module (standard or otherwise), the "import statement" is used. The import statement can be written any of three ways, with slightly different effects. ::
 
    >>> import <module>
    >>> from <module> import <function_in_module>
    >>> import <module> as <short_name>
+
+The first, ``import <module>``, makes the module available in your program under its own name. (Module names don't include any ``.py`` extension, and submodules are denoted with ``dot.separated.names``.) For example: you could use functionality from the ``math`` module with ``import math`` followed by ``math.somefunction()``.
+
+The second, ``from <module> import <function_in_module>``, brings in only a portion of the functionality. This can be good if you want to keep things readable, and don't want to write ``os.path.join()`` every time when you only use that one function from ``os.path``.
+
+The last is most commonly used in scientific applications, where you might be typing ``numpy`` often enough that it makes sense to call it ``np``. For example, ``import numpy as np`` makes the function ``numpy.sqrt()`` available in your program as ``np.sqrt()``.
 
 math.sqrt() function
 --------------------
@@ -1494,6 +1582,7 @@ Examples::
    Try making a MJD-normalized text file for the ``flux_vs_time_C.dat``
    data using ascii.write()
 
+
 Plotting with PyPlot
 ====================
 
@@ -1948,6 +2037,8 @@ Now we plot the ideal blackbody, noisy data, and fitted blackbody for comparison
    noise, or change the scale of the additive noise to twice the mean rather than half)?
 
 
+
+
 .. _python_scripts:
 
 Python Scripts and Functions
@@ -1968,63 +2059,6 @@ easy-to-use Python code.
 
 Please choose a text editor for editing your script, such as
 SublimeText, Emacs, TextWrangler, NEdit, or others.
-
-.. _python_3_vs_2:
-
-What a new Python user should know about Python 2 vs. Python 3
---------------------------------------------------------------
-
-Python is developed by a community of volunteers and distributed for free. In 2008, this community decided to fix some long-standing bugs in the previous major version of Python (the ``2.x`` branch, which had been developed from 2000 onwards), and call the new version "Python 3". The nature of these fixes meant that users couldn't simply install Python 3 and expect everything to work immediately.
-
-The creators of Python have decreed that Python 2 will no longer be updated, and Python 3 is the way forward. The Institute has started migrating to Python 3, but during this transitional period you should be aware that you may encounter code that works with only Python 2 (or only Python 3).
-
-New code should be written to be forwards compatible with Python 3, *especially* if it will be used by other members of your team! There are more comprehensive guides elsewhere, but we want to call your attention to two important things that will change with Python 3. In Python 2, this code is fine::
-
-   >>> print "Hello world"
-   Hello world
-
-In Python 3, ``print`` is a function, invoked with parentheses like every other. The above syntax won't work any more. ::
-
-   >>> print "Hello world"
-     File "<stdin>", line 1
-       print "Hello world"
-                         ^
-   SyntaxError: Missing parentheses in call to 'print'
-
-Add parentheses to make Python 3 happy::
-
-   >>> print("Hello world")
-   Hello world
-
-Also, in Python 3, division will work less like computer scientists expect, and more like everyone else expects. Python 2 used "integer division", which truncated any fractional part to make the result of dividing two integers an integer. For example::
-
-   >>> 7 / 3
-   2
-   >>> 7.0 / 3  # floating point division used when either operand is a float
-   2.3333333333333335
-
-In Python 3, the behavior is as follows::
-
-   >>> 7 / 3
-   2.3333333333333335
-   >>> 7.0 / 3
-   2.3333333333333335
-
-The old behavior can be used with the new ``//`` operator::
-
-   >>> 7 // 3
-   2
-   >>> 7.0 // 3
-   2.0
-
-What you should do about it
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-You can make your code future-proof by "importing" functionality from the future. When writing stand-alone scripts (as opposed to snippets in the interactive environment), it is a good idea to include this at the top (after any ``#!`` line)::
-
-   from __future__ import print_function, division
-
-...and that will give you the new behavior in Python 2. (In Python 3, which already has the new behavior by default, it will have no effect.)
 
 hotpix\_monitor.py
 ------------------
@@ -2776,6 +2810,12 @@ about these best practices are PEP-8
 conventions, and PEP-257 (https://www.python.org/dev/peps/pep-0257/),
 which discusses docstrings. If you have an interest in scripting in
 Python, please take the time to review these two documents.
+
+.. note::
+
+   Let your trainer know you've finished, and send them your exercise solutions. You're done with Python training!
+
+   Review the resources below for more in-depth coverage of these topics and more.
 
 Resources
 =========
