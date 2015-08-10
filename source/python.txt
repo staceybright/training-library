@@ -157,6 +157,71 @@ To exit either Python or IPython, type 'exit()'. To close the notebook, ensure y
 
    For command line IPython or the ``python`` interactive interpreter, you should copy your input and the interpreter's output to a text file. At the end of the training, submit the text file with your exercise solutions to your trainer.
 
+.. _python_3_vs_2:
+
+What a new Python user should know about Python 2 vs. Python 3
+--------------------------------------------------------------
+
+Python is developed by a community of volunteers and distributed for free. In 2008, this community decided to fix some long-standing bugs in the previous major version of Python (the ``2.x`` branch, which had been developed from 2000 onwards), and call the new version "Python 3". The nature of these fixes meant that users couldn't simply install Python 3 and expect everything to work immediately.
+
+The creators of Python have decreed that Python 2 will no longer be updated, and Python 3 is the way forward. The Institute has started migrating to Python 3, but during this transitional period you should be aware that you may encounter code that works with only Python 2 (or only Python 3).
+
+New code should be written to be forwards compatible with Python 3, *especially* if it will be used by other members of your team! There are more comprehensive guides elsewhere, but we want to call your attention to two important things that will change with Python 3. In Python 2, this code is fine::
+
+   >>> print "Hello world"
+   Hello world
+
+In Python 3, ``print`` is a function, invoked with parentheses like every other. The above syntax won't work any more. ::
+
+   >>> print "Hello world"
+     File "<stdin>", line 1
+       print "Hello world"
+                         ^
+   SyntaxError: Missing parentheses in call to 'print'
+
+Add parentheses to make Python 3 happy::
+
+   >>> print("Hello world")
+   Hello world
+
+Also, in Python 3, division will work less like computer scientists expect, and more like everyone else expects. Python 2 used "integer division", which truncated any fractional part to make the result of dividing two integers an integer. For example::
+
+   >>> 7 / 3
+   2
+   >>> 7.0 / 3  # floating point division used when either operand is a float
+   2.3333333333333335
+
+In Python 3, the behavior is as follows::
+
+   >>> 7 / 3
+   2.3333333333333335
+   >>> 7.0 / 3
+   2.3333333333333335
+
+The old behavior can be used with the new ``//`` operator::
+
+   >>> 7 // 3
+   2
+   >>> 7.0 // 3
+   2.0
+
+What you should do about it
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can make your code future-proof by "importing" functionality from the future. When writing stand-alone scripts (as opposed to snippets in the interactive environment), it is a good idea to include this at the top (after any ``#!`` line)::
+
+   from __future__ import print_function, division
+
+...and that will give you the new behavior in Python 2. (In Python 3, which already has the new behavior by default, it will have no effect.)
+
+.. warning::
+
+   In examples that should be run in an interactive environment (``python``, ``ipython``, or the IPython Notebook), this guide uses the old ``print`` syntax since we expect you to be running Python 2.7.
+
+   In the :ref:`python_scripts` section, you will see an example of using ``__future__`` imports in a stand-alone script.
+
+
+
 .. _python_dtype:
 
 Built-In Data Types
@@ -322,6 +387,8 @@ There's no requirement that your index be a literal number, either. This is perf
    >>> mynumbers[index]
    2
 
+.. _python_slicing:
+
 Slicing up a sequence
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -366,12 +433,6 @@ Sequences can also be used on the right hand side of an assignment operation. Su
    >>> print mean
    340.0
 
-.. warning::
-
-   In Python 3, the statement ``print mything`` will be written as a function call like ``print(mything)``!
-
-   See :ref:`python_3_vs_2` for details.
-
 That's a bit verbose. As long as we know the number of elements we're getting, Python lets us do this instead::
 
    >>> filename, extension, mean = mydataset
@@ -381,6 +442,12 @@ That's a bit verbose. As long as we know the number of elements we're getting, P
    1
    >>> print mean
    340.0
+
+.. warning::
+
+   In Python 3, the statement ``print mything`` will be written as a function call like ``print(mything)``!
+
+   Refer back to :ref:`python_3_vs_2` for details.
 
 .. _python_immutable_tuples_mutable_lists:
 
@@ -826,6 +893,8 @@ Imagine your ``k2_catalog.csv`` were actually several gigabytes of target data, 
 
 Also, it bears mentioning, both ``.readlines()`` and ``for ... in fileobject`` will only help you when your file is "plain text" broken up into lines. Reading binary files with ``open()`` is an advanced topic, but Python can do that just as well. See :ref:`python:tut-filemethods` in the official Python tutorial for more details on file objects.
 
+.. _python_objects_attributes:
+
 Objects, Instances, Attributes, Functions, and Methods
 ======================================================
 
@@ -884,24 +953,21 @@ Double Underscore
 In Python you will notice certain names beginning and ending with double
 underscores. These names are used for attributes and methods that are
 used or created by the interpreter (for a discussion on the definition
-of attributes and methods see Section [s:attribute]). Examples include:
+of attributes and methods see :ref:`python_objects_attributes`). Examples include:
 
 -  ``__file__`` : an attribute automatically created by the interpreter
 
--  ``__add__`` : an attribute with special meaning to the interpreter
+-  ``__add__`` : a method with special meaning to the interpreter
 
 -  ``__init__`` : a method implicitly called by the interpreter, defined
    by the programmer
 
-We will see examples of a few of these in :ref:`python_scripts`.
+(We will see examples of a few of these later on :ref:`python_scripts`.)
 
-Common Built-In Functions and Statements
-========================================
+Built-in functions
+==================
 
-For a complete list of Python built-in modules, see
-http://docs.python.org/library/index.html, also listed in
-:ref:`python_links`. Below we provide descriptions of some of the most
-useful functions and statements.
+Python has some functionality "built-in", besides the syntax and data types we have already discussed. This functionality takes the form of functions that are always available in any Python program.
 
 help() function
 ---------------
@@ -918,6 +984,37 @@ Examples::
    :class: note
 
    Type ``help(varname)`` where varname is a variable you've defined (or a new variable of your favorite type) and explore the options.
+
+enumerate() function
+--------------------
+
+**Use:** The enumerate() function turns a sequence into a sequence of ``(index, item)`` tuples. This comes in handy if you care about the indexes of items in the list.
+
+
+Example::
+
+   >>> my_list = ['dog', 'cat', 'penguin']
+   >>> for the_item in my_list:
+   ...     print the_item
+   ...
+   dog
+   cat
+   penguin
+   >>> for index_and_the_item in enumerate(my_list):
+   ...     print index_and_the_item
+   ...
+   (0, 'dog')
+   (1, 'cat')
+   (2, 'penguin')
+
+These tuples can be "unpacked" in the ``for`` statement as shown below::
+
+   >>> for index, the_item in enumerate(my_list):
+   ...     print "item number", index + 1, " - ", the_item
+   ...
+   item number 1  -  dog
+   item number 2  -  cat
+   item number 3  -  penguin
 
 range() function
 ----------------
@@ -944,22 +1041,6 @@ Examples::
 
    >>> a = range(10)
    >>> dir(a)
-
-len()  function
----------------
-
-**Use:** The len() function returns the number of elements contained in an
-expression or variable.
-
-Examples::
-
-   >>> a = range(11)
-   >>> len(a)
-
-See also:
-
-Other useful similar functions in NumPy (see :ref:`python_numpy`) are
-numpy.shape, numpy.size.
 
 xrange() function
 -----------------
@@ -993,10 +1074,17 @@ xrange() when we just need an iterator.
 
    In Python 3, ``xrange()`` is named ``range()``, and the old ``range()`` behavior no longer exists. In general, this won't make any difference for your programs.
 
-try ... except statement
-------------------------
+Error Handling
+==============
 
-**Use:** The try ... except statement is used as an exception (error) handler. It will try whatever we put in the try block, but if an exception occurs, it will go to the except block. As long as the kind of exception that happens matches what the except block says it handles, you can handle the error and your program can continue.
+Python supports exception-based error handling. This means that rather than exiting the program, or proceeding with undefined behavior when an error occurs, an **exception** is **raised** up through the program. If you have a function that calls a function that calls a function (or some arbitrarily nested structure), you can "catch" the exception at any level from the innermost function to the top. (If the exception is "uncaught" at every level, it will reach the topmost level of the program, and Python will exit with an error.)
+
+Exception handling in Python is done with ``try ... except`` blocks.
+
+try ... except
+--------------
+
+**Use:** The ``try ... except`` block is used as an exception (error) handler. It will try whatever we put in the try block, but if an exception occurs, it will go to the except block. As long as the kind of exception that happens matches what the except block says it handles, you can handle the error and your program can continue.
 
 Examples: Try this code below. Notice the error message you get. ::
 
@@ -1013,7 +1101,7 @@ To solve this problem, we put it in a try ... except statement::
    ...         a[i + 1] = 100 + a[i]
    ...         print a[i], a[i + 1]
    ...     except IndexError:
-   ...         print 'This index does not work: ',i + 1
+   ...         print 'This index does not work: ', i + 1
 
 .. admonition:: Exercise
    :class: note
@@ -1029,15 +1117,26 @@ To solve this problem, we put it in a try ... except statement::
 
 .. _python_modules:
 
-Importing Modules, and Common Functions
-=======================================
+Importing modules, and the Python Standard Library
+==================================================
 
-Python's built-in functions are limited. The diversity of Python's
-abilities come when we import modules. The following syntax can be used:
+There is also a "standard library" of Python **modules** that can be **imported** into your program. Importing a module makes its functions and classes available for use in your own program. The standard library modules are available anywhere you can run Python, but they must be imported to be used.
+
+Python's standard library extends the basics of what is built-in to the language with functionality ranging from communicating with web servers to manipulating files and directories through the operating system. It's highly likely that you'll find something you need already exists in the standard library, though there are a few notable exceptions.
+
+NumPy, SciPy, matplotlib, and AstroPy are essential for the kind of data analysis we do with Python, and they are **not** part of the standard library. In practice, every computer at the Institute will have them set up already through Ureka, so you can assume they will be available.
+
+To bring in functionality from a module (standard or otherwise), the "import statement" is used. The import statement can be written any of three ways, with slightly different effects. ::
 
    >>> import <module>
    >>> from <module> import <function_in_module>
    >>> import <module> as <short_name>
+
+The first, ``import <module>``, makes the module available in your program under its own name. (Module names don't include any ``.py`` extension, and submodules are denoted with ``dot.separated.names``.) For example: you could use functionality from the ``math`` module with ``import math`` followed by ``math.somefunction()``.
+
+The second, ``from <module> import <function_in_module>``, brings in only a portion of the functionality. This can be good if you want to keep things readable, and don't want to write ``os.path.join()`` every time when you only use that one function from ``os.path``.
+
+The last is most commonly used in scientific applications, where you might be typing ``numpy`` often enough that it makes sense to call it ``np``. For example, ``import numpy as np`` makes the function ``numpy.sqrt()`` available in your program as ``np.sqrt()``.
 
 math.sqrt() function
 --------------------
@@ -1108,7 +1207,8 @@ Examples::
    >>> import os
    >>> datadir = '/Users/username/data/'  #insert a usable path
    >>> mydir = os.getcwd()
-   >>> if (mydir != datadir): os.chdir(datadir)
+   >>> if (mydir != datadir):
+   ...     os.chdir(datadir)
 
 See also:
 
@@ -1133,8 +1233,8 @@ Examples::
 
 .. _python_numpy:
 
-NumPy and Data Arrays
-=====================
+NumPy
+=====
 
 The Uses of NumPy
 ------------------
@@ -1152,9 +1252,9 @@ NumPy's array vs. Python's built-in list
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 NumPy introduces new data types, but the most popular, versatile, and
-useful one is the array. This is similar to arrays in IDL. There are
+useful one is the array. (It provides similar functionality to arrays in IDL.) There are
 several reasons why you would want to use a NumPy array over Python's
-built-in list.
+built-in ``list``.
 
 -  NumPy, PyLab, SciPy, PyFITS and other modules' functions often work
    with NumPy arrays.
@@ -1163,17 +1263,20 @@ built-in list.
    there is less information to keep track of which makes array
    computations faster.
 
--  NumPy arrays act as vectors and therefore we can do things such as
-   element-wise addition and multiplication.
+-  NumPy arrays take the usual arithmetic operators and make them work **element-wise** on arrays (and scalars), so long as they have compatible shapes.
 
-To convert a list to an array, use numpy.array().
+To convert a list to an array, use ``numpy.array(my_list_var)``.
+
+While lists have a length, computable with ``len(mylist)``, NumPy arrays have a **shape**. A shape is a tuple with the length of each dimension of an n-dimensional array. For example: a data cube with four 100x100 images would have the shape ``(4, 100, 100)``. You can inspect the shape of any array object through its ``.shape`` attribute.
+
+NumPy arrays also have a ``dtype`` (visible as the ``.dtype`` attribute), which gives the data type that all elements must conform to. Most NumPy functions that create arrays accept a ``dtype=`` argument, which can take built-in types like ``int`` or ``float``, or explicitly specify precision with types like ``numpy.complex128`` or ``numpy.float64`` (see `Array types <http://docs.scipy.org/doc/numpy/user/basics.types.html>`_ in the NumPy docs).
 
 numpy.array() function
 ^^^^^^^^^^^^^^^^^^^^^^
 
 **Use:** The numpy.array() function converts a list to a NumPy array.
 
-Examples::
+In this example we have a Python list ``a``, a converted NumPy array version ``b``, and an example of a 2D array made from nested lists ``c``.
 
    >>> import numpy as np
    >>> a = [1,2,3,4]      #a Python built in list
@@ -1182,11 +1285,7 @@ Examples::
    >>> print b
    >>> indx = [1,2]
    >>> print b[indx]
-   >>> print b[1:3]       #prints elements 1 to 2, NOT 1 to 3.
-   >>> print b[:3], b[3:] #prints up to the 3rd element, \
-   ...    and then everything after the 3rd element.
-   >>> print b[-1],b[-2]
-   >>> print b[::-1]      #reverses the array.
+   >>> print b[1:3]
    >>> c = np.array([[1,2,3,4,5],[6,7,8,9,10]])
    >>> print c
    >>> print c[1,3]       #indices for a multi-dimensional array
@@ -1203,37 +1302,79 @@ spaces.
 .. admonition:: Exercise
    :class: note
 
-   Create a list ``a`` and a NumPy array ``b``. Multiply each by 2
+   Create a list ``x`` and a NumPy array ``y``. Multiply each by 2
    and explain what happens. Now add 2 to each array. Again, explain the
    result.
 
 .. admonition:: Exercise
    :class: note
 
-   Create a third list ``c``. Add ``c`` to both ``a`` and
-   ``b``. Explain the result.
+   Create a third list ``z``. Add ``z`` to both ``x`` and
+   ``y``. Explain the result.
+
+Making new NumPy arrays
+-----------------------
+
+Data loaded in from FITS files or tables through Astropy will already be in NumPy array (or array-like) data structures. Python lists can be converted to arrays as seen above. However, sometimes you need to make arrays of own.
+
+Ones, zeroes, and empty
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The simplest way to make new arrays is to figure out the **shape** you want and use  :py:func:`numpy.ones`, :py:func:`numpy.zeros`, or :py:func:`numpy.empty`. (n.b. :py:func:`numpy.empty` doesn't set the elements of the array to one or zero, so only use it if you *know* you will replace every value!)
+
+The **shape** of an array is the n-dimensional equivalent of a list's **length**. It's passed in as a tuple, like ``(4, 10, 10)`` for a 4x10x10 array. If the array is 1D, a simple integer will work.
+
+.. admonition:: Exercise
+   :class: note
+
+   Make a 4x100x100 data cube of zeros called ``my_cube``, and print out its shape. What's the shape of the first slice of the data cube?
+
+.. admonition:: Exercise
+   :class: note
+
+   Using :py:func:`numpy.empty`, make a 5x5 array and print it out to the console (e.g. ``print np.empty((5,5))``). Do the same for 10x10, and 20x1 arrays.
+
+   Are the initial values what you expected? Why might ``zeros`` or ``ones`` be preferred? When does it make sense to use ``empty``? See :py:func:`numpy.empty` for reference.
+
+New sequential arrays
+^^^^^^^^^^^^^^^^^^^^^
+
+Analogous to :py:func:`range`, NumPy offers :py:func:`numpy.arange`. (Think "array-range".) They work pretty much the same way, except the latter returns a NumPy array.
+
+For non-integer spacing, it's better to use :py:func:`numpy.linspace`. Unlike :py:func:`~numpy.arange`, the ``start`` and ``stop`` arguments are inclusive on *both* ends. It takes a third argument ``num`` (instead of ``step``) to determine how many elements should be linearly spaced to cover the interval from ``start`` to ``stop``.
+
+.. admonition:: Exercise
+   :class: note
+
+   Make an array of **floats** counting from 0 to 99. Next, using :py:func:`numpy.linspace`, make the same array. Subtract one from the other and ensure all the elements are identically zero. Now make a third array that samples the interval twice as finely.
 
 What a NumPy array really is and a word of caution
 --------------------------------------------------
 
-A final note about NumPy arrays is that an array is actually an object
-which points to a block of memory. For example, in the above exercise we
-created an array ``b``. Try the following::
+A final note about NumPy arrays is that an array is actually an object which points to a block of memory. Suppose we have an array in the variable ``b``::
+
+
+   >>> b = np.ones(5)
+   >>> b
+   array([ 1.,  1.,  1.,  1.,  1.])
+
+Variables in Python are kind of like "name tags" for an object, so if you want to have the name ``d`` point to the array ``b`` you would do this::
 
    >>> d = b
+   >>> d
+   array([ 1.,  1.,  1.,  1.,  1.])
 
-When we assign our array ``b`` to the variable ``d``, instead of using up twice
-the memory space, ``d`` is just becomes a pointer to the memory used by ``b``.
+This does **not**, as one might assume, make a new copy of ``b`` and give it the name ``d``. They are, in fact, two references to the *same* data.
 
 To illustrate this, try assigning a value in ``d``::
 
    >>> d[2] = 999
-   >>> print d
-   >>> print b
+   >>> d
+   array([   1.,    1.,  999.,    1.,    1.])
+   >>> b
+   array([   1.,    1.,  999.,    1.,    1.])
 
-Notice what happened to ``b``. While it saves on memory space,
-programmers have to be careful. If you know you will want to change one
-array and not the other, the correct function to use is ``numpy.copy()``.
+Notice what happened to ``b``. If you know you will want to change an array while keeping the original values around, the correct function to use is ``numpy.copy()``.
 
 numpy.copy() function
 ^^^^^^^^^^^^^^^^^^^^^
@@ -1253,96 +1394,227 @@ simple ``d = b`` assignment. ::
    >>> a.size
    >>> a.shape
 
-Other Common NumPy Functions
-----------------------------
+Computing with NumPy
+--------------------
 
-numpy.arange() function
+Element-wise operations
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-**Use:** The numpy.arange() function creates an integer array from zero to the
-'stop' parameter given, with a step size of one. The 'start' and 'step'
-can also be specified. By setting the parameter 'dtype' we can change
-the data type of the array (i.e. to float).
+Arithmetic operates element-wise on NumPy arrays, making it easy to express computations that might involve slower ``for`` loops if you had to explicitly visit each element.
 
-Examples::
+In this example, the function :math:`y = x^2` is evaluated from -2 to 2. ::
 
-   >>> import numpy as np
-   >>> np.arange(10)
-   >>> 1 + np.arange(10, dtype=float) * 4
-   >>> np.arange(1,40,4,dtype=float)
+   >>> x = np.linspace(-2, 2, 10)
+   >>> y = x ** 2  # n.b. the double asterisk is the exponentiation operator
+   >>> print x
+   [-2.         -1.55555556 -1.11111111 -0.66666667 -0.22222222
+    0.22222222   0.66666667  1.11111111  1.55555556  2.        ]
+   >>> print y
+   [ 4.          2.41975309  1.2345679   0.44444444  0.04938272
+     0.04938272  0.44444444  1.2345679   2.41975309  4.        ]
 
-See also:
+NumPy also provides element-wise versions of your favorite transcendental functions:
 
-A similar function for lists is range().
+* :math:`e^{x}` --- :py:data:`numpy.exp(x) <numpy:numpy.exp>`
+* :math:`\sin(x)`, :math:`\cos(x)`, :math:`\tan(x)` --- :py:data:`numpy.sin(x) <numpy:numpy.sin>` , :py:data:`numpy.cos(x) <numpy:numpy.cos>` , :py:data:`numpy.tan(x) <numpy:numpy.tan>`
+* :math:`\sin^{-1}(x)`, :math:`\cos^{-1}(x)`, :math:`\tan^{-1}(x)` --- :py:data:`numpy.arcsin(x) <numpy:numpy.arcsin>`, :py:data:`numpy.arccos(x) <numpy:numpy.arccos>`, :py:data:`numpy.arctan(x) <numpy:numpy.arctan>`
+
+::
+
+   >>> x = [0, np.pi / 2.0, np.pi, 3 * np.pi / 2.0, 2 * np.pi]
+   >>> y = np.sin(x)
+   >>> y
+   array([  0.00000000e+00,   1.00000000e+00,   1.22464680e-16,
+           -1.00000000e+00,  -2.44929360e-16])
+
+There are many more than can be covered here, so consult the full list of `mathematical functions <http://docs.scipy.org/doc/numpy/reference/routines.math.html>`_ in the NumPy documentation.
+
+.. tip::
+
+   A special mention should be made of :py:data:`numpy.arctan2 <numpy:numpy.arctan2>`. If you have a ``y`` and ``x`` value, and want an angle in the full 360 degree (or :math:`[-\pi, \pi]`) range on which the arctangent can be defined based on the quadrant of the point, ``np.arctan2(y, x)`` is your friend. (Note the order of the arguments!)
+
+Selecting and modifying data with fancy indexing
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+NumPy arrays support a number of fancy indexing tricks to slice up your data. As you'll recall from :ref:`python_slicing`, list items can be indexed with the square brackets, and sliced with the square brackets and a colon. NumPy supports this type of slicing, and adds features to generalize it to higher dimensions.
+
+To illustrate, let's make a 10x10 2D array of the numbers 0 to 99 which we'll use in the examples in this section. Here we pass the new shape dimensions to :py:func:`numpy.reshape <numpy:numpy.reshape>` to turn a 100 element 1D array into the desired 10x10 shape::
+
+   >>> two_dim_arr = np.arange(100).reshape(10,10)
+   >>> two_dim_arr
+   array([[ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9],
+          [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+          [20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
+          [30, 31, 32, 33, 34, 35, 36, 37, 38, 39],
+          [40, 41, 42, 43, 44, 45, 46, 47, 48, 49],
+          [50, 51, 52, 53, 54, 55, 56, 57, 58, 59],
+          [60, 61, 62, 63, 64, 65, 66, 67, 68, 69],
+          [70, 71, 72, 73, 74, 75, 76, 77, 78, 79],
+          [80, 81, 82, 83, 84, 85, 86, 87, 88, 89],
+          [90, 91, 92, 93, 94, 95, 96, 97, 98, 99]])
+
+Two-dimensional indexing can be done as with Python lists::
+
+   >>> two_dim_arr[5][5]
+   55
+
+... or with comma-separated indices for each dimension::
+
+   >>> two_dim_arr[5, 5]
+   55
+
+The same trick works for slicing::
+
+   >>> two_dim_arr[5:7, 5:7]
+   array([[55, 56],
+          [65, 66]])
+
+When you only provide an index for one dimension (or a 1-D slice), NumPy will grab the entire row::
+
+   >>> two_dim_arr[0]
+   array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+Since it doesn't make sense to assign a scalar to a sequence of values, ``two_dim_arr[0]`` on the left hand of an assignment fills in every matching element with the right hand side value::
+
+   >>> two_dim_arr[0] = 1
+   >>> two_dim_arr
+   array([[ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
+          [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+          [20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
+          [30, 31, 32, 33, 34, 35, 36, 37, 38, 39],
+          [40, 41, 42, 43, 44, 45, 46, 47, 48, 49],
+          [50, 51, 52, 53, 54, 55, 56, 57, 58, 59],
+          [60, 61, 62, 63, 64, 65, 66, 67, 68, 69],
+          [70, 71, 72, 73, 74, 75, 76, 77, 78, 79],
+          [80, 81, 82, 83, 84, 85, 86, 87, 88, 89],
+          [90, 91, 92, 93, 94, 95, 96, 97, 98, 99]])
+
+As previously discussed, the first index is analogous to the "y dimension" or "rows" by convention in various Python packages. If you wish to select by column, use a generic slice with only a ``:`` in the first dimension::
+
+   >>> two_dim_arr[:, 0] = 2
+   >>> two_dim_arr
+   array([[ 2,  1,  1,  1,  1,  1,  1,  1,  1,  1],
+          [ 2, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+          [ 2, 21, 22, 23, 24, 25, 26, 27, 28, 29],
+          [ 2, 31, 32, 33, 34, 35, 36, 37, 38, 39],
+          [ 2, 41, 42, 43, 44, 45, 46, 47, 48, 49],
+          [ 2, 51, 52, 53, 54, 55, 56, 57, 58, 59],
+          [ 2, 61, 62, 63, 64, 65, 66, 67, 68, 69],
+          [ 2, 71, 72, 73, 74, 75, 76, 77, 78, 79],
+          [ 2, 81, 82, 83, 84, 85, 86, 87, 88, 89],
+          [ 2, 91, 92, 93, 94, 95, 96, 97, 98, 99]])
 
 .. admonition:: Exercise
    :class: note
 
-   Create the sequence 0.1, 0.2,0.3, ... 1.4 using numpy.arange(). Hint: As
-   noted in the NumPy documentation for numpy.arange(), it is best to use
-   integer step sizes.
+   Make a two dimensional array like ``two_dim_arr`` in the examples, but have it be 20x20 elements. Satisfy yourself that you understand how to modify the following kinds of regions:
+
+   * a single row
+   * a single column
+   * a range of rows
+   * a range of columns
+   * a rectangular region defined by a range of rows and a range of columns
+
+Boolean indexing, masking, and ``np.where``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normally, the stuff between the square brackets is some kind of expression to programmatically determine which elements will match. It's also possible to pass in an array the same shape as the thing being indexed, where each element matches up with one in the thing being indexed and contains a ``True`` or ``False`` flag. Elements where the **boolean indexing array** has ``True`` will be considered to match. Believe it or not, this turns out to be absurdly useful.
+
+   >>> mini = np.arange(5)
+   >>> mini
+   array([0, 1, 2, 3, 4])
+   >>> boolean_indexing_array = np.array([True, True, True, False, False])
+   >>> mini[boolean_indexing_array]
+   array([0, 1, 2])
+
+The reason this is useful is that we can make boolean indexing arrays super easily with the element-wise comparison operators in NumPy. Returning to our ``two_dim_arr`` example, suppse we wanted all elements larger than 50::
+
+   >>> big_entries = two_dim_arr > 50
+   >>> two_dim_arr[big_entries]
+   array([51, 52, 53, 54, 55, 56, 57, 58, 59, 61, 62, 63, 64, 65, 66, 67, 68,
+          69, 71, 72, 73, 74, 75, 76, 77, 78, 79, 81, 82, 83, 84, 85, 86, 87,
+          88, 89, 91, 92, 93, 94, 95, 96, 97, 98, 99])
+
+In fact, we could omit the new variable ``big_entries`` entirely and write ``two_dim_arr[two_dim_arr > 50]``. Python's smart enough to figure it out. However, we'll need it later. For something slightly more complicated, what about finding all the even numbered entries in the array? ::
+
+   >>> even_entries = two_dim_arr % 2 == 0  # for each element x, True if x mod 2 is == 0
+   >>> two_dim_arr[even_entries]
+   array([ 2,  2, 12, 14, 16, 18,  2, 22, 24, 26, 28,  2, 32, 34, 36, 38,  2,
+          42, 44, 46, 48,  2, 52, 54, 56, 58,  2, 62, 64, 66, 68,  2, 72, 74,
+          76, 78,  2, 82, 84, 86, 88,  2, 92, 94, 96, 98])
+
+Now, suppose we wanted to combine these two conditions. NumPy uses the "bit-wise operators" to combine boolean indexing arrays. This means "and"ing two conditions uses ``&``, "or"ing them uses ``|``, and inverting the sense of a boolean indexing array (to match things it didn't, and not match things it did) is the unary ``~`` operator. ::
+
+   >>> two_dim_arr[big_entries & even_entries]  # entries > 50 that are even
+   array([52, 54, 56, 58, 62, 64, 66, 68, 72, 74, 76, 78, 82, 84, 86, 88, 92,
+          94, 96, 98])
+   >>> two_dim_arr[~even_entries]  # odd entries
+   array([ 1,  1,  1,  1,  1,  1,  1,  1,  1, 11, 13, 15, 17, 19, 21, 23, 25,
+          27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59,
+          61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93,
+          95, 97, 99])
+   >>> two_dim_arr[big_entries | ~even_entries]  # entries that are big or odd
+   array([ 1,  1,  1,  1,  1,  1,  1,  1,  1, 11, 13, 15, 17, 19, 21, 23, 25,
+          27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 52, 53, 54, 55,
+          56, 57, 58, 59, 61, 62, 63, 64, 65, 66, 67, 68, 69, 71, 72, 73, 74,
+          75, 76, 77, 78, 79, 81, 82, 83, 84, 85, 86, 87, 88, 89, 91, 92, 93,
+          94, 95, 96, 97, 98, 99])
+
+You could imagine using a combination of constraints to select only good pixels within a certain number of elements of some point of interest. The boolean indexing arrays don't need to be "made from" the thing you're indexing, either, as long as they're the right shape. (e.g. If you had a 100x100 image called ``bad_pixels`` with ones where bad pixels are found, and a 100x100 image called ``my_image``, then ``good_pixel_values = my_image[bad_pixels != 1]`` is perfectly legal.)
 
 .. admonition:: Exercise
    :class: note
 
-   Create the sequence -3.2, -3.0, -2.8, ... -1.0 using numpy.arange(). See
-   above hint.
+   Make a two dimensional array like ``two_dim_arr`` in the examples, but have it be 20x20 elements. Select entries that are under 25 and contain even numbers using a combination of two boolean indexing arrays.
 
-numpy.empty() function
-^^^^^^^^^^^^^^^^^^^^^^
+Matrix operations
+^^^^^^^^^^^^^^^^^
 
-**Use:** The numpy.empty() function creates a float array of the specified
-dimensions. Each element of the array is whatever was left in that
-memory space, therefore it is fast but useful only if you know you will
-assign each element a meaningful value.
+Recall that multiplication happens element-wise for NumPy. How, then, are we to express a product of two matrices? ::
 
-Examples::
+   >>> X = np.array([[1,2,3], [0,1,0], [2,2,2]])
+   >>> Y = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
+   >>> X * Y
+   array([[1, 0, 0],
+          [0, 1, 0],
+          [0, 0, 2]])
 
-   >>> import numpy as np
-   >>> np.empty(10)   #pass an argument, which is the dimensions
-   >>> np.empty((3,4)) #here it is 2D, so we pass the dimensions as a tuple
+Not what we wanted at all! The solution is to use the NumPy ``dot()`` function or method, as shown below::
 
-See also:
+   >>> X.dot(Y)
+   array([[1, 2, 3],
+          [0, 1, 0],
+          [2, 2, 2]])
+   >>> np.dot(X, Y)
+   array([[1, 2, 3],
+          [0, 1, 0],
+          [2, 2, 2]])
 
-Other useful similar functions are numpy.zeros(), numpy.ones().
+Of course, the *better* solution is to use NumPy matrix objects. For more information, see :py:class:`numpy.matrix <numpy:numpy.matrix>`.
 
-numpy.where() function
-^^^^^^^^^^^^^^^^^^^^^^
+Concatenating arrays
+^^^^^^^^^^^^^^^^^^^^
 
-**Use:** The numpy.where() function returns an array (or a tuple of arrays) of
-the indices where the condition is ``True``. Otherwise, if you
-specify substitute values, it will return an array of the same shape as
-the original with the first value substituted where the condition is
-``True``, and the second value substituted where the condition is
-``False``.
+From time to time, you may need to concatenate arrays. For example, for instruments with two chips, concatenating the two data arrays gives you the whole instrument field of view in a single array.
 
-Examples::
+The tool for this is :py:func:`numpy.concatenate <numpy:numpy.concatenate>`. Take, for example, two identically shaped arrays: a 5x8 array of ones, and a 5x8 array of zeros. ::
 
-   >>> import numpy as np
-   >>> a = np.arange(11, dtype=float) + 1
-   >>> b = np.where(a >= 8.)
-   >>> print b
-   >>> a[b]
-   >>> a = np.array([1,2,3,1,2,1,1,1,1,4])
-   >>> b = np.where(a == 1, 1,0)
-   >>> print b
+   >>> first = np.ones((2, 3))
+   >>> second = np.zeros((2, 3))
+   >>> np.concatenate([first, second])
+   array([[ 1.,  1.,  1.],
+          [ 1.,  1.,  1.],
+          [ 0.,  0.,  0.],
+          [ 0.,  0.,  0.]])
 
-If we do not need the indices from numpy.where() then we can just use
-creative indexing for the same effect. ::
+We could stick the arrays together along a different axis, just as easily::
 
-   >>> a > 5
-   >>> a[a>5]
+   >>> np.concatenate([first, second], axis=1)
+   array([[ 1.,  1.,  1.,  0.,  0.,  0.],
+          [ 1.,  1.,  1.,  0.,  0.,  0.]])
 
-See also:
+The dimensions do not *all* have to match, but they do have to match on every axis but the axis on which you're concatenating.
 
-Other useful similar functions are numpy.any(), numpy.all(),
-numpy.nonzero(), numpy.choose().
-
-.. admonition:: Exercise
-   :class: note
-
-   Create a random real 10-element array with numbers between 0 and 1.
-   Select those with counts lower than 0.5.
 
 .. _python_fits_ascii:
 
@@ -1493,6 +1765,7 @@ Examples::
 
    Try making a MJD-normalized text file for the ``flux_vs_time_C.dat``
    data using ascii.write()
+
 
 Plotting with PyPlot
 ====================
@@ -1948,6 +2221,8 @@ Now we plot the ideal blackbody, noisy data, and fitted blackbody for comparison
    noise, or change the scale of the additive noise to twice the mean rather than half)?
 
 
+
+
 .. _python_scripts:
 
 Python Scripts and Functions
@@ -1968,63 +2243,6 @@ easy-to-use Python code.
 
 Please choose a text editor for editing your script, such as
 SublimeText, Emacs, TextWrangler, NEdit, or others.
-
-.. _python_3_vs_2:
-
-What a new Python user should know about Python 2 vs. Python 3
---------------------------------------------------------------
-
-Python is developed by a community of volunteers and distributed for free. In 2008, this community decided to fix some long-standing bugs in the previous major version of Python (the ``2.x`` branch, which had been developed from 2000 onwards), and call the new version "Python 3". The nature of these fixes meant that users couldn't simply install Python 3 and expect everything to work immediately.
-
-The creators of Python have decreed that Python 2 will no longer be updated, and Python 3 is the way forward. The Institute has started migrating to Python 3, but during this transitional period you should be aware that you may encounter code that works with only Python 2 (or only Python 3).
-
-New code should be written to be forwards compatible with Python 3, *especially* if it will be used by other members of your team! There are more comprehensive guides elsewhere, but we want to call your attention to two important things that will change with Python 3. In Python 2, this code is fine::
-
-   >>> print "Hello world"
-   Hello world
-
-In Python 3, ``print`` is a function, invoked with parentheses like every other. The above syntax won't work any more. ::
-
-   >>> print "Hello world"
-     File "<stdin>", line 1
-       print "Hello world"
-                         ^
-   SyntaxError: Missing parentheses in call to 'print'
-
-Add parentheses to make Python 3 happy::
-
-   >>> print("Hello world")
-   Hello world
-
-Also, in Python 3, division will work less like computer scientists expect, and more like everyone else expects. Python 2 used "integer division", which truncated any fractional part to make the result of dividing two integers an integer. For example::
-
-   >>> 7 / 3
-   2
-   >>> 7.0 / 3  # floating point division used when either operand is a float
-   2.3333333333333335
-
-In Python 3, the behavior is as follows::
-
-   >>> 7 / 3
-   2.3333333333333335
-   >>> 7.0 / 3
-   2.3333333333333335
-
-The old behavior can be used with the new ``//`` operator::
-
-   >>> 7 // 3
-   2
-   >>> 7.0 // 3
-   2.0
-
-What you should do about it
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-You can make your code future-proof by "importing" functionality from the future. When writing stand-alone scripts (as opposed to snippets in the interactive environment), it is a good idea to include this at the top (after any ``#!`` line)::
-
-   from __future__ import print_function, division
-
-...and that will give you the new behavior in Python 2. (In Python 3, which already has the new behavior by default, it will have no effect.)
 
 hotpix\_monitor.py
 ------------------
@@ -2735,24 +2953,28 @@ Error Handling and ``pdb.set_trace()``
 --------------------------------------
 
 Debugging can be a difficult and long process, but the pdb module can
-help. pdb is the Python debugger. There are many ways to use it, but a
+help. :py:mod:`pdb` is the Python debugger. There are many ways to use it, but a
 common method is with ``pdb.set_trace()``. To debug your code using this
 function, import ``pdb`` and insert the line ``pdb.set_trace()`` into your
 code before the part you are unsure about. Execute the program. Once the
 interpreter reaches the ``pdb.set_trace()`` mark, it will allow you to
-interact with the code and print variables as they are defined. Common
-``pdb.set_trace()`` commands include:
+interact with the code and print variables as they are defined.
 
--  (n)ext: continue to the next line
+The interactive prompt is not *quite* like the interactive interpreter prompt we were using before. It has special commands to navigate in the code and control Python one line at a time.
 
--  (l)ist: list a few steps
+Common ``pdb`` commands include:
 
--  (b)reak: give line and file to break at
+-  **next** (n): continue to the next line of your program (starting after the ``set_trace()`` call)
 
--  (s)tep: moves into deeper calls (i.e. a function in NumPy, or our
-   function mkplot).
+-  **list** (l): list a few steps
 
--  (c)ontinue: continue the program like normal.
+-  **break** (b): give line and file to "break" (pause) at
+
+-  **step** (s): moves into deeper calls (i.e. a function in NumPy, or our function ``mkplot``).
+
+-  **continue** (c): continue the program like normal (until we reach an exception, a breakpoint, or the end)
+
+As suggested by the parentheses, these commands can be written out in full or abbreviated to a single character. A full ``pdb`` reference is available in the `Python documentation <https://docs.python.org/2/library/pdb.html>`_ (or `here <https://docs.python.org/3.4/library/pdb.html>`_ for Python 3.4.x).
 
 .. admonition:: Exercise
    :class: note
@@ -2773,61 +2995,57 @@ conventions, and PEP-257 (https://www.python.org/dev/peps/pep-0257/),
 which discusses docstrings. If you have an interest in scripting in
 Python, please take the time to review these two documents.
 
+.. note::
+
+   Let your trainer know you've finished, and send them your exercise solutions. You're done with Python training!
+
+   Review the resources below for more in-depth coverage of these topics and more.
+
 Resources
 =========
 
 .. _python_links:
 
-Useful Links
--------------
+References
+----------
 
-Below is a list of links to be used as a reference.
+-  http://docs.python.org/ --- The official Python documentation
 
--  http://docs.python.org/
+-  https://www.python.org/dev/peps/pep-0008/ --- PEP8, the Python style guide
 
--  http://legacy.python.org/dev/peps/pep-0008/
+-  http://www.astropy.org/ --- Astropy, a module being developed at STScI and elsewhere to support astronomical uses of Python
 
--  http://www.astropy.org/
+-  http://wiki.python.org/moin/HowTo/Sorting --- A topic guide to sorting lists of objects in Python
 
--  http://wiki.python.org/moin/HowTo/Sorting
+-  http://ipython.org/ipython-doc/stable/interactive/tutorial.html --- The official IPython tutorial
 
--  http://ipython.scipy.org/moin/Documentation
+-  http://matplotlib.org/ --- The matplotlib website
 
--  http://matplotlib.sourceforge.net/
+-  http://docs.scipy.org/doc/scipy/reference/ --- The official SciPy documentation
 
--  http://www.scipy.org/Numpy_Example_List_With_Doc
+-  http://wiki.scipy.org/Cookbook - The SciPy community cookbook, with "recipes" to accomplish common tasks with NumPy/SciPy *(n.b. these are unofficial, and may not always be correct or optimal)*
 
--  http://docs.scipy.org/doc/
+Tutorials and texts
+-------------------
 
--  http://www.scipy.org/Cookbook
+-  http://python4astronomers.github.com/ --- Workshop materials from "Practical Python for Astronomers"
 
-The following links are for further training and building of your Python
-skills.
+-  http://code.google.com/edu/languages/google-python-class/ --- Google's Python Class materials
 
--  http://stsdas.stsci.edu/perry/pydatatut.pdf
+-  http://learnpythonthehardway.org/book/ --- "Learn Python the Hard Way" is an online textbook that starts from the very basics of programming and builds up to Python proficiency
 
--  http://www.scipy.org/Additional_Documentation/Astronomy_Tutorial?action=show
+-  http://www.astro.washington.edu/users/vanderplas/Astr599_2014/notebooks/ -- Jake VanderPlas' IPython notebooks from a Python workshop he taught (start with ``00_intro``)
 
--  http://python4astronomers.github.com/
+Advanced plotting tools
+-----------------------
 
--  http://code.google.com/edu/languages/google-python-class/
+-  https://github.com/yhat/ggplot --- make your plots look like ggplot from the R data analysis environment
 
--  http://learnpythonthehardway.org/book/
+-  https://github.com/olgabot/prettyplotlib --- better defaults and prettification for matplotlib plots
 
--  http://www.pythonchallenge.com/
+-  http://stanford.edu/~mwaskom/software/seaborn/index.html --- another approach to prettifying matplotlib
 
--  http://www.astro.washington.edu/users/vanderplas/Astr599_2014/notebooks/
-
-And, a few libraries to help make your plots pretty:
-
--  https://github.com/yhat/ggplot
-
--  https://plot.ly/
-
--  https://github.com/olgabot/prettyplotlib
-
--  http://stanford.edu/~mwaskom/software/seaborn/index.html
-
+-  https://plot.ly/ --- a commercial online plot hosting service with a free tier
 
 Mailing Lists
 -------------
@@ -2841,6 +3059,8 @@ Web App (OWA):
 -  **python-interested**: A mailing list usually used to discuss bugs,
    fixes, and how to do some outrageous tasks that astronomers come up
    with.
+
+
 
 .. rubric:: Footnotes
 
