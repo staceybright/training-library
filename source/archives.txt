@@ -430,15 +430,10 @@ and you will get a drop down menu with various selections. Choose *Add
 To Cart*. Once you have done this, the menu will disappear and you will
 have to click on *Download Cart* again. Select *View Cart…* and then you
 will get a GUI in the top center of the web page. Select *Proceed to
-Checkout…* and then you will get the following web page shown in Figure
-15.
+Checkout…*.
 
-.. figure:: figures/archives/starview_search_retrieval.png
-
-   Figure 15: This figure shows what datasets are marked for retrieval.
-
-From here you can download the data like you would from MAST. (Note:
-This was just an exercise showing how starview works. You do not need to
+From here you can download the data like you normally would from MAST. (Note:
+This was just an exercise showing how Starview works. You do not need to
 actually download the data.)
 
 MAST Data Discovery Portal
@@ -481,7 +476,7 @@ is found in Figure 16.
 
 .. figure:: figures/archives/pyraf_startup.png
 
-   Figure 16: An example of the PyRAF screen after starting up.
+   Figure 15: An example of the PyRAF screen after starting up.
 
 After PyRAF starts up, ensure that the needed packages are loaded by
 typing::
@@ -511,7 +506,7 @@ keywords and metadata associated with the particular observation.
 
 .. figure:: figures/archives/pyraf_catfits.png
 
-   Figure 17: The FITS extension structure of o8j502280\_raw.fits as given by the catfits command.
+   Figure 16: The FITS extension structure of o8j502280\_raw.fits as given by the catfits command.
 
 We use imhead to inspect the primary header::
 
@@ -529,7 +524,7 @@ STIS Data Handbook reference).
 
 .. figure:: figures/archives/pyraf_calstis_header_switches.png
 
-   Figure 18: This shows the correct configuration in the raw image header that will produce calibrated STIS data.
+   Figure 17: This shows the correct configuration in the raw image header that will produce calibrated STIS data.
 
 Let us now calibrate some raw STIS data (remember that you need both the
 raw and wav extension files in the same directory). This is easy to do
@@ -564,7 +559,7 @@ more about tomultispec and splot in future PyRAF trainings.
 
 .. figure:: figures/archives/pyraf_splot.png
 
-   Figure 19: The plotted spectra for the o8j502280 dataset.
+   Figure 18: The plotted spectra for the o8j502280 dataset.
 
 We have now retrieved STIS data from the archive, downloading only *raw*
 and *wav* extension fits files. We inspected the calibration switches
