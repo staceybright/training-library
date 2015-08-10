@@ -1332,7 +1332,9 @@ The **shape** of an array is the n-dimensional equivalent of a list's **length**
 .. admonition:: Exercise
    :class: note
 
-   Make an array of your favorite shape using :py:func:`numpy.empty`. Why do you think its contents are what they are? See :py:func:`numpy.empty` for reference.
+   Using :py:func:`numpy.empty`, make a 5x5 array and print it out to the console (e.g. ``print np.empty((5,5))``). Do the same for 10x10, and 20x1 arrays.
+
+   Are the initial values what you expected? Why might ``zeros`` or ``ones`` be preferred? When does it make sense to use ``empty``? See :py:func:`numpy.empty` for reference.
 
 New sequential arrays
 ^^^^^^^^^^^^^^^^^^^^^
