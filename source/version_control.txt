@@ -273,6 +273,16 @@ At the bottom of the page, you'll see the changes you're asking to pull in. Ensu
 
 Give your pull request a brief title and description, then click "Create pull request." Tell your trainer for this section, and they will merge it in if it all looks good!
 
+This concludes the version control training, but there's one more thing you may want to do. Now that you have access to the ``stsci-riab/riatraining`` repository, you will be emailed about changes and issues. That's probably not what you want, unless you're involved in training the next round of hires!
+
+.. admonition:: Exercise
+   :class: note
+
+   Set your status on the https://github.com/stsci-riab/riatraining repository to **Not watching**, using the button in the upper right area of the GitHub web interface.
+
+   .. image:: figures/python/github_unwatch.png
+
+
 .. rubric:: Footnotes
 
 .. [#gitproject] `git <http://git-scm.com/>`_ is free and open source software developed by the creator of Linux (Linus Torvalds) and many others. He once said that "git" (British English for "an unpleasant person") was a good name for a project of his, as he names all of his projects after himself.
