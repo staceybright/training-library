@@ -280,7 +280,7 @@ This concludes the version control training, but there's one more thing you may 
 
    Set your status on the https://github.com/stsci-riab/riatraining repository to **Not watching**, using the button in the upper right area of the GitHub web interface.
 
-   .. image:: figures/python/github_unwatch.png
+   .. image:: figures/version_control/github_unwatch.png
 
 
 .. rubric:: Footnotes
