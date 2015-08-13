@@ -16,7 +16,7 @@ All of your PyRAF preferences are held in a file with the name login.cl.  If you
 \subsection{SSBREL, SSBX, and SSBDEV}
 There are three environment which you can use which get updated at various times. These set the versions of STSDAS, STSCI\_PYTHON, PyRAF, and PyFITS. The SSBREL environment contains packages which have been released to the public. This generally happens a few times a year. This is the most stable (but least up to date) environment. The SSBX environment is updated weekly and may contain some bugs but is generally pretty stable. This is the environment chosen by most people at the institute. The SSBDEV environment is updated daily. More details can be found at: \url{http://ssb.stsci.edu/ssb_software.shtml}
 
-Installed copies of SSBREL, SSBX, and SSBDEV are not automatically updated.  To get an up-to-date version of a particular environment, simply use `ur\_update' in the environment you wish to update.  To switch between environments, use `ur\_setup common <environment>'
+Installed copies of SSBREL, SSBX, and SSBDEV are not automatically updated.  To switch between environments type the environment you wish to use into the command line. For example, if you want to switch to SSBX, simply type 'ssbx' in a terminal. If you have a desktop then these environments will update automatically. However, if you have a laptop you will need to update them when connected to the internal network by running {\bf /Users/Shared/sync\_ssb}.
 
 When you start up PyRAF, the environment will be printed prominently in the startup text.
 
@@ -108,6 +108,6 @@ Because PyRAF is Python based, you can import any Python module. This is particu
 
 \subsection{Exercises}
 \begin{enumerate}
-\item In PyRAF located the package {\bf apextract}. What tasks are in this package? What does the {\bf aptrace} task do? Are there any parameter tasks?
+\item In PyRAF locate the package {\bf apextract}. What tasks are in this package? What does the {\bf aptrace} task do? Are there any parameter tasks?
 \end{enumerate}
 
