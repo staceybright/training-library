@@ -211,6 +211,10 @@ centerpars.cbox& 10.\\
 \hline
 centerpars.maxshift&6\\
 \hline
+phot.interactive& no\\
+\hline
+phot.verbose& yes\\
+\hline
 \end{tabular}
 \end{center}
 %\end{table}
@@ -220,6 +224,7 @@ Set the above values in the parameter files using epar. \\
 & {\color{RoyalBlue}--> epar fitskypars} \\
 & {\color{RoyalBlue}--> epar photpars }\\
 & {\color{RoyalBlue}--> epar centerpars } \\
+& {\color{RoyalBlue}--> epar phot} \\
 \end{tabular}
 
 Run {\bf phot} \\
@@ -229,7 +234,7 @@ Run {\bf phot} \\
 \end{tabular}
 \end{minipage}
 
-
+\emph{(\textbf{Note:} If the {\tt phot} task doesn't seem to be running, ensure the {\tt interactive} parameter flag is set to {\tt no}!)}
 
 \subsection{Exercises}
 \begin{enumerate}
