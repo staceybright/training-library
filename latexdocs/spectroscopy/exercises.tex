@@ -96,10 +96,10 @@ python> smooth_flux = boxcar(flux, (boxcar_size,) )
 
 
 \section{Signal to Noise}
-The signal to noise ratio (S/N) of a dataset is an important statistic to be able to estimate.  If the S/N is too low to detect your feature of interest, then attempting to use your dataset is a waste of your time. The signal can be approximated with a low order polynomial fit to a region, and the noise can be the standard deviation of the data - fit.  Some useful functions in Python are numpy.polyfit, numpy.poly1d, and numpy.std. 
+The signal to noise ratio (S/N) of a dataset is an important statistic to be able to estimate.  If the S/N is too low to detect your feature of interest, then attempting to use your dataset is a waste of your time. The signal can be approximated with a low order polynomial fit to a continuum region where there are no absorption or emission lines, and the noise can be approximated as the standard deviation of the data - fit.  Some useful functions in Python are numpy.polyfit, numpy.poly1d, and numpy.std. 
 
 {\bf \color{blue} Exercise \arabic{exercise} \stepcounter{exercise}}:  \\
-{\bf Determine the signal to noise of the continuum of both the COS and STIS spectra. Which dataset has the better signal to noise, COS or STIS?} 
+{\bf Determine the signal to noise of the continuum of both the COS and STIS spectra. Which dataset has the better signal to noise, COS or STIS? Does this number make sense with what your eye is seeing?} 
 
 \section{Interpolation}
 Directly comparing two spectra in wavelength space cannot be done, apart from visually, unless both datasets have the same wavelength scale.  Interpolating one spectrum onto another wavelength scale will allow you to do far more useful calculations such as dividing, subtracting, etc. Below is the syntax for using one linear interpolation algorithm from numpy, which gives you interpolated fluxes on the wavelength scale of wavel1.
