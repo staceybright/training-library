@@ -23,7 +23,9 @@ Choose a printer near your office from `this list of printers <http://www.stsci.
 Verify network mounts
 ======================
 
-New computers set up by ITSD automatically connect certain folders to servers on the Institute network. These are called "Central Storage", and you will  Open a terminal and check that you can list the contents of the ``/grp/hst`` and ``/user`` directories, like shown::
+New computers set up by ITSD automatically connect certain folders to servers on the Institute network. These are called "Central Storage", and you will use them to exchange large files with coworkers and to make files from your personal machine available on the back-room servers.
+
+Open a terminal and check that you can list the contents of the ``/grp/hst`` and ``/user`` directories, as shown::
 
     $ ls /grp/hst
     HST_Arch_Proj acs_testing   etc           nicmos        tac           wfc3c         wfc3i
@@ -46,6 +48,35 @@ Setting up your own Central Storage directory
 Users can store files under their username at ``/user/myusername``. This is useful for sharing large files with your colleagues. In fact, you'll be using your Central Storage directory to send your training exercises to your trainers later on.
 
 Send an email to the STScI *internal* helpdesk at support@stsci.edu, and ask them to make you a Central Storage directory. [#externalhelpdesk]_
+
+While they set this up for you, if you're unfamiliar with UNIX file permissions, now is a good time to review them.
+
+While at STScI, you may use proprietary science data in your analyses that should not be shared outside your team. Your Central Store directory is, by default, readable by other users in the institute. This, believe it or not, is not a mistake! This choice makes it easy to use to share large files with your colleagues, but must be kept in mind when handling sensitive data.
+
+If you have data you don't wish others to see, you must be sure to set the permissions appropriately on the directory with the data. Files and folders can be assigned read, write, and execute permissions that apply to the owning user, owning group, and others. (The owning user and group are set when the file or directory is created; use ``ls -l FILE_OR_DIRECTORY_NAME`` to see what they're set to: owning user in the 3rd column, owning group in the 4th.)
+
+The command to change permissions is ``chmod``, and it takes the form of ``chmod [-R] PERMS FILE_OR_DIRECTORY``. When you wish to apply new permissions to a directory and all its contents, use ``-R`` (recursive). The ``PERMS`` string can be built up from the options in the table below.
+
++----------------+-------+-------+---------+
+|                | Read  | Write | Execute |
++================+=======+=======+=========+
+|           User | u=r   | u=w   | u=x     |
++----------------+-------+-------+---------+
+|          Group | g=r   | g=w   | g=x     |
++----------------+-------+-------+---------+
+|  Other / World | o=r   | o=w   | o=x     |
++----------------+-------+-------+---------+
+
+For example, if you want a file to be readable and writable by yourself, only readable by people in your group, and completely inaccessible others, you would use ``chmod u=rw,g=r,o= myfile.txt``. See how we used ``o=`` to **clear** the permissions. Omitting ``o=`` from the list would tell chmod to leave whatever permissions were already there [#umask]_.
+
+**Note:** the "execute" permission should only be set for programs (and scripts) with one major exception: for **directories**, the "execute" permission means "can use files from"... so even if you cannot read the list of files in the directory, if you know the name of a particular file with world-readable access and the "execute" permission is available to you on the directory, you can still open the file. This is kind of subtle, so check out `this StackOverflow thread <http://unix.stackexchange.com/questions/21251/how-do-directory-permissions-in-linux-work>`_ for additional background.
+
+.. admonition:: Exercise
+   :class: note
+
+   Make a subdirectory of your ``/user/myusername`` directory called ``private`` and make it usable only by you.
+
+   Use ``ls -l`` to verify the permissions and ownership are what you expect. If you're not sure, ask your trainer to try and read a file in your new private directory!
 
 .. _computer_setup_environment:
 
@@ -152,3 +183,4 @@ Additional resources
 .. rubric:: Footnotes
 
 .. [#externalhelpdesk] There's an *external* helpdesk too, help@stsci.edu. For IT issues, though, you want the internal one. The external one is for astronomers to ask questions about things like the archive, SSB software, data characteristics, and the like.
+.. [#umask] Files are created with a default set of permissions set by your "umask", which will most likely make them world-readable by default. See `this Wikipedia article <https://en.wikipedia.org/wiki/Umask>`_ if you're really curious.
