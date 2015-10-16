@@ -23,7 +23,9 @@ Choose a printer near your office from `this list of printers <http://www.stsci.
 Verify network mounts
 ======================
 
-New computers set up by ITSD automatically connect certain folders to servers on the Institute network. These are called "Central Storage", and you will  Open a terminal and check that you can list the contents of the ``/grp/hst`` and ``/user`` directories, like shown::
+New computers set up by ITSD automatically connect certain folders to servers on the Institute network. These are called "Central Storage", and you will use them to exchange large files with coworkers and to make files from your personal machine available on the back-room servers.
+
+Open a terminal and check that you can list the contents of the ``/grp/hst`` and ``/user`` directories, as shown::
 
     $ ls /grp/hst
     HST_Arch_Proj acs_testing   etc           nicmos        tac           wfc3c         wfc3i
