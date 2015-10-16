@@ -164,6 +164,93 @@ Log in to the Confluence wiki at https://confluence.stsci.edu/ using your AD cre
 * the `RIA training hub <https://confluence.stsci.edu/display/INSRIA/RIA+training>`_
 * the training page for your hiring group (click "RIA training" in the sidebar to expand the list)
 
+Log in to a server
+==================
+
+The Institute has a whole herd of (mostly) Linux servers sitting in the server room downstairs. If you have a long-running task that you don't want to interrupt by taking your laptop home or rebooting your desktop, you should use a back-room server to run your analysis.
+
+The command to remotely connect to a server is ``ssh SERVERNAME`` (e.g. ``ssh science1``). It will attempt to log you in with your current username and prompt you for your password. This is the same password you use to unlock your computer.
+
+Any commands you run in an ssh session will execute on the server, not on your personal computer. This means any data you need should be copied to a Central Store directory so that the server can see it.
+
+One tool that makes working with back-room servers way more flexible is ``screen``. The ``screen`` utility lets you **detach** from a running session, go away (shut down your computer, disconnect, whatever), and then **reattach** to it later.
+
+Here's a possible scenario: Jane wants to leave on Friday, but needs to run her ``calibrate_everything.py`` script that takes 12 hours to complete. First, she connects to a server with ``ssh``::
+
+   janecomputer:~ janeuser$ ssh science1
+   The authenticity of host 'science1 (130.167.200.161)' can't be established.
+   RSA key fingerprint is 5e:21:0f:02:d9:23:16:7c:a8:28:a7:1b:c3:60:2f:81.
+   Are you sure you want to continue connecting (yes/no)? yes
+   Warning: Permanently added 'science1,130.167.200.161' (RSA) to the list of known hosts.
+   Password:
+
+      ****************************************************************************
+      * This US Government system is for authorized users only. By accessing   *
+      * this system you are consenting to complete monitoring with no            *
+      * expectation of privacy. Unauthorized access or use may subject you to    *
+      * disciplinary action and criminal prosecution                             *
+      ****************************************************************************
+
+   science1>
+
+Then she starts a ``screen`` session with the -U option to say she wants accented characters to print properly (if she encounters any)::
+
+   science1> screen
+
+The terminal window clears and the prompt is redisplayed at the top. She changes to the appropriate directory and runs her script::
+
+   science1> ssbx
+   science1> python calibrate_everything.py
+   Working...
+
+While it's running, she uses a magic key combination to detach the screen session: :kbd:`Ctrl-A` and then :kbd:`d`. The script output disappears and she's left with::
+
+   science1> screen
+   [detached]
+   science1>
+
+On Monday, she reattaches to the session by connecting to ``science1`` via ``ssh`` as before, then running::
+
+   science1> screen -rd
+
+which clears the current terminal output and shows her the tail end of her script's output::
+
+   science1> python calibrate_everything.py
+   Working...
+   Calibrating Hubble... DONE
+   Calibrating JWST... DONE
+   Calibrating WFIRST... DONE
+   science1>
+
+Note that there's nothing special about the command finishing before she re-attached. She could have just as easily checked in on it while it was in progress over the weekend, but she was busy having fun.
+
++------------------+----------------------------+
+| Server hostname  | Use                        |
++==================+============================+
+| plhstins1        | INS HST functional work    |
++------------------+----------------------------+
+| plhstins2        | INS HST functional work    |
++------------------+----------------------------+
+| science1         | Science / research use     |
++------------------+----------------------------+
+| science3         | Science / research use     |
++------------------+----------------------------+
+| science4         | Science / research use     |
++------------------+----------------------------+
+| science5         | Science / research use     |
++------------------+----------------------------+
+| science6         | Science / research use     |
++------------------+----------------------------+
+| plscigpu1        | GPU computing              |
++------------------+----------------------------+
+| plscigpu2        | GPU computing              |
++------------------+----------------------------+
+
+.. admonition:: Exercise
+   :class: note
+
+   Log into one of the servers named above and start a ``screen`` session. Detach from it, close your terminal, and make sure you can reconnect and reattach to it successfully.
+
 On to the training exercises!
 ================================
 
