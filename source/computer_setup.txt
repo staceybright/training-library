@@ -196,9 +196,9 @@ Here's a possible scenario: Jane wants to leave on Friday, but needs to run her 
 
    science1>
 
-Then she starts a ``screen`` session::
+Then she starts a ``screen`` session and gives it the name ``mylongjob``::
 
-   science1> screen
+   science1> screen -S mylongjob
 
 The terminal window clears and the prompt is redisplayed at the top. She changes to the appropriate directory and runs her script::
 
@@ -212,9 +212,16 @@ While it's running, she uses a magic key combination to detach the screen sessio
    [detached]
    science1>
 
-On Monday, she reattaches to the session by connecting to ``science1`` via ``ssh`` as before, then running::
+On Monday, she connects to ``science1`` via ``ssh`` as before, but she can't remember what she named the screen session so she runs::
 
-   science1> screen -r
+   science1> screen -ls
+   There are screens on:
+       28724.mylongjob    (Detached)
+   1 Socket in /var/run/screen/S-janeuser
+
+Then she re-attaches to the screen session with::
+
+   science1> screen -r mylongjob
 
 which clears the current terminal output and shows her the tail end of her script's output::
 
