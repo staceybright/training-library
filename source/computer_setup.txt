@@ -173,6 +173,9 @@ The command to remotely connect to a server is ``ssh SERVERNAME`` (e.g. ``ssh sc
 
 Any commands you run in an ssh session will execute on the server, not on your personal computer. This means any data you need should be copied to a Central Store directory so that the server can see it.
 
+The ``screen`` utility
+----------------------
+
 One tool that makes working with back-room servers way more flexible is ``screen``. The ``screen`` utility lets you **detach** from a running session, go away (shut down your computer, disconnect, whatever), and then **reattach** to it later.
 
 Here's a possible scenario: Jane wants to leave on Friday, but needs to run her ``calibrate_everything.py`` script that takes 12 hours to complete. First, she connects to a server with ``ssh``::
@@ -211,7 +214,7 @@ While it's running, she uses a magic key combination to detach the screen sessio
 
 On Monday, she reattaches to the session by connecting to ``science1`` via ``ssh`` as before, then running::
 
-   science1> screen -rd
+   science1> screen -r
 
 which clears the current terminal output and shows her the tail end of her script's output::
 
