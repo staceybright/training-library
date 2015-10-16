@@ -47,11 +47,11 @@ Users can store files under their username at ``/user/myusername``. This is usef
 
 Send an email to the STScI *internal* helpdesk at support@stsci.edu, and ask them to make you a Central Storage directory. [#externalhelpdesk]_
 
-While they set this up for you, if you're unfamiliar with UNIX file permissions, now is a good time to review them. While at STScI, you may use proprietary science data in your analyses that should not be shared outside your team.
+While they set this up for you, if you're unfamiliar with UNIX file permissions, now is a good time to review them.
 
-Your Central Store directory is, by default, readable by other users in the institute. This, believe it or not, is not a mistake! That's because Central Store is often the easiest way to share files with your team: just drop them in ``/user/myusername/teamstuff`` and your teammates can get to them from their institute machines.
+While at STScI, you may use proprietary science data in your analyses that should not be shared outside your team. Your Central Store directory is, by default, readable by other users in the institute. This, believe it or not, is not a mistake! This choice makes it easy to use to share large files with your colleagues, but must be kept in mind when handling sensitive data.
 
-If you have data you don't wish to share, however, you must be sure to set the permissions appropriately on the directory with the data. Files and folders can be assigned read, write, and execute permissions that apply to the owning user, owning group, and others. (The owning user and group are set when the file or directory is created; use ``ls -l FILE_OR_DIRECTORY_NAME`` to see what they're set to: owning user in the 3rd column, owning group in the 4th.)
+If you have data you don't wish others to see, you must be sure to set the permissions appropriately on the directory with the data. Files and folders can be assigned read, write, and execute permissions that apply to the owning user, owning group, and others. (The owning user and group are set when the file or directory is created; use ``ls -l FILE_OR_DIRECTORY_NAME`` to see what they're set to: owning user in the 3rd column, owning group in the 4th.)
 
 The command to change permissions is ``chmod``, and it takes the form of ``chmod [-R] PERMS FILE_OR_DIRECTORY``. When you wish to apply new permissions to a directory and all its contents, use ``-R`` (recursive). The ``PERMS`` string can be built up from the options in the table below.
 
@@ -65,7 +65,7 @@ The command to change permissions is ``chmod``, and it takes the form of ``chmod
 |  Other / World | o=r   | o=w   | o=x     |
 +----------------+-------+-------+---------+
 
-For example, if you want a file to be readable and writable by yourself, and only readable by people in your group and others, you would use ``chmod u=rw,g=r,o=r myfile.txt``.
+For example, if you want a file to be readable and writable by yourself, only readable by people in your group, and completely inaccessible others, you would use ``chmod u=rw,g=r,o= myfile.txt``. See how we used ``o=`` to **clear** the permissions. Omitting ``o=`` from the list would tell chmod to leave whatever permissions were already there [#umask]_.
 
 **Note:** the "execute" permission should only be set for programs (and scripts) with one major exception: for **directories**, the "execute" permission means "can use files from"... so even if you cannot read the list of files in the directory, if you know the name of a particular file with world-readable access and the "execute" permission is available to you on the directory, you can still open the file. This is kind of subtle, so check out `this StackOverflow thread <http://unix.stackexchange.com/questions/21251/how-do-directory-permissions-in-linux-work>`_ for additional background.
 
@@ -181,3 +181,4 @@ Additional resources
 .. rubric:: Footnotes
 
 .. [#externalhelpdesk] There's an *external* helpdesk too, help@stsci.edu. For IT issues, though, you want the internal one. The external one is for astronomers to ask questions about things like the archive, SSB software, data characteristics, and the like.
+.. [#umask] Files are created with a default set of permissions set by your "umask", which will most likely make them world-readable by default. See `this Wikipedia article <https://en.wikipedia.org/wiki/Umask>`_ if you're really curious.
