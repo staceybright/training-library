@@ -196,7 +196,7 @@ Here's a possible scenario: Jane wants to leave on Friday, but needs to run her 
 
    science1>
 
-Then she starts a ``screen`` session with the -U option to say she wants accented characters to print properly (if she encounters any)::
+Then she starts a ``screen`` session::
 
    science1> screen
 
@@ -225,34 +225,40 @@ which clears the current terminal output and shows her the tail end of her scrip
    Calibrating WFIRST... DONE
    science1>
 
-Note that there's nothing special about the command finishing before she re-attached. She could have just as easily checked in on it while it was in progress over the weekend, but she was busy having fun.
+Note that there's nothing special about the command finishing before she re-attached. She could have just as easily checked in on it while it was in progress over the weekend, but she was busy having fun. Since everything's done, she decides that instead of detaching again, she will just exit ``screen``::
 
-+------------------+----------------------------+
-| Server hostname  | Use                        |
-+==================+============================+
-| plhstins1        | INS HST functional work    |
-+------------------+----------------------------+
-| plhstins2        | INS HST functional work    |
-+------------------+----------------------------+
-| science1         | Science / research use     |
-+------------------+----------------------------+
-| science3         | Science / research use     |
-+------------------+----------------------------+
-| science4         | Science / research use     |
-+------------------+----------------------------+
-| science5         | Science / research use     |
-+------------------+----------------------------+
-| science6         | Science / research use     |
-+------------------+----------------------------+
-| plscigpu1        | GPU computing              |
-+------------------+----------------------------+
-| plscigpu2        | GPU computing              |
-+------------------+----------------------------+
+   science1> exit
+   [screen is terminating]
+   science1>
+
+If she didn't ``exit``, that session would remain active (and she could reattach to it later).
 
 .. admonition:: Exercise
    :class: note
 
-   Log into one of the servers named above and start a ``screen`` session. Detach from it, close your terminal, and make sure you can reconnect and reattach to it successfully.
+   Log into one of the servers named below and start a ``screen`` session. Detach from it, close your terminal, and make sure you can reconnect and reattach to it successfully.
+
+   +------------------+----------------------------+
+   | Server hostname  | Use                        |
+   +==================+============================+
+   | plhstins1        | INS HST functional work    |
+   +------------------+----------------------------+
+   | plhstins2        | INS HST functional work    |
+   +------------------+----------------------------+
+   | science1         | Science / research use     |
+   +------------------+----------------------------+
+   | science3         | Science / research use     |
+   +------------------+----------------------------+
+   | science4         | Science / research use     |
+   +------------------+----------------------------+
+   | science5         | Science / research use     |
+   +------------------+----------------------------+
+   | science6         | Science / research use     |
+   +------------------+----------------------------+
+   | plscigpu1        | GPU computing              |
+   +------------------+----------------------------+
+   | plscigpu2        | GPU computing              |
+   +------------------+----------------------------+
 
 On to the training exercises!
 ================================
