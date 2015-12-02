@@ -26,6 +26,9 @@ Summer 2015 hires
 * Mees Fix
 * James White
 
+
 Fall 2015 hires
 =================
 * J. Brendan Hagan
+* Ben Sunnquist
+
