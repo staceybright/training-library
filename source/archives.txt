@@ -327,9 +327,8 @@ Data*. This will be downloaded as a zip. The file should look something
 like this: ``HLADATA-<numbers>.zip``. Unzip the data and view the contents.
 
 You should see some text files (.cat for example) in there that contain the 
-source lists. Again, these source lists could be useful, for example, 
-to make CMDs, and for a quick look, open them in an editor of your preference
-in Terminal.
+source lists. For a quick look, open them in an editor of your 
+preference in Terminal.
 
 After completing this training, please **give one of the source lists
 that you retrieved to your instructor**.
