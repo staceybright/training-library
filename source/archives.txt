@@ -307,10 +307,10 @@ Although it is preferable to have NExposures and ExpTime to be the same
 in making a CMD, this does not have to be the case for our purposes.
 
 Use the search forms under the column names to located data for Target
-'NGC6809' and Spectral\_Elt 'F606W' or 'F814W'. When you have found
-appropriate datasets, you can retrieve them by clicking on either the
-DAOphot or SExtractor links and these will be put into a shopping cart.
-Figure 8 shows where the shopping cart is located (middle of web page).
+'NGC6809' and Spectral\_Elt 'F606W' and 'F814W'. When you have found all 
+four appropriate datasets, you can retrieve them by clicking on either 
+the DAOphot or SExtractor links and these will be put into a shopping 
+cart. Figure 8 shows where the shopping cart is located (middle of web page).
 
 .. figure:: figures/archives/hla_shopping_cart.png
 
@@ -326,8 +326,10 @@ Make sure that you have the data that you want and click on *Fetch HLA
 Data*. This will be downloaded as a zip. The file should look something
 like this: ``HLADATA-<numbers>.zip``. Unzip the data and view the contents.
 
-You should see some text files in there that contain the source lists.
-Again, these source lists could be useful, for example, to make CMDs.
+You should see some text files (.cat for example) in there that contain the 
+source lists. Again, these source lists could be useful, for example, 
+to make CMDs, and for a quick look, open them in an editor of your preference
+in Terminal.
 
 After completing this training, please **give one of the source lists
 that you retrieved to your instructor**.
