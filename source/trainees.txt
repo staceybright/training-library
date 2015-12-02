@@ -25,3 +25,5 @@ Summer 2015 hires
 * Catherine Martlin
 * Mees Fix
 * James White
+* Ben Sunnquist
+
