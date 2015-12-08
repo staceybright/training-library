@@ -78,14 +78,57 @@ For example, if you want a file to be readable and writable by yourself, only re
 
    Use ``ls -l`` to verify the permissions and ownership are what you expect. If you're not sure, ask your trainer to try and read a file in your new private directory!
 
+Setting up a text editor
+========================
+
+Some new RIAs have a preference for a text editor for programming like ``vim`` or ``emacs``. For everyone else, TextWrangler is installed on your Institute machine already, and is a good starting point.
+
+.. figure:: figures/computer_setup/textwrangler_icon.png
+   :alt: The TextWrangler icon.
+
+   The TextWrangler icon.
+
+The first step is to open up TextWrangler by double-clicking the icon in your Applications folder. Once you've done that, select the "Install Command Line Tools..." option from the main menu as shown.
+
+.. figure:: figures/computer_setup/textwrangler_install_command_line_tools_menu.png
+   :alt: The menu showing the "Install Command Line Tools..." option
+
+   The menu showing the "Install Command Line Tools..." option.
+
+Choose to install the command line tools, as shown. You will be prompted for your password a couple of times.
+
+.. figure:: figures/computer_setup/textwrangler_install_command_line_tools_prompt.png
+   :alt: Dialog box asking you to confirm that you want to install the command line tools.
+
+   Dialog box asking you to confirm that you want to install the command line tools.
+
+Once they've installed, you should see a window like this one:
+
+.. figure:: figures/computer_setup/textwrangler_install_command_line_tools_success.png
+   :alt: Dialog box for successful installation.
+
+   Dialog box for successful installation.
+
+These steps make a new command, ``edit``, available in your terminal.
+
+Quit TextWrangler, then open a new terminal window and make sure TextWrangler appears when you use the edit command (e.g. ``edit myfile.txt``).
+
 .. _computer_setup_environment:
 
 Configuring STScI-specific environment variables
 =================================================
 
-A lot of tools developed within STScI assume the existence of certain environment variables that point to data on servers within the Institute. The default shell for new computers at the Institute is ``tcsh``, which means you should set these variables in the file ``.cshrc`` in your home directory.
+A lot of tools developed within STScI assume the existence of certain environment variables that point to data on servers within the Institute. The default shell for new computers at the Institute is ``tcsh``, which means you should set these variables in the file ``.cshrc`` in your home directory. If it does not exist already, you will have to create it.
 
-Here is an example ``.cshrc``::
+Open (or create) ``.cshrc`` with the following command::
+
+   edit ~/.cshrc
+
+.. tip::
+
+   Files starting with a ``.`` are hidden in the Finder, so it's often easier to open them from the command line.
+
+Here is an example ``.cshrc`` that you can copy and paste into yours::
 
     # Paths and stuff for accessing CDBS stuff
     # For WFC3
@@ -97,10 +140,31 @@ Here is an example ``.cshrc``::
     setenv lref /grp/hst/cdbs/lref/
     # For STIS
     setenv oref /grp/hst/cdbs/oref/
+    # Set a default editor
+    setenv EDITOR edit
+    setenv VISUAL edit
 
 As you may have guessed, setting variables in ``tcsh`` takes the form of ``setenv NAMEOFVAR /value/for/var``. You should set all of these variables, even if you are not on one of the listed instrument teams, as later training exercises will depend on them being set.
 
 To check that your changes have taken effect, open a **new terminal window** and type ``echo $oref``. You should see the value for ``oref`` from above printed out in the terminal.
+
+.. tip::
+
+   If you prefer another editor, change the ``setenv EDITOR`` and ``VISUAL`` lines accordingly.
+
+.. _git_configuration:
+
+Configure the git version control tool
+======================================
+
+We will use git in :ref:`version_control`, but let's take the opportunity now to tell it your name and email address. These will be used by git to identify who changed particular versions of the code. Run the commands below, updating them with your own name and work email address::
+
+   git config --global user.name "Name of RIA"
+   git config --global user.email "nria@stsci.edu"
+
+It's also a good idea to tell it about your preferred text editor (here we use ``edit``, as an alias to TextWrangler), which git will sometimes use when it wants you to describe your changes.
+
+   git config --global core.editor "edit"
 
 .. _computer_setup_ureka:
 
