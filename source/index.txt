@@ -27,6 +27,7 @@ Training guides and exercises for new RIAs
 #. :doc:`using_idl`
 #. :doc:`spectroscopy`
 #. :doc:`astrodrizzle`
+#. :doc:`drizzle`
 #. :doc:`photometry`
 
 *Also, once you have finished the training exercises, you will be assigned a project that relates to your instrument team assignment.*
@@ -65,6 +66,7 @@ Reference information
    using_idl
    spectroscopy
    astrodrizzle
+   drizzle
    photometry
    jwst_intro
    jwst_training
