@@ -36,7 +36,7 @@ To correct for the spherical aberration of Hubble's primary mirror, corrective o
 
 Detector Artifacts
 ---------------------------------
-The detectors aboard both ACS and WFC3 feature a small, but non-negligible, number of pixels classified as 'bad'.  These may be warm/hot pixels, unstable pixels, unbonded pixels, or pixels that are entirely dead.  In the case of WFC3/IR blemishes with lower than expected sensitivity ('blobs') are created by issues elsewhere in the optical path.  These pixels are generally detrimental to obtaining good, photometrically accurate images. In addition, cosmic rays are constantly bombarding the detectors.  Due to the high energies of these particles HST images show bright speckles/streaks (which do not correspond to any real source), especially in images with longer exposure times.  Instrument channels featuring multiple detector chips, such as WFC3/UVIS and ACS/WFC, have gaps inbetween the chips (chip gaps).  These gaps are the width of several pixels so single exposures from these instrument channels are bisected by a gap in which no data is recorded (as there are no pixels there).
+The detectors aboard both ACS and WFC3 feature a small, but non-negligible, number of pixels classified as 'bad'.  These may be warm/hot pixels, unstable pixels, unbonded pixels, or pixels that are entirely dead.  In the case of WFC3/IR blemishes with lower than expected sensitivity ('blobs') are created by issues elsewhere in the optical path.  These pixels are generally detrimental to obtaining good, photometrically accurate images. In addition, cosmic rays are constantly bombarding the detectors.  Due to the high energies of these particles HST images show bright speckles/streaks (which do not correspond to any real source), especially in images with longer exposure times.  Instrument channels featuring multiple detector chips, such as WFC3/UVIS and ACS/WFC, have gaps in-between the chips (chip gaps).  These gaps are the width of several pixels so single exposures from these instrument channels are bisected by a gap in which no data is recorded (as there are no pixels there).
 
 To fix these issues, dithered exposures are taken in flight and combined later by AstroDrizzle.
 
@@ -66,7 +66,7 @@ The actual process used to 'drizzle' and image consists of several steps.  Rough
 #. Drizzle single undistorted images (AstroDrizzle)
 #. Create median image (AstroDrizzle)
 #. Blot median image back to distorted frame (AstroDrizzle)
-#. Create cosmic ray mask
+#. Create cosmic ray mask (AstroDrizzle)
 #. **Create final undistorted, combined image** (AstroDrizzle)
 #. PROFIT!!!! (Science/pretty pictures)
 
@@ -74,14 +74,66 @@ Before any drizzling is actually done, images must be properly aligned.  The ali
 
 Steps one through seven are the main steps of the AstroDrizzle process.  Steps one through three remove distortion and reject any permanently 'bad' pixels (dead pixels, blobs, etc) whereas steps four through six flag and reject cosmic rays.  Step 7 creates the final optimized drizzled product which can be used for step 8 at your leisure.
 
-Alignment
+Alignment using TweakReg
 =========
-The first step in image combination using DrizzlePac is to align (register) the images.  Images taken within the same visit are usually aligned to each other and often do not need to be registered.  However, uncertainties in the guide star catalog introduce errors in the pointing of the telescope, so images taken in separate visits should not be assumed to be aligned.  An example of misaligned images is shown below:
+
+Images taken within the same visit are usually aligned (registered) to each other and often do not need to be registered.  However, uncertainties in the guide star catalog introduce errors in the pointing of the telescope, so images taken in separate visits should not be assumed to be aligned.  An example of misaligned images is shown below:
 
 .. image:: figures/drizzle/misaligned_source.png
     :scale: 75 %
     :alt: misaligned_image
 
-The first image (shown in red)is clearly offset from the second (shown in cyan) by nearly 10 pixels.  In general an alignment with 0.1 pixels is considered good.
+The first image (shown in red)is clearly offset from the second (shown in cyan) by nearly 10 pixels (roughly an arcsecond).  In general an alignment within 0.1 pixels is considered good.
 
-Pixel positions are mapped to positions on the sky (RA/Dec) via the world coordinate system  To do this, the world coordinate system (WCS) of every input image must be 'tweaked' to the other images.
+Pixel positions are mapped to positions on the sky (RA/Dec) via the world coordinate system (WCS).  Naturally, the positions of sources **should** have the same celestial coordinates between exposures (this obviously isn't always the case for objects with large proper motions).  Misaligned images like the example above show the same sources having different celestial positions- an error that must be rectified before running AstroDrizzle.  To do this, the WCS of the input images must be 'tweaked' so the positions of the sources match across all of the images.
+
+The zeroth step in the drizzle process is making sure the images are aligned.  This remainder of this section will guide you through aligning images using TweakReg.  The example images we use feature the open cluster NGC 6791.
+
+.. admonition:: Exercise
+   :class: note
+
+   Retrieve all the WFC3 ``flt`` images (if ``flc`` images are available, retrieve those instead) of NGC 6791 in program 12379 from MAST in filters F606W and F502N.  Refer to your archive training (or your trainer) for help if needed.
+
+================== ======== ========== ====== =====
+Rootname           Targname Date-obs   Filter Exptime
+================== ======== ========== ====== =====
+ibnh01z1q_flt.fits NGC-6791 2010-11-17 F606W  30.0
+ibnh01z2q_flt.fits NGC-6791 2010-11-17 F606W  360.0
+ibnh01zjq_flt.fits NGC-6791 2010-11-18 F606W  360.0
+ibnh01zmq_flt.fits NGC-6791 2010-11-18 F606W  30.0
+ibnh01zoq_flt.fits NGC-6791 2010-11-18 F606W  30.0
+ibnh01zpq_flt.fits NGC-6791 2010-11-18 F606W  30.0
+ibnh09a5q_flt.fits NGC-6791 2011-03-08 F606W  348.0
+ibnh09a8q_flt.fits NGC-6791 2011-03-08 F606W  30.0
+ibnh01z4q_flt.fits NGC-6791 2010-11-17 F502N  60.0
+ibnh01z7q_flt.fits NGC-6791 2010-11-17 F502N  60.0
+ibnh01zfq_flt.fits NGC-6791 2010-11-18 F502N  420.0
+ibnh01zhq_flt.fits NGC-6791 2010-11-18 F502N  420.0
+ibnh09adq_flt.fits NGC-6791 2011-03-09 F502N  400.0
+ibnh09agq_flt.fits NGC-6791 2011-03-09 F502N  60.0
+================== ======== ========== ====== =====
+
+Open some of the images in ds9 and press ``Match -> Frame -> WCS``.  Notice that images from the Visit 01 (``ibnh01*flt.fits``) are well aligned to one another, but images from the Visit 09 (``ibnh09*flt.fits``) are not aligned with Visit 01.
+
+
+TweakReg
+--------
+The alignment process via TweakReg consists of a few steps:
+
+1. Make a catalog of point source pixel positions for each input image via a source finding algorithm similar to IRAF's ``DAOFIND`` task
+#. Convert the pixel position catalogs to sky position catalogs (accounting for geometric distortion)
+#. Find common source positions between catalogs
+#. Calculate the shifts, rotation and scale needed to align sky positions of sources in the input images
+#. Update the input image headers with the newly calculated WCS information
+
+You can run TweakReg through Pyraf/Python, though only Python DrizzlePac interfaces will be featured in this document.  However, before ou can actually run TweakReg, the distortion information must be put into the header.  Enter the ``SSBX`` environment and open a python shell of your choice (ipython/ipython notebook will likely work the best) ::
+
+>>> import glob
+>>> from stwcs import updatewcs # module to update WCS with distortion solution
+>>> for flt in glob.glob('*flt.fits'): updatewcs.updatewcs(flt)
+
+TweakReg can now be run either through a python command or through the ``teal`` interface: ::
+
+>>> from stsci.tools import teal
+>>> from drizzlepac import tweakreg
+>>> teal.teal('tweakreg')
