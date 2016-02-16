@@ -75,7 +75,7 @@ Before any drizzling is actually done, images must be properly aligned.  The ali
 Steps one through seven are the main steps of the AstroDrizzle process.  Steps one through three remove distortion and reject any permanently 'bad' pixels (dead pixels, blobs, etc) whereas steps four through six flag and reject cosmic rays.  Step 7 creates the final optimized drizzled product which can be used for step 8 at your leisure.
 
 Alignment using TweakReg
-=========
+========================
 
 Images taken within the same visit are usually aligned (registered) to each other and often do not need to be registered.  However, uncertainties in the guide star catalog introduce errors in the pointing of the telescope, so images taken in separate visits should not be assumed to be aligned.  An example of misaligned images is shown below:
 
@@ -120,20 +120,59 @@ TweakReg
 --------
 The alignment process via TweakReg consists of a few steps:
 
-1. Make a catalog of point source pixel positions for each input image via a source finding algorithm similar to IRAF's ``DAOFIND`` task
+1. Make a catalog of point source pixel positions for each input image and reference image via a source finding algorithm similar to IRAF's ``DAOFIND`` task
 #. Convert the pixel position catalogs to sky position catalogs (accounting for geometric distortion)
-#. Find common source positions between catalogs
+#. Find common source positions between reference and input image catalogs
 #. Calculate the shifts, rotation and scale needed to align sky positions of sources in the input images
 #. Update the input image headers with the newly calculated WCS information
 
-You can run TweakReg through Pyraf/Python, though only Python DrizzlePac interfaces will be featured in this document.  However, before ou can actually run TweakReg, the distortion information must be put into the header.  Enter the ``SSBX`` environment and open a python shell of your choice (ipython/ipython notebook will likely work the best) ::
+You can run TweakReg through Pyraf or Python, though it's recommended to stick to Python (as Pyraf/IRAF support is being discontinued by STScI).  Enter the ``SSBX`` environment and open a python shell of your choice (ipython/ipython notebook will likely work the best).  Many tasks that originated from IRAF (such as the tasks in DrizzlePac) be run through the ``teal`` GUI ::
 
 >>> import glob
->>> from stwcs import updatewcs # module to update WCS with distortion solution
->>> for flt in glob.glob('*flt.fits'): updatewcs.updatewcs(flt)
-
-TweakReg can now be run either through a python command or through the ``teal`` interface: ::
-
 >>> from stsci.tools import teal
 >>> from drizzlepac import tweakreg
 >>> teal.teal('tweakreg')
+
+Though not practical for scripting, the GUIs are helpful when learning how to use the tasks.  Clearly, there are many parameters to play with, but for now we'll go over the most important ones.  In the tweakreg parameters window:
+
+    * Set the input parameter to ``*flt.fits``.  These are the input images
+    * Set the updatewcs parameter to ``Yes`` so TweakReg can incorporate the geometric distortion into the alignment.
+    * Set the refimage parameter to ``ibnh01z2q_flt.fits`` (or any one of the other input images).  All of the input images will be aligned to the refimage.
+    * Set expand_refcat to ``Yes``.  This allows TweakReg to add unmatched sources from input images to the reference image source catalog on the fly (this is great for mosaicking!).
+    * Set enforce_user_order to ``No``.  This lets TweakReg come up with a good order of input images when computing alignment transformations.
+
+The first (and probably most important) step of TweakReg is building a catalog of sources in the input and reference images.  The relevant parameters for this step are within the *imagefind Parameters* and *refimagefind Parameters* sections:
+
+    * Press the **refimagefind Parameters** button and set conv_width to ``3.5`` for WFC3/UVIS and ACS/WFC (``2.5`` for WFC3/IR).
+    * For peakmin and peakmax use an image viewer (such as DS9 or ATV) to inspect the cores of the stars and set these parameters based on the range of values you see.  These parameters set the brightness cutoffs for stars used in alignment.
+    * For WFC3/UVIS and ACS/WFC set the threshold high (try ``100.0`` for now) to avoid detection cosmic rays and faint sources.
+    * Press **Save & Quit** then the **imagefind Parameters** button and input the same values from the **refimagefind Parameters** GUI.  This tells TweakReg how to do source finding for the input images.
+
+You can now run TweakReg from this GUI by pressing **Execute**, or you can run via python command.  To do the latter press **Save & Quit** and type in your python shell: ::
+
+>>> tweakreg.TweakReg(glob.glob('*flt.fits'))
+
+The parameter values you populated in the GUI are saved and used when you call TweakReg through the command.  However, if you do not want to use the GUI at all, you can set all of the parameters within the TweakReg call: ::
+
+    >>> findpars = {'threshold':100.,'conv_width':3.5,'peakmin':1000.,'peakmax':40000.}
+    # Parameters in sub parameter windows are passed as dictionaries
+    >>> tweakreg.TweakReg(glob.glob('*flt.fits'), expand_refcat=True, enforce_user_order=False,
+    ...                   updatewcs=True, refimage='ibnh01z2q_flt.fits', imagefindcfg=findpars,
+    ...                   refimagefindcfg=findpars)
+
+TweakReg will then output a number of messages detailing the sources, matches, and shifts that were found and will also make plots that help indicate the quality of alignment solution:
+
+.. image:: figures/drizzle/hist2d_ibnh09a5q_flt.png
+    :scale: 50 %
+    :alt: histogram_2d
+.. image:: figures/drizzle/vector_ibnh09a5q_flt.png
+    :scale: 35 %
+    :alt: vector_residuals
+
+.. image:: figures/drizzle/residuals_ibnh09a5q_flt.png
+    :scale: 100 %
+    :alt: histogram_2d
+
+Coach made some plots, explain dis later pl0x
+
+If the residuals do not show any systematics and are small enough to indicate good alignments then TweakReg can be rerun with the updatehder set to ``Yes`` in the GUI or given as the keyword ``updatehdr=True`` in the call from python.  When all the images are aligned, you can then proceed to run AstroDrizzle.
