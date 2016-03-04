@@ -2,8 +2,7 @@
 Basic Spectroscopy
 ******************
 
-This document gives an overview of the Hubble Space Telescope Spectrographs--COS and STIS. 
+The spectroscopy :download:`training document <pdf_guides/spectroscopy_training.pdf>` gives an overview of spectrographs in general and the basics of spectroscopy. Also included are exercises that will introduce you to using the data from HST's spectrographs--COS and STIS.
 
-.. note::
+There are also :download:`slides <pdf_guides/intro_to_hst_spec_3.2.pdf>` that give a high-level overview of COS, STIS, and MAMA detectors.
 
-   This guide is maintained as a PDF document. :download:`Download it <pdf_guides/spectroscopy_training.pdf>` and get started.
