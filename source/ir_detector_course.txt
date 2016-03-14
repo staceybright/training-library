@@ -1,0 +1,9 @@
+************
+IR Detectors
+************
+
+This is a simple introduction to IR detectors and their data for JWST 
+and HST. Lecturers for this course include Massimo Robberto, Mike Regan, 
+Eddie Bergeron and others. Course materials can be found here:
+
+`IR Detector Course <https://confluence.stsci.edu/display/INSTraining/IR+Detector+Course>`_
