@@ -307,7 +307,7 @@ Although it is preferable to have NExposures and ExpTime to be the same
 in making a CMD, this does not have to be the case for our purposes.
 
 Use the search forms under the column names to located data for Target
-'NGC6809' and Spectral\_Elt 'F606W' and 'F814W'. For this demonstration, look for four wfpc2 data sets: two F606W and two F814W. When you have found all 
+'NGC6809' and Spectral\_Elt 'F606W' and 'F814W'. For this demonstration, look for four WFPC2 data sets: two F606W and two F814W. When you have found all 
 four appropriate datasets, you can retrieve them by clicking on either 
 the DAOphot or SExtractor links and these will be put into a shopping 
 cart. Figure 8 shows where the shopping cart is located (middle of web page). Your cart should match Figure 9.
