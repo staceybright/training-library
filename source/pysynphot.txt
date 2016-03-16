@@ -199,7 +199,7 @@ To write the spectrum in a FITS file use::
 
     >>> src_spectrum.writefits('phoenix_a0v.fits')
 
-Use the following to read the spectrum from already existing FITS file. Here we are using the file that we created above, so sp_a0v and src_spectrum are the same. (You can also use full path here.) ::
+Use the following to read the spectrum from already existing FITS file. Here we are using the file that we created above, so ``sp_a0v`` and ``src_spectrum`` are the same. (You can also use full path here.) ::
 
     >>> sp_a0v = pysynphot.FileSpectrum('phoenix_a0v.fits')
 
