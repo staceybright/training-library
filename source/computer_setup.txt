@@ -157,12 +157,12 @@ To check that your changes have taken effect, open a **new terminal window** and
 Configure the git version control tool
 ======================================
 
-We will use git in :ref:`version_control`, but let's take the opportunity now to tell it your name and email address. These will be used by git to identify who changed particular versions of the code. Run the commands below, updating them with your own name and work email address::
+We will use git in the :doc:`version_control` module later on, but let's take the opportunity now to tell it your name and email address. These will be used by git to identify who changed particular versions of the code. Run the commands below, updating them with your own name and work email address::
 
    git config --global user.name "Name of RIA"
    git config --global user.email "nria@stsci.edu"
 
-It's also a good idea to tell it about your preferred text editor (here we use ``edit``, as an alias to TextWrangler), which git will sometimes use when it wants you to describe your changes.
+It's also a good idea to tell it about your preferred text editor (here we use ``edit``, as an alias to TextWrangler), which git will sometimes open for you when it wants you to describe your changes. ::
 
    git config --global core.editor "edit"
 
