@@ -6,6 +6,13 @@ IDL stands for "Interactive Data Language." It is a complete computer language g
 
 The intention of this tutorial is to provide the IDL basics to understand how to perform simple astronomical data analysis. We assume no previous knowledge of IDL, but at least a simple understanding of any other computer language.
 
+.. warning::
+
+   This document is no longer supported as STScI as a whole is moving towards Python. These sections are meant only to give a brief introduction. You can use the PDF as a reference as needed. 
+   
+   **Ask your trainer which sections to work through.**
+    
 .. note::
 
    This guide is maintained as a PDF document. :download:`Download it <pdf_guides/IDL-training-june2015.pdf>` and get started.
+
