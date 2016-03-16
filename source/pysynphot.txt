@@ -17,7 +17,11 @@ Pysynphot requires access to data files that are distributed separately by `Cali
 
     % setenv PYSYN_CDBS /grp/hst/cdbs/
 
-Typing this every time you want to use Pysynphot in your code is rather tedious, so you can add the appropriate line to your ``.cshrc`` file.
+If you're using the bash shell instead of the default (tcsh), the appropriate command is::
+
+    $ export PYSYN_CDBS="/grp/hst/cdbs/"
+
+Typing this every time you want to use Pysynphot in your code is rather tedious, so you can add the appropriate line to your ``.cshrc`` (or ``.bashrc``) file.
 
 All the information that Pysynphot needs to compute the throughput of an HST instrument mode, is contained within three types of data files: ``*_tmg.fits``, ``*_tmc.fits`` and ``*_tmt.fits``. The master graph table (``tmg``) describes all the possible light paths through the telescope and instruments. It describes which component files should be combined to find the throughput of the instrument configuration. Thermal component lookup table (``tmt``) contains the full directory path and name of each component thermal element to be used: in other words, it is the lookup table for HST component thermal characteristics. Master component lookup table (``tmc``) contains the full directory path and name of each component throughput table to be used. These files get updated when new components are added or  replaced, keywords are edited, or when a new thermal emissivity or throughput table is delivered to the database.
 
@@ -66,7 +70,7 @@ Using analytic spectra
 Pysynphot also gives the user the ability to generate analytic spectra. For example::
 
     >>> bb = pysynphot.spectrum.BlackBody(10000)  # Creates a blackbody spectrum at 10000 Kelvin
-    >>> pow = pysynphot.spectrum.PowerLaw(8000, -2)  # Creates a power law spectrum with a reference wavelength of 8000 Å and index of 2
+    >>> pow = pysynphot.spectrum.PowerLaw(8000, -2)  # Creates a power law spectrum with a reference wavelength of 8000 Å and index of -2
     >>> composite_spec = bb + pow
 
 See the documentation for more details on usage of the various analytic spectrum options.
@@ -119,7 +123,7 @@ The observation object contains several methods, the most often used is the coun
 
     >>> obs.countrate()
 
-The default unit for countrate is counts/s for a point source or counts per second per square arcsec for an extended source. Also the count rate is integrated over the area of HST Primary mirror specified in :math:`\mathrm{cm}^2`.
+The default unit for countrate is counts/s for a point source or counts per second per square arcsec for an extended source. Also the count rate is integrated over the area of HST Primary mirror specified in cm\ :sup:`2`.
 
 To get the countrate in specified units use the ``effstim()`` method: ::
 
@@ -145,13 +149,20 @@ Using Pysynphot for JWST
 
 In the examples below we will use some functions from the packages POPPY (Physical Optics Propagation in PYthon) and WebbPSF (JWST PSF Simulation Tool) with Pysynphot. As mentioned earlier the current distribution of Pysynphot does not support JWST observing modes in a similar manner as HST. Using some of the WebbPSF functionality makes use of Pysynphot relatively easier.
 
-Import necessary modules::
+.. note::
+
+   As of March 2016, the SSBX software distribution has an out-of-date version of WebbPSF. Before starting the exercises below, you must load the ``ssbdev`` environment and declare an environment variable to point to the WebbPSF reference data. ::
+
+      % ssbdev
+      [ssbdev-osx] % setenv WEBBPSF_PATH /grp/jwst/ote/webbpsf-data/
+      [ssbdev-osx] % ipython
+
+In your Python session, import necessary modules::
 
     >>> import pysynphot
     >>> import poppy  # Physical Optics Propagation in PYthon
     >>> import webbpsf  # JWST PSF Simulation Tool
     >>> import numpy as np
-
 
 Import the function to retrieve an appropriate Pysynphot Spectrum object for a given stellar spectral type from the PHOENIX or Castelli & Kurucz model libraries: ::
 
@@ -195,7 +206,7 @@ To write the spectrum in a FITS file use::
 
     >>> src_spectrum.writefits('phoenix_a0v.fits')
 
-Use the following to read the spectrum from already existing FITS file. Here we are using the file that we created above, so sp_a0v and src_spectrum are the same. (You can also use full path here.) ::
+Use the following to read the spectrum from already existing FITS file. Here we are using the file that we created above, so ``sp_a0v`` and ``src_spectrum`` are the same. (You can also use full path here.) ::
 
     >>> sp_a0v = pysynphot.FileSpectrum('phoenix_a0v.fits')
 
