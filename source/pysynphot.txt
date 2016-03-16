@@ -66,7 +66,7 @@ Using analytic spectra
 Pysynphot also gives the user the ability to generate analytic spectra. For example::
 
     >>> bb = pysynphot.spectrum.BlackBody(10000)  # Creates a blackbody spectrum at 10000 Kelvin
-    >>> pow = pysynphot.spectrum.PowerLaw(8000, -2)  # Creates a power law spectrum with a reference wavelength of 8000 Å and index of 2
+    >>> pow = pysynphot.spectrum.PowerLaw(8000, -2)  # Creates a power law spectrum with a reference wavelength of 8000 Å and index of -2
     >>> composite_spec = bb + pow
 
 See the documentation for more details on usage of the various analytic spectrum options.
@@ -119,7 +119,7 @@ The observation object contains several methods, the most often used is the coun
 
     >>> obs.countrate()
 
-The default unit for countrate is counts/s for a point source or counts per second per square arcsec for an extended source. Also the count rate is integrated over the area of HST Primary mirror specified in :math:`\mathrm{cm}^2`.
+The default unit for countrate is counts/s for a point source or counts per second per square arcsec for an extended source. Also the count rate is integrated over the area of HST Primary mirror specified in cm\ :sup:`2`.
 
 To get the countrate in specified units use the ``effstim()`` method: ::
 
