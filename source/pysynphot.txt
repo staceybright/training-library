@@ -65,8 +65,8 @@ Using analytic spectra
 ----------------------
 Pysynphot also gives the user the ability to generate analytic spectra.  For example: ::
 
-    >>> bb = pysynphot.Blackbody(10000)  # Creates a blackbody spectrum at 10000 Kelvin
-    >>> pow = pysynphot.PowerLaw(8000, -2)  # Creates a power law spectrum with a reference wavelength of 8000 Å and index of 2
+    >>> bb = pysynphot.spectrum.BlackBody(10000)  # Creates a blackbody spectrum at 10000 Kelvin
+    >>> pow = pysynphot.spectrum.PowerLaw(8000, -2)  # Creates a power law spectrum with a reference wavelength of 8000 Å and index of 2
     >>> composite_spec = bb + pow
 
 See the documentation for more details on usage of the various analytic spectrum options.
