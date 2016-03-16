@@ -3,7 +3,6 @@ Using MAST (a.k.a. the Archive)
 ********************************
 
 | *Archives: You might use them all the time*
-| Version 7.1 - M. Bourque, S. Bright, June 2014 *(converted to reST May 2015 by J. Long)*
 | Authors: M. Bourque, S. Bright, M. A. Wolfe, S. Ogaz, J. Mack, M. Sosey, J White
 
 --------------------------------------------
