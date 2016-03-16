@@ -17,7 +17,11 @@ Pysynphot requires access to data files that are distributed separately by `Cali
 
     % setenv PYSYN_CDBS /grp/hst/cdbs/
 
-Typing this every time you want to use Pysynphot in your code is rather tedious, so you can add the appropriate line to your ``.cshrc`` file.
+If you're using the bash shell instead of the default (tcsh), the appropriate command is::
+
+    $ export PYSYN_CDBS="/grp/hst/cdbs/"
+
+Typing this every time you want to use Pysynphot in your code is rather tedious, so you can add the appropriate line to your ``.cshrc`` (or ``.bashrc``) file.
 
 All the information that Pysynphot needs to compute the throughput of an HST instrument mode, is contained within three types of data files: ``*_tmg.fits``, ``*_tmc.fits`` and ``*_tmt.fits``. The master graph table (``tmg``) describes all the possible light paths through the telescope and instruments. It describes which component files should be combined to find the throughput of the instrument configuration. Thermal component lookup table (``tmt``) contains the full directory path and name of each component thermal element to be used: in other words, it is the lookup table for HST component thermal characteristics. Master component lookup table (``tmc``) contains the full directory path and name of each component throughput table to be used. These files get updated when new components are added or  replaced, keywords are edited, or when a new thermal emissivity or throughput table is delivered to the database.
 
