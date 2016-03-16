@@ -15,7 +15,7 @@ Making and previewing changes
 
 The first step to making a change is to clone the repository, giving you a local copy to work with::
 
-   git clone git@github.com:stsci-riab/riatraining.git
+   git clone https://github.com/stsci-riab/riatraining.git
 
 This creates a ``riatraining`` directory in whatever folder you're in. The web pages you're reading now are automatically generated from the ``.txt`` files in the ``source`` subdirectory. To generate them on your computer, you need to install required packages from ``requirements.txt``::
 
