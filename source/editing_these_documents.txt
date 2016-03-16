@@ -13,9 +13,12 @@ These documents live in a ``git`` repository, making it easy for you to modify t
 Making and previewing changes
 =============================
 
-The first step to making a change is to clone the repository, giving you a local copy to work with::
+The first step to making a change is to clone the repository, giving you a local copy to work with. You can do this is two ways::
 
    git clone https://github.com/stsci-riab/riatraining.git
+   
+   Or if you have an ssh key for github set up (see :doc:`tricks`):
+   git clone github.com/stsci-riab/riatraining.git
 
 This creates a ``riatraining`` directory in whatever folder you're in. The web pages you're reading now are automatically generated from the ``.txt`` files in the ``source`` subdirectory. To generate them on your computer, you need to install required packages from ``requirements.txt``::
 
