@@ -149,13 +149,20 @@ Using Pysynphot for JWST
 
 In the examples below we will use some functions from the packages POPPY (Physical Optics Propagation in PYthon) and WebbPSF (JWST PSF Simulation Tool) with Pysynphot. As mentioned earlier the current distribution of Pysynphot does not support JWST observing modes in a similar manner as HST. Using some of the WebbPSF functionality makes use of Pysynphot relatively easier.
 
-Import necessary modules::
+.. note::
+
+   As of March 2016, the SSBX software distribution has an out-of-date version of WebbPSF. Before starting the exercises below, you must load the ``ssbdev`` environment and declare an environment variable to point to the WebbPSF reference data. ::
+
+      % ssbdev
+      [ssbdev-osx] % setenv WEBBPSF_PATH /grp/jwst/ote/webbpsf-data/
+      [ssbdev-osx] % ipython
+
+In your Python session, import necessary modules::
 
     >>> import pysynphot
     >>> import poppy  # Physical Optics Propagation in PYthon
     >>> import webbpsf  # JWST PSF Simulation Tool
     >>> import numpy as np
-
 
 Import the function to retrieve an appropriate Pysynphot Spectrum object for a given stellar spectral type from the PHOENIX or Castelli & Kurucz model libraries: ::
 
