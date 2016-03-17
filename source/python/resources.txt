@@ -1,0 +1,67 @@
+**************************************
+Appendix: Resources and Best Practices
+**************************************
+
+More about Python Coding Styles and Best Practices
+==================================================
+
+At various points in this training, we have touched on some of the "best practices" that are recommended when coding in Python. Two good resources for learning more about these best practices are PEP-8 (https://www.python.org/dev/peps/pep-0008/), which covers general conventions, and PEP-257 (https://www.python.org/dev/peps/pep-0257/), which discusses docstrings. If you have an interest in scripting in Python, please take the time to review these two documents.
+
+Resources
+=========
+
+.. _python_links:
+
+References
+----------
+
+-  http://docs.python.org/ --- The official Python documentation
+
+-  https://www.python.org/dev/peps/pep-0008/ --- PEP8, the Python style guide
+
+-  http://www.astropy.org/ --- Astropy, a module being developed at STScI and elsewhere to support astronomical uses of Python
+
+-  http://wiki.python.org/moin/HowTo/Sorting --- A topic guide to sorting lists of objects in Python
+
+-  http://ipython.org/ipython-doc/stable/interactive/tutorial.html --- The official IPython tutorial
+
+-  http://matplotlib.org/ --- The matplotlib website
+
+-  http://docs.scipy.org/doc/scipy/reference/ --- The official SciPy documentation
+
+-  http://wiki.scipy.org/Cookbook - The SciPy community cookbook, with "recipes" to accomplish common tasks with NumPy/SciPy *(n.b. these are unofficial, and may not always be correct or optimal)*
+
+Tutorials and texts
+-------------------
+
+-  http://python4astronomers.github.com/ --- Workshop materials from "Practical Python for Astronomers"
+
+-  http://code.google.com/edu/languages/google-python-class/ --- Google's Python Class materials
+
+-  http://learnpythonthehardway.org/book/ --- "Learn Python the Hard Way" is an online textbook that starts from the very basics of programming and builds up to Python proficiency
+
+-  http://www.astro.washington.edu/users/vanderplas/Astr599_2014/notebooks/ -- Jake VanderPlas' IPython notebooks from a Python workshop he taught (start with ``00_intro``)
+
+Advanced plotting tools
+-----------------------
+
+-  https://github.com/yhat/ggplot --- make your plots look like ggplot from the R data analysis environment
+
+-  https://github.com/olgabot/prettyplotlib --- better defaults and prettification for matplotlib plots
+
+-  http://stanford.edu/~mwaskom/software/seaborn/index.html --- another approach to prettifying matplotlib
+
+-  https://plot.ly/ --- a commercial online plot hosting service with a free tier
+
+Mailing Lists
+-------------
+
+These Python themed STScI e-mail lists are available through the Outlook Web App (OWA):
+
+-  **pylunch**: A mailing list for a lunch group that presents and discusses
+   Python related material.
+
+-  **python-interested**: A mailing list usually used to discuss bugs,
+   fixes, and how to do some outrageous tasks that astronomers come up
+   with.
+
