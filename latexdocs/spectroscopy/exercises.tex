@@ -51,13 +51,13 @@ You have already received calibrated products from the archive, but let's calibr
 
 The pipelines can be imported and run in python as shown:
 \begin{alltt}
-python> from pyraf import iraf
-python> from iraf import stsdas, hst_calib, stis
-python> iraf.calstis(file_name, verbose = "Yes", outroot=output_dir)
+python> from stistools import calstis
+python> calstis.calstis(file_name, verbose=True, outroot="output_dir/")
 
 python> import calcos
-python> calcos.calcos(file_name, outdir=output_dir)
+python> calcos.calcos(file_name, outdir="output_dir/")
 \end{alltt}
+
 Recall looking at the column names before--you can access the data for each of those columns by indexing the science data extension and the column name. Don't forget that COS will contain 2 rows instead of 1 like STIS. If you want to combine both of those pesky COS segments into one array, use ravel(). 
 \begin{alltt}
 python> your_cos_wavel = data["wavelength"]
