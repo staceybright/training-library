@@ -676,74 +676,61 @@ Also, it bears mentioning, both ``.readlines()`` and ``for ... in fileobject`` w
 
 .. _python_objects_attributes:
 
-Objects, Instances, Attributes, Functions, and Methods
+Functions, Objects, Instances, Attributes, and Methods
 ======================================================
 
-Python is an object oriented programming language and before we go any
-further, it is important to note the differences and uses of objects,
-instances, attributes, functions, and methods.
+Python is an object oriented programming language and before we go any further, it is important to note the differences and uses of functions, objects, instances, attributes, and methods.
 
--  Objects:
+**Functions** are a way to wrap up a piece of commonly used code and give it a short name for easy reuse. They accept **arguments**, which are names that can be referred to within the **function body**. Here we declare a function to add two numbers. Its name is ``add``, it accepts two arguments (``a`` and ``b``), and **returns** the sum of ``a`` and ``b``.
 
-   Data carriers that also carry functions and attributes that work on
-   that data. In :ref:`python_dtype`, integers, floats, lists, tuples, and
-   dictionaries are all objects.
+   >>> def add(a, b):
+   ...      return a + b
+   ...
+   >>> add(2, 3)
+   5
 
--  Instance:
+You can use a function call anywhere that another expression would be valid, except for the left-hand side of a variable assignment (for reasons that should be understandable... try it and see!).
 
-   In :ref:`python_dictionaries` when we said ``filters = { ... }`` we created
-   an instance of a dictionary, ``filters``. Similarly, while ``myfile``
-   was an instance of a ``file`` object created with ``open()``.
+   >>> my_new_list = [1, 3, add(2, 3), 7]
+   >>> my_new_list
+   [1, 3, 5, 7]
 
--  Attributes:
+**Objects** in Python (and other object-oriented languages) can be thought of as containers that hold both some data about an entity and some actions that can be taken with that entity. This sounds pretty abstract, so let's talk about a particular object first: when we called the built-in function ``open()`` above, we got a **file object** called ``myfile``. ::
 
-   For example: ``closed`` is an attribute of an instance of a Python file.
-   In :ref:`python_file_operations` we used ``myfile.closed`` to check if the ``myfile`` instance had been closed.
-   Attributes do not have the '()' like functions or methods do.
 
--  Functions:
+   >>> myfile = open('k2_catalog.csv')
+   >>> type(myfile)  # what type of object is this variable?
+   <type 'file'>
 
-   A function is a named piece of code that can be run by "calling" it. To call a function, place parentheses after the name. If a function operates on values, those go inside the parentheses and are called "arguments". If the function produces a result, that is its "return value", which can be assigned to a variable.
+The output here indicates that the ``myfile`` object that is an **instance** of the ``file`` type (or **class**). The ``myfile`` object holds on to a few different pieces of information about how the Python environment will interact with ``k2_catalog.csv``. For example, since we didn't specify whether we were reading or writing this file, it was opened in "read mode". We can inspect the ``mode`` **attribute** to verify this::
 
-   ``len()`` is a function, and in :ref:`python_different_sequences` we pass it the
-   tuple ``('first element', 'second element')``.
+   >>> myfile.mode
+   'r'
 
--  Methods:
+Attributes are little nuggets of information that pertain to the object's current state, and they can be accessed using the dot notation shown above. ``myfile.mode`` means "the ``mode`` attribute of object ``myfile``".
 
-   A method is a function attached to an object that then has access
-   to all other methods and attributes of that object. Therefore we
-   usually do not have to pass as much information to methods, and
-   methods are easier to read. All methods are functions, but not all
-   functions are methods.
+A **method** is essentially a function that operates on a particular object instance. (Sometimes you will hear people say that it is "bound" to an object.) File objects have a ``close`` method, which tells the Python environment that we are done with them. Here, we call the ``close`` method on ``myfile``::
 
-   For example, in :ref:`python_immutable_tuples_mutable_lists`, after we
-   created the instance ``psf_ee_vals``, we append a number to that list
-   using the :ref:`append() <python:tut-morelists>` method with the line ``psf_ee_vals.append(0.99)``.
+   >>> myfile.close()
 
-   In :ref:`python_file_operations` we also used the methods ``readlines()`` and ``close()``
-   which belong to the ``file`` class.
+This does some internal bookkeeping and updates the ``closed`` **attribute**, which we can check::
 
-Notice that we use dot notation to call an attribute or a method of a
-particular instance. As we will see in :ref:`python_modules`, dot notation
-will also be used to call a method or a function from a particular
-module.
+   >>> myfile.closed
+   True
 
-Double Underscore
-=================
+If you look back over the training so far, you'll see we've been using objects, instances, attributes, and methods all along.
 
-In Python you will notice certain names beginning and ending with double
-underscores. These names are used for attributes and methods that are
-used or created by the interpreter (for a discussion on the definition
-of attributes and methods see :ref:`python_objects_attributes`). Examples include:
+-  In :ref:`python_dtype`, integers, floats, lists, tuples, and dictionaries are all objects.
 
--  ``__file__`` : an attribute automatically created by the interpreter
+-  In :ref:`python_dictionaries` we used ``filters = { ... }`` to create an instance of a dictionary named ``filters``. (And as discussed, ``myfile`` is an instance of a ``file``.)
 
--  ``__add__`` : a method with special meaning to the interpreter
+-  In :ref:`python_file_operations` we used ``myfile.closed`` to check if the ``myfile`` instance had been closed.
 
--  ``__init__`` : a method implicitly called by the interpreter, defined
-   by the programmer
+-  ``len()`` is a function, and in :ref:`python_different_sequences` we pass it the tuple ``('first element', 'second element')`` and it returns the length (2).
 
-(We will see examples of a few of these later on :ref:`python_scripts`.)
+-  In :ref:`python_immutable_tuples_mutable_lists`, after we created the instance ``psf_ee_vals``, we append a number to that list using the :ref:`append() <python:tut-morelists>` method with the line ``psf_ee_vals.append(0.99)``. Also, in :ref:`python_file_operations` we also used the methods ``readlines()`` and ``close()`` which belong to the ``file`` class.
+
+Notice that we use dot notation to refer to an attribute or a method of a particular instance. As we will see in :ref:`python_modules`, dot notation will also be used to refer to a method or a function from a particular module.
 
 Built-in functions
 ==================
@@ -1011,3 +998,8 @@ Examples::
    ...            continue
    ...        else:
    ...            sys.exit('We do not need a number above 5.')
+
+.. rubric:: Footnotes
+
+.. [#iterationtuple] Under the hood, ``enumerate()`` is really making an ``(index, element)`` *tuple* for every element in ``mytuple``! By putting ``idx, item`` in the ``for`` statement, you're "unpacking" the tuple into two separate variables, just like we did in the variable assignment example with multiple left-hand-side values.
+.. [#hashable] What's "hashable"? In practice, you won't care about this beyond the fact that lists don't make for good dictionary keys. Python internally calculates a place to store your value based on the key, and to do that consistently requires that the key be *immutable*. See the `Python glossary <https://docs.python.org/glossary.html#term-hashable>`_ for gory details.

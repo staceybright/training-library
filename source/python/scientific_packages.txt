@@ -990,10 +990,3 @@ Now we plot the ideal blackbody, noisy data, and fitted blackbody for comparison
    How do the ideal and fitted function compare? How does this change when you change
    the noise properties (for example, if you use only additive or only multiplicative
    noise, or change the scale of the additive noise to twice the mean rather than half)?
-
-
-
-.. rubric:: Footnotes
-
-.. [#iterationtuple] Under the hood, ``enumerate()`` is really making an ``(index, element)`` *tuple* for every element in ``mytuple``! By putting ``idx, item`` in the ``for`` statement, you're "unpacking" the tuple into two separate variables, just like we did in the variable assignment example with multiple left-hand-side values.
-.. [#hashable] What's "hashable"? In practice, you won't care about this beyond the fact that lists don't make for good dictionary keys. Python internally calculates a place to store your value based on the key, and to do that consistently requires that the key be *immutable*. See the `Python glossary <https://docs.python.org/glossary.html#term-hashable>`_ for gory details.

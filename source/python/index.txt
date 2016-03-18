@@ -32,4 +32,4 @@ You can use the **Next** and **Previous** buttons at the bottom of the page to n
    basics
    scientific_packages
    scripting
-
+   resources
