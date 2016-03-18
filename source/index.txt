@@ -21,7 +21,7 @@ Training guides and exercises for new RIAs
 #. :doc:`computer_setup`
 #. :doc:`version_control`
 #. :doc:`archives`
-#. :doc:`python`
+#. :doc:`python/index`
 #. :doc:`pyraf`
 #. :doc:`pysynphot`
 #. :doc:`using_idl`
@@ -60,7 +60,7 @@ Reference information
    computer_setup
    version_control
    archives
-   python
+   python/index
    pyraf
    pysynphot
    using_idl
