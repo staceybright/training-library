@@ -281,7 +281,7 @@ Lastly, we need to know how to add more packages (and delete them) in the future
     conda install --name [name of environment] [name of package]
     conda remove --name [name of environment] [name of package]
 
-If you decide that you don't like/need an environment, you can delete it!::
+If you decide that you don't like/need an environment, you can delete it! ::
 
     conda remove --name [name of environment] --all
 
