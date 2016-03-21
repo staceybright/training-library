@@ -287,7 +287,7 @@ If you decide that you don't like/need an environment, you can delete it!::
 
 .. note::
 
-    For more information on dealing with Conda and playing with environments, check out the 'Conda page <http://conda.pydata.org/docs/index.html>`_ .
+    For more information on dealing with Conda and playing with environments, check out the `Conda page <http://conda.pydata.org/docs/index.html>`_ .
 
 Verify IDL is installed
 ========================
