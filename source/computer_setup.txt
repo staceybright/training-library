@@ -194,7 +194,7 @@ Installing Ureka for internal users
 
 .. warning::
 
-    This section is only for users still using/who need to use the legacy Ureka install through the ``ssbx`` or ``ssbdev``. If you are a new user, please skip down to the next section.
+    This section is only for users still using/who need to use the legacy Ureka install through the ``ssbx`` or ``ssbdev`` aliases. If you are a new user, please skip down to the :ref:`next section <installing-conda>`.
     
 The Institute's Science Software Branch distributes a package containing all of the essentials for scientific computing for astronomy. The version for outside users is called Ureka (you may have it on your home computer), but we use a special version of Ureka internally. Like Ureka, this package includes all the usual suspects: Python, IRAF, PyRAF, IPython + the IPython Notebook, NumPy, SciPy, matplotlib, ds9, etc. For more information, consult the `complete list <http://ssb.stsci.edu/ssbx/docs/components.html>`_ (or the `SSBREL complete list <http://ssb.stsci.edu/ssbrel/docs/components.html>`_).
 
@@ -214,14 +214,14 @@ When that completes, open a *new* terminal window and type ``ssbx`` to activate 
 
     If you are a laptop user, make a habit of running ``/Users/Shared/sync_ssb`` while you are connected to the Institute network, at least once a week. Desktops will automatically sync nightly at 6:30 AM, unless the computer is off.
 
-.._installing-conda:
+.. _installing-conda:
 
 Installing Conda
 ================
 
 The Institute's Science Software Branch currently distributes a package that contains some essentials for scientific computing for astronomy, however, we are starting to switch over to Conda as the direct successor to Ureka. As a result, we suggest that you install Conda, and set up your own environments with the necessary packages. One of the main reasons we recommend this is because of Python 2.7 and Python 3 and the differences between them. We discuss this further in the Python module of the training, however since we are working with both Python 2.7 and Python 3 code at the Institute, it is beneficial to be able to work with both.
 
-Getting started, we must install Conda from bash and when doing this you can choose to install either Anaconda or Miniconda. We've decided to use Miniconda which you can download `here <http://conda.pydata.org/miniconda.html>`_. Make sure to choose Python 2.7, 64 bit for Mac OS X which will ensure that your root environment will run Python 2.7. 
+Getting started, we must install Conda from bash. When doing this you can choose to install either Anaconda or Miniconda. We've decided to use Miniconda which you can download `here <http://conda.pydata.org/miniconda.html>`_. Make sure to choose Python 2.7, 64 bit for Mac OS X. 
 
 Now, in your terminal, type::
 
@@ -237,7 +237,7 @@ Now, we can check our environments and add some new ones. First, to see the list
 
 You should only see your root environment. For reasons that are a little confusing, we don't want to use our ``root`` environment to do all our work, so let's create a new environment that will be our main environment that runs Python 2.7.  
 
-Since we installed Miniconda, we get to install all our own programs and packages and most of what we need can be installed by simply installing the handy STScI package in the following way:: 
+Since we installed Miniconda, we get to install all our own programs and packages. Most of what we need can be installed by simply installing the STScI package in the following way:: 
     
     conda create --name python2 -c http://ssb.stsci.edu/conda-dev/ stsci
 
