@@ -2,7 +2,7 @@
 Setting Up Your Computer
 *************************
 
-*Authors: Joseph Long, Matthew Bourque, Sara Ogaz, Amber Armstrong, Michael Dulude, and Tiffany Borders*
+*Authors: Keira Brooks, Joseph Long, Matthew Bourque, Sara Ogaz, Amber Armstrong, Michael Dulude, and Tiffany Borders*
 
 The Institute provides you a computer when you are hired, and sets it up with a core set of software. (Some new hires get a loaner computer while a new machine is ordered and prepared for them.) They'll buy you a new one every three years, if you're good. Even though ITSD is responsible for installing important things like Office and antivirus software for all, it's up to each RIA to set their system up the way they want. For science-related uses, most new Institute machines are Macs, so this guide will assume that's what you have.
 
@@ -194,7 +194,7 @@ Installing Ureka for internal users
 
 .. warning::
 
-    This section is only for users still using/who have been asked specifically to use SSB. If you are a new user, please skip down to the next section.
+    This section is only for users still using/who need to use the legacy Ureka install through the ``ssbx`` or ``ssbdev``. If you are a new user, please skip down to the next section.
     
 The Institute's Science Software Branch distributes a package containing all of the essentials for scientific computing for astronomy. The version for outside users is called Ureka (you may have it on your home computer), but we use a special version of Ureka internally. Like Ureka, this package includes all the usual suspects: Python, IRAF, PyRAF, IPython + the IPython Notebook, NumPy, SciPy, matplotlib, ds9, etc. For more information, consult the `complete list <http://ssb.stsci.edu/ssbx/docs/components.html>`_ (or the `SSBREL complete list <http://ssb.stsci.edu/ssbrel/docs/components.html>`_).
 
@@ -213,15 +213,15 @@ When that completes, open a *new* terminal window and type ``ssbx`` to activate 
 .. note::
 
     If you are a laptop user, make a habit of running ``/Users/Shared/sync_ssb`` while you are connected to the Institute network, at least once a week. Desktops will automatically sync nightly at 6:30 AM, unless the computer is off.
-    
+
+.._installing-conda:
+
 Installing Conda
 ================
 
-The Institute's Science Software Branch currently distributes a package that contains some essentials for scientific computing for astronomy, however, this package is slowly being phased out. As a result, we suggest that instead you install Miniconda, and set up your own environments with the necessary packages. One of the main reasons we recommend this is because of Python 2.7 and Python 3 and the differences between them. We discuss this further in the Python section of the training, however since we are working with both Python 2.7 and Python 3 code at the Institute, we cannot completely move to Python 3 and being able to work within both is beneficial.
+The Institute's Science Software Branch currently distributes a package that contains some essentials for scientific computing for astronomy, however, we are starting to switch over to Conda as the direct successor to Ureka. As a result, we suggest that you install Conda, and set up your own environments with the necessary packages. One of the main reasons we recommend this is because of Python 2.7 and Python 3 and the differences between them. We discuss this further in the Python module of the training, however since we are working with both Python 2.7 and Python 3 code at the Institute, it is beneficial to be able to work with both.
 
-Getting starting, we must install Conda from bash. When installing Conda, you can choose to install Anaconda or Miniconda. While Anaconda can be more convenient, Miniconda allows you to create specific environments according to your needs. Specifically, we are installing Miniconda that we can easily switch between Python versions.
-
-Download Miniconda `here <http://conda.pydata.org/miniconda.html>`_ and make sure to choose Python 2.7, 64 bit for Mac OS X. This will ensure that your root environment will run Python 2.7. 
+Getting started, we must install Conda from bash and when doing this you can choose to install either Anaconda or Miniconda. We've decided to use Miniconda which you can download `here <http://conda.pydata.org/miniconda.html>`_. Make sure to choose Python 2.7, 64 bit for Mac OS X which will ensure that your root environment will run Python 2.7. 
 
 Now, in your terminal, type::
 
@@ -235,13 +235,13 @@ Now, we can check our environments and add some new ones. First, to see the list
     
     conda info --envs
 
-You should only see your root environment. For reasons that are a little confusing, we don't want to use our ``root`` environment to do all our works so let's create a new environment that will be our main environment that runs Python 2.7.  
+You should only see your root environment. For reasons that are a little confusing, we don't want to use our ``root`` environment to do all our work, so let's create a new environment that will be our main environment that runs Python 2.7.  
 
-Since we installed Miniconda, we get to install all our own programs and packages. Most of what we need can be installed by simply installing the STScI package in the following way:: 
+Since we installed Miniconda, we get to install all our own programs and packages and most of what we need can be installed by simply installing the handy STScI package in the following way:: 
     
     conda create --name python2 -c http://ssb.stsci.edu/conda-dev/ stsci
 
-I call this environment ``python2`` so that I always know which Python version I am using. You can call this environment whatever you want. We have added the STScI package to our python2 environment to start, which will give you all your usually Python friends (NumPy, Astropy, matplotlib, etc.) and also make sure that you have iPython and iPython Notebook. Now we enter this environment and then check to see exactly which packages have been added.::
+I call this environment ``python2`` so that I always know which Python version I am using. You can call this environment whatever you want. We have added the STScI package to our python2 environment to start, which will give you all your usual Python friends (NumPy, Astropy, matplotlib, etc.) and also make sure that you have IPython and IPython Notebook. Now we enter this environment and then check to see exactly which packages have been added.::
 
     source activate python2
     conda list
@@ -276,7 +276,7 @@ Now that you have several environments, let's check them all out::
 
     conda info --envs
     
-Lastly, we need to know how to add more packages (and delete them) in the future. The following is how you can do this from ``root`` or a different environment. If you are in the environment you are changing, you do not need the ``--name [name of package`` part. 
+Lastly, we need to know how to add more packages (and delete them) in the future. The following is how you can do this from ``root`` or a different environment. If you are in the environment you are changing, you do not need the ``--name [name of package]`` part. 
     
     conda install --name [name of environment] [name of package]
     conda remove --name [name of environment] [name of package]
