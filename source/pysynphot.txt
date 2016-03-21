@@ -193,7 +193,7 @@ The folowing two functions from WebbPSF can be used to generate source spectrum 
    | Create an observation using the above source spectrum and bandpass and calculate the count rate.
 
 Other ways to get the spectrum and the bandpass
---------------------------------------------------
+-----------------------------------------------
 
 The ``$PYSYN_CDBS/grid/`` directory contains stellar atmosphere models. They are available in FITS table format for use with Pysynphot and can be accessed with class *Icat*.
 
@@ -241,7 +241,7 @@ Use this observation to calculate the count rate of 7.5 magnitude A0V star in NI
 
 
 Calculate the zeropoint of the F430M filter
-----------------------------------------
+-------------------------------------------
 
 Normalize the spectrum to 1 count/sec to calculate zeropoint of the filter::
 
