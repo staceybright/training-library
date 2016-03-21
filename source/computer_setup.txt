@@ -2,7 +2,7 @@
 Setting Up Your Computer
 *************************
 
-*Authors: Joseph Long, Matthew Bourque, Sara Ogaz, Amber Armstrong, Michael Dulude, and Tiffany Borders*
+*Authors: Keira Brooks, Joseph Long, Matthew Bourque, Sara Ogaz, Amber Armstrong, Michael Dulude, and Tiffany Borders*
 
 The Institute provides you a computer when you are hired, and sets it up with a core set of software. (Some new hires get a loaner computer while a new machine is ordered and prepared for them.) They'll buy you a new one every three years, if you're good. Even though ITSD is responsible for installing important things like Office and antivirus software for all, it's up to each RIA to set their system up the way they want. For science-related uses, most new Institute machines are Macs, so this guide will assume that's what you have.
 
@@ -118,39 +118,60 @@ Quit TextWrangler, then open a new terminal window and make sure TextWrangler ap
 Configuring STScI-specific environment variables
 =================================================
 
-A lot of tools developed within STScI assume the existence of certain environment variables that point to data on servers within the Institute. The default shell for new computers at the Institute is ``tcsh``, which means you should set these variables in the file ``.cshrc`` in your home directory. If it does not exist already, you will have to create it.
+A lot of tools developed within STScI assume the existence of certain environment variables that point to data on servers within the Institute. The default shell for new computers at the Institute is ``tcsh``, however you will want to change this to ``bash``. To do so, you have to do a couple things.
 
-Open (or create) ``.cshrc`` with the following command::
+In the terminal, change your shell with the following command::
 
-   edit ~/.cshrc
+    chsh -s /bin/bash
+
+
+Close your terminal, and open a new one to finalize this change. 
+
+Now, you need to set the environment variables in the file ``.bashrc`` in your home directory. This file probably does not exist so you will have to create it.
+
+Open (or create) ``.bashrc`` with the following command::
+
+   edit ~/.bashrc
 
 .. tip::
 
    Files starting with a ``.`` are hidden in the Finder, so it's often easier to open them from the command line.
 
-Here is an example ``.cshrc`` that you can copy and paste into yours::
+Here is an example ``.bashrc`` that you can copy and paste into yours::
 
     # Paths and stuff for accessing CDBS stuff
     # For WFC3
-    setenv iref /grp/hst/cdbs/iref/
-    # For ACS
-    setenv jref /grp/hst/cdbs/jref/
-    setenv jtab /grp/hst/cdbs/jtab/
-    # For COS
-    setenv lref /grp/hst/cdbs/lref/
-    # For STIS
-    setenv oref /grp/hst/cdbs/oref/
-    # Set a default editor
-    setenv EDITOR edit
-    setenv VISUAL edit
+    export iref="/grp/hst/cdbs/iref/"
 
-As you may have guessed, setting variables in ``tcsh`` takes the form of ``setenv NAMEOFVAR /value/for/var``. You should set all of these variables, even if you are not on one of the listed instrument teams, as later training exercises will depend on them being set.
+    # For ACS
+    export jref="/grp/hst/cdbs/jref/"
+    export jtab="/grp/hst/cdbs/jtab/"
+
+    # For COS
+    export lref="/grp/hst/cdbs/lref/"
+
+    # For STIS
+    export oref="/grp/hst/cdbs/oref/"
+
+    # Set a default editor
+    # If you prefer another editor, change the export EDITOR and VISUAL lines accordingly.
+    export EDITOR=edit
+    export VISUAL=edit
+
+    # Pysynphot
+    export PYSYN_CDBS="/grp/hst/cdbs/"
+
+As you may have guessed, setting variables in ``bash`` takes the form of ``export NAMEOFVAR="/value/for/var"``. You should set all of these variables, even if you are not on one of the listed instrument teams, as later training exercises will depend on them being set.
+
+To set these changes, save the file and typing the following into the command line::
+
+    source ~/.bashrc
 
 To check that your changes have taken effect, open a **new terminal window** and type ``echo $oref``. You should see the value for ``oref`` from above printed out in the terminal.
 
 .. tip::
 
-   If you prefer another editor, change the ``setenv EDITOR`` and ``VISUAL`` lines accordingly.
+   If you prefer another editor, change the ``export EDITOR`` and ``VISUAL`` lines accordingly.
 
 .. _git_configuration:
 
@@ -171,6 +192,10 @@ It's also a good idea to tell it about your preferred text editor (here we use `
 Installing Ureka for internal users
 ====================================
 
+.. warning::
+
+    This section is only for users still using/who need to use the legacy Ureka install through the ``ssbx`` or ``ssbdev`` aliases. If you are a new user, please skip down to the :ref:`next section <installing-conda>`.
+    
 The Institute's Science Software Branch distributes a package containing all of the essentials for scientific computing for astronomy. The version for outside users is called Ureka (you may have it on your home computer), but we use a special version of Ureka internally. Like Ureka, this package includes all the usual suspects: Python, IRAF, PyRAF, IPython + the IPython Notebook, NumPy, SciPy, matplotlib, ds9, etc. For more information, consult the `complete list <http://ssb.stsci.edu/ssbx/docs/components.html>`_ (or the `SSBREL complete list <http://ssb.stsci.edu/ssbrel/docs/components.html>`_).
 
 There are three release channels of the SSB IRAF + Python distribution: SSBDEV, SSBX, and SSBREL. SSBDEV is updated nightly, SSBX weekly, and SSBREL infrequently as it is the most stable option.
@@ -188,6 +213,81 @@ When that completes, open a *new* terminal window and type ``ssbx`` to activate 
 .. note::
 
     If you are a laptop user, make a habit of running ``/Users/Shared/sync_ssb`` while you are connected to the Institute network, at least once a week. Desktops will automatically sync nightly at 6:30 AM, unless the computer is off.
+
+.. _installing-conda:
+
+Installing Conda
+================
+
+The Institute's Science Software Branch currently distributes a package that contains some essentials for scientific computing for astronomy, however, we are starting to switch over to Conda as the direct successor to Ureka. As a result, we suggest that you install Conda, and set up your own environments with the necessary packages. One of the main reasons we recommend this is because of Python 2.7 and Python 3 and the differences between them. We discuss this further in the Python module of the training, however since we are working with both Python 2.7 and Python 3 code at the Institute, it is beneficial to be able to work with both.
+
+Getting started, we must install Conda from bash. When doing this you can choose to install either Anaconda or Miniconda. We've decided to use Miniconda which you can download `here <http://conda.pydata.org/miniconda.html>`_. Make sure to choose Python 2.7, 64 bit for Mac OS X. 
+
+Now, in your terminal, type::
+
+    bash Miniconda-latest-MacOSX-x86_64.sh
+    
+Follow the instructions as prompted. Accepting the defaults should be sufficient at this time. Now Conda is installed! 
+
+If you want a detailed introduction on how to use Conda, you can check out `<http://conda.pydata.org/docs/test-drive.html>`_ which will guide you step-by-step through some of what Conda can do. If instead, you are on board for a quick environment setup you can follow along here.
+
+Now, we can check our environments and add some new ones. First, to see the list of environments::
+    
+    conda info --envs
+
+You should only see your root environment. For reasons that are a little confusing, we don't want to use our ``root`` environment to do all our work, so let's create a new environment that will be our main environment that runs Python 2.7.  
+
+Since we installed Miniconda, we get to install all our own programs and packages. Most of what we need can be installed by simply installing the STScI package in the following way:: 
+    
+    conda create --name python2 -c http://ssb.stsci.edu/conda-dev/ stsci
+
+I call this environment ``python2`` so that I always know which Python version I am using. You can call this environment whatever you want. We have added the STScI package to our python2 environment to start, which will give you all your usual Python friends (NumPy, Astropy, matplotlib, etc.) and also make sure that you have IPython and IPython Notebook. Now we enter this environment and then check to see exactly which packages have been added.::
+
+    source activate python2
+    conda list
+    
+We already know we are using Python 2.7, but just in case, you can check by typing::
+
+    python --version
+    
+Now, since we are running Python 2.7 in our python2 environment, let's add a new environment that is generally the same, but uses Python 3. 
+
+.. note::
+
+    It's impractical to make all your environments the same so it's best to just pick one that you will use more often and use other environments for specific tasks.
+    
+First we return to root::
+
+    source deactivate
+
+You can check to see where you are by typing::
+
+    conda info --envs
+    
+And seeing which environment the asterisk is next to. 
+    
+To add your Python 3 environment::
+
+    conda create --name python3 python=3 -c http://ssb.stsci.edu/conda-dev/ stsci
+    
+I have named my new environment ``python3`` but, again, you can name yours whatever you want. 
+
+Now that you have several environments, let's check them all out::
+
+    conda info --envs
+    
+Lastly, we need to know how to add more packages (and delete them) in the future. The following is how you can do this from ``root`` or a different environment. If you are in the environment you are changing, you do not need the ``--name [name of package]`` part. 
+    
+    conda install --name [name of environment] [name of package]
+    conda remove --name [name of environment] [name of package]
+
+If you decide that you don't like/need an environment, you can delete it!::
+
+    conda remove --name [name of environment] --all
+
+.. note::
+
+    For more information on dealing with Conda and playing with environments, check out the 'Conda page <http://conda.pydata.org/docs/index.html>`_ .
 
 Verify IDL is installed
 ========================
