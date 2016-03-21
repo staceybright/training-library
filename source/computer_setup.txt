@@ -276,7 +276,7 @@ Now that you have several environments, let's check them all out::
 
     conda info --envs
     
-Lastly, we need to know how to add more packages (and delete them) in the future. The following is how you can do this from ``root`` or a different environment. If you are in the environment you are changing, you do not need the ``--name [name of package]`` part. ::
+Lastly, we need to know how to add more packages (and delete them) in the future. The following is how you can do this from ``root`` or a different environment. If you are in the environment you are changing (that is, you have done ``source activate [name of environment]`` already in that terminal), you do not need the ``--name [name of environment]`` part. ::
     
     conda install --name [name of environment] [name of package]
     conda remove --name [name of environment] [name of package]
