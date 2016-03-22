@@ -163,6 +163,8 @@ Here is an example ``.bashrc`` that you can copy and paste into yours::
 
 As you may have guessed, setting variables in ``bash`` takes the form of ``export NAMEOFVAR="/value/for/var"``. You should set all of these variables, even if you are not on one of the listed instrument teams, as later training exercises will depend on them being set.
 
+It is not obvious, but the trailing slash in the $oref definition is required for CALSTIS to function properly.  Be sure not to leave it off.
+
 To set these changes, save the file and typing the following into the command line::
 
     source ~/.bashrc
