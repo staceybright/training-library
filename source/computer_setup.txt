@@ -256,7 +256,7 @@ Now, since we are running Python 2.7 in our python2 environment, let's add a new
 
     It's impractical to make all your environments the same so it's best to just pick one that you will use more often and use other environments for specific tasks.
     
-First we return to the root (default) envorinmet by typing::
+First we return to the root (default) environment by typing::
 
     source deactivate
 
@@ -334,7 +334,7 @@ Log in to a server
 
 The Institute has a whole herd of (mostly) Linux servers sitting in the server room downstairs. If you have a long-running task that you don't want to interrupt by taking your laptop home or rebooting your desktop, you should use a back-room server to run your analysis.
 
-The command to remotely connect to a server is ``ssh SERVERNAME`` (e.g. ``ssh plhstins1`` or ``ssh science1``). It will attempt to log you in with your current username and prompt you for your password. This is the same password you use to unlock your computer. To enable X forwading you can use the ``-XY`` option (e.g. ``ssh -XY plhstins1``). This allows for displays that use x (which is linux's default backend) to be forwarded to your monitor.
+The command to remotely connect to a server is ``ssh SERVERNAME`` (e.g. ``ssh plhstins1`` or ``ssh science1``). It will attempt to log you in with your current username and prompt you for your password. This is the same password you use to unlock your computer. To enable X forwarding you can use the ``-XY`` option (e.g. ``ssh -XY plhstins1``). This allows for displays that use X (which is Linux's default backend) to be forwarded to your monitor.
 
 Any commands you run in an ssh session will execute on the server, not on your personal computer. This means any data you need should be copied to a Central Store directory so that the server can see it.
 
@@ -441,7 +441,7 @@ The next chapters explain useful tools with exercises interspered with the text.
 
 Wondering who your trainer is for a particular section? Check the `Confluence wiki page <https://confluence.stsci.edu/display/INSRIA/RIA+training>`_ for your training group (find your training group in the sidebar, after expanding the "RIA training" category). Other current RIAs have also done this training, so they're a good resource for quick questions if your trainer is busy.
 
-Without further ado, it's time to learn about MAST retreivals (a.k.a. the Archive).
+Without further ado, it's time to learn about MAST retrievals (a.k.a. the Archive).
 
 (If you're following along on paper, visit https://confluence.stsci.edu/display/INSRIA/RIA+training and choose the link for MAST archive training.)
 
