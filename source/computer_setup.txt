@@ -404,14 +404,21 @@ Note that there's nothing special about the command finishing before she re-atta
 
 If she didn't ``exit``, that session would remain active (and she could reattach to it later).
 
-A server's ``screen`` session can be customized in a ``~/.screenrc`` configuration file.  A useful setup that includes a lower status bar that labels parallel multiplexed terminals is::
+Screen allows multiplexing of the terminal into multiple shells.  This means that one can have multiple emulated terminals available within one session (e.g. over one SSH connection).  To create a new shell session within screen, type ``C-a c`` (create).  To close a session, simply ``exit`` the shell.  In order to swap between different shells, type ``C-a #`` (where # is the number of the shell session).  A handy shortcut to swap between the two most recently accessed shells is ``C-a C-a``.
+
+A server's screen session can be customized in the ``~/.screenrc`` configuration file.  A useful setup that includes a lower status bar labelling the multiplexed shells is::
 
    shell -$SHELL
    defscrollback 10000
    termcapinfo xterm-256color ti@:te@
    caption always "%?%F%{-b bc}%:%{-b bb}%?%C|%D|%M %d|%H%?%F%{+u wb}%? %L=%-Lw%45>%{+b by}%n%f*%t%{-}%+Lw%-0<"
 
-To scroll above the terminal window boundaries, read up on screen's copy mode.
+To scroll above the terminal window boundaries, use screen's copy mode::
+
+   Enter copy mode:    C-a [ or C-a <esc>
+   Scroll up:          C-u
+   Scroll down:        C-d
+   Exit copy mode:     ] or <esc>
 
 .. admonition:: Exercise
    :class: note
