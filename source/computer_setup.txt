@@ -2,7 +2,7 @@
 Setting Up Your Computer
 *************************
 
-*Authors: Keira Brooks, Joseph Long, Matthew Bourque, Sara Ogaz, Amber Armstrong, Michael Dulude, and Tiffany Borders*
+*Authors: Keira Brooks, Joseph Long, Matthew Bourque, Sara Ogaz, Dave Borncamp, Amber Armstrong, Michael Dulude, and Tiffany Borders*
 
 The Institute provides you a computer when you are hired, and sets it up with a core set of software. (Some new hires get a loaner computer while a new machine is ordered and prepared for them.) They'll buy you a new one every three years, if you're good. Even though ITSD is responsible for installing important things like Office and antivirus software for all, it's up to each RIA to set their system up the way they want. For science-related uses, most new Institute machines are Macs, so this guide will assume that's what you have.
 
@@ -256,11 +256,11 @@ Now, since we are running Python 2.7 in our python2 environment, let's add a new
 
     It's impractical to make all your environments the same so it's best to just pick one that you will use more often and use other environments for specific tasks.
     
-First we return to root::
+First we return to the root (default) envorinmet by typing::
 
     source deactivate
 
-You can check to see where you are by typing::
+You can check information on your configured environments by typing::
 
     conda info --envs
     
@@ -268,7 +268,8 @@ And seeing which environment the asterisk is next to.
     
 To add your Python 3 environment::
 
-    conda create --name python3 python=3 -c http://ssb.stsci.edu/conda-dev/ stsci
+    conda create --name python3 python=3 numpy
+    conda install --name python3 -c http://ssb.stsci.edu/conda-dev/ stsci
     
 I have named my new environment ``python3`` but, again, you can name yours whatever you want. 
 
@@ -295,7 +296,7 @@ Verify IDL is installed
 IDL should be pre-installed on new Institute machines. To check, open a terminal window and type ``idl``. You should see something like this::
 
    $ idl
-   IDL Version 8.2.3, Mac OS X (darwin x86_64 m64). (c) 2013, Exelis Visual Information Solutions, Inc.
+   IDL Version 8.4, Mac OS X (darwin x86_64 m64). (c) 2013, Exelis Visual Information Solutions, Inc.
    Installation number: 90853.
    Licensed for use by: Space Telescope
 
@@ -333,7 +334,7 @@ Log in to a server
 
 The Institute has a whole herd of (mostly) Linux servers sitting in the server room downstairs. If you have a long-running task that you don't want to interrupt by taking your laptop home or rebooting your desktop, you should use a back-room server to run your analysis.
 
-The command to remotely connect to a server is ``ssh SERVERNAME`` (e.g. ``ssh science1``). It will attempt to log you in with your current username and prompt you for your password. This is the same password you use to unlock your computer.
+The command to remotely connect to a server is ``ssh SERVERNAME`` (e.g. ``ssh plhstins1`` or ``ssh science1``). It will attempt to log you in with your current username and prompt you for your password. This is the same password you use to unlock your computer. To enable X forwading you can use the ``-XY`` option (e.g. ``ssh -XY plhstins1``). This allows for displays that use x (which is linux's default backend) to be forwarded to your monitor.
 
 Any commands you run in an ssh session will execute on the server, not on your personal computer. This means any data you need should be copied to a Central Store directory so that the server can see it.
 
@@ -416,6 +417,8 @@ If she didn't ``exit``, that session would remain active (and she could reattach
    +------------------+----------------------------+
    | plhstins2        | INS HST functional work    |
    +------------------+----------------------------+
+   | plhstins3        | INS HST functional work    |
+   +------------------+----------------------------+
    | science1         | Science / research use     |
    +------------------+----------------------------+
    | science3         | Science / research use     |
@@ -438,7 +441,7 @@ The next chapters explain useful tools with exercises interspered with the text.
 
 Wondering who your trainer is for a particular section? Check the `Confluence wiki page <https://confluence.stsci.edu/display/INSRIA/RIA+training>`_ for your training group (find your training group in the sidebar, after expanding the "RIA training" category). Other current RIAs have also done this training, so they're a good resource for quick questions if your trainer is busy.
 
-Without further ado, it's time to learn about MAST (a.k.a. the Archive).
+Without further ado, it's time to learn about MAST retreivals (a.k.a. the Archive).
 
 (If you're following along on paper, visit https://confluence.stsci.edu/display/INSRIA/RIA+training and choose the link for MAST archive training.)
 
@@ -449,5 +452,5 @@ Additional resources
 
 .. rubric:: Footnotes
 
-.. [#externalhelpdesk] There's an *external* helpdesk too, help@stsci.edu. For IT issues, though, you want the internal one. The external one is for astronomers to ask questions about things like the archive, SSB software, data characteristics, and the like.
+.. [#externalhelpdesk] There's an *external* helpdesk too, help@stsci.edu. For IT issues, though, you want the internal one. The external helpdesk is for science/instrument support. It is a way for astronomers to ask questions about things like the archive, SSB software, data characteristics, instrument information and the like.
 .. [#umask] Files are created with a default set of permissions set by your "umask", which will most likely make them world-readable by default. See `this Wikipedia article <https://en.wikipedia.org/wiki/Umask>`_ if you're really curious.
