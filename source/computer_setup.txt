@@ -402,6 +402,8 @@ Note that there's nothing special about the command finishing before she re-atta
    [screen is terminating]
    science1>
 
+If she didn't ``exit``, that session would remain active (and she could reattach to it later).
+
 A server's ``screen`` session can be customized in a ``~/.screenrc`` configuration file.  A useful setup that includes a lower status bar that labels parallel multiplexed terminals is::
 
    shell -$SHELL
@@ -410,8 +412,6 @@ A server's ``screen`` session can be customized in a ``~/.screenrc`` configurati
    caption always "%?%F%{-b bc}%:%{-b bb}%?%C|%D|%M %d|%H%?%F%{+u wb}%? %L=%-Lw%45>%{+b by}%n%f*%t%{-}%+Lw%-0<"
 
 To scroll above the terminal window boundaries, read up on screen's copy mode.
-
-If she didn't ``exit``, that session would remain active (and she could reattach to it later).
 
 .. admonition:: Exercise
    :class: note
