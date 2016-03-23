@@ -3,7 +3,7 @@ Using MAST (a.k.a. the Archive)
 ********************************
 
 | *Archives: You might use them all the time*
-| Authors: M. Bourque, S. Bright, M. A. Wolfe, S. Ogaz, J. Mack, M. Sosey, J White
+| Authors: M. Bourque, S. Bright, M. A. Wolfe, S. Ogaz, J. Mack, M. Sosey, J. White
 
 --------------------------------------------
 
@@ -306,14 +306,14 @@ Although it is preferable to have NExposures and ExpTime to be the same
 in making a CMD, this does not have to be the case for our purposes.
 
 Use the search forms under the column names to located data for Target
-'NGC6809' and Spectral\_Elt 'F606W' and 'F814W'. For this demonstration, look for four WFPC2 data sets: two F606W and two F814W. When you have found all 
-four appropriate datasets, you can retrieve them by clicking on either 
-the DAOphot or SExtractor links and these will be put into a shopping 
+'NGC6809' and Spectral\_Elt 'F606W' and 'F814W'. For this demonstration, look for four WFPC2 data sets: two F606W and two F814W. When you have found all
+four appropriate datasets, you can retrieve them by clicking on either
+the DAOphot or SExtractor links and these will be put into a shopping
 cart. Figure 8 shows where the shopping cart is located (middle of web page). Your cart should match Figure 9.
 
    .. admonition:: Note
       :class: note
-      
+
       You will need one F606W and one F814W dataset for the photometry section
 
 
@@ -331,8 +331,8 @@ Make sure that you have the data that you want and click on *Fetch HLA
 Data*. This will be downloaded as a zip. The file should look something
 like this: ``HLADATA-<numbers>.zip``. Unzip the data and view the contents.
 
-You should see some text files (.cat for example) in there that contain the 
-source lists. For a quick look, open them in an editor of your 
+You should see some text files (.cat for example) in there that contain the
+source lists. For a quick look, open them in an editor of your
 preference in Terminal.
 
 After completing this training, please **give one of the source lists
