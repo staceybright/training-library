@@ -76,16 +76,23 @@ For those who already know a programming language or two, an important part of l
 Environment and Set Up
 ======================
 
-SSB Environment
----------------
-
-On your work computer, the easiest way to access up-to-date versions of Python and related tools is with the :ref:`Institute's SSB packages <computer_setup_ureka>`. For the purposes of this training, we will use ``ssbx``, which you activate in a terminal by typing::
-
-   $ ssbx
+Python packages and environments are managed with ``conda``, as described in :ref:`installing-conda`. Ensure you are in the ``conda`` environment you set up in :ref:`the computer setup module <installing-conda>` when you go through this training.
 
 .. note::
 
    In this text, when discussing commands to be typed at a command prompt, ``$`` is a placeholder for your command prompt (which may be something like ``yourname@localhost $``). You don't need to type it, just the commands following it.
+
+.. tip::
+
+   Check which ``python`` you're using with this command::
+
+      $ which python
+      /Users/myusername/anaconda/envs/astroconda27/bin/python
+
+   You can also check the version of Python install with::
+
+      $ python -V
+      Python 2.7.11 :: Continuum Analytics, Inc.
 
 
 Interactive Python Environment
