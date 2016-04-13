@@ -8,11 +8,13 @@ The intention of this tutorial is to provide the IDL basics to understand how to
 
 .. warning::
 
-   This document is no longer supported as STScI as a whole is moving towards Python. These sections are meant only to give a brief introduction. You can use the PDF as a reference as needed. 
-   
+   This document is no longer supported as STScI as a whole is moving towards Python. These sections are meant only to give a brief introduction. You can use the PDF as a reference as needed.
+
+   For information and tips on how to translate IDL to Python, check out `this website <http://mathesaurus.sourceforge.net/idl-python-xref.pdf>`. Note that this reference assumes
+   that pylab has been imported instead of the typical prefixing with "np." or "plt."
+
    **Ask your trainer which sections to work through.**
-    
+
 .. note::
 
    This guide is maintained as a PDF document. :download:`Download it <pdf_guides/IDL-training-june2015.pdf>` and get started.
-
