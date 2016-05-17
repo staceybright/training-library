@@ -245,7 +245,7 @@ Now, we check to make sure your terminal can see Conda so simply run::
 
     conda
     
-This should show some usage instructions. If you get a message that hte command is not found, *talk to your buddy/trainer*. 
+This should show some usage instructions. If you get a message that the command is not found, *talk to your buddy/trainer*. 
 
 With Anaconda, we get to install all our own programs and packages. We want to use the Institute's AstroConda repository as it includes most of the packages people at the institute will need for their functional work and research. But, we need to tell Anaconda to do this:: 
     
