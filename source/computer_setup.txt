@@ -272,7 +272,7 @@ To check the version of Python, type::
 
     python --version
     
-If you went with the Python 2.7 download and you want an AstroConda environment that runs Python 3.5, you can create your environment (which I choose to name ``astroconda35``) by first leaving your astroconda environment, checking out what environments you have now, and then adding a new one. ::
+If you went with the Python 2.7 download but also want an AstroConda environment that runs Python 3.5, you can create another environment. To do this, leave your astroconda environment, see which environments you have now, and then add a new one (which I chose to name ``astroconda35``). ::
 
     source deactivate 
     conda info --envs 
