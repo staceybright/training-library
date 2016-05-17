@@ -225,13 +225,13 @@ The Institute's Science Software Branch currently distributes a package that con
 
 .. note::
 
-    We herein follow along with the SSB-recommended method for installing AstroConda which is institute-specific and can be found here: `AstroConda Installation <http://astroconda.readthedocs.io/en/latest/installation.html>`_. We will make some small deviations from the instructions found there, but the result is no different.
+    We herein follow along with the SSB-recommended method for installing AstroConda, found here: `AstroConda Installation <http://astroconda.readthedocs.io/en/latest/installation.html>`_. We will make some small deviations from the instructions found there, but the result is no different.
 
 Getting started, we must install Conda from ``bash``. When doing this you can choose to install either Anaconda or Miniconda, depending on the time, disk space, and operating system you have. For MacOS, we've decided to use Anaconda which you can download `here <https://www.continuum.io/downloads>`_. We recommend that you choose Python 2.7, 64 bit for Mac OS X -- Command-Line Installer. This is the recommendation based on the fact that many programs at the institute rely on Python 2.7 and will not work in Python 3.5, however we can easily create separate environments for different Python versions. The command-line installer can be less confusing than the graphical installer.
 
 *Discuss with your buddy/trainer about which Python version you will likely need for your work*.
 
-Now, in your terminal, type ::
+Now, in your terminal, type::
 
     bash Anaconda2-4.0.0-MacOSX-x86_64.sh 
     
@@ -245,21 +245,25 @@ Now, we check to make sure your terminal can see Conda so simply run::
 
     conda
     
-If this doesn't work, *talk to your buddy/trainer*. 
+This should show some usage instructions. If you get a message that hte command is not found, *talk to your buddy/trainer*. 
 
-With Anaconda, we get to install all our own programs and packages, specifically, we want to use the Institute's AstroConda repository as it includes most of the packages people at the institute will need for their functional work and research. But, we need to tell Anaconda to do this :: 
+With Anaconda, we get to install all our own programs and packages. We want to use the Institute's AstroConda repository as it includes most of the packages people at the institute will need for their functional work and research. But, we need to tell Anaconda to do this:: 
     
     conda config --add channels http://ssb.stsci.edu/astroconda
     
-We can now checkout out our current environment(s) and add some new ones. First, to see the list of environments ::
+We can now checkout our current environment(s) and add some new ones. First, to see the list of environments::
 
     conda info --envs
+    
+Or::
 
-You should only see your root environment. For reasons that are a little confusing, we don't want to use our ``root`` environment to do all our work, so let's create a new environment that will be our main environment that runs Python 2.7 (or Python 3.5 depending on which Anaconda distribution you downloaded). ::  
+    conda env list
+
+You should only see your root environment. For reasons that are a little confusing, we don't want to use our ``root`` environment to do all our work, so let's create a new environment that will be our main environment that runs Python 2.7 (or Python 3.5 depending on which Anaconda distribution you downloaded)::  
 
     conda create --name astroconda stsci
 
-I call this environment ``astroconda`` because it is using the AstroConda repository, but you can call this environment whatever you want. This repository includes are your usual Python friends (NumPy, Astropy, matplotlib, etc.) and also makes sure that you have IPython, Jupyter Notebook, and additional Institute-specific Python packages. Now we can start this environment and then check to see exactly which packages have been added. ::
+I call this environment ``astroconda`` because it is using the AstroConda repository, but you can call this environment whatever you want. This repository includes are your usual Python friends (NumPy, Astropy, matplotlib, etc.) and also makes sure that you have IPython, Jupyter Notebook, and additional Institute-specific Python packages. We can start this environment and check to see exactly which packages have been added::
 
     source activate astroconda
     conda list 
