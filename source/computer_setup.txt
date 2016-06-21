@@ -165,11 +165,19 @@ As you may have guessed, setting variables in ``bash`` takes the form of ``expor
 
 It is not obvious, but the trailing slash in the $oref definition is required for CALSTIS to function properly.  Be sure not to leave it off.
 
-To set these changes, save the file and typing the following into the command line::
+To apply these changes, save the file and typing the following into the command line::
 
     source ~/.bashrc
 
 To check that your changes have taken effect, open a **new terminal window** and type ``echo $oref``. You should see the value for ``oref`` from above printed out in the terminal.
+
+There are a few different files that can be executed when opening a new terminal, depending on arcane details everyone would rather ignore [#bashrc]_. To make sure your ``.bashrc`` file gets sourced no matter how ``bash`` is started, it is necessary to make a ``.bash_profile`` file that simply loads the contents of ``.bashrc``. This is what that would look like::
+
+    if [ -f ~/.bashrc ]; then
+       source ~/.bashrc
+    fi
+
+Save that in ``.bash_profile`` and shed a single tear for the ineffable complexity of the UNIX.
 
 .. tip::
 
@@ -479,3 +487,4 @@ Additional resources
 
 .. [#externalhelpdesk] There's an *external* helpdesk too, help@stsci.edu. For IT issues, though, you want the internal one. The external helpdesk is for science/instrument support. It is a way for astronomers to ask questions about things like the archive, SSB software, data characteristics, instrument information and the like.
 .. [#umask] Files are created with a default set of permissions set by your "umask", which will most likely make them world-readable by default. See `this Wikipedia article <https://en.wikipedia.org/wiki/Umask>`_ if you're really curious.
+.. [#bashrc] Said details are summarized in `this blog post from 2005 <http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html>`_. The gist of it is: ``.bashrc`` is run when starting an xterm or running ``bash`` within an already-started terminal session. ``.bash_profile`` is run for login shells (``bash -l`` or logging on via console or SSH). Yes, it's confusing. No, there isn't really a good reason it's this way.
