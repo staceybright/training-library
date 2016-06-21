@@ -21,7 +21,7 @@ Training guides and exercises for new RIAs
 #. :doc:`computer_setup`
 #. :doc:`version_control`
 #. :doc:`archives`
-#. :doc:`python`
+#. :doc:`python/index`
 #. :doc:`pyraf`
 #. :doc:`pysynphot`
 #. :doc:`using_idl`
@@ -29,6 +29,7 @@ Training guides and exercises for new RIAs
 #. :doc:`astrodrizzle`
 #. :doc:`drizzle`
 #. :doc:`photometry`
+#. :doc:`ir_detector_course`
 
 *Also, once you have finished the training exercises, you will be assigned a project that relates to your instrument team assignment.*
 
@@ -60,7 +61,7 @@ Reference information
    computer_setup
    version_control
    archives
-   python
+   python/index
    pyraf
    pysynphot
    using_idl
@@ -68,6 +69,7 @@ Reference information
    astrodrizzle
    drizzle
    photometry
+   ir_detector_course
    jwst_intro
    jwst_training
    jwst_read_modes

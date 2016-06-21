@@ -1,0 +1,1005 @@
+*********************
+Basic Python Concepts
+*********************
+
+
+.. _python_dtype:
+
+Built-In Data Types
+===================
+
+The principal built-in types of Python are numerics, sequences,
+mappings, files, classes, instances and exceptions. Other data types are
+available through importing modules (Example: the datetime module).
+
+Numeric types
+-------------
+
+There are four distinct numeric types in Python:
+
+- plain integers, or "ints"
+- long integers, or "longs" (specified with an ``L`` suffix, or created automatically)
+- floating-point numbers, or "floats" (which have ``double`` precision, in C terms)
+- complex numbers, or "complexes", which are composed a floating point real and imaginary part (e.g. ``1.2 + 3.4j``)
+
+The Python interpreter will try to do "the right thing" when you operate on numeric values with different types.
+
+If a sum exceeds the maximum value a "plain integer" can represent, the result will be a long integer. When doing arithmetic with integers and floating point numbers, the result will always be floating point. When complex numbers are added to the mix, the result will always be complex. ::
+
+   >>> 1 + 1
+   2
+   >>> 1 + 1L
+   2L
+   >>> 1 + 1.0
+   2.0
+   >>> 1 + (1.0 + 0.0j)
+   (2+0j)
+
+You can explicitly convert a variable from one type to another using the "short names" above::
+
+   >>> int(3.5)  # note: this doesn't "round up"!
+   3
+   >>> long(3)
+   3L
+   >>> float(3)
+   3.0
+   >>> complex(3)
+   3+0j
+
+.. warning::
+
+   One "gotcha", corrected in Python 3, is that dividing two integers will discard the fractional part.
+
+      >>> 5 / 2 == 2.5
+      False
+      >>> 5 / 2
+      2
+
+   To get a floating-point result, ensure that one or both operands is a float.
+
+      >>> 7.0 / 3
+      2.3333333333333335
+      >>> float(7) / 3
+      2.3333333333333335
+
+   In the (unlikely?) event that you want the integer division behavior, use the ``//`` operator to ensure the meaning of your code does not change when run on newer versions of Python. ::
+
+      >>> 7 // 3
+      2
+
+   See :ref:`python_3_vs_2` for details.
+
+Boolean types and expressions
+-----------------------------
+
+Any expression that can be interpreted as a boolean value can be used in an ``if``/``elif`` statement, ``while`` loop test, or other places boolean values are needed.
+
+Equality/inequality statements are perhaps the most common and useful. The operators are ``<``, ``>``, ``>=``, ``<=``, ``==``, ``!=`` (not like in IDL or FORTRAN, where comparisons are done with shortened keywords like ``eq``). These work for numeric types (except complex numbers, which have no ordering relation)::
+
+   >>> 3 < 4.0
+   True
+   >>> 3 >= 3.0
+   True
+   >>> 3 == 3.0
+   True
+
+String types can also be compared in this way, but that's more of a curiosity than something you will regularly need. The following is equivalent to asking if "JWST" comes after "Hubble" alphabetically::
+
+   >>> "JWST" > "Hubble"
+   True
+
+For strings, you usually want to identify when they are different from each other (or equal)::
+
+   >>> "Hubble" != "Hubble"
+   False
+   >>> "JWST" == "JWST"
+   True
+
+Combining conditions is done with the boolean operators ``and`` and ``or``, and negation with ``not``::
+
+   >>> not "science" in "JWST"
+   True
+   >>> "ST" in "STScI" and 3 > 4.0
+   False
+   >>> "science" in "JWST" or 3 == 3.0
+   True
+
+These boolean operators in Python are what is called "short-circuiting". This means that if Python can determine the truth value of ``expr1 and expr2`` or ``expr1 or expr2`` from the value of ``expr1`` alone, it will not evaluate ``expr2`` at all. You can use this to your advantage, for example when ``expr2`` takes a long time to compute::
+
+   >>> True or compute_ten_thousand_factorial() > 1000000
+   True
+   >>> False and compute_ten_thousand_factorial() > 1000000
+   False
+
+In the first expression, Python won't bother computing ten-thousand factorial, since the expression must be True regardless. In the second, the expression must be False regardless.
+
+.. note::
+
+   **What about &&, ||, !, ~, &, and |?**
+
+   If you've programmed in a C-like language before, you're probably used to ``&&``, ``||``, and ``!`` in your boolean expressions. Good news: Python ``and``, ``or``, and ``not`` work just like them.
+
+   C-like languages have the notion of *bitwise* operators like ``~`` (complement), ``&`` (bitwise and), and ``|`` (bitwise or). Those operators exist in Python, but are reserved for "special occasions". (We will see an example later on with NumPy arrays, where you can use ``&`` and ``|`` to filter a data set in sophisticated ways.)
+
+.. _python_different_sequences:
+
+Different kinds of sequences in Python
+--------------------------------------
+
+Python provides three main built-in sequence types: ``tuple``, ``list``, and ``str``. Lists are variable-length collections of entries that need not all be the same data type, and tuples are their immutable (i.e. non-modifiable) cousins. We have seen strings (``str``) in the section on comparisons, but it bears mentioning that they are immutable sequences that support indexing and slicing like tuples.
+
+To make a new tuple, you need parentheses and a comma::
+
+   >>> ('first element', 'second element')
+   ('first element', 'second element')
+   >>> type(('first element', 'second element'))
+   <type 'tuple'>
+
+There's no requirement that all elements in a sequence have the same data type. Imagine a tuple describing a dataset by filename, extension number, and mean pixel value::
+
+   >>> mydataset = ('icft01crq_raw.fits', 1, 340.0)
+
+This tuple contains a string, an integer, and a floating point number without any special treatment on the part of the programmer. (If you're used to interpreted scripting languages, this is probably not very novel or exciting.)
+
+.. tip::
+
+   This example assigns a new variable named ``mydataset`` with the ``=``. The single equals sign is always assignment, in contrast with the double equals sign which tests equality.
+
+Tuples, like most sequences you'll see in Python, have a defined length, which you can check with the ``len()`` function::
+
+   >>> len(('first element', 'second element'))
+   2
+
+Indexing into sequences uses square brackets. Consider a tuple of integers, assigned to a new variable called ``mynumbers``. Accessing its elements would look like this::
+
+   >>> mynumbers = (4, 8, 1, 2, 9, 3, 4, 7, 5)
+   >>> mynumbers[0]
+   4
+   >>> mynumbers[3]
+   2
+   >>> mynumbers[-1]
+   5
+
+In Python, indexes count from zero (the first element is element 0, the second is element 1, etc.). For most sequence types in Python, it is legal to use negative numbers to index counting back from the end (element ``-1`` is the last, ``-2`` second-to-last, etc.).
+
+There's no requirement that your index be a literal number, either. This is perfectly valid::
+
+   >>> index = 3
+   >>> mynumbers[index]
+   2
+
+.. _python_slicing:
+
+Slicing up a sequence
+^^^^^^^^^^^^^^^^^^^^^
+
+Python supports the concept of a "slice" of a sequence with the ``:`` symbol inside the indexing brackets. The syntax ``mynumbers[start:stop]``, where ``start`` and ``stop`` are integers, tells Python you want the items ``mynumbers[start]``, ``mynumbers[start + 1]``, ... , ``mynumbers[stop - 1]``.
+
+An example may be more illustrative::
+
+   >>> mynumbers = (4, 8, 1, 2, 9, 3, 4, 7, 5)
+   >>> mynumbers[2:5]
+   (1, 2, 9)
+
+Recall that Python is zero-indexed, so we're asking for the third through fifth elements. (Why isn't it ``[2:4]``? Well, one reason is so that ``len(mynumbers[2:5]) == 5 - 2``, but really it's just a decision the language designers made.)
+
+You can omit the ``start``... ::
+
+   >>> mynumbers[:5]
+   (4, 8, 1, 2, 9)
+
+... or the ``stop``::
+
+   >>> mynumbers[2:]
+   (1, 2, 9, 3, 4, 7, 5)
+
+Those are the basics. There are more slicing tricks like the extra ``:step`` syntax, negative step sizes, and multi-dimensional indexing that we'll leave for you to discover as you learn Python.
+
+
+.. _multiassignment:
+
+Multiple assignment with sequences
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Sequences can also be used on the right hand side of an assignment operation. Suppose we want to break our ``mydataset`` tuple from before into its constituent pieces (filename, extension, mean value)::
+
+   >>> mydataset = ('icft01crq_raw.fits', 1, 340.0)
+   >>> filename = mydataset[0]
+   >>> extension = mydataset[1]
+   >>> mean = mydataset[2]
+   >>> print filename
+   icft01crq_raw.fits
+   >>> print extension
+   1
+   >>> print mean
+   340.0
+
+That's a bit verbose. As long as we know the number of elements we're getting, Python lets us do this instead::
+
+   >>> filename, extension, mean = mydataset
+   >>> print filename
+   icft01crq_raw.fits
+   >>> print extension
+   1
+   >>> print mean
+   340.0
+
+.. warning::
+
+   In Python 3, the statement ``print mything`` will be written as a function call like ``print(mything)``!
+
+   Refer back to :ref:`python_3_vs_2` for details.
+
+.. _python_immutable_tuples_mutable_lists:
+
+Immutable tuples vs. mutable lists
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+What happens if we try to go the other way, and assign something to the third position?
+
+   >>> mydataset[2] = 199.9
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   TypeError: 'tuple' object does not support item assignment
+
+This is what is meant when we say tuples are "immutable". There are good reasons you might want to have immutable data, but when you need to be able to modify a sequence in-place you need a **list**.
+
+To write a new list in your code, use a comma-separated sequence of values enclosed in square brackets. For example::
+
+   >>> mydataset_list = ['test.fits', 1, 100.0]
+
+Let's try assigning to position ``2`` again::
+
+   >>> mydataset_list[2] = 199.9
+   >>> print mydataset_list
+   ['test.fits', 1, 199.9]
+
+Lists implement all of the behaviors described above for tuples, but additionally support modification in place with *assignment* (as shown above) and with *methods* that manipulate a particular list variable. We'll look at three of the most commonly used methods, but a full reference is available :py:ref:`in the Python reference manual <python:typesseq-mutable>`.
+
+Let's start with a list of floating point values. Pretend they're PSF encircled energies, or something.
+
+   >>> psf_ee_vals = [0.101, 0.413, 0.219, 0.713]
+
+Appending to a list
+^^^^^^^^^^^^^^^^^^^
+
+``append()`` appends the argument to the end of the list.
+
+   >>> psf_ee_vals.append(0.99)
+   >>> psf_ee_vals
+   [0.101, 0.413, 0.219, 0.713, 0.99]
+
+Popping items off a list
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+``pop()`` removes the last item in the list and returns it (so that you can keep the result).
+
+   >>> last_val = psf_ee_vals.pop()
+   >>> last_val
+   0.99
+   >>> psf_ee_vals
+   [0.101, 0.413, 0.219, 0.713]
+
+.. tip::
+
+   In addition to being the notional "inverse" of ``append()``, ``pop()`` can be called with an integer index specifying which element to "pop out" of the sequence. (e.g. To remove the first element, you could do ``psf_ee_vals.pop(0)``.)
+
+Sorting a list
+^^^^^^^^^^^^^^
+
+``sort()`` sorts a list in-place, meaning it does not return anything. However, when you access the list again, it will be reordered least-to-greatest. (n.b. This is only meaningful if your list elements are all the same data type.)
+
+   >>> psf_ee_vals.sort()
+   >>> psf_ee_vals
+   [0.101, 0.219, 0.413, 0.713]
+
+Deleting an item
+^^^^^^^^^^^^^^^^
+
+Deleting is actually *not* a method of a list (surprise!), but rather a language keyword called ``del``. Use it with an expression referring to a list item to delete it.
+
+   >>> del psf_ee_vals[-1]
+   >>> psf_ee_vals
+   [0.101, 0.219, 0.413]
+
+.. tip::
+
+   You can also use ``del`` on any variable name to clear that reference to it. This is less useful than you might think, since Python manages memory for you and won't actually free the memory until all references have been collected. ::
+
+      >>> a = ['a', 'b']
+      >>> b = a
+      >>> del a
+      >>> a
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      NameError: name 'a' is not defined
+      >>> b
+      ['a', 'b']
+
+   In practice, you will rarely need to use ``del``, but we include it for completeness' sake.
+
+.. admonition:: Exercise
+   :class: note
+
+   Write a snippet of code that starts with a list ``[0.101, 0.413, 0.219, 0.713]``. Remove the smallest value, add a new value of your choosing, and print a sorted list as your final result.
+
+Operating on sequences with loops
+---------------------------------
+
+If you've programmed in other languages before, you are probably familiar with looping over a sequence using a "loop variable" that counts from 0, 1, 2, ... up to the last element in your sequence. In Python, that's possible, but there's a shortcut::
+
+   >>> mytuple = ('first element', 'second element')
+   >>> for item in mytuple:
+   ...     print item
+   ...
+   first element
+   second element
+
+Here we've introduced our first use of an indented block. See how the ``print`` line is indented four spaces following the ``for item in mytuple:`` line? Currently we're just printing the current item at each iteration of the loop, but more lines of code can be added as long as the indentation is maintained. Within the indented block, the name ``item`` takes on the value of the current item in the sequence.
+
+.. warning::
+
+   If you're using a list or other mutable sequence, don't alter the sequence within the loop body! You may experience unexpected behavior.
+
+There **are** cases where you might want the "loop variable" giving the numerical index of each item explicitly. For that, wrap your sequence in the ``enumerate()`` helper function::
+
+   >>> mytuple = ('first element', 'second element')
+   >>> for idx, item in enumerate(mytuple):
+   ...     print idx, item
+   ...
+   0 first element
+   1 second element
+
+Note how the first expression after the for keyword now reads ``idx, item`` instead of ``item``. When looping with an "enumerated" sequence, the index and item are provided to the loop body as a pair. [#iterationtuple]_
+
+List comprehensions
+^^^^^^^^^^^^^^^^^^^
+
+A very common pattern in Python is having a list (or other sequence) and creating a new list by applying some operation to each element. ::
+
+   >>> mysequence = ['first', 'second', 'third', 'fourth']
+   >>> newsequence = []
+   >>> for item in mysequence:
+   ...     newitem = item.upper()
+   ...     newsequence.append(newitem)
+   ...
+   >>> newsequence
+   ['FIRST', 'SECOND', 'THIRD', 'FOURTH']
+
+To simplify things, Python has a structure called a "list comprehension". List comprehensions are introduced with the same square brackets as list literals (that is, lists created like ``a = [1, 2,3]``). Rather than a comma separated sequence, they instead have special syntax for a loop.
+
+The above code listing would look like this in list comprehension form::
+
+   >>> mysequence = ['first', 'second', 'third', 'fourth']
+   >>> newsequence = [item.upper() for item in mysequence]
+   >>> newsequence
+   ['FIRST', 'SECOND', 'THIRD', 'FOURTH']
+
+You may even apply a condition to the item within the list comprehension. For example, the following two code samples are equivalent. First with a loop block::
+
+   >>> mysequence = ['first', 'second', 'third', 'fourth']
+   >>> newsequence = []
+   >>> for item in mysequence:
+   ...     if item != 'second':
+   ...         newitem = item.upper()
+   ...         newsequence.append(newitem)
+   ...
+   >>> newsequence
+   ['FIRST', 'THIRD', 'FOURTH']
+
+And second with a list comprehension::
+
+   >>> mysequence = ['first', 'second', 'third', 'fourth']
+   >>> newsequence = [item.upper() for item in mysequence
+   ...                if item != 'second']
+   >>> newsequence
+   ['FIRST', 'THIRD', 'FOURTH']
+
+.. tip::
+
+   We're taking advantage of the fact that Python allows you to continue to the next line within parentheses or brackets. The ``if item != 'second']`` part of the list comprehension is indented for ease of reading.
+
+Strings
+-------
+
+Textual data in Python lives in strings, which are usually enclosed in either single or double quotes. If a string spans multiple lines, triple quotes (``'''`` or ``"""``) are used.
+
+   >>> 'hello world'
+   'hello world'
+   >>> "hello world"
+   'hello world'
+   >>> """hello
+   ... world"""
+   'hello\nworld'
+   >>> '''hello
+   ... world'''
+   'hello\nworld'
+
+(The ``\n`` in the triple-quoted examples represents the linebreak.)
+
+A string is, in some ways, a lot like the tuples we just saw. For instance, they are immutable::
+
+   >>> mystring = 'JWST'
+   >>> mystring[0] = '?'
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   TypeError: 'str' object does not support item assignment
+
+They also support indexing and slicing::
+
+   >>> mystring[2:]
+   'ST'
+
+However, they have a few additional capabilities you may find useful. The ``in`` keyword, for example, will test if one string is contained within another::
+
+   >>> "science" in "JWST"
+   False
+   >>> "ST" in "STScI"
+   True
+
+Even though you cannot modify a string in-place, you can stick two together with the ``+`` operator::
+
+   >>> "ST" + "ScI"
+   'STScI'
+
+Or use ``+=`` to add and reassign in a single step::
+
+   >>> name = "ST"
+   >>> name += "ScI"
+   >>> name
+   'STScI'
+
+Strings also have some string-specific helper methods, as we shall see.
+
+Splitting strings on a delimiter
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+``.split()`` splits a string at every instance of the delimiter string passed as the first argument. (A delimiter is just a character or string of characters that separates pieces of data in a sequence, like a comma.)
+
+For example, say we have a target catalog::
+
+   RA,Dec,Mag,Name,Shortname,K2ID
+   093.479095,26.882500,18.0,K 3-71,k371,202065169
+   095.420833,23.586944,19.0,HoCr 1,hocr1,202065170
+   096.488487,17.790980,17.8,J900,j900,202060054
+
+Let's take one line of it, and split it at every occurrence of the comma, ``,``::
+
+   >>> catalog_line = "096.488487,17.790980,17.8,J900,j900,202060054"
+   >>> catalog_line.split(',')
+   ['096.488487', '17.790980', '17.8', 'J900', 'j900', '202060054']
+
+As you can see, now we have a list with the catalog entry split up by column.
+
+It's also possible to call ``split()`` with *no* argument, which makes it split on "white space" (spaces and tabs). Suppose our catalog columns were lined up with spaces::
+
+   >>> catalog_line_space_delim = "096.488487  17.790980  17.8      J900   j900  202060054"
+   >>> catalog_line_space_delim.split()
+   ['096.488487', '17.790980', '17.8', 'J900', 'j900', '202060054']
+
+Joining a sequence with a string
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Joining is the opposite of splitting. However, it is a method of *strings*, not of sequences. It's probably easiest to explain by example. Here, we split the catalog line up by its commas, and join it back together with semicolons::
+
+   >>> catalog_line = "096.488487,17.790980,17.8,J900,j900,202060054"
+   >>> parts = catalog_line.split(',')
+   >>> parts
+   ['096.488487', '17.790980', '17.8', 'J900', 'j900', '202060054']
+   >>> ';'.join(parts)
+   '096.488487;17.790980;17.8;J900;j900;202060054'
+
+That called the ``.join()`` method on the string ``';'`` to produce a new string with the parts joined by semicolons.
+
+Substituting numeric and other values into a string
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+There's a surprising amount of complexity wrapped up in the ``.format()`` method of strings. For the purposes of an introduction, we'll only scratch the surface. When substituting values into strings, there is a "format string" that acts as a template. It contains symbols indicating where the substitutions should go.
+
+The simplest case is substituting strings into a format string, like if we wanted a prettier display of ``parts`` from the previous section.
+
+   >>> '{} -- Kepler mag = {}'.format(parts[3], parts[2])
+   'J900 -- Kepler mag = 17.8'
+
+You may also see ``{0}``, ``{1}``, etc. used as placeholders. The numbers indicate which argument to ``.format()`` should go where, and are used if that differs from the order in which they were supplied.
+
+   >>> 'second: {1}, first: {0}'.format(3.5, 9.8)
+   'second: 9.8, first: 3.5'
+
+The last essential thing to know about string formatting is how to make decimal numbers behave. ::
+
+   >>> '1 / 3 is approximately {}'.format(1.0 / 3.0)
+   '1 / 3 is approximately 0.333333333333'
+
+Suppose we only wanted the first two digits after the decimal point. We use a "format specifier" to tell the ``.format()`` method how it should look. Here, it's ``:.2f`` meaning "two places after the decimal point, floating point format"::
+
+   >>> '1 / 3 is approximately {:.2f}'.format(1.0 / 3.0)
+   '1 / 3 is approximately 0.33'
+
+.. admonition:: Exercise
+   :class: note
+
+   Using the ``catalog_line`` variable from the examples, and what you now know about string formatting, print out a nicely formatted summary of the RA, Dec, Mag, and Name columns.
+
+   (Keep in mind that the parts you get from ``.split()`` are strings, not numbers! If you want to get fancy formatting the numeric values, you'll have to use something like ``float(mypart[0])`` to convert them to a numeric type *before* you pass them to ``.format()``.)
+
+.. _python_dictionaries:
+
+Dictionaries
+------------
+
+A dictionary maps keys to values, but unlike lists and tuples it has **no ordering**. You may have seen this data type by another name; they're sometimes called "hashes", "hashmaps", "maps", or "associative arrays".
+
+To write a dictionary in your code, use a sequence of ``key: value`` pairs separated by commas, and enclosed in curly braces (``{}``). Say we want to map filter names to center wavelengths. The "keys" in this case would be the filter names, and the "values" would be the center wavelengths in meters. ::
+
+   >>> filters = {"F212N": 2.12e-6, "F110W": 1.1e-6, "F460M": 4.6e-6}
+
+There's no rule that keys have to be strings, as long as they are unique [#hashable]_ . You can't have two different center wavelengths for ``"F212N"``, for example. To access the values, supply the key within square brackets (like you would for list indexing)::
+
+   >>> filters['F212N']
+   2.12e-06
+
+If you try to access a key that is not present in the dictionary, you will get an exception (that is, an error that aborts what your program is currently doing)::
+
+   >>> filters['F335M']
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   KeyError: 'F335M'
+
+You can check if a key is present in a dictionary first without triggering an exception::
+
+   >>> 'F335M' in filters
+   False
+   >>> 'F212N' in filters
+   True
+
+If you don't know whether a key will be present, but you have a "default" value you want to use when a key is absent, use the ``.get()`` method::
+
+   >>> filters.get('F212N', 'Missing')
+   2.12e-06
+   >>> filters.get('F335M', 'Missing')
+   'Missing'
+
+When no second argument is supplied, and the key is not found, you'll get the special value ``None``::
+
+   >>> filters.get('F335M')
+   >>> filters.get('F335M') is None
+   True
+
+.. tip::
+
+   In Python, ``None`` is used to indicate when something is absent (when absence should not be treated as an error). To test for it in your programs, ``expr is None`` is preferred to ``expr == None``.
+
+Once you've made a dictionary, you can add new keys to it using the ``=`` assignment operator::
+
+   >>> filters['F227W'] = 2.27e-6
+   >>> filters
+   {'F212N': 2.12e-06, 'F227W': 2.27e-06, 'F110W': 1.1e-06, 'F460M': 4.6e-06}
+
+And, similarly to lists, the ``del`` keyword removes an entry::
+
+   >>> del filters['F227W']
+   >>> filters
+   {'F212N': 2.12e-06, 'F110W': 1.1e-06, 'F460M': 4.6e-06}
+
+The last important thing you might want to do with your dictionary is iterate over its key value pairs::
+
+   >>> for key, val in filters.items():
+   ...     print key, 'is', val
+   F212N is 2.12e-06
+   F110W is 1.1e-06
+   F460M is 4.6e-06
+
+(n.b. In this example, we used commas so that multiple arguments to the ``print`` statement would print out with spaces between them.)
+
+One thing that trips up a lot of new Python users is that dictionaries have **no ordering** of their elements. When you loop over ``.items()``, you might get the keys in alphabetical order, order of assignment, or totally randomly! If you need to preserve ordering, use a sequence type like a list or tuple.
+
+.. admonition:: Exercise
+   :class: note
+
+   You now know about lists, tuples, and dictionaries. Combine what you know to represent this target catalog using dicts and sequences.
+
+   ::
+
+      RA,Dec,Mag,Name,Shortname,K2ID
+      093.479095,26.882500,18.0,K 3-71,k371,202065169
+      095.420833,23.586944,19.0,HoCr 1,hocr1,202065170
+      096.488487,17.790980,17.8,J900,j900,202060054
+
+   Your solution to this exercise should be in the form of a variable declaration ``catalog = ...`` followed by a data structure made up of lists, dictionaries, and/or tuples. (In other words, you don't need to *generate* this data structure from the catalog for this exercise. Writing it out by hand is fine.)
+
+   (Hint: What type should the ``catalog`` variable be? What type(s) should its contents be? If there are dictionaries, what are their keys?)
+
+.. _python_file_operations:
+
+Lower-level file operations
+---------------------------
+
+Later on, we will see how to read in text tables and FITS files with Astropy. However, sometimes you will have a file that is not readable with those techniques, and you will have to use Python's built-in file operations to handle it.
+
+We'll be using the target catalog introduced in the previous section. Copy the file ``k2_catalog.csv`` from ``/grp/hst/riab/training/python`` to your working directory.
+
+The "old" way to open a file was to use ``open()``. By default, ``open(filename)`` only supports reading, not writing. ::
+
+   >>> myfile = open('k2_catalog.csv')
+
+At this point, nothing has been read in, but ``myfile`` provides a reference (sometimes called a "handle") to the file. Since this file is broken up into lines, we read it in with ``myfile.readlines()``::
+
+   >>> lines = myfile.readlines()
+   >>> lines
+   ['RA,Dec,Mag,Name,Shortname,K2ID\n',
+    '093.479095,26.882500,18.0,K 3-71,k371,202065169\n',
+    '095.420833,23.586944,19.0,HoCr 1,hocr1,202065170\n',
+    '096.488487,17.790980,17.8,J900,j900,202060054\n']
+
+Now that we have read our data into the new ``lines`` list variable, we make sure to **close** the file with ``myfile.close()``::
+
+   >>> myfile.close()
+
+A closed file cannot be read from any more, and has an **attribute** called ``closed``. You access the attribute with a dot, but no parentheses::
+
+   >>> myfile.closed
+   True
+
+Leaving file handles open can cause problems with long-running scripts, especially if you open a great many files. In response to this fact, and the tendency of programmers to forget to close their file handles, Python introduced the ``with`` keyword.
+
+The "old" style example above can be written as follows with the ``with`` keyword::
+
+   >>> with open('k2_catalog.csv') as myfile:
+   ...     lines = myfile.readlines()
+   ...
+   >>> lines
+   ['RA,Dec,Mag,Name,Shortname,K2ID\n',
+    '093.479095,26.882500,18.0,K 3-71,k371,202065169\n',
+    '095.420833,23.586944,19.0,HoCr 1,hocr1,202065170\n',
+    '096.488487,17.790980,17.8,J900,j900,202060054\n']
+
+In this example, Python automatically closes ``myfile`` once we end the ``with`` block. Check the ``closed`` attribute to verify::
+
+   >>> myfile.closed
+   True
+
+Limitations of ``readlines``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For the purposes of our example, ``.readlines()`` was the easiest way to read in the whole catalog. However, for files that are too big to fit in RAM, your program's performance will suffer. Python provides a way to operate on files one line at a time, without loading the whole thing into memory.
+
+Imagine your ``k2_catalog.csv`` were actually several gigabytes of target data, and we only wanted the line for J900. Using ``for ... in ...`` to iterate over the ``myfile`` object, Python will not try to load the whole file into RAM first.
+
+   >>> with open('k2_catalog.csv') as myfile:
+   ...     for line in myfile:
+   ...         if 'J900' in line:
+   ...             print line
+   096.488487,17.790980,17.8,J900,j900,202060054
+
+Also, it bears mentioning, both ``.readlines()`` and ``for ... in fileobject`` will only help you when your file is "plain text" broken up into lines. Reading binary files with ``open()`` is an advanced topic, but Python can do that just as well. See :ref:`python:tut-filemethods` in the official Python tutorial for more details on file objects.
+
+.. _python_objects_attributes:
+
+Functions, Objects, Instances, Attributes, and Methods
+======================================================
+
+Python is an object oriented programming language and before we go any further, it is important to note the differences and uses of functions, objects, instances, attributes, and methods.
+
+**Functions** are a way to wrap up a piece of commonly used code and give it a short name for easy reuse. They accept **arguments**, which are names that can be referred to within the **function body**. Here we declare a function to add two numbers. Its name is ``add``, it accepts two arguments (``a`` and ``b``), and **returns** the sum of ``a`` and ``b``.
+
+   >>> def add(a, b):
+   ...      return a + b
+   ...
+   >>> add(2, 3)
+   5
+
+You can use a function call anywhere that another expression would be valid, except for the left-hand side of a variable assignment (for reasons that should be understandable... try it and see!).
+
+   >>> my_new_list = [1, 3, add(2, 3), 7]
+   >>> my_new_list
+   [1, 3, 5, 7]
+
+**Objects** in Python (and other object-oriented languages) can be thought of as containers that hold both some data about an entity and some actions that can be taken with that entity. This sounds pretty abstract, so let's talk about a particular object first: when we called the built-in function ``open()`` above, we got a **file object** called ``myfile``. ::
+
+
+   >>> myfile = open('k2_catalog.csv')
+   >>> type(myfile)  # what type of object is this variable?
+   <type 'file'>
+
+The output here indicates that the ``myfile`` object that is an **instance** of the ``file`` type (or **class**). The ``myfile`` object holds on to a few different pieces of information about how the Python environment will interact with ``k2_catalog.csv``. For example, since we didn't specify whether we were reading or writing this file, it was opened in "read mode". We can inspect the ``mode`` **attribute** to verify this::
+
+   >>> myfile.mode
+   'r'
+
+Attributes are little nuggets of information that pertain to the object's current state, and they can be accessed using the dot notation shown above. ``myfile.mode`` means "the ``mode`` attribute of object ``myfile``".
+
+A **method** is essentially a function that operates on a particular object instance. (Sometimes you will hear people say that it is "bound" to an object.) File objects have a ``close`` method, which tells the Python environment that we are done with them. Here, we call the ``close`` method on ``myfile``::
+
+   >>> myfile.close()
+
+This does some internal bookkeeping and updates the ``closed`` **attribute**, which we can check::
+
+   >>> myfile.closed
+   True
+
+If you look back over the training so far, you'll see we've been using objects, instances, attributes, and methods all along.
+
+-  In :ref:`python_dtype`, integers, floats, lists, tuples, and dictionaries are all objects.
+
+-  In :ref:`python_dictionaries` we used ``filters = { ... }`` to create an instance of a dictionary named ``filters``. (And as discussed, ``myfile`` is an instance of a ``file``.)
+
+-  In :ref:`python_file_operations` we used ``myfile.closed`` to check if the ``myfile`` instance had been closed.
+
+-  ``len()`` is a function, and in :ref:`python_different_sequences` we pass it the tuple ``('first element', 'second element')`` and it returns the length (2).
+
+-  In :ref:`python_immutable_tuples_mutable_lists`, after we created the instance ``psf_ee_vals``, we append a number to that list using the :ref:`append() <python:tut-morelists>` method with the line ``psf_ee_vals.append(0.99)``. Also, in :ref:`python_file_operations` we also used the methods ``readlines()`` and ``close()`` which belong to the ``file`` class.
+
+Notice that we use dot notation to refer to an attribute or a method of a particular instance. As we will see in :ref:`python_modules`, dot notation will also be used to refer to a method or a function from a particular module.
+
+Built-in functions
+==================
+
+Python has some functionality "built-in", besides the syntax and data types we have already discussed. This functionality takes the form of functions that are always available in any Python program.
+
+help() function
+---------------
+
+**Use:** The help() function gives the user information on many aspects of the
+current Python session. Type 'q' to quit.
+
+Examples::
+
+   >>> a = 3
+   >>> help(a)
+
+.. admonition:: Exercise
+   :class: note
+
+   Type ``help(varname)`` where varname is a variable you've defined (or a new variable of your favorite type) and explore the options.
+
+enumerate() function
+--------------------
+
+**Use:** The enumerate() function turns a sequence into a sequence of ``(index, item)`` tuples. This comes in handy if you care about the indexes of items in the list.
+
+
+Example::
+
+   >>> my_list = ['dog', 'cat', 'penguin']
+   >>> for the_item in my_list:
+   ...     print the_item
+   ...
+   dog
+   cat
+   penguin
+   >>> for index_and_the_item in enumerate(my_list):
+   ...     print index_and_the_item
+   ...
+   (0, 'dog')
+   (1, 'cat')
+   (2, 'penguin')
+
+These tuples can be "unpacked" in the ``for`` statement as shown below::
+
+   >>> for index, the_item in enumerate(my_list):
+   ...     print "item number", index + 1, " - ", the_item
+   ...
+   item number 1  -  dog
+   item number 2  -  cat
+   item number 3  -  penguin
+
+range() function
+----------------
+
+**Use:** The range() function creates a list starting at zero of the length you
+give it. You may also pass the start, stop, and the step you want to use
+(default of the step is 1).
+
+Examples::
+
+   >>> range(4)
+   >>> range(2, 8, 2)
+
+See also:
+
+NumPy (see :ref:`python_numpy`) offers ``np.arange`` and ``np.linspace`` which are often more useful for scientific computing purposes.
+
+dir() function
+--------------
+
+**Use:** The dir() function returns the methods and attributes of an object.
+
+Examples::
+
+   >>> a = range(10)
+   >>> dir(a)
+
+xrange() function
+-----------------
+
+**Use:**
+
+The xrange() function is similar to range() except that it does not
+create a new list (saving on memory) but instead acts as a generator of
+numbers starting at zero up to the stop value you pass it. You may also
+pass the start, stop, and the step you want to use (default of the step
+is 1). This is used in iterations.
+
+Examples::
+
+   >>> for x in xrange(3): print x, x * 2
+
+Within a function, the for statement has the following simple structure:
+
+   >>> for x in xrange(1, 7):
+   ...    a = x * 3.0
+   ...    print a
+
+See also:
+
+Other useful similar statements are range().
+
+Notice that we use range() when we use the actual list created, but
+xrange() when we just need an iterator.
+
+.. tip::
+
+   In Python 3, ``xrange()`` is named ``range()``, and the old ``range()`` behavior no longer exists. In general, this won't make any difference for your programs.
+
+Error Handling
+==============
+
+Python supports exception-based error handling. This means that rather than exiting the program, or proceeding with undefined behavior when an error occurs, an **exception** is **raised** up through the program. If you have a function that calls a function that calls a function (or some arbitrarily nested structure), you can "catch" the exception at any level from the innermost function to the top. (If the exception is "uncaught" at every level, it will reach the topmost level of the program, and Python will exit with an error.)
+
+Exception handling in Python is done with ``try ... except`` blocks.
+
+try ... except
+--------------
+
+**Use:** The ``try ... except`` block is used as an exception (error) handler. It will try whatever we put in the try block, but if an exception occurs, it will go to the except block. As long as the kind of exception that happens matches what the except block says it handles, you can handle the error and your program can continue.
+
+Examples: Try this code below. Notice the error message you get. ::
+
+   >>> a = [1, 2, 3, 4, 5]
+   >>> for i in xrange(len(a)):
+   ...    a[i + 1] = 100 + a[i]
+   ...    print a[i], a[i + 1]
+
+To solve this problem, we put it in a try ... except statement::
+
+   >>> a = [1, 2, 3, 4, 5]
+   >>> for i in xrange(len(a)):
+   ...     try:
+   ...         a[i + 1] = 100 + a[i]
+   ...         print a[i], a[i + 1]
+   ...     except IndexError:
+   ...         print 'This index does not work: ', i + 1
+
+.. admonition:: Exercise
+   :class: note
+
+   Imagine a situation where your code passes a function a variable, and
+   that variable might be zero. The only problem is that this function
+   divides by that variable.
+
+   Write a simple loop which calculates 1/\ :math:`n`, where :math:`n` is a
+   number in range(11). What happens when :math:`n=0`? Write an exception handling block for this loop.
+
+   (Hint: use the ``try ... except`` statement with ``ZeroDivisionError``).
+
+.. _python_modules:
+
+Importing modules, and the Python Standard Library
+==================================================
+
+There is also a "standard library" of Python **modules** that can be **imported** into your program. Importing a module makes its functions and classes available for use in your own program. The standard library modules are available anywhere you can run Python, but they must be imported to be used.
+
+Python's standard library extends the basics of what is built-in to the language with functionality ranging from communicating with web servers to manipulating files and directories through the operating system. It's highly likely that you'll find something you need already exists in the standard library, though there are a few notable exceptions.
+
+NumPy, SciPy, matplotlib, and AstroPy are essential for the kind of data analysis we do with Python, and they are **not** part of the standard library. In practice, every computer at the Institute will have them set up already through Ureka, so you can assume they will be available.
+
+To bring in functionality from a module (standard or otherwise), the "import statement" is used. The import statement can be written any of three ways, with slightly different effects. ::
+
+   >>> import <module>
+   >>> from <module> import <function_in_module>
+   >>> import <module> as <short_name>
+
+The first, ``import <module>``, makes the module available in your program under its own name. (Module names don't include any ``.py`` extension, and submodules are denoted with ``dot.separated.names``.) For example: you could use functionality from the ``math`` module with ``import math`` followed by ``math.somefunction()``.
+
+The second, ``from <module> import <function_in_module>``, brings in only a portion of the functionality. This can be good if you want to keep things readable, and don't want to write ``os.path.join()`` every time when you only use that one function from ``os.path``.
+
+The last is most commonly used in scientific applications, where you might be typing ``numpy`` often enough that it makes sense to call it ``np``. For example, ``import numpy as np`` makes the function ``numpy.sqrt()`` available in your program as ``np.sqrt()``.
+
+math.sqrt() function
+--------------------
+
+**Use:** If we want to take the square root of a number, we could use the
+function sqrt() in the module math. The following is two examples of how
+to do this:
+
+Examples::
+
+   >>> import math
+   >>> math.sqrt(100)
+
+Notice we did not need the '.py' extension. If we do not need any other
+math module, and we know we will not name a variable 'sqrt' and
+overwrite the function, we can do this::
+
+   >>> from math import sqrt
+   >>> sqrt(100)
+
+glob.glob() function
+--------------------
+
+**Use:** The glob.glob() function searches for files that match the given
+path-name. The path-name you give is a string similar to the search
+strings used for the UNIX/Linux 'ls'. A list is returned containing any
+matching files.
+
+Examples::
+
+   >>> import glob
+   >>> glob.glob('*')
+   >>> glob.glob('*.pdf')
+   >>> datadir = '/grp/hst/riab/training/python/'
+   >>> glob.glob(datadir + 'flux_vs_time_?.fits')
+
+.. admonition:: Exercise
+   :class: note
+
+   Search for a set of files on your desktop.
+
+random.random() function
+------------------------
+
+**Use:** The random.random() function returns a random floating point number in
+the range [0.0, 1.0).
+
+Examples::
+
+   >>> import random
+   >>> random.random()
+   >>> print 'My random number between 2 and 8: ', \
+   ...    2 + (8-2) * random.random()
+
+See also:
+
+Other useful similar statements are random.uniform(), random.gaus().
+
+os.getcwd() and os.chdir() functions
+------------------------------------
+
+**Use:** The os module is for 'Operating System' operations. Examples include
+os.getcwd() which returns the current working directory and os.chdir()
+which changes the current working directory.
+
+Examples::
+
+   >>> import os
+   >>> datadir = '/Users/username/data/'  #insert a usable path
+   >>> mydir = os.getcwd()
+   >>> if (mydir != datadir):
+   ...     os.chdir(datadir)
+
+See also:
+
+Other useful similar statements are os.open(), os.close().
+
+sys.exit() function
+-------------------
+
+**Use:** The sys module is for system-specific parameters and functions. It
+provides a way to interact with the interpreter. sys.exit() is different
+than exit() in that it will honor try statements and you can intercept
+the exit attempt.
+
+Examples::
+
+   >>> import sys
+   >>> for i in xrange(10):
+   ...        if i <= 5:
+   ...            continue
+   ...        else:
+   ...            sys.exit('We do not need a number above 5.')
+
+.. rubric:: Footnotes
+
+.. [#iterationtuple] Under the hood, ``enumerate()`` is really making an ``(index, element)`` *tuple* for every element in ``mytuple``! By putting ``idx, item`` in the ``for`` statement, you're "unpacking" the tuple into two separate variables, just like we did in the variable assignment example with multiple left-hand-side values.
+.. [#hashable] What's "hashable"? In practice, you won't care about this beyond the fact that lists don't make for good dictionary keys. Python internally calculates a place to store your value based on the key, and to do that consistently requires that the key be *immutable*. See the `Python glossary <https://docs.python.org/glossary.html#term-hashable>`_ for gory details.

@@ -1,0 +1,351 @@
+*************************************
+Python Scripts, Modules, and Packages
+*************************************
+
+Up until now, we have limited ourselves to exercises that could be just as easily completed in the IPython (Jupyter) Notebook or an interactive session as in a stand-alone script. In this section, we will build up an understanding of separating functionality into modules, then introduce a powerful tool for parallelizing computations that **only** works with stand-alone scripts and modules. We will also discuss certain stylistic "best practices" that make your code easier to read for others (and which, once you know them, you will recognize in others' code).
+
+The simplest script
+===================
+
+Let's make a simple stand-alone script. The following is the simplest Python program imaginable::
+
+   print("Hello, world!")
+
+Save it as ``hello_world.py`` in your working directory. Try to run it with ``./hello_world.py`` and see what happens::
+
+   $ ./hello_world.py
+   -bash: ./hello_world.py: Permission denied
+
+The "permission denied" error can be kind of confusing if you weren't aware that UNIX-like systems consider "whether you can run this" a permission (like 'read' or 'write'). Make your file **executable** with the command ``chmod +x ./hello_world.py``, and try again::
+
+   $ ./hello_world.py
+   ./hello_world.py: line 1: syntax error near unexpected token `"Hello, world!"'
+   ./hello_world.py: line 1: `print("Hello, world!")'
+
+What happened? Well, the system doesn't know your script is written in Python (it doesn't actually use the ``.py`` extension to guess). Stand-alone scripts on UNIX-like operating systems start with a line beginning with ``#!`` (sometimes called a `'shebang' <https://en.wikipedia.org/wiki/Shebang_%28Unix%29>`_ or 'hash-bang' line). The line takes the format of ``#!/path/to/program/that/can/run/this/script extra_args``. Of course, Python might be installed in different places on different systems, so there has to be another trick to it.
+
+To ensure cross-system compatibility, there's a particular syntax that will find the "right" copy of Python to use. When writing a stand-alone Python script, the first line should be written as follows::
+
+   #!/usr/bin/env python
+
+That ensures that the 'current' version of Python, whether it be the default one bundled with your Mac or the Ureka SSB{x, dev, rel} version, is called to run your script. Update ``hello_world.py`` accordingly, and you should see this when you run it::
+
+   $ ./hello_world.py
+   Hello, world!
+
+.. _python_3_vs_2:
+
+A brief digression on Python 2 vs. Python 3
+===========================================
+
+Python is developed by a community of volunteers and distributed for free. In 2008, this community decided to fix some long-standing bugs in the previous major version of Python (the ``2.x`` branch, which had been developed from 2000 onwards), and call the new version "Python 3". The nature of these fixes meant that users couldn't simply install Python 3 and expect everything to work immediately.
+
+The creators of Python have decreed that Python 2 will no longer be updated, and Python 3 is the way forward. The Institute has started migrating to Python 3, but during this transitional period you should be aware that you may encounter code that works with only Python 2 (or only Python 3).
+
+New code should be written to be forwards compatible with Python 3, *especially* if it will be used by other members of your team! There are more comprehensive guides elsewhere, but we want to call your attention to two important things that will change with Python 3. In Python 2, this code is fine::
+
+   >>> print "Hello world"
+   Hello world
+
+In Python 3, ``print`` is a function, invoked with parentheses like every other. The above syntax won't work any more. ::
+
+   >>> print "Hello world"
+     File "<stdin>", line 1
+       print "Hello world"
+                         ^
+   SyntaxError: Missing parentheses in call to 'print'
+
+Add parentheses to make Python 3 happy::
+
+   >>> print("Hello world")
+   Hello world
+
+Also, in Python 3, division will work less like computer scientists expect, and more like everyone else expects. Python 2 used "integer division", which truncated any fractional part to make the result of dividing two integers an integer. For example::
+
+   >>> 7 / 3
+   2
+   >>> 7.0 / 3  # floating point division used when either operand is a float
+   2.3333333333333335
+
+In Python 3, the behavior is as follows::
+
+   >>> 7 / 3
+   2.3333333333333335
+   >>> 7.0 / 3
+   2.3333333333333335
+
+The old behavior can be used with the new ``//`` operator::
+
+   >>> 7 // 3
+   2
+   >>> 7.0 // 3
+   2.0
+
+What you should do about it
+---------------------------
+
+You can make your code future-proof by "importing" functionality from the future. When writing stand-alone scripts (as opposed to snippets in the interactive environment), it is a good idea to include this at the top (after any ``#!`` line)::
+
+   from __future__ import print_function, division
+
+...and that will give you the new behavior in Python 2. (In Python 3, which already has the new behavior by default, it will have no effect.)
+
+.. admonition:: Exercise
+   :class: note
+
+   Update your ``hello_world.py`` to include the future imports, and ensure that runnning ``./hello_world.py`` still works.
+
+Scripts versus modules (or packages)
+====================================
+
+The words 'script', 'module', and 'package' are used to mean so many different things by different people that it's probably hopeless to enforce a distinction. However, within the Python community, they **do** mean different things.
+
+A **module** is a file containing Python source code (or, less commonly, a custom extension to the language). It's typically not constructed to do anything useful when run on its own; usually they contain function definitions, class definitions, constants, and similar.
+
+Here's a very short module, ``do_something.py``::
+
+   def say():
+       print("Hello, world!")
+
+If you went through the rigamarole described above and tried to run it as a stand-alone script, you'd see::
+
+   $ ./do_something.py
+
+That's not a mistake: there's no output at all! Modules typically **define** functions, classes, and constants to be used later on by scripts. They are useful to group related functionality, and de-duplicate commonly used code among different parts of your program.
+
+Update your ``hello_world.py`` to look like this::
+
+   #!/usr/bin/env python
+   import do_something
+   do_something.say()
+
+Here we've **imported** the ``do_something`` module, then **called** the ``say()`` function within it. Check that it works in your terminal::
+
+   $ ./hello_world.py
+   Hello, world!
+
+.. admonition:: Exercise
+   :class: note
+
+   Create a **module** called ``verbose_math.py`` with a single function ``square_root(x)`` that **prints** a message along the lines of ``square_root(4) -> 2.0`` (for ``x = 4``) and **returns** the square root of its argument. (n.b. No need to algorithmically determine the square root! ``from math import sqrt`` gives you what you need.)
+
+   Now, write a stand-alone script to compute the square root of 16 using your ``square_root()`` function. Ensure the output is what you expect, and it as ``sqrt_16.py``.
+
+   We will add on to this, so keep this version in a folder called ``scripting_ex1``.
+
+Let's relate this back to a less trivial use-case: data pipeline construction. You may painstakingly construct some code that applies a sophisticated correction to a single FITS file, then wish to include it in the pipeline.
+
+Rather than keep a stand-alone script implementing your calibration **and** have a copy within the pipeline, you could "factor out" your calibration into a function or group of related functions in a module. Then you could use a stand-alone script that applies that single calibration step, imported from the module where you put it, for testing purposes.
+
+Best practices for scripts
+==========================
+
+As you may have noticed, our script is exceedingly tiny. Real scripts will include functions of their own, typically those specific to the operation of the script and not useful for other purposes.
+
+.. admonition:: Exercise
+   :class: note
+
+   Copy your Python files from the last step into a new folder called ``scripting_ex2``. Add a function ``greet(name)`` to the ``sqrt_16.py`` file that takes a string ``name`` as an argument and prints out a greeting addressed to ``name``. (It's not really part of our plan to make verbose versions of all the math functions in ``verbose_math``, so it makes sense to group it with our ``sqrt_16.py`` script.) Have your ``sqrt_16.py`` script greet a person or thing of your choice by calling ``greet()`` before ``square_root``.
+
+It's not uncommon for a script to evolve over time, growing new functionality that eventually migrates to a module. We will now look at the preferred technique for making a script file that works as both a stand-alone script **and** a module.
+
+Preventing "import side-effects"
+--------------------------------
+
+You may hear software engineers or more experienced programmers talk about "import side-effects" with great scorn. Fortunately, you can tell them you learned about those in your RIA Python training. Here's the deal:
+
+When you run ``import verbose_math`` (or any of the related family of import statements, such as ``from verbose_math import square_root``), Python actually opens up ``verbose_math.py`` and runs through it line-by-line, executing each line as it goes. This is why modules should really only **define** things, and not contain program logic outside of ``def`` or ``class`` blocks (or defining constants with ``=``). Such code will be executed when the module is imported, potentially messing up what you're trying to do.
+
+Add a line that says ``print("Hey, it's verbose_math!")`` to the bottom of ``verbose_math.py``, then open up the interactive Python interpreter. We're not going to do anything, just import our module. ::
+
+   >>> import verbose_math
+   Hey, it's verbose_math!
+   >>>
+
+If you hand your module to a colleague, and they import it, their internal monologue will be: "Woah there, cowboy! I haven't done anything yet, why are you telling me this?" Go ahead and remove that line from ``verbose_math.py`` and read on.
+
+Printing out messages just because someone imported the module is a **side-effect**. Other side effects include loading a website to check for software updates, popping open a graphics window, or similar. Don't do these things. Just because someone imported your module does **not** mean they're necessarily using it in a way you expected. Let your user tell you if they want a graphics window opened.
+
+However, say your stand-alone script has some useful functionality (evolved over time), and you want people to be able to import it from their scripts without kicking off a complete run of whatever else is in there. This is a common enough need that there's a conventional way to "guard" your code such that it won't run accidentally on import.
+
+.. admonition:: Exercise
+   :class: note
+
+   Copy your Python files from the last step into a new folder called ``scripting_ex3``. Remember the ``sqrt_16.py`` script? We're interested in another number now, so make a ``sqrt_40.py`` with the appropriate shebang line and permissions. Everything should be the same, but we don't want to write the ``greet()`` function twice, so add a ``from sqrt_16 import greet`` line before it's called. Oh, and change the number from 16 to 40. (But you probably guessed that.)
+
+   What happens when you run it? Why might that not be what you want from a program named ``sqrt_40.py``?
+
+The way to guard against accidentally running stand-alone script code on import is a (more-or-less magic) ``if`` statement. The ``__name__`` magic variable is set to the name of the module being imported, except when the script is being run on its own, in which case it is set to the special name ``__main__``.
+
+.. admonition:: Exercise
+   :class: note
+
+   Copy your Python files from the last step into a new folder called ``scripting_ex4``. Your ``sqrt_16.py`` script should have some imports, followed by a function definition for ``greet()``, followed by a call to ``greet()`` and then a call to ``square_root()``.
+
+   After the imports and function definition, but before the function calls, begin a new block with::
+
+      if __name__ == "__main__":
+
+   Indent your function call lines appropriately such that they're within the ``if`` block.
+
+   Now run ``sqrt_40.py``. What has changed? How would you want to modify ``sqrt_40.py`` in the future, if it, too, grew to include some useful functions?
+
+Future-proofing your code
+-------------------------
+
+As discussed in the section on Python 2 vs. Python 3, it is especially important for modules and stand-alone scripts to specify that they are using the newer syntax (that will remain valid going forward to future versions). The place to put the "future imports" is just after the shebang line. Most of your Python files will start just like this::
+
+   #!/usr/bin/env python
+   from __future__ import print_function, division
+
+Best practices for re-usable functions
+======================================
+
+Now we have two functions that could conceivably be used by others, if they can guess how to use them. Python supports the idea of built-in documentation, allowing you to provide hints to others about how a function should be used in the place where the function itself is defined.
+
+Any string literal (which could be delimited a few different ways, as you may recall from the section on basic data types), when placed at the "top" of a function or class (i.e. on the first line within the block introduced by ``def blah():`` or ``class Bleh:``) becomes its **docstring**. Docstrings are important because a bunch of Python tools know how to look for them, and they make interfacing with someone else's code less of a guessing game.
+
+As an example, open up an IPython session and import the ``math`` module. There's a funky function in there named ``atan2``, which doesn't sound like anything they taught me in trigonometry class. In IPython, you can get more information on any function (or class, or module, etc.) by just typing its name followed by a ``?`` and hitting enter. This prints the function's **docstring**::
+
+   In [1]: import math
+
+   In [2]: math.atan2?
+   Docstring:
+   atan2(y, x)
+
+   Return the arc tangent (measured in radians) of y/x.
+   Unlike atan(y/x), the signs of both x and y are considered.
+   Type:      builtin_function_or_method
+
+And now you know. And knowing is half the battle.
+
+The same ``?`` shorthand works in the IPython / Jupyter Notebook, but isn't valid in scripts. (Note that interactive sessions with the plain old ``python`` command support this too, but you write ``help(math.atan2)`` instead of a ``?``. To get out of that help screen, type ``q``.)
+
+Conventions for formatting the contents of docstrings are as abundant as the stars in the sky, but there are a few important things your users (or your future self) might want to know about a particular function:
+
+  * What do its arguments mean? (Especially if you've given them names like ``i``, ``j``, ``k``!)
+  * What kinds of values are accepted? (Does it only work with integers? Strings?)
+  * What does it **do**?
+  * What does it return, if anything?
+
+One common convention for formatting docstrings is the "NumPy style", extensively documented under `Docstring Standard <https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt#docstring-standard>`_ in the NumPy documentation. I find it quite readable without being unnecessarily verbose, but your mileage may vary. When working in a large team, it's more important that your code follows any documentation conventions they set up. (Unless, of course, they conventionally have no documentation at all.)
+
+.. admonition:: Exercise
+   :class: note
+
+   Copy your Python files from the last step into a new folder called ``scripting_ex5``. Modify your ``square_root()`` and ``greet()`` functions to have docstrings. Try to use the NumPy docstring style, but don't worry if the guidelines contain stuff that goes over your head. (There are also `examples of good NumPy-style docstrings <http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_numpy.html>`_ you can consult.)
+
+   Open an interactive IPython session and ensure that your docstrings are printed out when you import the functions and use the ``?`` shorthand to view the docstring. Copy your IPython session output into a new text file called ``ex5_output.txt`` for the trainer.
+
+Best practices for naming things
+================================
+
+It is said that there are two hard problems in computing: cache invalidation, naming things, and off-by-one errors. This second problem comes down to trying to convey what a piece of code is all about in a name short enough to type ten times a day. We will leave the more artful aspects of naming things to you, but you should note some more technical constraints on names in Python.
+
+**Names beginning with a single underscore**: Names you encounter that begin with a single underscore, like ``_reserved`` or ``_something`` are "hidden" names. In practice, this doesn't mean anything about how your code interacts with them, but some tools respect this designation to show you, e.g., tab completion suggestions without any hidden names included. It's a good bet that a single-underscore-prefixed name found as an attribute on an object represents a reference to something considered "internal", which you should not rely on to be there in future versions (even if using it would make your code simpler!).
+
+**Names beginning with a double underscore**: As mentioned previously, these are reserved for use by the Python language itself. Your code should not create any new variables with double underscore names.
+
+There is a document called "PEP8" (Python Enhancement Proposal 8) that lays out some common-sense rules for formatting your Python code. (https://www.python.org/dev/peps/pep-0008/) Not everything in PEP8 is a hard-and-fast rule, and nothing in PEP8 affects whether your code will **run**, but it's worth familiarizing yourself with. Notably, it lays out some guidelines for naming structures within your program that make it easy to see at a glance what a particular name is referring to. Review the "Prescriptive: Naming Conventions" section here: https://www.python.org/dev/peps/pep-0008/#id30.
+
+In brief:
+
+**Module names**: Module names should be short, all-lowercase, and (if composed of multiple words) include underscores. Examples: ``numpy``, ``scipy``, ``math``.
+
+**Function names**: Functions (and relatedly, methods on classes) should be ``lowercase_words_separated_by_underscores``. This is sometimes called ``snake_case``. Yes, this can even apply to acronyms (c.f. ``numpy.fft.fft``). Examples: ``sqrt()``, ``write_to()``, ``apply_async``.
+
+**Class names**: Class names are uppercased, and multiple words should each be capitalized to distinguish them from one another. Examples: ``ThreadedWriter``, ``HDUList``, ``Instrument``.
+
+Regular old variables within your program should be named descriptively, with multiple words separated by underscores (similarly to function and method names).
+
+An introduction to ``multiprocessing``
+======================================
+
+Fair warning, ``multiprocessing`` is a pretty complex topic, and we'll only be able to scratch the surface of it here. That said, it's a complex topic that **definitely** rewards the time invested in it. You'll probably see it a lot at Space Telescope.
+
+It's something of an open secret that Python isn't actually that good at computationally intensive work. That's not to say that Python isn't a good language for scientific computing, but the real workhorses of numeric computation in the Python world are things like like NumPy and SciPy: in other words, external libraries, not part of the language itself. Of course, NumPy and SciPy only know how to use one of your computer's CPUs, when you might have 4 to 16 in a recent desktop. There's clearly a place here for a tool that lets you take your moderately-fast Python code and... well... throw more hardware at it.
+
+The ``multiprocessing`` module lets you write your functions just as you would in a normal Python program, but allows you to use additional Python processes to "farm out" work to the other processors in your computer. Think of it as running things four or eight at-a-time instead of one after the other.
+
+.. admonition:: Exercise
+   :class: note
+
+   Copy your Python files from the last step into a new folder called ``scripting_ex6``. Make the following modification to ``square_root()``: add a line before the ``print()`` call that sleeps (pauses) for 2 seconds. We'll use this to simulate a long-running function from a less trivial module, like correlating two data sets or computing a PSF. See ``time.sleep()`` in the standard library: https://docs.python.org/2/library/time.html#time.sleep.
+
+   Open up a new IPython session, import your ``square_root`` function, and verify that it now takes a hella long time to compute any square roots.
+
+Now we're going to build a simple stand-alone script called ``first_hundred_sqrts.py`` that computes the square roots of numbers 1 to 100. Consider this sample code::
+
+   results = []
+   for number in range(1, 101):
+      its_square_root = verbose_math.square_root(number)
+      results.append((number, its_square_root))
+
+   print(results)
+
+If this runs, one number at a time, it'll take at least 100 x 2 seconds to complete! Who has that kind of time? There has to be a better way.
+
+For starters, we have to stop thinking in our linear, loop-oriented way. Consider this: does the result of ``sqrt(4)`` really influence the result of ``sqrt(5)`` at all? Couldn't we just as easily go through the numbers 1 to 100 backwards, or in a random order, and sort the results later? (Problems where the inputs to a computation don't depend directly on the outputs of a previous stage are *excellent* candidates for parallelization.)
+
+There's another way to apply a function to a sequence of numbers that looks a bit different, but also expresses this property of each step in the sequence being computed independently. If you think about it, the result we have in the example above isn't actually the square root: it's a 2-tuple of ``(number, its_square_root)``. To make this explicit, let's "rephrase" that code sample. Add a function::
+
+   def compute_result(number):
+       its_square_root = verbose_math.square_root(number)
+       return number, its_square_root
+
+And change the main block to look like::
+
+   results = []
+
+   for number in range(1, 101):
+       result = compute_result(number)
+       results.append(result)
+
+   print(results)
+
+There's also a way to eliminate the loop entirely, now that we've rearranged the code this way. The ``map()`` builtin function takes two arguments: a function to use to compute a result, and the sequence which should be passed to that function (one at a time). Rephrasing again, we get a "functional" form (so named for its reliance on functions rather than looping to process a sequence)::
+
+   results = map(compute_result, range(1, 101))
+   print(results)
+
+.. admonition:: Exercise
+   :class: note
+
+   Also within ``scripting_ex6``, create your ``first_hundred_sqrts.py`` stand-alone script. Use the conventions described above (e.g. the shebang line, future imports, and an ``if __name__ == "__main__":`` block). Use the last "phrasing" of the main program logic, as this will lend itself well to parallelization in a moment. Ensure your code runs, but don't feel obligated to wait for three minutes for it to finish!
+
+Now that we've clarified the independence of our various tasks, and written a simple function that does exactly what we want when presented with a particular number, we just need to parallelize it.
+
+Enter the ``Pool`` object, by far the easiest interface to ``multiprocessing``. When using ``multiprocessing`` this way, a minimal amount of boilerplate code is required to configure the process pool, then methods on the pool are used to call your functions in a parallel fashion. Bring in the ``Pool`` class::
+
+   from multiprocessing import Pool
+
+.. admonition:: Exercise
+   :class: note
+
+   Copy your Python files from the last step into a new folder called ``scripting_ex7``. Within your ``if __name__ == "__main__":`` block in ``first_hundred_sqrts.py``, create a process pool and use its ``map`` method to parallelize your computation. A good rule of thumb is to use the number of processors in your computer (or server) to figure out how many worker processes to put in the pool. Here we use 8 processes::
+
+      p = Pool(8)
+      result = p.map(compute_result, range(1, 101))
+      print(result)
+
+   Compare how long it takes to run with your ``scripting_ex6`` version. Nice, right?
+
+This is a somewhat contrived example (square roots don't take long to compute, after all!) but hopefully it gave you some ideas of how to use this to speed up your programs. Multiprocessing is not limited to replacing loops and list-processing constructs with `map()`, though. Consult the Python multiprocessing documentation for the full details: https://docs.python.org/3.5/library/multiprocessing.html
+
+.. admonition:: Exercise
+   :class: note
+
+   As a final exercise for this section on parallelization, consider a data pipeline script that does the following:
+
+     1. Queries the archive to retrieve each "dark" (dark current calibration exposures) for an instrument
+     2. Computes a median dark image by taking the median pixel values across the set of exposures
+     3. Queries the archive web service for each data set corresponding to some list of science exposures
+     4. Applies the dark correction to each science exposure and saves a corrected version
+
+   Which of these steps could be sped up by `multiprocessing`? Which could not? Why? Save your answers in ex7.txt.
+
+.. note::
+
+   Let your trainer know you've finished, and send them your exercise solutions. You're done with Python training!
+
+   Review the resources in the following appendix for more in-depth coverage of these topics and more.

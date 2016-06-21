@@ -1,0 +1,35 @@
+***********************************
+Python for Scientific Data Analysis
+***********************************
+
+| **Authors:**  *(in order of most- to least-recent contribution)*
+| Joseph Long, Meredith Durbin, Katie Gosmeyer, Heather Gunning, Matthew Bourque, Justin Ely, Thompson LeBlanc, Rachel Anderson, Sami-Matias Niemi, Alex Viana
+| **Latest revision:** June 2015
+| **Initial version:** September 2008
+
+\
+
+Python is a free, open-source, high-level interpreted scripting language. Python has become very popular for scientific data analysis thanks to:
+
+* its (relatively) simple syntax without many surprising rules or opaque symbols
+* its ability to serve equally well for quick, exploratory data analysis as for the construction of more complex software (e.g. Web applications, data pipelines)
+* its facility to interface with lower-level programming languages to speed up critical parts of a taxing computation
+
+The intention of this tutorial is to provide the Python basics to understand how to perform simple astronomical data analysis. We will begin with the basics of the Python language and its built-in functionality, then shift our focus to add-on packages (already included on STScI computers) that are essential for scientific computing. Finally, we will explore the process of writing a stand-alone script, making the jump from exploratory data analysis to re-usable analysis tools.
+
+--------------
+
+**The training continues in the** :doc:`introduction` **section!**
+
+You can use the **Next** and **Previous** buttons at the bottom of the page to navigate.
+
+--------------
+
+.. toctree::
+   :maxdepth: 2
+
+   introduction
+   basics
+   scientific_packages
+   scripting
+   resources

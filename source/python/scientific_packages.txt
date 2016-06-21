@@ -1,0 +1,992 @@
+***********************************************
+Essential packages for scientific data analysis
+***********************************************
+
+.. _python_numpy:
+
+NumPy
+=====
+
+The Uses of NumPy
+------------------
+
+NumPy is a Python module which adds support for large, multi-dimensional
+arrays and matrices, along with a large library of high-level
+mathematical functions to operate on these arrays. NumPy addresses the
+problems of speed in interpreted languages by providing
+multi-dimensional arrays and lots of functions and operators that
+operate on arrays. Any algorithm that can be expressed primarily as
+operations on arrays and matrices can run almost as fast as the
+equivalent C code.
+
+NumPy's array vs. Python's built-in list
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+NumPy introduces new data types, but the most popular, versatile, and
+useful one is the array. (It provides similar functionality to arrays in IDL.) There are
+several reasons why you would want to use a NumPy array over Python's
+built-in ``list``.
+
+-  NumPy, PyLab, SciPy, PyFITS and other modules' functions often work
+   with NumPy arrays.
+
+-  Every item in a NumPy array is of the same data type. This means
+   there is less information to keep track of which makes array
+   computations faster.
+
+-  NumPy arrays take the usual arithmetic operators and make them work **element-wise** on arrays (and scalars), so long as they have compatible shapes.
+
+To convert a list to an array, use ``numpy.array(my_list_var)``.
+
+While lists have a length, computable with ``len(mylist)``, NumPy arrays have a **shape**. A shape is a tuple with the length of each dimension of an n-dimensional array. For example: a data cube with four 100x100 images would have the shape ``(4, 100, 100)``. You can inspect the shape of any array object through its ``.shape`` attribute.
+
+NumPy arrays also have a ``dtype`` (visible as the ``.dtype`` attribute), which gives the data type that all elements must conform to. Most NumPy functions that create arrays accept a ``dtype=`` argument, which can take built-in types like ``int`` or ``float``, or explicitly specify precision with types like ``numpy.complex128`` or ``numpy.float64`` (see `Array types <http://docs.scipy.org/doc/numpy/user/basics.types.html>`_ in the NumPy docs).
+
+numpy.array() function
+^^^^^^^^^^^^^^^^^^^^^^
+
+**Use:** The numpy.array() function converts a list to a NumPy array.
+
+In this example we have a Python list ``a``, a converted NumPy array version ``b``, and an example of a 2D array made from nested lists ``c``.
+
+   >>> import numpy as np
+   >>> a = [1,2,3,4]      #a Python built in list
+   >>> b = np.array(a)     #converted to a NumPy array
+   >>> print a
+   >>> print b
+   >>> indx = [1,2]
+   >>> print b[indx]
+   >>> print b[1:3]
+   >>> c = np.array([[1,2,3,4,5],[6,7,8,9,10]])
+   >>> print c
+   >>> print c[1,3]       #indices for a multi-dimensional array
+   >>> print c[1][3]      #this is slower than the previous as it \
+   ...    creates a new array, c[1], and then subscripts that array.
+   >>> print c[1,:]  #print the first element in the first \
+   ...    dimension, but all in the second dimension
+   >>> print c[:,1]
+
+Notice when we print lists and arrays that the elements in lists are
+separated by commas while the elements in arrays are only separated by
+spaces.
+
+.. admonition:: Exercise
+   :class: note
+
+   Create a list ``x`` and a NumPy array ``y``. Multiply each by 2
+   and explain what happens. Now add 2 to each array. Again, explain the
+   result.
+
+.. admonition:: Exercise
+   :class: note
+
+   Create a third list ``z``. Add ``z`` to both ``x`` and
+   ``y``. Explain the result.
+
+Making new NumPy arrays
+-----------------------
+
+Data loaded in from FITS files or tables through Astropy will already be in NumPy array (or array-like) data structures. Python lists can be converted to arrays as seen above. However, sometimes you need to make arrays of own.
+
+Ones, zeroes, and empty
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The simplest way to make new arrays is to figure out the **shape** you want and use  :py:func:`numpy.ones`, :py:func:`numpy.zeros`, or :py:func:`numpy.empty`. (n.b. :py:func:`numpy.empty` doesn't set the elements of the array to one or zero, so only use it if you *know* you will replace every value!)
+
+The **shape** of an array is the n-dimensional equivalent of a list's **length**. It's passed in as a tuple, like ``(4, 10, 10)`` for a 4x10x10 array. If the array is 1D, a simple integer will work.
+
+.. admonition:: Exercise
+   :class: note
+
+   Make a 4x100x100 data cube of zeros called ``my_cube``, and print out its shape. What's the shape of the first slice of the data cube?
+
+.. admonition:: Exercise
+   :class: note
+
+   Using :py:func:`numpy.empty`, make a 5x5 array and print it out to the console (e.g. ``print np.empty((5,5))``). Do the same for 10x10, and 20x1 arrays.
+
+   Are the initial values what you expected? Why might ``zeros`` or ``ones`` be preferred? When does it make sense to use ``empty``? See :py:func:`numpy.empty` for reference.
+
+New sequential arrays
+^^^^^^^^^^^^^^^^^^^^^
+
+Analogous to :py:func:`range`, NumPy offers :py:func:`numpy.arange`. (Think "array-range".) They work pretty much the same way, except the latter returns a NumPy array.
+
+For non-integer spacing, it's better to use :py:func:`numpy.linspace`. Unlike :py:func:`~numpy.arange`, the ``start`` and ``stop`` arguments are inclusive on *both* ends. It takes a third argument ``num`` (instead of ``step``) to determine how many elements should be linearly spaced to cover the interval from ``start`` to ``stop``.
+
+.. admonition:: Exercise
+   :class: note
+
+   Make an array of **floats** counting from 0 to 99. Next, using :py:func:`numpy.linspace`, make the same array. Subtract one from the other and ensure all the elements are identically zero. Now make a third array that samples the interval twice as finely.
+
+What a NumPy array really is and a word of caution
+--------------------------------------------------
+
+A final note about NumPy arrays is that an array is actually an object which points to a block of memory. Suppose we have an array in the variable ``b``::
+
+
+   >>> b = np.ones(5)
+   >>> b
+   array([ 1.,  1.,  1.,  1.,  1.])
+
+Variables in Python are kind of like "name tags" for an object, so if you want to have the name ``d`` point to the array ``b`` you would do this::
+
+   >>> d = b
+   >>> d
+   array([ 1.,  1.,  1.,  1.,  1.])
+
+This does **not**, as one might assume, make a new copy of ``b`` and give it the name ``d``. They are, in fact, two references to the *same* data.
+
+To illustrate this, try assigning a value in ``d``::
+
+   >>> d[2] = 999
+   >>> d
+   array([   1.,    1.,  999.,    1.,    1.])
+   >>> b
+   array([   1.,    1.,  999.,    1.,    1.])
+
+Notice what happened to ``b``. If you know you will want to change an array while keeping the original values around, the correct function to use is ``numpy.copy()``.
+
+numpy.copy() function
+^^^^^^^^^^^^^^^^^^^^^
+
+**Use:** The numpy.copy() function copies the contents of the memory space the
+array points to.
+
+Examples: Try the code below and notice the difference in the results from a
+simple ``d = b`` assignment. ::
+
+   >>> import numpy as np
+   >>> a = np.array([1,2,3,4,5,6,7])
+   >>> b = a.copy()
+   >>> b[2] = 999
+   >>> print b
+   >>> print a
+   >>> a.size
+   >>> a.shape
+
+Computing with NumPy
+--------------------
+
+Element-wise operations
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Arithmetic operates element-wise on NumPy arrays, making it easy to express computations that might involve slower ``for`` loops if you had to explicitly visit each element.
+
+In this example, the function :math:`y = x^2` is evaluated from -2 to 2. ::
+
+   >>> x = np.linspace(-2, 2, 10)
+   >>> y = x ** 2  # n.b. the double asterisk is the exponentiation operator
+   >>> print x
+   [-2.         -1.55555556 -1.11111111 -0.66666667 -0.22222222
+    0.22222222   0.66666667  1.11111111  1.55555556  2.        ]
+   >>> print y
+   [ 4.          2.41975309  1.2345679   0.44444444  0.04938272
+     0.04938272  0.44444444  1.2345679   2.41975309  4.        ]
+
+NumPy also provides element-wise versions of your favorite transcendental functions:
+
+* :math:`e^{x}` --- :py:data:`numpy.exp(x) <numpy:numpy.exp>`
+* :math:`\sin(x)`, :math:`\cos(x)`, :math:`\tan(x)` --- :py:data:`numpy.sin(x) <numpy:numpy.sin>` , :py:data:`numpy.cos(x) <numpy:numpy.cos>` , :py:data:`numpy.tan(x) <numpy:numpy.tan>`
+* :math:`\sin^{-1}(x)`, :math:`\cos^{-1}(x)`, :math:`\tan^{-1}(x)` --- :py:data:`numpy.arcsin(x) <numpy:numpy.arcsin>`, :py:data:`numpy.arccos(x) <numpy:numpy.arccos>`, :py:data:`numpy.arctan(x) <numpy:numpy.arctan>`
+
+::
+
+   >>> x = [0, np.pi / 2.0, np.pi, 3 * np.pi / 2.0, 2 * np.pi]
+   >>> y = np.sin(x)
+   >>> y
+   array([  0.00000000e+00,   1.00000000e+00,   1.22464680e-16,
+           -1.00000000e+00,  -2.44929360e-16])
+
+There are many more than can be covered here, so consult the full list of `mathematical functions <http://docs.scipy.org/doc/numpy/reference/routines.math.html>`_ in the NumPy documentation.
+
+.. tip::
+
+   A special mention should be made of :py:data:`numpy.arctan2 <numpy:numpy.arctan2>`. If you have a ``y`` and ``x`` value, and want an angle in the full 360 degree (or :math:`[-\pi, \pi]`) range on which the arctangent can be defined based on the quadrant of the point, ``np.arctan2(y, x)`` is your friend. (Note the order of the arguments!)
+
+Selecting and modifying data with fancy indexing
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+NumPy arrays support a number of fancy indexing tricks to slice up your data. As you'll recall from :ref:`python_slicing`, list items can be indexed with the square brackets, and sliced with the square brackets and a colon. NumPy supports this type of slicing, and adds features to generalize it to higher dimensions.
+
+To illustrate, let's make a 10x10 2D array of the numbers 0 to 99 which we'll use in the examples in this section. Here we pass the new shape dimensions to :py:func:`numpy.reshape <numpy:numpy.reshape>` to turn a 100 element 1D array into the desired 10x10 shape::
+
+   >>> two_dim_arr = np.arange(100).reshape(10,10)
+   >>> two_dim_arr
+   array([[ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9],
+          [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+          [20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
+          [30, 31, 32, 33, 34, 35, 36, 37, 38, 39],
+          [40, 41, 42, 43, 44, 45, 46, 47, 48, 49],
+          [50, 51, 52, 53, 54, 55, 56, 57, 58, 59],
+          [60, 61, 62, 63, 64, 65, 66, 67, 68, 69],
+          [70, 71, 72, 73, 74, 75, 76, 77, 78, 79],
+          [80, 81, 82, 83, 84, 85, 86, 87, 88, 89],
+          [90, 91, 92, 93, 94, 95, 96, 97, 98, 99]])
+
+Two-dimensional indexing can be done as with Python lists::
+
+   >>> two_dim_arr[5][5]
+   55
+
+... or with comma-separated indices for each dimension::
+
+   >>> two_dim_arr[5, 5]
+   55
+
+The same trick works for slicing::
+
+   >>> two_dim_arr[5:7, 5:7]
+   array([[55, 56],
+          [65, 66]])
+
+When you only provide an index for one dimension (or a 1-D slice), NumPy will grab the entire row::
+
+   >>> two_dim_arr[0]
+   array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+Since it doesn't make sense to assign a scalar to a sequence of values, ``two_dim_arr[0]`` on the left hand of an assignment fills in every matching element with the right hand side value::
+
+   >>> two_dim_arr[0] = 1
+   >>> two_dim_arr
+   array([[ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1],
+          [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+          [20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
+          [30, 31, 32, 33, 34, 35, 36, 37, 38, 39],
+          [40, 41, 42, 43, 44, 45, 46, 47, 48, 49],
+          [50, 51, 52, 53, 54, 55, 56, 57, 58, 59],
+          [60, 61, 62, 63, 64, 65, 66, 67, 68, 69],
+          [70, 71, 72, 73, 74, 75, 76, 77, 78, 79],
+          [80, 81, 82, 83, 84, 85, 86, 87, 88, 89],
+          [90, 91, 92, 93, 94, 95, 96, 97, 98, 99]])
+
+As previously discussed, the first index is analogous to the "y dimension" or "rows" by convention in various Python packages. If you wish to select by column, use a generic slice with only a ``:`` in the first dimension::
+
+   >>> two_dim_arr[:, 0] = 2
+   >>> two_dim_arr
+   array([[ 2,  1,  1,  1,  1,  1,  1,  1,  1,  1],
+          [ 2, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+          [ 2, 21, 22, 23, 24, 25, 26, 27, 28, 29],
+          [ 2, 31, 32, 33, 34, 35, 36, 37, 38, 39],
+          [ 2, 41, 42, 43, 44, 45, 46, 47, 48, 49],
+          [ 2, 51, 52, 53, 54, 55, 56, 57, 58, 59],
+          [ 2, 61, 62, 63, 64, 65, 66, 67, 68, 69],
+          [ 2, 71, 72, 73, 74, 75, 76, 77, 78, 79],
+          [ 2, 81, 82, 83, 84, 85, 86, 87, 88, 89],
+          [ 2, 91, 92, 93, 94, 95, 96, 97, 98, 99]])
+
+.. admonition:: Exercise
+   :class: note
+
+   Make a two dimensional array like ``two_dim_arr`` in the examples, but have it be 20x20 elements. Satisfy yourself that you understand how to modify the following kinds of regions:
+
+   * a single row
+   * a single column
+   * a range of rows
+   * a range of columns
+   * a rectangular region defined by a range of rows and a range of columns
+
+Boolean indexing, masking, and ``np.where``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normally, the stuff between the square brackets is some kind of expression to programmatically determine which elements will match. It's also possible to pass in an array the same shape as the thing being indexed, where each element matches up with one in the thing being indexed and contains a ``True`` or ``False`` flag. Elements where the **boolean indexing array** has ``True`` will be considered to match. Believe it or not, this turns out to be absurdly useful.
+
+   >>> mini = np.arange(5)
+   >>> mini
+   array([0, 1, 2, 3, 4])
+   >>> boolean_indexing_array = np.array([True, True, True, False, False])
+   >>> mini[boolean_indexing_array]
+   array([0, 1, 2])
+
+The reason this is useful is that we can make boolean indexing arrays super easily with the element-wise comparison operators in NumPy. Returning to our ``two_dim_arr`` example, suppse we wanted all elements larger than 50::
+
+   >>> big_entries = two_dim_arr > 50
+   >>> two_dim_arr[big_entries]
+   array([51, 52, 53, 54, 55, 56, 57, 58, 59, 61, 62, 63, 64, 65, 66, 67, 68,
+          69, 71, 72, 73, 74, 75, 76, 77, 78, 79, 81, 82, 83, 84, 85, 86, 87,
+          88, 89, 91, 92, 93, 94, 95, 96, 97, 98, 99])
+
+In fact, we could omit the new variable ``big_entries`` entirely and write ``two_dim_arr[two_dim_arr > 50]``. Python's smart enough to figure it out. However, we'll need it later. For something slightly more complicated, what about finding all the even numbered entries in the array? ::
+
+   >>> even_entries = two_dim_arr % 2 == 0  # for each element x, True if x mod 2 is == 0
+   >>> two_dim_arr[even_entries]
+   array([ 2,  2, 12, 14, 16, 18,  2, 22, 24, 26, 28,  2, 32, 34, 36, 38,  2,
+          42, 44, 46, 48,  2, 52, 54, 56, 58,  2, 62, 64, 66, 68,  2, 72, 74,
+          76, 78,  2, 82, 84, 86, 88,  2, 92, 94, 96, 98])
+
+Now, suppose we wanted to combine these two conditions. NumPy uses the "bit-wise operators" to combine boolean indexing arrays. This means "and"ing two conditions uses ``&``, "or"ing them uses ``|``, and inverting the sense of a boolean indexing array (to match things it didn't, and not match things it did) is the unary ``~`` operator. ::
+
+   >>> two_dim_arr[big_entries & even_entries]  # entries > 50 that are even
+   array([52, 54, 56, 58, 62, 64, 66, 68, 72, 74, 76, 78, 82, 84, 86, 88, 92,
+          94, 96, 98])
+   >>> two_dim_arr[~even_entries]  # odd entries
+   array([ 1,  1,  1,  1,  1,  1,  1,  1,  1, 11, 13, 15, 17, 19, 21, 23, 25,
+          27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59,
+          61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93,
+          95, 97, 99])
+   >>> two_dim_arr[big_entries | ~even_entries]  # entries that are big or odd
+   array([ 1,  1,  1,  1,  1,  1,  1,  1,  1, 11, 13, 15, 17, 19, 21, 23, 25,
+          27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 52, 53, 54, 55,
+          56, 57, 58, 59, 61, 62, 63, 64, 65, 66, 67, 68, 69, 71, 72, 73, 74,
+          75, 76, 77, 78, 79, 81, 82, 83, 84, 85, 86, 87, 88, 89, 91, 92, 93,
+          94, 95, 96, 97, 98, 99])
+
+You could imagine using a combination of constraints to select only good pixels within a certain number of elements of some point of interest. The boolean indexing arrays don't need to be "made from" the thing you're indexing, either, as long as they're the right shape. (e.g. If you had a 100x100 image called ``bad_pixels`` with ones where bad pixels are found, and a 100x100 image called ``my_image``, then ``good_pixel_values = my_image[bad_pixels != 1]`` is perfectly legal.)
+
+.. admonition:: Exercise
+   :class: note
+
+   Make a two dimensional array like ``two_dim_arr`` in the examples, but have it be 20x20 elements. Select entries that are under 25 and contain even numbers using a combination of two boolean indexing arrays.
+
+Matrix operations
+^^^^^^^^^^^^^^^^^
+
+Recall that multiplication happens element-wise for NumPy. How, then, are we to express a product of two matrices? ::
+
+   >>> X = np.array([[1,2,3], [0,1,0], [2,2,2]])
+   >>> Y = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
+   >>> X * Y
+   array([[1, 0, 0],
+          [0, 1, 0],
+          [0, 0, 2]])
+
+Not what we wanted at all! The solution is to use the NumPy ``dot()`` function or method, as shown below::
+
+   >>> X.dot(Y)
+   array([[1, 2, 3],
+          [0, 1, 0],
+          [2, 2, 2]])
+   >>> np.dot(X, Y)
+   array([[1, 2, 3],
+          [0, 1, 0],
+          [2, 2, 2]])
+
+Of course, the *better* solution is to use NumPy matrix objects. For more information, see :py:class:`numpy.matrix <numpy:numpy.matrix>`.
+
+Concatenating arrays
+^^^^^^^^^^^^^^^^^^^^
+
+From time to time, you may need to concatenate arrays. For example, for instruments with two chips, concatenating the two data arrays gives you the whole instrument field of view in a single array.
+
+The tool for this is :py:func:`numpy.concatenate <numpy:numpy.concatenate>`. Take, for example, two identically shaped arrays: a 5x8 array of ones, and a 5x8 array of zeros. ::
+
+   >>> first = np.ones((2, 3))
+   >>> second = np.zeros((2, 3))
+   >>> np.concatenate([first, second])
+   array([[ 1.,  1.,  1.],
+          [ 1.,  1.,  1.],
+          [ 0.,  0.,  0.],
+          [ 0.,  0.,  0.]])
+
+We could stick the arrays together along a different axis, just as easily::
+
+   >>> np.concatenate([first, second], axis=1)
+   array([[ 1.,  1.,  1.,  0.,  0.,  0.],
+          [ 1.,  1.,  1.,  0.,  0.,  0.]])
+
+The dimensions do not *all* have to match, but they do have to match on every axis but the axis on which you're concatenating.
+
+
+.. _python_fits_ascii:
+
+Handling FITS files and ASCII data tables using Astropy
+=======================================================
+
+Astropy is a Python library for astronomy developed by professional
+astronomers and software developers from around the world, some of which
+work here at STScI in the Science Software Branch. It is under
+continuous development and is quickly becoming a powerful library,
+especially for handling FITS files and ASCII tables. Visit the website
+listed in :ref:`python_links` for more information and useful
+documentation.
+
+The astropy.io.fits module provides an interface to FITS formatted files
+under the Python scripting language. astropy.io.fits data structures are
+a subclass of NumPy arrays, which means that they can use NumPy arrays'
+methods and attributes. The astropy.io.ascii module provides flexible
+and easy-to-use methods for reading and writing ASCII data tables. In
+the following sections, we will explore these two modules.
+
+Opening, Reading, and Closing a FITS File
+-----------------------------------------
+
+As an example, we will use data from the *WFC3* instrument located here::
+
+   /grp/hst/riab/training/python/icft01crq_raw.fits
+
+Please copy this file to your working directory.
+
+Below we show an example of opening a FITS file, getting the data and
+the header, closing the file, printing out the shape of the data using
+numpy.shape, printing out header values, and finally making changes to
+the data. ::
+
+   >>> from astropy.io import fits
+   >>> infile = 'icft01crq_raw.fits'
+   >>> fits.info(infile)
+   >>> hdulist = fits.open(infile)
+   >>> hdr = hdulist[0].header  # Get the primary header
+   >>> data = hdulist[1].data  # Get the data from the 1st extension
+   >>> data.shape
+   >>> hdr
+   >>> hdr['FLSHCORR']
+   >>> hdr['FLSHCORR'] = 'PERFORM'
+   >>> hdr['FLSHCORR']
+   >>> print data[-2:]  # Print the last two lines.
+   >>> data[-1:][0][0] = 0
+   >>> print data[-1]
+
+Notice that ``hdr`` behaves like a dictionary. We did some bad
+things to this file, but let's save it anyway to a new file. ::
+
+   >>> outfile = 'mybad.fits'
+   >>> fits.writeto(outfile, data, hdr)
+   >>> print 'Saved FITS file to: {}'.format(outfile)
+
+Alternatively, if we want to modify the original file directly, we can
+do the following::
+
+   >>> fits.update(infile, data, 1)
+
+As a word of caution, note that astropy.io.fits reads in FITS images as
+(rows, cols) or (y, x), not (x, y). This is often a 'gotcha' for users
+who are indexing specific areas of the array.
+
+fits.getval() and fits.setval() functions
+-----------------------------------------
+
+Above, we edited a FITS header by assigning to dictionary keys in Python (e.g. ``hdr['FLSHCORR'] = 'PERFORM'``). If you're manipulating headers a lot, astropy.io.fits provides shorthand for getting and setting the values of header keywords using fits.getval() and fits.setval(). In the example below, we check the header value for ``DARKFILE`` in extension ``0``, set it to a new value, and then check it again to make sure::
+
+   >>> from astropy.io import fits
+   >>> infile = 'icft01crq_raw.fits'
+   >>> key = 'DARKFILE'
+   >>> fits.getval(infile, key, 0)
+   >>> fits.setval(infile, key, value='iref$bogus_dark.fits', ext=0)
+   >>> fits.getval(infile, key, 0)
+
+You should see the ``iref$bogus_dark.fits`` value. Let's put it back::
+
+   >>> fits.setval(infile, key, value='iref$y2j13512i_drk.fits', ext=0)
+   >>> fits.getval(infile, key, 0)
+
+Now our FITS file is back to its 'initial' state. No harm done.
+
+Reading and Writing ASCII Data Files
+------------------------------------
+
+The astropy.io.ascii module provides two robust methods, ascii.read()
+and ascii.write(), for reading and writing multi-column text format data
+tables.
+
+astropy.io.ascii.read() function
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Use:** The astropy.io.ascii.read() function reads in a table of data from a
+specified file and returns an astropy.Table object.
+
+As an example, we will use these files::
+
+   /grp/hst/riab/training/python/flux_vs_time_A.dat
+   /grp/hst/riab/training/python/flux_vs_time_C.dat
+
+These data are used to plot the flux versus time for a standard star and
+serves as a monitor of the WFC3/UVIS photometric stability for amps A
+and C, respectively. In this section, we will read in the data, and in
+chapter 4, we will use it to produce the plots.
+
+Examples::
+
+   >>> from astropy.io import ascii
+   >>> infile = 'flux_vs_time_A.dat'
+   >>> data = ascii.read(infile,
+   ...             names=['MJD', 'Flux_diff', 'Flux_err', 'Flux_linear_fit'])
+   >>> print data
+   >>> print data['MJD']
+   >>> print data['MJD', 'Flux_diff']
+   >>> print data['Flux_diff']  10
+   >>> pos_flux = data['Flux_diff'] > 0
+   >>> print data[pos_flux]
+
+.. admonition:: Exercise
+   :class: note
+
+   Try reading in the data from ``flux_vs_time_C.dat`` using ascii.read()
+
+astropy.io.ascii.write() function
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Use:** Similar to ascii.read(), the astropy.io.ascii.write() function writes
+a table of data to a specified file. For fun, lets try taking the MJDs
+from ``flux_vs_time_A.dat``, normalizing them to the first observation
+date, and writing the new table to a new text file:
+
+Examples::
+
+   >>> from astropy.io import ascii
+   >>> infile = 'flux_vs_time_A.dat'
+   >>> data = ascii.read('flux_vs_time_A.dat',
+   ...                   names=['MJD', 'Flux_diff', 'Flux_err', 'Flux_linear_fit'])
+   >>> first_date = min(data['MJD'])
+   >>> data['MJD'] = data['MJD'] - first_date
+   >>> print data
+   >>> ascii.write(data, 'flux_vs_time_A_mjdnorm.dat')
+
+.. admonition:: Exercise
+   :class: note
+
+   Try making a MJD-normalized text file for the ``flux_vs_time_C.dat``
+   data using ascii.write()
+
+
+Plotting with PyPlot
+====================
+
+matplotlib.pyplot
+-----------------
+
+Matplotlib and its PyPlot environment is a versatile Python plotting
+library capable of producing publication quality figures in a variety of
+hard-copy formats such as EPS, PDF, and PNG. With PyPlot you can
+generate scatter and line plots, histograms, power spectra, bar charts,
+error-charts, pie charts, and many more with just a few lines of code.
+For the power user, you have full control of line styles, font
+properties, axes properties, and so on.
+
+.. _python_simple_scatter:
+
+Basic Plotting
+--------------
+
+The most-used plotting function is ``plt.plot()``, which generally takes 
+two arguments ``x`` and ``y``::
+
+   import numpy as np
+   from matplotlib import pyplot as plt
+   
+   x = np.arange(0, 10, 0.5)
+   y = x**2
+   
+   plt.plot(x,y)
+   plt.show()
+
+.. figure:: figures/basicplot.png
+   :width: 50%
+   :align: center
+   :alt: Our first plot.
+
+.. tip::
+
+   Are you doing the exercises in an IPython notebook? You can have your plots show up in the same window, in line with your code. Use ``%matplotlib inline`` before importing pyplot, like this::
+
+      %matplotlib inline
+      import matplotlib.pyplot as plt
+
+   If you have a retina display, an additional bit of magic will make your plots much easier on the eyes::
+
+      %config InlineBackend.figure_format='retina'
+
+
+You can call ``plt.plot()`` multiple times and the data will show up on the same plot::
+
+   y2 = np.e**(x/2)
+
+   plt.plot(x,y)
+   plt.plot(x,y2)
+
+.. figure:: figures/basicplot2.png
+   :width: 50%
+   :align: center
+
+If you don't want two datasets showing up on the same plot, you can use ``fig = plt.figure()`` to explicitly create separate plots, and ``ax = fig.add_subplot(1,1,1)`` to create a subplot object for the figure. The ``1,1,1`` arguments here indicate the number of rows of subplots you want to create, number of columns, and what the number of this particular subplot is; if you had, say, ``2,3,4`` as your argument instead, you'd then have 2 rows and 3 columns for 6 total subplots, and the particular subplot you just created would be the fourth out of those.
+
+After creating the subplot, you can then call ``ax.plot()``, which will ensure that the dataset appears on the correct plot. We will also see a different way of creating subplots, ``plt.subplots()``, later. ::
+
+   fig1 = plt.figure()
+   ax1 = fig1.add_subplot(1,1,1)
+   ax1.plot(x,y)
+
+   fig2 = plt.figure()
+   ax2 = fig2.add_subplot(1,1,1)
+   ax2.plot(x,y2)
+
+.. figure:: figures/basicplot.png
+   :width: 50%
+   :align: center
+
+.. figure:: figures/basicplot3.png
+   :width: 50%
+   :align: center
+
+Matplotlib's `marker properties <http://matplotlib.org/api/markers_api.html>`_ are extremely customizable; say we want each point marked with an individual dot rather than a line, and we want the line to be red::
+
+   plt.plot(x,y,'.',color='r')
+
+.. figure:: figures/markers.png
+   :width: 50%
+   :align: center
+
+What if we want a functionality that ``plt.plot()`` doesn't have, such as adding error bars? Luckily, there's more than just ``plt.plot()`` to work with; for example, ``plt.errorbar()`` is a very useful function for astronomers. ::
+
+   yerr = np.sqrt(y)
+   plt.errorbar(x,y,yerr)
+
+.. figure:: figures/errorbar.png
+   :width: 50%
+   :align: center
+
+We've been very bad scientists so far and have failed to label our axes! Let's do that now. ::
+
+   plt.errorbar(x,y,yerr)
+   plt.xlabel('x')
+   plt.ylabel('y')
+   plt.title('Quadratic with Poissonian error in y')
+
+.. figure:: figures/plot_labels.png
+   :width: 50%
+   :align: center
+
+
+Now that you've got the basics, let's look at some more complicated things Matplotlib can do.
+
+
+.. _multi_subplots:
+
+Example: Multiple Subplots and Different Plotting Functions
+-----------------------------------------------------------
+
+Here we'll be making a scatter plot, 1D and 2D histograms, and a contour plot from the same dataset.
+::
+
+   # make figure with two rows and two columns of subplots, specify size in inches
+   fig, [(ax0, ax1), (ax2, ax3)] = plt.subplots(2,2, figsize=(8,8))
+
+We assign the figure and four axis objects to their own variables; see :ref:`multiassignment`.
+
+Now we need some data. We'll use ``np.random.randn``, which generates an array of user-specified length with values pulled from the normal distribution centered at 0 with a standard deviation of 1. Let's generate two arrays with 5000 points each. ::
+
+   data_x = np.random.randn(5000)
+   data_y = np.random.randn(5000)
+
+On the first subplot, we add a scatter plot::
+
+   ax0.scatter(data_x, data_y)
+   ax0.set_title('plt.scatter()')
+
+For the next two plots, we'll be making two different types of histograms::
+
+   # set number of bins for histograms
+   nbins = 20
+
+   # histogram of 1D dataset
+   ax1.hist(data_x, bins=nbins)
+   ax1.set_title('plt.hist()')
+
+   # histogram of 2D dataset
+   # we assign hist2d output to variables for use in the next plot
+   H, xedges, yedges, patches = ax2.hist2d(data_x, data_y, cmap='Blues', bins=(nbins,nbins))
+   ax2.set_title('plt.hist2d()')
+
+For the filled contour plot, we need to convert the data to a format ``contourf`` accepts. Don't worry if you don't understand this particular bit of code; essentially what it does is get a density map from the 2D histogram output. ::
+
+   x_bin_sizes = (xedges[1:] - xedges[:-1]).reshape((1,nbins))
+   y_bin_sizes = (yedges[1:] - yedges[:-1]).reshape((nbins,1))
+   pdf = (H*(x_bin_sizes*y_bin_sizes))
+   X, Y = 0.5*(xedges[1:]+xedges[:-1]), 0.5*(yedges[1:]+yedges[:-1])
+   Z = pdf.T
+
+   # plot filled contour map
+   cs = ax3.contourf(X, Y, Z, origin="lower", cmap='Blues')
+   ax3.set_title('plt.contourf()')
+
+   # adjust plot spacing
+   fig.tight_layout()
+
+.. figure:: figures/subplot_examples.png
+   :width: 75%
+   :align: center
+
+.. admonition:: Exercise
+   :class: note
+
+   Create a figure with at least three subplots (in whatever grid shape you choose) 
+   and make a different kind of plot in each.
+   If you want to explore plotting options beyond what's been presented here so far, 
+   check out the `PyPlot documentation <http://matplotlib.org/api/pyplot_summary.html>`_.
+
+
+Example: Plotting FITS Figures & Using Colormaps
+------------------------------------------------
+
+In Matplotlib any 2D array of floats or integers can be displayed as an image. 
+This is extremely convenient for displaying data from FITS files. In this example, we use a FITS file called ``ibsa01fpq_flt.fits`` (you can find a copy in ``/grp/hst/riab/training/python/``)::
+
+   from astropy.io import fits
+
+   f = fits.open('ibsa01fpq_flt.fits')
+   data = f['sci'].data
+   f.close()
+
+   # display the data
+   # you may have to manually fiddle with vmin and vmax
+   plt.imshow(data, vmin=3, vmax=20)
+
+.. figure:: figures/fits_image.png
+   :width: 50%
+   :align: center
+
+Here ``vmin`` and ``vmax`` specify the image values for which to set the minimum and maximum of the colormap. A colormap assigns a color to pixels in the plot based on the values in the array. The simplest color map is grayscale (higher array values mean brighter pixels), but other color map choices can be useful to show patterns in the data.
+
+Let's compare some different types of colormaps for this image. ::
+
+   # set up figure; specify size in inches
+   fig = plt.figure(figsize=(12,5))
+   
+   # add three subplots in a row
+   ax1 = fig.add_subplot(1,3,1)
+   ax2 = fig.add_subplot(1,3,2)
+   ax3 = fig.add_subplot(1,3,3)
+   
+   # display the image in each subplot with different colormaps
+   ax1.imshow(data, vmin=3, vmax=20)
+   ax2.imshow(data, vmin=3, vmax=20, cmap='RdBu_r')
+   ax3.imshow(data, vmin=3, vmax=20, cmap='bone')
+   
+This isn't strictly necessary, but the tick marks are a distraction and take up space, so let's get rid of them::
+
+   for ax in (ax1, ax2, ax3):
+       ax.set_xticks([])
+       ax.set_yticks([])
+   
+Let's give each subplot a title::
+
+   ax1.set_title('Default colormap')
+   ax2.set_title('Diverging colormap')
+   ax3.set_title('Sequential colormap')
+   
+Finally, let's tweak the spacing between subplots so that they're closer together::
+
+   fig.tight_layout()
+   fig.subplots_adjust(hspace=0.01, wspace=0.01)
+
+.. figure:: figures/colormaps.png
+   :width: 100%
+   :align: center
+
+When displaying an image, there are very few instances in which you want to use anything other than a sequential colormap. Diverging colormaps are good for displaying the deviation of data from a mean or median, and qualitative colormaps such as the default "jet" should almost never be used for anything other than categorization of discrete data types. (For more on why jet is a bad choice for continuous/image-like data, see `this blog post <https://jakevdp.github.io/blog/2014/10/16/how-bad-is-your-colormap/>`_.)
+
+For a quick reference of all built-in colormaps in Matplotlib, see this `colormap reference chart <http://matplotlib.org/examples/color/colormaps_reference.html>`_.
+
+
+.. admonition:: Exercise
+   :class: note
+
+   Copy the FITS image used above from ``/grp/hst/riab/training/python/`` to your working directory and try plotting a 500x500 pixel cutout of it (say, the galaxy disk in the lower left corner). (Hint: refer to the previous section on slicing sequences.)
+
+   Next, apply your favorite colormap to the image. Can you adjust vmin and vmax for this region to get a better dynamic range?
+
+
+Making Attractive Plots
+-----------------------
+
+As you may have noticed, the Matplotlib fonts, colors, and general 
+formatting defaults are rather unattractive. Fortunately, almost 
+everything in Matplotlib is customizable with a little know-how.
+
+TeXify Your Text
+^^^^^^^^^^^^^^^^
+
+If you are preparing a document in LaTeX for publication, 
+your figures will blend in very nicely (and look so much better in general!) 
+if you use LaTeX formatting, not only for symbols and equations 
+but for all figure text. `This 
+<http://matplotlib.org/api/matplotlib_configuration_api.html#matplotlib.rc>`_ 
+is the simplest method for doing so::
+
+    # import module that sets formatting parameters
+    from matplotlib import rc
+    # change default font for all plot text to LaTeX font; also change font size
+    rc('font', **{'family': 'serif', 'serif': ['Computer Modern Roman'], 'size':14})
+    # allow TeX commands to be used in text strings
+    rc('text', usetex=True)
+
+It is also possible to edit these preferences in your `matplotlibrc 
+<http://matplotlib.org/users/customizing.html>`_ file directly; 
+however, this may cause issues if you use scripts that weren't 
+written with this in mind.
+
+If you want to see everything you can possibly modify with ``rc``, 
+do the following::
+
+    from matplotlib import rcParams
+    rcParams.keys()
+
+For more information, see Matplotlib's documentation on `text 
+rendering with LaTeX <http://matplotlib.org/users/usetex.html>`_.
+
+High-DPI Rasterized Figures
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Typically, if you want to save a high-resolution figure it's easiest to just 
+save it as a pdf or eps. However, the disadvantage of these formats for figures 
+with large datasets is that their graphics are in vector format and thus very 
+information-dense, which means that if you have upwards of a few hundred data 
+points the file will quickly become bloated and you'll end up wasting twenty 
+minutes while Preview struggles to open it.
+
+Fortunately, there is a workaround. Rasterization is a process that maps vector 
+graphics to pixel format, resulting in much less information being stored. 
+In Matplotlib one can rasterize the entire figure with one simple command::
+
+    # set up your figure
+    fig = plt.figure()
+    # plot some things here
+    # set rasterization for the entire figure before saving
+    fig.set_rasterized(True)
+    # save the figure and specify the dpi
+    fig.savefig('rasterized.eps', dpi=144)
+
+A DPI of 144 should be good enough for most screens, and 300-400 for publication 
+quality, although a high DPI also results in large files.
+
+Alternatively, if you want to keep as much of the figure resolution-independent as 
+possible, you can set rasterization only for the plotted objects in the plotting call::
+
+    # set up your figure
+    fig = plt.figure()
+    # plot some things here and set rasterization
+    plt.plot(x, y, rasterized=True)
+    # save the figure and specify the dpi
+    fig.savefig('partially_rasterized.eps', dpi=144)
+
+
+.. _general_mpl_tricks:
+
+General Tricks/Quick Reference
+------------------------------
+
+When To Explicitly Create Figure and Axis Objects
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+So far in this training we've been somewhat lax about explicit figure creation; sometimes we just do ``plt.plot(x,y)``, and sometimes we create a figure object ``fig = plt.figure()`` with or without an axes object ``ax = fig.add_subplot()``. (There's also the option ``fig, ax = plt.subplots()``). When do you need explicit figure and axes objects, and when it is okay to skip straight to the plot function?
+
+Essentially, it depends on the complexity of your figure, although it's generally good form to use the object-oriented figure and axis calls ``fig = plt.figure()`` and ``ax = fig.add_subplot()`` when you can. For quick-and-dirty plotting, ``plt.plot()`` is generally sufficient; however, if you have multiple subplots or an otherwise complicated figure, explicitly creating figure and axis objects is easier to work with.
+
+General vs. Axis-Specific Commands
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Some commands are different for general (``plt.plot()``) vs. object-oriented (``ax.plot()``) plotting. For the basic plotting functions ``plot()``, ``errorbar()``, ``hist()`` and so on, there is no name difference between the general and object-oriented names. However, for other things such as adding x- and y-labels, the function you have to call to achieve the same effect changes. Often if you have a function ``plt.<do_some_thing>`` that modifies a plot's axis, the corresponding function for a specific axis object will be ``ax.set_<do_some_thing``.
+
+Legends
+^^^^^^^
+
+The function to create a legend for your plot is quite simple, although some of the details of customizing it are a bit tricky.
+
+All you need to make a legend is at least one plotted object with the keyword argument ``label='(your label here)'`` in the plotting call. The legend call is simply::
+
+   plt.legend()
+
+This will make a boxed legend appear on your plot. The default legend formatting is perhaps one of Matplotlib's least attractive features, which is saying something; fortunately, it is easily customizable. For example, you can change the location, size, and handle length with the legend keyword arguments ``loc``, ``prop``, and ``handlelength`` respectively. ::
+
+    plt.legend(loc=0, prop={'size':14}, handlelength=1)
+
+Here ``loc=0`` tells Matplotlib to determine the optimal location for the legend. The numbering system for legend locations in Matplotlib can be confusing; the `documentation <http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.legend>`_, lists all numbered positions. If you need more specificity than any of these provide, you can also use ``loc=(x,y)`` where x and y specify the location of the lower left corner of the legend box in the coordinates of your axis object.
+
+Logarithmic Axes
+^^^^^^^^^^^^^^^^
+
+If you need one or both axes to be log scale, the quickest way to do so is::
+
+    # general
+    plt.yscale('log')
+    # for a specific subplot object
+    ax.set_yscale('log')
+
+Be careful when you have axis limits that are close to 0; your plots will come out very funky if you don't take care to adjust your axis limits to be log-compatible. If you have any negative data, ``plt.yscale('symlog')`` is your best option.
+
+Alternately, you can use ``plt.semilogx(x,y)``, ``plt.semilogy(x,y)``, or ``plt.loglog(x,y)``; however, these give you slightly less flexibility.
+
+
+.. _curve_fitting:
+
+Example: Fitting a Curve With SciPy
+-----------------------------------
+
+As astronomers, a large part of our job is to fit lines to things, 
+regardless of the consequences. SciPy's `optimize 
+<http://docs.scipy.org/doc/scipy-0.14.0/reference/optimize.html>`_ 
+package has many useful tools for doing this;
+here we will demonstrate the use of one of its most versatile functions, ``curve_fit``. ::
+
+   # adapted from http://python4esac.github.io/fitting/example_blackbody.html
+
+   import numpy as np
+   from scipy.optimize import curve_fit
+   from matplotlib import pyplot as plt
+   from matplotlib import rc
+   rc('font', **{'family': 'serif', 'serif': ['Computer Modern Roman'], 'size':14})
+   rc('text', usetex=True)
+
+First, we define a blackbody function ``blackbody`` that takes an array-like input of wavelengths in microns and an integer or float temperature value in Kelvin and returns the spectral radiance blackbody values over the specified wavelength range. ::
+
+   def blackbody(wavelength, T):
+       from scipy.constants import h,k,c
+       wav = wavelength / 10**6
+       exponential = np.exp(h*c / (wav*k*T))
+       coeff = 2*h*c**2 / wav**5
+       return coeff / (exponential - 1)
+
+Next, we use the ``blackbody`` function to create an ideal blackbody spectrum for a given set of wavelengths. The function ``np.linspace()`` used here is similar to np.arange except its third argument is an integer specifying how many values the resulting array should have, instead of the size of the increment between values. ::
+
+   wa = np.linspace(0.02, 4, 200)
+   T = 7000.
+   y = blackbody(wa, T)
+
+Now we add some noise to this perfect blackbody. We're creating two different types of noise here: a baseline "additive" noise scaled to half the mean of the blackbody function, and noise that we will multiply the blackbody function by in order to have it vary with the amplitude of the blackbody. Note that the noise arrays must have the same number of values as the wavelength range above. ::
+
+   add_noise = np.random.randn(200) * np.mean(y) / 2
+   multiply_noise = (np.random.randn(200) + 4) / 4
+
+   noisy_data = y * multiply_noise + add_noise
+
+Now we use ``curve_fit`` to fit the blackbody function to the noisy data, with temperature as the only free parameter.
+Here the arguments for ``curve_fit`` are the function to be used for fitting, the x- and y-data, and optional initial parameter guesses. It returns the optimized parameters for the function as well as a covariance matrix for those parameters. Output is called ``popt,pcov`` by convention. To get the standard deviations of the optimized parameters, we take the square root of the diagonal values of the covariance matrix. (Although we only have one free parameter here, it's good form to still take the diagonal.) ::
+
+   popt, pcov = curve_fit(blackbody, wa, noisy_data, p0=(7000.))
+
+   fitT = popt[0]
+   sigmaT = np.sqrt(np.diag(pcov))[0]
+
+   # fit blackbody with new temperature
+   yfit = blackbody(wa, fitT)
+
+   print 'Observed blackbody temperature: {:.2f} +/- {:.2f} K'.format(fitT, sigmaT)
+
+Observed blackbody temperature: 6926.61 +/- 35.57 K
+
+Now we plot the ideal blackbody, noisy data, and fitted blackbody for comparison. ::
+
+   # plot all functions
+   fig = plt.figure()
+   ax = fig.add_subplot(1,1,1)
+   ax.plot(wa, y, label='True blackbody')
+   ax.plot(wa, noisy_data, alpha=0.7, label='Noisy data')
+   ax.plot(wa, yfit, '--', label='Fitted blackbody', lw=1)
+
+   ax.set_xlabel(r'Wavelength ($\mu$m)')
+   ax.set_ylabel('Spectral radiance (erg s$^{-1}$ cm$^3$ sr$^{-1}$)')
+
+   plt.legend(prop={'size':14})
+
+.. figure:: figures/blackbody.png
+   :width: 60%
+   :align: center
+   :alt: Blackbody spectrum.
+
+
+.. admonition:: Exercise
+   :class: note
+
+   Define your own function and use ``curve_fit`` to fit it to some noisy data.
+   How do the ideal and fitted function compare? How does this change when you change
+   the noise properties (for example, if you use only additive or only multiplicative
+   noise, or change the scale of the additive noise to twice the mean rather than half)?

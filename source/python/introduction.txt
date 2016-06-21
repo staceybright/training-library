@@ -1,0 +1,145 @@
+*******************************************
+Introduction and setting up the environment
+*******************************************
+
+Python for speakers of other languages
+======================================
+
+For those who already know a programming language or two, an important part of learning a new language is finding out which parts of your knowledge will carry over and which won't. Rather than providing an exhaustive tutorial on syntax [#pythontutorial]_, we will point out some key ideas and traps for users used to other languages. (If you don't know another language well, don't worry! More details will follow in the next sections.)
+
+-  If you're coming from a **C or Java-like background**, note that Python does not use curly braces to denote "blocks" of code (e.g. the body of a loop or a conditional). Instead, blocks are indented by four spaces, and Python detects the end of a block when you return to the "outer" level of indentation.
+
+   For example, this C code::
+
+      if (myinteger > 0) {
+         handle_over_zero_case();
+      }
+      do_something_else();
+
+   Would look like this in Python::
+
+      if myinteger > 0:
+          handle_over_zero_case()
+      do_something_else()
+
+-  Similarly, semicolons are unnecessary to end lines.
+   (In fact, it is considered poor style to use semicolons in Python code, though it is not a syntax error.)
+
+   \
+
+-  If you're coming from an **IDL background**, be aware that there is no equivalent to the common ``proc_name, argument1, argument2`` syntax. (Function calls in Python will always look like ``function_name(argument1, argument2)``.)
+
+   \
+
+- Similarly, there are no ``begin`` and ``endif`` keywords. Blocks are introduced with a colon and indentation, and ended by returning to the previous indentation level. (See the example code above.)
+
+\
+
+-  When referring to an element of a sequence, the indices count from zero.
+   (That is, the first element of ``mylist`` would be ``mylist[0]``.)
+
+   \
+
+- When working with image data (or any 2D arrays), indexing follows matrix conventions of row-column, rather than Cartesian (x, y). This means accessing an element of an array in row "y" and column "x" looks like ``myarray[y,x]`` (rather than ``myarray[x,y]``).
+
+   \
+
+-  Python is case sensitive. That is, a variable named ``varONE`` cannot be referred to as ``varone``. Language keywords like ``if``, ``for``, ``while``, etc. are always lowercase.
+
+   \
+
+-  Comments in code are useful to help you remember what is going on,
+   but also so that others know what you are doing. In Python, comment text
+   begins with the ``#`` symbol and goes to the end of the line.
+
+   For example::
+
+      # a comment
+
+   ::
+
+      do_something()  # a comment sharing a line
+
+   ::
+
+      # a multi
+      # line
+      # comment
+
+   \
+
+-  The line continuation symbol ``\`` can be used to spread an expression
+   out over multiple lines. There are constructs in Python that use parentheses,
+   square brackets (``[]``), or curly braces (``{}``). Inside those, Python will
+   wait for the closing symbol before assuming the end of the line.
+
+Environment and Set Up
+======================
+
+Python packages and environments are managed with ``conda``, as described in :ref:`installing-conda`. Ensure you are in the ``conda`` environment you set up in :ref:`the computer setup module <installing-conda>` when you go through this training.
+
+.. note::
+
+   In this text, when discussing commands to be typed at a command prompt, ``$`` is a placeholder for your command prompt (which may be something like ``yourname@localhost $``). You don't need to type it, just the commands following it.
+
+.. tip::
+
+   Check which ``python`` you're using with this command::
+
+      $ which python
+      /Users/myusername/anaconda/envs/astroconda27/bin/python
+
+   You can also check the version of Python install with::
+
+      $ python -V
+      Python 2.7.11 :: Continuum Analytics, Inc.
+
+
+Interactive Python Environment
+------------------------------
+
+You will need to choose an interactive Python environment. There are three
+popular options.
+
+- **Python**
+
+  To start the Python interactive environment, just type ``python`` at
+  the prompt in your terminal.
+
+\
+
+- **IPython**
+
+  To use the IPython interactive environment, type ``ipython`` instead.
+  One advantage of IPython is that besides Python code, you are also
+  able to execute UNIX commands such as ``ls`` and ``cp`` without special syntax,
+  or any UNIX shell command by including a ``!`` prefix at the beginning of a line.
+
+\
+
+- **IPython Notebook** (a.k.a. Jupyter Notebook)
+
+  The notebook is an interactive web based interface to the IPython environment described above. It combines code, text, math, plots, and rich media into a single document with all the functionality of IPython.
+
+  IPython Notebook can be started in the terminal with the command ``ipython notebook``. It will open a web browser window with the notebook interface.
+
+  After it starts, choose the button for a new Python 2 notebook, and click on the "Untitled" heading to rename it. Both the code you write and any output generated will be saved when you click the save button.
+
+To exit either Python or IPython, type 'exit()'. To close the notebook, ensure you've saved your work, then :kbd:`Ctrl-C` in the terminal window to interrupt it and "y" to confirm you want to quit.
+
+.. note::
+
+   In this text, when discussing commands to be typed at a Python interactive interpreter prompt, ``>>>`` is a placeholder for your command prompt (which will look like ``>>>``, or ``In [#]:`` if you're using IPython). An ellipsis (``...``) indicates a continuation of the preceding block or expression. (Enter a blank line to conclude the block or expression.)
+
+.. note::
+
+   Exercises will appear in blue boxes like this one. You should perform them in the interactive interpreter, unless otherwise stated.
+
+   If you prefer to use the IPython notebook (which we recommend!), perform your exercises in the notebook and save it when you are done. Submit the ``.ipynb`` file to your trainer when you finish.
+
+   For command line IPython or the ``python`` interactive interpreter, you should copy your input and the interpreter's output to a text file. At the end of the training, submit the text file with your exercise solutions to your trainer.
+
+
+.. rubric:: Footnotes
+
+.. [#pythontutorial] An extensive Python tutorial is available from the Python developers themselves: https://docs.python.org/2/tutorial/introduction.html. (For Python 3, the updated tutorial is at https://docs.python.org/3/tutorial/introduction.html.)
