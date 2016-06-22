@@ -22,8 +22,20 @@ import os.path
 import posixpath
 import urllib
 
-import BaseHTTPServer
-import SimpleHTTPServer
+try:
+    import BaseHTTPServer
+except ImportError:
+    import http.server as BaseHTTPServer
+
+try:
+    import SimpleHTTPServer
+except ImportError:
+    import http.server as SimpleHTTPServer
+
+try:
+    from urllib import unquote
+except ImportError:
+    from urllib.parse import unquote
 
 BIND_TO = ('127.0.0.1', 8000)
 
@@ -40,7 +52,7 @@ class RequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         path = path.split('#', 1)[0]
         # Don't forget explicit trailing slash when normalizing. Issue17324
         trailing_slash = path.rstrip().endswith('/')
-        path = posixpath.normpath(urllib.unquote(path))
+        path = posixpath.normpath(unquote(path))
         words = path.split('/')
         words = filter(None, words)
         path = self.document_root
