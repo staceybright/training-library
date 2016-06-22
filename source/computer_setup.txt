@@ -165,11 +165,19 @@ As you may have guessed, setting variables in ``bash`` takes the form of ``expor
 
 It is not obvious, but the trailing slash in the $oref definition is required for CALSTIS to function properly.  Be sure not to leave it off.
 
-To set these changes, save the file and typing the following into the command line::
+To apply these changes, save the file and typing the following into the command line::
 
     source ~/.bashrc
 
 To check that your changes have taken effect, open a **new terminal window** and type ``echo $oref``. You should see the value for ``oref`` from above printed out in the terminal.
+
+There are a few different files that can be executed when opening a new terminal, depending on arcane details everyone would rather ignore [#bashrc]_. To make sure your ``.bashrc`` file gets sourced no matter how ``bash`` is started, it is necessary to make a ``.bash_profile`` file that simply loads the contents of ``.bashrc``. This is what that would look like::
+
+    if [ -f ~/.bashrc ]; then
+       source ~/.bashrc
+    fi
+
+Save that in ``.bash_profile`` and shed a single tear for the ineffable complexity of the UNIX.
 
 .. tip::
 
@@ -221,65 +229,72 @@ When that completes, open a *new* terminal window and type ``ssbx`` to activate 
 Installing Conda
 ================
 
-The Institute's Science Software Branch currently distributes a package that contains some essentials for scientific computing for astronomy, however, we are starting to switch over to Conda as the direct successor to Ureka. As a result, we suggest that you install Conda, and set up your own environments with the necessary packages. One of the main reasons we recommend this is because of Python 2.7 and Python 3 and the differences between them. We discuss this further in the Python module of the training, however since we are working with both Python 2.7 and Python 3 code at the Institute, it is beneficial to be able to work with both.
-
-Getting started, we must install Conda from bash. When doing this you can choose to install either Anaconda or Miniconda. We've decided to use Miniconda which you can download `here <http://conda.pydata.org/miniconda.html>`_. Make sure to choose Python 2.7, 64 bit for Mac OS X. 
-
-Now, in your terminal, type::
-
-    bash Miniconda-latest-MacOSX-x86_64.sh
-    
-Follow the instructions as prompted. Accepting the defaults should be sufficient at this time. Now Conda is installed! 
-
-If you want a detailed introduction on how to use Conda, you can check out `<http://conda.pydata.org/docs/test-drive.html>`_ which will guide you step-by-step through some of what Conda can do. If instead, you are on board for a quick environment setup you can follow along here.
-
-Now, we can check our environments and add some new ones. First, to see the list of environments::
-    
-    conda info --envs
-
-You should only see your root environment. For reasons that are a little confusing, we don't want to use our ``root`` environment to do all our work, so let's create a new environment that will be our main environment that runs Python 2.7.  
-
-Since we installed Miniconda, we get to install all our own programs and packages. Most of what we need can be installed by simply installing the STScI package in the following way:: 
-    
-    conda create --name python2 -c http://ssb.stsci.edu/conda-dev/ stsci
-
-I call this environment ``python2`` so that I always know which Python version I am using. You can call this environment whatever you want. We have added the STScI package to our python2 environment to start, which will give you all your usual Python friends (NumPy, Astropy, matplotlib, etc.) and also make sure that you have IPython and IPython Notebook. Now we enter this environment and then check to see exactly which packages have been added.::
-
-    source activate python2
-    conda list
-    
-We already know we are using Python 2.7, but just in case, you can check by typing::
-
-    python --version
-    
-Now, since we are running Python 2.7 in our python2 environment, let's add a new environment that is generally the same, but uses Python 3. 
+The Institute's Science Software Branch currently distributes a package that contains some essentials for scientific computing for astronomy, and we are now switching over to Conda as the direct successor to Ureka. As a result, here we will step through installing Conda and setting up your own environments with the necessary packages. One of the main reasons we recommend this is because of Python 2.7 and Python 3.5 (the most recent version of Python) and the differences between them. We discuss this further in the Python module of the training, however since we are working with both Python 2.7 and Python 3+ code at the Institute, it is beneficial to be able to work with both.
 
 .. note::
 
+    We herein follow along with the SSB-recommended method for installing AstroConda, found here: `AstroConda Installation <http://astroconda.readthedocs.io/en/latest/installation.html>`_. We will make some small deviations from the instructions found there, but the result is no different.
+
+Getting started, we must install Conda from ``bash``. When doing this you can choose to install either Anaconda or Miniconda, depending on the time, disk space, and operating system you have. For MacOS, we've decided to use Anaconda which you can download `here <https://www.continuum.io/downloads>`_. We recommend that you choose Python 2.7, 64 bit for Mac OS X -- Command-Line Installer. This is the recommendation based on the fact that many programs at the institute rely on Python 2.7 and will not work in Python 3.5, however we can easily create separate environments for different Python versions. The command-line installer can be less confusing than the graphical installer.
+
+*Discuss with your buddy/trainer about which Python version you will likely need for your work*.
+
+Now, in your terminal, type::
+
+    bash Anaconda2-4.0.0-MacOSX-x86_64.sh 
+    
+(Where "Anaconda..." is the filename of the download)
+
+Follow the instructions as prompted. Accepting the defaults should be sufficient at this time. Now Anaconda is installed! 
+
+If you want a detailed introduction on how to use Conda, you can check out the `Conda test drive <http://conda.pydata.org/docs/test-drive.html>`_ which will guide you step-by-step through some of what Conda can do. If instead, you are on board for a quick environment setup you can follow along here.
+
+Now, we check to make sure your terminal can see Conda so simply run::
+
+    conda
+    
+This should show some usage instructions. If you get a message that the command is not found, *talk to your buddy/trainer*. 
+
+With Anaconda, we get to install all our own programs and packages. We want to use the Institute's AstroConda repository as it includes most of the packages people at the institute will need for their functional work and research. But, we need to tell Anaconda to do this:: 
+    
+    conda config --add channels http://ssb.stsci.edu/astroconda
+    
+We can now checkout our current environment(s) and add some new ones. First, to see the list of environments::
+
+    conda info --envs
+    
+Or::
+
+    conda env list
+
+You should only see your root environment. For reasons that are a little confusing, we don't want to use our ``root`` environment to do all our work, so let's create a new environment that will be our main environment that runs Python 2.7 (or Python 3.5 depending on which Anaconda distribution you downloaded)::  
+
+    conda create --name astroconda stsci
+
+I call this environment ``astroconda`` because it is using the AstroConda repository, but you can call this environment whatever you want. This repository includes are your usual Python friends (NumPy, Astropy, matplotlib, etc.) and also makes sure that you have IPython, Jupyter Notebook, and additional Institute-specific Python packages. We can start this environment and check to see exactly which packages have been added::
+
+    source activate astroconda
+    conda list 
+    
+To check the version of Python, type::
+
+    python --version
+    
+If you went with the Python 2.7 download but also want an AstroConda environment that runs Python 3.5, you can create another environment. To do this, leave your astroconda environment, see which environments you have now, and then add a new one (which I chose to name ``astroconda35``). ::
+
+    source deactivate 
+    conda info --envs 
+    conda create --name astroconda35 python=3.5 stsci
+
+If you will be using PyRAF or IRAF (talk to your buddy/trainer), you can install these packages at the same time as you install STScI packages in either your ``astroconda`` environment, or in a specific IRAF/PyRAF environment that I call ``iraf27``. You can also add them later (see below) if you decide you need them. Note that IRAF and PyRAF require Python 2.7. ::
+
+    conda create -n iraf27 iraf pyraf stsci
+    
+.. note::
+
     It's impractical to make all your environments the same so it's best to just pick one that you will use more often and use other environments for specific tasks.
-    
-First we return to the root (default) environment by typing::
-
-    source deactivate
-
-You can check information on your configured environments by typing::
-
-    conda info --envs
-    
-And seeing which environment the asterisk is next to. 
-    
-To add your Python 3 environment::
-
-    conda create --name python3 python=3 numpy
-    conda install --name python3 -c http://ssb.stsci.edu/conda-dev/ stsci
-    
-I have named my new environment ``python3`` but, again, you can name yours whatever you want. 
-
-Now that you have several environments, let's check them all out::
-
-    conda info --envs
-    
-Lastly, we need to know how to add more packages (and delete them) in the future. The following is how you can do this from ``root`` or a different environment. If you are in the environment you are changing (that is, you have done ``source activate [name of environment]`` already in that terminal), you do not need the ``--name [name of environment]`` part. ::
+  
+Lastly, we need to know how to add more packages (and delete them) in the future. The following is how you can do this from ``root`` or a different environment. If you are in the environment you are changing (that is, you have done ``source activate [name of environment]`` already in that terminal), you do not need the ``--name [name of environment]`` part::
     
     conda install --name [name of environment] [name of package]
     conda remove --name [name of environment] [name of package]
@@ -407,6 +422,22 @@ Note that there's nothing special about the command finishing before she re-atta
 
 If she didn't ``exit``, that session would remain active (and she could reattach to it later).
 
+Screen allows multiplexing of the terminal into multiple shells.  This means that one can have multiple emulated terminals available within one session (e.g. over one SSH connection).  To create a new shell session within screen, type ``C-a c`` (create).  To close a session, simply ``exit`` the shell.  In order to swap between different shells, type ``C-a #`` (where # is the number of the shell session).  A handy shortcut to swap between the two most recently accessed shells is ``C-a C-a``.
+
+A server's screen session can be customized in the ``~/.screenrc`` configuration file.  A useful setup that includes a lower status bar labelling the multiplexed shells is::
+
+   shell -$SHELL
+   defscrollback 10000
+   termcapinfo xterm-256color ti@:te@
+   caption always "%?%F%{-b bc}%:%{-b bb}%?%C|%D|%M %d|%H%?%F%{+u wb}%? %L=%-Lw%45>%{+b by}%n%f*%t%{-}%+Lw%-0<"
+
+To scroll above the terminal window boundaries, use screen's copy mode::
+
+   Enter copy mode:    C-a [ or C-a <esc>
+   Scroll up:          C-u
+   Scroll down:        C-d
+   Exit copy mode:     ] or <esc>
+
 .. admonition:: Exercise
    :class: note
 
@@ -456,3 +487,4 @@ Additional resources
 
 .. [#externalhelpdesk] There's an *external* helpdesk too, help@stsci.edu. For IT issues, though, you want the internal one. The external helpdesk is for science/instrument support. It is a way for astronomers to ask questions about things like the archive, SSB software, data characteristics, instrument information and the like.
 .. [#umask] Files are created with a default set of permissions set by your "umask", which will most likely make them world-readable by default. See `this Wikipedia article <https://en.wikipedia.org/wiki/Umask>`_ if you're really curious.
+.. [#bashrc] Said details are summarized in `this blog post from 2005 <http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html>`_. The gist of it is: ``.bashrc`` is run when starting an xterm or running ``bash`` within an already-started terminal session. ``.bash_profile`` is run for login shells (``bash -l`` or logging on via console or SSH). Yes, it's confusing. No, there isn't really a good reason it's this way.
