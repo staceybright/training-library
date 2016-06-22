@@ -12,14 +12,16 @@ In this training, you will have an introduction to the pipeline reductions of th
 
 To begin, copy over the following directory to your central store location::
 
-   cp -rf /grp/hst/riab/training/up_the_ramp_sampling/WFC3_tutorial   [user/username]
+   cp -rfv /grp/hst/riab/training/up_the_ramp_sampling/WFC3_tutorial /user/$USER/WFC3_tutorial
 
 Next, you will need to open the notebook named CalWF3_Inspector.ipynb located here::
 
-  > cd [your/path/here]/WF3_tutorial/main
+  > cd /user/$USER/WFC3_tutorial/main/
 
 
-Run the notebook and walk through the tutorial.
+Run the notebook and walk through the tutorial::
+
+  > Jupyter notebook
 
 .. admonition:: Exercise
    :class: note

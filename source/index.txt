@@ -30,6 +30,7 @@ Training guides and exercises for new RIAs
 #. :doc:`photometry`
 #. :doc:`ir_detector_course`
 #. :doc:`up_the_ramp_sampling`
+
 *Also, once you have finished the training exercises, you will be assigned a project that relates to your instrument team assignment.*
 
 *******************************************
