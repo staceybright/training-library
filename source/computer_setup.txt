@@ -197,33 +197,6 @@ It's also a good idea to tell it about your preferred text editor (here we use `
 
    git config --global core.editor "edit"
 
-.. _computer_setup_ureka:
-
-Installing Ureka for internal users
-====================================
-
-.. warning::
-
-    This section is only for users still using/who need to use the legacy Ureka install through the ``ssbx`` or ``ssbdev`` aliases. If you are a new user, please skip down to the :ref:`next section <installing-conda>`.
-    
-The Institute's Science Software Branch distributes a package containing all of the essentials for scientific computing for astronomy. The version for outside users is called Ureka (you may have it on your home computer), but we use a special version of Ureka internally. Like Ureka, this package includes all the usual suspects: Python, IRAF, PyRAF, IPython + the IPython Notebook, NumPy, SciPy, matplotlib, ds9, etc. For more information, consult the `complete list <http://ssb.stsci.edu/ssbx/docs/components.html>`_ (or the `SSBREL complete list <http://ssb.stsci.edu/ssbrel/docs/components.html>`_).
-
-There are three release channels of the SSB IRAF + Python distribution: SSBDEV, SSBX, and SSBREL. SSBDEV is updated nightly, SSBX weekly, and SSBREL infrequently as it is the most stable option.
-
-Follow the `directions for using SSBREL, SSBX, and SSBDEV at STScI <http://ssb.stsci.edu/internal_ssb_software_installations.shtml>`_ to install the ``sync_ssb`` utility.
-
-After going through the steps in the downloaded installer, the program ``/Users/Shared/sync_ssb`` will be available. Run that command in the terminal to perform the initial sync and complete the installation.
-
-.. note::
-
-    Running ``sync_ssb`` may take up to 45 minutes the first time you do it. To see useful output as it runs, use the command ``/Users/Shared/sync_ssb -v``.
-
-When that completes, open a *new* terminal window and type ``ssbx`` to activate the SSBX environment. (SSBDEV and SSBREL work similarly.) You must choose an environment to activate each time you open a new Terminal window.
-
-.. note::
-
-    If you are a laptop user, make a habit of running ``/Users/Shared/sync_ssb`` while you are connected to the Institute network, at least once a week. Desktops will automatically sync nightly at 6:30 AM, unless the computer is off.
-
 .. _installing-conda:
 
 Installing Conda
@@ -306,6 +279,11 @@ If you decide that you don't like/need an environment, you can delete it! ::
 .. note::
 
     For more information on dealing with Conda and playing with environments, check out the `Conda page <http://conda.pydata.org/docs/index.html>`_ .
+
+.. warning::
+
+    Astroconda is a set of packages that replaces `Ureka <http://ssb.stsci.edu/ureka/>`_, which was one big honking package containing everything and the kitchen sink. You may encounter Ureka, or hear about "SSBx", "SSBdev", and "SSBrel" environments (which were specific Ureka environments, now deprecated). However, you should use conda with Astroconda since Ureka is no longer being updated.
+
 
 Verify IDL is installed
 ========================
