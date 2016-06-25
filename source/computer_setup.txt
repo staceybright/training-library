@@ -362,8 +362,8 @@ Then she starts a ``screen`` session and gives it the name ``mylongjob``::
 
 The terminal window clears and the prompt is redisplayed at the top. She changes to the appropriate directory and runs her script::
 
-   science1> ssbx
-   science1> python calibrate_everything.py
+   science1> source activate astroconda
+   (astroconda)science1> python calibrate_everything.py
    Working...
 
 While it's running, she uses a magic key combination to detach the screen session: :kbd:`Ctrl-A` and then :kbd:`d`. The script output disappears and she's left with::
@@ -385,16 +385,16 @@ Then she re-attaches to the screen session with::
 
 which clears the current terminal output and shows her the tail end of her script's output::
 
-   science1> python calibrate_everything.py
+   (astroconda)science1> python calibrate_everything.py
    Working...
    Calibrating Hubble... DONE
    Calibrating JWST... DONE
    Calibrating WFIRST... DONE
-   science1>
+   (astroconda)science1>
 
 Note that there's nothing special about the command finishing before she re-attached. She could have just as easily checked in on it while it was in progress over the weekend, but she was busy having fun. Since everything's done, she decides that instead of detaching again, she will just exit ``screen``::
 
-   science1> exit
+   (astroconda)science1> exit
    [screen is terminating]
    science1>
 
