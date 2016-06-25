@@ -366,7 +366,7 @@ The terminal window clears and the prompt is redisplayed at the top. She changes
    (astroconda)science1> python calibrate_everything.py
    Working...
 
-While it's running, she uses a magic key combination to detach the screen session: :kbd:`Ctrl-A` and then :kbd:`d`. The script output disappears and she's left with::
+While it's running, she uses a magic key combination to detach the screen session: :kbd:`Ctrl-a` and then :kbd:`d`. The script output disappears and she's left with::
 
    science1> screen
    [detached]
@@ -400,7 +400,7 @@ Note that there's nothing special about the command finishing before she re-atta
 
 If she didn't ``exit``, that session would remain active (and she could reattach to it later).
 
-Screen allows multiplexing of the terminal into multiple shells.  This means that one can have multiple emulated terminals available within one session (e.g. over one SSH connection).  To create a new shell session within screen, type ``C-a c`` (create).  To close a session, simply ``exit`` the shell.  In order to swap between different shells, type ``C-a #`` (where # is the number of the shell session).  A handy shortcut to swap between the two most recently accessed shells is ``C-a C-a``.
+Screen allows multiplexing of the terminal into multiple shells.  This means that one can have multiple emulated terminals available within one session (e.g. over one SSH connection).  To create a new shell session within screen, type :kbd:`Ctrl-a` :kbd:`c` (create).  To close a session, simply ``exit`` the shell.  In order to swap between different shells, type :kbd:`Ctrl-a` :kbd:`#` (where # is the number of the shell session).  A handy shortcut to swap between the two most recently accessed shells is :kbd:`Ctrl-a` :kbd:`Ctrl-a`.
 
 A server's screen session can be customized in the ``~/.screenrc`` configuration file.  A useful setup that includes a lower status bar labelling the multiplexed shells is::
 
@@ -409,12 +409,12 @@ A server's screen session can be customized in the ``~/.screenrc`` configuration
    termcapinfo xterm-256color ti@:te@
    caption always "%?%F%{-b bc}%:%{-b bb}%?%C|%D|%M %d|%H%?%F%{+u wb}%? %L=%-Lw%45>%{+b by}%n%f*%t%{-}%+Lw%-0<"
 
-To scroll above the terminal window boundaries, use screen's copy mode::
+To scroll above the terminal window boundaries, use screen's copy mode:
 
-   Enter copy mode:    C-a [ or C-a <esc>
-   Scroll up:          C-u
-   Scroll down:        C-d
-   Exit copy mode:     ] or <esc>
+ 1. Enter copy mode:    :kbd:`Ctrl-a` :kbd:`[` or :kbd:`Ctrl-a` :kbd:`Esc`
+ 2. Scroll up:          :kbd:`Ctrl-u`
+ 3. Scroll down:        :kbd:`Ctrl-d`
+ 4. Exit copy mode:     :kbd:`]` or :kbd:`Esc`
 
 .. admonition:: Exercise
    :class: note
