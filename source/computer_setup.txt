@@ -212,7 +212,7 @@ Getting started, we must install Conda from ``bash``. When doing this you can ch
 
 *Discuss with your buddy/trainer about which Python version you will likely need for your work*.
 
-Now, in your terminal, type::
+Now move the file to your home directory and in the terminal, type::
 
     bash Anaconda2-4.0.0-MacOSX-x86_64.sh 
     
