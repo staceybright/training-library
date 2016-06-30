@@ -389,7 +389,7 @@ Download and install the latest Miniconda::
 
 It'll run for a little bit and output a message when it finishes. The ``.bashrc`` and ``.bash_profile`` files you made earlier have separate versions on the servers. Make sure to add your miniconda folder to the ``$PATH`` on the server. ::
 
-   science6> echo "export PATH=\"/user/$USER/miniconda3/bin:$PATH\"" >> ~/.bashrc
+   science6> echo "export PATH=\"/user/$USER/miniconda3/bin:\$PATH\"" >> ~/.bashrc
 
 Ensure that your ``.bashrc`` gets loaded no matter how you start your shell by creating a ``.bash_profile`` with these contents::
 
