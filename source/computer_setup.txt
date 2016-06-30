@@ -372,24 +372,25 @@ Installing conda again
 
 What's this? Installing conda *again*? That's right, it's so much fun we have you do it twice.
 
-That's actually not the reason why. The servers at STScI run Linux (for the most part) and will not be able to run the Anaconda you installed earlier. Besides, it's residing on your local laptop or desktop disk, so it won't be accessible to programs running on the servers at STScI. To use conda for your server computing needs, you need to set it up on one of the servers separately.
+That's actually not the reason why. The servers at STScI run Linux (for the most part) and will not be able to run the Mac version of Anaconda you installed earlier. Besides, that version is installed to your local laptop or desktop disk, so it wouldn't be accessible to programs running on the servers at STScI. To use conda for your server computing needs, you need to set it up on one of the servers separately. (Fortunately, you only have to go through the process on **one** Linux server to make conda available on **all** the Linux servers.)
 
 One important consequence of this is that you will be responsible for installing the same things into both environments. Running ``conda install mypackage`` on your laptop or desktop will not automatically make it available when you ssh to ``science1`` or similar.
 
-All the servers have network-mounted home directories (i.e. ``/home/myname``) and access to the Central Store. Anaconda wants to install in the home directory by default, but the free space in your home directory is much less than in Central Store. Therefore, we will explain how to install to your Central Store directory.
+All the servers have network-mounted home directories (i.e. ``/home/myname``) and access to the Central Store. Conda wants to install in the home directory by default, but the free space in your home directory is much less than in Central Store. Therefore, we will explain how to install to your Central Store directory instead.
 
-First, ssh in to any of the servers mentioned in the previous exercise. Change directories to your Central Store directory::
+First, ssh in to one of the servers mentioned in the previous exercise. Change directories to your Central Store directory::
 
-   science6> cd /user/$USER
+   plhstins1> cd /user/$USER
 
-Download and install the latest Miniconda::
+Download and install the latest Miniconda for Linux using ``curl``::
 
-   science6> curl -OL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-   science6> bash Miniconda3-latest-Linux-x86_64.sh -b -p /user/$USER/miniconda3
+   plhstins1> curl -OL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+   plhstins1> bash Miniconda3-latest-Linux-x86_64.sh -b -p /user/$USER/miniconda3
 
 It'll run for a little bit and output a message when it finishes. The ``.bashrc`` and ``.bash_profile`` files you made earlier have separate versions on the servers. Make sure to add your miniconda folder to the ``$PATH`` on the server. ::
 
-   science6> echo "export PATH=\"/user/$USER/miniconda3/bin:\$PATH\"" >> ~/.bashrc
+
+   plhstins1> echo "export PATH=\"/user/$USER/miniconda3/bin:\$PATH\"" >> ~/.bashrc
 
 Ensure that your ``.bashrc`` gets loaded no matter how you start your shell by creating a ``.bash_profile`` with these contents::
 
@@ -399,15 +400,15 @@ Ensure that your ``.bashrc`` gets loaded no matter how you start your shell by c
 
 Log out and ssh to the server again::
 
-   science6> exit
+   plhstins1> exit
    logout
-   Connection to science6.stsci.edu closed.
-   $ ssh science6
-   science6>
+   Connection to plhstins1.stsci.edu closed.
+   $ ssh plhstins1
+   plhstins1>
 
 The ``conda`` command works with ``bash``, not ``tcsh``. So, before you continue, start a bash shell on the server you chose::
 
-   science6> bash
+   plhstins1> bash
    bash$
 
 Then check that the ``conda`` command is available::
