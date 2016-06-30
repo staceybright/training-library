@@ -226,7 +226,12 @@ Now, we check to make sure your terminal can see Conda so simply run::
 
     conda
     
-This should show some usage instructions. If you get a message that the command is not found, *talk to your buddy/trainer*. 
+This should show some usage instructions. If you get a message that the command is not found, *talk to your buddy/trainer*.
+
+.. _astroconda-setup:
+
+AstroConda setup
+----------------
 
 With Anaconda, we get to install all our own programs and packages. We want to use the Institute's AstroConda repository as it includes most of the packages people at the institute will need for their functional work and research. But, we need to tell Anaconda to do this:: 
     
@@ -333,6 +338,85 @@ The command to remotely connect to a server is ``ssh SERVERNAME`` (e.g. ``ssh pl
 
 Any commands you run in an ssh session will execute on the server, not on your personal computer. This means any data you need should be copied to a Central Store directory so that the server can see it.
 
+.. admonition:: Exercise
+   :class: note
+
+   Log into one of the servers named below using ``ssh``. Using your laptop or desktop, save a text file in your Central Storage directory (e.g. ``/user/myname/temp.txt``). Within your SSH session, verify that you can read it from the server you chose (e.g. ``cat /user/myname/temp.txt``).
+
+   +------------------+----------------------------+
+   | Server hostname  | Use                        |
+   +==================+============================+
+   | plhstins1        | INS HST functional work    |
+   +------------------+----------------------------+
+   | plhstins2        | INS HST functional work    |
+   +------------------+----------------------------+
+   | plhstins3        | INS HST functional work    |
+   +------------------+----------------------------+
+   | science1         | Science / research use     |
+   +------------------+----------------------------+
+   | science3         | Science / research use     |
+   +------------------+----------------------------+
+   | science4         | Science / research use     |
+   +------------------+----------------------------+
+   | science5         | Science / research use     |
+   +------------------+----------------------------+
+   | science6         | Science / research use     |
+   +------------------+----------------------------+
+   | plscigpu1        | GPU computing              |
+   +------------------+----------------------------+
+   | plscigpu2        | GPU computing              |
+   +------------------+----------------------------+
+
+Installing conda again
+----------------------
+
+What's this? Installing conda *again*? That's right, it's so much fun we have you do it twice.
+
+That's actually not the reason why. The servers at STScI run Linux (for the most part) and will not be able to run the Anaconda you installed earlier. Besides, it's residing on your local laptop or desktop disk, so it won't be accessible to programs running on the servers at STScI. To use conda for your server computing needs, you need to set it up on one of the servers separately.
+
+One important consequence of this is that you will be responsible for installing the same things into both environments. Running ``conda install mypackage`` on your laptop or desktop will not automatically make it available when you ssh to ``science1`` or similar.
+
+All the servers have network-mounted home directories (i.e. ``/home/myname``) and access to the Central Store. Anaconda wants to install in the home directory by default, but the free space in your home directory is much less than in Central Store. Therefore, we will explain how to install to your Central Store directory.
+
+First, ssh in to any of the servers mentioned in the previous exercise. Change directories to your Central Store directory::
+
+   science6> cd /user/$USER
+
+Download and install the latest Miniconda::
+
+   science6> curl -OL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+   science6> bash Miniconda3-latest-Linux-x86_64.sh -b -p /user/$USER/miniconda3
+
+It'll run for a little bit. You have a separate ``.bashrc`` on the servers, so make sure to add your miniconda folder to the ``$PATH``. ::
+
+   science6> echo "export PATH=\"/user/$USER/miniconda3/bin:$PATH\"" >> ~/.bashrc
+
+Ensure that your ``.bashrc`` gets loaded no matter how you start your shell by creating a ``.bash_profile`` with these contents::
+
+    if [ -f ~/.bashrc ]; then
+       source ~/.bashrc
+    fi
+
+Log out and ssh to the server again::
+
+   science6> exit
+   logout
+   Connection to science6.stsci.edu closed.
+   $ ssh science6
+   science6>
+
+The ``conda`` command works with ``bash``, not ``tcsh``. So, before you continue, start a bash shell on the server you chose::
+
+   science6> bash
+   bash$
+
+Then check that the ``conda`` command is available::
+
+   bash$ which conda
+   /user/myname/miniconda3/bin/conda
+
+Now that you have the ``conda`` command available, follow the :ref:`astroconda-setup` instructions again on the server.
+
 The ``screen`` utility
 ----------------------
 
@@ -419,31 +503,7 @@ To scroll above the terminal window boundaries, use screen's copy mode:
 .. admonition:: Exercise
    :class: note
 
-   Log into one of the servers named below and start a ``screen`` session. Detach from it, close your terminal, and make sure you can reconnect and reattach to it successfully.
-
-   +------------------+----------------------------+
-   | Server hostname  | Use                        |
-   +==================+============================+
-   | plhstins1        | INS HST functional work    |
-   +------------------+----------------------------+
-   | plhstins2        | INS HST functional work    |
-   +------------------+----------------------------+
-   | plhstins3        | INS HST functional work    |
-   +------------------+----------------------------+
-   | science1         | Science / research use     |
-   +------------------+----------------------------+
-   | science3         | Science / research use     |
-   +------------------+----------------------------+
-   | science4         | Science / research use     |
-   +------------------+----------------------------+
-   | science5         | Science / research use     |
-   +------------------+----------------------------+
-   | science6         | Science / research use     |
-   +------------------+----------------------------+
-   | plscigpu1        | GPU computing              |
-   +------------------+----------------------------+
-   | plscigpu2        | GPU computing              |
-   +------------------+----------------------------+
+   Log into one of the servers named in the previous exercise and start a ``screen`` session. Detach from it, close your terminal, and make sure you can reconnect and reattach to it successfully.
 
 On to the training exercises!
 ================================
