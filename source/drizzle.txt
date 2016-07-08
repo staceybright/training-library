@@ -28,14 +28,20 @@ Geometric Distortion
 --------------------
 To correct for the spherical aberration of Hubble's primary mirror, corrective optics were required to produce usable data.  In the current generation of imagers, this correction causes distortion in the cameras' field of view, as the detectors are tilted relative to the focal plane.  This, in turn, creates a slight pixel area gradient across the detectors as well as a skewed, non-rectangular field of view.  In this state, astrometric alignments/measurements are near impossible.  DrizzlePac is able to correct for this using distortion correction reference files provided by the instrument teams at STScI.
 
-.. image:: figures/drizzle/Visit01-icb701oqq_flt.jpg
-    :scale: 8 %
-    :alt: first_exposure
-.. image:: figures/drizzle/ds9.jpeg
-    :scale: 8 %
-    :alt: second_exposure
+.. figure:: figures/drizzle/Visit01-icb701oqq_flt.jpg
+    :width: 45%
+    :align: center
+    :alt: Distorted image with the chip gap collapsed.
 
-(Left) Distorted image with the chip gap collapsed.  (Right) Undistorted Drizzled image, notice the shape of the field of view and the chip gap in the middle.
+    Distorted image with the chip gap collapsed. (Click for full size.)
+
+.. figure:: figures/drizzle/ds9.jpeg
+    :width: 45%
+    :align: center
+    :alt: Undistorted Drizzled image.
+
+    Undistorted Drizzled image. Note the shape of the field of view, and the chip gap in the middle. (Click for full size.)
+
 
 Detector Artifacts
 ---------------------------------
@@ -48,13 +54,13 @@ Dithering
 Dithering is the repointing of the telescope within a single visit to shift targets onto different pixels from exposure to exposure.  This process moves sources that may have been on problematic pixels onto pixels unaffected by detector artifacts (an example of two dithered exposures of NGC-1856 is provided below).
 
 .. image:: figures/drizzle/Visit01-icb701oqq_flt.jpg
-    :scale: 8 %
-    :alt: first_exposure
+    :width: 45%
+    :alt: First exposure
 .. image:: figures/drizzle/Visit01-icb701p0q_flt.jpg
-    :scale: 8 %
-    :alt: second_exposure
+    :width: 45%
+    :alt: Second exposure, taken after a slight pointing change (dither)
 
-Notice in the example above how the target moves across the chip gap, so the regions of the target placed in the gap in the first exposure can be recorded in the following exposure.  Bad pixels in a single exposure are rejected and filled in with good pixels from other exposures when multiple exposures are ultimately combined in the Drizzle process.
+Notice in the example above how the target moves across the chip gap (visible as a thin line through the middle of the image), so the regions of the target placed in the gap in the first exposure can be recorded in the following exposure.  Bad pixels in a single exposure are rejected and filled in with good pixels from other exposures when multiple exposures are ultimately combined in the Drizzle process.
 
 In addition, dithering subpixel distances can allow for better sampling of the point spread function (PSF).  This PSF subsampling can be used to achieve a higher resolution in the final Drizzled image.
 
@@ -71,11 +77,11 @@ The actual process used to 'drizzle' and image consists of several steps.  Rough
 #. Blot median image back to distorted frame (AstroDrizzle)
 #. Create cosmic ray mask (AstroDrizzle)
 #. **Create final undistorted, combined image** (AstroDrizzle)
-#. PROFIT!!!! (Science/pretty pictures)
+#. PROFIT! (Science/pretty pictures)
 
 Before any drizzling is actually done, images must be properly aligned.  The alignment process uses a module in DrizzlePac called TweakReg.
 
-Steps one through seven are the main steps of the AstroDrizzle process.  Steps one through three remove distortion and reject any permanently 'bad' pixels (dead pixels, blobs, etc) whereas steps four through six flag and reject cosmic rays.  Step 7 creates the final optimized drizzled product which can be used for step 8 at your leisure.
+Steps one through seven are the main steps of the AstroDrizzle process.  Steps one through three remove distortion and reject any permanently 'bad' pixels (dead pixels, blobs, etc) whereas steps four through six flag and reject cosmic rays.  Step 7 creates the final optimized Drizzled product which can be used for step 8 at your leisure.
 
 Alignment
 =========
@@ -83,8 +89,9 @@ Alignment
 Images taken within the same visit are usually aligned (registered) to each other and often do not need to be registered.  However, uncertainties in the guide star catalog introduce errors in the pointing of the telescope, so images taken in separate visits should not be assumed to be aligned.  An example of misaligned images is shown below:
 
 .. image:: figures/drizzle/misaligned_source.png
-    :scale: 75 %
-    :alt: misaligned_image
+    :width: 75%
+    :align: center
+    :alt: Color image showing a red channel misaligned relative to the blue channel.
 
 The first image (shown in red) is clearly offset from the second (shown in cyan) by nearly 10 pixels (roughly an arcsecond).  In general an alignment within 0.1 pixels is considered good.
 
@@ -127,7 +134,7 @@ The alignment process via TweakReg consists of a few steps:
 #. Calculate the shifts, rotation and scale needed to align sky positions of sources in the input images
 #. Update the input image headers with the newly calculated WCS information
 
-You can run TweakReg through PyRAF or Python, though it's strongly recommended to stick to Python (as PyRAF/IRAF support is being discontinued by STScI).  Enter your ``astroconda`` environment and open a Python shell of your choice (IPython/IPython notebook will likely work the best).  Many tasks that originated from IRAF (such as the tasks in DrizzlePac) be run through the ``teal`` GUI: ::
+You can run TweakReg through PyRAF or Python, though it's strongly recommended to stick to Python (as PyRAF/IRAF support is being discontinued by STScI).  Enter your ``astroconda`` environment and open a Python shell of your choice (IPython/IPython notebook will likely work the best).  Many tasks that originated from IRAF (such as the tasks in DrizzlePac) be run through the ``teal`` GUI::
 
 >>> import glob
 >>> from stsci.tools import teal
@@ -149,11 +156,11 @@ The first (and probably most important) step of TweakReg is building a catalog o
     * For WFC3/UVIS and ACS/WFC set the **threshold** high (try ``100.0`` for now) to avoid detection of cosmic rays and other spurious sources.  This is the detection threshold for sources in number of standard deviations above the background.
     * Press **Save & Quit** then the **imagefind Parameters** button and input the same values from the **refimagefind Parameters** GUI.  This tells TweakReg how to do source finding for the input images.  Note that if your reference image is quite different than your input image (different filter, detector, scale etc) these parameter do not have to match those in the **refimagefind Parameters**.
 
-You can now run TweakReg from this GUI by pressing **Execute**, or you can run via Python command.  To do the latter press **Save & Quit** and type in your Python shell: ::
+You can now run TweakReg from this GUI by pressing **Execute**, or you can run via Python command.  To do the latter press **Save & Quit** and type in your Python shell::
 
 >>> tweakreg.TweakReg(glob.glob('*flc.fits'))
 
-The parameter values you populated in the GUI are saved and used when you call TweakReg through the command.  However, if you do not want to use the GUI at all, you can set all of the parameters within the TweakReg call: ::
+The parameter values you populated in the GUI are saved and used when you call TweakReg through the command.  However, if you do not want to use the GUI at all, you can set all of the parameters within the TweakReg call::
 
     >>> findpars = {'threshold':100.,'conv_width':3.5,'peakmin':1000.,'peakmax':40000.}
     # Parameters in sub parameter windows are passed as dictionaries
@@ -163,18 +170,10 @@ The parameter values you populated in the GUI are saved and used when you call T
 
 TweakReg will then output a number of messages detailing the sources, matches, and shifts that were found and will also make plots that help indicate the quality of alignment solution:
 
-.. image:: figures/drizzle/hist2d_j8ny02zkq_flc.png
-    :scale: 45 %
-    :alt: histogram_2d
-.. image:: figures/drizzle/vector_j8ny02zkq_flc.png
-    :scale: 40 %
-    :alt: vector_residuals
+.. figure:: figures/drizzle/combined_tweakreg_plots.png
+    :alt: Histogram of residuals, residual vectors, and residuals plotted against position.
 
-.. image:: figures/drizzle/residuals_j8ny02zkq_flc.png
-    :scale: 100 %
-    :alt: histogram_2d
-
-(Top left) Two-dimensional histogram showing the offsets found for all of the sources matched.  Nearly all of the sources matches should have the same offsets, which corresponds to the peak of the histogram (hard to spot, but in the center of this example plot).  (Top right) Vector residual plot for the matched sources, showing the residual between the peak of the histogram (the used offset) and calculated offset for each source, plotted by pixel position.  (Bottom) Residuals in X and Y, plotted as functions of X and Y.  The residual and vector residual plots should look fairly random, if any correlation is seen, this is an indicator of a poor alignment solution or issue with the data (i.e. incorrect distortion information, proper motion).
+    (Top left) Two-dimensional histogram showing the offsets found for all of the sources matched.  Nearly all of the sources matches should have the same offsets, which corresponds to the peak of the histogram (hard to spot, but in the center of this example plot).  (Top right) Vector residual plot for the matched sources, showing the residual between the peak of the histogram (the used offset) and calculated offset for each source, plotted by pixel position.  (Bottom) Residuals in X and Y, plotted as functions of X and Y.  The residual and vector residual plots should look fairly random, if any correlation is seen, this is an indicator of a poor alignment solution or issue with the data (i.e. incorrect distortion information, proper motion).
 
 If the residuals do not show any systematics and are small enough (<0.1 pixels) to indicate good alignments then TweakReg can be rerun with the parameter ``updatehdr`` set to ``Yes`` in the GUI or given as the keyword ``updatehdr=True`` in the call from Python.  Do the same for the ``shiftfile`` parameter.  This flag updates the WCS information in the header to a new, aligned WCS.  When all the images are aligned, you can then proceed to run AstroDrizzle.
 
@@ -187,33 +186,33 @@ If the residuals do not show any systematics and are small enough (<0.1 pixels) 
 
 AstroDrizzle
 ============
-To combine the images, you will be using AstroDrizzle, the powerhouse of DrizzlePac. All of the exposures taken in a single filter will contribute to a single, drizzled end result.  As such you will have one final F606W image, and one final F814W image.  In this example, you'll first start with the F606W image (this corresponds to the ``j8ny01*flc.fits`` files).
+To combine the images, you will be using AstroDrizzle, the powerhouse of DrizzlePac. All of the exposures taken in a single filter will contribute to a single, Drizzled end result.  As such you will have one final F606W image, and one final F814W image.  In this example, you'll first start with the F606W image (this corresponds to the ``j8ny01*flc.fits`` files).
 
-AstroDrizzle can be ran similarly to TweakReg, either through a IRAF/PyRAF, a GUI, or directly through Python.  First, take a look at the GUI: ::
+AstroDrizzle can be ran similarly to TweakReg, either through a IRAF/PyRAF, a GUI, or directly through Python.  First, take a look at the GUI::
 
 >>> from drizzlepac import astrodrizzle
 >>> teal.teal('astrodrizzle')
 
 Clearly there are a lot of parameters, but notice how the interface is broken into sections for each of the drizzle process steps described previously.
 
-To start, you will create a basic drizzled image for F606W, without optimizing any parameters:
+To start, you will create a basic Drizzled image for F606W, without optimizing any parameters:
 
     * Set the **input** to ``j8ny01*flc.fits``.  Input can either be passed as a string with wildcards, or a list if passing directly from Python.
     * Set the **output** to ``F606W_derp``, this is what your output file will be named, with the extension ``_drc.fits`` appended to the end.
     * Set **build** to ``Yes`` or ``True`` if passing from Python.
     * Set **preserve** to ``No`` or ``False``. If set to ``True`` a copy of the input images would be backed up to a subdirectory, which is unnecessary in this case.
-    * Press the ``Update From MDRIZTAB`` button or pass ``mdriztab=False`` in Python.  The mdriztab is a master table of drizzle parameters for a given instrument with the standard set of parameters used by the Archive.  These parameters are okay for getting a general preview image, but are not optimized for getting the best drizzled product.
+    * Press the ``Update From MDRIZTAB`` button or pass ``mdriztab=False`` in Python.  The mdriztab is a master table of drizzle parameters for a given instrument with the standard set of parameters used by the Archive.  These parameters are okay for getting a general preview image, but are not optimized for getting the best Drizzled product.
 
 To run, press **Execute** or run the command in Python similarly to how you ran the TweakReg command. You'll notice that a large number of new files are put into your directory.  Many of these files are the masks and transformed images that the Drizzle algorithm uses to produce your undistorted, clean image.  Often times the cosmic ray mask files (cr_mask) can be used for other purposes (if you only want to sample the good pixels in the input images).
 
 Take a look at your output image using ds9 or a viewer of your choice. Compared to the individual FLC images, you should see a much cleaner image without distortion, cosmic rays and other artifacts:
 
 .. image:: figures/drizzle/flt.jpeg
-    :scale: 75 %
-    :alt: flc_image
+    :width: 45%
+    :alt: Flat fielded, CTE corrected image pre-drizzling.
 .. image:: figures/drizzle/driz.png
-    :scale: 45 %
-    :alt: driz_image
+    :width: 45%
+    :alt: Final Drizzled product with distortion and cosmic rays removed.
 
 However, you can do even better!  Depending on what your final goal is, different parameters need to be optimized.  Since we're looking at a star cluster, let's assume that you're trying to get accurate photometric results with a better sampling of the PSF. Some of the relevant parameters are the following (refer to the AstroDrizzle documentation pages to find these ones):
 
@@ -225,19 +224,20 @@ However, you can do even better!  Depending on what your final goal is, differen
     * The output pixel scale should be 0.03'' per pixel.  Note that this is significantly better than the 0.05'' per pixel scale of your input image, giving you much better resolution.
     * Set the pixel shrinking factor to 0.6. *Hint:* these last four parameters are under step 7/7a.
 
-    .. admonition:: Note
-       :class: note
+.. note::
 
-       In general, choosing proper values for last two parameters is crucial, as these are what lay at the heart of the Drizzle algorithm.  In essence, they dictate how pixels corresponding to the same spatial location are combined, which has direct consequences on the resolution/PSF sampling and quality of the final image.  For brevity further discussions of the effects of these parameters are not included in this document.  For further information (especially relevant if drizzling in the future) consult the DrizzlePac homepage, and `Chapter 2 of the DrizzlePac Handbook <http://documents.stsci.edu/hst/HST_overview/documents/DrizzlePac/ch21.html>`_.
+    In general, choosing proper values for last two parameters is crucial, as these are what lay at the heart of the Drizzle algorithm. They dictate how pixels corresponding to the same spatial location are combined, which has direct consequences on the resolution/PSF sampling and quality of the final image.  For brevity, further discussions of the effects of these parameters are not included in this document.
+
+    For further information (especially relevant if drizzling in the future) consult the DrizzlePac homepage, and `Chapter 2 of the DrizzlePac Handbook <http://documents.stsci.edu/hst/HST_overview/documents/DrizzlePac/ch21.html>`_.
 
 Run AstroDrizzle again with these updated parameters (change the output name to something else so it doesn't overwrite your first image).  Compare your optimized product to your original one (matching the frame WCS and blinking between them in ds9 is a good way to see the differences).  Notice the better spatial resolution, especially when looking at the cores of unsaturated stars:
 
 .. image:: figures/drizzle/lowres.jpeg
-    :scale: 45 %
-    :alt: lowres_prod
+    :width: 45 %
+    :alt: Lower-resolution Drizzled image
 .. image:: figures/drizzle/hires.jpeg
-    :scale: 45 %
-    :alt: hires_prod
+    :width: 45 %
+    :alt: Higher-resolution Drizzled image
 
 .. admonition:: Exercise
    :class: note
@@ -248,12 +248,13 @@ Weight Image
 ------------
 So far, you've taken a look at the science image produced by Drizzle.  This is a very basic way to check that Drizzle did an okay job combining the individual exposures.  However, another way to check this is to look at the second extension of the DRC image.  This extension is the weight image, which by default says how much exposure time went into each pixel of the science image (there are other weighting scales to use, with various advantages).
 
-.. image:: figures/drizzle/wht.png
-    :scale: 100 %
-    :alt: weight_image
+.. figure:: figures/drizzle/wht.png
+    :alt: The weight image from the drizzling process for the F606W product.
 
-The weight image for the F606W product.  The darker gray regions show where where Drizzle rejected cosmic rays/bad pixels, so those output image pixels have slightly less exposure time.  The black lines show where Drizzle rejected all of the input pixels (due to saturation), resulting in 0 exposure time used for these pixels.  In a good combination, these spots/lines should only be seen on bad pixels, saturated pixels, cosmic rays, and the other artifacts discussed previously.  If the real sources (an entire PSF, for instance) in the science image appears in the weight image, then the combination incorrectly identified the sources as cosmic rays and rejected those pixels.  Often times, basic statistics on the weight image are used to determine if the parameters used in the combination were suitable or not.
+    The weight image from the drizzling process for the F606W product.
+
+The darker gray regions show where where Drizzle rejected cosmic rays/bad pixels, so those output image pixels have slightly less exposure time.  The black lines show where Drizzle rejected all of the input pixels (due to saturation), resulting in 0 exposure time used for these pixels.  In a good combination, these spots/lines should only be seen on bad pixels, saturated pixels, cosmic rays, and the other artifacts discussed previously.  If the real sources (an entire PSF, for instance) in the science image appears in the weight image, then the combination incorrectly identified the sources as cosmic rays and rejected those pixels.  Often times, basic statistics on the weight image are used to determine if the parameters used in the combination were suitable or not.
 
 ---------------------------
 
-**Congrats! You have finished the essential DrizzlePac training. You've taken your first steps onto becoming a Drizzle Wizard...a Drizzard!**
+**Congrats! You have finished the essential DrizzlePac training. You've taken your first steps onto becoming a Drizzle Wizard… a Drizzard!**
