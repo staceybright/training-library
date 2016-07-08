@@ -21,6 +21,7 @@ Until now, you may have only looked at image data processed solely by the calibr
     * Cosmic rays
     * Blobs
     * Chip gaps
+
 Drizzle is able to fill in pixels affected by these artifacts by replacing them with other 'good' pixels in your stack.
 
 Geometric Distortion
@@ -33,6 +34,7 @@ To correct for the spherical aberration of Hubble's primary mirror, corrective o
 .. image:: figures/drizzle/ds9.jpeg
     :scale: 8 %
     :alt: second_exposure
+
 (Left) Distorted image with the chip gap collapsed.  (Right) Undistorted Drizzled image, notice the shape of the field of view and the chip gap in the middle.
 
 Detector Artifacts
@@ -84,7 +86,7 @@ Images taken within the same visit are usually aligned (registered) to each othe
     :scale: 75 %
     :alt: misaligned_image
 
-The first image (shown in red)is clearly offset from the second (shown in cyan) by nearly 10 pixels (roughly an arcsecond).  In general an alignment within 0.1 pixels is considered good.
+The first image (shown in red) is clearly offset from the second (shown in cyan) by nearly 10 pixels (roughly an arcsecond).  In general an alignment within 0.1 pixels is considered good.
 
 Pixel positions are mapped to positions on the sky (RA/Dec) via the world coordinate system (WCS).  Naturally, the positions of sources **should** have the same sky coordinates between exposures (this obviously isn't always the case for objects with large proper motions).  Misaligned images like the example above show the same sources having different sky positions- an error that must be rectified before running AstroDrizzle.  To do this, the WCS of the input images must be 'tweaked' so the positions of the sources match across all of the images.
 
@@ -93,11 +95,11 @@ The zeroth step in the drizzle process is making sure the images are aligned.  T
 .. admonition:: Exercise
    :class: note
 
-   Copy the ``*flc.fits`` files from ``/user/vbajaj/driz_training`` to a directory to use for these training exercises.
+   Copy the ``*flc.fits`` files from ``/grp/hst/riab/training/drizzle`` to a directory to use for these training exercises.
 
-================== ======== ========== ====== =====
+================== ======== ========== ====== =======
 Rootname           Targname Date-obs   Filter Exptime
-================== ======== ========== ====== =====
+================== ======== ========== ====== =======
 j8ny01svq_flc.fits NGC6791  2003-07-16 F606W  1142.0
 j8ny01szq_flc.fits NGC6791  2003-07-16 F606W  1142.0
 j8ny01t5q_flc.fits NGC6791  2003-07-16 F606W  1185.0
@@ -110,7 +112,7 @@ j8ny02z1q_flc.fits NGC6791  2003-07-17 F814W  1142.0
 j8ny02zdq_flc.fits NGC6791  2003-07-17 F814W  1185.0
 j8ny02zkq_flc.fits NGC6791  2003-07-17 F814W  1185.0
 j8ny02ztq_flc.fits NGC6791  2003-07-17 F814W  1185.0
-================== ======== ========== ====== =====
+================== ======== ========== ====== =======
 
 Open some of the images in ds9 and press ``Match -> Frame -> WCS``.  Notice that images from the Visit 01 (``j8ny01*flc.fits``) are well aligned to one another, but images from the Visit 02 (``j8ny02*flc.fits``) are not aligned with Visit 01.
 
@@ -125,29 +127,29 @@ The alignment process via TweakReg consists of a few steps:
 #. Calculate the shifts, rotation and scale needed to align sky positions of sources in the input images
 #. Update the input image headers with the newly calculated WCS information
 
-You can run TweakReg through Pyraf or Python, though it's recommended to stick to Python (as Pyraf/IRAF support is being discontinued by STScI).  Enter your ``astroconda`` environment and open a python shell of your choice (ipython/ipython notebook will likely work the best).  Many tasks that originated from IRAF (such as the tasks in DrizzlePac) be run through the ``teal`` GUI ::
+You can run TweakReg through PyRAF or Python, though it's strongly recommended to stick to Python (as PyRAF/IRAF support is being discontinued by STScI).  Enter your ``astroconda`` environment and open a Python shell of your choice (IPython/IPython notebook will likely work the best).  Many tasks that originated from IRAF (such as the tasks in DrizzlePac) be run through the ``teal`` GUI: ::
 
 >>> import glob
 >>> from stsci.tools import teal
 >>> from drizzlepac import tweakreg
 >>> teal.teal('tweakreg')
 
-Though not practical for scripting, the GUIs are helpful when learning how to use the tasks.  Clearly, there are many parameters to play with, but for now we'll go over the most important ones.  In the tweakreg parameters window:
+Though not practical for scripting, the GUIs are helpful when learning how to use the tasks.  Clearly, there are many parameters to play with, but for now we'll go over the most important ones.  In the TweakReg parameters window:
 
-    * Set the input parameter to ``*flc.fits``.  These are the input images
-    * Set the updatewcs parameter to ``Yes`` so TweakReg can incorporate the geometric distortion into the alignment.
-    * Set the refimage parameter to ``j8ny01svq_flc.fits`` (or any one of the other input images).  All of the input images will be aligned to the refimage.
-    * Set expand_refcat to ``Yes``.  This allows TweakReg to add unmatched sources from input images to the reference image source catalog on the fly (this is great for mosaicking!).
-    * Set enforce_user_order to ``No``.  This lets TweakReg come up with an optimal order of input images when computing alignment transformations.
+    * Set the **input** parameter to ``*flc.fits``.  These are the input images.
+    * Set the **updatewcs** parameter to ``Yes`` so TweakReg can incorporate the geometric distortion into the alignment.
+    * Set the **refimage** parameter to ``j8ny01svq_flc.fits`` (or any one of the other input images).  All of the input images will be aligned to the refimage.
+    * Set **expand_refcat** to ``Yes``.  This allows TweakReg to add unmatched sources from input images to the reference image source catalog on the fly (this is great for mosaicking!).
+    * Set **enforce_user_order** to ``No``.  This lets TweakReg come up with an optimal order of input images when computing alignment transformations.
 
-The first (and probably most important) step of TweakReg is building a catalog of sources in the input and reference images.  The relevant parameters for this step are within the *imagefind Parameters* and *refimagefind Parameters* sections:
+The first (and probably most important) step of TweakReg is building a catalog of sources in the input and reference images.  The relevant parameters for this step are within the **imagefind Parameters** and **refimagefind Parameters** sections:
 
     * Press the **refimagefind Parameters** button and set conv_width to ``3.5`` for WFC3/UVIS and ACS/WFC (``2.5`` for WFC3/IR).  In general, this number should be about twice the FWHM of the PSF in your image.
-    * For peakmin and peakmax use an image viewer (such as DS9 or ATV) to inspect the cores of the stars and set these parameters based on the range of values you see.  These parameters set the brightness cutoffs for stars used in alignment.
-    * For WFC3/UVIS and ACS/WFC set the threshold high (try ``100.0`` for now) to avoid detection of cosmic rays and other spurious sources.  This is the detection threshold for sources in number of standard deviations above the background.
+    * For **peakmin** and **peakmax** use an image viewer (such as DS9 or ATV) to inspect the cores of the stars and set these parameters based on the range of values you see.  These parameters set the brightness cutoffs for stars used in alignment.
+    * For WFC3/UVIS and ACS/WFC set the **threshold** high (try ``100.0`` for now) to avoid detection of cosmic rays and other spurious sources.  This is the detection threshold for sources in number of standard deviations above the background.
     * Press **Save & Quit** then the **imagefind Parameters** button and input the same values from the **refimagefind Parameters** GUI.  This tells TweakReg how to do source finding for the input images.  Note that if your reference image is quite different than your input image (different filter, detector, scale etc) these parameter do not have to match those in the **refimagefind Parameters**.
 
-You can now run TweakReg from this GUI by pressing **Execute**, or you can run via python command.  To do the latter press **Save & Quit** and type in your python shell: ::
+You can now run TweakReg from this GUI by pressing **Execute**, or you can run via Python command.  To do the latter press **Save & Quit** and type in your Python shell: ::
 
 >>> tweakreg.TweakReg(glob.glob('*flc.fits'))
 
@@ -174,7 +176,7 @@ TweakReg will then output a number of messages detailing the sources, matches, a
 
 (Top left) Two-dimensional histogram showing the offsets found for all of the sources matched.  Nearly all of the sources matches should have the same offsets, which corresponds to the peak of the histogram (hard to spot, but in the center of this example plot).  (Top right) Vector residual plot for the matched sources, showing the residual between the peak of the histogram (the used offset) and calculated offset for each source, plotted by pixel position.  (Bottom) Residuals in X and Y, plotted as functions of X and Y.  The residual and vector residual plots should look fairly random, if any correlation is seen, this is an indicator of a poor alignment solution or issue with the data (i.e. incorrect distortion information, proper motion).
 
-If the residuals do not show any systematics and are small enough (<0.1 pixels) to indicate good alignments then TweakReg can be rerun with the parameter ``updatehdr`` set to ``Yes`` in the GUI or given as the keyword ``updatehdr=True`` in the call from python.  Do the same for the ``shiftfile`` parameter.  This flag updates the WCS information in the header to a new, aligned WCS.  When all the images are aligned, you can then proceed to run AstroDrizzle.
+If the residuals do not show any systematics and are small enough (<0.1 pixels) to indicate good alignments then TweakReg can be rerun with the parameter ``updatehdr`` set to ``Yes`` in the GUI or given as the keyword ``updatehdr=True`` in the call from Python.  Do the same for the ``shiftfile`` parameter.  This flag updates the WCS information in the header to a new, aligned WCS.  When all the images are aligned, you can then proceed to run AstroDrizzle.
 
 .. admonition:: Exercise
    :class: note
@@ -185,9 +187,9 @@ If the residuals do not show any systematics and are small enough (<0.1 pixels) 
 
 AstroDrizzle
 ============
-To combine the images, you will be using AstroDrizzle, the powerhouse of DrizzlePac. All of the exposures taken in a single filter will contribute to a single, drizzled end result.  As such you will have one final F606W image, and one final F814W image.  In this example, you'll first start with the F606W image (this corresponds to the j8ny01*flc.fits files).
+To combine the images, you will be using AstroDrizzle, the powerhouse of DrizzlePac. All of the exposures taken in a single filter will contribute to a single, drizzled end result.  As such you will have one final F606W image, and one final F814W image.  In this example, you'll first start with the F606W image (this corresponds to the ``j8ny01*flc.fits`` files).
 
-AstroDrizzle can be ran similarly to TweakReg, either through a IRAF/PyRaf, a GUI, or directly through Python.  First, take a look at the GUI: ::
+AstroDrizzle can be ran similarly to TweakReg, either through a IRAF/PyRAF, a GUI, or directly through Python.  First, take a look at the GUI: ::
 
 >>> from drizzlepac import astrodrizzle
 >>> teal.teal('astrodrizzle')
@@ -196,10 +198,10 @@ Clearly there are a lot of parameters, but notice how the interface is broken in
 
 To start, you will create a basic drizzled image for F606W, without optimizing any parameters:
 
-    * Set the input to ``j8ny01*flc.fits``.  Input can either be passed as a string with wildcards, or a list if passing directly from Python.
-    * Set the output to ``F606W_derp``, this is what your output file will be named, with the extension ``_drc.fits`` appended to the end.
-    * Set build to ``Yes`` or ``True`` if passing from Python.
-    * Set preserve to ``No`` or ``False``. If set to ``True`` a copy of the input images would be backed up to a subdirectory, which is unnecessary in this case.
+    * Set the **input** to ``j8ny01*flc.fits``.  Input can either be passed as a string with wildcards, or a list if passing directly from Python.
+    * Set the **output** to ``F606W_derp``, this is what your output file will be named, with the extension ``_drc.fits`` appended to the end.
+    * Set **build** to ``Yes`` or ``True`` if passing from Python.
+    * Set **preserve** to ``No`` or ``False``. If set to ``True`` a copy of the input images would be backed up to a subdirectory, which is unnecessary in this case.
     * Press the ``Update From MDRIZTAB`` button or pass ``mdriztab=False`` in Python.  The mdriztab is a master table of drizzle parameters for a given instrument with the standard set of parameters used by the Archive.  These parameters are okay for getting a general preview image, but are not optimized for getting the best drizzled product.
 
 To run, press **Execute** or run the command in Python similarly to how you ran the TweakReg command. You'll notice that a large number of new files are put into your directory.  Many of these files are the masks and transformed images that the Drizzle algorithm uses to produce your undistorted, clean image.  Often times the cosmic ray mask files (cr_mask) can be used for other purposes (if you only want to sample the good pixels in the input images).
@@ -215,8 +217,8 @@ Take a look at your output image using ds9 or a viewer of your choice. Compared 
 
 However, you can do even better!  Depending on what your final goal is, different parameters need to be optimized.  Since we're looking at a star cluster, let's assume that you're trying to get accurate photometric results with a better sampling of the PSF. Some of the relevant parameters are the following (refer to the AstroDrizzle documentation pages to find these ones):
 
-    * Set ``clean`` and ``in_memory`` to ``True``. This will get rid of the intermediate masks/images at the end (you wont need them for the remainder of the exercise).
-    * Set ``mdriztab`` to ``False`` (or your optimized parameters will be ignored).
+    * Set **clean** and **in_memory** to ``True``. This will get rid of the intermediate masks/images at the end (you wont need them for the remainder of the exercise).
+    * Set **mdriztab** to ``False`` (or your optimized parameters will be ignored).
     * The sky subtraction method should be set to match.  This basically equalizes background across your stack of images.
     * The default WCS drizzle creates should not be used, as you will be specifying the following WCS parameters.
     * The image axes should be transformed to have North up (and naturally, East left).
@@ -226,7 +228,7 @@ However, you can do even better!  Depending on what your final goal is, differen
     .. admonition:: Note
        :class: note
 
-       In general, choosing proper for last two parameters is crucial, as these are what lay at the heart of the Drizzle algorithm.  In essence, they dictate how pixels corresponding to the same spatial location are combined, which has direct consequences on the resolution/PSF sampling and quality of the final image.  For brevity further discussion of the effects of these parameters are not included in this document.  For further information (especially relevant if drizzling in the future) consult the DrizzlePac homepage, and `Chapter 2 of the DrizzlePac Handbook <http://documents.stsci.edu/hst/HST_overview/documents/DrizzlePac/ch21.html>`_.
+       In general, choosing proper values for last two parameters is crucial, as these are what lay at the heart of the Drizzle algorithm.  In essence, they dictate how pixels corresponding to the same spatial location are combined, which has direct consequences on the resolution/PSF sampling and quality of the final image.  For brevity further discussions of the effects of these parameters are not included in this document.  For further information (especially relevant if drizzling in the future) consult the DrizzlePac homepage, and `Chapter 2 of the DrizzlePac Handbook <http://documents.stsci.edu/hst/HST_overview/documents/DrizzlePac/ch21.html>`_.
 
 Run AstroDrizzle again with these updated parameters (change the output name to something else so it doesn't overwrite your first image).  Compare your optimized product to your original one (matching the frame WCS and blinking between them in ds9 is a good way to see the differences).  Notice the better spatial resolution, especially when looking at the cores of unsaturated stars:
 
@@ -255,5 +257,3 @@ The weight image for the F606W product.  The darker gray regions show where wher
 ---------------------------
 
 **Congrats! You have finished the essential DrizzlePac training. You've taken your first steps onto becoming a Drizzle Wizard...a Drizzard!**
-
----------------------------
