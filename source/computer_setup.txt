@@ -507,6 +507,11 @@ Note that there's nothing special about the command finishing before she re-atta
 
 If she didn't ``exit``, that session would remain active (and she could reattach to it later).
 
+.. admonition:: Exercise
+   :class: note
+
+   Log into one of the servers named in the previous exercise and start a ``screen`` session. Detach from it, close your terminal, and make sure you can reconnect and reattach to it successfully.
+
 Screen allows multiplexing of the terminal into multiple shells.  This means that one can have multiple emulated terminals available within one session (e.g. over one SSH connection).  To create a new shell session within screen, type :kbd:`Ctrl-a` :kbd:`c` (create).  To close a session, simply ``exit`` the shell.  In order to swap between different shells, type :kbd:`Ctrl-a` :kbd:`#` (where # is the number of the shell session).  A handy shortcut to swap between the two most recently accessed shells is :kbd:`Ctrl-a` :kbd:`Ctrl-a`.
 
 A server's screen session can be customized in the ``~/.screenrc`` configuration file.  A useful setup that includes a lower status bar labelling the multiplexed shells is::
@@ -516,17 +521,14 @@ A server's screen session can be customized in the ``~/.screenrc`` configuration
    termcapinfo xterm-256color ti@:te@
    caption always "%?%F%{-b bc}%:%{-b bb}%?%C|%D|%M %d|%H%?%F%{+u wb}%? %L=%-Lw%45>%{+b by}%n%f*%t%{-}%+Lw%-0<"
 
+If you want to use this, just copy these lines into a new ``.screenrc`` file under your home directory while connected to a server via ssh.
+
 To scroll above the terminal window boundaries, use screen's copy mode:
 
  1. Enter copy mode:    :kbd:`Ctrl-a` :kbd:`[` or :kbd:`Ctrl-a` :kbd:`Esc`
  2. Scroll up:          :kbd:`Ctrl-u`
  3. Scroll down:        :kbd:`Ctrl-d`
  4. Exit copy mode:     :kbd:`]` or :kbd:`Esc`
-
-.. admonition:: Exercise
-   :class: note
-
-   Log into one of the servers named in the previous exercise and start a ``screen`` session. Detach from it, close your terminal, and make sure you can reconnect and reattach to it successfully.
 
 On to the training exercises!
 ================================
