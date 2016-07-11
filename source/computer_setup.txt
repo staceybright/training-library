@@ -208,30 +208,30 @@ It's also a good idea to tell it about your preferred text editor (here we use `
 Installing Conda
 ================
 
-The Institute's Science Software Branch currently distributes a package that contains some essentials for scientific computing for astronomy, and we are now switching over to Conda as the direct successor to Ureka. As a result, here we will step through installing Conda and setting up your own environments with the necessary packages. One of the main reasons we recommend this is because of Python 2.7 and Python 3.5 (the most recent version of Python) and the differences between them. We discuss this further in the Python module of the training, however since we are working with both Python 2.7 and Python 3+ code at the Institute, it is beneficial to be able to work with both.
+The Institute's Science Software Branch currently distributes a package that contains some essentials for scientific computing for astronomy, and we are now switching over to Conda (as the direct successor to Ureka, the previous Institute software package system). As a result, here we will step through installing Conda and setting up your own environments with the necessary packages. One of the main reasons we recommend this is because of Python 2.7 and Python 3.5 (the most recent version of Python) and the differences between them. We discuss this further in the Python module of the training, however since we are working with both Python 2.7 and Python 3+ code at the Institute, it is beneficial to set up environments for both.
 
 .. note::
 
     We herein follow along with the SSB-recommended method for installing AstroConda, found here: `AstroConda Installation <http://astroconda.readthedocs.io/en/latest/installation.html>`_. We will make some small deviations from the instructions found there, but the result is no different.
 
-Getting started, we must install Conda from ``bash``. When doing this you can choose to install either Anaconda or Miniconda, depending on the time, disk space, and operating system you have. For MacOS, we've decided to use Anaconda which you can download `here <https://www.continuum.io/downloads>`_. We recommend that you choose Python 2.7, 64 bit for Mac OS X -- Command-Line Installer. This is the recommendation based on the fact that many programs at the institute rely on Python 2.7 and will not work in Python 3.5, however we can easily create separate environments for different Python versions. The command-line installer can be less confusing than the graphical installer.
+Getting started, we must install Conda from ``bash``. If you changed your shell to bash as described in :ref:`computer_setup_environment`, that should be what you get when you open a new terminal window. Open one now, and download the Miniconda3 installer with the following command::
 
-*Discuss with your buddy/trainer about which Python version you will likely need for your work*.
+   curl -OL https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
 
-Now move the file to your home directory and in the terminal, type::
+You should now have a file named "Miniconda3-latest-MacOSX-x86_64.sh" in your home directory. To install it::
 
-    bash Anaconda2-4.0.0-MacOSX-x86_64.sh 
-    
-(Where "Anaconda..." is the filename of the download)
+   bash Miniconda3-latest-MacOSX-x86_64.sh
 
-Follow the instructions as prompted. Accepting the defaults should be sufficient at this time. Now Anaconda is installed! 
+Follow the instructions as prompted. Accept the default options to install in your home directory. Now miniconda is installed!
+
+Conda is available in a bunch of flavors ("Ana-" and "mini-", Python 2 and Python 3), but ultimately they do the same things. We will create an AstroConda environment for Python 2.7, which you may need for older scripts and testing, and an environment for Python 3.5 with the latest version of the language and associated packages.
 
 If you want a detailed introduction on how to use Conda, you can check out the `Conda test drive <http://conda.pydata.org/docs/test-drive.html>`_ which will guide you step-by-step through some of what Conda can do. If instead, you are on board for a quick environment setup you can follow along here.
 
-Now, we check to make sure your terminal can see Conda so simply run::
+Close that window, and open a new terminal. Check to make sure your terminal can see the Conda command::
 
-    conda
-    
+   conda
+
 This should show some usage instructions. If you get a message that the command is not found, *talk to your buddy/trainer*.
 
 .. _astroconda-setup:
@@ -251,33 +251,27 @@ Or::
 
     conda env list
 
-You should only see your root environment. For reasons that are a little confusing, we don't want to use our ``root`` environment to do all our work, so let's create a new environment that will be our main environment that runs Python 2.7 (or Python 3.5 depending on which Anaconda distribution you downloaded)::  
+You should only see your root environment. For reasons that are a little confusing, we don't want to use our ``root`` environment to do all our work, so let's create a new environment that will be our main environment that runs Python 3.5. The command takes a name and a list of packages to install. The ``stsci`` package pulls in everything else, and we also want to make sure the Jupyter Notebook gets installed, so the command becomes::
 
-    conda create --name astroconda stsci
+    conda create --name astroconda python=3.5 stsci notebook
 
-I call this environment ``astroconda`` because it is using the AstroConda repository, but you can call this environment whatever you want. This repository includes are your usual Python friends (NumPy, Astropy, matplotlib, etc.) and also makes sure that you have IPython, Jupyter Notebook, and additional Institute-specific Python packages. We can start this environment and check to see exactly which packages have been added::
+We have called this environment ``astroconda`` because we are installing the main AstroConda packages into it, but you can call this environment whatever you want. This repository includes are your usual Python friends (NumPy, Astropy, matplotlib, etc.) and also makes sure that you have IPython, Jupyter Notebook, and additional Institute-specific Python packages. We can activate this environment and check to see exactly which packages have been added::
 
     source activate astroconda
     conda list 
-    
+
 To check the version of Python, type::
 
     python --version
-    
-If you went with the Python 2.7 download but also want an AstroConda environment that runs Python 3.5, you can create another environment. To do this, leave your astroconda environment, see which environments you have now, and then add a new one (which I chose to name ``astroconda35``). ::
 
-    source deactivate 
-    conda info --envs 
-    conda create --name astroconda35 python=3.5 stsci
+Some people and systems within the Institute have not upgraded to Python 3.5 yet. When running older code, it helps to have a Python 2.7 environment available, so let's create one. Here we've added IRAF and PyRAF to the package list for installation, as well. (Hopefully, they will soon be retired.) ::
 
-If you will be using PyRAF or IRAF (talk to your buddy/trainer), you can install these packages at the same time as you install STScI packages in either your ``astroconda`` environment, or in a specific IRAF/PyRAF environment that I call ``iraf27``. You can also add them later (see below) if you decide you need them. Note that IRAF and PyRAF require Python 2.7. ::
-
-    conda create -n iraf27 iraf pyraf stsci
+   conda create --name astroconda27 python=2.7 stsci iraf pyraf notebook
     
 .. note::
 
-    It's impractical to make all your environments the same so it's best to just pick one that you will use more often and use other environments for specific tasks.
-  
+    It's impractical to keep the exact same set of extra packages in all your environments, so it's best to just pick one that you will use more often and use other environments for specific tasks.
+
 Lastly, we need to know how to add more packages (and delete them) in the future. The following is how you can do this from ``root`` or a different environment. If you are in the environment you are changing (that is, you have done ``source activate [name of environment]`` already in that terminal), you do not need the ``--name [name of environment]`` part::
     
     conda install --name [name of environment] [name of package]
@@ -295,6 +289,22 @@ If you decide that you don't like/need an environment, you can delete it! ::
 
     Astroconda is a set of packages that replaces `Ureka <http://ssb.stsci.edu/ureka/>`_, which was one big honking package containing everything and the kitchen sink. You may encounter Ureka, or hear about "SSBx", "SSBdev", and "SSBrel" environments (which were specific Ureka environments, now deprecated). However, you should use conda with Astroconda since Ureka is no longer being updated.
 
+Using your conda environments
+-----------------------------
+
+When you open a new terminal, the conda system implicitly puts you in a "root" environment. This is rarely the environment you want to use for scientific computing. (In fact, installing STScI packages into the root environment is not supported.) So, before you run your scripts, you must be sure to activate the appropriate environment!
+
+For Python 3.5, this looks like::
+
+   $ source activate astroconda
+
+For older scripts that need Python 2.7 (or anything that needs PyRAF)::
+
+   $ source activate astroconda27
+
+.. tip::
+
+   If you don't want to do this every time you open a terminal, you can add the appropriate line to the end of your ``.bash_profile``.
 
 Verify IDL is installed
 ========================
