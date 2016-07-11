@@ -133,17 +133,17 @@ In the terminal, change your shell with the following command::
 
 Close your terminal, and open a new one to finalize this change. 
 
-Now, you need to set the environment variables in the file ``.bashrc`` in your home directory. This file probably does not exist so you will have to create it.
+Now, you need to set the environment variables in the file ``.bash_profile`` in your home directory. This file probably does not exist so you will have to create it.
 
-Open (or create) ``.bashrc`` with the following command::
+Open (or create) ``.bash_profile`` with the following command::
 
-   edit ~/.bashrc
+   edit ~/.bash_profile
 
 .. tip::
 
    Files starting with a ``.`` are hidden in the Finder, so it's often easier to open them from the command line.
 
-Here is an example ``.bashrc`` that you can copy and paste into yours::
+Here is an example ``.bash_profile`` that you can copy and paste into yours::
 
     # Paths and stuff for accessing CDBS stuff
     # For WFC3
@@ -173,17 +173,17 @@ It is not obvious, but the trailing slash in the $oref definition is required fo
 
 To apply these changes, save the file and typing the following into the command line::
 
-    source ~/.bashrc
+    source ~/.bash_profile
 
 To check that your changes have taken effect, open a **new terminal window** and type ``echo $oref``. You should see the value for ``oref`` from above printed out in the terminal.
 
-There are a few different files that can be executed when opening a new terminal, depending on arcane details everyone would rather ignore [#bashrc]_. To make sure your ``.bashrc`` file gets sourced no matter how ``bash`` is started, it is necessary to make a ``.bash_profile`` file that simply loads the contents of ``.bashrc``. This is what that would look like::
+There are a few different files that can be executed when opening a new terminal, depending on arcane details everyone would rather ignore [#bashrc]_. To make sure your ``.bash_profile`` file gets sourced no matter how ``bash`` is started, it is necessary to make a ``.bashrc`` file that simply loads the contents of ``.bash_profile``. This is what that would look like::
 
-    if [ -f ~/.bashrc ]; then
-       source ~/.bashrc
+    if [ -f ~/.bash_profile ]; then
+       source ~/.bash_profile
     fi
 
-Save that in ``.bash_profile`` and shed a single tear for the ineffable complexity of the UNIX.
+Save that in ``.bashrc`` and shed a single tear for the ineffable complexity of the UNIX.
 
 .. tip::
 
@@ -382,30 +382,42 @@ That's actually not the reason why. The servers at STScI run Linux (for the most
 
 One important consequence of this is that you will be responsible for installing the same things into both environments. Running ``conda install mypackage`` on your laptop or desktop will not automatically make it available when you ssh to ``plhstins1`` or similar.
 
-All the servers have network-mounted home directories (i.e. ``/home/myname``) and access to the Central Store. Conda wants to install in the home directory by default, but the free space in your home directory is much less than in Central Store. Therefore, we will explain how to install to your Central Store directory instead.
+All the servers have network-mounted home directories (i.e. ``/home/myname``) and access to the Central Store (i.e. ``/user/myname``). Conda wants to install in the home directory by default, but there is less free space in your home directory than on Central Store. Therefore, we will explain how to install to your Central Store directory instead.
 
-First, ssh in to one of the servers mentioned in the previous exercise. Change directories to your Central Store directory::
+First, ssh in to one of the servers mentioned in the previous exercise::
 
-   plhstins1> cd /user/$USER
+   $ ssh plhstins1
+   plhstins1>
+
+Change directories to your Central Store directory::
+
+   plhstins1> cd "/user/$(logname)"
 
 Download and install the latest Miniconda for Linux using ``curl``::
 
    plhstins1> curl -OL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-   plhstins1> bash Miniconda3-latest-Linux-x86_64.sh -b -p /user/$USER/miniconda3
+   plhstins1> bash Miniconda3-latest-Linux-x86_64.sh -b -p "/user/$(logname)/miniconda3"
 
-It'll run for a little bit and output a message when it finishes. The ``.bashrc`` and ``.bash_profile`` files you made earlier have separate versions on the servers. Make sure to add your miniconda folder to the ``$PATH`` on the server. ::
+It'll run for a little bit and output a message when it finishes.
 
+By default, these servers run ``tcsh`` (not ``bash``) when you log in. Start a ``bash`` shell::
 
-   plhstins1> echo "export PATH=\"/user/$USER/miniconda3/bin:\$PATH\"" >> ~/.bashrc
+   plhstins1> bash
+   bash$
 
-Ensure that your ``.bashrc`` gets loaded no matter how you start your shell by creating a ``.bash_profile`` with these contents::
+The ``.bashrc`` and ``.bash_profile`` files you made earlier for your personal computer have counterparts on the servers. We have to add your miniconda folder to the ``$PATH`` on the server for the ``conda`` command to work. ::
 
-    if [ -f ~/.bashrc ]; then
-       source ~/.bashrc
+   bash$ echo "export PATH=\"/user/$(logname)/miniconda3/bin:\$PATH\"" >> ~/.bash_profile
+
+Ensure that your ``.bash_profile`` gets loaded no matter how you start your shell by creating a ``.bashrc`` with these contents::
+
+    if [ -f ~/.bash_profile ]; then
+       source ~/.bash_profile
     fi
 
 Log out and ssh to the server again::
 
+   bash$ exit
    plhstins1> exit
    logout
    Connection to plhstins1.stsci.edu closed.
