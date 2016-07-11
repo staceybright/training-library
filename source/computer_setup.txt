@@ -62,7 +62,7 @@ While at STScI, you may use proprietary science data in your analyses that shoul
 
 If you have data you don't wish others to see, you must be sure to set the permissions appropriately on the directory with the data. Files and folders can be assigned read, write, and execute permissions that apply to the owning user, owning group, and others. (The owning user and group are set when the file or directory is created; use ``ls -l FILE_OR_DIRECTORY_NAME`` to see what they're set to: owning user in the 3rd column, owning group in the 4th.)
 
-The command to change permissions is ``chmod``, and it takes the form of ``chmod [-R] PERMS FILE_OR_DIRECTORY``. When you wish to apply new permissions to a directory and all its contents, use ``-R`` (recursive). The ``PERMS`` string can be built up from the options in the table below.
+The command to change permissions is ``chmod``, and it takes the form of ``chmod PERMS FILE_OR_DIRECTORY``. The ``PERMS`` string can be built up from the options in the table below.
 
 +----------------+-------+-------+---------+
 |                | Read  | Write | Execute |
@@ -74,7 +74,9 @@ The command to change permissions is ``chmod``, and it takes the form of ``chmod
 |  Other / World | o=r   | o=w   | o=x     |
 +----------------+-------+-------+---------+
 
-For example, if you want a file to be readable and writable by yourself, only readable by people in your group, and completely inaccessible others, you would use ``chmod u=rw,g=r,o= myfile.txt``. See how we used ``o=`` to **clear** the permissions. Omitting ``o=`` from the list would tell chmod to leave whatever permissions were already there [#umask]_.
+For example, if you want a file to be readable and writable by yourself, only readable by people in your group, and completely inaccessible others, you would use ``chmod u=rw,g=r,o= myfile.txt``. Make sure your ``u=rw,g=r,o=`` string has no spaces in it, or it'll get interpreted as part of the next argument! Also, note how we used ``o=`` to **clear** the permissions. Omitting ``o=`` from the list would tell chmod to leave whatever permissions were already there [#umask]_.
+
+If you have a directory full of files whose permissions you want to change, use the ``-R`` command. For example, to recursively change the permissions on a folder ``myfolder/`` and files ``myfolder/a.fits`` and ``myfolder/b.fits``, you would use this command: ``chmod -R u=rw,g=r,o= myfolder``.
 
 **Note:** the "execute" permission should only be set for programs (and scripts) with one major exception: for **directories**, the "execute" permission means "can use files from"... so even if you cannot read the list of files in the directory, if you know the name of a particular file with world-readable access and the "execute" permission is available to you on the directory, you can still open the file. This is kind of subtle, so check out `this StackOverflow thread <http://unix.stackexchange.com/questions/21251/how-do-directory-permissions-in-linux-work>`_ for additional background.
 
