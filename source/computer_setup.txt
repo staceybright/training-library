@@ -4,9 +4,13 @@ Setting Up Your Computer
 
 *Authors: Keira Brooks, Joseph Long, Matthew Bourque, Sara Ogaz, Dave Borncamp, Amber Armstrong, Michael Dulude, and Tiffany Borders*
 
-The Institute provides you a computer when you are hired, and sets it up with a core set of software. (Some new hires get a loaner computer while a new machine is ordered and prepared for them.) They'll buy you a new one every three years, if you're good. Even though ITSD is responsible for installing important things like Office and antivirus software for all, it's up to each RIA to set their system up the way they want. For science-related uses, most new Institute machines are Macs, so this guide will assume that's what you have.
+The Institute provides you a computer when you are hired, and sets it up with a core set of software. (Some new hires get a loaner computer while a new machine is ordered and prepared for them.) They'll buy you a new one every three years, if you're good. Even though ITSD (Information Technology Services Department) is responsible for installing important things like Office and antivirus software for all, it's up to each RIA to set their system up the way they want. For science-related uses, most new Institute machines are Macs, so this guide will assume that's what you have.
 
-You should have a computer, an ActiveDirectory (AD) username, and a password from ITSD. Let's get started.
+If you experience issues, you should ask your trainer or ITSD. The ITSD service desk can be reached at extension 4400 or via email at support@stsci.edu.
+
+(There's an *external* helpdesk too, help@stsci.edu. For IT issues, you want the internal one. The external helpdesk is for science/instrument support. It is a way for astronomers to ask questions about things like the archive, SSB software, data characteristics, instrument information and the like.)
+
+You should now have a computer, an ActiveDirectory (AD) username, and a password from ITSD. Let's get started.
 
 Configuring your email
 =======================
@@ -47,9 +51,12 @@ Setting up your own Central Storage directory
 
 Users can store files under their username at ``/user/myusername``. This is useful for sharing large files with your colleagues. In fact, you'll be using your Central Storage directory to send your training exercises to your trainers later on.
 
-Send an email to the STScI *internal* helpdesk at support@stsci.edu, and ask them to make you a Central Storage directory. [#externalhelpdesk]_
+.. admonition:: Exercise
+   :class: note
 
-While they set this up for you, if you're unfamiliar with UNIX file permissions, now is a good time to review them.
+   Verify that your Central Storage directory exists with an ``ls /user/myusername`` (where you replace ``myusername`` with your username). If you get a "not found" or "permission denied" error, you will have to get in touch with ITSD.
+
+If you're unfamiliar with UNIX file permissions, now is a good time to review them.
 
 While at STScI, you may use proprietary science data in your analyses that should not be shared outside your team. Your Central Store directory is, by default, readable by other users in the institute. This, believe it or not, is not a mistake! This choice makes it easy to use to share large files with your colleagues, but must be kept in mind when handling sensitive data.
 
@@ -123,7 +130,6 @@ A lot of tools developed within STScI assume the existence of certain environmen
 In the terminal, change your shell with the following command::
 
     chsh -s /bin/bash
-
 
 Close your terminal, and open a new one to finalize this change. 
 
@@ -528,6 +534,5 @@ Additional resources
 
 .. rubric:: Footnotes
 
-.. [#externalhelpdesk] There's an *external* helpdesk too, help@stsci.edu. For IT issues, though, you want the internal one. The external helpdesk is for science/instrument support. It is a way for astronomers to ask questions about things like the archive, SSB software, data characteristics, instrument information and the like.
 .. [#umask] Files are created with a default set of permissions set by your "umask", which will most likely make them world-readable by default. See `this Wikipedia article <https://en.wikipedia.org/wiki/Umask>`_ if you're really curious.
 .. [#bashrc] Said details are summarized in `this blog post from 2005 <http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html>`_. The gist of it is: ``.bashrc`` is run when starting an xterm or running ``bash`` within an already-started terminal session. ``.bash_profile`` is run for login shells (``bash -l`` or logging on via console or SSH). Yes, it's confusing. No, there isn't really a good reason it's this way.
