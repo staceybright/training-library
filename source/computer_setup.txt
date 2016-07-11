@@ -417,13 +417,9 @@ It'll run for a little bit and output a message when it finishes.
 
 The ``.bashrc`` and ``.bash_profile`` files you made earlier for your personal computer have counterparts on the servers. We have to add your miniconda folder to the ``$PATH`` on the server for the ``conda`` command to work. ::
 
-   bash$ echo "export PATH=\"/user/$(logname)/miniconda3/bin:\$PATH\"" >> ~/.bash_profile
+   bash$ echo "export PATH=\"/user/$(logname)/miniconda3/bin:\$PATH\"" >> ~/.bashrc
 
-Ensure that your ``.bash_profile`` gets loaded no matter how you start your shell by creating a ``.bashrc`` with these contents::
-
-    if [ -f ~/.bash_profile ]; then
-       source ~/.bash_profile
-    fi
+There are lines in the default ``.bash_profile`` that comes with your account ensuring your ``.bashrc`` gets loaded, so you shouldn't need to edit ``.bash_profile`` at all.
 
 Log out and ssh to the server again::
 
