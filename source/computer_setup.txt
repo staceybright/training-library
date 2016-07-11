@@ -399,21 +399,21 @@ First, ssh in to one of the servers mentioned in the previous exercise::
    $ ssh plhstins1
    plhstins1>
 
-Change directories to your Central Store directory::
-
-   plhstins1> cd "/user/$(logname)"
-
-Download and install the latest Miniconda for Linux using ``curl``::
-
-   plhstins1> curl -OL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-   plhstins1> bash Miniconda3-latest-Linux-x86_64.sh -b -p "/user/$(logname)/miniconda3"
-
-It'll run for a little bit and output a message when it finishes.
-
 By default, these servers run ``tcsh`` (not ``bash``) when you log in. Start a ``bash`` shell::
 
    plhstins1> bash
    bash$
+
+Change directories to your Central Store directory::
+
+   bash$ cd "/user/$(logname)"
+
+Download and install the latest Miniconda for Linux using ``curl``::
+
+   bash$ curl -OL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+   bash$ bash Miniconda3-latest-Linux-x86_64.sh -b -p "/user/$(logname)/miniconda3"
+
+It'll run for a little bit and output a message when it finishes.
 
 The ``.bashrc`` and ``.bash_profile`` files you made earlier for your personal computer have counterparts on the servers. We have to add your miniconda folder to the ``$PATH`` on the server for the ``conda`` command to work. ::
 
