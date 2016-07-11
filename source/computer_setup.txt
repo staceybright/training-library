@@ -4,9 +4,13 @@ Setting Up Your Computer
 
 *Authors: Keira Brooks, Joseph Long, Matthew Bourque, Sara Ogaz, Dave Borncamp, Amber Armstrong, Michael Dulude, and Tiffany Borders*
 
-The Institute provides you a computer when you are hired, and sets it up with a core set of software. (Some new hires get a loaner computer while a new machine is ordered and prepared for them.) They'll buy you a new one every three years, if you're good. Even though ITSD is responsible for installing important things like Office and antivirus software for all, it's up to each RIA to set their system up the way they want. For science-related uses, most new Institute machines are Macs, so this guide will assume that's what you have.
+The Institute provides you a computer when you are hired, and sets it up with a core set of software. (Some new hires get a loaner computer while a new machine is ordered and prepared for them.) They'll buy you a new one every three years, if you're good. Even though ITSD (Information Technology Services Department) is responsible for installing important things like Office and antivirus software for all, it's up to each RIA to set their system up the way they want. For science-related uses, most new Institute machines are Macs, so this guide will assume that's what you have.
 
-You should have a computer, an ActiveDirectory (AD) username, and a password from ITSD. Let's get started.
+If you experience issues, you should ask your trainer or ITSD. The ITSD service desk can be reached at extension 4400 or via email at support@stsci.edu.
+
+(There's an *external* helpdesk too, help@stsci.edu. For IT issues, you want the internal one. The external helpdesk is for science/instrument support. It is a way for astronomers to ask questions about things like the archive, SSB software, data characteristics, instrument information and the like.)
+
+You should now have a computer, an ActiveDirectory (AD) username, and a password from ITSD. Let's get started.
 
 Configuring your email
 =======================
@@ -47,9 +51,12 @@ Setting up your own Central Storage directory
 
 Users can store files under their username at ``/user/myusername``. This is useful for sharing large files with your colleagues. In fact, you'll be using your Central Storage directory to send your training exercises to your trainers later on.
 
-Send an email to the STScI *internal* helpdesk at support@stsci.edu, and ask them to make you a Central Storage directory. [#externalhelpdesk]_
+.. admonition:: Exercise
+   :class: note
 
-While they set this up for you, if you're unfamiliar with UNIX file permissions, now is a good time to review them.
+   Verify that your Central Storage directory exists with an ``ls /user/myusername`` (where you replace ``myusername`` with your username). If you get a "not found" or "permission denied" error, you will have to get in touch with ITSD.
+
+If you're unfamiliar with UNIX file permissions, now is a good time to review them.
 
 While at STScI, you may use proprietary science data in your analyses that should not be shared outside your team. Your Central Store directory is, by default, readable by other users in the institute. This, believe it or not, is not a mistake! This choice makes it easy to use to share large files with your colleagues, but must be kept in mind when handling sensitive data.
 
@@ -124,20 +131,19 @@ In the terminal, change your shell with the following command::
 
     chsh -s /bin/bash
 
-
 Close your terminal, and open a new one to finalize this change. 
 
-Now, you need to set the environment variables in the file ``.bashrc`` in your home directory. This file probably does not exist so you will have to create it.
+Now, you need to set the environment variables in the file ``.bash_profile`` in your home directory. This file probably does not exist so you will have to create it.
 
-Open (or create) ``.bashrc`` with the following command::
+Open (or create) ``.bash_profile`` with the following command::
 
-   edit ~/.bashrc
+   edit ~/.bash_profile
 
 .. tip::
 
    Files starting with a ``.`` are hidden in the Finder, so it's often easier to open them from the command line.
 
-Here is an example ``.bashrc`` that you can copy and paste into yours::
+Here is an example ``.bash_profile`` that you can copy and paste into yours::
 
     # Paths and stuff for accessing CDBS stuff
     # For WFC3
@@ -167,17 +173,17 @@ It is not obvious, but the trailing slash in the $oref definition is required fo
 
 To apply these changes, save the file and typing the following into the command line::
 
-    source ~/.bashrc
+    source ~/.bash_profile
 
 To check that your changes have taken effect, open a **new terminal window** and type ``echo $oref``. You should see the value for ``oref`` from above printed out in the terminal.
 
-There are a few different files that can be executed when opening a new terminal, depending on arcane details everyone would rather ignore [#bashrc]_. To make sure your ``.bashrc`` file gets sourced no matter how ``bash`` is started, it is necessary to make a ``.bash_profile`` file that simply loads the contents of ``.bashrc``. This is what that would look like::
+There are a few different files that can be executed when opening a new terminal, depending on arcane details everyone would rather ignore [#bashrc]_. To make sure your ``.bash_profile`` file gets sourced no matter how ``bash`` is started, it is necessary to make a ``.bashrc`` file that simply loads the contents of ``.bash_profile``. This is what that would look like::
 
-    if [ -f ~/.bashrc ]; then
-       source ~/.bashrc
+    if [ -f ~/.bash_profile ]; then
+       source ~/.bash_profile
     fi
 
-Save that in ``.bash_profile`` and shed a single tear for the ineffable complexity of the UNIX.
+Save that in ``.bashrc`` and shed a single tear for the ineffable complexity of the UNIX.
 
 .. tip::
 
@@ -202,30 +208,30 @@ It's also a good idea to tell it about your preferred text editor (here we use `
 Installing Conda
 ================
 
-The Institute's Science Software Branch currently distributes a package that contains some essentials for scientific computing for astronomy, and we are now switching over to Conda as the direct successor to Ureka. As a result, here we will step through installing Conda and setting up your own environments with the necessary packages. One of the main reasons we recommend this is because of Python 2.7 and Python 3.5 (the most recent version of Python) and the differences between them. We discuss this further in the Python module of the training, however since we are working with both Python 2.7 and Python 3+ code at the Institute, it is beneficial to be able to work with both.
+The Institute's Science Software Branch currently distributes a package that contains some essentials for scientific computing for astronomy, and we are now switching over to Conda (as the direct successor to Ureka, the previous Institute software package system). As a result, here we will step through installing Conda and setting up your own environments with the necessary packages. One of the main reasons we recommend this is because of Python 2.7 and Python 3.5 (the most recent version of Python) and the differences between them. We discuss this further in the Python module of the training, however since we are working with both Python 2.7 and Python 3+ code at the Institute, it is beneficial to set up environments for both.
 
 .. note::
 
     We herein follow along with the SSB-recommended method for installing AstroConda, found here: `AstroConda Installation <http://astroconda.readthedocs.io/en/latest/installation.html>`_. We will make some small deviations from the instructions found there, but the result is no different.
 
-Getting started, we must install Conda from ``bash``. When doing this you can choose to install either Anaconda or Miniconda, depending on the time, disk space, and operating system you have. For MacOS, we've decided to use Anaconda which you can download `here <https://www.continuum.io/downloads>`_. We recommend that you choose Python 2.7, 64 bit for Mac OS X -- Command-Line Installer. This is the recommendation based on the fact that many programs at the institute rely on Python 2.7 and will not work in Python 3.5, however we can easily create separate environments for different Python versions. The command-line installer can be less confusing than the graphical installer.
+Getting started, we must install Conda from ``bash``. If you changed your shell to bash as described in :ref:`computer_setup_environment`, that should be what you get when you open a new terminal window. Open one now, and download the Miniconda3 installer with the following command::
 
-*Discuss with your buddy/trainer about which Python version you will likely need for your work*.
+   curl -OL https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
 
-Now move the file to your home directory and in the terminal, type::
+You should now have a file named "Miniconda3-latest-MacOSX-x86_64.sh" in your home directory. To install it::
 
-    bash Anaconda2-4.0.0-MacOSX-x86_64.sh 
-    
-(Where "Anaconda..." is the filename of the download)
+   bash Miniconda3-latest-MacOSX-x86_64.sh
 
-Follow the instructions as prompted. Accepting the defaults should be sufficient at this time. Now Anaconda is installed! 
+Follow the instructions as prompted. Accept the default options to install in your home directory. Now miniconda is installed!
+
+Conda is available in a bunch of flavors ("Ana-" and "mini-", Python 2 and Python 3), but ultimately they do the same things. We will create an AstroConda environment for Python 2.7, which you may need for older scripts and testing, and an environment for Python 3.5 with the latest version of the language and associated packages.
 
 If you want a detailed introduction on how to use Conda, you can check out the `Conda test drive <http://conda.pydata.org/docs/test-drive.html>`_ which will guide you step-by-step through some of what Conda can do. If instead, you are on board for a quick environment setup you can follow along here.
 
-Now, we check to make sure your terminal can see Conda so simply run::
+Close that window, and open a new terminal. Check to make sure your terminal can see the Conda command::
 
-    conda
-    
+   conda
+
 This should show some usage instructions. If you get a message that the command is not found, *talk to your buddy/trainer*.
 
 .. _astroconda-setup:
@@ -245,33 +251,27 @@ Or::
 
     conda env list
 
-You should only see your root environment. For reasons that are a little confusing, we don't want to use our ``root`` environment to do all our work, so let's create a new environment that will be our main environment that runs Python 2.7 (or Python 3.5 depending on which Anaconda distribution you downloaded)::  
+You should only see your root environment. For reasons that are a little confusing, we don't want to use our ``root`` environment to do all our work, so let's create a new environment that will be our main environment that runs Python 3.5. The command takes a name and a list of packages to install. The ``stsci`` package pulls in everything else, and we also want to make sure the Jupyter Notebook gets installed, so the command becomes::
 
-    conda create --name astroconda stsci
+    conda create --name astroconda python=3.5 stsci notebook
 
-I call this environment ``astroconda`` because it is using the AstroConda repository, but you can call this environment whatever you want. This repository includes are your usual Python friends (NumPy, Astropy, matplotlib, etc.) and also makes sure that you have IPython, Jupyter Notebook, and additional Institute-specific Python packages. We can start this environment and check to see exactly which packages have been added::
+We have called this environment ``astroconda`` because we are installing the main AstroConda packages into it, but you can call this environment whatever you want. This repository includes are your usual Python friends (NumPy, Astropy, matplotlib, etc.) and also makes sure that you have IPython, Jupyter Notebook, and additional Institute-specific Python packages. We can activate this environment and check to see exactly which packages have been added::
 
     source activate astroconda
     conda list 
-    
+
 To check the version of Python, type::
 
     python --version
-    
-If you went with the Python 2.7 download but also want an AstroConda environment that runs Python 3.5, you can create another environment. To do this, leave your astroconda environment, see which environments you have now, and then add a new one (which I chose to name ``astroconda35``). ::
 
-    source deactivate 
-    conda info --envs 
-    conda create --name astroconda35 python=3.5 stsci
+Some people and systems within the Institute have not upgraded to Python 3.5 yet. When running older code, it helps to have a Python 2.7 environment available, so let's create one. Here we've added IRAF and PyRAF to the package list for installation, as well. (Hopefully, they will soon be retired.) ::
 
-If you will be using PyRAF or IRAF (talk to your buddy/trainer), you can install these packages at the same time as you install STScI packages in either your ``astroconda`` environment, or in a specific IRAF/PyRAF environment that I call ``iraf27``. You can also add them later (see below) if you decide you need them. Note that IRAF and PyRAF require Python 2.7. ::
-
-    conda create -n iraf27 iraf pyraf stsci
+   conda create --name astroconda27 python=2.7 stsci iraf pyraf notebook
     
 .. note::
 
-    It's impractical to make all your environments the same so it's best to just pick one that you will use more often and use other environments for specific tasks.
-  
+    It's impractical to keep the exact same set of extra packages in all your environments, so it's best to just pick one that you will use more often and use other environments for specific tasks.
+
 Lastly, we need to know how to add more packages (and delete them) in the future. The following is how you can do this from ``root`` or a different environment. If you are in the environment you are changing (that is, you have done ``source activate [name of environment]`` already in that terminal), you do not need the ``--name [name of environment]`` part::
     
     conda install --name [name of environment] [name of package]
@@ -289,6 +289,22 @@ If you decide that you don't like/need an environment, you can delete it! ::
 
     Astroconda is a set of packages that replaces `Ureka <http://ssb.stsci.edu/ureka/>`_, which was one big honking package containing everything and the kitchen sink. You may encounter Ureka, or hear about "SSBx", "SSBdev", and "SSBrel" environments (which were specific Ureka environments, now deprecated). However, you should use conda with Astroconda since Ureka is no longer being updated.
 
+Using your conda environments
+-----------------------------
+
+When you open a new terminal, the conda system implicitly puts you in a "root" environment. This is rarely the environment you want to use for scientific computing. (In fact, installing STScI packages into the root environment is not supported.) So, before you run your scripts, you must be sure to activate the appropriate environment!
+
+For Python 3.5, this looks like::
+
+   $ source activate astroconda
+
+For older scripts that need Python 2.7 (or anything that needs PyRAF)::
+
+   $ source activate astroconda27
+
+.. tip::
+
+   If you don't want to do this every time you open a terminal, you can add the appropriate line to the end of your ``.bash_profile``.
 
 Verify IDL is installed
 ========================
@@ -376,30 +392,42 @@ That's actually not the reason why. The servers at STScI run Linux (for the most
 
 One important consequence of this is that you will be responsible for installing the same things into both environments. Running ``conda install mypackage`` on your laptop or desktop will not automatically make it available when you ssh to ``plhstins1`` or similar.
 
-All the servers have network-mounted home directories (i.e. ``/home/myname``) and access to the Central Store. Conda wants to install in the home directory by default, but the free space in your home directory is much less than in Central Store. Therefore, we will explain how to install to your Central Store directory instead.
+All the servers have network-mounted home directories (i.e. ``/home/myname``) and access to the Central Store (i.e. ``/user/myname``). Conda wants to install in the home directory by default, but there is less free space in your home directory than on Central Store. Therefore, we will explain how to install to your Central Store directory instead.
 
-First, ssh in to one of the servers mentioned in the previous exercise. Change directories to your Central Store directory::
+First, ssh in to one of the servers mentioned in the previous exercise::
 
-   plhstins1> cd /user/$USER
+   $ ssh plhstins1
+   plhstins1>
+
+Change directories to your Central Store directory::
+
+   plhstins1> cd "/user/$(logname)"
 
 Download and install the latest Miniconda for Linux using ``curl``::
 
    plhstins1> curl -OL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-   plhstins1> bash Miniconda3-latest-Linux-x86_64.sh -b -p /user/$USER/miniconda3
+   plhstins1> bash Miniconda3-latest-Linux-x86_64.sh -b -p "/user/$(logname)/miniconda3"
 
-It'll run for a little bit and output a message when it finishes. The ``.bashrc`` and ``.bash_profile`` files you made earlier have separate versions on the servers. Make sure to add your miniconda folder to the ``$PATH`` on the server. ::
+It'll run for a little bit and output a message when it finishes.
 
+By default, these servers run ``tcsh`` (not ``bash``) when you log in. Start a ``bash`` shell::
 
-   plhstins1> echo "export PATH=\"/user/$USER/miniconda3/bin:\$PATH\"" >> ~/.bashrc
+   plhstins1> bash
+   bash$
 
-Ensure that your ``.bashrc`` gets loaded no matter how you start your shell by creating a ``.bash_profile`` with these contents::
+The ``.bashrc`` and ``.bash_profile`` files you made earlier for your personal computer have counterparts on the servers. We have to add your miniconda folder to the ``$PATH`` on the server for the ``conda`` command to work. ::
 
-    if [ -f ~/.bashrc ]; then
-       source ~/.bashrc
+   bash$ echo "export PATH=\"/user/$(logname)/miniconda3/bin:\$PATH\"" >> ~/.bash_profile
+
+Ensure that your ``.bash_profile`` gets loaded no matter how you start your shell by creating a ``.bashrc`` with these contents::
+
+    if [ -f ~/.bash_profile ]; then
+       source ~/.bash_profile
     fi
 
 Log out and ssh to the server again::
 
+   bash$ exit
    plhstins1> exit
    logout
    Connection to plhstins1.stsci.edu closed.
@@ -489,6 +517,11 @@ Note that there's nothing special about the command finishing before she re-atta
 
 If she didn't ``exit``, that session would remain active (and she could reattach to it later).
 
+.. admonition:: Exercise
+   :class: note
+
+   Log into one of the servers named in the previous exercise and start a ``screen`` session. Detach from it, close your terminal, and make sure you can reconnect and reattach to it successfully.
+
 Screen allows multiplexing of the terminal into multiple shells.  This means that one can have multiple emulated terminals available within one session (e.g. over one SSH connection).  To create a new shell session within screen, type :kbd:`Ctrl-a` :kbd:`c` (create).  To close a session, simply ``exit`` the shell.  In order to swap between different shells, type :kbd:`Ctrl-a` :kbd:`#` (where # is the number of the shell session).  A handy shortcut to swap between the two most recently accessed shells is :kbd:`Ctrl-a` :kbd:`Ctrl-a`.
 
 A server's screen session can be customized in the ``~/.screenrc`` configuration file.  A useful setup that includes a lower status bar labelling the multiplexed shells is::
@@ -498,17 +531,14 @@ A server's screen session can be customized in the ``~/.screenrc`` configuration
    termcapinfo xterm-256color ti@:te@
    caption always "%?%F%{-b bc}%:%{-b bb}%?%C|%D|%M %d|%H%?%F%{+u wb}%? %L=%-Lw%45>%{+b by}%n%f*%t%{-}%+Lw%-0<"
 
+If you want to use this, just copy these lines into a new ``.screenrc`` file under your home directory while connected to a server via ssh.
+
 To scroll above the terminal window boundaries, use screen's copy mode:
 
  1. Enter copy mode:    :kbd:`Ctrl-a` :kbd:`[` or :kbd:`Ctrl-a` :kbd:`Esc`
  2. Scroll up:          :kbd:`Ctrl-u`
  3. Scroll down:        :kbd:`Ctrl-d`
  4. Exit copy mode:     :kbd:`]` or :kbd:`Esc`
-
-.. admonition:: Exercise
-   :class: note
-
-   Log into one of the servers named in the previous exercise and start a ``screen`` session. Detach from it, close your terminal, and make sure you can reconnect and reattach to it successfully.
 
 On to the training exercises!
 ================================
@@ -528,6 +558,5 @@ Additional resources
 
 .. rubric:: Footnotes
 
-.. [#externalhelpdesk] There's an *external* helpdesk too, help@stsci.edu. For IT issues, though, you want the internal one. The external helpdesk is for science/instrument support. It is a way for astronomers to ask questions about things like the archive, SSB software, data characteristics, instrument information and the like.
 .. [#umask] Files are created with a default set of permissions set by your "umask", which will most likely make them world-readable by default. See `this Wikipedia article <https://en.wikipedia.org/wiki/Umask>`_ if you're really curious.
 .. [#bashrc] Said details are summarized in `this blog post from 2005 <http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html>`_. The gist of it is: ``.bashrc`` is run when starting an xterm or running ``bash`` within an already-started terminal session. ``.bash_profile`` is run for login shells (``bash -l`` or logging on via console or SSH). Yes, it's confusing. No, there isn't really a good reason it's this way.
