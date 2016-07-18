@@ -207,26 +207,26 @@ Sequences can also be used on the right hand side of an assignment operation. Su
    >>> filename = mydataset[0]
    >>> extension = mydataset[1]
    >>> mean = mydataset[2]
-   >>> print filename
+   >>> print(filename)
    icft01crq_raw.fits
-   >>> print extension
+   >>> print(extension)
    1
-   >>> print mean
+   >>> print(mean)
    340.0
 
 That's a bit verbose. As long as we know the number of elements we're getting, Python lets us do this instead::
 
    >>> filename, extension, mean = mydataset
-   >>> print filename
+   >>> print(filename)
    icft01crq_raw.fits
-   >>> print extension
+   >>> print(extension)
    1
-   >>> print mean
+   >>> print(mean)
    340.0
 
 .. warning::
 
-   In Python 3, the statement ``print mything`` will be written as a function call like ``print(mything)``!
+   In Python 2, the function call ``print(mything)`` would be written as a statement like ``print mything``!
 
    Refer back to :ref:`python_3_vs_2` for details.
 
@@ -251,7 +251,7 @@ To write a new list in your code, use a comma-separated sequence of values enclo
 Let's try assigning to position ``2`` again::
 
    >>> mydataset_list[2] = 199.9
-   >>> print mydataset_list
+   >>> print(mydataset_list)
    ['test.fits', 1, 199.9]
 
 Lists implement all of the behaviors described above for tuples, but additionally support modification in place with *assignment* (as shown above) and with *methods* that manipulate a particular list variable. We'll look at three of the most commonly used methods, but a full reference is available :py:ref:`in the Python reference manual <python:typesseq-mutable>`.
@@ -330,7 +330,7 @@ If you've programmed in other languages before, you are probably familiar with l
 
    >>> mytuple = ('first element', 'second element')
    >>> for item in mytuple:
-   ...     print item
+   ...     print(item)
    ...
    first element
    second element
@@ -345,7 +345,7 @@ There **are** cases where you might want the "loop variable" giving the numerica
 
    >>> mytuple = ('first element', 'second element')
    >>> for idx, item in enumerate(mytuple):
-   ...     print idx, item
+   ...     print(idx, item)
    ...
    0 first element
    1 second element
@@ -585,7 +585,7 @@ And, similarly to lists, the ``del`` keyword removes an entry::
 The last important thing you might want to do with your dictionary is iterate over its key value pairs::
 
    >>> for key, val in filters.items():
-   ...     print key, 'is', val
+   ...     print(key, 'is', val)
    F212N is 2.12e-06
    F110W is 1.1e-06
    F460M is 4.6e-06
@@ -669,7 +669,7 @@ Imagine your ``k2_catalog.csv`` were actually several gigabytes of target data, 
    >>> with open('k2_catalog.csv') as myfile:
    ...     for line in myfile:
    ...         if 'J900' in line:
-   ...             print line
+   ...             print(line)
    096.488487,17.790980,17.8,J900,j900,202060054
 
 Also, it bears mentioning, both ``.readlines()`` and ``for ... in fileobject`` will only help you when your file is "plain text" broken up into lines. Reading binary files with ``open()`` is an advanced topic, but Python can do that just as well. See :ref:`python:tut-filemethods` in the official Python tutorial for more details on file objects.
@@ -763,13 +763,13 @@ Example::
 
    >>> my_list = ['dog', 'cat', 'penguin']
    >>> for the_item in my_list:
-   ...     print the_item
+   ...     print(the_item)
    ...
    dog
    cat
    penguin
    >>> for index_and_the_item in enumerate(my_list):
-   ...     print index_and_the_item
+   ...     print(index_and_the_item)
    ...
    (0, 'dog')
    (1, 'cat')
@@ -778,7 +778,7 @@ Example::
 These tuples can be "unpacked" in the ``for`` statement as shown below::
 
    >>> for index, the_item in enumerate(my_list):
-   ...     print "item number", index + 1, " - ", the_item
+   ...     print("item number", index + 1, " - ", the_item)
    ...
    item number 1  -  dog
    item number 2  -  cat
@@ -787,18 +787,26 @@ These tuples can be "unpacked" in the ``for`` statement as shown below::
 range() function
 ----------------
 
-**Use:** The range() function creates a list starting at zero of the length you
-give it. You may also pass the start, stop, and the step you want to use
-(default of the step is 1).
+**Use:** The range() function creates an iterator starting at zero and counting up to (but not including) the end value that you pass it. You may also pass the start, stop, and the step (i.e. counting by twos, counting by threes) you want to use.
 
 Examples::
 
    >>> range(4)
-   >>> range(2, 8, 2)
+   range(0, 4)
+   >>> list(range(4))  # count up to four
+   [0, 1, 2, 3]
+   >>> list(range(2, 8, 2))  # count from two up to eight by twos
+   [2, 4, 6]
 
 See also:
 
 NumPy (see :ref:`python_numpy`) offers ``np.arange`` and ``np.linspace`` which are often more useful for scientific computing purposes.
+
+.. tip::
+
+   In Python 2, ``range()`` is named ``xrange()``, but there is a similar ``range()`` function that returns a list instead of an iterator. In general, this won't make any difference for your programs, but it's good to remember if you see an unfamiliar ``xrange()`` call.
+
+   Making a *single* ``range()`` function with consistent semantics is one of the simplifying changes to the language in Python 3.
 
 dir() function
 --------------
@@ -809,38 +817,14 @@ Examples::
 
    >>> a = range(10)
    >>> dir(a)
-
-xrange() function
------------------
-
-**Use:**
-
-The xrange() function is similar to range() except that it does not
-create a new list (saving on memory) but instead acts as a generator of
-numbers starting at zero up to the stop value you pass it. You may also
-pass the start, stop, and the step you want to use (default of the step
-is 1). This is used in iterations.
-
-Examples::
-
-   >>> for x in xrange(3): print x, x * 2
-
-Within a function, the for statement has the following simple structure:
-
-   >>> for x in xrange(1, 7):
-   ...    a = x * 3.0
-   ...    print a
-
-See also:
-
-Other useful similar statements are range().
-
-Notice that we use range() when we use the actual list created, but
-xrange() when we just need an iterator.
-
-.. tip::
-
-   In Python 3, ``xrange()`` is named ``range()``, and the old ``range()`` behavior no longer exists. In general, this won't make any difference for your programs.
+   ['__class__', '__contains__', '__delattr__', '__dir__', '__doc__',
+    '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__',
+    '__gt__', '__hash__', '__init__', '__iter__', '__le__', '__len__',
+    '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__',
+    '__repr__', '__reversed__', '__setattr__', '__sizeof__', '__str__',
+    '__subclasshook__', 'count', 'index', 'start', 'step', 'stop']
+   >>> a.stop
+   10
 
 Error Handling
 ==============
@@ -859,7 +843,7 @@ Examples: Try this code below. Notice the error message you get. ::
    >>> a = [1, 2, 3, 4, 5]
    >>> for i in xrange(len(a)):
    ...    a[i + 1] = 100 + a[i]
-   ...    print a[i], a[i + 1]
+   ...    print(a[i], a[i + 1])
 
 To solve this problem, we put it in a try ... except statement::
 
@@ -867,9 +851,9 @@ To solve this problem, we put it in a try ... except statement::
    >>> for i in xrange(len(a)):
    ...     try:
    ...         a[i + 1] = 100 + a[i]
-   ...         print a[i], a[i + 1]
+   ...         print(a[i], a[i + 1])
    ...     except IndexError:
-   ...         print 'This index does not work: ', i + 1
+   ...         print('This index does not work: ', i + 1)
 
 .. admonition:: Exercise
    :class: note
@@ -956,8 +940,7 @@ Examples::
 
    >>> import random
    >>> random.random()
-   >>> print 'My random number between 2 and 8: ', \
-   ...    2 + (8-2) * random.random()
+   >>> print('My random number between 2 and 8: ', 2 + (8-2) * random.random())
 
 See also:
 
