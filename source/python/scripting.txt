@@ -42,7 +42,7 @@ Python is developed by a community of volunteers and distributed for free. In 20
 
 The creators of Python have decreed that Python 2 will no longer be updated, and Python 3 is the way forward. The Institute has started migrating to Python 3, but during this transitional period you should be aware that you may encounter code that works with only Python 2 (or only Python 3).
 
-New code should be written to be forwards compatible with Python 3, *especially* if it will be used by other members of your team! There are more comprehensive guides elsewhere, but we want to call your attention to two important things that will change with Python 3. In Python 2, this code is fine::
+New code should be written to be forwards compatible with Python 3, *especially* if it will be used by other members of your team! There are more comprehensive guides elsewhere, but we want to call your attention to two important things that have changed in Python 3. In Python 2, this code is fine::
 
    >>> print "Hello world"
    Hello world

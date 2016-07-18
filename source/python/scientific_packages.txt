@@ -50,21 +50,19 @@ numpy.array() function
 In this example we have a Python list ``a``, a converted NumPy array version ``b``, and an example of a 2D array made from nested lists ``c``.
 
    >>> import numpy as np
-   >>> a = [1,2,3,4]      #a Python built in list
-   >>> b = np.array(a)     #converted to a NumPy array
-   >>> print a
-   >>> print b
-   >>> indx = [1,2]
-   >>> print b[indx]
-   >>> print b[1:3]
-   >>> c = np.array([[1,2,3,4,5],[6,7,8,9,10]])
-   >>> print c
-   >>> print c[1,3]       #indices for a multi-dimensional array
-   >>> print c[1][3]      #this is slower than the previous as it \
-   ...    creates a new array, c[1], and then subscripts that array.
-   >>> print c[1,:]  #print the first element in the first \
-   ...    dimension, but all in the second dimension
-   >>> print c[:,1]
+   >>> a = [1, 2, 3, 4]       # a Python built in list
+   >>> b = np.array(a)     # converted to a NumPy array
+   >>> print(a)
+   >>> print(b)
+   >>> indx = [1, 2]
+   >>> print(b[indx])
+   >>> print(b[1:3])
+   >>> c = np.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]])
+   >>> print(c)
+   >>> print(c[1,3])    # indices for a multi-dimensional array
+   >>> print(c[1][3])   # this is slower than the previous as it creates a new array, c[1], and then subscripts that array.
+   >>> print(c[1,:])     # print the first element in the first dimension, but all in the second dimension
+   >>> print(c[:,1])
 
 Notice when we print lists and arrays that the elements in lists are
 separated by commas while the elements in arrays are only separated by
@@ -103,7 +101,7 @@ The **shape** of an array is the n-dimensional equivalent of a list's **length**
 .. admonition:: Exercise
    :class: note
 
-   Using :py:func:`numpy.empty`, make a 5x5 array and print it out to the console (e.g. ``print np.empty((5,5))``). Do the same for 10x10, and 20x1 arrays.
+   Using :py:func:`numpy.empty`, make a 5x5 array and print it out to the console (e.g. ``print(np.empty((5,5)))``). Do the same for 10x10, and 20x1 arrays.
 
    Are the initial values what you expected? Why might ``zeros`` or ``ones`` be preferred? When does it make sense to use ``empty``? See :py:func:`numpy.empty` for reference.
 
@@ -157,11 +155,11 @@ Examples: Try the code below and notice the difference in the results from a
 simple ``d = b`` assignment. ::
 
    >>> import numpy as np
-   >>> a = np.array([1,2,3,4,5,6,7])
+   >>> a = np.array([1, 2, 3, 4, 5, 6, 7])
    >>> b = a.copy()
    >>> b[2] = 999
-   >>> print b
-   >>> print a
+   >>> print(b)
+   >>> print(a)
    >>> a.size
    >>> a.shape
 
@@ -177,10 +175,10 @@ In this example, the function :math:`y = x^2` is evaluated from -2 to 2. ::
 
    >>> x = np.linspace(-2, 2, 10)
    >>> y = x ** 2  # n.b. the double asterisk is the exponentiation operator
-   >>> print x
+   >>> print(x)
    [-2.         -1.55555556 -1.11111111 -0.66666667 -0.22222222
     0.22222222   0.66666667  1.11111111  1.55555556  2.        ]
-   >>> print y
+   >>> print(y)
    [ 4.          2.41975309  1.2345679   0.44444444  0.04938272
      0.04938272  0.44444444  1.2345679   2.41975309  4.        ]
 
@@ -432,16 +430,16 @@ the data. ::
    >>> hdr['FLSHCORR']
    >>> hdr['FLSHCORR'] = 'PERFORM'
    >>> hdr['FLSHCORR']
-   >>> print data[-2:]  # Print the last two lines.
+   >>> print(data[-2:])  # Print the last two lines.
    >>> data[-1:][0][0] = 0
-   >>> print data[-1]
+   >>> print(data[-1])
 
 Notice that ``hdr`` behaves like a dictionary. We did some bad
 things to this file, but let's save it anyway to a new file. ::
 
    >>> outfile = 'mybad.fits'
    >>> fits.writeto(outfile, data, hdr)
-   >>> print 'Saved FITS file to: {}'.format(outfile)
+   >>> print('Saved FITS file to: {}'.format(outfile))
 
 Alternatively, if we want to modify the original file directly, we can
 do the following::
@@ -500,12 +498,12 @@ Examples::
    >>> infile = 'flux_vs_time_A.dat'
    >>> data = ascii.read(infile,
    ...             names=['MJD', 'Flux_diff', 'Flux_err', 'Flux_linear_fit'])
-   >>> print data
-   >>> print data['MJD']
-   >>> print data['MJD', 'Flux_diff']
-   >>> print data['Flux_diff']  10
+   >>> print(data)
+   >>> print(data['MJD'])
+   >>> print(data['MJD', 'Flux_diff'])
+   >>> print(data['Flux_diff'])
    >>> pos_flux = data['Flux_diff'] > 0
-   >>> print data[pos_flux]
+   >>> print(data[pos_flux])
 
 .. admonition:: Exercise
    :class: note
@@ -528,7 +526,7 @@ Examples::
    ...                   names=['MJD', 'Flux_diff', 'Flux_err', 'Flux_linear_fit'])
    >>> first_date = min(data['MJD'])
    >>> data['MJD'] = data['MJD'] - first_date
-   >>> print data
+   >>> print(data)
    >>> ascii.write(data, 'flux_vs_time_A_mjdnorm.dat')
 
 .. admonition:: Exercise
@@ -602,12 +600,12 @@ If you don't want two datasets showing up on the same plot, you can use ``fig = 
 After creating the subplot, you can then call ``ax.plot()``, which will ensure that the dataset appears on the correct plot. We will also see a different way of creating subplots, ``plt.subplots()``, later. ::
 
    fig1 = plt.figure()
-   ax1 = fig1.add_subplot(1,1,1)
-   ax1.plot(x,y)
+   ax1 = fig1.add_subplot(1, 1, 1)
+   ax1.plot(x, y)
 
    fig2 = plt.figure()
-   ax2 = fig2.add_subplot(1,1,1)
-   ax2.plot(x,y2)
+   ax2 = fig2.add_subplot(1, 1, 1)
+   ax2.plot(x, y2)
 
 .. figure:: figures/basicplot.png
    :width: 50%
@@ -619,7 +617,7 @@ After creating the subplot, you can then call ``ax.plot()``, which will ensure t
 
 Matplotlib's `marker properties <http://matplotlib.org/api/markers_api.html>`_ are extremely customizable; say we want each point marked with an individual dot rather than a line, and we want the line to be red::
 
-   plt.plot(x,y,'.',color='r')
+   plt.plot(x, y, '.', color='r')
 
 .. figure:: figures/markers.png
    :width: 50%
@@ -628,7 +626,7 @@ Matplotlib's `marker properties <http://matplotlib.org/api/markers_api.html>`_ a
 What if we want a functionality that ``plt.plot()`` doesn't have, such as adding error bars? Luckily, there's more than just ``plt.plot()`` to work with; for example, ``plt.errorbar()`` is a very useful function for astronomers. ::
 
    yerr = np.sqrt(y)
-   plt.errorbar(x,y,yerr)
+   plt.errorbar(x, y, yerr)
 
 .. figure:: figures/errorbar.png
    :width: 50%
@@ -636,7 +634,7 @@ What if we want a functionality that ``plt.plot()`` doesn't have, such as adding
 
 We've been very bad scientists so far and have failed to label our axes! Let's do that now. ::
 
-   plt.errorbar(x,y,yerr)
+   plt.errorbar(x, y, yerr)
    plt.xlabel('x')
    plt.ylabel('y')
    plt.title('Quadratic with Poissonian error in y')
@@ -645,9 +643,7 @@ We've been very bad scientists so far and have failed to label our axes! Let's d
    :width: 50%
    :align: center
 
-
 Now that you've got the basics, let's look at some more complicated things Matplotlib can do.
-
 
 .. _multi_subplots:
 
@@ -658,7 +654,7 @@ Here we'll be making a scatter plot, 1D and 2D histograms, and a contour plot fr
 ::
 
    # make figure with two rows and two columns of subplots, specify size in inches
-   fig, [(ax0, ax1), (ax2, ax3)] = plt.subplots(2,2, figsize=(8,8))
+   fig, [(ax0, ax1), (ax2, ax3)] = plt.subplots(2, 2, figsize=(8, 8))
 
 We assign the figure and four axis objects to their own variables; see :ref:`multiassignment`.
 
@@ -683,15 +679,15 @@ For the next two plots, we'll be making two different types of histograms::
 
    # histogram of 2D dataset
    # we assign hist2d output to variables for use in the next plot
-   H, xedges, yedges, patches = ax2.hist2d(data_x, data_y, cmap='Blues', bins=(nbins,nbins))
+   H, xedges, yedges, patches = ax2.hist2d(data_x, data_y, cmap='Blues', bins=(nbins, nbins))
    ax2.set_title('plt.hist2d()')
 
 For the filled contour plot, we need to convert the data to a format ``contourf`` accepts. Don't worry if you don't understand this particular bit of code; essentially what it does is get a density map from the 2D histogram output. ::
 
-   x_bin_sizes = (xedges[1:] - xedges[:-1]).reshape((1,nbins))
-   y_bin_sizes = (yedges[1:] - yedges[:-1]).reshape((nbins,1))
-   pdf = (H*(x_bin_sizes*y_bin_sizes))
-   X, Y = 0.5*(xedges[1:]+xedges[:-1]), 0.5*(yedges[1:]+yedges[:-1])
+   x_bin_sizes = (xedges[1:] - xedges[:-1]).reshape((1, nbins))
+   y_bin_sizes = (yedges[1:] - yedges[:-1]).reshape((nbins, 1))
+   pdf = (H * (x_bin_sizes * y_bin_sizes))
+   X, Y = 0.5 * (xedges[1:] + xedges[:-1]), 0.5 * (yedges[1:] + yedges[:-1])
    Z = pdf.T
 
    # plot filled contour map
@@ -742,9 +738,9 @@ Let's compare some different types of colormaps for this image. ::
    fig = plt.figure(figsize=(12,5))
    
    # add three subplots in a row
-   ax1 = fig.add_subplot(1,3,1)
-   ax2 = fig.add_subplot(1,3,2)
-   ax3 = fig.add_subplot(1,3,3)
+   ax1 = fig.add_subplot(1, 3, 1)
+   ax2 = fig.add_subplot(1, 3, 2)
+   ax3 = fig.add_subplot(1, 3, 3)
    
    # display the image in each subplot with different colormaps
    ax1.imshow(data, vmin=3, vmax=20)
@@ -805,7 +801,7 @@ is the simplest method for doing so::
     # import module that sets formatting parameters
     from matplotlib import rc
     # change default font for all plot text to LaTeX font; also change font size
-    rc('font', **{'family': 'serif', 'serif': ['Computer Modern Roman'], 'size':14})
+    rc('font', **{'family': 'serif', 'serif': ['Computer Modern Roman'], 'size': 14})
     # allow TeX commands to be used in text strings
     rc('text', usetex=True)
 
@@ -867,7 +863,7 @@ General Tricks/Quick Reference
 When To Explicitly Create Figure and Axis Objects
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-So far in this training we've been somewhat lax about explicit figure creation; sometimes we just do ``plt.plot(x,y)``, and sometimes we create a figure object ``fig = plt.figure()`` with or without an axes object ``ax = fig.add_subplot()``. (There's also the option ``fig, ax = plt.subplots()``). When do you need explicit figure and axes objects, and when it is okay to skip straight to the plot function?
+So far in this training we've been somewhat lax about explicit figure creation; sometimes we just do ``plt.plot(x, y)``, and sometimes we create a figure object ``fig = plt.figure()`` with or without an axes object ``ax = fig.add_subplot()``. (There's also the option ``fig, ax = plt.subplots()``). When do you need explicit figure and axes objects, and when it is okay to skip straight to the plot function?
 
 Essentially, it depends on the complexity of your figure, although it's generally good form to use the object-oriented figure and axis calls ``fig = plt.figure()`` and ``ax = fig.add_subplot()`` when you can. For quick-and-dirty plotting, ``plt.plot()`` is generally sufficient; however, if you have multiple subplots or an otherwise complicated figure, explicitly creating figure and axis objects is easier to work with.
 
@@ -887,7 +883,7 @@ All you need to make a legend is at least one plotted object with the keyword ar
 
 This will make a boxed legend appear on your plot. The default legend formatting is perhaps one of Matplotlib's least attractive features, which is saying something; fortunately, it is easily customizable. For example, you can change the location, size, and handle length with the legend keyword arguments ``loc``, ``prop``, and ``handlelength`` respectively. ::
 
-    plt.legend(loc=0, prop={'size':14}, handlelength=1)
+    plt.legend(loc=0, prop={'size': 14}, handlelength=1)
 
 Here ``loc=0`` tells Matplotlib to determine the optimal location for the legend. The numbering system for legend locations in Matplotlib can be confusing; the `documentation <http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.legend>`_, lists all numbered positions. If you need more specificity than any of these provide, you can also use ``loc=(x,y)`` where x and y specify the location of the lower left corner of the legend box in the coordinates of your axis object.
 
@@ -903,7 +899,7 @@ If you need one or both axes to be log scale, the quickest way to do so is::
 
 Be careful when you have axis limits that are close to 0; your plots will come out very funky if you don't take care to adjust your axis limits to be log-compatible. If you have any negative data, ``plt.yscale('symlog')`` is your best option.
 
-Alternately, you can use ``plt.semilogx(x,y)``, ``plt.semilogy(x,y)``, or ``plt.loglog(x,y)``; however, these give you slightly less flexibility.
+Alternately, you can use ``plt.semilogx(x, y)``, ``plt.semilogy(x, y)``, or ``plt.loglog(x, y)``; however, these give you slightly less flexibility.
 
 
 .. _curve_fitting:
@@ -923,7 +919,7 @@ here we will demonstrate the use of one of its most versatile functions, ``curve
    from scipy.optimize import curve_fit
    from matplotlib import pyplot as plt
    from matplotlib import rc
-   rc('font', **{'family': 'serif', 'serif': ['Computer Modern Roman'], 'size':14})
+   rc('font', **{'family': 'serif', 'serif': ['Computer Modern Roman'], 'size': 14})
    rc('text', usetex=True)
 
 First, we define a blackbody function ``blackbody`` that takes an array-like input of wavelengths in microns and an integer or float temperature value in Kelvin and returns the spectral radiance blackbody values over the specified wavelength range. ::
@@ -959,7 +955,7 @@ Here the arguments for ``curve_fit`` are the function to be used for fitting, th
    # fit blackbody with new temperature
    yfit = blackbody(wa, fitT)
 
-   print 'Observed blackbody temperature: {:.2f} +/- {:.2f} K'.format(fitT, sigmaT)
+   print('Observed blackbody temperature: {:.2f} +/- {:.2f} K'.format(fitT, sigmaT))
 
 Observed blackbody temperature: 6926.61 +/- 35.57 K
 
