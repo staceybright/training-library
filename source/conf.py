@@ -29,16 +29,11 @@ import os
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'nbsphinx',
-    'IPython.sphinxext.ipython_console_highlighting',  # see https://github.com/spatialaudio/nbsphinx/issues/24
     'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx.ext.mathjax',
 ]
-
-# nbsphinx: Disable executing notebooks in source during build
-nbsphinx_execute = 'never'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
