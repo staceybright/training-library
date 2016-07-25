@@ -6,4 +6,4 @@ This presentation gives an overview of the use of reference outputs and referenc
 
 .. note::
 
-   These slides are provided as a PDF document. :download:`Download it <pdf_guides/jwst_reference_output.pdf>` and get started.
+   These slides are provided as a PDF document. :download:`Download it <downloads/pdf_guides/jwst_reference_output.pdf>` and get started.
