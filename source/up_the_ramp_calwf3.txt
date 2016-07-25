@@ -20,4 +20,4 @@ Start the notebook server::
 
     jupyter notebook
 
-and load ``up_the_ramp_calwf3.ipynb``, i.e. your copy of this document. The exercise runs on an arbitrary image with the associated calibration files; any other image + calibration file downloaded from the archive should work.
+and load ``up_the_ramp_calwf3.ipynb``, i.e. your copy of this document.
