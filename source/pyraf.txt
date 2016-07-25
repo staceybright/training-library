@@ -6,4 +6,4 @@ PyRAF is a command language for running IRAF (Image Reduction and Analysis Facil
 
 .. note::
 
-   This guide is maintained as a PDF document. :download:`Download it <pdf_guides/pyraf_training.pdf>` and get started.
+   This guide is maintained as a PDF document. :download:`Download it <downloads/pdf_guides/pyraf_training.pdf>` and get started.

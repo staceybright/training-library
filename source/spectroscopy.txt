@@ -2,7 +2,7 @@
 Basic Spectroscopy
 ******************
 
-The spectroscopy :download:`training document <pdf_guides/spectroscopy_training.pdf>` gives an overview of spectrographs in general and the basics of spectroscopy. Also included are exercises that will introduce you to using the data from HST's spectrographs--COS and STIS.
+The spectroscopy :download:`training document <downloads/pdf_guides/spectroscopy_training.pdf>` gives an overview of spectrographs in general and the basics of spectroscopy. Also included are exercises that will introduce you to using the data from HST's spectrographs--COS and STIS.
 
-There are also :download:`slides <pdf_guides/intro_to_hst_spec_3.2.pdf>` that give a high-level overview of COS, STIS, and MAMA detectors.
+There are also :download:`slides <downloads/pdf_guides/intro_to_hst_spec_3.2.pdf>` that give a high-level overview of COS, STIS, and MAMA detectors.
 
