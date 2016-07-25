@@ -92,25 +92,18 @@ Once it is merged, either you or they can publish it using the directions in :re
 Creating an entirely new document
 =================================
 
-Adding a new topic to the training is accomplished by creating a new file with the source code of the new training document, adding this file to source control (git), and referencing it in ``index.txt`` so the build system includes a link to it.
+1. Add a new ``.txt`` file under ``source/``
 
-1. Add a new file under ``source/``. Most of the documents in this repository are written as reST, a simplified text formatting syntax. (See :ref:`rest_primer`.) Name your source file something descriptive, ending in ``.txt``.
-
-   Begin your document with a heading. This is the title that will show up when your document is linked to within the training site. For example::
+   Begin your document with a heading. This is the title that will show up it is linked to. For example::
 
       ***********************
       Editing These Documents
       ***********************
 
-   It is also possible to write up a topic within an IPython notebook file. This has the benefit of familiarity for those who use the notebook regularly, as well as embedded plots and code. (Unfortunately, it is harder to review changes to IPython notebooks within pull requests.) Make sure to start your notebook with a Markdown cell containing a header, like this::
-
-      # Editing These Documents
-
-   It is also a good idea to explicitly import everything you need to run the code cells (i.e. not use the ``%pylab`` shortcut or startup files). This will make it easier for others to edit and amend the document later on.
 
 2. Add the base name of the file to ``index.txt``
 
-   There are two places in ``index.txt`` where you must add the base name of your document (e.g. for ``python.txt`` or ``python.ipynb``, the base name is ``python``). First, include a link to it in the numbered lists like this::
+   There are two places in ``index.txt`` where you must add the base name of your document (e.g. for ``python.txt``, the base name is ``python``). First, include a link to it in the numbered lists like this::
 
       #. :doc:`base_name`
 
