@@ -4,4 +4,4 @@ Photometry
 
 Roberto Avila has prepared some :download:`slides <downloads/pdf_guides/phot_training_current.pdf>` about photometry on Hubble images.
 
-There are also :download:`exercises <downloads/notebooks/photometry_exercises.ipynb>` that complement the slides and will introduce you to photometry on HST images with PyRAF.
+There are also :download:`exercises <downloads/notebooks/photometry_exercises.ipynb>`, presented in the form of a Jupyter Notebook file for you to download and run, that complement the slides and will introduce you to photometry on HST images with `photutils <https://photutils.readthedocs.io>`_.
