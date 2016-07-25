@@ -1,0 +1,23 @@
+********************************
+Up-the-ramp Sampling with calwf3
+********************************
+
+Massimo Robberto has prepared a Jupyter Notebook file that follows the calwf3 pipeline through the process of calibrating an infrared up-the-ramp sampled image.
+
+To run this demonstration notebook locally, first copy over the following directory of example data to your Central Store location::
+
+   cp -rfv /grp/hst/riab/training/up_the_ramp_sampling/WFC3_tutorial /user/$USER/WFC3_tutorial
+
+Change directories to the new ``WFC3_tutorial`` folder you just created::
+
+   cd /user/$USER/WFC3_tutorial/main/
+
+Download the notebook named :download:`up_the_ramp_calwf3.ipynb <downloads/notebooks/up_the_ramp_calwf3.ipynb>` and save it in the ``WFC3_tutorial`` folder with the following command::
+
+   curl -L https://stsci-riab.github.io/riatraining/_downloads/up_the_ramp_calwf3.ipynb
+
+Start the notebook server::
+
+    jupyter notebook
+
+and load ``up_the_ramp_calwf3.ipynb``, i.e. your copy of this document. The exercise runs on an arbitrary image with the associated calibration files; any other image + calibration file downloaded from the archive should work.
