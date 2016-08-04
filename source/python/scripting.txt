@@ -127,9 +127,14 @@ Here we've **imported** the ``do_something`` module, then **called** the ``say()
 .. admonition:: Exercise
    :class: note
 
-   Create a **module** called ``verbose_math.py`` with a single function ``square_root(x)`` that **prints** a message along the lines of ``square_root(4) -> 2.0`` (for ``x = 4``) and **returns** the square root of its argument. (n.b. No need to algorithmically determine the square root! ``from math import sqrt`` gives you what you need.)
+   Create a **module** called ``verbose_math.py`` with a single function ``square_root(x)`` that does two things:
 
-   Now, write a stand-alone script to compute the square root of 16 using your ``square_root()`` function. Ensure the output is what you expect, and it as ``sqrt_16.py``.
+     1. **prints** a message along the lines of ``square_root(4) -> 2.0`` (for ``x = 4``)
+     2. **returns** the square root of its argument (2.0 in this case).
+
+   (n.b. No need to algorithmically determine the square root! ``from math import sqrt`` gives you what you need.)
+
+   Now, write a stand-alone script to compute the square root of 16 using your ``square_root()`` function. Ensure the output is what you expect, and save it as ``sqrt_16.py``.
 
    We will add on to this, so keep this version in a folder called ``scripting_ex1``.
 
