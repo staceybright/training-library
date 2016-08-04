@@ -127,15 +127,25 @@ Here we've **imported** the ``do_something`` module, then **called** the ``say()
 .. admonition:: Exercise
    :class: note
 
-   Create a **module** called ``verbose_math.py`` with a single function ``square_root(x)`` that **prints** a message along the lines of ``square_root(4) -> 2.0`` (for ``x = 4``) and **returns** the square root of its argument. (n.b. No need to algorithmically determine the square root! ``from math import sqrt`` gives you what you need.)
+   Create a **module** called ``verbose_math.py`` with a single function ``square_root(x)`` that does two things:
 
-   Now, write a stand-alone script to compute the square root of 16 using your ``square_root()`` function. Ensure the output is what you expect, and it as ``sqrt_16.py``.
+     1. **prints** a message along the lines of ``square_root(4) -> 2.0`` (for ``x = 4``)
+     2. **returns** the square root of its argument (2.0 in this case).
+
+   (n.b. No need to algorithmically determine the square root! ``from math import sqrt`` gives you what you need.)
+
+   Now, write a stand-alone script to compute the square root of 16 using your ``square_root()`` function. Ensure the output is what you expect, and save it as ``sqrt_16.py``.
 
    We will add on to this, so keep this version in a folder called ``scripting_ex1``.
 
 Let's relate this back to a less trivial use-case: data pipeline construction. You may painstakingly construct some code that applies a sophisticated correction to a single FITS file, then wish to include it in the pipeline.
 
 Rather than keep a stand-alone script implementing your calibration **and** have a copy within the pipeline, you could "factor out" your calibration into a function or group of related functions in a module. Then you could use a stand-alone script that applies that single calibration step, imported from the module where you put it, for testing purposes.
+
+.. tip::
+
+   In the next few exercises, you will make copies of your code and add to it in each step.
+   You will be sending the code for each of your exercises in this section to your trainer for review, so make a new folder where you will keep each exercise solution. Then, at the end, you will send the trainer a zip file with ``hello_world.py``, ``do_something.py``, ``scripting_ex1``, ``scripting_ex2``, and so on.
 
 Best practices for scripts
 ==========================
@@ -301,12 +311,15 @@ And change the main block to look like::
        result = compute_result(number)
        results.append(result)
 
-   print(results)
+   for the_number, its_sqrt in results:
+       print("The square root of", the_number, "is", its_sqrt)
 
 There's also a way to eliminate the loop entirely, now that we've rearranged the code this way. The ``map()`` builtin function takes two arguments: a function to use to compute a result, and the sequence which should be passed to that function (one at a time). Rephrasing again, we get a "functional" form (so named for its reliance on functions rather than looping to process a sequence)::
 
    results = map(compute_result, range(1, 101))
-   print(results)
+
+   for the_number, its_sqrt in results:
+       print("The square root of", the_number, "is", its_sqrt)
 
 .. admonition:: Exercise
    :class: note
@@ -325,8 +338,9 @@ Enter the ``Pool`` object, by far the easiest interface to ``multiprocessing``. 
    Copy your Python files from the last step into a new folder called ``scripting_ex7``. Within your ``if __name__ == "__main__":`` block in ``first_hundred_sqrts.py``, create a process pool and use its ``map`` method to parallelize your computation. A good rule of thumb is to use the number of processors in your computer (or server) to figure out how many worker processes to put in the pool. Here we use 8 processes::
 
       p = Pool(8)
-      result = p.map(compute_result, range(1, 101))
-      print(result)
+      results = p.map(compute_result, range(1, 101))
+      for the_number, its_sqrt in results:
+          print("The square root of", the_number, "is", its_sqrt)
 
    Compare how long it takes to run with your ``scripting_ex6`` version. Nice, right?
 
@@ -346,6 +360,8 @@ This is a somewhat contrived example (square roots don't take long to compute, a
 
 .. note::
 
-   Let your trainer know you've finished, and send them your exercise solutions. You're done with Python training!
+   Let your trainer know you've finished, and send them your exercise solutions. You should have ``do_something.py``, ``hello_world.py``, and folders for ``scripting_ex1``, ``scripting_ex2``, etc.
+
+   Once your trainer has reviewed your exercises, they will provide feedback and let you know when you're done with Python training!
 
    Review the resources in the following appendix for more in-depth coverage of these topics and more.
