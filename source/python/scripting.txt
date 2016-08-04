@@ -142,6 +142,11 @@ Let's relate this back to a less trivial use-case: data pipeline construction. Y
 
 Rather than keep a stand-alone script implementing your calibration **and** have a copy within the pipeline, you could "factor out" your calibration into a function or group of related functions in a module. Then you could use a stand-alone script that applies that single calibration step, imported from the module where you put it, for testing purposes.
 
+.. tip::
+
+   In the next few exercises, you will make copies of your code and add to it in each step.
+   You will be sending the code for each of your exercises in this section to your trainer for review, so make a new folder where you will keep each exercise solution. Then, at the end, you will send the trainer a zip file with ``hello_world.py``, ``do_something.py``, ``scripting_ex1``, ``scripting_ex2``, and so on.
+
 Best practices for scripts
 ==========================
 
@@ -351,6 +356,8 @@ This is a somewhat contrived example (square roots don't take long to compute, a
 
 .. note::
 
-   Let your trainer know you've finished, and send them your exercise solutions. You're done with Python training!
+   Let your trainer know you've finished, and send them your exercise solutions. You should have ``do_something.py``, ``hello_world.py``, and folders for ``scripting_ex1``, ``scripting_ex2``, etc.
+
+   Once your trainer has reviewed your exercises, they will provide feedback and let you know when you're done with Python training!
 
    Review the resources in the following appendix for more in-depth coverage of these topics and more.
