@@ -311,12 +311,15 @@ And change the main block to look like::
        result = compute_result(number)
        results.append(result)
 
-   print(results)
+   for the_number, its_sqrt in results:
+       print("The square root of", the_number, "is", its_sqrt)
 
 There's also a way to eliminate the loop entirely, now that we've rearranged the code this way. The ``map()`` builtin function takes two arguments: a function to use to compute a result, and the sequence which should be passed to that function (one at a time). Rephrasing again, we get a "functional" form (so named for its reliance on functions rather than looping to process a sequence)::
 
    results = map(compute_result, range(1, 101))
-   print(results)
+
+   for the_number, its_sqrt in results:
+       print("The square root of", the_number, "is", its_sqrt)
 
 .. admonition:: Exercise
    :class: note
@@ -335,8 +338,9 @@ Enter the ``Pool`` object, by far the easiest interface to ``multiprocessing``. 
    Copy your Python files from the last step into a new folder called ``scripting_ex7``. Within your ``if __name__ == "__main__":`` block in ``first_hundred_sqrts.py``, create a process pool and use its ``map`` method to parallelize your computation. A good rule of thumb is to use the number of processors in your computer (or server) to figure out how many worker processes to put in the pool. Here we use 8 processes::
 
       p = Pool(8)
-      result = p.map(compute_result, range(1, 101))
-      print(result)
+      results = p.map(compute_result, range(1, 101))
+      for the_number, its_sqrt in results:
+          print("The square root of", the_number, "is", its_sqrt)
 
    Compare how long it takes to run with your ``scripting_ex6`` version. Nice, right?
 
