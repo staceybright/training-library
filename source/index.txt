@@ -45,6 +45,22 @@ Supplemental training guides and exercises
 #. :doc:`jwst_reference_output`
 #. :doc:`jwst_telescopes_project`
 
+************************
+Instrument pocket guides
+************************
+
+**Hubble**:
+`ACS <http://www.stsci.edu/hst/acs/documents/InformationBrochure_AAS2010.pdf>`_ |
+`COS <http://www.stsci.edu/hst/cos/documents/COS_brochure_2012_05.pdf>`_ |
+`STIS <http://www.stsci.edu/hst/stis/documents/stis_brochure_jan2010.pdf>`_ |
+`WFC3 <http://www.stsci.edu/hst/wfc3/documents/handouts/wfc3_brochure_200801.pdf>`_
+
+**JWST**:
+`NIRCam <http://www.stsci.edu/jwst/instruments/nircam/docarchive/NIRCam-pocket-guide.pdf>`_ |
+`NIRISS <http://www.stsci.edu/jwst/instruments/niriss/docarchive/NIRISS-pocket-guide.pdf>`_ |
+`MIRI <http://www.stsci.edu/jwst/instruments/miri/docarchive/miri-pocket-guide.pdf>`_ |
+`NIRSpec <http://www.stsci.edu/jwst/instruments/nirspec/docarchive/NIRSpec-pocket-guide.pdf>`_
+
 *********************
 Reference information
 *********************
