@@ -59,7 +59,7 @@ Instrument pocket guides
 `NIRCam <http://www.stsci.edu/jwst/instruments/nircam/docarchive/NIRCam-pocket-guide.pdf>`_ |
 `NIRISS <http://www.stsci.edu/jwst/instruments/niriss/docarchive/NIRISS-pocket-guide.pdf>`_ |
 `MIRI <http://www.stsci.edu/jwst/instruments/miri/docarchive/miri-pocket-guide.pdf>`_ |
-`NIRSpec <http://www.stsci.edu/jwst/instruments/nirspec/docarchive/NIRSpec-pocket-guide.pdf>`_
+`NIRSpec <https://jwst.stsci.edu/files/live/sites/jwst/files/home/instrumentation/nirspec/technical%20documents/NIRSpec_pocketguide.pdf>`_
 
 *********************
 Reference information
