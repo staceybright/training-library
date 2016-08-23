@@ -59,3 +59,4 @@ Summer 2016 hires
 * Emily Wislowski
 * Andrea Bellini
 * Myles McKay
+* Jules Fowler
