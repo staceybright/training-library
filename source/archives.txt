@@ -29,14 +29,15 @@ The goal of this training exercise is to familiarize you with:
 
 | *HST Data Handbook*
 | Please review Chapters 1 and 2.
-| `http://www.stsci.edu/hst/HST_overview/documents/datahandbook/hstdh_intro.pdf`__
+|
+`<http://www.stsci.edu/hst/HST_overview/documents/datahandbook/hstdh_intro.pdf>`__
 |
 | *HST File Naming Conventions*
-| `http://archive.stsci.edu/hlsp/ipppssoot.html <http://archive.stsci.edu/hlsp/ipppssoot.html>`__
+| `<http://archive.stsci.edu/hlsp/ipppssoot.html <http://archive.stsci.edu/hlsp/ipppssoot.html>`__
 |
 | *The STIS Data Handbook* (for reference)
 | Chapters 1, 2, and 3.
-| `http://www.stsci.edu/hst/stis/documents/handbooks/currentDHB/ix.html`__
+| `<http://www.stsci.edu/hst/stis/documents/handbooks/currentDHB/ix.html>`__
 
 --------------------------------------------
 
