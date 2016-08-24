@@ -132,7 +132,7 @@ If you look at the main page for the repository on GitHub, there's a box on the 
 Creating a branch for your changes
 ==================================
 
-Now you have a git repository to manipulate on your own computer.  You may want to keep this `git cheat sheet <https://training.github.com/kit/downloads/github-git-cheat-sheet.pdf>`_ on hand for future reference. Also an `interactive git cheat sheet <http://www.ndpsoftware.com/git-cheatsheet.html>`_ can be useful. The command ``clone`` is aptly named: the entire history of the repository is there, but it's entirely self contained. Don't worry about screwing it up; if you get stuck it's possible to delete the whole folder and make a "fresh" clone without affecting anyone else's work.
+Now you have a git repository to manipulate on your own computer.  You may want to keep this `git cheat sheet <https://services.github.com/kit/downloads/github-git-cheat-sheet.pdf>`_ on hand for future reference. (This `interactive git cheat sheet <http://www.ndpsoftware.com/git-cheatsheet.html>`_ may be useful as well to visualize the various commands.) The command ``clone`` is aptly named: the entire history of the repository is there, but it's entirely self contained. Don't worry about screwing it up; if you get stuck it's possible to delete the whole folder and make a "fresh" clone without affecting anyone else's work.
 
 .. admonition:: Exercise: Check the status of your repository
    :class: note
