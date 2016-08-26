@@ -139,11 +139,24 @@ You can run TweakReg through PyRAF or Python, though it's strongly recommended t
 >>> import glob
 >>> from stsci.tools import teal
 >>> from drizzlepac import tweakreg
+
+Due to the **updatewcs** paramter that has now been removed from the GUI, before
+you can run TweakReg, the first step is to set the **updatewcs** parameter. This
+allows TweakReg to incorporate the geometric distortion into the alignment:
+
+>>> teal.teal('updatewcs')
+
+In the UpdateWcs window:
+
+    * Set the **input** parameter to ``*flc.fits``. These are the input images.
+
+Then presss **Execute** and you can continue on to your regularly scheduled TweakReg :
+
 >>> teal.teal('tweakreg')
 
 Though not practical for scripting, the GUIs are helpful when learning how to use the tasks.  Clearly, there are many parameters to play with, but for now we'll go over the most important ones.  In the TweakReg parameters window:
 
-    * Set the **input** parameter to ``*flc.fits``.  These are the input images.
+    * Again, set the **input** parameter to ``*flc.fits``.
     * Set the **updatewcs** parameter to ``Yes`` so TweakReg can incorporate the geometric distortion into the alignment.
     * Set the **refimage** parameter to ``j8ny01svq_flc.fits`` (or any one of the other input images).  All of the input images will be aligned to the refimage.
     * Set **expand_refcat** to ``Yes``.  This allows TweakReg to add unmatched sources from input images to the reference image source catalog on the fly (this is great for mosaicking!).
