@@ -140,9 +140,7 @@ You can run TweakReg through PyRAF or Python, though it's strongly recommended t
 >>> from stsci.tools import teal
 >>> from drizzlepac import tweakreg
 
-Due to the **updatewcs** paramter that has now been removed from the GUI, before
-you can run TweakReg, the first step is to set the **updatewcs** parameter. This
-allows TweakReg to incorporate the geometric distortion into the alignment:
+The **updatewcs** parameter has been removed from some of the Drizzlepac tasks. It may sometimes be necessary to run this task to get the correct geometric distortion headers keywords and file extensions incorporated into the files. To run this task do the following:
 
 >>> teal.teal('updatewcs')
 
