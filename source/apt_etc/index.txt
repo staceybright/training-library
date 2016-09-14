@@ -1,0 +1,20 @@
+********************************************************************************
+The Astronomer's Proposal Tool and the Exposure Time Calculater for HST and JWST
+********************************************************************************
+
+| **Authors:** James White
+| **Created:** August 2016
+
+\
+
+This module is meant as an introduction to APT and ETC. It is a surface- level guide
+for becoming familiar with basic processes and language. For more details or help,
+please see the remaining APT training materials (linked below) not discussed here.
+
+--------------
+
+.. toctree::
+    :maxdepth: 2
+
+    hst_apt_etc
+    jwst_apt_etc
