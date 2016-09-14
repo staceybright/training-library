@@ -1,6 +1,6 @@
-***********************************************************
+***************
 HST APT and ETC
-***********************************************************
+***************
 
 | Authors: J. White
 |
@@ -10,20 +10,15 @@ HST APT and ETC
 
 **Helpful Links:**
 
-| *APT Webpage*
-| `website <http://www.stsci.edu/hst/proposing/apt>`__
-|
-| *APT Training Materials*
-| `training videos <http://www.stsci.edu/hst/proposing/apt/using_apt>`__
-|
-| *APT Training Slides*
-| `APT Overview <https://confluence.stsci.edu/download/attachments/66356683/APT_Overview_july2016.pptx?version=1&modificationDate=1468868047000&api=v2>`__
-|
-| *ETC Webpage*
-| `website <http://etc.stsci.edu>`__
-|
-| *Additional Info*
-|`ALADIN Info <http://aladin.u-strasbg.fr>`__
+- `APT Webpage <http://www.stsci.edu/hst/proposing/apt>`__
+
+- `APT training videos <http://www.stsci.edu/hst/proposing/apt/using_apt>`_
+
+- `APT Training Slides <https://confluence.stsci.edu/download/attachments/66356683/APT_Overview_july2016.pptx?version=1&modificationDate=1468868047000&api=v2>`__
+
+- `ETC Webpage <http://etc.stsci.edu>`__
+
+- `ALADIN Info <http://aladin.u-strasbg.fr>`__
 
 --------------------------------------------
 
@@ -31,7 +26,7 @@ Astronomer's Proposal Tool
 ============================
 
 The Astronomer's Proposal Tool (APT) is a software package used by the institute and external users alike
-for planning HST (and soon, JWST) Proposals. It consists mainly of the following:
+for planning HST (and soon, JWST) proposals. It consists mainly of the following:
 
     - Editors used in filling out Phase I and Phase II proposals
     - An Orbit Planner tool used to test the viability of a desired observation in a Phase II proposal
@@ -64,10 +59,9 @@ proposal. For additional help, see the APT Overview presentation slides.
 
     For the Phase I: include some notes for the abstract and add a CO-I.
 
-.. admonition:: Warning!!!!
-    :class: warning
+.. warning::
 
-    DON'T HIT THE SUBMISSION BUTTON. YOU DON'T ACTUALLY WANT THIS TO BE REVIEWED....
+    Do not hit the submission button. You Don't actually want this to be reviewed...
 
 
 

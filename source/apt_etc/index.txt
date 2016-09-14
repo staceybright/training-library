@@ -1,5 +1,5 @@
 ********************************************************************************
-The Astronomer's Proposal Tool and the Exposure Time Calculater for HST and JWST
+The Astronomer's Proposal Tool and the Exposure Time Calculator for HST and JWST
 ********************************************************************************
 
 | **Authors:** James White
