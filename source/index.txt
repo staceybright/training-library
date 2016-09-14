@@ -21,6 +21,7 @@ Training guides and exercises for new RIAs
 #. :doc:`computer_setup`
 #. :doc:`version_control`
 #. :doc:`archives`
+#. :doc:`apt_etc/index`
 #. :doc:`python/index`
 #. :doc:`pyraf`
 #. :doc:`pysynphot`
@@ -60,6 +61,7 @@ Reference information
    computer_setup
    version_control
    archives
+   apt_etc/index
    python/index
    pyraf
    pysynphot

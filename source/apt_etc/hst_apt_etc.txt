@@ -1,0 +1,98 @@
+***************
+HST APT and ETC
+***************
+
+| Authors: J. White
+|
+| **HST**
+
+--------------------------------------------
+
+**Helpful Links:**
+
+- `APT Webpage <http://www.stsci.edu/hst/proposing/apt>`__
+
+- `APT training videos <http://www.stsci.edu/hst/proposing/apt/using_apt>`_
+
+- `APT Training Slides <https://confluence.stsci.edu/download/attachments/66356683/APT_Overview_july2016.pptx?version=1&modificationDate=1468868047000&api=v2>`__
+
+- `ETC Webpage <http://etc.stsci.edu>`__
+
+- `ALADIN Info <http://aladin.u-strasbg.fr>`__
+
+--------------------------------------------
+
+Astronomer's Proposal Tool
+============================
+
+The Astronomer's Proposal Tool (APT) is a software package used by the institute and external users alike
+for planning HST (and soon, JWST) proposals. It consists mainly of the following:
+
+    - Editors used in filling out Phase I and Phase II proposals
+    - An Orbit Planner tool used to test the viability of a desired observation in a Phase II proposal
+    - A Visit Planner tool used for visualizing and determining the ability to schedule a desired observation
+    - A Bright Object tool used for performing checks for brightness above instrument safety thresholds
+    - A tool based on ALADIN used for simulating what data may look like for the planned observation
+
+To get started with learning how to use APT, first download the app by going to the
+APT webpage using the 'website' link above and clicking on the appropriate link on the right side of the
+page under 'Install APT.' APT is also available internally (or by VPN) via /eng/apt/Mac,
+but it's a good idea to have a copy of the app that doesn't depend on the Institute's /eng network mount.
+Then use the "training videos" link above and watch and follow along with (on your machine)
+the 'General' training videos. These tutorials will teach you how to use APT to prepare for a general
+proposal. For additional help, see the APT Overview presentation slides.
+
+.. admonition:: Exercise 1
+   :class: note
+
+   Try to create a Phase I and a Phase II proposal based on these parameters:
+
+        Instrument: COS
+
+        Target: M31
+
+        Visits: 3
+
+        Orbits: 2, 4, 5 (for each visit)
+
+        Grating: G130M
+
+        Cenwave: 1327
+
+    For the Phase I: include some notes for the abstract and add a CO-I.
+
+.. warning::
+
+    Do not hit the submission button. You Don't actually want this to be reviewed...
+
+
+
+
+Exposure Time Calculator
+========================
+
+The Exposure Time Calculator (ETC) is a software tool that does exactly what the name implies, and each
+instrument has it's own tool. ETC is a simulator used in helping users of HST or JWST
+instruments figure out what exposure times they need to fulfill certain requirements for
+their science such as Signal to Noise, the type of target they want to observe, background levels, etc.
+It also generates handy plots for understanding the instrument's expected performance under the conditions that are input.
+
+.. admonition:: Exercise
+    :class: note
+
+    In the case of ETC there's not much training that's required. It's a simple form that you
+    fill out based on parameters that you want/expect for your observation.
+
+    Go try it out! Start with the default values. What do you get?
+
+    Find your instrument's ETC and submit 3 (default plus two different submissions)
+    different forms with different parameters.
+    Return to your trainer with the following::
+
+        Start with the default values. What do you get?
+        Parameters used (with the fields) for each submission
+        Results page for each submission
+        Any plots that are generated
+
+        OPTIONAL: Note any warnings that you may get. Try to figure out why you got them
+        and how to resolve them
