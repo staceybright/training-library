@@ -36,7 +36,9 @@ for planning HST (and soon, JWST) proposals. It consists mainly of the following
 
 To get started with learning how to use APT, first download the app by going to the
 APT webpage using the 'website' link above and clicking on the appropriate link on the right side of the
-page under 'Install APT.' Then use the "training videos" link above and watch and follow along with (on your machine)
+page under 'Install APT.' APT is also available internally (or by VPN) via /eng/apt/Mac,
+but it's a good idea to have a copy of the app that doesn't depend on the Institute's /eng network mount.
+Then use the "training videos" link above and watch and follow along with (on your machine)
 the 'General' training videos. These tutorials will teach you how to use APT to prepare for a general
 proposal. For additional help, see the APT Overview presentation slides.
 
