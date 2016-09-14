@@ -18,8 +18,11 @@ The intention of this tutorial is to provide the IDL basics to understand how to
 .. note::
 
 <<<<<<< HEAD
+<<<<<<< HEAD
    This guide is maintained as a PDF document. :download:`Download it <pdf_guides/IDL-training-june2015.pdf>` and get started.
 =======
+=======
+>>>>>>> 80119e21acf8899f10fb3a501e075a2beb7aeefc
    This guide is maintained as a PDF document. :download:`Download it <downloads/pdf_guides/IDL-training-june2015.pdf>` and get started.
 
 >>>>>>> 80119e21acf8899f10fb3a501e075a2beb7aeefc
