@@ -61,7 +61,7 @@ riadocs:
 	# a second time to resolve refs
 	cd latexdocs/pyraf/; pdflatex training.tex
 	# Copy PyRAF training into pdf_guides
-	cp latexdocs/pyraf/training.pdf source/pdf_guides/pyraf_training.pdf
+	cp latexdocs/pyraf/training.pdf source/downloads/pdf_guides/pyraf_training.pdf
 	#
 	#
 	# Spectroscopy training LaTeX build
@@ -69,7 +69,7 @@ riadocs:
 	# a second time to resolve refs
 	cd latexdocs/spectroscopy/; pdflatex training.tex
 	# Copy Spectroscopy training into pdf_guides
-	cp latexdocs/spectroscopy/training.pdf source/pdf_guides/spectroscopy_training.pdf
+	cp latexdocs/spectroscopy/training.pdf source/downloads/pdf_guides/spectroscopy_training.pdf
 	#
 	#
 	# Execute the Sphinx build

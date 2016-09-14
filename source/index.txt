@@ -27,9 +27,10 @@ Training guides and exercises for new RIAs
 #. :doc:`pysynphot`
 #. :doc:`using_idl`
 #. :doc:`spectroscopy`
-#. :doc:`astrodrizzle`
+#. :doc:`drizzle`
 #. :doc:`photometry`
 #. :doc:`ir_detector_course`
+#. :doc:`up_the_ramp_calwf3`
 
 *Also, once you have finished the training exercises, you will be assigned a project that relates to your instrument team assignment.*
 
@@ -44,6 +45,22 @@ Supplemental training guides and exercises
 #. :doc:`jwst_read_modes`
 #. :doc:`jwst_reference_output`
 #. :doc:`jwst_telescopes_project`
+
+************************
+Instrument pocket guides
+************************
+
+**Hubble**:
+`ACS <http://www.stsci.edu/hst/acs/documents/InformationBrochure_AAS2010.pdf>`_ |
+`COS <http://www.stsci.edu/hst/cos/documents/COS_brochure_2012_05.pdf>`_ |
+`STIS <http://www.stsci.edu/hst/stis/documents/stis_brochure_jan2010.pdf>`_ |
+`WFC3 <http://www.stsci.edu/hst/wfc3/documents/handouts/wfc3_brochure_200801.pdf>`_
+
+**JWST**:
+`NIRCam <http://www.stsci.edu/jwst/instruments/nircam/docarchive/NIRCam-pocket-guide.pdf>`_ |
+`NIRISS <http://www.stsci.edu/jwst/instruments/niriss/docarchive/NIRISS-pocket-guide.pdf>`_ |
+`MIRI <http://www.stsci.edu/jwst/instruments/miri/docarchive/miri-pocket-guide.pdf>`_ |
+`NIRSpec <https://jwst.stsci.edu/files/live/sites/jwst/files/home/instrumentation/nirspec/technical%20documents/NIRSpec_pocketguide.pdf>`_
 
 *********************
 Reference information
@@ -67,9 +84,10 @@ Reference information
    pysynphot
    using_idl
    spectroscopy
-   astrodrizzle
+   drizzle
    photometry
    ir_detector_course
+   up_the_ramp_calwf3
    jwst_intro
    jwst_training
    jwst_read_modes
