@@ -11,10 +11,14 @@ This module is meant as an introduction to APT and ETC. It is a surface- level g
 for becoming familiar with basic processes and language. For more details or help,
 please see the remaining APT training materials (linked below) not discussed here.
 
+.. admonition:: Note
+    :class: note
+
+    JWST APT and ETC training material is coming soon
+
 --------------
 
 .. toctree::
     :maxdepth: 2
 
     hst_apt_etc
-    jwst_apt_etc
