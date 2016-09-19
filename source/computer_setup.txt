@@ -35,6 +35,13 @@ Adding a printer
 
 Choose a printer near your office from `this list of printers <http://www.stsci.edu/institute/itsd/hardware/printers/printerlocs/printerlocations>`_. There are `instructions for printer setup <http://www.stsci.edu/institute/itsd/hardware/printers>`_ for different operating systems. The one you want is "Adding a Printer in Mac OS X".
 
+Disable autocorrect (optional)
+==============================
+
+Since Mac OS X 10.10, smartphone-style autocorrect is standard in text fields throughout the OS. This is perhaps more useful in theory than in practice, especially when typing a lot of jargon that is not in the OS dictionary.
+
+To disable it, go to the Apple menu at the top left of your screen and open System Preferences. Choose "Keyboard", then the "Text" tab within that pane, and uncheck "Correct spelling automatically". Close System Preferences, and the annoyance should be resolved.
+
 Verify network mounts
 ======================
 
