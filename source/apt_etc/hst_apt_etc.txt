@@ -87,11 +87,13 @@ It also generates handy plots for understanding the instrument's expected perfor
 
     Find your instrument's ETC and submit 3 (default plus two different submissions)
     different forms with different parameters.
-    Return to your trainer with the following::
+    Return to your trainer with the following:
 
         Start with the default values. What do you get?
+
         Parameters used (with the fields) for each submission
         Results page for each submission
+        
         Any plots that are generated
 
         OPTIONAL: Note any warnings that you may get. Try to figure out why you got them
