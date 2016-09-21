@@ -61,3 +61,5 @@ Summer 2016 hires
 * Myles McKay
 * Jules Fowler
 * Martha Boyer
+* Nicholas Indriolo
+* Marc Rafelski
