@@ -60,7 +60,10 @@ Summer 2016 hires
 * Andrea Bellini
 * Myles McKay
 * Jules Fowler
-
-Fall 2016 hires
-===============
 * Tony Sohn
+* Kevin Stevenson
+* Tea Temim
+* Ben Sargent
+* Martha Boyer
+* Nicholas Indriolo
+* Marc Rafelski
