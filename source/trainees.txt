@@ -60,5 +60,6 @@ Summer 2016 hires
 * Andrea Bellini
 * Myles McKay
 * Jules Fowler
+* Martha Boyer
 * Nicholas Indriolo
 * Marc Rafelski
