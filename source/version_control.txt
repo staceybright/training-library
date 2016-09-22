@@ -69,7 +69,9 @@ You may have heard some of these terms bandied around. For clarity's sake, here'
 
  * **git** -- A command-line tool to manage versions of files. (Free and open-source)
  * **GitHub** -- A service to share and collaborate on repositories using ``git``. (Commercial, with exceptions for nonprofits)
- * **GitLab** (Grit) -- Software similar to GitHub, but running internally at STScI (http://grit.stsci.edu/). Used by some instrument teams. (Free community edition, commercial version available)
+ * **GitLab** (Grit) -- Software similar to GitHub for use internally. (Free community edition, commercial version available)
+ * **grit** -- Internal-only collaboration platform running on GitLab software, uses AD login credentials. https://grit.stsci.edu/
+ * **gitar** -- Identical to grit, but is safe for ITAR material. https://gitar.stsci.edu/
 
 We use GitHub to collaborate on these training documents. In the next section, you will set up a user account and key to let your computer talk to GitHub.
 
@@ -91,6 +93,16 @@ At this point, you will need to ask your trainer for access to the repository we
    :class: note
 
    Send your trainer the username for your GitHub account. They will give you access to the ``stsci-riab/riatraining`` repository, which we use in the next section.
+   
+Once you have access, there is one quick thing you may want to do. GitHub will email users with commit access (what you just received) any time there's activity on the GitHub repository's issues or pull requests. That's probably not what you want, unless you're involved in training the next round of hires!
+
+.. admonition:: Exercise
+   :class: note
+
+   Set your status on the https://github.com/stsci-riab/riatraining repository to **Not watching**, using the button in the upper right area of the GitHub web interface.
+
+   .. image:: figures/version_control/github_unwatch.png
+   
 
 Cloning the training document repository
 ========================================
@@ -263,24 +275,36 @@ At the bottom of the page, you'll see the changes you're asking to pull in. Ensu
 
    Color-coded view of the changes in the pull request
 
-.. warning::
+Give your pull request a brief title and description, then click "Create pull request." This takes you to a page where you and collaborators can review the changes and comment on them. If there's a big green checkmark saying the pull request is okay to merge, you can skip ahead to :ref:`merge_pull_request`. Otherwise, read on to learn what git does when two people edit the exact same line of a file.
 
-   If you see a message saying that the branches cannot be automatically merged, you need to "pull in upstream changes". All that means is that someone else edited the same thing as you, and you need to incorporate their changes in your pull request.
+Dealing with merge conflicts
+----------------------------
 
-   To do this, go to your repository in the terminal and execute ``git pull`` and ``git merge master``. You will see a message about which files have conflicts. Open them in your editor, look for the ``<<<<<<`` and ``>>>>>>`` markers, and combine the changes in a way that makes sense (e.g. include your name *and* that of another trainee that just added theirs).
+If you see a message saying that the branches cannot be automatically merged, you need to "pull in upstream changes". All that means is that someone else edited the same thing as you, and you need to incorporate their changes in your pull request.
 
-   Add, commit, push to your branch, and your pull request should gain the green "Able to merge" icon!
+To do this, go to your repository in the terminal and execute ``git pull`` and ``git merge master``. You will see a message about which files have conflicts. Open them in your editor, look for the ``<<<<<<`` and ``>>>>>>`` markers, and combine the changes in a way that makes sense (e.g. include your name *and* that of another trainee that just added theirs).
 
-Give your pull request a brief title and description, then click "Create pull request." Tell your trainer for this section, and they will merge it in if it all looks good!
+Add, commit, push to your branch, and your pull request should gain the green "Able to merge" icon!
 
-This concludes the version control training, but there's one more thing you may want to do. Now that you have access to the ``stsci-riab/riatraining`` repository, you will be emailed about changes and issues. That's probably not what you want, unless you're involved in training the next round of hires!
+The same thing, written out step by step starting from a terminal with your new branch checked out, would look like::
 
-.. admonition:: Exercise
-   :class: note
+   git pull
+   git merge master
+   # - look at the list of conflicting files from the 'git merge master' output
+   # - edit the conflicting file (trainees.txt) to remove
+   #   "<<<<", "===", and ">>>>" while preserving what you want to keep
+   # - save the files
+   git add source/trainees.txt
+   git commit
+   git push origin yourname_trainee
 
-   Set your status on the https://github.com/stsci-riab/riatraining repository to **Not watching**, using the button in the upper right area of the GitHub web interface.
+.. _merge_pull_request:
 
-   .. image:: figures/version_control/github_unwatch.png
+Merging your changes
+--------------------
+
+Send the trainer for this section a link to your pull request, and they will merge it in if it all looks good! Merging pull requests is done with a big green "merge" button on the GitHub website. (Even if the system will let you, it's considered good etiquette not to merge your own pull request.)
+
 
 
 .. rubric:: Footnotes
