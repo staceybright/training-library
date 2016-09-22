@@ -69,7 +69,7 @@ You may have heard some of these terms bandied around. For clarity's sake, here'
 
  * **git** -- A command-line tool to manage versions of files. (Free and open-source)
  * **GitHub** -- A service to share and collaborate on repositories using ``git``. (Commercial, with exceptions for nonprofits)
- * **GitLab** (Grit) -- Software similar to GitHub for use internally. (Free community edition, commercial version available)
+ * **GitLab** -- Software similar to GitHub for use internally. (Free community edition, commercial version available)
  * **grit** -- Internal-only collaboration platform running on GitLab software, uses AD login credentials. https://grit.stsci.edu/
  * **gitar** -- Identical to grit, but is safe for ITAR material. https://gitar.stsci.edu/
 
