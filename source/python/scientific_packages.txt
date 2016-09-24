@@ -774,7 +774,7 @@ Much better.
 
 The ``rc()`` function sets values called "rcParams", which are basically defaults for various customizable things in matplotlib. If you do::
 
-   import matplotlib
+   from matplotlib import rc
    rc('image', origin='lower')
 
 in a cell at the beginning of your notebook it will act as if you had supplied ``origin='lower'`` in subsequent ``imshow()`` calls.
