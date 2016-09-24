@@ -94,38 +94,46 @@ Python packages and environments are managed with ``conda``, as described in :re
       $ python -V
       Python 2.7.11 :: Continuum Analytics, Inc.
 
+Using Python interactively
+--------------------------
 
-Interactive Python Environment
-------------------------------
+Not every piece of Python code you write must be saved in a file. When using Python for data analysis, it is common to try out snippets of code interactively, examine their results, and iterate until you get the code the way you want it.
 
-You will need to choose an interactive Python environment. There are three
-popular options.
+The most bare-bones way to use Python interactively is the **interactive interpreter** or **REPL** (Read-Evaluate-Print Loop). You start it by typing ``python`` in a terminal, which gives output like this::
 
-- **Python**
+   $ python
+   Python 3.5.1 |Continuum Analytics, Inc.| (default, Jun 15 2016, 16:14:02)
+   [GCC 4.2.1 Compatible Apple LLVM 4.2 (clang-425.0.28)] on darwin
+   Type "help", "copyright", "credits" or "license" for more information.
+   >>>
 
-  To start the Python interactive environment, just type ``python`` at
-  the prompt in your terminal.
+You can type any valid Python code at the ``>>>`` prompt. Exit with ``exit()``.
 
-\
+Heavy users of Python for interactive data analysis have come up with something better: **IPython**. It includes various niceties like syntax highlighting and some helpful `magic commands <http://ipython.readthedocs.io/en/stable/interactive/magics.html>`_.
 
-- **IPython**
+Start it from the terminal with the ``ipython`` command::
 
-  To use the IPython interactive environment, type ``ipython`` instead.
-  One advantage of IPython is that besides Python code, you are also
-  able to execute UNIX commands such as ``ls`` and ``cp`` without special syntax,
-  or any UNIX shell command by including a ``!`` prefix at the beginning of a line.
+   $ ipython
+   Python 3.5.1 |Continuum Analytics, Inc.| (default, Jun 15 2016, 16:14:02)
+   Type "copyright", "credits" or "license" for more information.
 
-\
+   IPython 4.2.0 -- An enhanced Interactive Python.
+   ?         -> Introduction and overview of IPython's features.
+   %quickref -> Quick reference.
+   help      -> Python's own help system.
+   object?   -> Details about 'object', use 'object??' for extra details.
 
-- **IPython Notebook** (a.k.a. Jupyter Notebook)
+   In [1]:
 
-  The notebook is an interactive web based interface to the IPython environment described above. It combines code, text, math, plots, and rich media into a single document with all the functionality of IPython.
+You can type any valid Python code at the ``In [#]`` prompt. One advantage of IPython is that besides Python code, you are also able to execute UNIX commands such as ``ls`` and ``cp`` without special syntax, or any UNIX shell command by including a ``!`` prefix at the beginning of a line. Exit with ``exit()``.
 
-  IPython Notebook can be started in the terminal with the command ``ipython notebook``. It will open a web browser window with the notebook interface.
+The developers and users of IPython eventually came up with another interface, based on the successful Mathematica notebook concept. The IPython Notebook offers most of the same conveniences as IPython in the terminal, but additionally enable storing notes, outputs, and plots in a single file. The IPython Notebook was renamed to be the **Jupyter Notebook** in 2014.
 
-  After it starts, choose the button for a new Python 2 notebook, and click on the "Untitled" heading to rename it. Both the code you write and any output generated will be saved when you click the save button.
+Start it from the terminal with the ``jupyter notebook`` command. A process will open your web browser and point it to http://localhost:8888/, where a local web interface to the Jupyter Notebook is running.
 
-To exit either Python or IPython, type 'exit()'. To close the notebook, ensure you've saved your work, then :kbd:`Ctrl-C` in the terminal window to interrupt it and "y" to confirm you want to quit.
+Click on the "New" button above and to the right of the file listing, and choose a "Python 3" notebook to create. You then type your code in "cells", which can be multiple lines long. To execute a cell, use :kbd:`Shift-Enter`.
+
+To close the notebook, first ensure you've saved your work. (From the "File" menu, choose "Save and checkpoint" and then "Close and halt".) Next, stop the web interface by typing :kbd:`Ctrl-C` in the terminal window to interrupt it and "y" to confirm you want to quit.
 
 .. note::
 
@@ -133,13 +141,11 @@ To exit either Python or IPython, type 'exit()'. To close the notebook, ensure y
 
 .. note::
 
-   Exercises will appear in blue boxes like this one. You should perform them in the interactive interpreter, unless otherwise stated.
+   Exercises will appear in blue boxes like this one. Open the Jupyter Notebook in a folder where you will keep your training solutions, and make a new notebook file for your exercise solutions. Save it when you are done, and submit the ``.ipynb`` file to the person conducting the training. (Some later exercises ask you to make script files, but most exercises can be completed in the Notebook.)
 
-   If you prefer to use the IPython notebook (which we recommend!), perform your exercises in the notebook and save it when you are done. Submit the ``.ipynb`` file to your trainer when you finish.
-
-   For command line IPython or the ``python`` interactive interpreter, you should copy your input and the interpreter's output to a text file. At the end of the training, submit the text file with your exercise solutions to your trainer.
+   Sometimes, it can be helpful to have an IPython session open as well for experimentation and trying out examples in the text. (That saves you from having to clean up experimentation cells in your notebook when you're done.)
 
 
 .. rubric:: Footnotes
 
-.. [#pythontutorial] An extensive Python tutorial is available from the Python developers themselves: https://docs.python.org/2/tutorial/introduction.html. (For Python 3, the updated tutorial is at https://docs.python.org/3/tutorial/introduction.html.)
+.. [#pythontutorial] An extensive Python tutorial is available from the Python developers themselves: https://docs.python.org/3/tutorial/introduction.html.

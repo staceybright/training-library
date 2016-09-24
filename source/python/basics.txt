@@ -43,7 +43,7 @@ You can explicitly convert a variable from one type to another using the "short 
 
 .. warning::
 
-   One "gotcha", corrected in Python 3, is that dividing two integers will discard the fractional part.
+   If writing code that has to target Python versions below 3.0, be aware that dividing two integers will discard the fractional part.
 
       >>> 5 / 2 == 2.5
       False
@@ -57,7 +57,7 @@ You can explicitly convert a variable from one type to another using the "short 
       >>> float(7) / 3
       2.3333333333333335
 
-   In the (unlikely?) event that you want the integer division behavior, use the ``//`` operator to ensure the meaning of your code does not change when run on newer versions of Python. ::
+   In the (unlikely?) event that you want the integer division behavior, use the ``//`` operator to ensure the meaning of your code does not change when run on current versions of Python. ::
 
       >>> 7 // 3
       2
