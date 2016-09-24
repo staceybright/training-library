@@ -15,21 +15,18 @@ available through importing modules (Example: the datetime module).
 Numeric types
 -------------
 
-There are four distinct numeric types in Python:
+There are three distinct numeric types in Python:
 
-- plain integers, or "ints"
-- long integers, or "longs" (specified with an ``L`` suffix, or created automatically)
+- integers, or "ints" (which can grow arbitrarily large, unlike C ints or the NumPy integers we'll see later)
 - floating-point numbers, or "floats" (which have ``double`` precision, in C terms)
 - complex numbers, or "complexes", which are composed a floating point real and imaginary part (e.g. ``1.2 + 3.4j``)
 
 The Python interpreter will try to do "the right thing" when you operate on numeric values with different types.
 
-If a sum exceeds the maximum value a "plain integer" can represent, the result will be a long integer. When doing arithmetic with integers and floating point numbers, the result will always be floating point. When complex numbers are added to the mix, the result will always be complex. ::
+When doing arithmetic with integers and floating point numbers, the result will always be floating point. When complex numbers are added to the mix, the result will always be complex. ::
 
    >>> 1 + 1
    2
-   >>> 1 + 1L
-   2L
    >>> 1 + 1.0
    2.0
    >>> 1 + (1.0 + 0.0j)
@@ -39,8 +36,6 @@ You can explicitly convert a variable from one type to another using the "short 
 
    >>> int(3.5)  # note: this doesn't "round up"!
    3
-   >>> long(3)
-   3L
    >>> float(3)
    3.0
    >>> complex(3)
