@@ -431,7 +431,7 @@ the data. ::
    >>> hdr['FLSHCORR'] = 'PERFORM'
    >>> hdr['FLSHCORR']
    >>> print(data[-2:])  # Print the last two lines.
-   >>> data[-1:][0][0] = 0
+   >>> data[-1][0] = 0   # Modify the first pixel in the last row
    >>> print(data[-1])
 
 Notice that ``hdr`` behaves like a dictionary. We did some bad
