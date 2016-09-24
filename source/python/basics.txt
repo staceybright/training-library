@@ -876,7 +876,7 @@ There is also a "standard library" of Python **modules** that can be **imported*
 
 Python's standard library extends the basics of what is built-in to the language with functionality ranging from communicating with web servers to manipulating files and directories through the operating system. It's highly likely that you'll find something you need already exists in the standard library, though there are a few notable exceptions.
 
-NumPy, SciPy, matplotlib, and AstroPy are essential for the kind of data analysis we do with Python, and they are **not** part of the standard library. In practice, every computer at the Institute will have them set up already through Ureka, so you can assume they will be available.
+NumPy, SciPy, matplotlib, and AstroPy are essential for the kind of data analysis we do with Python, and they are **not** part of the standard library. In practice, pretty much everyone at the Institute will have them installed (if they followed the :ref:`conda setup instructions <installing-conda>`), so you can assume they will be available.
 
 To bring in functionality from a module (standard or otherwise), the "import statement" is used. The import statement can be written any of three ways, with slightly different effects. ::
 
