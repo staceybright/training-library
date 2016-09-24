@@ -732,6 +732,31 @@ This is extremely convenient for displaying data from FITS files. In this exampl
 
 Here ``vmin`` and ``vmax`` specify the image values for which to set the minimum and maximum of the colormap. A colormap assigns a color to pixels in the plot based on the values in the array. The simplest color map is grayscale (higher array values mean brighter pixels), but other color map choices can be useful to show patterns in the data.
 
+Woah, wait, something's not quite right there. Take a close look at the Y axis labels. They seem to count *up* towards the lower edge, while X labels count *up* towards the right edge. What the hey?
+
+As with so many things, the answer is "historical reasons". The earliest graphical displays were just fancier character displays, and (English) characters are written from top left to bottom right. Somehow, this carried over into computer graphics code, and from thence to matplotlib. Fortunately, it's configurable.
+
+Supply the ``origin='lower'`` argument, like so::
+
+   plt.imshow(data, vmin=3, vmax=20, origin='lower')
+
+.. figure:: figures/fits_image_origin_lower.png
+   :width: 50%
+   :align: center
+
+Much better.
+
+The ``rc()`` function sets values called "rcParams", which are basically defaults for various customizable things in matplotlib. If you do::
+
+   import matplotlib
+   rc('image', origin='lower')
+
+in a cell at the beginning of your notebook it will act as if you had supplied ``origin='lower'`` in subsequent ``imshow()`` calls.
+
+.. warning::
+
+   There's another facility for setting defaults, the ``matplotlibrc`` file, but it comes with some caveats. Most importantly, if you send your code or notebook to another person who has not installed your matplotlibrc file, your plots may show up wrong or even be misinterpreted. (The ``image.origin`` parameter, in particular, has the potential to confuse!) See `the matplotlibrc docs <http://matplotlib.org/users/customizing.html#the-matplotlibrc-file>`_ for details.
+
 Let's compare some different types of colormaps for this image. ::
 
    # set up figure; specify size in inches
