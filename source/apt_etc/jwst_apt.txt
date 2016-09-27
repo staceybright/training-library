@@ -1,0 +1,135 @@
+********
+JWST APT
+********
+
+| *Authors: Deepashri Thatte & Bill Blair*
+|
+|
+
+Astronomer's Proposal Tool
+============================
+
+The Astronomer’s Proposal Tool (APT) is an integrated software package for constructing, validating and submitting
+proposals for the Hubble Space Telescope and will also be used for James Webb Space Telescope proposals. Observers
+have the responsibility of creating and submitting proposals that are accurate, feasible and schedulable. The
+computer software used to schedule and execute observations can interpret the proposal information only if it
+is in the proper format. APT helps with this process by providing a  collection of tools with graphical user interface
+(GUI) for the user. APT was first released in 2002. 
+
+
+HST-APT has two modes that correspond with the two-phase proposal process. Focus of Phase I is to make the case for
+the science to be done. Phase II (details of observations) is only done for accepted proposals. The JWST branch has
+been developed to be consistent with the single-phase (single-stream) proposal approach. For JWST once an instrument
+and observing mode (or template) are selected, the specific parameters that need to be specified for that mode are
+presented to the user. Users specify exposure parameters that provide the necessary S/N for their science requirements.
+Using a set of rules and assumed overhead times APT calculates the total science exposure time being requested in the
+observations.
+
+
+APT team has created extensive documentation that can be accessed from the links below. The HST and JWST versions of APT
+are very similar. The differences between the two are are highlighted in `JWST What’s New page <http://apst.stsci.edu/apt/external/help/jwst_documentation/Getting-Started.html>`__ and
+described in the APT overview slides. 
+
+--------------------------------------------
+
+
+**Helpful Links:**
+
+- `APT Webpage <http://www.stsci.edu/hst/proposing/apt>`__
+
+- `APT training materials <http://www.stsci.edu/hst/proposing/apt/using_apt>`_
+
+- `APT Overview Slides <https://confluence.stsci.edu/download/attachments/66356683/APT_Overview_july2016.pptx?version=1&modificationDate=1468868047000&api=v2>`__
+
+- `Getting Started for JWST <http://apst.stsci.edu/apt/external/help/jwst_documentation/Getting-Started.html>`__
+
+- `JWST What's New <http://apst.stsci.edu/apt/external/help/jwst_whats_new.html>`__
+
+- `Proposal Instructions for JWST <http://www.stsci.edu/institute/org/oed/JWST_PPS_Design/proposal_instructions_html>`__
+
+- `ALADIN Tool <http://aladin.u-strasbg.fr>`__
+
+--------------------------------------------
+
+**How to get the new version: (From periodic APT release notes by Karla Peterson)**
+
+
+You can install APT on your home machine just as the outside users do (go to
+http://apt.stsci.edu). But at work, APT is conveniently preinstalled on our
+Mac and Linux clusters. You do not have to do anything but bring it up again.
+No reinstalling with every release. Sorry Windows users - we have to install.
+
+Mac users can open the /eng/apt/Mac folder in the Finder and launch APT from
+there. Alternatively, you can create an alias to the folder or app right on
+your desk top.
+
+Linux users can just cd to /eng/apt/Linux64 to find APT preinstalled for them
+and can create aliases as well.
+
+--------------------------------------------
+
+
+.. admonition:: Exercise
+   :class: note
+
+   Create a dummy JWST NIRISS AMI (Aperture Masking Interferometry) proposal based on the parameters listed below:
+   (Some information in this program is adapted from SODRM program 3051)
+
+   Please refer to the APT overview slides for additional help.
+
+        **Instrument:** NIRISS
+
+        **Template:** NIRISS Aperture Masking Interferometry 
+
+        **Title:** Long wavelength follow-up of planets found by ground-based observatories.
+
+        **Abstract and Proposal Description:** Enter any text (you would enter appropriate text for the real program)
+
+        **Scientific Category:** Extrasolar Planets and Planet Formation
+
+        **Science Keywords:** Exoplanet Host Stars, Extra-Solar Planets, Giant Planets
+
+        **Targets:** HD 231776, HD 229863, HD 215904 (Use 'Fixed Target Resolver' and SIMBAD to add these targets), REFSTAR1 (Use 'New Fixed Target' and enter coordinates  297.8281093,10.30381967).
+
+		   
+        **Acq Fluxes** (micro-Jy): 1.47 e6, 1.52e6,  2.34e5, 1e7
+
+        **Subarray:** SUB80
+
+        **Readout Pattern:** NISRAPID
+
+        **Observations:** Create four observations for these targets as shown in the table below.
+
+
+
+        =======    =======  ====  =======  ====  =======  ====  =======  ====
+        Targets    HD231776       HD229863       HD215904       REFSTAR1
+        -------    -------------  -------------  -------------  -------------
+        Filters    Observation 1  Observation 2  Observation 3  Observation 4
+        -------    -------------  -------------  -------------  -------------
+              .    NGROUPS  NINT  NGROUPS  NINT  NGROUPS  NINT  NGROUPS  NINT
+        =======    =======  ====  =======  ====  =======  ====  =======  ====
+        F480M      47       55    45       55    298      54    27       54
+        F430M      34       66    33       66    218      64    19       67
+        F380M      18       83    18       80    118      79    10       85
+        =======    =======  ====  =======  ====  =======  ====  =======  ====
+
+
+    After creating the above observations create a Special Requirement to group observations 1, 2, 3 and 4 and choose options Non-interruptible, Exclusive  Use of Instrument.
+    Find the meaning of Non-interruptible and Exclusive use of instrument special requirements using JWST Proposal Instructions.
+    Create Target Confirmation Charts, run Visit Planner, view one of the observations with Aladin, look at the PDF Preview. Do you think the
+    observations are schedulable? Are the coordinates correct for all targets?
+
+    Send the aptx file to your trainer.
+
+
+.. warning::
+
+    [1]Do not click the submission button.
+    [2]This program uses dummy values for exposure parameters, some of the target coordinates and acquisition fluxes. Do not use these values for a real proposal.
+
+
+
+
+
+
