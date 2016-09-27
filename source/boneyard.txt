@@ -1,0 +1,18 @@
+##############
+Retired topics
+##############
+
+These topics have been retired because there is nobody to actively maintain them, or they are no longer recommended. They're still stored here for posterity.
+
+.. toctree::
+   :maxdepth: 2
+
+   pyraf
+   using_idl
+   ir_detector_course
+   up_the_ramp_calwf3
+   jwst_intro
+   jwst_training
+   jwst_read_modes
+   jwst_reference_output
+   jwst_telescopes_project

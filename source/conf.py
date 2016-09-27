@@ -48,7 +48,7 @@ source_suffix = '.txt'
 master_doc = 'index'
 
 # General information about the project.
-project = u'RIA Training'
+project = u'Technical Staff Training'
 copyright = (u'{}, AURA / Space Telescope Science Institute. These documents '
     'are designed for internal use only, and are not an official AURA/STScI '
     'publication. Information may be out of date, irrelevant, or '

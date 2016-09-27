@@ -347,7 +347,7 @@ Cisco Jabber should already be installed on your machine. (Contact ITSD if it's 
 
 ITSD maintains a guide with more information here: http://www.stsci.edu/institute/itsd/phone/jabber
 
-.. confluence-intro::
+.. _confluence-intro:
 
 Log in to the Confluence wiki
 ==============================
