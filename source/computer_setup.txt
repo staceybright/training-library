@@ -560,7 +560,7 @@ Depending on when you start at STScI, this could go one of two ways:
 
 2. If your start date at STScI falls **falls in between** the schedules on Confluence, you will work through materials in this library on your own with the help of trainers who can answer questions. When the next large cohort of new hires starts, you will join them for the lectures you haven't attended yet. (There is no need to repeat material you already worked through.)
 
-The other documents in this library explain useful tools with exercises interspered with the text. Save the results of your exercises as you go; you will submit them to your trainer once you've completed the section. If you get stuck, you can always ask your trainer for help!
+The other documents in this library explain useful tools with exercises interspersed with the text. Save the results of your exercises as you go; you will submit them to your trainer once you've completed the section. If you get stuck, you can always ask your trainer for help!
 
 Wondering who the trainers are for a particular section? Check the schedule page you bookmarked in the :ref:`brief section on Confluence <confluence-intro>`. Other recent hires have also done this training, so they're a good resource for quick questions if your trainer is busy.
 
