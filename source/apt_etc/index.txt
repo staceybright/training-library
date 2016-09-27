@@ -21,3 +21,4 @@ please see the remaining APT training materials (linked below) not discussed her
     :maxdepth: 2
 
     hst_apt_etc
+    jwst_apt
