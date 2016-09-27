@@ -2,7 +2,7 @@
 Editing These Documents
 ***********************
 
-These documents live in a ``git`` repository, making it easy for you to modify them and share your changes with other RIAs. GitHub is the service we use to coordinate sharing and reviewing the changes. You can find the web interface to the repository at https://github.com/stsci-riab/riatraining.
+These documents live in a ``git`` repository, making it easy for you to modify them and share your changes with others. GitHub is the service we use to coordinate sharing and reviewing the changes. You can find the web interface to the repository at https://github.com/stsci-riab/riatraining.
 
 .. warning::
 
@@ -83,7 +83,7 @@ At the bottom of the page, you'll see the changes you're asking to pull in. Ensu
 
    Add, commit, push to your branch, and your pull request should gain the green "Able to merge" icon!
 
-Give your pull request a brief title (e.g. "Updates to Computer Setup to fix X, Y, and Z") and description, then click "Create pull request." Ask one of the other RIA trainers to review your changes, and if it all looks good, they can merge it in.
+Give your pull request a brief title (e.g. "Updates to Computer Setup to fix X, Y, and Z") and description, then click "Create pull request." Ask one of the trainers to review your changes, and if it all looks good, they can merge it in.
 
 If they recommend revisions, simply follow the above instructions to edit, add, commit, and push again. New commits on the same branch will automatically show up in your pull request.
 

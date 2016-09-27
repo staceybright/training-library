@@ -162,7 +162,7 @@ It's not uncommon for a script to evolve over time, growing new functionality th
 Preventing "import side-effects"
 --------------------------------
 
-You may hear software engineers or more experienced programmers talk about "import side-effects" with great scorn. Fortunately, you can tell them you learned about those in your RIA Python training. Here's the deal:
+You may hear software engineers or more experienced programmers talk about "import side-effects" with great scorn. Fortunately, you can tell them you learned about those in your Python training. Here's the deal:
 
 When you run ``import verbose_math`` (or any of the related family of import statements, such as ``from verbose_math import square_root``), Python actually opens up ``verbose_math.py`` and runs through it line-by-line, executing each line as it goes. This is why modules should really only **define** things, and not contain program logic outside of ``def`` or ``class`` blocks (or defining constants with ``=``). Such code will be executed when the module is imported, potentially messing up what you're trying to do.
 

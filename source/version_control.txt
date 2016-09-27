@@ -58,7 +58,7 @@ Enough conceptual stuff, let's do something more hands-on.
 Getting set up to collaborate
 =============================
 
-Since most RIAs come across ``git`` in the context of joining an existing project, we will structure these exercises around making an edit to the ``git`` repository that stores these training documents.
+Since most Institute staff come across ``git`` in the context of joining an existing project, we will structure these exercises around making an edit to the ``git`` repository that stores these training documents.
 
 There's a :doc:`trainees` document listing everyone who completes the training [#wellkinda]_. To complete this training, you will add your name to the list, and learn some essential ``git`` commands in the process.
 

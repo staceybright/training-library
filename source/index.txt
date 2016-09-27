@@ -1,16 +1,16 @@
-#####################################
-The RIA Training Library
-#####################################
+####################################
+The Technical Staff Training Library
+####################################
 
 .. warning::
 
-   **To non-RIA readers:** These documents are designed for internal use only, and are not an official AURA/STScI publication. Information may be out of date, irrelevant, or contradict published documentation. Use at your own risk!
+   **To non-STScI readers:** These documents are designed for internal use only, and are not an official AURA/STScI publication. Information may be out of date, irrelevant, or contradict published documentation. Use at your own risk!
 
 New Research & Instrument Analysts at STScI work with a variety of tools, depending on their instrument team and research assignments. Nevertheless, some things are so generally useful to RIAs that we've drawn up training documents to bring you up to speed on anything you haven't used before.
 
-*******************************************
-Training guides and exercises for new RIAs
-*******************************************
+*****************************
+Training guides and exercises
+*****************************
 
 .. tip::
 
