@@ -28,7 +28,7 @@ To ensure cross-system compatibility, there's a particular syntax that will find
 
    #!/usr/bin/env python
 
-That ensures that the 'current' version of Python, whether it be the default one bundled with your Mac or the Ureka SSB{x, dev, rel} version, is called to run your script. Update ``hello_world.py`` accordingly, and you should see this when you run it::
+That ensures that the 'current' version of Python, whether it be the default one bundled with your Mac or the one in your current conda environment, is called to run your script. Update ``hello_world.py`` accordingly, and you should see this when you run it::
 
    $ ./hello_world.py
    Hello, world!

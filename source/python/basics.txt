@@ -15,21 +15,18 @@ available through importing modules (Example: the datetime module).
 Numeric types
 -------------
 
-There are four distinct numeric types in Python:
+There are three distinct numeric types in Python:
 
-- plain integers, or "ints"
-- long integers, or "longs" (specified with an ``L`` suffix, or created automatically)
+- integers, or "ints" (which can grow arbitrarily large, unlike C ints or the NumPy integers we'll see later)
 - floating-point numbers, or "floats" (which have ``double`` precision, in C terms)
 - complex numbers, or "complexes", which are composed a floating point real and imaginary part (e.g. ``1.2 + 3.4j``)
 
 The Python interpreter will try to do "the right thing" when you operate on numeric values with different types.
 
-If a sum exceeds the maximum value a "plain integer" can represent, the result will be a long integer. When doing arithmetic with integers and floating point numbers, the result will always be floating point. When complex numbers are added to the mix, the result will always be complex. ::
+When doing arithmetic with integers and floating point numbers, the result will always be floating point. When complex numbers are added to the mix, the result will always be complex. ::
 
    >>> 1 + 1
    2
-   >>> 1 + 1L
-   2L
    >>> 1 + 1.0
    2.0
    >>> 1 + (1.0 + 0.0j)
@@ -39,8 +36,6 @@ You can explicitly convert a variable from one type to another using the "short 
 
    >>> int(3.5)  # note: this doesn't "round up"!
    3
-   >>> long(3)
-   3L
    >>> float(3)
    3.0
    >>> complex(3)
@@ -48,7 +43,7 @@ You can explicitly convert a variable from one type to another using the "short 
 
 .. warning::
 
-   One "gotcha", corrected in Python 3, is that dividing two integers will discard the fractional part.
+   If writing code that has to target Python versions below 3.0, be aware that dividing two integers will discard the fractional part.
 
       >>> 5 / 2 == 2.5
       False
@@ -62,7 +57,7 @@ You can explicitly convert a variable from one type to another using the "short 
       >>> float(7) / 3
       2.3333333333333335
 
-   In the (unlikely?) event that you want the integer division behavior, use the ``//`` operator to ensure the meaning of your code does not change when run on newer versions of Python. ::
+   In the (unlikely?) event that you want the integer division behavior, use the ``//`` operator to ensure the meaning of your code does not change when run on current versions of Python. ::
 
       >>> 7 // 3
       2
@@ -876,7 +871,7 @@ There is also a "standard library" of Python **modules** that can be **imported*
 
 Python's standard library extends the basics of what is built-in to the language with functionality ranging from communicating with web servers to manipulating files and directories through the operating system. It's highly likely that you'll find something you need already exists in the standard library, though there are a few notable exceptions.
 
-NumPy, SciPy, matplotlib, and AstroPy are essential for the kind of data analysis we do with Python, and they are **not** part of the standard library. In practice, every computer at the Institute will have them set up already through Ureka, so you can assume they will be available.
+NumPy, SciPy, matplotlib, and AstroPy are essential for the kind of data analysis we do with Python, and they are **not** part of the standard library. In practice, pretty much everyone at the Institute will have them installed (if they followed the :ref:`conda setup instructions <installing-conda>`), so you can assume they will be available.
 
 To bring in functionality from a module (standard or otherwise), the "import statement" is used. The import statement can be written any of three ways, with slightly different effects. ::
 

@@ -431,7 +431,7 @@ the data. ::
    >>> hdr['FLSHCORR'] = 'PERFORM'
    >>> hdr['FLSHCORR']
    >>> print(data[-2:])  # Print the last two lines.
-   >>> data[-1:][0][0] = 0
+   >>> data[-1][0] = 0   # Modify the first pixel in the last row
    >>> print(data[-1])
 
 Notice that ``hdr`` behaves like a dictionary. We did some bad
@@ -539,16 +539,22 @@ Examples::
 Plotting with PyPlot
 ====================
 
-matplotlib.pyplot
------------------
+`Matplotlib <http://matplotlib.org>`_ and its `PyPlot <http://matplotlib.org/users/pyplot_tutorial.html>`_ environment is a versatile Python plotting library capable of producing publication quality figures in a variety of hard-copy formats such as EPS, PDF, and PNG. With PyPlot you can generate scatter and line plots, histograms, power spectra, bar charts, error-charts, pie charts, and many more with just a few lines of code. For the power user, you have full control of line styles, font properties, axes properties, and so on.
 
-Matplotlib and its PyPlot environment is a versatile Python plotting
-library capable of producing publication quality figures in a variety of
-hard-copy formats such as EPS, PDF, and PNG. With PyPlot you can
-generate scatter and line plots, histograms, power spectra, bar charts,
-error-charts, pie charts, and many more with just a few lines of code.
-For the power user, you have full control of line styles, font
-properties, axes properties, and so on.
+In the Jupyter Notebook, use the magic command ``%matplotlib inline`` before importing pyplot, like this::
+
+   %matplotlib inline
+   import matplotlib.pyplot as plt
+
+That will ensure your figures appear embedded in your notebook, rather than external windows. (However, they will not be interactively zoomable.)
+
+If you have a new Apple laptop, an additional bit of magic will make your plots much easier on the eyes::
+
+   %config InlineBackend.figure_format='retina'
+
+.. tip::
+
+   Building up a complex figure in matplotlib typically involves a few calls to different plotting functions. In the Jupyter Notebook, when showing inline plots is enabled, all the plotting code for a particular figure must be in the same "cell". That is, you should put multiple lines of plotting code in one cell, and then :kbd:`Shift-Enter` will generate and display the figure.
 
 .. _python_simple_scatter:
 
@@ -558,31 +564,15 @@ Basic Plotting
 The most-used plotting function is ``plt.plot()``, which generally takes 
 two arguments ``x`` and ``y``::
 
-   import numpy as np
-   from matplotlib import pyplot as plt
-   
    x = np.arange(0, 10, 0.5)
    y = x**2
    
    plt.plot(x,y)
-   plt.show()
 
 .. figure:: figures/basicplot.png
    :width: 50%
    :align: center
    :alt: Our first plot.
-
-.. tip::
-
-   Are you doing the exercises in an IPython notebook? You can have your plots show up in the same window, in line with your code. Use ``%matplotlib inline`` before importing pyplot, like this::
-
-      %matplotlib inline
-      import matplotlib.pyplot as plt
-
-   If you have a retina display, an additional bit of magic will make your plots much easier on the eyes::
-
-      %config InlineBackend.figure_format='retina'
-
 
 You can call ``plt.plot()`` multiple times and the data will show up on the same plot::
 
@@ -697,6 +687,42 @@ For the filled contour plot, we need to convert the data to a format ``contourf`
    # adjust plot spacing
    fig.tight_layout()
 
+Here's the code explained above all in one place, suitable for the Jupyter Notebook or pasting into an interactive interpreter::
+
+   # make figure with two rows and two columns of subplots, specify size in inches
+   fig, [(ax0, ax1), (ax2, ax3)] = plt.subplots(2, 2, figsize=(8, 8))
+   data_x = np.random.randn(5000)
+   data_y = np.random.randn(5000)
+
+   ax0.scatter(data_x, data_y)
+   ax0.set_title('plt.scatter()')
+
+   # set number of bins for histograms
+   nbins = 20
+
+   # histogram of 1D dataset
+   ax1.hist(data_x, bins=nbins)
+   ax1.set_title('plt.hist()')
+
+   # histogram of 2D dataset
+   # we assign hist2d output to variables for use in the next plot
+   H, xedges, yedges, patches = ax2.hist2d(data_x, data_y, cmap='Blues', bins=(nbins, nbins))
+   ax2.set_title('plt.hist2d()')
+
+   x_bin_sizes = (xedges[1:] - xedges[:-1]).reshape((1, nbins))
+   y_bin_sizes = (yedges[1:] - yedges[:-1]).reshape((nbins, 1))
+   pdf = (H * (x_bin_sizes * y_bin_sizes))
+   X, Y = 0.5 * (xedges[1:] + xedges[:-1]), 0.5 * (yedges[1:] + yedges[:-1])
+   Z = pdf.T
+
+   # plot filled contour map
+   cs = ax3.contourf(X, Y, Z, origin="lower", cmap='Blues')
+   ax3.set_title('plt.contourf()')
+
+   # adjust plot spacing
+   fig.tight_layout()
+   fig.savefig('subplot_examples.png')
+
 .. figure:: figures/subplot_examples.png
    :width: 75%
    :align: center
@@ -731,6 +757,31 @@ This is extremely convenient for displaying data from FITS files. In this exampl
    :align: center
 
 Here ``vmin`` and ``vmax`` specify the image values for which to set the minimum and maximum of the colormap. A colormap assigns a color to pixels in the plot based on the values in the array. The simplest color map is grayscale (higher array values mean brighter pixels), but other color map choices can be useful to show patterns in the data.
+
+Woah, wait, something's not quite right there. Take a close look at the Y axis labels. They seem to count *up* towards the lower edge, while X labels count *up* towards the right edge. What the hey?
+
+As with so many things, the answer is "historical reasons". The earliest graphical displays were just fancier character displays, and (English) characters are written from top left to bottom right. Somehow, this carried over into computer graphics code, and from thence to matplotlib. Fortunately, it's configurable.
+
+Supply the ``origin='lower'`` argument, like so::
+
+   plt.imshow(data, vmin=3, vmax=20, origin='lower')
+
+.. figure:: figures/fits_image_origin_lower.png
+   :width: 50%
+   :align: center
+
+Much better.
+
+The ``rc()`` function sets values called "rcParams", which are basically defaults for various customizable things in matplotlib. If you do::
+
+   from matplotlib import rc
+   rc('image', origin='lower')
+
+in a cell at the beginning of your notebook it will act as if you had supplied ``origin='lower'`` in subsequent ``imshow()`` calls.
+
+.. warning::
+
+   There's another facility for setting defaults, the ``matplotlibrc`` file, but it comes with some caveats. Most importantly, if you send your code or notebook to another person who has not installed your matplotlibrc file, your plots may show up wrong or even be misinterpreted. (The ``image.origin`` parameter, in particular, has the potential to confuse!) See `the matplotlibrc docs <http://matplotlib.org/users/customizing.html#the-matplotlibrc-file>`_ for details.
 
 Let's compare some different types of colormaps for this image. ::
 
