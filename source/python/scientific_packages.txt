@@ -687,7 +687,7 @@ For the filled contour plot, we need to convert the data to a format ``contourf`
    # adjust plot spacing
    fig.tight_layout()
 
-Here's the code explained above above all in one place, suitable for the Jupyter Notebook or pasting into an interactive interpreter::
+Here's the code explained above all in one place, suitable for the Jupyter Notebook or pasting into an interactive interpreter::
 
    # make figure with two rows and two columns of subplots, specify size in inches
    fig, [(ax0, ax1), (ax2, ax3)] = plt.subplots(2, 2, figsize=(8, 8))

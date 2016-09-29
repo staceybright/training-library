@@ -125,9 +125,9 @@ Start it from the terminal with the ``ipython`` command::
 
    In [1]:
 
-You can type any valid Python code at the ``In [#]`` prompt. One advantage of IPython is that besides Python code, you are also able to execute UNIX commands such as ``ls`` and ``cp`` without special syntax, or any UNIX shell command by including a ``!`` prefix at the beginning of a line. Exit with ``exit()``.
+You can type any valid Python code at the ``In [#]`` prompt. One advantage of IPython is that besides Python code, you are also able to execute UNIX commands such as ``ls`` and ``cp`` without special syntax, or any UNIX shell command by including a ``!`` prefix at the beginning of a line. Exit with ``exit`` or ``exit()``.
 
-The developers and users of IPython eventually came up with another interface, based on the successful Mathematica notebook concept. The IPython Notebook offers most of the same conveniences as IPython in the terminal, but additionally enable storing notes, outputs, and plots in a single file. The IPython Notebook was renamed to be the **Jupyter Notebook** in 2014.
+The developers and users of IPython eventually came up with another interface, based on the successful Mathematica notebook concept. The IPython Notebook offers most of the same conveniences as IPython in the terminal, but additionally enables storing notes, outputs, and plots in a single file. The IPython Notebook was renamed to become the **Jupyter Notebook** in 2014.
 
 Start it from the terminal with the ``jupyter notebook`` command. A process will open your web browser and point it to http://localhost:8888/, where a local web interface to the Jupyter Notebook is running.
 
