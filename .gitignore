@@ -29,9 +29,8 @@ latexdocs/spectroscopy/training.pdf
 
 # Intermediate copies from Sphinx build
 # (we're tracking the source files, so we don't need the PDFs)
-source/pdf_guides/pyraf_training.pdf
-source/pdf_guides/python_training.pdf
-source/pdf_guides/spectroscopy_training.pdf
+source/downloads/pdf_guides/pyraf_training.pdf
+source/downloads/pdf_guides/spectroscopy_training.pdf
 
 # Jupyter notebook checkpoints
 # (Only track the actual notebooks)
