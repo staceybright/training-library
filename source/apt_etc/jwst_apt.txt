@@ -39,7 +39,7 @@ described in the APT overview slides.
 
 - `APT training materials <http://www.stsci.edu/hst/proposing/apt/using_apt>`_
 
-- `APT Overview Slides <https://confluence.stsci.edu/download/attachments/66356683/APT_Overview_july2016.pptx?version=1&modificationDate=1468868047000&api=v2>`__
+- `APT Overview Slides <https://confluence.stsci.edu/display/INSTraining/New+hire+training?preview=/66357177/69961952/APT_Overview_INS_v3_Sep2016.pptx>`__
 
 - `Getting Started for JWST <http://apst.stsci.edu/apt/external/help/jwst_documentation/Getting-Started.html>`__
 
