@@ -27,7 +27,7 @@ observations.
 
 
 APT team has created extensive documentation that can be accessed from the links below. The HST and JWST versions of APT
-are very similar. The differences between the two are are highlighted in `JWST What’s New page <http://apst.stsci.edu/apt/external/help/jwst_documentation/Getting-Started.html>`__ and
+are very similar. The differences between the two are highlighted in `JWST What’s New page <http://apst.stsci.edu/apt/external/help/jwst_documentation/Getting-Started.html>`__ and
 described in the APT overview slides. 
 
 --------------------------------------------
