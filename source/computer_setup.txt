@@ -4,7 +4,7 @@ Setting Up Your Computer
 
 *Authors: Keira Brooks, Joseph Long, Matthew Bourque, Sara Ogaz, Dave Borncamp, Amber Armstrong, Michael Dulude, and Tiffany Borders*
 
-The Institute provides you a computer when you are hired, and sets it up with a core set of software. (Some new hires get a loaner computer while a new machine is ordered and prepared for them.) They'll buy you a new one every three years, if you're good. Even though ITSD (Information Technology Services Department) is responsible for installing important things like Office and antivirus software for all, it's up to each RIA to set their system up the way they want. For science-related uses, most new Institute machines are Macs, so this guide will assume that's what you have.
+The Institute provides you a computer when you are hired, and sets it up with a core set of software. (Some new hires get a loaner computer while a new machine is ordered and prepared for them.) They'll buy you a new one every three years, if you're good. Even though ITSD (Information Technology Services Department) is responsible for installing important things like Office and antivirus software for all, it's up to each new member of staff to set their system up the way they want. For science-related uses, most new Institute machines are Macs, so this guide will assume that's what you have.
 
 If you experience issues, you should ask your trainer or ITSD. The ITSD service desk can be reached at extension 4400 or via email at support@stsci.edu.
 
@@ -108,7 +108,7 @@ If you have a directory full of files whose permissions you want to change, use 
 Setting up a text editor
 ========================
 
-Some new RIAs have a preference for a text editor for programming like ``vim`` or ``emacs``. For everyone else, TextWrangler is installed on your Institute machine already, and is a good starting point.
+Some people have a preference for a text editor for programming like ``vim`` or ``emacs``. For everyone else, TextWrangler is installed on your Institute machine already, and is a good starting point.
 
 .. figure:: figures/computer_setup/textwrangler_icon.png
    :alt: The TextWrangler icon.
@@ -216,8 +216,8 @@ Configure the git version control tool
 
 We will use git in the :doc:`version_control` module later on, but let's take the opportunity now to tell it your name and email address. These will be used by git to identify who changed particular versions of the code. Run the commands below, updating them with your own name and work email address::
 
-   git config --global user.name "Name of RIA"
-   git config --global user.email "nria@stsci.edu"
+   git config --global user.name "Name of Hire"
+   git config --global user.email "nhire@stsci.edu"
 
 It's also a good idea to tell it about your preferred text editor (here we use ``edit``, as an alias to TextWrangler), which git will sometimes open for you when it wants you to describe your changes. ::
 
@@ -347,14 +347,18 @@ Cisco Jabber should already be installed on your machine. (Contact ITSD if it's 
 
 ITSD maintains a guide with more information here: http://www.stsci.edu/institute/itsd/phone/jabber
 
+.. _confluence-intro:
+
 Log in to the Confluence wiki
 ==============================
 
-Log in to the Confluence wiki at https://confluence.stsci.edu/ using your AD credentials. Some important links to bookmark are:
+Log in to the Confluence wiki at https://confluence.stsci.edu/ using your AD credentials.
 
-* the `RIA branch wiki page <https://confluence.stsci.edu/pages/viewpage.action?pageId=32015091>`_ 
-* the `RIA training hub <https://confluence.stsci.edu/display/INSRIA/RIA+training>`_
-* the training page for your hiring group (click "RIA training" in the sidebar to expand the list)
+Visit the `New hire training <https://confluence.stsci.edu/display/INSTraining/New+hire+training>`_ page, and select the appropriate schedule from the links there (e.g. "New hire training for technical staff (September 2016)" if that is the most recent).
+
+On that page, there is a "Watch" link in the upper right corner below the blue title bar. Click that so that you will receive an email if there are last-minute updates to the schedule (for example, if someone has to reschedule their lecture).
+
+If you are in the Research and Instrument Analysis Branch, you should also bookmark the `RIA branch wiki page <https://confluence.stsci.edu/pages/viewpage.action?pageId=32015091>`_.
 
 Log in to a server
 ==================
@@ -547,16 +551,18 @@ To scroll above the terminal window boundaries, use screen's copy mode:
  3. Scroll down:        :kbd:`Ctrl-d`
  4. Exit copy mode:     :kbd:`]` or :kbd:`Esc`
 
-On to the training exercises!
-================================
+Continuing your training
+========================
 
-The next chapters explain useful tools with exercises interspered with the text. Save the results of your exercises as you go; you will submit them to your trainer once you've completed the section. If you get stuck, you can always ask your trainer for help!
+Depending on when you start at STScI, this could go one of two ways:
 
-Wondering who your trainer is for a particular section? Check the `Confluence wiki page <https://confluence.stsci.edu/display/INSRIA/RIA+training>`_ for your training group (find your training group in the sidebar, after expanding the "RIA training" category). Other current RIAs have also done this training, so they're a good resource for quick questions if your trainer is busy.
+1. If your start date at STScI lines up with the schedule in the most current "New hire training for technical staff" document on Confluence, that means you'll be following the schedule there. Every few months, the Instruments (INS) division is able to coordinate the start dates of a number of new hires such that training can take place in two weeks of lectures and workshops.
 
-Without further ado, it's time to learn about MAST retrievals (a.k.a. the Archive).
+2. If your start date at STScI falls **falls in between** the schedules on Confluence, you will work through materials in this library on your own with the help of trainers who can answer questions. When the next large cohort of new hires starts, you will join them for the lectures you haven't attended yet. (There is no need to repeat material you already worked through.)
 
-(If you're following along on paper, visit https://confluence.stsci.edu/display/INSRIA/RIA+training and choose the link for MAST archive training.)
+The other documents in this library explain useful tools with exercises interspersed with the text. Save the results of your exercises as you go; you will submit them to your trainer once you've completed the section. If you get stuck, you can always ask your trainer for help!
+
+Wondering who the trainers are for a particular section? Check the schedule page you bookmarked in the :ref:`brief section on Confluence <confluence-intro>`. Other recent hires have also done this training, so they're a good resource for quick questions if your trainer is busy.
 
 Additional resources
 =====================

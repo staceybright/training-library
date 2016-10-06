@@ -461,8 +461,4 @@ Conclusion
 Thank you for completing the Archives Training! Please send your trainer
 the various materials that were asked of you to provide (i.e. answers to
 questions, the tab-separated query results file, and the source list),
-preferably in an email. Also, please 'comment' on the RIA Training
-Confluence page for your cohort
-stating that you have completed this training, as well as any feelings
-you have towards this training exercise in particular or any questions
-you may have..
+preferably in an email.

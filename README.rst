@@ -1,12 +1,12 @@
-#####################################
-Welcome to the RIA Training Library!
-#####################################
+####################################
+The Technical Staff Training Library
+####################################
 
 .. warning::
 
    These documents are designed for internal use only, and are not an official AURA/STScI publication. Information may be out of date, irrelevant, or contradict published documentation. **Use at your own risk.**
 
-This repository contains the source code for training documents for new Research & Instrument Analysts at the Space Telescope Science Institute.
+This repository contains the source code for training documents for new Research & Instrument Analysts and other technical staff at the Space Telescope Science Institute.
 
 If you are looking for a place to **read** the documents, you can find the latest internally published version at http://stsci-riab.github.io/riatraining/.
 
