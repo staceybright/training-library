@@ -2,7 +2,7 @@
 Past Trainees
 *************
 
-The final training exercise is to add your name to the list below of those who have completed the training.
+The final :doc:`version_control` training exercise is to add your name to the list below of those who have completed the training.
 
 Summer 2014 hires
 =================
@@ -60,6 +60,10 @@ Summer 2016 hires
 * Andrea Bellini
 * Myles McKay
 * Jules Fowler
+
+Fall 2016 hires
+===============
+
 * Alaina Henry
 * Jenna Ryon
 * Samantha Hoffmann
