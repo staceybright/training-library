@@ -14,7 +14,7 @@ Change directories to the new ``WFC3_tutorial`` folder you just created::
 
 Download the notebook named :download:`up_the_ramp_calwf3.ipynb <downloads/notebooks/up_the_ramp_calwf3.ipynb>` and save it in the ``WFC3_tutorial`` folder with the following command::
 
-   curl -L https://stsci-riab.github.io/riatraining/_downloads/up_the_ramp_calwf3.ipynb
+   curl -O https://stsci-riab.github.io/riatraining/_downloads/up_the_ramp_calwf3.ipynb
 
 Start the notebook server::
 
