@@ -238,6 +238,18 @@ delivered.
 
    The selections needed to retrieve data over SFTP.
 
+.. admonition:: Additional, Useful SFTP Option
+    :class: note
+
+    SFTP to a personal computer is not recommended any more, but in
+    any case it's faster to deliver to a server. For example, if you enter
+    plhstins1.stsci.edu as a hostname and /user/myusername as the directory,
+    it'll deliver to Central Store and be available from your laptop/desktop for
+    copying to local storage with the usual file management tools.
+
+    It's faster to go from Archive to compute server than from Archive to personal
+    machine because the archive and compute servers are connected by speedy ethernet.
+
 You should now be familiar with searching for, and retrieving HST data
 through MAST. Good job! Next, we will explore a few additional ways to
 search for and retrieve HST data.
