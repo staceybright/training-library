@@ -78,6 +78,7 @@ Fall 2016 hires
 
 Spring 2017 hires
 =================
+* Bethan James
 * Joleen Carlberg
 * Bryan Holler
 * Stephanie LaMassa
