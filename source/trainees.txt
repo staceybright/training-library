@@ -76,3 +76,8 @@ Fall 2016 hires
 * Nicholas Indriolo
 * Marc Rafelski
 * Joleen Carlberg
+
+Spring 2017 hires
+===============
+
+* Greg Sloan
