@@ -1,0 +1,138 @@
+********************************
+Working with Spectra: Exercises
+********************************
+
+HST Spectral Data
+==================
+For HST spectral data, there are three types of files; raw, intermediate, and products.  Raw data has undergone no processing besides generic conversion from spacecraft data to FITS, and include \_rawtag, \_rawaccum, and \_rawacq files for COS and \_raw, \_tag, and \_wav files for STIS.  Intermediate products are files produced  by each instrument's calibration pipeline on the way to extracting a spectrum. There are many of these for both COS and STIS, but main ones include \_corrtag files for COS, \_crj and \_sfl for STIS, and \_flt files for both. Products for spectrographs are fully calibrated, extracted spectra and typically end in \_x1d.fits. See the Instrument Data Handbooks for a full list of all data file types.
+
+.. admonition:: Exercise 0
+   :class: note
+
+   Retrieve two datasets,  lbgu17qnq and o8k401010 from the archive. Be sure to retrieve both uncalibrated and calibrated products. One of the calibrated products for both COS and STIS are the \_x1d files. We will examine both \_x1d files using Python (feel free to use your language of choice). You will need to repeat each of these steps for both COS and STIS files.
+
+.. warning::
+   To get lbgu17qnq you will need to search for the association name "lbgu17010" instead of the dataset name, and download all the files it returns (sorry, COS is weird).
+
+---------------------------
+
+First, look at the primary headers and identify what type of detectors and observation modes each of these exposures used for what targets. ::
+
+   python> from astropy.io import fits
+   python> fits.getheader(file_name, 0)
+   python> detector = fits.getval(file_name, "detector", 0)
+   python> obsmode = fits.getval(file_name, "obsmode", 0)
+   python> target = fits.getval(file_name, "targname", 0)
+
+To determine if there are differences in the data, you must open the file. Look closely at the file dimensions- the FUV detector of COS is split into two segments, A and B. ::
+
+  python> hdulist = fits.open(file_name)
+  python> hdulist.info()
+
+The science data can be easily analyzed by looking in the extension containing the science information. You can determine the columns in the data extension and their formats and units. ::
+
+  python> data = hdulist[sci_ext].data
+  python> data.names
+  python> data.columns
+
+---------------------------
+
+.. admonition:: Exercise 1
+   :class: note
+
+   For each instrument: What detector was used? What observation mode was used? What target was observed? List the names of the columns in each file.
+
+.. admonition:: Exercise 2
+   :class: note
+
+    Open the STIS raw file and both COS rawtag files (there is one for each segment). What is different between the format of the two files? Why are these differences present? (Hint--look again at the OBSMODE header keywords. What does it mean to be taken in TIME-TAG rather than ACCUM?)}
+
+Calibration
+===========
+
+The calibration pipelines for COS and STIS, CalCOS and CalSTIS respectively, are available in python. (They can also be found in the stsdas.hst\_calib package of IRAF/PyRAF, and CalSTIS can be run from the unix shell, if you are so inclined). The calibration pipelines themselves have very limited optional arguments, and very few will effect the data. Most of the ways to change how data is calibrated is accessed by editing header keywords in the raw files.
+
+All of the calibration files (reference files) used by the calibration pipelines are located on central storage, and the pipelines themselves look to environment variables to find them. If you have not already done so, you will need to set environment variables: oref for STIS, and lref for COS (see the example below). If you haven't already set these in your shell file, it would be benificial to do so now. You will notice, as you begin your work, that STIS datasets always begin with the letter `o', and COS always begin with the letter `l'.  Each instrument has a letter assigned to it, and that is where the reference file directories get their names. ::
+
+> set oref '/grp/hst/cdbs/oref/'
+> set lref '/grp/hst/cdbs/lref/'
+
+You have already received calibrated products from the archive, but let's calibrate some data ourselves by using the pipelines.  It is always a good idea to write to screen the trailer file that a pipeline creates- they are step-by-step records of how the data were calibrated and will record any errors that occurred. The steps below are done in python, but you are welcome to calibrate data within IRAF/PyRAF. In IRAF/PyRAF you can get information on the different parameters for both CalSTIS and CalCOS by typing ``help calcos" or ``help calstis". You will need to specify a different output directory to make sure that the pipelines will not overwrite the data you retrieved from MAST.
+
+The pipelines can be imported and run in python as shown: ::
+
+  python> from stistools import calstis
+  python> calstis.calstis(file_name, verbose=True, outroot="output_dir/")
+
+  python> import calcos
+  python> calcos.calcos(file_name, outdir="output_dir/")
+
+
+Recall looking at the column names before--you can access the data for each of those columns by indexing the science data extension and the column name. Don't forget that COS will contain 2 rows instead of 1 like STIS. If you want to combine both of those pesky COS segments into one array, use ravel(). ::
+
+  python> your_cos_wavel = data["wavelength"]
+  python> your_cos_flux = data["flux"]
+
+  python> flat_wavel = your_cos_wavel.ravel()
+  python> flat_flux = your_cos_flux.ravel()
+
+Now, let's plot some data. If you are plotting STIS data, you will need to plot wavel[0] and flux[0]. If you did not flatten your COS data, you will need to plot each segment by calling wavel[0]/flux[0] for the B segment and wavel[1]/flux[1] for the A segment. If you did flatten your COS data, simply plot wavel and flux. Let's add some labels and a title to spruce up our plots too. ::
+
+  python> from matplotlib import pyplot
+  python> pyplot.plot(wavel, flux)
+  python> pyplot.xlabel("Wavelength [$\textbackslash AA$]")
+  python> pyplot.ylabel("Flux")
+  python> pyplot.title("COS MARK1044")
+
+Isn't that a nice looking plot!
+
+.. admonition:: Exercise 3
+   :class: note
+
+   Using the STIS and COS raw files as input, calibrate the data yourself by using CalSTIS and CalCOS respectively. Examine the wavelength and flux levels in the products you produced compared to the products you retrieved from the archive. Are they identical? On separate plots, plot the STIS and COS spectra from the x1d files.
+
+
+.. admonition:: Exercise 4
+   :class: note
+
+   Say you have decided that the standard pipeline is not doing a good job of background subtracting the data.  Turn off the BACKCORR calibration switch in the primary (0th) extension header of the COS and STIS raw files and recalibrate.  You can change the switch by changing the BACKCORR keyword value from "PERFORM" to "OMIT" (Hint: There are many ways to do this, but if using python try using fits.setval). Produce a plot comparing the COS spectra with BACKCORR turned on and with it turned off. Produce the same plot for the STIS data. What, if anything, has changed?
+
+Smoothing/Convolving
+====================
+
+The COS data you have is at a much higher resolution than that of STIS.  We would like to directly compare the two datasets, so it would be great if they were on more even footing.
+
+.. admonition:: Exercise 5
+   :class: note
+
+   Smooth the COS data with a boxcar filter using your favorite convolution function.  Try different box sizes and see what size approximately matches the two spectra the best.  (Just approximate is fine, this is just for an introduction). It is best not to use a box size greater than 15, or signal is smoothed out along with noise. Below is one way to do this in python. Produce a plot of the smoothed COS spectrum.
+
+
+.. tip::
+   For exercise 5, try using the stsci.convolve package in python: ::
+
+       python> from stsci.convolve import boxcar
+       python> smooth_flux = boxcar(flux, (boxcar_size,) )
+
+Signal to Noise
+================
+
+The signal to noise ratio (S/N) of a dataset is an important statistic to be able to estimate.  If the S/N is too low to detect your feature of interest, then attempting to use your dataset is a waste of your time. The signal can be approximated with a low order polynomial fit to a continuum region where there are no absorption or emission lines, and the noise can be approximated as the standard deviation of the data - fit.  Some useful functions in Python are numpy.polyfit, numpy.poly1d, and numpy.std.
+
+.. admonition:: Exercise 6
+   :class: note
+
+   Determine the signal to noise of the continuum of both the COS and STIS spectra. Which dataset has the better signal to noise, COS or STIS? Does this number make sense with what your eye is seeing?
+
+Interpolation
+=============
+
+Directly comparing two spectra in wavelength space cannot be done, apart from visually, unless both datasets have the same wavelength scale.  Interpolating one spectrum onto another wavelength scale will allow you to do far more useful calculations such as dividing, subtracting, etc. Below is the syntax for using one linear interpolation algorithm from numpy, which gives you interpolated fluxes on the wavelength scale of wavel1.::
+
+  python> import numpy as np
+  python> flux2_interpolated = np.interp(wavel1, wavel2, flux2)
+
+.. admonition:: Exercise 7
+   :class: note
+
+   Perform a linear interpolation of the STIS dataset onto the wavelength scale of the COS dataset.  Then divide the two spectra by each other to see where the two differ. Produce a plot of the divided spectrum.
