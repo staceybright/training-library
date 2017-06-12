@@ -4,7 +4,7 @@ Basic Spectroscopy
 
 In this document, we have assumed very little knowledge of spectroscopy. If you are already familiar with the subject you can likely skip directly to the exercises, found in :doc:`exercises`. These generally do not require a particular programming language or operating system, so you are free to complete them in whichever language you choose.  The notable exceptions to this rule are the STScI calibration pipelines.  These are written in particular languages, and are most readily available through the Python and IRAF/PyRAF interface.
 
-Chapter 3, includes two "science-based" spectroscopy assignments. These assignments are intended for RIAs being assigned to the COS+STIS team, and should not be completed unless instructed.
+The :doc:`assignments` chapter, includes two "science-based" spectroscopy assignments. These assignments are intended as training projects for RIAs being assigned to the COS or STIS teams, and should not be completed unless instructed.
 
 Note that this is a draft document, and feedback is always appreciated.
 
@@ -13,8 +13,8 @@ Note that this is a draft document, and feedback is always appreciated.
 
    introduction
    exercises
-   assignments
    theory
+   assignments
 
 ---------------------------
 

@@ -11,51 +11,72 @@ Transition Probabilities
 -------------------------
 
 The Einstein coefficients are defined as the probabilities for spontaneous transitions (A for emission, and B for absorption). The inverse of these coefficients give the radiative lifetimes (e.g. 1/A is the time for a transition to spontaneously decay).
-	A_{ji} = \frac{8 \pi h B_{ij} g_i}{g_j \lambda^3} \\
 
-	B_{ij} = \frac{f_{ij} e^2 \lambda}{4 \epsilon h c m_e}
+.. math::
 
-where $f$ is the oscillator strength, and $g$ the statistical weight of states $i$ and $j$ respectively. These equations treat the transition as if it were a bound harmonic oscillator, and asks how efficient the transition is at absorbing energy. Often, the $g$ and $f$ values are tabulated together:
+   A_(ji) = \frac{8 \pi h B_{ij} g_i}{g_j \lambda^3}
 
-	g_i f_{ij} = A_{ji} g_j \lambda^2 \left(\frac{4 \epsilon c m_e}{8 \pi e^2}\right)
+.. math::
 
-The oscillator strength is a transition probability which can be experimentally or theoretically derived from Quantum Mechanics. Typical A values are $10^8$--$10^9$~s$^{-1}$ for permitted resonance transitions, $\sim 10^3$~s$^{-1}$ for semi-forbidden lines, and $\sim 10^{-3}$~s$^{-1}$ for forbidden lines. Thus, forbidden lines are usually seen only in diffuse environments where the time between collisions is longer than about 1000 seconds.
+	 B_{ij} = \frac{f_{ij} e^2 \lambda}{4 \epsilon h c m_e}
+
+where *f* is the oscillator strength, and *g* the statistical weight of states *i* and *j* respectively. These equations treat the transition as if it were a bound harmonic oscillator, and asks how efficient the transition is at absorbing energy. Often, the *g* and *f* values are tabulated together:
+
+.. math::
+
+   g_i f_{ij} = A_{ji} g_j \lambda^2 \left(\frac{4 \epsilon c m_e}{8 \pi e^2}\right)
+
+The oscillator strength is a transition probability which can be experimentally or theoretically derived from Quantum Mechanics. Typical A values are :math: {10^8 to 10^9 s^{-1}} for permitted resonance transitions, ~:math:{10^3 s^{-1}} for semi-forbidden lines, and ~:math:{10^{-3}s^{-1}} for forbidden lines. Thus, forbidden lines are usually seen only in diffuse environments where the time between collisions is longer than about 1000 seconds.
 
 Local Thermodynamic Equilibrium
 -------------------------------
 
-The distribution of atomic states and energies for LTE is given by statistical mechanics. The Boltzmann equilibrium provides the relative number of atoms in an excited state, $j$, compared with the ground state ($j=1$) at a given temperature, $T$:
+The distribution of atomic states and energies for LTE is given by statistical mechanics. The Boltzmann equilibrium provides the relative number of atoms in an excited state, *j*, compared with the ground state (*j=1*) at a given temperature, *T*:
 
-	\frac{N_j}{N_1} = \frac{g_j}{g_1} \exp\left(\frac{-\Delta E}{kT}\right)
+.. math::
 
-where $\Delta E$ is the energy difference between the ground and excited states, and $k$ is the Boltzmann constant ($k = 1.38 \times 10^{-16}$~erg~K$^{-1}$). The energies for hydrogen may be approximated by the empirical formula
+	 \frac{N_j}{N_1} = \frac{g_j}{g_1} \exp\left(\frac{-\Delta E}{kT}\right)
 
-	E_n = \frac{-h c R_H}{n^2} = -13.6{\textrm eV}\frac{1}{n^2}
+where *Delta E* is the energy difference between the ground and excited states, and *k* is the Boltzmann constant :math:{(k = 1.38 \times 10^(-16) erg K^(-1))}. The energies for hydrogen may be approximated by the empirical formula
+
+.. math::
+
+	E_n = (-h c R_H)/(n^2) = -13.6 eV 1/n^2
 
 
 The energies of atoms will follow a Maxwell-Boltzmann distribution, which can be expressed as a function of either temperature or velocities:
 
-	n(E) = \frac{2 N}{\pi^{1/2} (kT)^{3/2}} E^{1/2} \exp\left(\frac{-E}{kT} dE\right)
+.. math::
 
-which has a most probably energy $kT$, or a most probable velocity $v = \sqrt{(2kT/m)}$. However, LTE is not usually applicable to the interstellar medium (ISM), as low densities mean that a Boltzmann equilibrium is rarely achieved because collisions are too rare. In the ISM, therefore, radiative processes become important. The Maxwellian distribution is usually applicable to the ISM.
+   n(E) = (2 N)/(\pi^{1/2} (kT)^{3/2}) E^{1/2} exp((-E)/(kT) dE)
+
+which has a most probably energy *kT*, or a most probable velocity :math: {v = \sqrt{(2kT/m)}}. However, LTE is not usually applicable to the interstellar medium (ISM), as low densities mean that a Boltzmann equilibrium is rarely achieved because collisions are too rare. In the ISM, therefore, radiative processes become important. The Maxwellian distribution is usually applicable to the ISM.
 
 Measuring Absorption and Emission Lines
 ----------------------------------------
 
-Lines are often measured via their equivalent width, $W$, using the relationship:
+Lines are often measured via their equivalent width, *W*, using the relationship:
 
-	W = \int{\frac{I_0 - I_{\lambda} d\lambda}{I_0}}
+.. math::
 
-where $I_0$ is the continuum intensity and $I_{lambda}$ the intensity at the wavelength $\lambda$. Note that, using this definition, emission lines will have negative $W$ whilst absorption lines will have positive $W$. Equivalent width can most easily be thought of as the area which would be taken up by the line on a normalized spectrum ($I_0 = 1$). In the case of observed spectra there will be noise, which will in turn lead to a detection limit. The n$\sigma$ detection limit is
+   W = \int{\frac{I_0 - I_{\lambda} d\lambda}{I_0}}
+
+where :math:{I_0} is the continuum intensity and :math:{I_{\lambda}} the intensity at the wavelength :math:{\`lambda`}. Note that, using this definition, emission lines will have negative $W$ whilst absorption lines will have positive *W*. Equivalent width can most easily be thought of as the area which would be taken up by the line on a normalized spectrum (:math: I_0 = 1$). In the case of observed spectra there will be noise, which will in turn lead to a detection limit. The n*{\sigma} detection limit is
+
+.. math::
 
 	W_{\rm lim} = \frac{n \times d \times \sqrt{M}}{\rm SNR}
 
-where $d$ is the dispersion (pixel width in \AA), and $M$ the number of pixels across the line. In the case of unresolved lines, this can be approximated to
+where *d* is the dispersion (pixel width in Å), and *M* the number of pixels across the line. In the case of unresolved lines, this can be approximated to
+
+.. math::
 
 	W_{\rm lim} = \frac{n \times {\rm FWHM}}{\rm SNR}
 
 
 The width of a line is usually expressed in km/s as either the velocity dispersion ($\sigma$) or the FWHM. In the case of a Gaussian distribution the two quantities are related, with ${\rm FWHM} = 2\sqrt{2\ln2}\sigma = 2.355\sigma$. Widths are often expressed in terms of the Doppler width, $b$, caused by thermal and turbulent broadening, where:
+
+.. math::
 
 	b = \sqrt{2}\sigma = \frac{\rm FWHM}{2\sqrt{\ln2}}
 

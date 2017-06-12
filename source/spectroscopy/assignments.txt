@@ -2,8 +2,9 @@
 Extra Assignments
 ******************
 
-.. admonition:: Please do not perform the following assignments unless you are assigned to.
-   :class: note
+.. warning::
+
+   Please do not perform the following assignments unless you are assigned to or have a lot of free time.
 
 Spectroscopy of RECX-1
 =======================
@@ -15,9 +16,17 @@ Tools that may be useful for this include using ``splittag`` to separate the cor
  ::
 
    python> from costools import splittag
-   python> splittag.splittag("rootname_corrtag_a.fits", "output_filename", time_list = "0, 250, 500, 750, 1000")
-   or equivalently:
-   python> splittag.splittag("rootname_corrtag_a.fits", output_filename", starttime = 0., increment = 250., endtime = 1000."
+   python> splittag.splittag("rootname_corrtag_a.fits",
+                             "output_filename",
+                             time_list = "0, 250, 500, 750, 1000")
+
+ or equivalently: ::
+
+   python> splittag.splittag("rootname_corrtag_a.fits",
+	                           output_filename",
+	                           starttime = 0.,
+	                           increment = 250.,
+	                           endtime = 1000.")
 
 To finish the pipeline extraction, run the x1dcorr task:
 
@@ -26,8 +35,11 @@ To finish the pipeline extraction, run the x1dcorr task:
    python> from costools import x1dcorr
    python> import glob
    python> for corrtag_file in glob.glob("*output_filename_corrtag*"):
-   python> ... x1dcorr.x1dcorr(corrtag_file)}
+               x1dcorr.x1dcorr(corrtag_file)}
 
+.. warning::
+
+  The ``x1dcorr`` task does not work since the implementation of CalCOS 3.0. Instead, run CalCOS directly on your file: ``calcos.calcos(corrtag_file)`` .
 
 .. admonition:: Exercise
   :class: note
@@ -39,28 +51,44 @@ To finish the pipeline extraction, run the x1dcorr task:
 	5. Are all of the lines affected in the same way by the flare?
 
 .. tip::
-   Any Lyman-$\alpha$ or O~{\sc i} emission is geocoronal emission from the Earth's atmosphere and not intrinsic to RECX-1. also that the effects of the flare are visible in the star's emission lines rather than its continuum. \textbf{Additional help--}once you have split the data by an appropriate time interval to see the flare, overplotting wavelength vs. flux in the multiple x1d files might help to see any differences in the spectrum over time.
+   Any Lyman-:math:`{\alpha}` or O I emission is geocoronal emission from the Earth's atmosphere and not intrinsic to RECX-1.
 
-Chemical Abundances in AO~0235$+$164
+.. tip::
+   The effects of the flare are visible in the star's emission lines rather than its continuum.
+
+.. tip::
+   Once you have split the data by an appropriate time interval to see the flare, overplotting wavelength vs. flux in the multiple x1d files might help to see any differences in the spectrum over time.
+
+Chemical Abundances in AO 0235+164
 =====================================
 
-.. admonition:: Exercise
-  :class: note
-
-  1. Retrieve Program 7294 Visits 01 and 02. (bonus: if you're up to dealing with FOS, retrieve visit 01 of Program 6217 as well). In this case, retrieving the processed data should be sufficient.
-  2. There is a damped Lyman-$\alpha$ system (DLA) in this sightline. What is its redshift? What is the N(H I)?
-  3. What is the Mg II column density associated with the DLA? Use equation 4.26 as well as the ``splot`` task in pyraf. Are the Mg II lines likely saturated based off what a saturated line looks like in Figure 4.1? What redshift do you derive from the Mg II doublet? Is it significantly different from the redshift derived from H I? Which would you trust more, and why?
-  4. Zn II and Cr II are often used to derive metallicities and dust abundances for DLAs. Can you detect lines belonging to either? Hint: Zn II has rest wavelengths at 2026\AA and 2062\AA(blended) and Cr II has rest wavelengths at 2056\AA and 2066\AA. Calculate where the observed lines should fall using the redshift in question 1 or 2 of this exercise.
-  5. Are there any other metal lines you can detect with a high degree of confidence? By calculating the rest wavelengths and using the NIST spectral database or somewhere you can find element emission rest wavelengths and relative intensities, see what these lines likely correspond to. Remember that any airglow lines aren't intrensic to the target and therefore won't be redshifted. How metal-rich would you say this DLA is based on these atoms?
-
-.. figure:: figures/ex2_spectrum.pdf
-    :width: 80%
+.. figure:: figures/ex2_spectrum.png
+    :width: 100%
     :align: center
     :alt: example spectrum
 
-		An example spectrum of a different QSO UV spectrum with a different redshift. The Lyman Alpha and Magnesium II lines are labeled, which should help you find these lines in AO 0235+164’s spectrum 1.
+    **Figure 4.1**. An example spectrum of a different QSO UV spectrum with a different redshift. The Lyman Alpha and Magnesium II lines are labeled, which should help you find these lines in AO 0235+164’s spectrum 1.
+
+.. admonition:: Exercise
+   :class: note
+
+	 1. Retrieve Program 7294 Visits 01 and 02. (Bonus: if you're up to dealing with FOS, retrieve visit 01 of Program 6217 as well). In this case, retrieving the processed data should be sufficient.
+	 2. There is a damped Lyman-:math:`{\alpha}` system (DLA) in this sightline. What is its redshift? What is the N(H I)?
+	 3. What is the Mg II column density associated with the DLA?	Are the Mg II lines likely saturated based off what a saturated line looks like in Figure 3.1 (in the theory chapter)? What redshift do you derive from the Mg II doublet? Is it significantly different from the redshift derived from H I? Which would you trust more, and why?
+
+	 Use the ``splot`` in pyraf as well as the curve of growth equation:
+	 .. math::
+
+			W(`{\lambda}`) = ({pi}e^2{lambda_0}N{lambda_0}f) / (m_e c^2)
+
+	 4. Zn II and Cr II are often used to derive metallicities and dust abundances for DLAs. Can you detect lines belonging to either?
+	 5. Are there any other metal lines you can detect with a high degree of confidence? By calculating the rest wavelengths and using the NIST spectral database or somewhere you can find element emission rest wavelengths and relative intensities, see what these lines likely correspond to. Remember that any airglow lines aren't intrinsic to the target and therefore won't be redshifted. How metal-rich would you say this DLA is based on these atoms?
 
 .. tip::
-   Absorption line spectra of the UV bright z=2.4 QSO HE 1122-1649
-	 S. K√∂hler, A. de la Varga and D. Reimers
-   Hamburger Sternwarte, Gojenbergsweg 112, 21029 Hamburg, Germany
+   Hint: Zn II has rest wavelengths at 2026 Å and 2062 Å (blended) and Cr II has rest wavelengths at 2056 Å and 2066 Å. Calculate where the observed lines should fall using the redshift in question 1 or 2 of this exercise.
+
+
+
+Absorption line spectra of the UV bright z=2.4 QSO HE 1122-1649
+S. K√∂hler, A. de la Varga and D. Reimers
+Hamburger Sternwarte, Gojenbergsweg 112, 21029 Hamburg, Germany
