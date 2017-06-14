@@ -26,7 +26,7 @@ Tools that may be useful for this include using ``splittag`` to separate the cor
 	                           "output_filename",
 	                           starttime = 0.,
 	                           increment = 250.,
-	                           endtime = 1000.")
+	                           endtime = 1000.)
 
 To finish the pipeline extraction, run the x1dcorr task:
 
