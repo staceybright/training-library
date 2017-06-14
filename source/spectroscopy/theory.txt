@@ -12,165 +12,171 @@ Transition Probabilities
 
 The Einstein coefficients are defined as the probabilities for spontaneous transitions (A for emission, and B for absorption). The inverse of these coefficients give the radiative lifetimes (e.g. 1/A is the time for a transition to spontaneously decay).
 
-.. math::
+.. math:: A_{ji} = \frac{8 \pi h B_{ij} g_i}{g_j \lambda^3}
+  :label: eq1
 
-   A_(ji) = \frac{8 \pi h B_{ij} g_i}{g_j \lambda^3}
-
-.. math::
-
-	 B_{ij} = \frac{f_{ij} e^2 \lambda}{4 \epsilon h c m_e}
+.. math:: B_{ij} = \frac{f_{ij} e^2 \lambda}{4 \epsilon h c m_e}
+  :label: eq2
 
 where *f* is the oscillator strength, and *g* the statistical weight of states *i* and *j* respectively. These equations treat the transition as if it were a bound harmonic oscillator, and asks how efficient the transition is at absorbing energy. Often, the *g* and *f* values are tabulated together:
 
-.. math::
+.. math:: g_i f_{ij} = A_{ji} g_j \lambda^2 \left(\frac{4 \epsilon c m_e}{8 \pi e^2}\right)
+  :label: eq3
 
-   g_i f_{ij} = A_{ji} g_j \lambda^2 \left(\frac{4 \epsilon c m_e}{8 \pi e^2}\right)
-
-The oscillator strength is a transition probability which can be experimentally or theoretically derived from Quantum Mechanics. Typical A values are :math: {10^8 to 10^9 s^{-1}} for permitted resonance transitions, ~:math:{10^3 s^{-1}} for semi-forbidden lines, and ~:math:{10^{-3}s^{-1}} for forbidden lines. Thus, forbidden lines are usually seen only in diffuse environments where the time between collisions is longer than about 1000 seconds.
+The oscillator strength is a transition probability which can be experimentally or theoretically derived from Quantum Mechanics. Typical A values are :math:`10^8` to :math:`10^9 s^{-1}` for permitted resonance transitions, :math:`~10^3 s^{-1}` for semi-forbidden lines, and :math:`~10^{-3} s^{-1}` for forbidden lines. Thus, forbidden lines are usually seen only in diffuse environments where the time between collisions is longer than about 1000 seconds.
 
 Local Thermodynamic Equilibrium
 -------------------------------
 
 The distribution of atomic states and energies for LTE is given by statistical mechanics. The Boltzmann equilibrium provides the relative number of atoms in an excited state, *j*, compared with the ground state (*j=1*) at a given temperature, *T*:
 
-.. math::
+.. math:: \frac{N_j}{N_1} = \frac{g_j}{g_1} \exp\left(\frac{-\Delta E}{kT}\right)
+  :label: eq4
 
-	 \frac{N_j}{N_1} = \frac{g_j}{g_1} \exp\left(\frac{-\Delta E}{kT}\right)
+where *Delta E* is the energy difference between the ground and excited states, and *k* is the Boltzmann constant :math:`(k = 1.38 \times 10^{-16} erg K^{-1})`. The energies for hydrogen may be approximated by the empirical formula
 
-where *Delta E* is the energy difference between the ground and excited states, and *k* is the Boltzmann constant :math:{(k = 1.38 \times 10^(-16) erg K^(-1))}. The energies for hydrogen may be approximated by the empirical formula
-
-.. math::
-
-	E_n = (-h c R_H)/(n^2) = -13.6 eV 1/n^2
+.. math:: E_n = \frac{-h c R_H}{n^2} = -13.6 eV \frac{1}{n^2}
+  :label: eq5
 
 
 The energies of atoms will follow a Maxwell-Boltzmann distribution, which can be expressed as a function of either temperature or velocities:
 
-.. math::
+.. math:: n(E) = \frac{2 N}{\pi^{1/2} (kT)^{3/2}} E^{1/2} exp(\frac{-E}{kT} dE)
+  :label: eq6
 
-   n(E) = (2 N)/(\pi^{1/2} (kT)^{3/2}) E^{1/2} exp((-E)/(kT) dE)
-
-which has a most probably energy *kT*, or a most probable velocity :math: {v = \sqrt{(2kT/m)}}. However, LTE is not usually applicable to the interstellar medium (ISM), as low densities mean that a Boltzmann equilibrium is rarely achieved because collisions are too rare. In the ISM, therefore, radiative processes become important. The Maxwellian distribution is usually applicable to the ISM.
+which has a most probable energy *kT*, or a most probable velocity :math:`v = \sqrt{2kT/m}`. However, LTE is not usually applicable to the interstellar medium (ISM), as low densities mean that a Boltzmann equilibrium is rarely achieved because collisions are too rare. In the ISM, therefore, radiative processes become important. The Maxwellian distribution is usually applicable to the ISM.
 
 Measuring Absorption and Emission Lines
 ----------------------------------------
 
 Lines are often measured via their equivalent width, *W*, using the relationship:
 
-.. math::
+.. math:: W = \int{\frac{I_0 - I_{\lambda} d\lambda}{I_0}}
+  :label: eq7
 
-   W = \int{\frac{I_0 - I_{\lambda} d\lambda}{I_0}}
+where :math:`I_0` is the continuum intensity and :math:`I_{\lambda}` the intensity at the wavelength :math:`\lambda`. Note that, using this definition, emission lines will have negative *W* whilst absorption lines will have positive *W*. Equivalent width can most easily be thought of as the area which would be taken up by the line on a normalized spectrum (:math: `I_0 = 1`). In the case of observed spectra there will be noise, which will in turn lead to a detection limit. The n*{\sigma} detection limit is
 
-where :math:{I_0} is the continuum intensity and :math:{I_{\lambda}} the intensity at the wavelength :math:{\`lambda`}. Note that, using this definition, emission lines will have negative $W$ whilst absorption lines will have positive *W*. Equivalent width can most easily be thought of as the area which would be taken up by the line on a normalized spectrum (:math: I_0 = 1$). In the case of observed spectra there will be noise, which will in turn lead to a detection limit. The n*{\sigma} detection limit is
-
-.. math::
-
-	W_{\rm lim} = \frac{n \times d \times \sqrt{M}}{\rm SNR}
+.. math:: W_{\rm lim} = \frac{n \times d \times \sqrt{M}}{\rm SNR}
+  :label: eq8
 
 where *d* is the dispersion (pixel width in Å), and *M* the number of pixels across the line. In the case of unresolved lines, this can be approximated to
 
-.. math::
+.. math:: W_{\rm lim} = \frac{n \times {\rm FWHM}}{\rm SNR}
+  :label: eq9
 
-	W_{\rm lim} = \frac{n \times {\rm FWHM}}{\rm SNR}
 
+The width of a line is usually expressed in km/s as either the velocity dispersion (*sigma*) or the FWHM. In the case of a Gaussian distribution the two quantities are related, with :math:`FWHM = 2\sqrt{2ln(2)} \sigma = 2.355\sigma`. Widths are often expressed in terms of the Doppler width, $b$, caused by thermal and turbulent broadening, where:
 
-The width of a line is usually expressed in km/s as either the velocity dispersion ($\sigma$) or the FWHM. In the case of a Gaussian distribution the two quantities are related, with ${\rm FWHM} = 2\sqrt{2\ln2}\sigma = 2.355\sigma$. Widths are often expressed in terms of the Doppler width, $b$, caused by thermal and turbulent broadening, where:
+.. math:: b = \sqrt{2}\sigma = \frac{\rm FWHM}{2\sqrt{\ln2}}
+  :label: eq10
 
-.. math::
-
-	b = \sqrt{2}\sigma = \frac{\rm FWHM}{2\sqrt{\ln2}}
-
-For emission lines, the flux is often quoted instead of the equivalent width, either in units of $F_{\nu}$ (ergs s$^{-1}$ cm$^{-2}$ Hz$^{-1}$ (Jy)), or $F_{\lambda}$ (ergs s$^{-1}$ cm$^{-2}$ \AA$^{-1}$) where $F_{\lambda} = F_{\nu} c/\lambda^2$. Graphs may be plotted with $\lambda F_{\lambda}$, or total energy.
+For emission lines, the flux is often quoted instead of the equivalent width, either in units of :math:`F_{\nu}` (ergs :math:`s^{-1} cm^{-2} Hz^{-1} (Jy)`), or :math:`F_{\lambda}` (ergs :math:`s^{-1} cm^{-2} Å^{-1}`) where :math:`F_{\lambda} = \frac{F_{\nu} c}{\lambda^2}`. Graphs may be plotted with :math:`\lambda F_{\lambda}`, or total energy.
 
 The Voigt Profile
 ------------------
 
-Spectral lines are broadened by various processes, including pressure broadening (more important in stars), thermal and turbulent broadening, and natural broadening (which occurs due to Heisenberg's uncertainty principle $\Delta E \Delta t \geq \hbar$). Because any transition has a finite lifetime $\Delta t = 1/A_{ji}$, the natural width in terms of frequency is $\Delta \nu_{N} = A_{ji}/2\pi$. Often this natural frequency width is replaced by the damping constant $\Gamma = 2 \pi \Delta \nu_{N}$, which is connected to the radiative transfer probability: for a transition from the ground state, $\Gamma$ is the sum over the Einstein coefficients for spontaneous emission for levels up to the level in question. The absorption cross-section (measure of probability) for natural broadening can then be expressed as:
+Spectral lines are broadened by various processes, including pressure broadening (more important in stars), thermal and turbulent broadening, and natural broadening (which occurs due to Heisenberg's uncertainty principle-- :math:`\Delta E \Delta t \geq \hbar`). Because any transition has a finite lifetime :math:`\Delta t = 1/A_{ji}`, the natural width in terms of frequency is :math:`\Delta \nu_{N} = A_{ji}/2\pi`. Often this natural frequency width is replaced by the damping constant :math:`\Gamma = 2 \pi \Delta \nu_{N}`, which is connected to the radiative transfer probability: for a transition from the ground state, :math:`\Gamma` is the sum over the Einstein coefficients for spontaneous emission for levels up to the level in question. The absorption cross-section (measure of probability) for natural broadening can then be expressed as:
 
-	\sigma_L(\nu) = \left(\frac{\pi e^2}{m_e c}\right)f\frac{\Gamma/4 \pi^2}{(\nu - \nu_0)^2 + (\Gamma/4\pi)^2}
+.. math::	\sigma_L(\nu) = \left(\frac{\pi e^2}{m_e c}\right)f\frac{\Gamma/4 \pi^2}{(\nu - \nu_0)^2 + (\Gamma/4\pi)^2}
+  :label: eq11
 
 (ignoring the term for stimulated emission).
 
 Thermal and turbulent motions are combined into the Doppler width, which is assumed to follow a Gaussian distribution.
 
-	P(v) = \frac{1}{b \sqrt{\pi}}e^{-(v/b)^2}
+.. math::	P(v) = \frac{1}{b \sqrt{\pi}}e^{-(v/b)^2}
+  :label: eq12
 
-	b = \sqrt{b^2_{\rm thermal} + b^2_{\rm turbulent}} = \sqrt{\frac{2kT}{m} + b^2_{\rm turbulent}}
+.. math::	b = \sqrt{b^2_{\rm thermal} + b^2_{\rm turbulent}} = \sqrt{\frac{2kT}{m} + b^2_{\rm turbulent}}
+  :label: eq13
 
-If $b$ is dominated by thermal broadening, then this simplifies to $b = 12.8 {\rm km/s} \sqrt{T/m}$
+If *b* is dominated by thermal broadening, then this simplifies to :math:`b = 12.8(km/s) \sqrt{T/m}`
 
-Combining Equations 11 and 12 gives an absorption cross-section
+Combining Equations :eq:`eq11` and :eq:`eq12` gives an absorption cross-section
 
-	\sigma(\nu) = \left(\frac{\pi e^2}{m_e c}\right)f\frac{\Gamma}{4\pi^2}\int^{+\infty}_{-\infty}\frac{e^{-(v/b)^2}dv}{(\nu - \nu_0(1+v/c))^2 + (\Gamma/4\pi)^2}
+.. math:: \sigma(\nu) = \left(\frac{\pi e^2}{m_e c}\right)f\frac{\Gamma}{4\pi^2}\int^{+\infty}_{-\infty}\frac{e^{-(v/b)^2}dv}{(\nu - \nu_0(1+v/c))^2 + (\Gamma/4\pi)^2}
+  :label: eq14
 
-This expression can (fortunately) be simplified using the Voigt function, $H(a,u)$
+This expression can (fortunately) be simplified using the Voigt function, *H(a,u)*
 
-	H(a,u) = \frac{a}{\pi}\int^{+\infty}_{-\infty}\frac{e^{-y^2}dy}{(u-y)^2 + a^2}
+.. math::	H(a,u) = \frac{a}{\pi}\int^{+\infty}_{-\infty}\frac{e^{-y^2}dy}{(u-y)^2 + a^2}
+  :label: eq15
 
 where
 
-	\Delta \nu = \frac{b\nu_0}{c}; a = \frac{\Gamma}{4\pi \Delta\nu}; u = \frac{c(\nu-\nu_0)}{\nu_0 b}; y=\frac{v}{b}
+.. math:: \Delta \nu = \frac{b\nu_0}{c}; a = \frac{\Gamma}{4\pi \Delta\nu}; u = \frac{c(\nu-\nu_0)}{\nu_0 b}; y=\frac{v}{b}
+  :label: eq16
 
-Substituting this into Equation 14 gives
+Substituting this into Equation :eq:`eq14` gives:
 
-	\sigma(\nu) = \frac{\sqrt{\pi} e^2 f}{m_e c}\frac{H(a,u)}{\Delta \nu}
+.. math::	\sigma(\nu) = \frac{\sqrt{\pi} e^2 f}{m_e c}\frac{H(a,u)}{\Delta \nu}
+  :label: eq17
 
-We can now write the line optical depth ($\tau = N \sigma = \ln(I_0/I)$) as
+We can now write the line optical depth :math:`(\tau = N \sigma = \ln(I_0/I))` as
 
-	\tau(\nu) = \frac{\sqrt{\pi}e^2}{m_e}\frac{N f}{b\nu}H(a,u)
+.. math::	\tau(\nu) = \frac{\sqrt{\pi}e^2}{m_e}\frac{N f}{b\nu}H(a,u)
+  :label: eq18
 
 or, written as a function of wavelength,
 
-	\tau(\lambda) = \frac{\sqrt{\pi}e^2}{m_e c}\frac{N f \lambda}{b}H(a,u) = 1.497 \times 10^{-15}\frac{N ({\rm cm^{-2}}) f \lambda (\text{\AA})}{b ({\rm km~s^{-1}})}
+.. math:: \tau(\lambda) = \frac{\sqrt{\pi}e^2}{m_e c}\frac{N f \lambda}{b}H(a,u) = 1.497 \times 10^{-15}\frac{N ({\rm cm^{-2}}) f \lambda (Å)}{b(km/s)}
+  :label: eq19
 
-At this point, it is worth noting that optical depth, unlike intensity, has the advantage that $\tau_{\rm total} = \tau_1 + \tau_2$.
+At this point, it is worth noting that optical depth, unlike intensity, has the advantage that :math:`\tau_{total} = \tau_1 + \tau_2`.
 
 The Curve of Growth
 -------------------
 
-Having covered all of that (and in rather abbreviated form), we move on to the most important question -- what is the effect of having light incident upon absorbing atoms? The optical depth, $\tau$, described above, is more formally defined as
+Having covered all of that (and in rather abbreviated form), we move on to the most important question -- what is the effect of having light incident upon absorbing atoms? The optical depth, :math:`\tau`, described above, is more formally defined as
 
-	I(\nu) = I_0(\nu)e^{-\tau}
+.. math::	I(\nu) = I_0(\nu)e^{-\tau}
+  :label: eq20
 
+.. math:: \tau(\nu) = N\sigma(\nu)
+  :label: eq21
 
-	\tau(\nu) = N\sigma(\nu)
+where *N* is the gas column density :math:`(cm^{-2})`. Because *W* is *defined* as the normalized net flux removed from the beam,
 
-where $N$ is the gas column density (cm$^{-2}$). Because $W$ is \emph{defined} as the normalized net flux removed from the beam,
+.. math::	I_0 W = I_0 \int d\nu - \int I(\nu) d\nu
+  :label: eq22
 
-	I_0 W = I_0 \int d\nu - \int I(\nu) d\nu
+.. math ::	W = \int[i - \exp(-N \sigma(\nu))]d\nu
+  :label: eq23
 
+When the optical depth of the cloud is small, :math:`\tau(\nu) = N\sigma(\nu) \ll 1`, so
 
-	W = \int(i - \exp[-N \sigma(\nu)])d\nu
+.. math :: W = N\int \sigma(\nu)d\nu
+  :label: eq24
 
-When the optical depth of the cloud is small, $\tau(\nu) = N\sigma(\nu) \ll 1$, so
+.. math::	W(\nu) = \frac{\pi e^2}{m_e \nu}N f
+  :label: eq25
 
-	W = N\int \sigma(\nu)d\nu
+.. math::	W(\lambda) = \frac{\pi e^2 \lambda_0}{m_e c^2}N \lambda_0 f
+  :label: eq26
 
+and the equivalent width is directly proportional to the number of atoms along the line of sight. This is the linear portion of the curve of growth, and Equation :eq:`eq26` may be simplified to
 
-	W(\nu) = \frac{\pi e^2}{m_e \nu}N f
+.. math:: N = 1.13 \times 10^{20} \frac{W(\lambda)}{\lambda_0^2 f}
+  :label: eq27
 
+for wavelengths in Å.
 
-	W(\lambda) = \frac{\pi e^2 \lambda_0}{m_e c^2}N \lambda_0 f
+As the column density increases, the absorption line will eventually become saturated (see Figure 3.1). In the saturated regime, the equation becomes instead
 
-and the equivalent width is directly proportional to the number of atoms along the line of sight. This is the linear portion of the curve of growth, and Equation 26 may be simplified to
+.. math::	W(\lambda) \sim \frac{2b\lambda_0}{c}\sqrt{\ln\left(\frac{\pi^{0.5}e^2N\lambda_0f}{m_ecb}\right)}
+  :label: eq28
 
-	N = 1.13 \times 10^{20} \frac{W(\lambda)}{\lambda_0^2 f}
+At this point :math:`W(\lambda) \propto \sqrt{\ln N}`, the flat (or saturated) part of the curve of growth. As can be seen from Figure 3.2, the precise shape of this part of the curve of growth depends significantly on the *b*-value, causing a degeneracy between *N* and *W*, and making Voigt profile fitting very uncertain.
 
-for wavelengths in \AA.
+Finally, when the column density is high enough :math:`(N \gtrsim 10^{19}~cm^{-2})`, the Lorentzian profile of the natural broadening begins to dominate the wings of the absorption line (again, see Figure 3.1). In this "damped" regime, :math:`W(\lambda) \propto \sqrt{N}`, and is again independent of *b*-value:
 
-As the column density increases, the absorption line will eventually become saturated (see Figure~\ref{fig:linetypes}). In the saturated regime, the equation becomes instead
+.. math::	W(\lambda) \sim \frac{\lambda_0^{1.5}}{c}\sqrt{\frac{e^2}{m_ec}N\lambda_0f\gamma}
+  :label: eq29
 
-	W(\lambda) \sim \frac{2b\lambda_0}{c}\sqrt{\ln\left(\frac{\pi^{0.5}e^2N\lambda_0f}{m_ecb}\right)}
+Since the only element usually present in large enough quantities to produce damped lines is neutral hydrogen (H I), the column density of neutral hydrogen in a damped environment may be derived as
 
-At this point $W(\lambda) \propto \sqrt{\ln N}$, the flat (or saturated) part of the curve of growth. As can be seen from Figure~\ref{fig:cog}, the precise shape of this part of the curve of growth depends significantly on the $b$-value, causing a degeneracy between $N$ and $W$, and making Voigt profile fitting very uncertain.
-
-Finally, when the column density is high enough ($N \gtrsim 10^{19}$~cm$^{-2}$), the Lorentzian profile of the natural broadening begins to dominate the wings of the absorption line (again, see Figure~\ref{fig:linetypes}). In this ``damped'' regime, $W(\lambda) \propto \sqrt{N}$, and is again independent of $b$-value:
-
-	W(\lambda) \sim \frac{\lambda_0^{1.5}}{c}\sqrt{\frac{e^2}{m_ec}N\lambda_0f\gamma}
-
-Since the only element usually present in large enough quantities to produce damped lines is neutral hydrogen (H~{\sc i}), the column density of neutral hydrogen in a damped environment may be derived as
-
-	N = 1.88 \times 10^{18} W^2
+.. math:: N = 1.88 \times 10^{18} W^2
+  :label: eq30
 
 at the rest wavelength.
 
@@ -179,14 +185,15 @@ at the rest wavelength.
     :align: center
     :alt: linetypes
 
-    Examples of linear (a), saturated (b), and damped (c) absorption lines. All of these lines are Ly$\alpha$ lines redshifted to $z_{abs}=3.0$, with $b = 20$~km/s. $\log N(H~\text{{\sc i}}) = 13 ({\rm a}), 16 ({\rm b}), 20 ({\rm c})$
+    **Figure 3.1**. Examples of linear (a), saturated (b), and damped (c) absorption lines. All of these lines are Lyα lines redshifted to :math:`z_{abs} = 3.0`, with :math:`b = 20 km/s`. :math:`logN(H I) = 13(a),16(b),20(c)` .
+
 
 .. figure:: figures/fig_cog.jpg
     :width: 80%
     :align: center
     :alt: curve of growth
 
-		Schematic figure illustrating the curve of growth for Ly$\alpha$ absorption lines for three different $b$-values (Doppler widths).
+    **Figure 3.2**. Schematic figure illustrating the curve of growth for Ly :math:`\alpha` absorption lines for three different *b*-values (Doppler widths).
 
 
 Redshift
@@ -194,30 +201,31 @@ Redshift
 
 Another very important concept in spectroscopy, and astronomy in general, is finding how far away an object is. This can be done by calculating the object's redshift. In order to do this properly, one must know the wavelength at which an element emits/absorbs here at Earth (the rest wavelength) and the wavelength the object in space is emiting that same element (the observed wavelength). From there it is a simple calculation:
 
-    z = \frac{\lambda_{obs} - \lambda_r}{\lambda_r} = 1 - \frac{\lambda_{obs}}{\lambda_r}
+.. math:: z = \frac{\lambda_{obs} - \lambda_r}{\lambda_r} = 1 - \frac{\lambda_{obs}}{\lambda_r}
+  :label: eq31
 
+where :math:`\lambda_{obs}` is the observed wavelength from the object and :math:`\lambda_r` is the rest wavelength. At non-relativistic speeds this can be approximated to:
 
-where $\lambda_{obs}$ is the observed wavelength from the object and $\lambda_r$ is the rest wavelength. At non-relativistic speeds this can be approximated to:
-
-    z \approx \frac{v_r}{c}
-
+.. math:: z \approx \frac{v_r}{c}
+  :label: eq32
 
 which gives you an idea of how fast an object is moving away from you.
 
 For objects such as galaxies, sometimes it is possible to calculate the rotation curve as well by using these simple equations. Instead of using the rest wavelength here at Earth, define the center of the galaxy--the bulge is usually the brightest part--to be the rest frame and the opposite edges of the galaxies to be the observed wavelengths. This is just one of many fun examples of ways spectroscopy helps do amazing science.
 
 
-Redshift increases both $W$ and FWHM by a factor of $(1 + z)$, which may sometimes result in an otherwise unresolved line being resolved (and which will also mean that, even for constant SNR, the detection limit on a line will depend on that line's redshift).
+Redshift increases both *W* and FWHM by a factor of *(1 + z)*, which may sometimes result in an otherwise unresolved line being resolved (and which will also mean that, even for constant SNR, the detection limit on a line will depend on that line's redshift).
 
 Relative Solar Abundances
 ==========================
 
 Elemental abundances are often expressed in solar-relative terms, denoted by surrounding the element with square brackets, as shown below:
 
-	[Z] = log(N(Z)/N(H)) - log(N(Z)/N(H))_\odot
+.. math::	[Z] = log(\frac{N(Z)}{N(H)}) - log(\frac{N(Z)}{N(H)})_\odot
+  :label: eq33
 
-Thus, [Zn] = -1.0 would mean that the Zinc is 1/10 as abundant *when compared to hydrogen* in the system of interest as compared to the solar system. In many astronomical systems, it is assumed that N(H)$\sim$N(H~{\sc i}), and that the abundance of the dominant ionization state of the element involved (e.g. Zn~{\sc ii} for zinc) is essentially equal to the abundance of that element as a whole.
+Thus, :math:`[Zn] = -1.0` would mean that the Zinc is 1/10 as abundant *when compared to hydrogen* in the system of interest as compared to the solar system. In many astronomical systems, it is assumed that :math:`N(H) \sim N(H I)`, and that the abundance of the dominant ionization state of the element involved (e.g. Zn II for zinc) is essentially equal to the abundance of that element as a whole.
 
-Note that solar system abundances may be measured either in the solar atmosphere or in meteoroids, and that these values do not always agree exactly. Note also that, when a pure logarithmic abundance relative to hydrogen is expressed, it may have 13 added to it (by convention, when quoting solar abundances log(X/H) = log(X/H) + 13.00). This won't matter when computing the solar-relative abundance, but is worth knowing so as to avoid confusion.
+Note that solar system abundances may be measured either in the solar atmosphere or in meteoroids, and that these values do not always agree exactly. Note also that, when a pure logarithmic abundance relative to hydrogen is expressed, it may have 13 added to it (by convention, when quoting solar abundances, :math:`log(X/H) = log(X/H) + 13.00`). This won't matter when computing the solar-relative abundance, but is worth knowing so as to avoid confusion.
 
 Relative abundances are also used to compare different metals. For example, [Cr/Zn] is used as a measure of dust abundance because Cr depletes onto dust grains whereas Zn generally does not.

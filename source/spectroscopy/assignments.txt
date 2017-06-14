@@ -11,7 +11,7 @@ Spectroscopy of RECX-1
 
 RECX-1 is a T-Tauri star that was observed as part of Program 11616. During these observations, the star experienced a flare. Your assignment here involves taking these COS observations, determining when the flare occurred, and determining which parts of the star's spectrum were affected by the flare
 
-Tools that may be useful for this include using ``splittag`` to separate the corrtag data by time or spatial location, in order to look for count rate changes. In addition, the ``x1dcorr`` task allows split datasets to be extracted. These are located in the ``costools`` package in python and pyraf. There is additional documentation located online, but the basics of calling these tasks in python are as follows:
+Tools that may be useful for this include using ``splittag`` to separate the corrtag data by time or spatial location, in order to look for count rate changes. In addition, the ``x1dcorr`` task allows split datasets to be extracted. These are located in the ``costools`` package in python. There is additional documentation located online, but the basics of calling these functions in python are as follows:
 
  ::
 
@@ -23,7 +23,7 @@ Tools that may be useful for this include using ``splittag`` to separate the cor
  or equivalently: ::
 
    python> splittag.splittag("rootname_corrtag_a.fits",
-	                           output_filename",
+	                           "output_filename",
 	                           starttime = 0.,
 	                           increment = 250.,
 	                           endtime = 1000.")
@@ -74,7 +74,7 @@ Chemical Abundances in AO 0235+164
 
 	 1. Retrieve Program 7294 Visits 01 and 02. (Bonus: if you're up to dealing with FOS, retrieve visit 01 of Program 6217 as well). In this case, retrieving the processed data should be sufficient.
 	 2. There is a damped Lyman-:math:`{\alpha}` system (DLA) in this sightline. What is its redshift? What is the N(H I)?
-	 3. What is the Mg II column density associated with the DLA?	Are the Mg II lines likely saturated based off what a saturated line looks like in Figure 3.1 (in the theory chapter)? What redshift do you derive from the Mg II doublet? Is it significantly different from the redshift derived from H I? Which would you trust more, and why?
+	 3. What is the Mg II column density associated with the DLA?	Are the Mg II lines likely saturated based off what a saturated line looks like in Figure 4.1 (in the theory chapter)? What redshift do you derive from the Mg II doublet? Is it significantly different from the redshift derived from H I? Which would you trust more, and why?
 
 	 Use the ``splot`` in pyraf as well as the curve of growth equation:
 	 .. math::
@@ -90,5 +90,5 @@ Chemical Abundances in AO 0235+164
 
 
 Absorption line spectra of the UV bright z=2.4 QSO HE 1122-1649
-S. K√∂hler, A. de la Varga and D. Reimers
+S. KÃuhler, A. de la Varga and D. Reimers
 Hamburger Sternwarte, Gojenbergsweg 112, 21029 Hamburg, Germany

@@ -56,10 +56,7 @@ Calibration
 
 The calibration pipelines for COS and STIS, CalCOS and CalSTIS respectively, are available in python. (They can also be found in the stsdas.hst\_calib package of IRAF/PyRAF, and can be run from the unix shell, if you are so inclined). The calibration pipelines themselves have very limited optional arguments, and very few will affect the data. Most of the ways to change how data is calibrated is accessed by editing header keywords in the raw files.
 
-All of the calibration files (reference files) used by the calibration pipelines are located on central storage, and the pipelines look to environment variables to find them. If you have not already done so, you will need to set environment variables: "oref" for STIS, and "lref" for COS. ::
-
-> set oref '/grp/hst/cdbs/oref/'
-> set lref '/grp/hst/cdbs/lref/'
+All of the calibration files (reference files) used by the calibration pipelines are located on central storage, and the pipelines look to environment variables to find them. If you have not already done so, you will need to set environment variables: "oref" for STIS, and "lref" for COS. See :ref:`computer_setup_environment`.
 
 If you haven't already set these in your shell file, it would be beneficial to do so now. You will notice, as you begin your work, that STIS datasets always begin with the letter "o", and COS always begin with the letter "l".  Each instrument has a letter assigned to it, and that is where the reference file directories get their names.
 

@@ -20,7 +20,7 @@ Note that this is a draft document, and feedback is always appreciated.
 
 The spectroscopy :download:`training document <downloads/pdf_guides/spectroscopy_training.pdf>` gives an overview of spectrographs in general and the basics of spectroscopy. Also included are exercises that will introduce you to using the data from HST's spectrographs--COS and STIS.
 
-There is a :download:`jupyter notebook version <downloads/notebooks/Spectroscopy_Training.ipynb>` of the training that is designed to be worked through interactively in group training.
+There is a :download:`Jupyter notebook version <downloads/notebooks/Spectroscopy_Training.ipynb>` of the training that is designed to be worked through interactively in group training.
 
 There are also :download:`slides <downloads/pdf_guides/intro_to_hst_spec_3.2.pdf>` that give a high-level overview of COS, STIS, and MAMA detectors.
 
