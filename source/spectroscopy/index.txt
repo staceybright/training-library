@@ -1,0 +1,39 @@
+******************
+Basic Spectroscopy
+******************
+
+In this document, we have assumed very little knowledge of spectroscopy. If you are already familiar with the subject you can likely skip directly to the exercises, found in :doc:`exercises`. These generally do not require a particular programming language or operating system, so you are free to complete them in whichever language you choose.  The notable exceptions to this rule are the STScI calibration pipelines.  These are written in particular languages, and are most readily available through the Python and IRAF/PyRAF interface.
+
+The :doc:`assignments` chapter, includes two "science-based" spectroscopy assignments. These assignments are intended as training projects for RIAs being assigned to the COS or STIS teams, and should not be completed unless instructed.
+
+Note that this is a draft document, and feedback is always appreciated.
+
+.. toctree::
+   :maxdepth: 3
+
+   introduction
+   exercises
+   theory
+   assignments
+
+---------------------------
+
+The spectroscopy :download:`training document <downloads/pdf_guides/spectroscopy_training.pdf>` gives an overview of spectrographs in general and the basics of spectroscopy. Also included are exercises that will introduce you to using the data from HST's spectrographs--COS and STIS.
+
+There is a :download:`Jupyter notebook version <downloads/notebooks/Spectroscopy_Training.ipynb>` of the training that is designed to be worked through interactively in group training.
+
+There are also :download:`slides <downloads/pdf_guides/intro_to_hst_spec_3.2.pdf>` that give a high-level overview of COS, STIS, and MAMA detectors.
+
+----------------------------
+
+Resources
+
+Instrument and Data Handbooks can be found at the links below.  Note that there is an option to download the PDF at the top of the page.
+
+http://www.stsci.edu/hst/cos/documents/handbooks/current/cos_cover.html
+http://www.stsci.edu/hst/cos/documents/handbooks/datahandbook/COS_longdhbcover.html
+http://www.stsci.edu/hst/stis/documents/handbooks/handbooks/currentIHB/cover.html
+http://www.stsci.edu/hst/stis/documents/handbooks/handbooks/currentDHB/stis_cover.html
+
+The following links may be useful for more information on spectroscopy.
+www.physics.uc.edu/~hanson/AstronomicalSpectroscopy.pdf

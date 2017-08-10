@@ -53,7 +53,7 @@ Additional topics
 
 Your team lead has selected a set of additional topics for you to complete. If you do not know which ones you will be doing, ask your training buddy for details. Research & Instrument Analysts are required to complete all of the additional topics.
 
-#. :doc:`spectroscopy`
+#. :doc:`spectroscopy/index`
 #. :doc:`drizzle`
 #. :doc:`photometry`
 #. :doc:`pysynphot`
@@ -117,7 +117,7 @@ These topics have been retired because there is nobody to actively maintain them
    apt_etc/index
    photometry
    drizzle
-   spectroscopy
+   spectroscopy/index
    pysynphot
    editing_these_documents
    tricks
