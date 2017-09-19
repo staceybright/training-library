@@ -142,13 +142,10 @@ You can run TweakReg through PyRAF or Python, though it's strongly recommended t
 
 The **updatewcs** parameter has been removed from some of the Drizzlepac tasks. It may sometimes be necessary to run this task to get the correct geometric distortion headers keywords and file extensions incorporated into the files. To run this task do the following:
 
->>> teal.teal('updatewcs')
+>>> from stwcs import updatewcs
+>>> updatewcs.updatewcs(yourfile)
 
-In the UpdateWcs window:
-
-    * Set the **input** parameter to ``*flc.fits``. These are the input images.
-
-Then presss **Execute** and you can continue on to your regularly scheduled TweakReg :
+Do this for all of your files and you can continue on to your regularly scheduled TweakReg :
 
 >>> teal.teal('tweakreg')
 
@@ -157,8 +154,9 @@ Though not practical for scripting, the GUIs are helpful when learning how to us
     * Again, set the **input** parameter to ``*flc.fits``.
     * Set the **updatewcs** parameter to ``Yes`` so TweakReg can incorporate the geometric distortion into the alignment.
     * Set the **refimage** parameter to ``j8ny01svq_flc.fits`` (or any one of the other input images).  All of the input images will be aligned to the refimage.
-    * Set **expand_refcat** to ``Yes``.  This allows TweakReg to add unmatched sources from input images to the reference image source catalog on the fly (this is great for mosaicking!).
+    * Set **expand_refcat** to ``No``.  This allows TweakReg to add unmatched sources from input images to the reference image source catalog on the fly (this is great for mosaicking!).
     * Set **enforce_user_order** to ``No``.  This lets TweakReg come up with an optimal order of input images when computing alignment transformations.
+    * Set **reusename** to ``Yes``.
 
 The first (and probably most important) step of TweakReg is building a catalog of sources in the input and reference images.  The relevant parameters for this step are within the **imagefind Parameters** and **refimagefind Parameters** sections:
 
@@ -175,7 +173,7 @@ The parameter values you populated in the GUI are saved and used when you call T
 
     >>> findpars = {'threshold':100.,'conv_width':3.5,'peakmin':1000.,'peakmax':40000.}
     # Parameters in sub parameter windows are passed as dictionaries
-    >>> tweakreg.TweakReg(glob.glob('*flc.fits'), expand_refcat=True, enforce_user_order=False,
+    >>> tweakreg.TweakReg(glob.glob('*flc.fits'), reusename=True, expand_refcat=False, enforce_user_order=False,
     ...                   updatewcs=True, refimage='j8ny01svq_flc.fits', imagefindcfg=findpars,
     ...                   refimagefindcfg=findpars)
 
@@ -229,7 +227,7 @@ However, you can do even better!  Depending on what your final goal is, differen
 
     * Set **clean** and **in_memory** to ``True``. This will get rid of the intermediate masks/images at the end (you wont need them for the remainder of the exercise).
     * Set **mdriztab** to ``False`` (or your optimized parameters will be ignored).
-    * The sky subtraction method should be set to match.  This basically equalizes background across your stack of images.
+    * Keep the  sky subtraction method at ``localmin`` (don’t change it).  The previous version of this guide wanted you to use ``match``, but it just resulted in errors.
     * The default WCS drizzle creates should not be used, as you will be specifying the following WCS parameters.
     * The image axes should be transformed to have North up (and naturally, East left).
     * The output pixel scale should be 0.03'' per pixel.  Note that this is significantly better than the 0.05'' per pixel scale of your input image, giving you much better resolution.
