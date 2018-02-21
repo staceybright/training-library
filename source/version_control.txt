@@ -42,7 +42,7 @@ For example, ``git add ./test`` means "add files in the test directory to be com
 
 Every sub-command has thorough documentation accessible through ``git nameofcommand --help``. (You can scroll the help page with the arrow keys and exit with :kbd:`q`.)
 
-.. admonition:: Excercise: Look at the documentation for a git command
+.. admonition:: Exercise: Look at the documentation for a git command
    :class: note
 
    Open up the help page for ``clone``. Skim the description. In a sentence or two, what do you think ``git clone`` does?
