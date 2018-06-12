@@ -59,10 +59,10 @@ Every command has thorough documentation accessible through ``git nameofcommand 
 
    Open up the help page for the ``clone`` command. Skim the description. In a sentence or two, what do you think ``git clone`` does? (There's a lot of jargon in the git help, so don't worry if it's not clear yet what all that means.)
 
-Two of the most important concepts when using git for version control are *reposotories* and *commits*:
+Two of the most important concepts to understand when using git are *reposotories* and *commits*:
 
- * **Repositories** -  Git has a special name for directories of files that it keeps histories of (we call those files "tracked" or "versioned"). Folders that git understands how to manipulate are called "repositories" (often called "repos" for short). A repository contains the current state of the tracked files, as well as a copy of their history at commits, or snapshots in time.
- * **Commits** - Each commit is a log to the project history that documents the changes that were made to tracked files since the last commit, as well as metadata such as the username of the author, the time that it was created, and a name that briefly describes the changes that were made.
+ * **Repositories** -  Git has a special name for directories of files that it keeps histories of (we call those files "tracked" or "versioned"). Folders that git understands how to manipulate are called "repositories" – often called "repos" for short. A repository contains the current state of the tracked files, as well as a copy of their history at commits, or snapshots in time.
+ * **Commits** - Each commit is a log to the project history that documents the changes that were made to tracked files since the last commit, as well as metadata such as the username of the author, the time that it was created, and a name that briefly describes the changes that were made. The word is used both as a noun - "I changed that in my last commit" - and a verb - "I will commit that file in the next hour."
 
 Git commands generally only work when you have ``cd``\ -ed into a repository directory in your terminal. The two main exceptions are ``git init``, which initializes a new repository in the current directory, and ``git clone``, which creates a new local copy of a repository.
 
@@ -90,7 +90,7 @@ Git, GitHub, Grit, and GitLab
 You may have heard some of these terms bandied around. For clarity's sake, here's what they mean:
 
  * **git** -- A command-line tool to manage versions of files. (Free and open-source)
- * **GitHub** -- A service to share and collaborate on repositories using ``git``. (Commercial, with exceptions for nonprofits)
+ * **GitHub** -- An online service to share and collaborate on repositories using ``git``. (Commercial, with exceptions for nonprofits)
  * **GitLab** -- Software similar to GitHub, for internal use, using ``git``. Allows organizations to host their own server. (Free community edition, commercial version available)
  * **grit** -- STScI-specific, internal-only collaboration platform running on GitLab software; uses AD login credentials. https://grit.stsci.edu/
  * **gitar** -- Identical to grit, but is safe for `ITAR <https://en.wikipedia.org/wiki/International_Traffic_in_Arms_Regulations>`_ material. https://gitar.stsci.edu/
@@ -179,7 +179,7 @@ Now you have a git repository to manipulate on your own computer!
 Creating a branch for your changes
 ==================================
 
-The command ``clone`` is aptly named: the entire history of the repository is in the clone, but it's entirely self contained and isolated from Github's copy of the repository. Don't worry about screwing anything up; if you get stuck, it's possible to delete the whole folder and make a "fresh" clone without affecting anyone else's work.
+The command ``clone`` is aptly named: the entire history of the repository is in the clone, but it's entirely self contained and isolated from GitHub's copy of the repository. Don't worry about screwing anything up; if you get stuck, it's possible to delete the whole folder and make a "fresh" clone without affecting anyone else's work.
 
 .. admonition:: Exercise: Check the status of your repository
    :class: note
@@ -222,13 +222,15 @@ When making changes, especially in a collaborative setting (or when you're explo
 
    Switch back to the branch you just made before continuing.
 
+(Know that branches don't have to be named after the people who make them; most of the time, branches are named for the work that is being done on them - such as ``edit_photometry_docs``, ``convert_to_python_3``, or ``develop_unit_tests``.)
+
 At this point, ``master`` and your new branch point to the same commit (or snapshot).
 
 .. figure:: figures/version_control/branching_2.png
    :alt: A second branch called "newbranch" coming off of master.
    :align: center
 
-   A second branch called "newbranch" coming off of master.
+   A second branch called "yourlastname_trainee" coming off of master.
 
 However, because you have selected a new branch, changes you make will be added to the history on their own separate timeline. Thus prepared, let's edit the trainees list.
 
@@ -269,7 +271,7 @@ Now your repository history looks a bit like this:
 
    A new commit on "yourlastname_trainee" shown coming off of master.
 
-This may seem academic (it's still a connected line to the main history!), but keep in mind that ``master`` can continue evolving while you work on your branch. Also, if you and another trainee both branch off of ``master``, your work can proceed in parallel on your own branches.
+This may seem academic (it's still a connected line to the main history!), but keep in mind that ``master`` can continue evolving while you work on your branch. Also, if you and another trainee both branch off of ``master``, your work can proceed in parallel on your own branches simultaneously.
 
 Incorporating your changes in the GitHub copy
 =============================================
@@ -287,21 +289,21 @@ A git repository remembers where you cloned it from, and calls it the "origin". 
 
    This updates GitHub's copy to look like yours: a new branch from master called "yourlastname_trainee" is now present with your changes.
 
-To incorporate your changes in the main history, you issue a "pull request" through the GitHub website. A "pull request" is a request to pull in changes from a branch to the main history. (GitHub would not stop you from merging your own edits, but it is considered good practice to give other collaborators a chance to review your changes.)
+To incorporate your changes in the main history, you issue a "pull request" through the GitHub website. A "pull request" is a request to pull in changes from one branch to another branch. In this case, you want to pull from ``yourlastname_trainee`` into ``master``. (GitHub would not stop you from merging your own edits, but it is considered good practice to give other collaborators a chance to review your changes.)
 
 *If your branch looks like this: (note that more commits have been added to ``master``)...*
 
 .. figure:: figures/version_control/branching_4.png
-   :alt: The repository history. The master branch now has another commit, illustrating how "newbranch" and master evolved in parallel.
+   :alt: The repository history. The master branch now has another commit, illustrating how "yourlastname_trainee" and master evolved in parallel.
    :align: center
 
 *... a pull request asks to combine the branches to look something like this:*
 
 .. figure:: figures/version_control/branching_5.png
-   :alt: The repository history after "newbranch" has been merged into master.
+   :alt: The repository history after "yourlastname_trainee" has been merged into master.
    :align: center
 
-Pull requests are a term invented by GitHub, but similar features exist in other version control systems by other names (e.g. "merge request"). Once you have pushed to a new branch, when you visit https://github.com/stsci-riab/riatraining you will see a new green icon to "Compare & pull request".
+Pull requests are a term invented by GitHub, but similar features exist in other version control systems by other names (e.g. "merge request"). Once you have pushed your commit to your ``yourlastname_trainee`` branch, you will see a new green icon to "Compare & pull request" when you visit https://github.com/stsci-riab/riatraining .
 
 .. figure:: figures/compare_and_pull_request.png
    :alt: GitHub's two buttons for "Compare & pull request"
@@ -311,7 +313,7 @@ Pull requests are a term invented by GitHub, but similar features exist in other
 
 Click the big green "Compare & pull request" button. (The smaller green pull request icon next to the branch selector will also work, but you will have to remember to select the right branch.)
 
-At the bottom of the page, you'll see the changes you're asking to pull in. Ensure you're only pulling in changes you mean to!
+At the bottom of the page, you'll see the changes you're asking to pull into ``master``. Ensure you're only pulling in changes you mean to!
 
 .. figure:: figures/pull_request_files.png
    :alt: Color-coded view of the changes in the pull request
@@ -324,7 +326,7 @@ Give your pull request a brief title and description, then click "Create pull re
 Dealing with merge conflicts
 ----------------------------
 
-If you see a message saying that the branches cannot be automatically merged, you need to "pull in upstream changes". All that means is that someone else edited the same thing as you, and you need to incorporate their changes in your pull request.
+If you see a message saying that the branches cannot be automatically merged, you need to "pull in upstream changes". All that means is that someone else also edited the same lines in the same file that you edited, and you need to incorporate their changes in your pull request.
 
 To do this, go to your repository in the terminal and execute ``git pull`` and ``git merge master``. You will see a message about which files have conflicts. Open them in your editor, look for the code between the ``<<<<<<`` and ``>>>>>>`` markers. This notation can be kind of confusing, but this is what it means: ::
 
@@ -363,7 +365,7 @@ Send the trainer for this section a link to your pull request, and they will mer
 More Advanced Workflows: Forking
 ================================
 
-The workflow that we just completed is called a "centralized workflow." (A *workflow* is a defined sequence of steps that are followed in order to complete a task.) In the centralized workflow, there is a single central repository (stsci-riab/riatraining) that each collaborator clones, and any changes are pushed directly to that central repository.
+The workflow that we just completed is called a "centralized workflow." (A *workflow* is a defined sequence of steps that are followed in order to complete a task.) In the centralized workflow, there is a single central repository (stsci-riab/riatraining) that each collaborator clones, and any changes are pushed directly to branches on that central repository.
 
 There is a slight more advanced workflow, called a "forking workflow", that is very commonly used and that you might encounter while working on projects at STScI. We are not going to make you redo this entire exercise using a forking workflow, but we will briefly describe how it works.
 
@@ -373,9 +375,9 @@ The forking workflow includes one extra step that allows for more discretion of 
    :height: 250 pt
    :align: center
 
-   Forkings copies a central remote repository (which git calls "upstream") into a new remote repository that is hosted on your personal Github/Gitlab account (which git calls "origin").
+   Forkings copies a central remote repository (which git calls "upstream") into a new remote repository that is hosted on your personal GitHub/GitLab account (which git calls "origin").
 
-While developing, each collaborator works on their forked repository (their "fork). Finally, when they want to integrate their changes into the central repository, they submit a pull request to merge from their personal repository ("origin") into the central repository ("upstream").
+While developing, each collaborator works on their forked repository (their "fork"). When they want to integrate their changes into the central repository, they submit a pull request to merge from their personal repository ("origin") into the central repository ("upstream").
 
 Because collaborators do not directly push to the central repository, this establishes another required level of review before changes are accepted. Additionally, each collaborator can have as many branches as they wish to on their fork without cluttering the central repository.
 
