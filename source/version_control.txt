@@ -247,7 +247,7 @@ However, because you have selected a new branch, subsequent changes that you mak
 Remote vs. Local Branches
 -------------------------
 
-When you clone a repository from GitHub to your computer, git automatically creates this local ``master`` branch on your computer. This branch is a clone of the ``master`` branch on the remote repository on GitHub. Recall that the remote repo is called "origin", so this original master branch is called the ``origin/master`` branch.
+When you clone a repository from GitHub to your computer, git automatically creates this local ``master`` branch on your computer. This branch is a clone of the ``master`` branch on the remote repository on GitHub. Recall that the remote repository where we cloned from is called "origin", so this original master branch is called the ``origin/master`` branch.
 
 It is important to understand that any changes that you make on your local ``master`` branch, or any other branch, will not affect the copy of that branch that lives on the remote repository (e.g. ``origin/master``) until you ``push``. Conversely, any changes that other developers make to the remote version of ``origin/master`` will not affect the local ``master`` branch on your computer until you ``pull``.
 
@@ -302,15 +302,15 @@ Now your repository history looks a bit like this:
 
    A new commit on "yourlastname_trainee" shown coming off of master.
 
-Now we are ready to upload our changes to origin.
+Now you are ready to upload your changes to origin.
 
 Incorporating your changes in the GitHub copy
 =============================================
 
 Your changes are now committed to your local copy of the history. The next step is to send them to the copy on GitHub, where your trainer will review and sign off on your changes.
 
-Pushing to "origin"
--------------------
+Pushing to ``origin``
+---------------------
 
 The command to send your commits to a remote copy (like GitHub's or Grit's) is called ``git push``. The syntax of the ``git push`` command is::
 
@@ -364,12 +364,12 @@ Up until this point, we have been interacting with origin through the terminal. 
 Once you have pushed your commit to your ``origin/yourlastname_trainee`` branch, you will see a new green button on the webpage prompting you to "Compare & pull request".
 
 .. figure:: figures/compare_and_pull_request.png
-   :alt: GitHub's two buttons for "Compare & pull request"
+   :alt: GitHub's button for "Compare & pull request"
    :align: center
 
-   GitHub's two buttons for "Compare & pull request"
+   GitHub's button for "Compare & pull request"
 
-Click the big green "Compare & pull request" button. (The smaller green pull request icon next to the branch selector will also work, but you will have to remember to select the right branch.)
+Click the big green "Compare & pull request" button.
 
 At the bottom of the page, you'll see the changes you're asking to pull into ``master``. Ensure you're only pulling in changes you mean to!
 
@@ -397,7 +397,7 @@ To do this, go to your repository in the terminal and execute ``git pull`` and `
    >>>>>>>
 
 
-Combine the changes in a way that makes sense (e.g. include your name *and* that of another trainee that just added theirs).
+Combine the changes in a way that makes sense (e.g. include your name *and* that of another trainee that just added theirs), and make sure to delete all the merge conflict markers (``<<<<<<``, ``=======``, and ``>>>>>>``).
 
 Add, commit, push to your branch, and your pull request should gain the green "Able to merge" icon!
 
@@ -456,7 +456,7 @@ The forking workflow includes one extra step that allows for more discretion of 
 
    Forkings copies a central remote repository (which git calls "upstream") into a new remote repository that is hosted on your personal GitHub/GitLab account (which git calls "origin").
 
-While developing, each collaborator works on their forked repository (their "fork"). When they want to integrate their changes into the central repository, they submit a pull request to merge from their personal repository ("origin") into the central repository ("upstream").
+While developing, each collaborator works on their forked repository (their "fork"). When they want to integrate their changes into the central repository, they submit a pull request to merge the desired branch from their personal repository ("origin") into the central repository ("upstream").
 
 Because collaborators do not directly push to the central repository, this establishes another required level of review before changes are accepted. Additionally, in a forking workflow each collaborator can have as many branches as they wish to on their own fork without cluttering the central repository.
 
@@ -477,7 +477,7 @@ However, even if you decide to use Sourcetree, it is important to maintain an un
    :alt: The stsci-riab/training repository as shown in Sourcetree.
    :align: center
 
-   The riab_training repository as shown in Sourcetree.
+   The stsci-riab/training repository as shown in Sourcetree.
 
 
 .. rubric:: Footnotes
