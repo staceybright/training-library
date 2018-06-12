@@ -132,7 +132,7 @@ Cloning the training document repository
 
 Make sure your trainer has given you access to https://github.com/stsci-riab/riatraining, a.k.a. `stsci-riab/riatraining <https://github.com/stsci-riab/riatraining>`_. [#abbreviatedgithub]_
 
-Cloning copies the contents and the history of a repository over the network or on disk.
+Cloning copies the contents and the history of a repository over the network or on disk. A git repository remembers where you cloned it from, and calls the original remote repository "origin".
 
 .. figure:: figures/version_control/cloning.png
    :height: 250 pt
@@ -199,7 +199,7 @@ It's generally a good idea to make changes on a separate "branch" within the rep
 
 You can think of branches like trains moving on parallel tracks. While you're on a branch, any commits and changes you make will just move you forward along your branch. Other people can be working on different branches at the same time as you, changing or even deleting files. But, just like two trains moving on different tracks, changes on different branches don't affect one another. It is only when you "merge" branches that the changes on different branches are brought together, like two train tracks merging into one.
 
-You use the ``git checkout`` command to navigate between branches. ``git checkout [branchname]`` will move you into a pre-existing branch, and ``git checkout -b [new_branchname]`` will create a new branch called ``[new_branchname]`` and then move you into it.
+You use the ``git checkout`` command to navigate between branches. ``git checkout [branchname]`` will move you into a pre-existing branch, and ``git checkout -b [new_branchname]`` will create a new branch called ``new_branchname`` and then move you into it.
 
 .. At its simplest, git's version history is a series of snapshots in time. ("On January 10th, the file looked like this. On January 12th, lines 2 and 4 changed, and now it looks like this. On January 15th, ...") This allows you to travel backwards in time and retrieve the state of your project on a certain day.
 
@@ -215,7 +215,7 @@ Most of the time, the main timeline (for the publication-ready version of a docu
 
    The master branch evolving in time as a series of commits.
 
-When making changes, especially in a collaborative setting (or when you're exploring an idea you're not sure about), working in a branch other than ``master`` allows you to add new commits to the history without changing the master copy.
+When making changes, especially in a collaborative setting (or when you're exploring an idea you're not sure about), working in a branch other than ``master`` allows you to add new commits to the history without changing your master copy.
 
 .. admonition:: Exercise: Create a branch for your changes
    :class: note
@@ -236,24 +236,24 @@ When making changes, especially in a collaborative setting (or when you're explo
 At this point, ``master`` and your new branch point to the same commit (or snapshot).
 
 .. figure:: figures/version_control/branching_2.png
-   :alt: A second branch called "newbranch" coming off of master.
+   :alt: A second branch called "yourlastname_trainee" coming off of master.
    :align: center
    :scale: 20 %
 
    A second branch called "yourlastname_trainee" coming off of master.
 
-However, because you have selected a new branch, changes you make will be added to the history on their own separate timeline.
+However, because you have selected a new branch, subsequent changes that you make will be added to the repository history on their own separate timeline along the ``yourlastname_trainee`` branch.
 
-Remote versus Local Branches
-----------------------------
+Remote vs. Local Branches
+-------------------------
 
-When you clone a repository from GitHub to your computer, git automatically creates a local ``master`` branch on your computer. This branch is a clone of the ``master`` branch on the remote repository. Recall that the remote repo is called "origin", so this original master branch is called the ``origin/master`` branch.
+When you clone a repository from GitHub to your computer, git automatically creates this local ``master`` branch on your computer. This branch is a clone of the ``master`` branch on the remote repository on GitHub. Recall that the remote repo is called "origin", so this original master branch is called the ``origin/master`` branch.
 
-It is important to understand that any changes that you make on your local ``master`` branch, or any other branch, will not affect the copy of that branch that lives on the remote (e.g. ``origin/master``) until you ``push``. Conversely, any changes that others make to the remote version of ``origin/master`` will not affect the local ``master`` branch on your computer until you ``pull``.
+It is important to understand that any changes that you make on your local ``master`` branch, or any other branch, will not affect the copy of that branch that lives on the remote repository (e.g. ``origin/master``) until you ``push``. Conversely, any changes that other developers make to the remote version of ``origin/master`` will not affect the local ``master`` branch on your computer until you ``pull``.
 
 .. If there are other branches on the remote repository, you have to switch into them manually with ``git checkout [branchname]`` in order for git to generate a local copy of that branch.
 
-Let's take our current example: if someone creates a change and pushes it to ``origin/master`` after you cloned the repo, this change will not appear on your local ``master`` branch:
+Let's take our current example: if someone creates a change and pushes it to ``origin/master`` after you cloned the repo, this change will not appear on your local ``master`` branch (or your ``yourlastname_trainee`` branch, for that matter):
 
 .. figure:: figures/version_control/branching_3.png
    :alt: A new commit on "origin/master" that was created after the clone.
@@ -269,7 +269,7 @@ Thus prepared, let's finally edit the trainees list.
 Editing and committing changes
 ==============================
 
-These pages are stored in the ``source`` directory. The document we want to edit is called ``trainees.txt``. Open it up in your favorite text editor.
+The page we will be editting is stored in the ``source`` directory. It is called ``trainees.txt``. Open it up in your favorite text editor.
 
 .. admonition:: Exercise: Add your name to ``trainees.txt``
    :class: note
@@ -289,7 +289,7 @@ Editing and saving a file is not enough to commit it to history. (This is intent
       $ git add source/trainees.txt
       $ git status
 
-   After "staging" a file with ``git add``, use ``git commit`` to save it to the history. Use ``-m`` to specify a short message describing what you changed::
+   After "staging" a file with ``git add``, use ``git commit`` to save it to the history. Use ``-m`` to specify a short message describing what you changed (future you and everyone else will thank you)::
 
       $ git commit -m "Added my name to trainees.txt"
 
@@ -302,8 +302,7 @@ Now your repository history looks a bit like this:
 
    A new commit on "yourlastname_trainee" shown coming off of master.
 
-This may seem academic (it's still a connected line to the main history!), but keep in mind that you could continue to edit your local ``master`` while you work on your trainee branch.
-.. Also, if you and another trainee both branch off of ``master``, your work can proceed in parallel on your own branches simultaneously.
+Now we are ready to upload our changes to origin.
 
 Incorporating your changes in the GitHub copy
 =============================================
@@ -313,18 +312,24 @@ Your changes are now committed to your local copy of the history. The next step 
 Pushing to "origin"
 -------------------
 
-A git repository remembers where you cloned it from, and calls it the "origin". The command to send your commits to a remote copy (like GitHub's) is called ``git push``.
+The command to send your commits to a remote copy (like GitHub's or Grit's) is called ``git push``. The syntax of the ``git push`` command is::
 
-.. admonition:: Exercise: Push your commits to a branch on GitHub
+$ git push [remote name] [source branch name]
+
+This means, in normal English, "push the changes that I made on my local branch, called [source branch name], to the same branch on the [remote name] repository on GitHub."
+
+Note that pushing does not cross branches. For example, if you push local changes from a branch called ``bug_fixes``, they will not be pushed to the main ``origin/master`` branch, but rather to ``origin/bug_fixes``. If the remote branch ``origin/bug_fixes`` does not exist at the time that the push command occurs, it will be created.
+
+.. admonition:: Exercise: Push your commits to a branch on GitHub.
    :class: note
 
-   The syntax of the ``git push`` command is ``git push [remote name] [source branch name]``. This means, in normal English, "push the changes that I made on the source branch to the remote repository." In this case, the remote name is "origin", since we're pushing changes back to the copy we originally cloned from. The source branch name is the same branch name as above. For example::
+   In this case, the remote name is "origin", since we're pushing changes back to the copy we originally cloned from. The source branch name is the "yourlastname_trainee". Since the origin/yourlastname_trainee branch doesn't exist yet (we only created it locally, remember?), this command will also create it::
 
    $ git push origin yourlastname_trainee
 
    This updates GitHub's copy to look like yours: a new branch from master called "yourlastname_trainee" is now present with your changes.
 
-After you push, your history will look like this:
+After you push, the history will look like this:
 
 .. figure:: figures/version_control/branching_5.png
    :alt: The newly created "origin/yourlastname_trainee" branch shown coming off of origin/master.
@@ -333,13 +338,17 @@ After you push, your history will look like this:
 
    The newly created "origin/yourlastname_trainee" branch shown coming off of origin/master.
 
+Hopefully it is clearer now why we edited ``trainees.txt`` on a new branch in the first place. Branching allows us to push our changes to origin - thus logging them in the repository history - without altering the master branch. This is particularly helpful when other people are making changes to master at the same time!
+
 Pull Requests
 -------------
 
-To incorporate your changes in the main history, you issue a "pull request" through the GitHub website. A "pull request" is a request to pull in changes from one branch to another branch. In this case, you want to pull from ``origin/yourlastname_trainee`` into ``origin/master``. (GitHub would not stop you from merging your own edits, but it is considered good practice to give other collaborators a chance to review your changes.)
+To incorporate your changes in the main history, you issue a "pull request" through the GitHub website. Pull requests are a term invented by GitHub, but similar features exist in other version control systems by other names (e.g. "merge request"). Naming aside, a pull request is a request to pull in changes from one branch to another branch. In this case, you want to pull from ``origin/yourlastname_trainee`` into ``origin/master``. (GitHub would not stop you from merging your own edits with a ``git merge`` command, but it is considered good practice to give other collaborators a chance to review your changes.)
 
 .. tip::
-   With ``git push`` and ``git pull``, the actions occur from the perspective of your local computer. You push local changes *to* origin, and you pull remote changes *from* origin onto your computer. However, a pull request changes the game - the action is from the perspective of the remote repository. During a pull request, you are pulling changes *from* your local computer *to* origin. It's just semantics, but it can add confusion.
+   With ``git push`` and ``git pull``, the actions always occur from the perspective of your local computer. You push local changes *to* the remote repo, and you pull remote changes *from* the remote repo onto your computer. However, a pull request changes the game. During a pull request, you are pulling changes from one remote branch into another remote branch (usually ``master``).
+
+   It's just semantics, but it might help to clarify what ``push`` and ``pull`` mean.
 
 A pull request asks to combine the branches to look something like this:
 
@@ -350,7 +359,9 @@ A pull request asks to combine the branches to look something like this:
 
    Merging origin/yourlastname_trainee into origin/master.
 
-Pull requests are a term invented by GitHub, but similar features exist in other version control systems by other names (e.g. "merge request"). Once you have pushed your commit to your ``yourlastname_trainee`` branch, you will see a new green icon to "Compare & pull request" when you visit https://github.com/stsci-riab/riatraining .
+Up until this point, we have been interacting with origin through the terminal. However, you cannot create a pull request through the command line, so for this section we will be interacting with the webpage where the remote repository is sourced, in this case: https://github.com/stsci-riab/riatraining.
+
+Once you have pushed your commit to your ``origin/yourlastname_trainee`` branch, you will see a new green button on the webpage prompting you to "Compare & pull request".
 
 .. figure:: figures/compare_and_pull_request.png
    :alt: GitHub's two buttons for "Compare & pull request"
@@ -414,10 +425,11 @@ Once the pull request is complete, you will need to update your local copy of th
 .. admonition:: Exercise: Pull into your local direcotry
    :class: note
 
-   Even though the pull request is complete, your local copies of ``master`` and ``yourlastname_trainee`` don't know anything about what happened on origin. To update these local copies, run one last command::
+   Even though the pull request is complete, your local copies of ``master`` and ``yourlastname_trainee`` don't know anything about what origin has been up to. To update these local copies, run one last command::
+
    $ git pull
 
-   This updates your local copy to look like GitHub's copy: with the ``yourlastname_trainee`` branch successfully merged into ``master``:
+   This brings the changes down from origin and  updates your local copy to look like GitHub's copy: with the ``yourlastname_trainee`` branch successfully merged into ``master``.
 
 .. figure:: figures/version_control/branching_7.png
    :alt: The repository history after the final ``git pull``.
@@ -446,7 +458,7 @@ The forking workflow includes one extra step that allows for more discretion of 
 
 While developing, each collaborator works on their forked repository (their "fork"). When they want to integrate their changes into the central repository, they submit a pull request to merge from their personal repository ("origin") into the central repository ("upstream").
 
-Because collaborators do not directly push to the central repository, this establishes another required level of review before changes are accepted. Additionally, each collaborator can have as many branches as they wish to on their fork without cluttering the central repository.
+Because collaborators do not directly push to the central repository, this establishes another required level of review before changes are accepted. Additionally, in a forking workflow each collaborator can have as many branches as they wish to on their own fork without cluttering the central repository.
 
 .. admonition:: Exercise: Explore the Forking Workflow
    :class: note
