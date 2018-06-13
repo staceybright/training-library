@@ -54,7 +54,7 @@ Git Repositories, Commits, and Commands
 
 Every command has thorough documentation accessible through ``git nameofcommand --help``. (You can scroll the help page with the arrow keys and exit with :kbd:`q`.)
 
-.. admonition:: Excercise: Look at the documentation for a git command
+.. admonition:: Exercise: Look at the documentation for a git command
    :class: note
 
    Open up the help page for the ``clone`` command. Skim the description. In a sentence or two, what do you think ``git clone`` does? (There's a lot of jargon in the git help, so don't worry if it's not clear yet what all that means.)
@@ -111,17 +111,17 @@ If you're new to GitHub, you'll need to register for a free account and set up y
 
 At this point, you will need to ask your trainer for access to the repository we'll use in the next section.
 
-.. admonition:: Exercise: Get access to the stsci-riab/riatraining repository
+.. admonition:: Exercise: Get access to the spacetelescope/training-library repository
    :class: note
 
-   Send your trainer the username for your GitHub account. They will give you access to the ``stsci-riab/riatraining`` repository, which we use in the next section.
+   Send your trainer the username for your GitHub account. They will give you access to the ``spacetelescope/training-library`` repository, which we use in the next section.
 
 Once you have access, there is one quick thing you may want to do. GitHub will email users with commit access (what you just received) any time there's activity on the GitHub repository's issues or pull requests. That's probably not what you want, unless you're involved in training the next round of hires!
 
 .. admonition:: Exercise
    :class: note
 
-   Set your status on the https://github.com/stsci-riab/riatraining repository to **Not watching**, using the button in the upper right area of the GitHub web interface.
+   Set your status on the https://github.com/spacetelescope/training-library repository to **Not watching**, using the button in the upper right area of the GitHub web interface.
 
    .. image:: figures/version_control/github_unwatch.png
       :align: center
@@ -130,7 +130,7 @@ Once you have access, there is one quick thing you may want to do. GitHub will e
 Cloning the training document repository
 ========================================
 
-Make sure your trainer has given you access to https://github.com/stsci-riab/riatraining, a.k.a. `stsci-riab/riatraining <https://github.com/stsci-riab/riatraining>`_. [#abbreviatedgithub]_
+Make sure your trainer has given you access to https://github.com/spacetelescope/training-library, a.k.a. `spacetelescope/training-library <https://github.com/spacetelescope/training-library>`_. [#abbreviatedgithub]_
 
 Cloning copies the contents and the history of a repository over the network or on disk. A git repository remembers where you cloned it from, and calls the original remote repository "origin".
 
@@ -160,8 +160,8 @@ If you look at the main page for the repository on GitHub, there's a green dropd
 
    Clone the repository onto your computer. Note that the ``clone`` command creates a new directory wherever you clone it with the name of the repository you are cloning. The command to clone a repository is ``git clone [clone url]``, where ``[clone url]`` is the URL you just copied. (You'll be prompted for your GitHub username and password.) ::
 
-      $ git clone https://github.com/stsci-riab/riatraining.git
-      Cloning into 'riatraining'...
+      $ git clone https://github.com/spacetelescope/training-library.git
+      Cloning into 'training-library'...
       Username for 'https://github.com': [your username]
       Password for 'https://yourusername@github.com': [your password]
       remote: Counting objects: 1187, done.
@@ -359,7 +359,7 @@ A pull request asks to combine the branches to look something like this:
 
    Merging origin/yourlastname_trainee into origin/master.
 
-Up until this point, we have been interacting with origin through the terminal. However, you cannot create a pull request through the command line, so for this section we will be interacting with the webpage where the remote repository is sourced, in this case: https://github.com/stsci-riab/riatraining.
+Up until this point, we have been interacting with origin through the terminal. However, you cannot create a pull request through the command line, so for this section we will be interacting with the webpage where the remote repository is sourced, in this case: https://github.com/spacetelescope/training-library.
 
 Once you have pushed your commit to your ``origin/yourlastname_trainee`` branch, you will see a new green button on the webpage prompting you to "Compare & pull request".
 
@@ -425,8 +425,11 @@ Once the pull request is complete, you will need to update your local copy of th
 .. admonition:: Exercise: Pull into your local direcotry
    :class: note
 
-   Even though the pull request is complete, your local copies of ``master`` and ``yourlastname_trainee`` don't know anything about what origin has been up to. To update these local copies, run one last command::
+   Even though the pull request is complete, your local copies of ``master`` and ``yourlastname_trainee`` don't know anything about what origin has been up to. To update these local copies, run one last set of commands::
 
+   $ git checkout yourlastname_trainee
+   $ git pull
+   $ git checkout master
    $ git pull
 
    This brings the changes down from origin and  updates your local copy to look like GitHub's copy: with the ``yourlastname_trainee`` branch successfully merged into ``master``.
@@ -444,11 +447,11 @@ You have now officially completed your first pull request with ``git``! Give you
 More Advanced Workflows: Forking
 ================================
 
-The workflow that we just completed is called a "centralized workflow." (A *workflow* is a defined sequence of steps that are followed in order to complete a task.) In the centralized workflow, there is a single central repository (stsci-riab/riatraining) that each collaborator clones, and any changes are pushed directly to branches on that central repository.
+The workflow that we just completed is called a "centralized workflow." (A *workflow* is a defined sequence of steps that are followed in order to complete a task.) In the centralized workflow, there is a single central repository (spacetelescope/training-library) that each collaborator clones, and any changes are pushed directly to branches on that central repository.
 
 There is a slight more advanced workflow, called a "forking workflow", that is very commonly used and that you might encounter while working on projects at STScI. We are not going to make you redo this entire exercise using a forking workflow, but we will briefly describe how it works.
 
-The forking workflow includes one extra step that allows for more discretion of what is changed on the central repository. Instead of cloning the central repository directly, each collaborator will "fork" the central repository, creating a new repository that is hosted on their personal account. This means there will be as many repositories as collaborators; in addition to stsci-riab/riatraining, there will also be lchambers/riatraining, jfowler/riatraining, jmedina/riatraining, and so on.
+The forking workflow includes one extra step that allows for more discretion of what is changed on the central repository. Instead of cloning the central repository directly, each collaborator will "fork" the central repository, creating a new repository that is hosted on their personal account. This means there will be as many repositories as collaborators; in addition to spacetelescope/training-library, there will also be lchambers/training-library, jfowler/training-library, jmedina/training-library, and so on.
 
 .. figure:: figures/version_control/forking.png
    :height: 250 pt
