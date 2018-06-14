@@ -1,0 +1,807 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Setting Up Your Computer &mdash; RIA Training Library</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Version Control with git" href="version_control.html" />
+    <link rel="prev" title="The Technical Staff Training Library" href="index.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Technical Staff Training
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                published 2018-6-14
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setting Up Your Computer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-your-email">Configuring your email</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#subscribe-to-mailing-lists">Subscribe to mailing lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-a-printer">Adding a printer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#disable-autocorrect-optional">Disable autocorrect (optional)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#verify-network-mounts">Verify network mounts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-your-own-central-storage-directory">Setting up your own Central Storage directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-a-text-editor">Setting up a text editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-stsci-specific-environment-variables">Configuring STScI-specific environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configure-the-git-version-control-tool">Configure the git version control tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-conda">Installing Conda</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#astroconda-setup">AstroConda setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-your-conda-environments">Using your conda environments</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#verify-idl-is-installed">Verify IDL is installed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#make-sure-you-can-log-in-to-cisco-jabber">Make sure you can log in to Cisco Jabber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#log-in-to-the-confluence-wiki">Log in to the Confluence wiki</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#log-in-to-a-server">Log in to a server</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installing-conda-again">Installing conda again</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-screen-utility">The <code class="docutils literal notranslate"><span class="pre">screen</span></code> utility</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#continuing-your-training">Continuing your training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#additional-resources">Additional resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="version_control.html">Version Control with git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="archives.html">Using MAST (a.k.a. the Archive)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python/index.html">Python for Scientific Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apt_etc/index.html">The Astronomer’s Proposal Tool and the Exposure Time Calculator for HST and JWST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="photometry.html">Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="drizzle.html">Using DrizzlePac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spectroscopy/index.html">Basic Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysynphot.html">Using Pysynphot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="editing_these_documents.html">Editing These Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tricks.html">Tips and Tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainees.html">Past Trainees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boneyard.html">Retired topics</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Technical Staff Training</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Setting Up Your Computer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/computer_setup.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="setting-up-your-computer">
+<h1>Setting Up Your Computer<a class="headerlink" href="#setting-up-your-computer" title="Permalink to this headline">¶</a></h1>
+<p><em>Authors: Keira Brooks, Joseph Long, Matthew Bourque, Sara Ogaz, Dave Borncamp, Amber Armstrong, Michael Dulude, and Tiffany Borders</em></p>
+<p>The Institute provides you a computer when you are hired, and sets it up with a core set of software. (Some new hires get a loaner computer while a new machine is ordered and prepared for them.) They’ll buy you a new one every three years, if you’re good. Even though ITSD (Information Technology Services Department) is responsible for installing important things like Office and antivirus software for all, it’s up to each new member of staff to set their system up the way they want. For science-related uses, most new Institute machines are Macs, so this guide will assume that’s what you have.</p>
+<p>If you experience issues, you should ask your trainer or ITSD. To get help from ITSD, visit the ITSD Service Portal at <a class="reference external" href="https://stsci.service-now.com/itsd">https://stsci.service-now.com/itsd</a>. After you log in, you can search the page for an answer to your problem or you can submit a ticket by clicking on “Something is Broken”.</p>
+<p>(There are <em>external</em> help desks too, <a class="reference external" href="https://stsci.service-now.com/hst">https://stsci.service-now.com/hst</a> (HST) and <a class="reference external" href="https://stsci.service-now.com/jwst">https://stsci.service-now.com/jwst</a> (JWST). For IT issues, you want the internal one. The external helpdesk is for science/instrument support. It is a way for astronomers to ask questions about things like the archive, SSB software, data characteristics, instrument information and the like.)</p>
+<p>You should now have a computer, an ActiveDirectory (AD) username, and a password from ITSD. Let’s get started.</p>
+<div class="section" id="configuring-your-email">
+<h2>Configuring your email<a class="headerlink" href="#configuring-your-email" title="Permalink to this headline">¶</a></h2>
+<p>Space Telescope uses Microsoft Exchange for email. Web-based access is available at <a class="reference external" href="https://mail.stsci.edu/">https://mail.stsci.edu/</a>. For daily use, you should set up a mail client like Outlook on your computer.</p>
+<p>ITSD maintains some <a class="reference external" href="https://stsci.service-now.com/itsd?id=kb_article&amp;sys_id=fe398bcddb96360042685434ce961981">guides for common mail clients</a>.</p>
+</div>
+<div class="section" id="subscribe-to-mailing-lists">
+<h2>Subscribe to mailing lists<a class="headerlink" href="#subscribe-to-mailing-lists" title="Permalink to this headline">¶</a></h2>
+<p>Subscribe to <code class="docutils literal notranslate"><span class="pre">sci_tech</span></code> and <code class="docutils literal notranslate"><span class="pre">tips_announce</span></code> through the Outlook Web Access interface at <a class="reference external" href="http://mail.stsci.edu/">http://mail.stsci.edu/</a>. Log in with your AD username and password. The way to subscribe to lists is well hidden; you must log in, choose “Options”, then “See all options”, select “Groups” from the sidebar, click “Join”  under “Public Groups I Belong To”. In the window that pops open, search for the mailing list name and click “Join”.</p>
+<p>You should already be subscribed to <code class="docutils literal notranslate"><span class="pre">ins_staff</span></code>, <code class="docutils literal notranslate"><span class="pre">ins_aura</span></code>, <code class="docutils literal notranslate"><span class="pre">ins_riab</span></code> (if appropriate), and <code class="docutils literal notranslate"><span class="pre">ins_tech_staff</span></code> (if appropriate).</p>
+<p>There will probably be other mailing lists for your instrument team, but you will need to be added to those by the team lead. Be sure to ask your team lead whether they need to add you to any lists.</p>
+<p>The lists <code class="docutils literal notranslate"><span class="pre">pylunch</span></code>, <code class="docutils literal notranslate"><span class="pre">python-interested</span></code> and <code class="docutils literal notranslate"><span class="pre">macx_users</span></code> can also be subscribed to in the same way. ITSD also provides <a class="reference external" href="https://stsci.service-now.com/itsd?id=kb_article&amp;sys_id=f6d24767db954740591e79fdae961945">more information on Exchange</a>, if you’re interested.</p>
+</div>
+<div class="section" id="adding-a-printer">
+<h2>Adding a printer<a class="headerlink" href="#adding-a-printer" title="Permalink to this headline">¶</a></h2>
+<p>Choose a printer near your office from <a class="reference external" href="https://stsci.service-now.com/itsd?id=kb_article&amp;sys_id=1012a3cfdbbb36c0fb50f9baae961932">this list of printers</a>. There are <a class="reference external" href="https://stsci.service-now.com/itsd?id=kb_article&amp;sys_id=5f867c29dbb3fe80fb50f9baae961974">instructions for printer setup</a> for different operating systems. The one you want is “Adding a Printer in Mac OS X”.</p>
+</div>
+<div class="section" id="disable-autocorrect-optional">
+<h2>Disable autocorrect (optional)<a class="headerlink" href="#disable-autocorrect-optional" title="Permalink to this headline">¶</a></h2>
+<p>Since Mac OS X 10.10, smartphone-style autocorrect is standard in text fields throughout the OS. This is perhaps more useful in theory than in practice, especially when typing a lot of jargon that is not in the OS dictionary.</p>
+<p>To disable it, go to the Apple menu at the top left of your screen and open System Preferences. Choose “Keyboard”, then the “Text” tab within that pane, and uncheck “Correct spelling automatically”. Close System Preferences, and the annoyance should be resolved.</p>
+</div>
+<div class="section" id="verify-network-mounts">
+<h2>Verify network mounts<a class="headerlink" href="#verify-network-mounts" title="Permalink to this headline">¶</a></h2>
+<p>New computers set up by ITSD automatically connect certain folders to servers on the Institute network. These are called “Central Storage”, and you will use them to exchange large files with coworkers and to make files from your personal machine available on the back-room servers.</p>
+<p>Open a terminal and check that you can list the contents of the <code class="docutils literal notranslate"><span class="pre">/grp/hst</span></code>, <code class="docutils literal notranslate"><span class="pre">/grp/jwst</span></code>, and <code class="docutils literal notranslate"><span class="pre">/user</span></code> directories, as shown:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls /grp/hst
+HST_Arch_Proj acs_testing   etc           nicmos        tac           wfc3c         wfc3i
+OTA           adrizzle      etcrlbkup     prd           telemetry     wfc3d         wfc3j
+acs           cdbs          fgs           pyetc         usersupport   wfc3e         wfc3k
+acs2          cos           frc           ssb           wasapsb       wfc3f         wfc3l
+acs3          cos2          frontier1     stis          wfc3a         wfc3g         wfpc2
+acs4          cos3          frontier2     synphot       wfc3b         wfc3h
+</pre></div>
+</div>
+<p>(If, instead, you see something like this…</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls /grp/hst
+ls: /grp/hst: No such file or directory
+</pre></div>
+</div>
+<p>… then you need to talk to ITSD.)</p>
+</div>
+<div class="section" id="setting-up-your-own-central-storage-directory">
+<h2>Setting up your own Central Storage directory<a class="headerlink" href="#setting-up-your-own-central-storage-directory" title="Permalink to this headline">¶</a></h2>
+<p>Users can store files under their username at <code class="docutils literal notranslate"><span class="pre">/user/myusername</span></code>. This is useful for sharing large files with your colleagues. In fact, you’ll be using your Central Storage directory to send your training exercises to your trainers later on.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p class="last">Verify that your Central Storage directory exists with an <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">/user/myusername</span></code> (where you replace <code class="docutils literal notranslate"><span class="pre">myusername</span></code> with your username). If you get a “not found” or “permission denied” error, you will have to get in touch with ITSD.</p>
+</div>
+<p>If you’re unfamiliar with UNIX file permissions, now is a good time to review them.</p>
+<p>While at STScI, you may use proprietary science data in your analyses that should not be shared outside your team. Your Central Store directory is, by default, readable by other users in the institute. This, believe it or not, is not a mistake! This choice makes it easy to use to share large files with your colleagues, but must be kept in mind when handling sensitive data.</p>
+<p>If you have data you don’t wish others to see, you must be sure to set the permissions appropriately on the directory with the data. Files and folders can be assigned read, write, and execute permissions that apply to the owning user, owning group, and others. (The owning user and group are set when the file or directory is created; use <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-l</span> <span class="pre">FILE_OR_DIRECTORY_NAME</span></code> to see what they’re set to: owning user in the 3rd column, owning group in the 4th.)</p>
+<p>The command to change permissions is <code class="docutils literal notranslate"><span class="pre">chmod</span></code>, and it takes the form of <code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">PERMS</span> <span class="pre">FILE_OR_DIRECTORY</span></code>. The <code class="docutils literal notranslate"><span class="pre">PERMS</span></code> string can be built up from the options in the table below.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="41%" />
+<col width="18%" />
+<col width="18%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">&#160;</th>
+<th class="head">Read</th>
+<th class="head">Write</th>
+<th class="head">Execute</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>User</td>
+<td>u=r</td>
+<td>u=w</td>
+<td>u=x</td>
+</tr>
+<tr class="row-odd"><td>Group</td>
+<td>g=r</td>
+<td>g=w</td>
+<td>g=x</td>
+</tr>
+<tr class="row-even"><td>Other / World</td>
+<td>o=r</td>
+<td>o=w</td>
+<td>o=x</td>
+</tr>
+</tbody>
+</table>
+<p>For example, if you want a file to be readable and writable by yourself, only readable by people in your group, and completely inaccessible others, you would use <code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">u=rw,g=r,o=</span> <span class="pre">myfile.txt</span></code>. Make sure your <code class="docutils literal notranslate"><span class="pre">u=rw,g=r,o=</span></code> string has no spaces in it, or it’ll get interpreted as part of the next argument! Also, note how we used <code class="docutils literal notranslate"><span class="pre">o=</span></code> to <strong>clear</strong> the permissions. Omitting <code class="docutils literal notranslate"><span class="pre">o=</span></code> from the list would tell chmod to leave whatever permissions were already there <a class="footnote-reference" href="#umask" id="id1">[1]</a>.</p>
+<p>If you have a directory full of files whose permissions you want to change, use the <code class="docutils literal notranslate"><span class="pre">-R</span></code> command. For example, to recursively change the permissions on a folder <code class="docutils literal notranslate"><span class="pre">myfolder/</span></code> and files <code class="docutils literal notranslate"><span class="pre">myfolder/a.fits</span></code> and <code class="docutils literal notranslate"><span class="pre">myfolder/b.fits</span></code>, you would use this command: <code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">-R</span> <span class="pre">u=rw,g=r,o=</span> <span class="pre">myfolder</span></code>.</p>
+<p><strong>Note:</strong> the “execute” permission should only be set for programs (and scripts) with one major exception: for <strong>directories</strong>, the “execute” permission means “can use files from”… so even if you cannot read the list of files in the directory, if you know the name of a particular file with world-readable access and the “execute” permission is available to you on the directory, you can still open the file. This is kind of subtle, so check out <a class="reference external" href="http://unix.stackexchange.com/questions/21251/how-do-directory-permissions-in-linux-work">this StackOverflow thread</a> for additional background.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p>Make a subdirectory of your <code class="docutils literal notranslate"><span class="pre">/user/myusername</span></code> directory called <code class="docutils literal notranslate"><span class="pre">private</span></code> and make it usable only by you.</p>
+<p class="last">Use <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">-l</span></code> to verify the permissions and ownership are what you expect. If you’re not sure, ask your trainer to try and read a file in your new private directory!</p>
+</div>
+</div>
+<div class="section" id="setting-up-a-text-editor">
+<h2>Setting up a text editor<a class="headerlink" href="#setting-up-a-text-editor" title="Permalink to this headline">¶</a></h2>
+<p>Some people have a preference for a text editor for programming like <code class="docutils literal notranslate"><span class="pre">vim</span></code> or <code class="docutils literal notranslate"><span class="pre">emacs</span></code>. For everyone else, TextWrangler is installed on your Institute machine already, and is a good starting point.</p>
+<div class="figure" id="id5">
+<img alt="The TextWrangler icon." src="_images/textwrangler_icon.png" />
+<p class="caption"><span class="caption-text">The TextWrangler icon.</span></p>
+</div>
+<p>The first step is to open up TextWrangler by double-clicking the icon in your Applications folder. Once you’ve done that, select the “Install Command Line Tools…” option from the main menu as shown.</p>
+<div class="figure" id="id6">
+<img alt="The menu showing the &quot;Install Command Line Tools...&quot; option" src="_images/textwrangler_install_command_line_tools_menu.png" />
+<p class="caption"><span class="caption-text">The menu showing the “Install Command Line Tools…” option.</span></p>
+</div>
+<p>Choose to install the command line tools, as shown. You will be prompted for your password a couple of times.</p>
+<div class="figure" id="id7">
+<img alt="Dialog box asking you to confirm that you want to install the command line tools." src="_images/textwrangler_install_command_line_tools_prompt.png" />
+<p class="caption"><span class="caption-text">Dialog box asking you to confirm that you want to install the command line tools.</span></p>
+</div>
+<p>Once they’ve installed, you should see a window like this one:</p>
+<div class="figure" id="id8">
+<img alt="Dialog box for successful installation." src="_images/textwrangler_install_command_line_tools_success.png" />
+<p class="caption"><span class="caption-text">Dialog box for successful installation.</span></p>
+</div>
+<p>These steps make a new command, <code class="docutils literal notranslate"><span class="pre">edit</span></code>, available in your terminal.</p>
+<p>Quit TextWrangler, then open a new terminal window and make sure TextWrangler appears when you use the edit command (e.g. <code class="docutils literal notranslate"><span class="pre">edit</span> <span class="pre">myfile.txt</span></code>).</p>
+</div>
+<div class="section" id="configuring-stsci-specific-environment-variables">
+<span id="computer-setup-environment"></span><h2>Configuring STScI-specific environment variables<a class="headerlink" href="#configuring-stsci-specific-environment-variables" title="Permalink to this headline">¶</a></h2>
+<p>A lot of tools developed within STScI assume the existence of certain environment variables that point to data on servers within the Institute. The default shell for new computers at the Institute is <code class="docutils literal notranslate"><span class="pre">tcsh</span></code>, however you will want to change this to <code class="docutils literal notranslate"><span class="pre">bash</span></code>. To do so, you have to do a couple things.</p>
+<p>In the terminal, change your shell with the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chsh</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">bash</span>
+</pre></div>
+</div>
+<p>Close your terminal, and open a new one to finalize this change.</p>
+<p>Now, you need to set the environment variables in the file <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code> in your home directory. This file probably does not exist so you will have to create it.</p>
+<p>Open (or create) <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code> with the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">edit</span> <span class="o">~/.</span><span class="n">bash_profile</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Files starting with a <code class="docutils literal notranslate"><span class="pre">.</span></code> are hidden in the Finder, so it’s often easier to open them from the command line.</p>
+</div>
+<p>Here is an example <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code> that you can copy and paste into yours:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paths and stuff for accessing CDBS stuff</span>
+<span class="c1"># For WFC3</span>
+<span class="n">export</span> <span class="n">iref</span><span class="o">=</span><span class="s2">&quot;/grp/hst/cdbs/iref/&quot;</span>
+
+<span class="c1"># For ACS</span>
+<span class="n">export</span> <span class="n">jref</span><span class="o">=</span><span class="s2">&quot;/grp/hst/cdbs/jref/&quot;</span>
+<span class="n">export</span> <span class="n">jtab</span><span class="o">=</span><span class="s2">&quot;/grp/hst/cdbs/jtab/&quot;</span>
+
+<span class="c1"># For COS</span>
+<span class="n">export</span> <span class="n">lref</span><span class="o">=</span><span class="s2">&quot;/grp/hst/cdbs/lref/&quot;</span>
+
+<span class="c1"># For STIS</span>
+<span class="n">export</span> <span class="n">oref</span><span class="o">=</span><span class="s2">&quot;/grp/hst/cdbs/oref/&quot;</span>
+
+<span class="c1"># Set a default editor</span>
+<span class="c1"># If you prefer another editor, change the export EDITOR and VISUAL lines accordingly.</span>
+<span class="n">export</span> <span class="n">EDITOR</span><span class="o">=</span><span class="n">edit</span>
+<span class="n">export</span> <span class="n">VISUAL</span><span class="o">=</span><span class="n">edit</span>
+
+<span class="c1"># Pysynphot</span>
+<span class="n">export</span> <span class="n">PYSYN_CDBS</span><span class="o">=</span><span class="s2">&quot;/grp/hst/cdbs/&quot;</span>
+</pre></div>
+</div>
+<p>As you may have guessed, setting variables in <code class="docutils literal notranslate"><span class="pre">bash</span></code> takes the form of <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">NAMEOFVAR=&quot;/value/for/var&quot;</span></code>. You should set all of these variables, even if you are not on one of the listed instrument teams, as later training exercises will depend on them being set.</p>
+<p>It is not obvious, but the trailing slash in the $oref definition is required for CALSTIS to function properly.  Be sure not to leave it off.</p>
+<p>To apply these changes, save the file and typing the following into the command line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">~/.</span><span class="n">bash_profile</span>
+</pre></div>
+</div>
+<p>To check that your changes have taken effect, open a <strong>new terminal window</strong> and type <code class="docutils literal notranslate"><span class="pre">echo</span> <span class="pre">$oref</span></code>. You should see the value for <code class="docutils literal notranslate"><span class="pre">oref</span></code> from above printed out in the terminal.</p>
+<p>There are a few different files that can be executed when opening a new terminal, depending on arcane details everyone would rather ignore <a class="footnote-reference" href="#bashrc" id="id2">[2]</a>. To make sure your <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code> file gets sourced no matter how <code class="docutils literal notranslate"><span class="pre">bash</span></code> is started, it is necessary to make a <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> file that simply loads the contents of <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code>. This is what that would look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">[</span> <span class="o">-</span><span class="n">f</span> <span class="o">~/.</span><span class="n">bash_profile</span> <span class="p">];</span> <span class="n">then</span>
+   <span class="n">source</span> <span class="o">~/.</span><span class="n">bash_profile</span>
+<span class="n">fi</span>
+</pre></div>
+</div>
+<p>Save that in <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> and shed a single tear for the ineffable complexity of the UNIX.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you prefer another editor, change the <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">EDITOR</span></code> and <code class="docutils literal notranslate"><span class="pre">VISUAL</span></code> lines accordingly.</p>
+</div>
+</div>
+<div class="section" id="configure-the-git-version-control-tool">
+<span id="git-configuration"></span><h2>Configure the git version control tool<a class="headerlink" href="#configure-the-git-version-control-tool" title="Permalink to this headline">¶</a></h2>
+<p>We will use git in the <a class="reference internal" href="version_control.html"><span class="doc">Version Control with git</span></a> module later on, but let’s take the opportunity now to tell it your name and email address. These will be used by git to identify who changed particular versions of the code. Run the commands below, updating them with your own name and work email address:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;Name of Hire&quot;</span>
+<span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="s2">&quot;nhire@stsci.edu&quot;</span>
+</pre></div>
+</div>
+<p>It’s also a good idea to tell it about your preferred text editor (here we use <code class="docutils literal notranslate"><span class="pre">edit</span></code>, as an alias to TextWrangler), which git will sometimes open for you when it wants you to describe your changes.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">core</span><span class="o">.</span><span class="n">editor</span> <span class="s2">&quot;edit&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-conda">
+<span id="id3"></span><h2>Installing Conda<a class="headerlink" href="#installing-conda" title="Permalink to this headline">¶</a></h2>
+<p>The Institute’s Science Software Branch currently distributes a package that contains some essentials for scientific computing for astronomy, and we are now switching over to Conda (as the direct successor to Ureka, the previous Institute software package system). As a result, here we will step through installing Conda and setting up your own environments with the necessary packages. One of the main reasons we recommend this is because of Python 2.7 and Python 3.5 (the most recent version of Python) and the differences between them. We discuss this further in the Python module of the training, however since we are working with both Python 2.7 and Python 3+ code at the Institute, it is beneficial to set up environments for both.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">We herein follow along with the SSB-recommended method for installing AstroConda, found here: <a class="reference external" href="http://astroconda.readthedocs.io/en/latest/installation.html">AstroConda Installation</a>. We will make some small deviations from the instructions found there, but the result is no different.</p>
+</div>
+<p>Getting started, we must install Conda from <code class="docutils literal notranslate"><span class="pre">bash</span></code>. If you changed your shell to bash as described in <a class="reference internal" href="#computer-setup-environment"><span class="std std-ref">Configuring STScI-specific environment variables</span></a>, that should be what you get when you open a new terminal window. Open one now, and download the Miniconda3 installer with the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">OL</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">repo</span><span class="o">.</span><span class="n">continuum</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">miniconda</span><span class="o">/</span><span class="n">Miniconda3</span><span class="o">-</span><span class="n">latest</span><span class="o">-</span><span class="n">MacOSX</span><span class="o">-</span><span class="n">x86_64</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>You should now have a file named “Miniconda3-latest-MacOSX-x86_64.sh” in your home directory. To install it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bash</span> <span class="n">Miniconda3</span><span class="o">-</span><span class="n">latest</span><span class="o">-</span><span class="n">MacOSX</span><span class="o">-</span><span class="n">x86_64</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>Follow the instructions as prompted. Accept the default options to install in your home directory. Now miniconda is installed!</p>
+<p>Conda is available in a bunch of flavors (“Ana-” and “mini-“, Python 2 and Python 3), but ultimately they do the same things. We will create an AstroConda environment for Python 2.7, which you may need for older scripts and testing, and an environment for Python 3.5 with the latest version of the language and associated packages.</p>
+<p>If you want a detailed introduction on how to use Conda, you can check out the <a class="reference external" href="http://conda.pydata.org/docs/test-drive.html">Conda test drive</a> which will guide you step-by-step through some of what Conda can do. If instead, you are on board for a quick environment setup you can follow along here.</p>
+<p>Close that window, and open a new terminal. Check to make sure your terminal can see the Conda command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span>
+</pre></div>
+</div>
+<p>This should show some usage instructions. If you get a message that the command is not found, <em>talk to your buddy/trainer</em>.</p>
+<div class="section" id="astroconda-setup">
+<span id="id4"></span><h3>AstroConda setup<a class="headerlink" href="#astroconda-setup" title="Permalink to this headline">¶</a></h3>
+<p>With Anaconda, we get to install all our own programs and packages. We want to use the Institute’s AstroConda repository as it includes most of the packages people at the institute will need for their functional work and research. But, we need to tell Anaconda to do this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">add</span> <span class="n">channels</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">ssb</span><span class="o">.</span><span class="n">stsci</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="n">astroconda</span>
+</pre></div>
+</div>
+<p>We can now checkout our current environment(s) and add some new ones. First, to see the list of environments:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">info</span> <span class="o">--</span><span class="n">envs</span>
+</pre></div>
+</div>
+<p>Or:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="nb">list</span>
+</pre></div>
+</div>
+<p>You should only see your root environment. For reasons that are a little confusing, we don’t want to use our <code class="docutils literal notranslate"><span class="pre">root</span></code> environment to do all our work, so let’s create a new environment that will be our main environment that runs Python 3.5. The command takes a name and a list of packages to install. The <code class="docutils literal notranslate"><span class="pre">stsci</span></code> package pulls in everything else, and we also want to make sure the Jupyter Notebook gets installed, so the command becomes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">--</span><span class="n">name</span> <span class="n">astroconda</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.5</span> <span class="n">stsci</span> <span class="n">notebook</span>
+</pre></div>
+</div>
+<p>We have called this environment <code class="docutils literal notranslate"><span class="pre">astroconda</span></code> because we are installing the main AstroConda packages into it, but you can call this environment whatever you want. This repository includes are your usual Python friends (NumPy, Astropy, matplotlib, etc.) and also makes sure that you have IPython, Jupyter Notebook, and additional Institute-specific Python packages. We can activate this environment and check to see exactly which packages have been added:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">activate</span> <span class="n">astroconda</span>
+<span class="n">conda</span> <span class="nb">list</span>
+</pre></div>
+</div>
+<p>To check the version of Python, type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">--</span><span class="n">version</span>
+</pre></div>
+</div>
+<p>Some people and systems within the Institute have not upgraded to Python 3.5 yet. When running older code, it helps to have a Python 2.7 environment available, so let’s create one. Here we’ve added IRAF and PyRAF to the package list for installation, as well. (Hopefully, they will soon be retired.)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">--</span><span class="n">name</span> <span class="n">astroconda27</span> <span class="n">python</span><span class="o">=</span><span class="mf">2.7</span> <span class="n">stsci</span> <span class="n">iraf</span> <span class="n">pyraf</span> <span class="n">notebook</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It’s impractical to keep the exact same set of extra packages in all your environments, so it’s best to just pick one that you will use more often and use other environments for specific tasks.</p>
+</div>
+<p>Lastly, we need to know how to add more packages (and delete them) in the future. The following is how you can do this from <code class="docutils literal notranslate"><span class="pre">root</span></code> or a different environment. If you are in the environment you are changing (that is, you have done <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">activate</span> <span class="pre">[name</span> <span class="pre">of</span> <span class="pre">environment]</span></code> already in that terminal), you do not need the <code class="docutils literal notranslate"><span class="pre">--name</span> <span class="pre">[name</span> <span class="pre">of</span> <span class="pre">environment]</span></code> part:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">--</span><span class="n">name</span> <span class="p">[</span><span class="n">name</span> <span class="n">of</span> <span class="n">environment</span><span class="p">]</span> <span class="p">[</span><span class="n">name</span> <span class="n">of</span> <span class="n">package</span><span class="p">]</span>
+<span class="n">conda</span> <span class="n">remove</span> <span class="o">--</span><span class="n">name</span> <span class="p">[</span><span class="n">name</span> <span class="n">of</span> <span class="n">environment</span><span class="p">]</span> <span class="p">[</span><span class="n">name</span> <span class="n">of</span> <span class="n">package</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>If you decide that you don’t like/need an environment, you can delete it!</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">remove</span> <span class="o">--</span><span class="n">name</span> <span class="p">[</span><span class="n">name</span> <span class="n">of</span> <span class="n">environment</span><span class="p">]</span> <span class="o">--</span><span class="nb">all</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For more information on dealing with Conda and playing with environments, check out the <a class="reference external" href="http://conda.pydata.org/docs/index.html">Conda page</a> .</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Astroconda is a set of packages that replaces Ureka, which was one big honking package containing everything and the kitchen sink. You may encounter Ureka, or hear about “SSBx”, “SSBdev”, and “SSBrel” environments (which were specific Ureka environments, now deprecated). However, you should use conda with Astroconda since Ureka is no longer being updated.</p>
+</div>
+</div>
+<div class="section" id="using-your-conda-environments">
+<h3>Using your conda environments<a class="headerlink" href="#using-your-conda-environments" title="Permalink to this headline">¶</a></h3>
+<p>When you open a new terminal, the Conda system implicitly puts you in a “root” environment. This is rarely the environment you want to use for scientific computing. (In fact, installing STScI packages into the root environment is not supported.) So, before you run your scripts, you must be sure to activate the appropriate environment!</p>
+<p>For Python 3.5, this looks like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ source activate astroconda
+</pre></div>
+</div>
+<p>For older scripts that need Python 2.7 (or anything that needs PyRAF):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ source activate astroconda27
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you don’t want to do this every time you open a terminal, you can add the appropriate line to the end of your <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="verify-idl-is-installed">
+<h2>Verify IDL is installed<a class="headerlink" href="#verify-idl-is-installed" title="Permalink to this headline">¶</a></h2>
+<p>IDL should be pre-installed on new Institute machines. To check, open a terminal window and type <code class="docutils literal notranslate"><span class="pre">idl</span></code>. You should see something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ idl
+IDL Version 8.4, Mac OS X (darwin x86_64 m64). (c) 2013, Exelis Visual Information Solutions, Inc.
+Installation number: 90853.
+Licensed for use by: Space Telescope
+
+IDL&gt;
+</pre></div>
+</div>
+<p>If not, contact computer support.</p>
+</div>
+<div class="section" id="make-sure-you-can-log-in-to-cisco-jabber">
+<h2>Make sure you can log in to Cisco Jabber<a class="headerlink" href="#make-sure-you-can-log-in-to-cisco-jabber" title="Permalink to this headline">¶</a></h2>
+<p>Cisco Jabber should already be installed on your machine. (Contact ITSD if it’s not.) Open the Cisco Jabber application and sign in with your AD username and password. Cisco Jabber connects with your calendar and phone, and will tell you if the person you’re trying to message is in a meeting or does not want to be disturbed. You can also set it up to receive calls through your computer (for example, for teleworking).</p>
+<p>ITSD maintains a guide with more information <a class="reference external" href="https://stsci.service-now.com/itsd?id=kb_article&amp;sys_id=8910c248db6a47040c0a5595ce9619a9">in their Service Portal</a>.</p>
+</div>
+<div class="section" id="log-in-to-the-confluence-wiki">
+<span id="confluence-intro"></span><h2>Log in to the Confluence wiki<a class="headerlink" href="#log-in-to-the-confluence-wiki" title="Permalink to this headline">¶</a></h2>
+<p>Log in to the Confluence wiki at <a class="reference external" href="https://confluence.stsci.edu/">https://confluence.stsci.edu/</a> using your AD credentials.</p>
+<p>Visit the <a class="reference external" href="https://confluence.stsci.edu/display/INSTraining/New+hire+training">New hire training</a> page, and select the appropriate schedule from the links there (e.g. “New hire training for technical staff (February 2017)” if that is the most recent).</p>
+<p>On that page, there is a “Watch” link in the upper right corner below the blue title bar. Click that so that you will receive an email if there are last-minute updates to the schedule (for example, if someone has to reschedule their lecture).</p>
+<p>If you are in the Research and Instrument Analysis Branch, you should also bookmark the <a class="reference external" href="https://confluence.stsci.edu/display/IDWP/INS+Technical+Staff">INS Technical Staff wiki page</a>.</p>
+</div>
+<div class="section" id="log-in-to-a-server">
+<h2>Log in to a server<a class="headerlink" href="#log-in-to-a-server" title="Permalink to this headline">¶</a></h2>
+<p>The Institute has a whole herd of (mostly) Linux servers sitting in the server room downstairs. If you have a long-running task that you don’t want to interrupt by taking your laptop home or rebooting your desktop, you should use a back-room server to run your analysis.</p>
+<p>The command to remotely connect to a server is <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">SERVERNAME</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">plhstins1</span></code> or <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">science1</span></code>). It will attempt to log you in with your current username and prompt you for your password. This is the same password you use to unlock your computer. To enable X forwarding you can use the <code class="docutils literal notranslate"><span class="pre">-XY</span></code> option (e.g. <code class="docutils literal notranslate"><span class="pre">ssh</span> <span class="pre">-XY</span> <span class="pre">plhstins1</span></code>). This allows for displays that use X (which is Linux’s default backend) to be forwarded to your monitor.</p>
+<p>Any commands you run in an ssh session will execute on the server, not on your personal computer. This means any data you need should be copied to a Central Store directory so that the server can see it.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p>Log into one of the servers named below using <code class="docutils literal notranslate"><span class="pre">ssh</span></code>. Using your laptop or desktop, save a text file in your Central Storage directory (e.g. <code class="docutils literal notranslate"><span class="pre">/user/myname/temp.txt</span></code>). Within your SSH session, verify that you can read it from the server you chose (e.g. <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">/user/myname/temp.txt</span></code>).</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="39%" />
+<col width="61%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Server hostname</th>
+<th class="head">Use</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>plhstins1</td>
+<td>INS HST functional work</td>
+</tr>
+<tr class="row-odd"><td>plhstins2</td>
+<td>INS HST functional work</td>
+</tr>
+<tr class="row-even"><td>plhstins3</td>
+<td>INS HST functional work</td>
+</tr>
+<tr class="row-odd"><td>witserv1</td>
+<td>INS JWST functional work</td>
+</tr>
+<tr class="row-even"><td>witserv2</td>
+<td>INS JWST functional work</td>
+</tr>
+<tr class="row-odd"><td>witserv3</td>
+<td>INS JWST functional work</td>
+</tr>
+<tr class="row-even"><td>science1</td>
+<td>Science / research use</td>
+</tr>
+<tr class="row-odd"><td>science3</td>
+<td>Science / research use</td>
+</tr>
+<tr class="row-even"><td>science4</td>
+<td>Science / research use</td>
+</tr>
+<tr class="row-odd"><td>science5</td>
+<td>Science / research use</td>
+</tr>
+<tr class="row-even"><td>science6</td>
+<td>Science / research use</td>
+</tr>
+<tr class="row-odd"><td>plscigpu1</td>
+<td>GPU computing</td>
+</tr>
+<tr class="row-even"><td>plscigpu2</td>
+<td>GPU computing</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="installing-conda-again">
+<h3>Installing conda again<a class="headerlink" href="#installing-conda-again" title="Permalink to this headline">¶</a></h3>
+<p>What’s this? Installing conda <em>again</em>? That’s right, it’s so much fun we have you do it twice.</p>
+<p>That’s actually not the reason why. The servers at STScI run Linux (for the most part) and will not be able to run the Mac version of Anaconda you installed earlier. Besides, that version is installed to your local laptop or desktop disk, so it wouldn’t be accessible to programs running on the servers at STScI. To use conda for your server computing needs, you need to set it up on one of the servers separately. (Fortunately, you only have to go through the process on <strong>one</strong> Linux server to make conda available on <strong>all</strong> the Linux servers.)</p>
+<p>One important consequence of this is that you will be responsible for installing the same things into both environments. Running <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">mypackage</span></code> on your laptop or desktop will not automatically make it available when you ssh to <code class="docutils literal notranslate"><span class="pre">plhstins1</span></code> or similar.</p>
+<p>All the servers have network-mounted home directories (i.e. <code class="docutils literal notranslate"><span class="pre">/home/myname</span></code>) and access to the Central Store (i.e. <code class="docutils literal notranslate"><span class="pre">/user/myname</span></code>). Conda wants to install in the home directory by default, but there is less free space in your home directory than on Central Store. Therefore, we will explain how to install to your Central Store directory instead.</p>
+<p>First, ssh in to one of the servers mentioned in the previous exercise:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ssh plhstins1
+plhstins1&gt;
+</pre></div>
+</div>
+<p>By default, these servers run <code class="docutils literal notranslate"><span class="pre">tcsh</span></code> (not <code class="docutils literal notranslate"><span class="pre">bash</span></code>) when you log in. Start a <code class="docutils literal notranslate"><span class="pre">bash</span></code> shell:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>plhstins1&gt; bash
+bash$
+</pre></div>
+</div>
+<p>Change directories to your Central Store directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>bash$ cd &quot;/user/$(logname)&quot;
+</pre></div>
+</div>
+<p>Download and install the latest Miniconda for Linux using <code class="docutils literal notranslate"><span class="pre">curl</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>bash$ curl -OL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash$ bash Miniconda3-latest-Linux-x86_64.sh -b -p &quot;/user/$(logname)/miniconda3&quot;
+</pre></div>
+</div>
+<p>It’ll run for a little bit and output a message when it finishes.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> and <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code> files you made earlier for your personal computer have counterparts on the servers. We have to add your miniconda folder to the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> on the server for the <code class="docutils literal notranslate"><span class="pre">conda</span></code> command to work.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>bash$ echo &quot;export PATH=\&quot;/user/$(logname)/miniconda3/bin:\$PATH\&quot;&quot; &gt;&gt; ~/.bashrc
+</pre></div>
+</div>
+<p>There are lines in the default <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code> that comes with your account ensuring your <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> gets loaded, so you shouldn’t need to edit <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code> at all.</p>
+<p>Log out and ssh to the server again:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>bash$ exit
+plhstins1&gt; exit
+logout
+Connection to plhstins1.stsci.edu closed.
+$ ssh plhstins1
+plhstins1&gt;
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">conda</span></code> command works with <code class="docutils literal notranslate"><span class="pre">bash</span></code>, not <code class="docutils literal notranslate"><span class="pre">tcsh</span></code>. So, before you continue, start a bash shell on the server you chose:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>plhstins1&gt; bash
+bash$
+</pre></div>
+</div>
+<p>Then check that the <code class="docutils literal notranslate"><span class="pre">conda</span></code> command is available:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>bash$ which conda
+/user/myname/miniconda3/bin/conda
+</pre></div>
+</div>
+<p>Now that you have the <code class="docutils literal notranslate"><span class="pre">conda</span></code> command available, follow the <a class="reference internal" href="#astroconda-setup"><span class="std std-ref">AstroConda setup</span></a> instructions again on the server.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can have ITSD change your default shell to <code class="docutils literal notranslate"><span class="pre">bash</span></code> on the Linux servers. Just submit a ticket through the <a class="reference external" href="https://stsci.service-now.com/itsd">ITSD Service Portal</a> with your request. If you opt to stick with the default (tcsh), remember you must start <code class="docutils literal notranslate"><span class="pre">bash</span></code> after sshing to the server before the <code class="docutils literal notranslate"><span class="pre">conda</span></code> command will be available.</p>
+</div>
+</div>
+<div class="section" id="the-screen-utility">
+<h3>The <code class="docutils literal notranslate"><span class="pre">screen</span></code> utility<a class="headerlink" href="#the-screen-utility" title="Permalink to this headline">¶</a></h3>
+<p>One tool that makes working with back-room servers way more flexible is <code class="docutils literal notranslate"><span class="pre">screen</span></code>. The <code class="docutils literal notranslate"><span class="pre">screen</span></code> utility lets you <strong>detach</strong> from a running session, go away (shut down your computer, disconnect, whatever), and then <strong>reattach</strong> to it later.</p>
+<p>Here’s a possible scenario: Jane wants to leave on Friday, but needs to run her <code class="docutils literal notranslate"><span class="pre">calibrate_everything.py</span></code> script that takes 12 hours to complete. First, she connects to a server with <code class="docutils literal notranslate"><span class="pre">ssh</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>janecomputer:~ janeuser$ ssh science1
+The authenticity of host &#39;science1 (130.167.200.161)&#39; can&#39;t be established.
+RSA key fingerprint is 5e:21:0f:02:d9:23:16:7c:a8:28:a7:1b:c3:60:2f:81.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added &#39;science1,130.167.200.161&#39; (RSA) to the list of known hosts.
+Password:
+
+   ****************************************************************************
+   * This US Government system is for authorized users only. By accessing   *
+   * this system you are consenting to complete monitoring with no            *
+   * expectation of privacy. Unauthorized access or use may subject you to    *
+   * disciplinary action and criminal prosecution                             *
+   ****************************************************************************
+
+science1&gt;
+</pre></div>
+</div>
+<p>Then she starts a <code class="docutils literal notranslate"><span class="pre">screen</span></code> session and gives it the name <code class="docutils literal notranslate"><span class="pre">mylongjob</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">science1</span><span class="o">&gt;</span> <span class="n">screen</span> <span class="o">-</span><span class="n">S</span> <span class="n">mylongjob</span>
+</pre></div>
+</div>
+<p>The terminal window clears and the prompt is redisplayed at the top. She changes to the appropriate directory and runs her script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">science1</span><span class="o">&gt;</span> <span class="n">source</span> <span class="n">activate</span> <span class="n">astroconda</span>
+<span class="p">(</span><span class="n">astroconda</span><span class="p">)</span><span class="n">science1</span><span class="o">&gt;</span> <span class="n">python</span> <span class="n">calibrate_everything</span><span class="o">.</span><span class="n">py</span>
+<span class="n">Working</span><span class="o">...</span>
+</pre></div>
+</div>
+<p>While it’s running, she uses a magic key combination to detach the screen session: <kbd class="kbd docutils literal notranslate">Ctrl-a</kbd> and then <kbd class="kbd docutils literal notranslate">d</kbd>. The script output disappears and she’s left with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">science1</span><span class="o">&gt;</span> <span class="n">screen</span>
+<span class="p">[</span><span class="n">detached</span><span class="p">]</span>
+<span class="n">science1</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>On Monday, she connects to <code class="docutils literal notranslate"><span class="pre">science1</span></code> via <code class="docutils literal notranslate"><span class="pre">ssh</span></code> as before, but she can’t remember what she named the screen session so she runs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">science1</span><span class="o">&gt;</span> <span class="n">screen</span> <span class="o">-</span><span class="n">ls</span>
+<span class="n">There</span> <span class="n">are</span> <span class="n">screens</span> <span class="n">on</span><span class="p">:</span>
+    <span class="mf">28724.</span><span class="n">mylongjob</span>    <span class="p">(</span><span class="n">Detached</span><span class="p">)</span>
+<span class="mi">1</span> <span class="n">Socket</span> <span class="ow">in</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">screen</span><span class="o">/</span><span class="n">S</span><span class="o">-</span><span class="n">janeuser</span>
+</pre></div>
+</div>
+<p>Then she re-attaches to the screen session with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">science1</span><span class="o">&gt;</span> <span class="n">screen</span> <span class="o">-</span><span class="n">r</span> <span class="n">mylongjob</span>
+</pre></div>
+</div>
+<p>which clears the current terminal output and shows her the tail end of her script’s output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">astroconda</span><span class="p">)</span><span class="n">science1</span><span class="o">&gt;</span> <span class="n">python</span> <span class="n">calibrate_everything</span><span class="o">.</span><span class="n">py</span>
+<span class="n">Working</span><span class="o">...</span>
+<span class="n">Calibrating</span> <span class="n">Hubble</span><span class="o">...</span> <span class="n">DONE</span>
+<span class="n">Calibrating</span> <span class="n">JWST</span><span class="o">...</span> <span class="n">DONE</span>
+<span class="n">Calibrating</span> <span class="n">WFIRST</span><span class="o">...</span> <span class="n">DONE</span>
+<span class="p">(</span><span class="n">astroconda</span><span class="p">)</span><span class="n">science1</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Note that there’s nothing special about the command finishing before she re-attached. She could have just as easily checked in on it while it was in progress over the weekend, but she was busy having fun. Since everything’s done, she decides that instead of detaching again, she will just exit <code class="docutils literal notranslate"><span class="pre">screen</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">astroconda</span><span class="p">)</span><span class="n">science1</span><span class="o">&gt;</span> <span class="n">exit</span>
+<span class="p">[</span><span class="n">screen</span> <span class="ow">is</span> <span class="n">terminating</span><span class="p">]</span>
+<span class="n">science1</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>If she didn’t <code class="docutils literal notranslate"><span class="pre">exit</span></code>, that session would remain active (and she could reattach to it later).</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p class="last">Log into one of the servers named in the previous exercise and start a <code class="docutils literal notranslate"><span class="pre">screen</span></code> session. Detach from it, close your terminal, and make sure you can reconnect and reattach to it successfully.</p>
+</div>
+<p>Screen allows multiplexing of the terminal into multiple shells.  This means that one can have multiple emulated terminals available within one session (e.g. over one SSH connection).  To create a new shell session within screen, type <kbd class="kbd docutils literal notranslate">Ctrl-a</kbd> <kbd class="kbd docutils literal notranslate">c</kbd> (create).  To close a session, simply <code class="docutils literal notranslate"><span class="pre">exit</span></code> the shell.  In order to swap between different shells, type <kbd class="kbd docutils literal notranslate">Ctrl-a</kbd> <kbd class="kbd docutils literal notranslate">#</kbd> (where # is the number of the shell session).  A handy shortcut to swap between the two most recently accessed shells is <kbd class="kbd docutils literal notranslate">Ctrl-a</kbd> <kbd class="kbd docutils literal notranslate">Ctrl-a</kbd>.</p>
+<p>A server’s screen session can be customized in the <code class="docutils literal notranslate"><span class="pre">~/.screenrc</span></code> configuration file.  A useful setup that includes a lower status bar labelling the multiplexed shells is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>shell -$SHELL
+defscrollback 10000
+termcapinfo xterm-256color ti@:te@
+caption always &quot;%?%F%{-b bc}%:%{-b bb}%?%C|%D|%M %d|%H%?%F%{+u wb}%? %L=%-Lw%45&gt;%{+b by}%n%f*%t%{-}%+Lw%-0&lt;&quot;
+</pre></div>
+</div>
+<p>If you want to use this, just copy these lines into a new <code class="docutils literal notranslate"><span class="pre">.screenrc</span></code> file under your home directory while connected to a server via ssh.</p>
+<p>To scroll above the terminal window boundaries, use screen’s copy mode:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Enter copy mode:    <kbd class="kbd docutils literal notranslate">Ctrl-a</kbd> <kbd class="kbd docutils literal notranslate">[</kbd> or <kbd class="kbd docutils literal notranslate">Ctrl-a</kbd> <kbd class="kbd docutils literal notranslate">Esc</kbd></li>
+<li>Scroll up:          <kbd class="kbd docutils literal notranslate">Ctrl-u</kbd></li>
+<li>Scroll down:        <kbd class="kbd docutils literal notranslate">Ctrl-d</kbd></li>
+<li>Exit copy mode:     <kbd class="kbd docutils literal notranslate">]</kbd> or <kbd class="kbd docutils literal notranslate">Esc</kbd></li>
+</ol>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="continuing-your-training">
+<h2>Continuing your training<a class="headerlink" href="#continuing-your-training" title="Permalink to this headline">¶</a></h2>
+<p>Depending on when you start at STScI, this could go one of two ways:</p>
+<ol class="arabic simple">
+<li>If your start date at STScI lines up with the schedule in the most current “New hire training for technical staff” document on Confluence, that means you’ll be following the schedule there. Every few months, the Instruments (INS) division is able to coordinate the start dates of a number of new hires such that training can take place in two weeks of lectures and workshops.</li>
+<li>If your start date at STScI falls <strong>falls in between</strong> the schedules on Confluence, you will work through materials in this library on your own with the help of trainers who can answer questions. When the next large cohort of new hires starts, you will join them for the lectures you haven’t attended yet. (There is no need to repeat material you already worked through.)</li>
+</ol>
+<p>The other documents in this library explain useful tools with exercises interspersed with the text. Save the results of your exercises as you go; you will submit them to your trainer once you’ve completed the section. If you get stuck, you can always ask your trainer for help!</p>
+<p>Wondering who the trainers are for a particular section? Check the schedule page you bookmarked in the <a class="reference internal" href="#confluence-intro"><span class="std std-ref">brief section on Confluence</span></a>. Other recent hires have also done this training, so they’re a good resource for quick questions if your trainer is busy.</p>
+</div>
+<div class="section" id="additional-resources">
+<h2>Additional resources<a class="headerlink" href="#additional-resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The Institute maintains a list of approved software, which you should consult if you need something else for your machine: <a class="reference external" href="http://www.stsci.edu/institute/itsd/software">http://www.stsci.edu/institute/itsd/software</a></li>
+</ul>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="umask" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Files are created with a default set of permissions set by your “umask”, which will most likely make them world-readable by default. See <a class="reference external" href="https://en.wikipedia.org/wiki/Umask">this Wikipedia article</a> if you’re really curious.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="bashrc" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Said details are summarized in <a class="reference external" href="http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html">this blog post from 2005</a>. The gist of it is: <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code> is run when starting an xterm or running <code class="docutils literal notranslate"><span class="pre">bash</span></code> within an already-started terminal session. <code class="docutils literal notranslate"><span class="pre">.bash_profile</span></code> is run for login shells (<code class="docutils literal notranslate"><span class="pre">bash</span> <span class="pre">-l</span></code> or logging on via console or SSH). Yes, it’s confusing. No, there isn’t really a good reason it’s this way.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="version_control.html" class="btn btn-neutral float-right" title="Version Control with git" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="The Technical Staff Training Library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, AURA / Space Telescope Science Institute. These documents are designed for internal use only, and are not an official AURA/STScI publication. Information may be out of date, irrelevant, or contradict published documentation. Use at your own risk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'published 2018-6-14',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

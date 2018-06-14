@@ -1,0 +1,500 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Version Control with git &mdash; RIA Training Library</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Using MAST (a.k.a. the Archive)" href="archives.html" />
+    <link rel="prev" title="Setting Up Your Computer" href="computer_setup.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Technical Staff Training
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                published 2018-6-14
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="computer_setup.html">Setting Up Your Computer</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Version Control with git</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-can-version-control-do-for-me">What can version control do for me?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#concepts-and-first-steps-with-git">Concepts and first steps with <code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-set-up-to-collaborate">Getting set up to collaborate</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#git-github-grit-and-gitlab">Git, GitHub, Grit, and GitLab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-started-with-github">Getting started with GitHub</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cloning-the-training-document-repository">Cloning the training document repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-branch-for-your-changes">Creating a branch for your changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#editing-and-committing-changes">Editing and committing changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#incorporating-your-changes-in-the-github-copy">Incorporating your changes in the GitHub copy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dealing-with-merge-conflicts">Dealing with merge conflicts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#merging-your-changes">Merging your changes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="archives.html">Using MAST (a.k.a. the Archive)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python/index.html">Python for Scientific Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apt_etc/index.html">The Astronomer’s Proposal Tool and the Exposure Time Calculator for HST and JWST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="photometry.html">Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="drizzle.html">Using DrizzlePac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spectroscopy/index.html">Basic Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysynphot.html">Using Pysynphot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="editing_these_documents.html">Editing These Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tricks.html">Tips and Tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainees.html">Past Trainees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boneyard.html">Retired topics</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Technical Staff Training</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Version Control with git</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/version_control.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="version-control-with-git">
+<h1>Version Control with git<a class="headerlink" href="#version-control-with-git" title="Permalink to this headline">¶</a></h1>
+<p>Version control systems keep track of changes to code, documents, and other files as you work. While this document will discuss one particular version control system, <code class="docutils literal notranslate"><span class="pre">git</span></code> <a class="footnote-reference" href="#gitproject" id="id1">[1]</a> , the <em>concept</em> of version control shows up everywhere from iCloud to Wikipedia to NASA project management. That’s because the simple idea of tracking changes is very powerful, giving authors and programmers great flexibility in their work.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>In this text, when discussing commands to be typed at a command prompt, <code class="docutils literal notranslate"><span class="pre">$</span></code> is a placeholder for your command prompt (which may be something like <code class="docutils literal notranslate"><span class="pre">yourname&#64;localhost</span> <span class="pre">$</span></code>). You don’t need to type it, just the commands following it.</p>
+<p class="last">Some commands will ask questions or require input. Hints for those prompts are given in <code class="docutils literal notranslate"><span class="pre">[square</span> <span class="pre">brackets]</span></code> where relevant.</p>
+</div>
+<div class="section" id="what-can-version-control-do-for-me">
+<h2>What can version control do for me?<a class="headerlink" href="#what-can-version-control-do-for-me" title="Permalink to this headline">¶</a></h2>
+<p>Here are things that a good version control system will enable you to do.</p>
+<ol class="arabic simple">
+<li><strong>Figuring out who to ask</strong> – Look at the <em>history</em> of a particular file to find out who to ask about a particular section and when it was written.</li>
+<li><strong>Collaborate without clobbering</strong> – Edit a file someone else is also working on, without overwriting their changes.</li>
+<li><strong>Work on two things at once</strong> – Explore a major change to code or a document, but keep those changes separate from your routine work.</li>
+<li><strong>Undo exactly what you changed</strong> – Sometimes things stop working and you don’t know what you changed. If you track changes in a version control system, you can see exactly what changed.</li>
+</ol>
+<p>We won’t cover all of these in detail in this training. Rather, we hope to expose you to the basics. That way if you join an instrument team or research collaboration that makes use of <code class="docutils literal notranslate"><span class="pre">git</span></code>, it won’t be completely unfamiliar.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There will be exercises in this training that ask you questions. Keep your answers in a text file somewhere convenient, and send them to your trainer when you finish the training.</p>
+</div>
+</div>
+<div class="section" id="concepts-and-first-steps-with-git">
+<h2>Concepts and first steps with <code class="docutils literal notranslate"><span class="pre">git</span></code><a class="headerlink" href="#concepts-and-first-steps-with-git" title="Permalink to this headline">¶</a></h2>
+<p>First things first, we want to make sure <code class="docutils literal notranslate"><span class="pre">git</span></code> is installed.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise: Verify that you have <code class="docutils literal notranslate"><span class="pre">git</span></code> installed</p>
+<p class="last">Open a new terminal window, type <code class="docutils literal notranslate"><span class="pre">git</span></code>, and hit <kbd class="kbd docutils literal notranslate">Enter</kbd>. If git is installed, it will show a somewhat intimidating list of all the things you can do with git. Can you figure out the options to find the version number for the <code class="docutils literal notranslate"><span class="pre">git</span></code> installed on your computer?</p>
+</div>
+<p>You may have noticed that typing <code class="docutils literal notranslate"><span class="pre">git</span></code> on its own didn’t do anything exciting. That’s because most of <code class="docutils literal notranslate"><span class="pre">git</span></code>’s functionality is available through “commands” given after the word git. To make it do something, you must provide the name of a command and, optionally, additional arguments.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">./test</span></code> means “add files in the test directory to be committed” and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> means “save the changes I requested to the project history”.</p>
+<p>Every sub-command has thorough documentation accessible through <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">nameofcommand</span> <span class="pre">--help</span></code>. (You can scroll the help page with the arrow keys and exit with <kbd class="kbd docutils literal notranslate">q</kbd>.)</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise: Look at the documentation for a git command</p>
+<p>Open up the help page for <code class="docutils literal notranslate"><span class="pre">clone</span></code>. Skim the description. In a sentence or two, what do you think <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> does?</p>
+<p class="last">(There’s a lot of jargon in the git help, so don’t worry if it’s not clear yet what all that means.)</p>
+</div>
+<p>Git has a special name for directories of files that it keeps histories of (we call those files “tracked” or “versioned”). Folders that git understands how to manipulate are called “repositories”, and contain the current state of the files, as well as a copy of their history at certain “snapshots” in time.</p>
+<p>Git commands generally only work when you have <code class="docutils literal notranslate"><span class="pre">cd</span></code>-ed into a repository directory in your terminal. The two main exceptions are <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code>, which initializes a new repository in the current directory, and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code>, which creates a new local copy of a repository.</p>
+<p>Enough conceptual stuff, let’s do something more hands-on.</p>
+</div>
+<div class="section" id="getting-set-up-to-collaborate">
+<h2>Getting set up to collaborate<a class="headerlink" href="#getting-set-up-to-collaborate" title="Permalink to this headline">¶</a></h2>
+<p>Since most Institute staff come across <code class="docutils literal notranslate"><span class="pre">git</span></code> in the context of joining an existing project, we will structure these exercises around making an edit to the <code class="docutils literal notranslate"><span class="pre">git</span></code> repository that stores these training documents.</p>
+<p>There’s a <a class="reference internal" href="trainees.html"><span class="doc">Past Trainees</span></a> document listing everyone who completes the training <a class="footnote-reference" href="#wellkinda" id="id2">[2]</a>. To complete this training, you will add your name to the list, and learn some essential <code class="docutils literal notranslate"><span class="pre">git</span></code> commands in the process.</p>
+<div class="section" id="git-github-grit-and-gitlab">
+<h3>Git, GitHub, Grit, and GitLab<a class="headerlink" href="#git-github-grit-and-gitlab" title="Permalink to this headline">¶</a></h3>
+<p>You may have heard some of these terms bandied around. For clarity’s sake, here’s what they mean:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>git</strong> – A command-line tool to manage versions of files. (Free and open-source)</li>
+<li><strong>GitHub</strong> – A service to share and collaborate on repositories using <code class="docutils literal notranslate"><span class="pre">git</span></code>. (Commercial, with exceptions for nonprofits)</li>
+<li><strong>GitLab</strong> – Software similar to GitHub for use internally. (Free community edition, commercial version available)</li>
+<li><strong>grit</strong> – Internal-only collaboration platform running on GitLab software, uses AD login credentials. <a class="reference external" href="https://grit.stsci.edu/">https://grit.stsci.edu/</a></li>
+<li><strong>gitar</strong> – Identical to grit, but is safe for ITAR material. <a class="reference external" href="https://gitar.stsci.edu/">https://gitar.stsci.edu/</a></li>
+</ul>
+</div></blockquote>
+<p>We use GitHub to collaborate on these training documents. In the next section, you will set up a user account and key to let your computer talk to GitHub.</p>
+</div>
+<div class="section" id="getting-started-with-github">
+<span id="getting-started-github"></span><h3>Getting started with GitHub<a class="headerlink" href="#getting-started-with-github" title="Permalink to this headline">¶</a></h3>
+<p>If you’re new to GitHub, you’ll need to register for a free account and set up your computer to authenticate you with GitHub when using git.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise: Sign up for a GitHub Account</p>
+<p class="last">GitHub sign-up is free, and the registration form is on their homepage: <a class="reference external" href="https://github.com/">https://github.com/</a>. If you already have a GitHub account, you can skip this.</p>
+</div>
+<p>At this point, you will need to ask your trainer for access to the repository we’ll use in the next section.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise: Get access to the stsci-riab/riatraining repository</p>
+<p class="last">Send your trainer the username for your GitHub account. They will give you access to the <code class="docutils literal notranslate"><span class="pre">stsci-riab/riatraining</span></code> repository, which we use in the next section.</p>
+</div>
+<p>Once you have access, there is one quick thing you may want to do. GitHub will email users with commit access (what you just received) any time there’s activity on the GitHub repository’s issues or pull requests. That’s probably not what you want, unless you’re involved in training the next round of hires!</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p>Set your status on the <a class="reference external" href="https://github.com/stsci-riab/riatraining">https://github.com/stsci-riab/riatraining</a> repository to <strong>Not watching</strong>, using the button in the upper right area of the GitHub web interface.</p>
+<img alt="_images/github_unwatch.png" class="last" src="_images/github_unwatch.png" />
+</div>
+</div>
+</div>
+<div class="section" id="cloning-the-training-document-repository">
+<h2>Cloning the training document repository<a class="headerlink" href="#cloning-the-training-document-repository" title="Permalink to this headline">¶</a></h2>
+<p>You should now have access to <a class="reference external" href="https://github.com/stsci-riab/riatraining">https://github.com/stsci-riab/riatraining</a>, a.k.a. <a class="reference external" href="https://github.com/stsci-riab/riatraining">stsci-riab/riatraining</a>. <a class="footnote-reference" href="#abbreviatedgithub" id="id3">[3]</a></p>
+<p>Cloning copies the contents and the history of a repository over the network or on disk. When cloning from GitHub, there are multiple ways <code class="docutils literal notranslate"><span class="pre">git</span></code> can talk to the central server. We’re interested in talking over <strong>HTTPS</strong>, since it’s simpler to set up.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You can also set up git to sign you in automatically, which might be useful if you find yourself typing your GitHub password all the time. See <a class="reference internal" href="tricks.html#git-push-ssh"><span class="std std-ref">Pushing to GitHub (or Grit/GitLab) via SSH</span></a>. If you set this up, choose the “SSH clone URL” option below.</p>
+</div>
+<p>If you look at the main page for the repository on GitHub, there’s a box on the right sidebar with a “clone URL”. Click “HTTPS” to select it, if it’s not already selected.</p>
+<div class="figure" id="id4">
+<a class="reference internal image-reference" href="_images/https_clone_url.png"><img alt="_images/https_clone_url.png" src="_images/https_clone_url.png" style="width: 155.0px; height: 163.5px;" /></a>
+<p class="caption"><span class="caption-text">Detail of the main repository page with the HTTPS clone URL.</span></p>
+</div>
+<div class="note admonition">
+<p class="first admonition-title">Exercise: Copy the HTTPS clone URL and clone the repository</p>
+<p>Click the clipboard button shown in the screenshot to copy the text box contents to your system clipboard for pasting into a terminal.</p>
+<p>Clone the repository into a directory on your computer. The command to clone a repository is <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">[clone</span> <span class="pre">url]</span></code>, where <code class="docutils literal notranslate"><span class="pre">[clone</span> <span class="pre">url]</span></code> is the URL you just copied. This will copy the repository into  a new directory called <code class="docutils literal notranslate"><span class="pre">riatraining</span></code> under whatever directory you’re in. (You’ll be prompted for your GitHub username and password.)</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/stsci-riab/riatraining.git
+Cloning into &#39;riatraining&#39;...
+Username for &#39;https://github.com&#39;: [your username]
+Password for &#39;https://yourusername@github.com&#39;: [your password]
+remote: Counting objects: 1187, done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 1187 (delta 3), reused 0 (delta 0), pack-reused 1179
+Receiving objects: 100% (1187/1187), 23.98 MiB | 7.44 MiB/s, done.
+Resolving deltas: 100% (641/641), done.
+Checking connectivity... done.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="creating-a-branch-for-your-changes">
+<span id="version-control-branching"></span><h2>Creating a branch for your changes<a class="headerlink" href="#creating-a-branch-for-your-changes" title="Permalink to this headline">¶</a></h2>
+<p>Now you have a git repository to manipulate on your own computer.  You may want to keep this <a class="reference external" href="https://services.github.com/kit/downloads/github-git-cheat-sheet.pdf">git cheat sheet</a> on hand for future reference. (This <a class="reference external" href="http://www.ndpsoftware.com/git-cheatsheet.html">interactive git cheat sheet</a> may be useful as well to visualize the various commands.) The command <code class="docutils literal notranslate"><span class="pre">clone</span></code> is aptly named: the entire history of the repository is there, but it’s entirely self contained. Don’t worry about screwing it up; if you get stuck it’s possible to delete the whole folder and make a “fresh” clone without affecting anyone else’s work.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise: Check the status of your repository</p>
+<p>Even though we haven’t made any changes yet, let’s try our first real git command. <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> shows which files you have edited, which are ready to commit to the history, and which files <code class="docutils literal notranslate"><span class="pre">git</span></code> doesn’t know about yet.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> in a terminal window. What does it say?</p>
+<p class="last"><em>(If you got a message saying “fatal: Not a git repository”, remember that git wants you to “cd” into the repository first!)</em></p>
+</div>
+<p>Since this is a fresh copy, hopefully you’ll see that the working directory is “clean” (meaning no changes have been made). Let’s make some.</p>
+<p>It’s generally a good idea to make changes on a separate “branch” within the repository. Branches are a key part of how git tracks history internally, but require a bit of explanation.</p>
+<p>At its simplest, git’s version history is a series of snapshots in time. (“On January 10th, the file looked like this. On January 12th, lines 2 and 4 changed, and now it looks like this. On January 15th, …”) This allows you to travel backwards in time and retrieve the state of your project on a certain day.</p>
+<p>Most of the time, the main timeline (for the publication-ready version of a document, or the latest development version of some software, for example) is a branch called <code class="docutils literal notranslate"><span class="pre">master</span></code>. New snapshots (“commits”) are added on to the end of <code class="docutils literal notranslate"><span class="pre">master</span></code>, and the latest up-to-date version is computed from the last commit on the branch.</p>
+<div class="figure" id="id5">
+<img alt="The master branch evolving in time as a series of commits." src="_images/branching_1.png" />
+<p class="caption"><span class="caption-text">The master branch evolving in time as a series of commits.</span></p>
+</div>
+<p>When making changes, especially in a collaborative setting (or when you’re exploring an idea you’re not sure about), a branch allows you to add new commits to the history without changing the master copy.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise: Create a branch for your changes</p>
+<p>Create a new branch with a descriptive name, like <code class="docutils literal notranslate"><span class="pre">yourlastname_trainee</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git checkout -b yourlastname_trainee
+Switched to a new branch &#39;yourlastname_trainee&#39;
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">-b</span></code> means “new branch”. If you do <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> now, you’ll see a message saying you are on the branch <code class="docutils literal notranslate"><span class="pre">yourlastname_trainee</span></code>.</p>
+<p>You only need the <code class="docutils literal notranslate"><span class="pre">-b</span></code> when you are checking out a branch that does not already exist. Try switching to <code class="docutils literal notranslate"><span class="pre">master</span></code> with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">master</span></code>. What does <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> say?</p>
+<p class="last">Switch back to the branch you just made before continuing.</p>
+</div>
+<p>At this point, <code class="docutils literal notranslate"><span class="pre">master</span></code> and your new branch point to the same commit (or snapshot).</p>
+<div class="figure" id="id6">
+<img alt="A second branch called &quot;newbranch&quot; coming off of master." src="_images/branching_2.png" />
+<p class="caption"><span class="caption-text">A second branch called “newbranch” coming off of master.</span></p>
+</div>
+<p>However, because you have selected a new branch, changes you make will be added to the history on their own separate timeline. Thus prepared, let’s edit the trainees list.</p>
+</div>
+<div class="section" id="editing-and-committing-changes">
+<span id="version-control-committing"></span><h2>Editing and committing changes<a class="headerlink" href="#editing-and-committing-changes" title="Permalink to this headline">¶</a></h2>
+<p>These pages are stored in the <code class="docutils literal notranslate"><span class="pre">source</span></code> directory. The document we want to edit is called <code class="docutils literal notranslate"><span class="pre">trainees.txt</span></code>. Open it up in your favorite text editor.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise: Add your name to <code class="docutils literal notranslate"><span class="pre">trainees.txt</span></code></p>
+<p>Find the appropriate section for your training cohort, and add your name. (Be sure to format your entry like the other names in the list.)</p>
+<p class="last">Save the file. What does <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> say now?</p>
+</div>
+<p>Editing and saving a file is not enough to commit it to history. (This is intentional, as in practice you may decide you don’t like your changes after all, and want to restore the original copy.) To commit your change to history, use the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> commands.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise: Commit your changes to the repository</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> command tells git which file you changed and want to save changes to. It doesn’t show any messages if it succeeds, but you can see what changed by running <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> before and after. Run these commands and save the output for your trainer:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git status
+$ git add source/trainees.txt
+$ git status
+</pre></div>
+</div>
+<p>After “staging” a file with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code>, use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> to save it to the history. Use <code class="docutils literal notranslate"><span class="pre">-m</span></code> to specify a short message describing what you changed:</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span>$ git commit -m &quot;Added my name to trainees.txt&quot;
+</pre></div>
+</div>
+</div>
+<p>Now your repository history looks a bit like this:</p>
+<div class="figure" id="id7">
+<img alt="A new commit on &quot;newbranch&quot; shown coming off of master." src="_images/branching_3.png" />
+<p class="caption"><span class="caption-text">A new commit on “newbranch” shown coming off of master.</span></p>
+</div>
+<p>This may seem academic (it’s still a connected line to the main history!), but keep in mind that <code class="docutils literal notranslate"><span class="pre">master</span></code> can continue evolving while you work on your branch. Also, if you and another trainee both branch off of <code class="docutils literal notranslate"><span class="pre">master</span></code>, your work can proceed in parallel on your own branches.</p>
+</div>
+<div class="section" id="incorporating-your-changes-in-the-github-copy">
+<h2>Incorporating your changes in the GitHub copy<a class="headerlink" href="#incorporating-your-changes-in-the-github-copy" title="Permalink to this headline">¶</a></h2>
+<p>Your changes are now committed to your local copy of the history. The next step is to send them to the copy on GitHub, where your trainer will review and sign off on your changes.</p>
+<p>A git repository remembers where you cloned it from, and calls it the “origin”. The command to send your commits to a remote copy (like GitHub’s) is called <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code>.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise: Push your commits to a branch on GitHub</p>
+<p>The syntax of the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> command is <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">[remote</span> <span class="pre">name]</span> <span class="pre">[source</span> <span class="pre">branch</span> <span class="pre">name]</span></code>. In this case, the remote name is “origin”, since we’re pushing changes back to the copy we originally cloned from. The source branch name is the same branch name as above. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git push origin yourlastname_trainee
+</pre></div>
+</div>
+<p class="last">This updates GitHub’s copy to look like yours: a new branch from master called “yourlastname_trainee” is now present with your changes.</p>
+</div>
+<p>To incorporate your changes in the main history, you issue a “pull request” through the GitHub website. A “pull request” is a request to pull in changes from a branch to the main history. (GitHub would not stop you from merging your own edits, but it is considered good practice to give other collaborators a chance to review your changes.)</p>
+<div class="figure" id="id8">
+<img alt="The repository history. The master branch now has another commit, illustrating how &quot;newbranch&quot; and master evolved in parallel." src="_images/branching_4.png" />
+<p class="caption"><span class="caption-text">If your branch looks like this (note that more commits have been added to <code class="docutils literal notranslate"><span class="pre">master</span></code>)…</span></p>
+</div>
+<div class="figure" id="id9">
+<img alt="The repository history after &quot;newbranch&quot; has been merged into master." src="_images/branching_5.png" />
+<p class="caption"><span class="caption-text">… a pull request asks to combine the branches to look something like this.</span></p>
+</div>
+<p>Pull requests are a term invented by GitHub, but similar features exist in other version control systems by other names (e.g. “merge request”). Once you have pushed to a new branch, when you visit <a class="reference external" href="https://github.com/stsci-riab/riatraining">https://github.com/stsci-riab/riatraining</a> you will see a new green icon to “Compare &amp; pull request”.</p>
+<div class="figure" id="id10">
+<img alt="GitHub's two buttons for &quot;Compare &amp; pull request&quot;" src="_images/compare_and_pull_request.png" />
+<p class="caption"><span class="caption-text">GitHub’s two buttons for “Compare &amp; pull request”</span></p>
+</div>
+<p>Click the big green “Compare &amp; pull request” button. (The smaller green pull request icon next to the branch selector will also work, but you will have to remember to select the right branch.)</p>
+<p>At the bottom of the page, you’ll see the changes you’re asking to pull in. Ensure you’re only pulling in changes you mean to!</p>
+<div class="figure" id="id11">
+<img alt="Color-coded view of the changes in the pull request" src="_images/pull_request_files.png" />
+<p class="caption"><span class="caption-text">Color-coded view of the changes in the pull request</span></p>
+</div>
+<p>Give your pull request a brief title and description, then click “Create pull request.” This takes you to a page where you and collaborators can review the changes and comment on them. If there’s a big green checkmark saying the pull request is okay to merge, you can skip ahead to <a class="reference internal" href="#merge-pull-request"><span class="std std-ref">Merging your changes</span></a>. Otherwise, read on to learn what git does when two people edit the exact same line of a file.</p>
+<div class="section" id="dealing-with-merge-conflicts">
+<h3>Dealing with merge conflicts<a class="headerlink" href="#dealing-with-merge-conflicts" title="Permalink to this headline">¶</a></h3>
+<p>If you see a message saying that the branches cannot be automatically merged, you need to “pull in upstream changes”. All that means is that someone else edited the same thing as you, and you need to incorporate their changes in your pull request.</p>
+<p>To do this, go to your repository in the terminal and execute <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span> <span class="pre">master</span></code>. You will see a message about which files have conflicts. Open them in your editor, look for the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;&lt;&lt;&lt;&lt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;&gt;&gt;&gt;</span></code> markers, and combine the changes in a way that makes sense (e.g. include your name <em>and</em> that of another trainee that just added theirs).</p>
+<p>Add, commit, push to your branch, and your pull request should gain the green “Able to merge” icon!</p>
+<p>The same thing, written out step by step starting from a terminal with your new branch checked out, would look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">pull</span>
+<span class="n">git</span> <span class="n">merge</span> <span class="n">master</span>
+<span class="c1"># - look at the list of conflicting files from the &#39;git merge master&#39; output</span>
+<span class="c1"># - edit the conflicting file (trainees.txt) to remove</span>
+<span class="c1">#   &quot;&lt;&lt;&lt;&lt;&quot;, &quot;===&quot;, and &quot;&gt;&gt;&gt;&gt;&quot; while preserving what you want to keep</span>
+<span class="c1"># - save the files</span>
+<span class="n">git</span> <span class="n">add</span> <span class="n">source</span><span class="o">/</span><span class="n">trainees</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">git</span> <span class="n">commit</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">yourname_trainee</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="merging-your-changes">
+<span id="merge-pull-request"></span><h3>Merging your changes<a class="headerlink" href="#merging-your-changes" title="Permalink to this headline">¶</a></h3>
+<p>Send the trainer for this section a link to your pull request, and they will merge it in if it all looks good! Merging pull requests is done with a big green “merge” button on the GitHub website. (Even if the system will let you, it’s considered good etiquette not to merge your own pull request.)</p>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="gitproject" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="http://git-scm.com/">git</a> is free and open source software developed by the creator of Linux (Linus Torvalds) and many others. He once said that “git” (British English for “an unpleasant person”) was a good name for a project of his, as he names all of his projects after himself.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="wellkinda" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Since we started keeping this list, anyway!</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="abbreviatedgithub" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>GitHub is so ubiquitous in the software world that it’s common to abbreviate URLs as <code class="docutils literal notranslate"><span class="pre">&lt;username&gt;/&lt;reponame&gt;</span></code> and omit the <code class="docutils literal notranslate"><span class="pre">https://github.com/</span></code> entirely in documents. It’s not common at STScI, but you may see this elsewhere on e.g. StackOverflow.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="archives.html" class="btn btn-neutral float-right" title="Using MAST (a.k.a. the Archive)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="computer_setup.html" class="btn btn-neutral" title="Setting Up Your Computer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, AURA / Space Telescope Science Institute. These documents are designed for internal use only, and are not an official AURA/STScI publication. Information may be out of date, irrelevant, or contradict published documentation. Use at your own risk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'published 2018-6-14',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

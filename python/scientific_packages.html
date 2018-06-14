@@ -1,0 +1,1193 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Essential packages for scientific data analysis &mdash; RIA Training Library</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Python Scripts, Modules, and Packages" href="scripting.html" />
+    <link rel="prev" title="Basic Python Concepts" href="basics.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Technical Staff Training
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                published 2018-6-14
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../computer_setup.html">Setting Up Your Computer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version_control.html">Version Control with git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../archives.html">Using MAST (a.k.a. the Archive)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Python for Scientific Data Analysis</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction and setting up the environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html">Basic Python Concepts</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Essential packages for scientific data analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#numpy">NumPy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-uses-of-numpy">The Uses of NumPy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#making-new-numpy-arrays">Making new NumPy arrays</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-a-numpy-array-really-is-and-a-word-of-caution">What a NumPy array really is and a word of caution</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#computing-with-numpy">Computing with NumPy</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#handling-fits-files-and-ascii-data-tables-using-astropy">Handling FITS files and ASCII data tables using Astropy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#opening-reading-and-closing-a-fits-file">Opening, Reading, and Closing a FITS File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fits-getval-and-fits-setval-functions">fits.getval() and fits.setval() functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reading-and-writing-ascii-data-files">Reading and Writing ASCII Data Files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#plotting-with-pyplot">Plotting with PyPlot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#basic-plotting">Basic Plotting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-multiple-subplots-and-different-plotting-functions">Example: Multiple Subplots and Different Plotting Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-plotting-fits-figures-using-colormaps">Example: Plotting FITS Figures &amp; Using Colormaps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#making-attractive-plots">Making Attractive Plots</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#general-tricks-quick-reference">General Tricks/Quick Reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-fitting-a-curve-with-scipy">Example: Fitting a Curve With SciPy</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="scripting.html">Python Scripts, Modules, and Packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html">Appendix: Resources and Best Practices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../apt_etc/index.html">The Astronomer’s Proposal Tool and the Exposure Time Calculator for HST and JWST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../photometry.html">Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drizzle.html">Using DrizzlePac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spectroscopy/index.html">Basic Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pysynphot.html">Using Pysynphot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editing_these_documents.html">Editing These Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tricks.html">Tips and Tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainees.html">Past Trainees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../boneyard.html">Retired topics</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Technical Staff Training</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Python for Scientific Data Analysis</a> &raquo;</li>
+        
+      <li>Essential packages for scientific data analysis</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/scientific_packages.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="essential-packages-for-scientific-data-analysis">
+<h1>Essential packages for scientific data analysis<a class="headerlink" href="#essential-packages-for-scientific-data-analysis" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="numpy">
+<span id="python-numpy"></span><h2>NumPy<a class="headerlink" href="#numpy" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="the-uses-of-numpy">
+<h3>The Uses of NumPy<a class="headerlink" href="#the-uses-of-numpy" title="Permalink to this headline">¶</a></h3>
+<p>NumPy is a Python module which adds support for large, multi-dimensional
+arrays and matrices, along with a large library of high-level
+mathematical functions to operate on these arrays. NumPy addresses the
+problems of speed in interpreted languages by providing
+multi-dimensional arrays and lots of functions and operators that
+operate on arrays. Any algorithm that can be expressed primarily as
+operations on arrays and matrices can run almost as fast as the
+equivalent C code.</p>
+<div class="section" id="numpy-s-array-vs-python-s-built-in-list">
+<h4>NumPy’s array vs. Python’s built-in list<a class="headerlink" href="#numpy-s-array-vs-python-s-built-in-list" title="Permalink to this headline">¶</a></h4>
+<p>NumPy introduces new data types, but the most popular, versatile, and
+useful one is the array. (It provides similar functionality to arrays in IDL.) There are
+several reasons why you would want to use a NumPy array over Python’s
+built-in <code class="docutils literal notranslate"><span class="pre">list</span></code>.</p>
+<ul class="simple">
+<li>NumPy, PyLab, SciPy, PyFITS and other modules’ functions often work
+with NumPy arrays.</li>
+<li>Every item in a NumPy array is of the same data type. This means
+there is less information to keep track of which makes array
+computations faster.</li>
+<li>NumPy arrays take the usual arithmetic operators and make them work <strong>element-wise</strong> on arrays (and scalars), so long as they have compatible shapes.</li>
+</ul>
+<p>To convert a list to an array, use <code class="docutils literal notranslate"><span class="pre">numpy.array(my_list_var)</span></code>.</p>
+<p>While lists have a length, computable with <code class="docutils literal notranslate"><span class="pre">len(mylist)</span></code>, NumPy arrays have a <strong>shape</strong>. A shape is a tuple with the length of each dimension of an n-dimensional array. For example: a data cube with four 100x100 images would have the shape <code class="docutils literal notranslate"><span class="pre">(4,</span> <span class="pre">100,</span> <span class="pre">100)</span></code>. You can inspect the shape of any array object through its <code class="docutils literal notranslate"><span class="pre">.shape</span></code> attribute.</p>
+<p>NumPy arrays also have a <code class="docutils literal notranslate"><span class="pre">dtype</span></code> (visible as the <code class="docutils literal notranslate"><span class="pre">.dtype</span></code> attribute), which gives the data type that all elements must conform to. Most NumPy functions that create arrays accept a <code class="docutils literal notranslate"><span class="pre">dtype=</span></code> argument, which can take built-in types like <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">float</span></code>, or explicitly specify precision with types like <code class="docutils literal notranslate"><span class="pre">numpy.complex128</span></code> or <code class="docutils literal notranslate"><span class="pre">numpy.float64</span></code> (see <a class="reference external" href="http://docs.scipy.org/doc/numpy/user/basics.types.html">Array types</a> in the NumPy docs).</p>
+</div>
+<div class="section" id="numpy-array-function">
+<h4>numpy.array() function<a class="headerlink" href="#numpy-array-function" title="Permalink to this headline">¶</a></h4>
+<p><strong>Use:</strong> The numpy.array() function converts a list to a NumPy array.</p>
+<p>In this example we have a Python list <code class="docutils literal notranslate"><span class="pre">a</span></code>, a converted NumPy array version <code class="docutils literal notranslate"><span class="pre">b</span></code>, and an example of a 2D array made from nested lists <code class="docutils literal notranslate"><span class="pre">c</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>       <span class="c1"># a Python built in list</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>     <span class="c1"># converted to a NumPy array</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indx</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">indx</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>    <span class="c1"># indices for a multi-dimensional array</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">])</span>   <span class="c1"># this is slower than the previous as it creates a new array, c[1], and then subscripts that array.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">,:])</span>     <span class="c1"># print the first element in the first dimension, but all in the second dimension</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Notice when we print lists and arrays that the elements in lists are
+separated by commas while the elements in arrays are only separated by
+spaces.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p class="last">Create a list <code class="docutils literal notranslate"><span class="pre">x</span></code> and a NumPy array <code class="docutils literal notranslate"><span class="pre">y</span></code>. Multiply each by 2
+and explain what happens. Now add 2 to each array. Again, explain the
+result.</p>
+</div>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p class="last">Create a third list <code class="docutils literal notranslate"><span class="pre">z</span></code>. Add <code class="docutils literal notranslate"><span class="pre">z</span></code> to both <code class="docutils literal notranslate"><span class="pre">x</span></code> and
+<code class="docutils literal notranslate"><span class="pre">y</span></code>. Explain the result.</p>
+</div>
+</div>
+</div>
+<div class="section" id="making-new-numpy-arrays">
+<h3>Making new NumPy arrays<a class="headerlink" href="#making-new-numpy-arrays" title="Permalink to this headline">¶</a></h3>
+<p>Data loaded in from FITS files or tables through Astropy will already be in NumPy array (or array-like) data structures. Python lists can be converted to arrays as seen above. However, sometimes you need to make arrays of own.</p>
+<div class="section" id="ones-zeroes-and-empty">
+<h4>Ones, zeroes, and empty<a class="headerlink" href="#ones-zeroes-and-empty" title="Permalink to this headline">¶</a></h4>
+<p>The simplest way to make new arrays is to figure out the <strong>shape</strong> you want and use  <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ones.html#numpy.ones" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.ones()</span></code></a>, <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.zeros.html#numpy.zeros" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.zeros()</span></code></a>, or <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.empty.html#numpy.empty" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.empty()</span></code></a>. (n.b. <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.empty.html#numpy.empty" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.empty()</span></code></a> doesn’t set the elements of the array to one or zero, so only use it if you <em>know</em> you will replace every value!)</p>
+<p>The <strong>shape</strong> of an array is the n-dimensional equivalent of a list’s <strong>length</strong>. It’s passed in as a tuple, like <code class="docutils literal notranslate"><span class="pre">(4,</span> <span class="pre">10,</span> <span class="pre">10)</span></code> for a 4x10x10 array. If the array is 1D, a simple integer will work.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p class="last">Make a 4x100x100 data cube of zeros called <code class="docutils literal notranslate"><span class="pre">my_cube</span></code>, and print out its shape. What’s the shape of the first slice of the data cube?</p>
+</div>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p>Using <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.empty.html#numpy.empty" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.empty()</span></code></a>, make a 5x5 array and print it out to the console (e.g. <code class="docutils literal notranslate"><span class="pre">print(np.empty((5,5)))</span></code>). Do the same for 10x10, and 20x1 arrays.</p>
+<p class="last">Are the initial values what you expected? Why might <code class="docutils literal notranslate"><span class="pre">zeros</span></code> or <code class="docutils literal notranslate"><span class="pre">ones</span></code> be preferred? When does it make sense to use <code class="docutils literal notranslate"><span class="pre">empty</span></code>? See <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.empty.html#numpy.empty" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.empty()</span></code></a> for reference.</p>
+</div>
+</div>
+<div class="section" id="new-sequential-arrays">
+<h4>New sequential arrays<a class="headerlink" href="#new-sequential-arrays" title="Permalink to this headline">¶</a></h4>
+<p>Analogous to <code class="xref py py-func docutils literal notranslate"><span class="pre">range()</span></code>, NumPy offers <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.arange.html#numpy.arange" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.arange()</span></code></a>. (Think “array-range”.) They work pretty much the same way, except the latter returns a NumPy array.</p>
+<p>For non-integer spacing, it’s better to use <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linspace.html#numpy.linspace" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linspace()</span></code></a>. Unlike <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.arange.html#numpy.arange" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">arange()</span></code></a>, the <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">stop</span></code> arguments are inclusive on <em>both</em> ends. It takes a third argument <code class="docutils literal notranslate"><span class="pre">num</span></code> (instead of <code class="docutils literal notranslate"><span class="pre">step</span></code>) to determine how many elements should be linearly spaced to cover the interval from <code class="docutils literal notranslate"><span class="pre">start</span></code> to <code class="docutils literal notranslate"><span class="pre">stop</span></code>.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p class="last">Make an array of <strong>floats</strong> counting from 0 to 99. Next, using <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linspace.html#numpy.linspace" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.linspace()</span></code></a>, make the same array. Subtract one from the other and ensure all the elements are identically zero. Now make a third array that samples the interval twice as finely.</p>
+</div>
+</div>
+</div>
+<div class="section" id="what-a-numpy-array-really-is-and-a-word-of-caution">
+<h3>What a NumPy array really is and a word of caution<a class="headerlink" href="#what-a-numpy-array-really-is-and-a-word-of-caution" title="Permalink to this headline">¶</a></h3>
+<p>A final note about NumPy arrays is that an array is actually an object which points to a block of memory. Suppose we have an array in the variable <code class="docutils literal notranslate"><span class="pre">b</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">array([ 1.,  1.,  1.,  1.,  1.])</span>
+</pre></div>
+</div>
+<p>Variables in Python are kind of like “name tags” for an object, so if you want to have the name <code class="docutils literal notranslate"><span class="pre">d</span></code> point to the array <code class="docutils literal notranslate"><span class="pre">b</span></code> you would do this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span>
+<span class="go">array([ 1.,  1.,  1.,  1.,  1.])</span>
+</pre></div>
+</div>
+<p>This does <strong>not</strong>, as one might assume, make a new copy of <code class="docutils literal notranslate"><span class="pre">b</span></code> and give it the name <code class="docutils literal notranslate"><span class="pre">d</span></code>. They are, in fact, two references to the <em>same</em> data.</p>
+<p>To illustrate this, try assigning a value in <code class="docutils literal notranslate"><span class="pre">d</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">999</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span>
+<span class="go">array([   1.,    1.,  999.,    1.,    1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span>
+<span class="go">array([   1.,    1.,  999.,    1.,    1.])</span>
+</pre></div>
+</div>
+<p>Notice what happened to <code class="docutils literal notranslate"><span class="pre">b</span></code>. If you know you will want to change an array while keeping the original values around, the correct function to use is <code class="docutils literal notranslate"><span class="pre">numpy.copy()</span></code>.</p>
+<div class="section" id="numpy-copy-function">
+<h4>numpy.copy() function<a class="headerlink" href="#numpy-copy-function" title="Permalink to this headline">¶</a></h4>
+<p><strong>Use:</strong> The numpy.copy() function copies the contents of the memory space the
+array points to.</p>
+<p>Examples: Try the code below and notice the difference in the results from a
+simple <code class="docutils literal notranslate"><span class="pre">d</span> <span class="pre">=</span> <span class="pre">b</span></code> assignment.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">999</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">size</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="computing-with-numpy">
+<h3>Computing with NumPy<a class="headerlink" href="#computing-with-numpy" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="element-wise-operations">
+<h4>Element-wise operations<a class="headerlink" href="#element-wise-operations" title="Permalink to this headline">¶</a></h4>
+<p>Arithmetic operates element-wise on NumPy arrays, making it easy to express computations that might involve slower <code class="docutils literal notranslate"><span class="pre">for</span></code> loops if you had to explicitly visit each element.</p>
+<p>In this example, the function <span class="math notranslate nohighlight">\(y = x^2\)</span> is evaluated from -2 to 2.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span>  <span class="c1"># n.b. the double asterisk is the exponentiation operator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">[-2.         -1.55555556 -1.11111111 -0.66666667 -0.22222222</span>
+<span class="go"> 0.22222222   0.66666667  1.11111111  1.55555556  2.        ]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="go">[ 4.          2.41975309  1.2345679   0.44444444  0.04938272</span>
+<span class="go">  0.04938272  0.44444444  1.2345679   2.41975309  4.        ]</span>
+</pre></div>
+</div>
+<p>NumPy also provides element-wise versions of your favorite transcendental functions:</p>
+<ul class="simple">
+<li><span class="math notranslate nohighlight">\(e^{x}\)</span> — <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.exp.html#numpy.exp" title="(in NumPy v1.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">numpy.exp(x)</span></code></a></li>
+<li><span class="math notranslate nohighlight">\(\sin(x)\)</span>, <span class="math notranslate nohighlight">\(\cos(x)\)</span>, <span class="math notranslate nohighlight">\(\tan(x)\)</span> — <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.sin.html#numpy.sin" title="(in NumPy v1.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">numpy.sin(x)</span></code></a> , <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.cos.html#numpy.cos" title="(in NumPy v1.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">numpy.cos(x)</span></code></a> , <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.tan.html#numpy.tan" title="(in NumPy v1.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">numpy.tan(x)</span></code></a></li>
+<li><span class="math notranslate nohighlight">\(\sin^{-1}(x)\)</span>, <span class="math notranslate nohighlight">\(\cos^{-1}(x)\)</span>, <span class="math notranslate nohighlight">\(\tan^{-1}(x)\)</span> — <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.arcsin.html#numpy.arcsin" title="(in NumPy v1.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">numpy.arcsin(x)</span></code></a>, <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.arccos.html#numpy.arccos" title="(in NumPy v1.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">numpy.arccos(x)</span></code></a>, <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.arctan.html#numpy.arctan" title="(in NumPy v1.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">numpy.arctan(x)</span></code></a></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>
+<span class="go">array([  0.00000000e+00,   1.00000000e+00,   1.22464680e-16,</span>
+<span class="go">        -1.00000000e+00,  -2.44929360e-16])</span>
+</pre></div>
+</div>
+<p>There are many more than can be covered here, so consult the full list of <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/routines.math.html">mathematical functions</a> in the NumPy documentation.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">A special mention should be made of <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.arctan2.html#numpy.arctan2" title="(in NumPy v1.14)"><code class="xref py py-data docutils literal notranslate"><span class="pre">numpy.arctan2</span></code></a>. If you have a <code class="docutils literal notranslate"><span class="pre">y</span></code> and <code class="docutils literal notranslate"><span class="pre">x</span></code> value, and want an angle in the full 360 degree (or <span class="math notranslate nohighlight">\([-\pi, \pi]\)</span>) range on which the arctangent can be defined based on the quadrant of the point, <code class="docutils literal notranslate"><span class="pre">np.arctan2(y,</span> <span class="pre">x)</span></code> is your friend. (Note the order of the arguments!)</p>
+</div>
+</div>
+<div class="section" id="selecting-and-modifying-data-with-fancy-indexing">
+<h4>Selecting and modifying data with fancy indexing<a class="headerlink" href="#selecting-and-modifying-data-with-fancy-indexing" title="Permalink to this headline">¶</a></h4>
+<p>NumPy arrays support a number of fancy indexing tricks to slice up your data. As you’ll recall from <a class="reference internal" href="basics.html#python-slicing"><span class="std std-ref">Slicing up a sequence</span></a>, list items can be indexed with the square brackets, and sliced with the square brackets and a colon. NumPy supports this type of slicing, and adds features to generalize it to higher dimensions.</p>
+<p>To illustrate, let’s make a 10x10 2D array of the numbers 0 to 99 which we’ll use in the examples in this section. Here we pass the new shape dimensions to <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.reshape.html#numpy.reshape" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.reshape</span></code></a> to turn a 100 element 1D array into the desired 10x10 shape:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">two_dim_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">two_dim_arr</span>
+<span class="go">array([[ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9],</span>
+<span class="go">       [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],</span>
+<span class="go">       [20, 21, 22, 23, 24, 25, 26, 27, 28, 29],</span>
+<span class="go">       [30, 31, 32, 33, 34, 35, 36, 37, 38, 39],</span>
+<span class="go">       [40, 41, 42, 43, 44, 45, 46, 47, 48, 49],</span>
+<span class="go">       [50, 51, 52, 53, 54, 55, 56, 57, 58, 59],</span>
+<span class="go">       [60, 61, 62, 63, 64, 65, 66, 67, 68, 69],</span>
+<span class="go">       [70, 71, 72, 73, 74, 75, 76, 77, 78, 79],</span>
+<span class="go">       [80, 81, 82, 83, 84, 85, 86, 87, 88, 89],</span>
+<span class="go">       [90, 91, 92, 93, 94, 95, 96, 97, 98, 99]])</span>
+</pre></div>
+</div>
+<p>Two-dimensional indexing can be done as with Python lists:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">two_dim_arr</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span>
+<span class="go">55</span>
+</pre></div>
+</div>
+<p>… or with comma-separated indices for each dimension:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">two_dim_arr</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="go">55</span>
+</pre></div>
+</div>
+<p>The same trick works for slicing:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">two_dim_arr</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span>
+<span class="go">array([[55, 56],</span>
+<span class="go">       [65, 66]])</span>
+</pre></div>
+</div>
+<p>When you only provide an index for one dimension (or a 1-D slice), NumPy will grab the entire row:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">two_dim_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</span>
+</pre></div>
+</div>
+<p>Since it doesn’t make sense to assign a scalar to a sequence of values, <code class="docutils literal notranslate"><span class="pre">two_dim_arr[0]</span></code> on the left hand of an assignment fills in every matching element with the right hand side value:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">two_dim_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">two_dim_arr</span>
+<span class="go">array([[ 1,  1,  1,  1,  1,  1,  1,  1,  1,  1],</span>
+<span class="go">       [10, 11, 12, 13, 14, 15, 16, 17, 18, 19],</span>
+<span class="go">       [20, 21, 22, 23, 24, 25, 26, 27, 28, 29],</span>
+<span class="go">       [30, 31, 32, 33, 34, 35, 36, 37, 38, 39],</span>
+<span class="go">       [40, 41, 42, 43, 44, 45, 46, 47, 48, 49],</span>
+<span class="go">       [50, 51, 52, 53, 54, 55, 56, 57, 58, 59],</span>
+<span class="go">       [60, 61, 62, 63, 64, 65, 66, 67, 68, 69],</span>
+<span class="go">       [70, 71, 72, 73, 74, 75, 76, 77, 78, 79],</span>
+<span class="go">       [80, 81, 82, 83, 84, 85, 86, 87, 88, 89],</span>
+<span class="go">       [90, 91, 92, 93, 94, 95, 96, 97, 98, 99]])</span>
+</pre></div>
+</div>
+<p>As previously discussed, the first index is analogous to the “y dimension” or “rows” by convention in various Python packages. If you wish to select by column, use a generic slice with only a <code class="docutils literal notranslate"><span class="pre">:</span></code> in the first dimension:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">two_dim_arr</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">two_dim_arr</span>
+<span class="go">array([[ 2,  1,  1,  1,  1,  1,  1,  1,  1,  1],</span>
+<span class="go">       [ 2, 11, 12, 13, 14, 15, 16, 17, 18, 19],</span>
+<span class="go">       [ 2, 21, 22, 23, 24, 25, 26, 27, 28, 29],</span>
+<span class="go">       [ 2, 31, 32, 33, 34, 35, 36, 37, 38, 39],</span>
+<span class="go">       [ 2, 41, 42, 43, 44, 45, 46, 47, 48, 49],</span>
+<span class="go">       [ 2, 51, 52, 53, 54, 55, 56, 57, 58, 59],</span>
+<span class="go">       [ 2, 61, 62, 63, 64, 65, 66, 67, 68, 69],</span>
+<span class="go">       [ 2, 71, 72, 73, 74, 75, 76, 77, 78, 79],</span>
+<span class="go">       [ 2, 81, 82, 83, 84, 85, 86, 87, 88, 89],</span>
+<span class="go">       [ 2, 91, 92, 93, 94, 95, 96, 97, 98, 99]])</span>
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p>Make a two dimensional array like <code class="docutils literal notranslate"><span class="pre">two_dim_arr</span></code> in the examples, but have it be 20x20 elements. Satisfy yourself that you understand how to modify the following kinds of regions:</p>
+<ul class="last simple">
+<li>a single row</li>
+<li>a single column</li>
+<li>a range of rows</li>
+<li>a range of columns</li>
+<li>a rectangular region defined by a range of rows and a range of columns</li>
+</ul>
+</div>
+</div>
+<div class="section" id="boolean-indexing-masking-and-np-where">
+<h4>Boolean indexing, masking, and <code class="docutils literal notranslate"><span class="pre">np.where</span></code><a class="headerlink" href="#boolean-indexing-masking-and-np-where" title="Permalink to this headline">¶</a></h4>
+<p>Normally, the stuff between the square brackets is some kind of expression to programmatically determine which elements will match. It’s also possible to pass in an array the same shape as the thing being indexed, where each element matches up with one in the thing being indexed and contains a <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> flag. Elements where the <strong>boolean indexing array</strong> has <code class="docutils literal notranslate"><span class="pre">True</span></code> will be considered to match. Believe it or not, this turns out to be absurdly useful.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mini</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mini</span>
+<span class="go">array([0, 1, 2, 3, 4])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">boolean_indexing_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mini</span><span class="p">[</span><span class="n">boolean_indexing_array</span><span class="p">]</span>
+<span class="go">array([0, 1, 2])</span>
+</pre></div>
+</div>
+<p>The reason this is useful is that we can make boolean indexing arrays super easily with the element-wise comparison operators in NumPy. Returning to our <code class="docutils literal notranslate"><span class="pre">two_dim_arr</span></code> example, suppse we wanted all elements larger than 50:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">big_entries</span> <span class="o">=</span> <span class="n">two_dim_arr</span> <span class="o">&gt;</span> <span class="mi">50</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">two_dim_arr</span><span class="p">[</span><span class="n">big_entries</span><span class="p">]</span>
+<span class="go">array([51, 52, 53, 54, 55, 56, 57, 58, 59, 61, 62, 63, 64, 65, 66, 67, 68,</span>
+<span class="go">       69, 71, 72, 73, 74, 75, 76, 77, 78, 79, 81, 82, 83, 84, 85, 86, 87,</span>
+<span class="go">       88, 89, 91, 92, 93, 94, 95, 96, 97, 98, 99])</span>
+</pre></div>
+</div>
+<p>In fact, we could omit the new variable <code class="docutils literal notranslate"><span class="pre">big_entries</span></code> entirely and write <code class="docutils literal notranslate"><span class="pre">two_dim_arr[two_dim_arr</span> <span class="pre">&gt;</span> <span class="pre">50]</span></code>. Python’s smart enough to figure it out. However, we’ll need it later. For something slightly more complicated, what about finding all the even numbered entries in the array?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">even_entries</span> <span class="o">=</span> <span class="n">two_dim_arr</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>  <span class="c1"># for each element x, True if x mod 2 is == 0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">two_dim_arr</span><span class="p">[</span><span class="n">even_entries</span><span class="p">]</span>
+<span class="go">array([ 2,  2, 12, 14, 16, 18,  2, 22, 24, 26, 28,  2, 32, 34, 36, 38,  2,</span>
+<span class="go">       42, 44, 46, 48,  2, 52, 54, 56, 58,  2, 62, 64, 66, 68,  2, 72, 74,</span>
+<span class="go">       76, 78,  2, 82, 84, 86, 88,  2, 92, 94, 96, 98])</span>
+</pre></div>
+</div>
+<p>Now, suppose we wanted to combine these two conditions. NumPy uses the “bit-wise operators” to combine boolean indexing arrays. This means “and”ing two conditions uses <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>, “or”ing them uses <code class="docutils literal notranslate"><span class="pre">|</span></code>, and inverting the sense of a boolean indexing array (to match things it didn’t, and not match things it did) is the unary <code class="docutils literal notranslate"><span class="pre">~</span></code> operator.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">two_dim_arr</span><span class="p">[</span><span class="n">big_entries</span> <span class="o">&amp;</span> <span class="n">even_entries</span><span class="p">]</span>  <span class="c1"># entries &gt; 50 that are even</span>
+<span class="go">array([52, 54, 56, 58, 62, 64, 66, 68, 72, 74, 76, 78, 82, 84, 86, 88, 92,</span>
+<span class="go">       94, 96, 98])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">two_dim_arr</span><span class="p">[</span><span class="o">~</span><span class="n">even_entries</span><span class="p">]</span>  <span class="c1"># odd entries</span>
+<span class="go">array([ 1,  1,  1,  1,  1,  1,  1,  1,  1, 11, 13, 15, 17, 19, 21, 23, 25,</span>
+<span class="go">       27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59,</span>
+<span class="go">       61, 63, 65, 67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93,</span>
+<span class="go">       95, 97, 99])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">two_dim_arr</span><span class="p">[</span><span class="n">big_entries</span> <span class="o">|</span> <span class="o">~</span><span class="n">even_entries</span><span class="p">]</span>  <span class="c1"># entries that are big or odd</span>
+<span class="go">array([ 1,  1,  1,  1,  1,  1,  1,  1,  1, 11, 13, 15, 17, 19, 21, 23, 25,</span>
+<span class="go">       27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 52, 53, 54, 55,</span>
+<span class="go">       56, 57, 58, 59, 61, 62, 63, 64, 65, 66, 67, 68, 69, 71, 72, 73, 74,</span>
+<span class="go">       75, 76, 77, 78, 79, 81, 82, 83, 84, 85, 86, 87, 88, 89, 91, 92, 93,</span>
+<span class="go">       94, 95, 96, 97, 98, 99])</span>
+</pre></div>
+</div>
+<p>You could imagine using a combination of constraints to select only good pixels within a certain number of elements of some point of interest. The boolean indexing arrays don’t need to be “made from” the thing you’re indexing, either, as long as they’re the right shape. (e.g. If you had a 100x100 image called <code class="docutils literal notranslate"><span class="pre">bad_pixels</span></code> with ones where bad pixels are found, and a 100x100 image called <code class="docutils literal notranslate"><span class="pre">my_image</span></code>, then <code class="docutils literal notranslate"><span class="pre">good_pixel_values</span> <span class="pre">=</span> <span class="pre">my_image[bad_pixels</span> <span class="pre">!=</span> <span class="pre">1]</span></code> is perfectly legal.)</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p class="last">Make a two dimensional array like <code class="docutils literal notranslate"><span class="pre">two_dim_arr</span></code> in the examples, but have it be 20x20 elements. Select entries that are under 25 and contain even numbers using a combination of two boolean indexing arrays.</p>
+</div>
+</div>
+<div class="section" id="matrix-operations">
+<h4>Matrix operations<a class="headerlink" href="#matrix-operations" title="Permalink to this headline">¶</a></h4>
+<p>Recall that multiplication happens element-wise for NumPy. How, then, are we to express a product of two matrices?</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">*</span> <span class="n">Y</span>
+<span class="go">array([[1, 0, 0],</span>
+<span class="go">       [0, 1, 0],</span>
+<span class="go">       [0, 0, 2]])</span>
+</pre></div>
+</div>
+<p>Not what we wanted at all! The solution is to use the NumPy <code class="docutils literal notranslate"><span class="pre">dot()</span></code> function or method, as shown below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="go">array([[1, 2, 3],</span>
+<span class="go">       [0, 1, 0],</span>
+<span class="go">       [2, 2, 2]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+<span class="go">array([[1, 2, 3],</span>
+<span class="go">       [0, 1, 0],</span>
+<span class="go">       [2, 2, 2]])</span>
+</pre></div>
+</div>
+<p>Of course, the <em>better</em> solution is to use NumPy matrix objects. For more information, see <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.matrix.html#numpy.matrix" title="(in NumPy v1.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.matrix</span></code></a>.</p>
+</div>
+<div class="section" id="concatenating-arrays">
+<h4>Concatenating arrays<a class="headerlink" href="#concatenating-arrays" title="Permalink to this headline">¶</a></h4>
+<p>From time to time, you may need to concatenate arrays. For example, for instruments with two chips, concatenating the two data arrays gives you the whole instrument field of view in a single array.</p>
+<p>The tool for this is <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.concatenate.html#numpy.concatenate" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.concatenate</span></code></a>. Take, for example, two identically shaped arrays: a 5x8 array of ones, and a 5x8 array of zeros.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">first</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">second</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">])</span>
+<span class="go">array([[ 1.,  1.,  1.],</span>
+<span class="go">       [ 1.,  1.,  1.],</span>
+<span class="go">       [ 0.,  0.,  0.],</span>
+<span class="go">       [ 0.,  0.,  0.]])</span>
+</pre></div>
+</div>
+<p>We could stick the arrays together along a different axis, just as easily:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([[ 1.,  1.,  1.,  0.,  0.,  0.],</span>
+<span class="go">       [ 1.,  1.,  1.,  0.,  0.,  0.]])</span>
+</pre></div>
+</div>
+<p>The dimensions do not <em>all</em> have to match, but they do have to match on every axis but the axis on which you’re concatenating.</p>
+</div>
+</div>
+</div>
+<div class="section" id="handling-fits-files-and-ascii-data-tables-using-astropy">
+<span id="python-fits-ascii"></span><h2>Handling FITS files and ASCII data tables using Astropy<a class="headerlink" href="#handling-fits-files-and-ascii-data-tables-using-astropy" title="Permalink to this headline">¶</a></h2>
+<p>Astropy is a Python library for astronomy developed by professional
+astronomers and software developers from around the world, some of which
+work here at STScI in the Science Software Branch. It is under
+continuous development and is quickly becoming a powerful library,
+especially for handling FITS files and ASCII tables. Visit the website
+listed in <a class="reference internal" href="resources.html#python-links"><span class="std std-ref">References</span></a> for more information and useful
+documentation.</p>
+<p>The astropy.io.fits module provides an interface to FITS formatted files
+under the Python scripting language. astropy.io.fits data structures are
+a subclass of NumPy arrays, which means that they can use NumPy arrays’
+methods and attributes. The astropy.io.ascii module provides flexible
+and easy-to-use methods for reading and writing ASCII data tables. In
+the following sections, we will explore these two modules.</p>
+<div class="section" id="opening-reading-and-closing-a-fits-file">
+<h3>Opening, Reading, and Closing a FITS File<a class="headerlink" href="#opening-reading-and-closing-a-fits-file" title="Permalink to this headline">¶</a></h3>
+<p>As an example, we will use data from the <em>WFC3</em> instrument located here:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">grp</span><span class="o">/</span><span class="n">hst</span><span class="o">/</span><span class="n">riab</span><span class="o">/</span><span class="n">training</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">icft01crq_raw</span><span class="o">.</span><span class="n">fits</span>
+</pre></div>
+</div>
+<p>Please copy this file to your working directory.</p>
+<p>Below we show an example of opening a FITS file, getting the data and
+the header, closing the file, printing out the shape of the data using
+numpy.shape, printing out header values, and finally making changes to
+the data.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">astropy.io</span> <span class="k">import</span> <span class="n">fits</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">infile</span> <span class="o">=</span> <span class="s1">&#39;icft01crq_raw.fits&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fits</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hdulist</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hdr</span> <span class="o">=</span> <span class="n">hdulist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>  <span class="c1"># Get the primary header</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">hdulist</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>  <span class="c1"># Get the data from the 1st extension</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hdr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hdr</span><span class="p">[</span><span class="s1">&#39;FLSHCORR&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hdr</span><span class="p">[</span><span class="s1">&#39;FLSHCORR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;PERFORM&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hdr</span><span class="p">[</span><span class="s1">&#39;FLSHCORR&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])</span>  <span class="c1"># Print the last two lines.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>   <span class="c1"># Modify the first pixel in the last row</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Notice that <code class="docutils literal notranslate"><span class="pre">hdr</span></code> behaves like a dictionary. We did some bad
+things to this file, but let’s save it anyway to a new file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">outfile</span> <span class="o">=</span> <span class="s1">&#39;mybad.fits&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fits</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">hdr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Saved FITS file to: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">outfile</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Alternatively, if we want to modify the original file directly, we can
+do the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fits</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As a word of caution, note that astropy.io.fits reads in FITS images as
+(rows, cols) or (y, x), not (x, y). This is often a ‘gotcha’ for users
+who are indexing specific areas of the array.</p>
+</div>
+<div class="section" id="fits-getval-and-fits-setval-functions">
+<h3>fits.getval() and fits.setval() functions<a class="headerlink" href="#fits-getval-and-fits-setval-functions" title="Permalink to this headline">¶</a></h3>
+<p>Above, we edited a FITS header by assigning to dictionary keys in Python (e.g. <code class="docutils literal notranslate"><span class="pre">hdr['FLSHCORR']</span> <span class="pre">=</span> <span class="pre">'PERFORM'</span></code>). If you’re manipulating headers a lot, astropy.io.fits provides shorthand for getting and setting the values of header keywords using fits.getval() and fits.setval(). In the example below, we check the header value for <code class="docutils literal notranslate"><span class="pre">DARKFILE</span></code> in extension <code class="docutils literal notranslate"><span class="pre">0</span></code>, set it to a new value, and then check it again to make sure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">astropy.io</span> <span class="k">import</span> <span class="n">fits</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">infile</span> <span class="o">=</span> <span class="s1">&#39;icft01crq_raw.fits&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;DARKFILE&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fits</span><span class="o">.</span><span class="n">getval</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fits</span><span class="o">.</span><span class="n">setval</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;iref$bogus_dark.fits&#39;</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fits</span><span class="o">.</span><span class="n">getval</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You should see the <code class="docutils literal notranslate"><span class="pre">iref$bogus_dark.fits</span></code> value. Let’s put it back:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fits</span><span class="o">.</span><span class="n">setval</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s1">&#39;iref$y2j13512i_drk.fits&#39;</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fits</span><span class="o">.</span><span class="n">getval</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now our FITS file is back to its ‘initial’ state. No harm done.</p>
+</div>
+<div class="section" id="reading-and-writing-ascii-data-files">
+<h3>Reading and Writing ASCII Data Files<a class="headerlink" href="#reading-and-writing-ascii-data-files" title="Permalink to this headline">¶</a></h3>
+<p>The astropy.io.ascii module provides two robust methods, ascii.read()
+and ascii.write(), for reading and writing multi-column text format data
+tables.</p>
+<div class="section" id="astropy-io-ascii-read-function">
+<h4>astropy.io.ascii.read() function<a class="headerlink" href="#astropy-io-ascii-read-function" title="Permalink to this headline">¶</a></h4>
+<p><strong>Use:</strong> The astropy.io.ascii.read() function reads in a table of data from a
+specified file and returns an astropy.Table object.</p>
+<p>As an example, we will use these files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">grp</span><span class="o">/</span><span class="n">hst</span><span class="o">/</span><span class="n">riab</span><span class="o">/</span><span class="n">training</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">flux_vs_time_A</span><span class="o">.</span><span class="n">dat</span>
+<span class="o">/</span><span class="n">grp</span><span class="o">/</span><span class="n">hst</span><span class="o">/</span><span class="n">riab</span><span class="o">/</span><span class="n">training</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">flux_vs_time_C</span><span class="o">.</span><span class="n">dat</span>
+</pre></div>
+</div>
+<p>These data are used to plot the flux versus time for a standard star and
+serves as a monitor of the WFC3/UVIS photometric stability for amps A
+and C, respectively. In this section, we will read in the data, and in
+chapter 4, we will use it to produce the plots.</p>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">astropy.io</span> <span class="k">import</span> <span class="n">ascii</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">infile</span> <span class="o">=</span> <span class="s1">&#39;flux_vs_time_A.dat&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">ascii</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">infile</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;MJD&#39;</span><span class="p">,</span> <span class="s1">&#39;Flux_diff&#39;</span><span class="p">,</span> <span class="s1">&#39;Flux_err&#39;</span><span class="p">,</span> <span class="s1">&#39;Flux_linear_fit&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;MJD&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;MJD&#39;</span><span class="p">,</span> <span class="s1">&#39;Flux_diff&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Flux_diff&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pos_flux</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;Flux_diff&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">pos_flux</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p class="last">Try reading in the data from <code class="docutils literal notranslate"><span class="pre">flux_vs_time_C.dat</span></code> using ascii.read()</p>
+</div>
+</div>
+<div class="section" id="astropy-io-ascii-write-function">
+<h4>astropy.io.ascii.write() function<a class="headerlink" href="#astropy-io-ascii-write-function" title="Permalink to this headline">¶</a></h4>
+<p><strong>Use:</strong> Similar to ascii.read(), the astropy.io.ascii.write() function writes
+a table of data to a specified file. For fun, lets try taking the MJDs
+from <code class="docutils literal notranslate"><span class="pre">flux_vs_time_A.dat</span></code>, normalizing them to the first observation
+date, and writing the new table to a new text file:</p>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">astropy.io</span> <span class="k">import</span> <span class="n">ascii</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">infile</span> <span class="o">=</span> <span class="s1">&#39;flux_vs_time_A.dat&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">ascii</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;flux_vs_time_A.dat&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                  <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;MJD&#39;</span><span class="p">,</span> <span class="s1">&#39;Flux_diff&#39;</span><span class="p">,</span> <span class="s1">&#39;Flux_err&#39;</span><span class="p">,</span> <span class="s1">&#39;Flux_linear_fit&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_date</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;MJD&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;MJD&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;MJD&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">first_date</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ascii</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;flux_vs_time_A_mjdnorm.dat&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p class="last">Try making a MJD-normalized text file for the <code class="docutils literal notranslate"><span class="pre">flux_vs_time_C.dat</span></code>
+data using ascii.write()</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="plotting-with-pyplot">
+<h2>Plotting with PyPlot<a class="headerlink" href="#plotting-with-pyplot" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://matplotlib.org">Matplotlib</a> and its <a class="reference external" href="http://matplotlib.org/users/pyplot_tutorial.html">PyPlot</a> environment is a versatile Python plotting library capable of producing publication quality figures in a variety of hard-copy formats such as EPS, PDF, and PNG. With PyPlot you can generate scatter and line plots, histograms, power spectra, bar charts, error-charts, pie charts, and many more with just a few lines of code. For the power user, you have full control of line styles, font properties, axes properties, and so on.</p>
+<p>In the Jupyter Notebook, use the magic command <code class="docutils literal notranslate"><span class="pre">%matplotlib</span> <span class="pre">inline</span></code> before importing pyplot, like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+<p>That will ensure your figures appear embedded in your notebook, rather than external windows. (However, they will not be interactively zoomable.)</p>
+<p>If you have a new Apple laptop, an additional bit of magic will make your plots much easier on the eyes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">config</span> <span class="n">InlineBackend</span><span class="o">.</span><span class="n">figure_format</span><span class="o">=</span><span class="s1">&#39;retina&#39;</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Building up a complex figure in matplotlib typically involves a few calls to different plotting functions. In the Jupyter Notebook, when showing inline plots is enabled, all the plotting code for a particular figure must be in the same “cell”. That is, you should put multiple lines of plotting code in one cell, and then <kbd class="kbd docutils literal notranslate">Shift-Enter</kbd> will generate and display the figure.</p>
+</div>
+<div class="section" id="basic-plotting">
+<span id="python-simple-scatter"></span><h3>Basic Plotting<a class="headerlink" href="#basic-plotting" title="Permalink to this headline">¶</a></h3>
+<p>The most-used plotting function is <code class="docutils literal notranslate"><span class="pre">plt.plot()</span></code>, which generally takes
+two arguments <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/basicplot.png"><img alt="Our first plot." src="../_images/basicplot.png" style="width: 50%;" /></a>
+</div>
+<p>You can call <code class="docutils literal notranslate"><span class="pre">plt.plot()</span></code> multiple times and the data will show up on the same plot:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">e</span><span class="o">**</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/basicplot2.png"><img alt="../_images/basicplot2.png" src="../_images/basicplot2.png" style="width: 50%;" /></a>
+</div>
+<p>If you don’t want two datasets showing up on the same plot, you can use <code class="docutils literal notranslate"><span class="pre">fig</span> <span class="pre">=</span> <span class="pre">plt.figure()</span></code> to explicitly create separate plots, and <code class="docutils literal notranslate"><span class="pre">ax</span> <span class="pre">=</span> <span class="pre">fig.add_subplot(1,1,1)</span></code> to create a subplot object for the figure. The <code class="docutils literal notranslate"><span class="pre">1,1,1</span></code> arguments here indicate the number of rows of subplots you want to create, number of columns, and what the number of this particular subplot is; if you had, say, <code class="docutils literal notranslate"><span class="pre">2,3,4</span></code> as your argument instead, you’d then have 2 rows and 3 columns for 6 total subplots, and the particular subplot you just created would be the fourth out of those.</p>
+<p>After creating the subplot, you can then call <code class="docutils literal notranslate"><span class="pre">ax.plot()</span></code>, which will ensure that the dataset appears on the correct plot. We will also see a different way of creating subplots, <code class="docutils literal notranslate"><span class="pre">plt.subplots()</span></code>, later.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig1</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">fig2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig2</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/basicplot.png"><img alt="../_images/basicplot.png" src="../_images/basicplot.png" style="width: 50%;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/basicplot3.png"><img alt="../_images/basicplot3.png" src="../_images/basicplot3.png" style="width: 50%;" /></a>
+</div>
+<p>Matplotlib’s <a class="reference external" href="http://matplotlib.org/api/markers_api.html">marker properties</a> are extremely customizable; say we want each point marked with an individual dot rather than a line, and we want the line to be red:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/markers.png"><img alt="../_images/markers.png" src="../_images/markers.png" style="width: 50%;" /></a>
+</div>
+<p>What if we want a functionality that <code class="docutils literal notranslate"><span class="pre">plt.plot()</span></code> doesn’t have, such as adding error bars? Luckily, there’s more than just <code class="docutils literal notranslate"><span class="pre">plt.plot()</span></code> to work with; for example, <code class="docutils literal notranslate"><span class="pre">plt.errorbar()</span></code> is a very useful function for astronomers.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yerr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/errorbar.png"><img alt="../_images/errorbar.png" src="../_images/errorbar.png" style="width: 50%;" /></a>
+</div>
+<p>We’ve been very bad scientists so far and have failed to label our axes! Let’s do that now.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Quadratic with Poissonian error in y&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/plot_labels.png"><img alt="../_images/plot_labels.png" src="../_images/plot_labels.png" style="width: 50%;" /></a>
+</div>
+<p>Now that you’ve got the basics, let’s look at some more complicated things Matplotlib can do.</p>
+</div>
+<div class="section" id="example-multiple-subplots-and-different-plotting-functions">
+<span id="multi-subplots"></span><h3>Example: Multiple Subplots and Different Plotting Functions<a class="headerlink" href="#example-multiple-subplots-and-different-plotting-functions" title="Permalink to this headline">¶</a></h3>
+<p>Here we’ll be making a scatter plot, 1D and 2D histograms, and a contour plot from the same dataset.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># make figure with two rows and two columns of subplots, specify size in inches</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">[(</span><span class="n">ax0</span><span class="p">,</span> <span class="n">ax1</span><span class="p">),</span> <span class="p">(</span><span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">)]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>We assign the figure and four axis objects to their own variables; see <a class="reference internal" href="basics.html#multiassignment"><span class="std std-ref">Multiple assignment with sequences</span></a>.</p>
+<p>Now we need some data. We’ll use <code class="docutils literal notranslate"><span class="pre">np.random.randn</span></code>, which generates an array of user-specified length with values pulled from the normal distribution centered at 0 with a standard deviation of 1. Let’s generate two arrays with 5000 points each.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5000</span><span class="p">)</span>
+<span class="n">data_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>On the first subplot, we add a scatter plot:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ax0</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">data_y</span><span class="p">)</span>
+<span class="n">ax0</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;plt.scatter()&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For the next two plots, we’ll be making two different types of histograms:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># set number of bins for histograms</span>
+<span class="n">nbins</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="c1"># histogram of 1D dataset</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">nbins</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;plt.hist()&#39;</span><span class="p">)</span>
+
+<span class="c1"># histogram of 2D dataset</span>
+<span class="c1"># we assign hist2d output to variables for use in the next plot</span>
+<span class="n">H</span><span class="p">,</span> <span class="n">xedges</span><span class="p">,</span> <span class="n">yedges</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">hist2d</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">data_y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="p">(</span><span class="n">nbins</span><span class="p">,</span> <span class="n">nbins</span><span class="p">))</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;plt.hist2d()&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For the filled contour plot, we need to convert the data to a format <code class="docutils literal notranslate"><span class="pre">contourf</span></code> accepts. Don’t worry if you don’t understand this particular bit of code; essentially what it does is get a density map from the 2D histogram output.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_bin_sizes</span> <span class="o">=</span> <span class="p">(</span><span class="n">xedges</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">xedges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">nbins</span><span class="p">))</span>
+<span class="n">y_bin_sizes</span> <span class="o">=</span> <span class="p">(</span><span class="n">yedges</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">yedges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">nbins</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">pdf</span> <span class="o">=</span> <span class="p">(</span><span class="n">H</span> <span class="o">*</span> <span class="p">(</span><span class="n">x_bin_sizes</span> <span class="o">*</span> <span class="n">y_bin_sizes</span><span class="p">))</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">xedges</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">xedges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">yedges</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">yedges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">pdf</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c1"># plot filled contour map</span>
+<span class="n">cs</span> <span class="o">=</span> <span class="n">ax3</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;plt.contourf()&#39;</span><span class="p">)</span>
+
+<span class="c1"># adjust plot spacing</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Here’s the code explained above all in one place, suitable for the Jupyter Notebook or pasting into an interactive interpreter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># make figure with two rows and two columns of subplots, specify size in inches</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">[(</span><span class="n">ax0</span><span class="p">,</span> <span class="n">ax1</span><span class="p">),</span> <span class="p">(</span><span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">)]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">data_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5000</span><span class="p">)</span>
+<span class="n">data_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">5000</span><span class="p">)</span>
+
+<span class="n">ax0</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">data_y</span><span class="p">)</span>
+<span class="n">ax0</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;plt.scatter()&#39;</span><span class="p">)</span>
+
+<span class="c1"># set number of bins for histograms</span>
+<span class="n">nbins</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="c1"># histogram of 1D dataset</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">nbins</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;plt.hist()&#39;</span><span class="p">)</span>
+
+<span class="c1"># histogram of 2D dataset</span>
+<span class="c1"># we assign hist2d output to variables for use in the next plot</span>
+<span class="n">H</span><span class="p">,</span> <span class="n">xedges</span><span class="p">,</span> <span class="n">yedges</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">hist2d</span><span class="p">(</span><span class="n">data_x</span><span class="p">,</span> <span class="n">data_y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="p">(</span><span class="n">nbins</span><span class="p">,</span> <span class="n">nbins</span><span class="p">))</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;plt.hist2d()&#39;</span><span class="p">)</span>
+
+<span class="n">x_bin_sizes</span> <span class="o">=</span> <span class="p">(</span><span class="n">xedges</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">xedges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">nbins</span><span class="p">))</span>
+<span class="n">y_bin_sizes</span> <span class="o">=</span> <span class="p">(</span><span class="n">yedges</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">yedges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">nbins</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">pdf</span> <span class="o">=</span> <span class="p">(</span><span class="n">H</span> <span class="o">*</span> <span class="p">(</span><span class="n">x_bin_sizes</span> <span class="o">*</span> <span class="n">y_bin_sizes</span><span class="p">))</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">xedges</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">xedges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">yedges</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">yedges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">pdf</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c1"># plot filled contour map</span>
+<span class="n">cs</span> <span class="o">=</span> <span class="n">ax3</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s2">&quot;lower&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;plt.contourf()&#39;</span><span class="p">)</span>
+
+<span class="c1"># adjust plot spacing</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;subplot_examples.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/subplot_examples.png"><img alt="../_images/subplot_examples.png" src="../_images/subplot_examples.png" style="width: 75%;" /></a>
+</div>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p class="last">Create a figure with at least three subplots (in whatever grid shape you choose)
+and make a different kind of plot in each.
+If you want to explore plotting options beyond what’s been presented here so far,
+check out the <a class="reference external" href="http://matplotlib.org/api/pyplot_summary.html">PyPlot documentation</a>.</p>
+</div>
+</div>
+<div class="section" id="example-plotting-fits-figures-using-colormaps">
+<h3>Example: Plotting FITS Figures &amp; Using Colormaps<a class="headerlink" href="#example-plotting-fits-figures-using-colormaps" title="Permalink to this headline">¶</a></h3>
+<p>In Matplotlib any 2D array of floats or integers can be displayed as an image.
+This is extremely convenient for displaying data from FITS files. In this example, we use a FITS file called <code class="docutils literal notranslate"><span class="pre">ibsa01fpq_flt.fits</span></code> (you can find a copy in <code class="docutils literal notranslate"><span class="pre">/grp/hst/riab/training/python/</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.io</span> <span class="k">import</span> <span class="n">fits</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;ibsa01fpq_flt.fits&#39;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;sci&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c1"># display the data</span>
+<span class="c1"># you may have to manually fiddle with vmin and vmax</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/fits_image.png"><img alt="../_images/fits_image.png" src="../_images/fits_image.png" style="width: 50%;" /></a>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">vmin</span></code> and <code class="docutils literal notranslate"><span class="pre">vmax</span></code> specify the image values for which to set the minimum and maximum of the colormap. A colormap assigns a color to pixels in the plot based on the values in the array. The simplest color map is grayscale (higher array values mean brighter pixels), but other color map choices can be useful to show patterns in the data.</p>
+<p>Woah, wait, something’s not quite right there. Take a close look at the Y axis labels. They seem to count <em>up</em> towards the lower edge, while X labels count <em>up</em> towards the right edge. What the hey?</p>
+<p>As with so many things, the answer is “historical reasons”. The earliest graphical displays were just fancier character displays, and (English) characters are written from top left to bottom right. Somehow, this carried over into computer graphics code, and from thence to matplotlib. Fortunately, it’s configurable.</p>
+<p>Supply the <code class="docutils literal notranslate"><span class="pre">origin='lower'</span></code> argument, like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/fits_image_origin_lower.png"><img alt="../_images/fits_image_origin_lower.png" src="../_images/fits_image_origin_lower.png" style="width: 50%;" /></a>
+</div>
+<p>Much better.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">rc()</span></code> function sets values called “rcParams”, which are basically defaults for various customizable things in matplotlib. If you do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">rc</span>
+<span class="n">rc</span><span class="p">(</span><span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>in a cell at the beginning of your notebook it will act as if you had supplied <code class="docutils literal notranslate"><span class="pre">origin='lower'</span></code> in subsequent <code class="docutils literal notranslate"><span class="pre">imshow()</span></code> calls.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">There’s another facility for setting defaults, the <code class="docutils literal notranslate"><span class="pre">matplotlibrc</span></code> file, but it comes with some caveats. Most importantly, if you send your code or notebook to another person who has not installed your matplotlibrc file, your plots may show up wrong or even be misinterpreted. (The <code class="docutils literal notranslate"><span class="pre">image.origin</span></code> parameter, in particular, has the potential to confuse!) See <a class="reference external" href="http://matplotlib.org/users/customizing.html#the-matplotlibrc-file">the matplotlibrc docs</a> for details.</p>
+</div>
+<p>Let’s compare some different types of colormaps for this image.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># set up figure; specify size in inches</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># add three subplots in a row</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># display the image in each subplot with different colormaps</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;bone&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This isn’t strictly necessary, but the tick marks are a distraction and take up space, so let’s get rid of them:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+</pre></div>
+</div>
+<p>Let’s give each subplot a title:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Default colormap&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Diverging colormap&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Sequential colormap&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, let’s tweak the spacing between subplots so that they’re closer together:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/colormaps.png"><img alt="../_images/colormaps.png" src="../_images/colormaps.png" style="width: 100%;" /></a>
+</div>
+<p>When displaying an image, there are very few instances in which you want to use anything other than a sequential colormap. Diverging colormaps are good for displaying the deviation of data from a mean or median, and qualitative colormaps such as the default “jet” should almost never be used for anything other than categorization of discrete data types. (For more on why jet is a bad choice for continuous/image-like data, see <a class="reference external" href="https://jakevdp.github.io/blog/2014/10/16/how-bad-is-your-colormap/">this blog post</a>.)</p>
+<p>For a quick reference of all built-in colormaps in Matplotlib, see this <a class="reference external" href="http://matplotlib.org/examples/color/colormaps_reference.html">colormap reference chart</a>.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p>Copy the FITS image used above from <code class="docutils literal notranslate"><span class="pre">/grp/hst/riab/training/python/</span></code> to your working directory and try plotting a 500x500 pixel cutout of it (say, the galaxy disk in the lower left corner). (Hint: refer to the previous section on slicing sequences.)</p>
+<p class="last">Next, apply your favorite colormap to the image. Can you adjust vmin and vmax for this region to get a better dynamic range?</p>
+</div>
+</div>
+<div class="section" id="making-attractive-plots">
+<h3>Making Attractive Plots<a class="headerlink" href="#making-attractive-plots" title="Permalink to this headline">¶</a></h3>
+<p>As you may have noticed, the Matplotlib fonts, colors, and general
+formatting defaults are rather unattractive. Fortunately, almost
+everything in Matplotlib is customizable with a little know-how.</p>
+<div class="section" id="texify-your-text">
+<h4>TeXify Your Text<a class="headerlink" href="#texify-your-text" title="Permalink to this headline">¶</a></h4>
+<p>If you are preparing a document in LaTeX for publication,
+your figures will blend in very nicely (and look so much better in general!)
+if you use LaTeX formatting, not only for symbols and equations
+but for all figure text. <a class="reference external" href="http://matplotlib.org/api/matplotlib_configuration_api.html#matplotlib.rc">This</a>
+is the simplest method for doing so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># import module that sets formatting parameters</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">rc</span>
+<span class="c1"># change default font for all plot text to LaTeX font; also change font size</span>
+<span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="s1">&#39;serif&#39;</span><span class="p">,</span> <span class="s1">&#39;serif&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Computer Modern Roman&#39;</span><span class="p">],</span> <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">14</span><span class="p">})</span>
+<span class="c1"># allow TeX commands to be used in text strings</span>
+<span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is also possible to edit these preferences in your <a class="reference external" href="http://matplotlib.org/users/customizing.html">matplotlibrc</a> file directly;
+however, this may cause issues if you use scripts that weren’t
+written with this in mind.</p>
+<p>If you want to see everything you can possibly modify with <code class="docutils literal notranslate"><span class="pre">rc</span></code>,
+do the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">rcParams</span>
+<span class="n">rcParams</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>For more information, see Matplotlib’s documentation on <a class="reference external" href="http://matplotlib.org/users/usetex.html">text
+rendering with LaTeX</a>.</p>
+</div>
+<div class="section" id="high-dpi-rasterized-figures">
+<h4>High-DPI Rasterized Figures<a class="headerlink" href="#high-dpi-rasterized-figures" title="Permalink to this headline">¶</a></h4>
+<p>Typically, if you want to save a high-resolution figure it’s easiest to just
+save it as a pdf or eps. However, the disadvantage of these formats for figures
+with large datasets is that their graphics are in vector format and thus very
+information-dense, which means that if you have upwards of a few hundred data
+points the file will quickly become bloated and you’ll end up wasting twenty
+minutes while Preview struggles to open it.</p>
+<p>Fortunately, there is a workaround. Rasterization is a process that maps vector
+graphics to pixel format, resulting in much less information being stored.
+In Matplotlib one can rasterize the entire figure with one simple command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># set up your figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="c1"># plot some things here</span>
+<span class="c1"># set rasterization for the entire figure before saving</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">set_rasterized</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># save the figure and specify the dpi</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;rasterized.eps&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">144</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A DPI of 144 should be good enough for most screens, and 300-400 for publication
+quality, although a high DPI also results in large files.</p>
+<p>Alternatively, if you want to keep as much of the figure resolution-independent as
+possible, you can set rasterization only for the plotted objects in the plotting call:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># set up your figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="c1"># plot some things here and set rasterization</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">rasterized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># save the figure and specify the dpi</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;partially_rasterized.eps&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">144</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="general-tricks-quick-reference">
+<span id="general-mpl-tricks"></span><h3>General Tricks/Quick Reference<a class="headerlink" href="#general-tricks-quick-reference" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="when-to-explicitly-create-figure-and-axis-objects">
+<h4>When To Explicitly Create Figure and Axis Objects<a class="headerlink" href="#when-to-explicitly-create-figure-and-axis-objects" title="Permalink to this headline">¶</a></h4>
+<p>So far in this training we’ve been somewhat lax about explicit figure creation; sometimes we just do <code class="docutils literal notranslate"><span class="pre">plt.plot(x,</span> <span class="pre">y)</span></code>, and sometimes we create a figure object <code class="docutils literal notranslate"><span class="pre">fig</span> <span class="pre">=</span> <span class="pre">plt.figure()</span></code> with or without an axes object <code class="docutils literal notranslate"><span class="pre">ax</span> <span class="pre">=</span> <span class="pre">fig.add_subplot()</span></code>. (There’s also the option <code class="docutils literal notranslate"><span class="pre">fig,</span> <span class="pre">ax</span> <span class="pre">=</span> <span class="pre">plt.subplots()</span></code>). When do you need explicit figure and axes objects, and when it is okay to skip straight to the plot function?</p>
+<p>Essentially, it depends on the complexity of your figure, although it’s generally good form to use the object-oriented figure and axis calls <code class="docutils literal notranslate"><span class="pre">fig</span> <span class="pre">=</span> <span class="pre">plt.figure()</span></code> and <code class="docutils literal notranslate"><span class="pre">ax</span> <span class="pre">=</span> <span class="pre">fig.add_subplot()</span></code> when you can. For quick-and-dirty plotting, <code class="docutils literal notranslate"><span class="pre">plt.plot()</span></code> is generally sufficient; however, if you have multiple subplots or an otherwise complicated figure, explicitly creating figure and axis objects is easier to work with.</p>
+</div>
+<div class="section" id="general-vs-axis-specific-commands">
+<h4>General vs. Axis-Specific Commands<a class="headerlink" href="#general-vs-axis-specific-commands" title="Permalink to this headline">¶</a></h4>
+<p>Some commands are different for general (<code class="docutils literal notranslate"><span class="pre">plt.plot()</span></code>) vs. object-oriented (<code class="docutils literal notranslate"><span class="pre">ax.plot()</span></code>) plotting. For the basic plotting functions <code class="docutils literal notranslate"><span class="pre">plot()</span></code>, <code class="docutils literal notranslate"><span class="pre">errorbar()</span></code>, <code class="docutils literal notranslate"><span class="pre">hist()</span></code> and so on, there is no name difference between the general and object-oriented names. However, for other things such as adding x- and y-labels, the function you have to call to achieve the same effect changes. Often if you have a function <code class="docutils literal notranslate"><span class="pre">plt.&lt;do_some_thing&gt;</span></code> that modifies a plot’s axis, the corresponding function for a specific axis object will be <code class="docutils literal notranslate"><span class="pre">ax.set_&lt;do_some_thing</span></code>.</p>
+</div>
+<div class="section" id="legends">
+<h4>Legends<a class="headerlink" href="#legends" title="Permalink to this headline">¶</a></h4>
+<p>The function to create a legend for your plot is quite simple, although some of the details of customizing it are a bit tricky.</p>
+<p>All you need to make a legend is at least one plotted object with the keyword argument <code class="docutils literal notranslate"><span class="pre">label='(your</span> <span class="pre">label</span> <span class="pre">here)'</span></code> in the plotting call. The legend call is simply:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This will make a boxed legend appear on your plot. The default legend formatting is perhaps one of Matplotlib’s least attractive features, which is saying something; fortunately, it is easily customizable. For example, you can change the location, size, and handle length with the legend keyword arguments <code class="docutils literal notranslate"><span class="pre">loc</span></code>, <code class="docutils literal notranslate"><span class="pre">prop</span></code>, and <code class="docutils literal notranslate"><span class="pre">handlelength</span></code> respectively.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">14</span><span class="p">},</span> <span class="n">handlelength</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">loc=0</span></code> tells Matplotlib to determine the optimal location for the legend. The numbering system for legend locations in Matplotlib can be confusing; the <a class="reference external" href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.legend">documentation</a>, lists all numbered positions. If you need more specificity than any of these provide, you can also use <code class="docutils literal notranslate"><span class="pre">loc=(x,y)</span></code> where x and y specify the location of the lower left corner of the legend box in the coordinates of your axis object.</p>
+</div>
+<div class="section" id="logarithmic-axes">
+<h4>Logarithmic Axes<a class="headerlink" href="#logarithmic-axes" title="Permalink to this headline">¶</a></h4>
+<p>If you need one or both axes to be log scale, the quickest way to do so is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># general</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="c1"># for a specific subplot object</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Be careful when you have axis limits that are close to 0; your plots will come out very funky if you don’t take care to adjust your axis limits to be log-compatible. If you have any negative data, <code class="docutils literal notranslate"><span class="pre">plt.yscale('symlog')</span></code> is your best option.</p>
+<p>Alternately, you can use <code class="docutils literal notranslate"><span class="pre">plt.semilogx(x,</span> <span class="pre">y)</span></code>, <code class="docutils literal notranslate"><span class="pre">plt.semilogy(x,</span> <span class="pre">y)</span></code>, or <code class="docutils literal notranslate"><span class="pre">plt.loglog(x,</span> <span class="pre">y)</span></code>; however, these give you slightly less flexibility.</p>
+</div>
+</div>
+<div class="section" id="example-fitting-a-curve-with-scipy">
+<span id="curve-fitting"></span><h3>Example: Fitting a Curve With SciPy<a class="headerlink" href="#example-fitting-a-curve-with-scipy" title="Permalink to this headline">¶</a></h3>
+<p>As astronomers, a large part of our job is to fit lines to things,
+regardless of the consequences. SciPy’s <a class="reference external" href="http://docs.scipy.org/doc/scipy-0.14.0/reference/optimize.html">optimize</a>
+package has many useful tools for doing this;
+here we will demonstrate the use of one of its most versatile functions, <code class="docutils literal notranslate"><span class="pre">curve_fit</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># adapted from http://python4esac.github.io/fitting/example_blackbody.html</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="k">import</span> <span class="n">curve_fit</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">rc</span>
+<span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="o">**</span><span class="p">{</span><span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="s1">&#39;serif&#39;</span><span class="p">,</span> <span class="s1">&#39;serif&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Computer Modern Roman&#39;</span><span class="p">],</span> <span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">14</span><span class="p">})</span>
+<span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>First, we define a blackbody function <code class="docutils literal notranslate"><span class="pre">blackbody</span></code> that takes an array-like input of wavelengths in microns and an integer or float temperature value in Kelvin and returns the spectral radiance blackbody values over the specified wavelength range.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">blackbody</span><span class="p">(</span><span class="n">wavelength</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="k">import</span> <span class="n">h</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">c</span>
+    <span class="n">wav</span> <span class="o">=</span> <span class="n">wavelength</span> <span class="o">/</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span>
+    <span class="n">exponential</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">h</span><span class="o">*</span><span class="n">c</span> <span class="o">/</span> <span class="p">(</span><span class="n">wav</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="n">T</span><span class="p">))</span>
+    <span class="n">coeff</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="o">*</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">wav</span><span class="o">**</span><span class="mi">5</span>
+    <span class="k">return</span> <span class="n">coeff</span> <span class="o">/</span> <span class="p">(</span><span class="n">exponential</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Next, we use the <code class="docutils literal notranslate"><span class="pre">blackbody</span></code> function to create an ideal blackbody spectrum for a given set of wavelengths. The function <code class="docutils literal notranslate"><span class="pre">np.linspace()</span></code> used here is similar to np.arange except its third argument is an integer specifying how many values the resulting array should have, instead of the size of the increment between values.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.02</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mf">7000.</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">blackbody</span><span class="p">(</span><span class="n">wa</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we add some noise to this perfect blackbody. We’re creating two different types of noise here: a baseline “additive” noise scaled to half the mean of the blackbody function, and noise that we will multiply the blackbody function by in order to have it vary with the amplitude of the blackbody. Note that the noise arrays must have the same number of values as the wavelength range above.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">add_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">multiply_noise</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span>
+
+<span class="n">noisy_data</span> <span class="o">=</span> <span class="n">y</span> <span class="o">*</span> <span class="n">multiply_noise</span> <span class="o">+</span> <span class="n">add_noise</span>
+</pre></div>
+</div>
+<p>Now we use <code class="docutils literal notranslate"><span class="pre">curve_fit</span></code> to fit the blackbody function to the noisy data, with temperature as the only free parameter.
+Here the arguments for <code class="docutils literal notranslate"><span class="pre">curve_fit</span></code> are the function to be used for fitting, the x- and y-data, and optional initial parameter guesses. It returns the optimized parameters for the function as well as a covariance matrix for those parameters. Output is called <code class="docutils literal notranslate"><span class="pre">popt,pcov</span></code> by convention. To get the standard deviations of the optimized parameters, we take the square root of the diagonal values of the covariance matrix. (Although we only have one free parameter here, it’s good form to still take the diagonal.)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">blackbody</span><span class="p">,</span> <span class="n">wa</span><span class="p">,</span> <span class="n">noisy_data</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="p">(</span><span class="mf">7000.</span><span class="p">))</span>
+
+<span class="n">fitT</span> <span class="o">=</span> <span class="n">popt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">sigmaT</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">pcov</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># fit blackbody with new temperature</span>
+<span class="n">yfit</span> <span class="o">=</span> <span class="n">blackbody</span><span class="p">(</span><span class="n">wa</span><span class="p">,</span> <span class="n">fitT</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Observed blackbody temperature: </span><span class="si">{:.2f}</span><span class="s1"> +/- </span><span class="si">{:.2f}</span><span class="s1"> K&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fitT</span><span class="p">,</span> <span class="n">sigmaT</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Observed blackbody temperature: 6926.61 +/- 35.57 K</p>
+<p>Now we plot the ideal blackbody, noisy data, and fitted blackbody for comparison.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot all functions</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wa</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True blackbody&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wa</span><span class="p">,</span> <span class="n">noisy_data</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Noisy data&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wa</span><span class="p">,</span> <span class="n">yfit</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Fitted blackbody&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Wavelength ($\mu$m)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Spectral radiance (erg s$^{-1}$ cm$^3$ sr$^{-1}$)&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span><span class="mi">14</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/blackbody.png"><img alt="Blackbody spectrum." src="../_images/blackbody.png" style="width: 60%;" /></a>
+</div>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p class="last">Define your own function and use <code class="docutils literal notranslate"><span class="pre">curve_fit</span></code> to fit it to some noisy data.
+How do the ideal and fitted function compare? How does this change when you change
+the noise properties (for example, if you use only additive or only multiplicative
+noise, or change the scale of the additive noise to twice the mean rather than half)?</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="scripting.html" class="btn btn-neutral float-right" title="Python Scripts, Modules, and Packages" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="basics.html" class="btn btn-neutral" title="Basic Python Concepts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, AURA / Space Telescope Science Institute. These documents are designed for internal use only, and are not an official AURA/STScI publication. Information may be out of date, irrelevant, or contradict published documentation. Use at your own risk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'published 2018-6-14',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>HST APT and ETC &mdash; RIA Training Library</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="JWST APT" href="jwst_apt.html" />
+    <link rel="prev" title="The Astronomer’s Proposal Tool and the Exposure Time Calculator for HST and JWST" href="index.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Technical Staff Training
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                published 2018-6-14
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../computer_setup.html">Setting Up Your Computer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version_control.html">Version Control with git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../archives.html">Using MAST (a.k.a. the Archive)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python for Scientific Data Analysis</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Astronomer’s Proposal Tool and the Exposure Time Calculator for HST and JWST</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">HST APT and ETC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#astronomer-s-proposal-tool">Astronomer’s Proposal Tool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exposure-time-calculator">Exposure Time Calculator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="jwst_apt.html">JWST APT</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../photometry.html">Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drizzle.html">Using DrizzlePac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spectroscopy/index.html">Basic Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pysynphot.html">Using Pysynphot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editing_these_documents.html">Editing These Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tricks.html">Tips and Tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainees.html">Past Trainees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../boneyard.html">Retired topics</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Technical Staff Training</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">The Astronomer’s Proposal Tool and the Exposure Time Calculator for HST and JWST</a> &raquo;</li>
+        
+      <li>HST APT and ETC</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/apt_etc/hst_apt_etc.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="hst-apt-and-etc">
+<h1>HST APT and ETC<a class="headerlink" href="#hst-apt-and-etc" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line">Authors: J. White</div>
+<div class="line"><br /></div>
+<div class="line"><strong>HST</strong></div>
+</div>
+<hr class="docutils" />
+<p><strong>Helpful Links:</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.stsci.edu/hst/proposing/apt">APT Webpage</a></li>
+<li><a class="reference external" href="http://www.stsci.edu/hst/proposing/apt/using_apt">APT training videos</a></li>
+<li><a class="reference external" href="https://confluence.stsci.edu/download/attachments/66356683/APT_Overview_july2016.pptx?version=1&amp;modificationDate=1468868047000&amp;api=v2">APT Training Slides</a></li>
+<li><a class="reference external" href="http://etc.stsci.edu">ETC Webpage</a></li>
+<li><a class="reference external" href="http://aladin.u-strasbg.fr">ALADIN Info</a></li>
+</ul>
+<hr class="docutils" />
+<div class="section" id="astronomer-s-proposal-tool">
+<h2>Astronomer’s Proposal Tool<a class="headerlink" href="#astronomer-s-proposal-tool" title="Permalink to this headline">¶</a></h2>
+<p>The Astronomer’s Proposal Tool (APT) is a software package used by the institute and external users alike
+for planning HST (and soon, JWST) proposals. It consists mainly of the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Editors used in filling out Phase I and Phase II proposals</li>
+<li>An Orbit Planner tool used to test the viability of a desired observation in a Phase II proposal</li>
+<li>A Visit Planner tool used for visualizing and determining the ability to schedule a desired observation</li>
+<li>A Bright Object tool used for performing checks for brightness above instrument safety thresholds</li>
+<li>A tool based on ALADIN used for simulating what data may look like for the planned observation</li>
+</ul>
+</div></blockquote>
+<p>To get started with learning how to use APT, first download the app by going to the
+APT webpage using the ‘website’ link above and clicking on the appropriate link on the right side of the
+page under ‘Install APT.’ APT is also available internally (or by VPN) via /eng/apt/Mac,
+but it’s a good idea to have a copy of the app that doesn’t depend on the Institute’s /eng network mount.
+Then use the “training videos” link above and watch and follow along with (on your machine)
+the ‘General’ training videos. These tutorials will teach you how to use APT to prepare for a general
+proposal. For additional help, see the APT Overview presentation slides.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise 1</p>
+<p>Try to create a Phase I and a Phase II proposal based on these parameters:</p>
+<blockquote class="last">
+<div><blockquote>
+<div><p>Instrument: COS</p>
+<p>Target: M31</p>
+<p>Visits: 3</p>
+<p>Orbits: 2, 4, 5 (for each visit)</p>
+<p>Grating: G130M</p>
+<p>Cenwave: 1327</p>
+</div></blockquote>
+<p>For the Phase I: include some notes for the abstract and add a CO-I.</p>
+</div></blockquote>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Do not hit the submission button. You Don’t actually want this to be reviewed…</p>
+</div>
+</div>
+<div class="section" id="exposure-time-calculator">
+<h2>Exposure Time Calculator<a class="headerlink" href="#exposure-time-calculator" title="Permalink to this headline">¶</a></h2>
+<p>The Exposure Time Calculator (ETC) is a software tool that does exactly what the name implies, and each
+instrument has it’s own tool. ETC is a simulator used in helping users of HST or JWST
+instruments figure out what exposure times they need to fulfill certain requirements for
+their science such as Signal to Noise, the type of target they want to observe, background levels, etc.
+It also generates handy plots for understanding the instrument’s expected performance under the conditions that are input.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p>In the case of ETC there’s not much training that’s required. It’s a simple form that you
+fill out based on parameters that you want/expect for your observation.</p>
+<p>Go try it out! Start with the default values. What do you get?</p>
+<p>Find your instrument’s ETC and submit 3 (default plus two different submissions)
+different forms with different parameters.
+Return to your trainer with the following:</p>
+<blockquote class="last">
+<div><p>Start with the default values. What do you get?</p>
+<p>Parameters used (with the fields) for each submission
+Results page for each submission</p>
+<p>Any plots that are generated</p>
+<p>OPTIONAL: Note any warnings that you may get. Try to figure out why you got them
+and how to resolve them</p>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="jwst_apt.html" class="btn btn-neutral float-right" title="JWST APT" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="The Astronomer’s Proposal Tool and the Exposure Time Calculator for HST and JWST" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, AURA / Space Telescope Science Institute. These documents are designed for internal use only, and are not an official AURA/STScI publication. Information may be out of date, irrelevant, or contradict published documentation. Use at your own risk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'published 2018-6-14',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

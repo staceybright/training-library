@@ -1,0 +1,463 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Editing These Documents &mdash; RIA Training Library</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tips and Tricks" href="tricks.html" />
+    <link rel="prev" title="Using Pysynphot" href="pysynphot.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Technical Staff Training
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                published 2018-6-14
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="computer_setup.html">Setting Up Your Computer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version_control.html">Version Control with git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="archives.html">Using MAST (a.k.a. the Archive)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python/index.html">Python for Scientific Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apt_etc/index.html">The Astronomer’s Proposal Tool and the Exposure Time Calculator for HST and JWST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="photometry.html">Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="drizzle.html">Using DrizzlePac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spectroscopy/index.html">Basic Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysynphot.html">Using Pysynphot</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Editing These Documents</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#making-and-previewing-changes">Making and previewing changes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#a-simpler-workflow">A simpler workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#changing-an-existing-document">Changing an existing document</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#making-a-pull-request-on-github">Making a pull request on GitHub</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-an-entirely-new-document">Creating an entirely new document</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#publishing-changes">Publishing changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-with-rest">Writing with reST</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tricks.html">Tips and Tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainees.html">Past Trainees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boneyard.html">Retired topics</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Technical Staff Training</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Editing These Documents</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/editing_these_documents.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="editing-these-documents">
+<h1>Editing These Documents<a class="headerlink" href="#editing-these-documents" title="Permalink to this headline">¶</a></h1>
+<p>These documents live in a <code class="docutils literal notranslate"><span class="pre">git</span></code> repository, making it easy for you to modify them and share your changes with others. GitHub is the service we use to coordinate sharing and reviewing the changes. You can find the web interface to the repository at <a class="reference external" href="https://github.com/stsci-riab/riatraining">https://github.com/stsci-riab/riatraining</a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">For now, the documents are at <a class="reference external" href="https://github.com/stsci-riab/riatraining">https://github.com/stsci-riab/riatraining</a>, and you need someone to add you as a collaborator before you can access them. Follow the instructions in <a class="reference internal" href="version_control.html#getting-started-github"><span class="std std-ref">Getting started with GitHub</span></a> and ask someone to add you as a collaborator.</p>
+</div>
+<div class="section" id="making-and-previewing-changes">
+<span id="id1"></span><h2>Making and previewing changes<a class="headerlink" href="#making-and-previewing-changes" title="Permalink to this headline">¶</a></h2>
+<p>The first step to making a change is to clone the repository, giving you a local copy to work with. You can do this is two ways:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">stsci</span><span class="o">-</span><span class="n">riab</span><span class="o">/</span><span class="n">riatraining</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>Or if you have an ssh key for GitHub set up (see <a class="reference internal" href="tricks.html#git-push-ssh"><span class="std std-ref">Pushing to GitHub (or Grit/GitLab) via SSH</span></a>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">stsci</span><span class="o">-</span><span class="n">riab</span><span class="o">/</span><span class="n">riatraining</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>This creates a <code class="docutils literal notranslate"><span class="pre">riatraining</span></code> directory in whatever folder you’re in. The web pages you’re reading now are automatically generated from the <code class="docutils literal notranslate"><span class="pre">.txt</span></code> files in the <code class="docutils literal notranslate"><span class="pre">source</span></code> subdirectory. To generate them on your computer, you need to install required packages from <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">riatraining</span><span class="o">/</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>This installs the program that builds the web pages from the source files, as well as components it depends on. To make a change, edit the <code class="docutils literal notranslate"><span class="pre">.txt</span></code> or <code class="docutils literal notranslate"><span class="pre">.tex</span></code> source for the document and then run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">riadocs</span>
+</pre></div>
+</div>
+<p>This builds HTML files for the webpages, as well as PDFs for those documents written in LaTeX. The generated HTML for the webpages is now in <code class="docutils literal notranslate"><span class="pre">build/html/</span></code>. You can open <code class="docutils literal notranslate"><span class="pre">build/html/index.html</span></code> (or another file) to see your handiwork.</p>
+<p>See <a class="reference internal" href="#publishing-changes"><span class="std std-ref">Publishing changes</span></a> for how to incorporate your changes in the published version.</p>
+<div class="section" id="a-simpler-workflow">
+<span id="autobuilder"></span><h3>A simpler workflow<a class="headerlink" href="#a-simpler-workflow" title="Permalink to this headline">¶</a></h3>
+<p>There’s a helper script that will rebuild (<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">riadocs</span></code>) the pages every time you edit and save a file. Run <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">autobuilder.py</span></code> from your terminal, and a browser window will pop open pointing to a local preview copy at <a class="reference external" href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a>.</p>
+<p>While the autobuilder is running, any changes to <code class="docutils literal notranslate"><span class="pre">.txt</span></code> files will trigger a rebuild when you save them. Make your edits, save, and refresh the page in your browser to see your changes.</p>
+<p>Quit the autobuilder by interrupting it with <kbd class="kbd docutils literal notranslate">Control-c</kbd>.</p>
+</div>
+</div>
+<div class="section" id="changing-an-existing-document">
+<h2>Changing an existing document<a class="headerlink" href="#changing-an-existing-document" title="Permalink to this headline">¶</a></h2>
+<p>Recall from <a class="reference internal" href="version_control.html"><span class="doc">Version Control with git</span></a> that it’s a good idea to make changes on a separate branch. Make a new branch with a descriptive name, like <code class="docutils literal notranslate"><span class="pre">durbin-matplotlib-edits</span></code> or <code class="docutils literal notranslate"><span class="pre">fix-setup-typo</span></code>. (See <a class="reference internal" href="version_control.html#version-control-branching"><span class="std std-ref">Creating a branch for your changes</span></a> for a refresher.)</p>
+<p>Edit the <code class="docutils literal notranslate"><span class="pre">.txt</span></code> source file (found in the <code class="docutils literal notranslate"><span class="pre">source/</span></code> directory) corresponding to the page you want to change. For formatting syntax tips, see <a class="reference internal" href="#rest-primer"><span class="std std-ref">Writing with reST</span></a> at the end of this document.</p>
+<p>Verify your changes worked using either the <a class="reference internal" href="#autobuilder"><span class="std std-ref">autobuilder script</span></a> or <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code> followed by opening the HTML file produced. Once you’re satisfied, commit the changes to your branch. (See <a class="reference internal" href="version_control.html#version-control-committing"><span class="std std-ref">Editing and committing changes</span></a> for a refresher.)</p>
+<p>Lastly, push your commits to a new branch on the origin repository. (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">your-branchname</span></code>)</p>
+<div class="section" id="making-a-pull-request-on-github">
+<h3>Making a pull request on GitHub<a class="headerlink" href="#making-a-pull-request-on-github" title="Permalink to this headline">¶</a></h3>
+<p>GitHub would not stop you from merging your own edits, but it is considered good practice to give other collaborators a chance to review your changes.</p>
+<p>Once you have pushed to a new branch, when you visit <a class="reference external" href="https://github.com/stsci-riab/riatraining">https://github.com/stsci-riab/riatraining</a> you will see a new green icon to “Compare &amp; pull request”.</p>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/compare_and_pull_request.png"><img alt="GitHub's two buttons for &quot;Compare &amp; pull request&quot;" src="_images/compare_and_pull_request.png" style="width: 404.5px; height: 57.0px;" /></a>
+</div>
+<p>Click the big green “Compare &amp; pull request” button. (The smaller green pull request icon next to the branch selector will also work, but you will have to remember to select the right branch.)</p>
+<p>At the bottom of the page, you’ll see the changes you’re asking to pull in. Ensure you’re only pulling in changes you mean to!</p>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/pull_request_files.png"><img alt="View of the changes in the pull request diff" src="_images/pull_request_files.png" style="width: 469.0px; height: 247.5px;" /></a>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>If you see a message saying that the branches cannot be automatically merged, you need to “pull in upstream changes”. All that means is that someone else edited the same thing as you, and you need to incorporate their changes in your pull request.</p>
+<p>To do this, go to your repository in the terminal and execute <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span> <span class="pre">master</span></code>. You will see a message about which files have conflicts. Open them in your editor, look for the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;&lt;&lt;&lt;&lt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;&gt;&gt;&gt;</span></code> markers, and combine the changes in a way that makes sense (e.g. include your name <em>and</em> that of another trainee that just added theirs).</p>
+<p class="last">Add, commit, push to your branch, and your pull request should gain the green “Able to merge” icon!</p>
+</div>
+<p>Give your pull request a brief title (e.g. “Updates to Computer Setup to fix X, Y, and Z”) and description, then click “Create pull request.” Ask one of the trainers to review your changes, and if it all looks good, they can merge it in.</p>
+<p>If they recommend revisions, simply follow the above instructions to edit, add, commit, and push again. New commits on the same branch will automatically show up in your pull request.</p>
+<p>Once it is merged, either you or they can publish it using the directions in <a class="reference internal" href="#publishing-changes"><span class="std std-ref">Publishing changes</span></a>.</p>
+</div>
+</div>
+<div class="section" id="creating-an-entirely-new-document">
+<h2>Creating an entirely new document<a class="headerlink" href="#creating-an-entirely-new-document" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Add a new <code class="docutils literal notranslate"><span class="pre">.txt</span></code> file under <code class="docutils literal notranslate"><span class="pre">source/</span></code></p>
+<p>Begin your document with a heading. This is the title that will show up it is linked to. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">***********************</span>
+<span class="n">Editing</span> <span class="n">These</span> <span class="n">Documents</span>
+<span class="o">***********************</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Add the base name of the file to <code class="docutils literal notranslate"><span class="pre">index.txt</span></code></p>
+<p>There are two places in <code class="docutils literal notranslate"><span class="pre">index.txt</span></code> where you must add the base name of your document (e.g. for <code class="docutils literal notranslate"><span class="pre">python.txt</span></code>, the base name is <code class="docutils literal notranslate"><span class="pre">python</span></code>). First, include a link to it in the numbered lists like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#. :doc:`base_name`</span>
+</pre></div>
+</div>
+<p>Second, include a link in the sidebar by adding it under the <code class="docutils literal notranslate"><span class="pre">toctree</span></code> at the end of <code class="docutils literal notranslate"><span class="pre">index.txt</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">toctree</span><span class="p">::</span>
+   <span class="p">:</span><span class="n">maxdepth</span><span class="p">:</span> <span class="mi">2</span>
+   <span class="p">:</span><span class="n">hidden</span><span class="p">:</span>
+
+   <span class="p">[</span> <span class="o">...</span> <span class="p">]</span>
+   <span class="n">base_name</span>
+   <span class="p">[</span> <span class="o">...</span> <span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Be sure to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span></code> your new <code class="docutils literal notranslate"><span class="pre">.txt</span></code> file so git will track it</p>
+</li>
+<li><p class="first">Commit, push, and pull request just as you would editing an existing document</p>
+</li>
+</ol>
+</div>
+<div class="section" id="publishing-changes">
+<span id="id2"></span><h2>Publishing changes<a class="headerlink" href="#publishing-changes" title="Permalink to this headline">¶</a></h2>
+<p>This training site is set up using GitHub Pages, a service of GitHub that hosts static web pages for free. The way you add things to GitHub Pages is through a specially named branch called <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> in this repository.</p>
+<p>To simplify copying the built HTML pages from one branch to another, there is a target in the Makefile called <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>. To use it, make sure you have no uncommitted changes on <code class="docutils literal notranslate"><span class="pre">master</span></code> and do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make gh-pages
+</pre></div>
+</div>
+<p>That will build the latest copy of the docs, copy them to the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch, commit them, and push them to the origin’s <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch. Within 5-10 minutes, you should see your changes online at <a class="reference external" href="http://stsci-riab.github.io/riatraining/">http://stsci-riab.github.io/riatraining/</a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If the build fails partway through, you will have to make <code class="docutils literal notranslate"><span class="pre">git</span></code> happy again yourself. That means unstaging everything, removing everything but the <code class="docutils literal notranslate"><span class="pre">.git</span></code> directory, and running <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">master</span></code> before you can try to build again. (It’s kind of a pain, but you shouldn’t typically encounter this.)</p>
+</div>
+</div>
+<div class="section" id="writing-with-rest">
+<span id="rest-primer"></span><h2>Writing with reST<a class="headerlink" href="#writing-with-rest" title="Permalink to this headline">¶</a></h2>
+<p>The training documents are formatted in <em>reST</em> (reStructuredText). reST is a markup language (like e.g. LaTeX), meaning that there are “source” files and a program that “compiles” them into pages with your formatting applied.</p>
+<p>Writing with reST (reStructuredText) is a lot like writing a plain-text email. Bullet points are just asterisks at the beginning of a line, emphasis is accomplished by putting asterisks on either side of a word, and so forth. If you’re not sure how some formatting was achieved in these documents, just have a look at the <code class="docutils literal notranslate"><span class="pre">.txt</span></code> source file for that document!</p>
+<p>Here are some very common patterns for quick reference:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Type of formatting</th>
+<th class="head">Example code</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Bold</td>
+<td><div class="first last line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">**bold</span> <span class="pre">text**</span></code></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>Italic/emphasis</td>
+<td><div class="first last line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">*emphasized</span> <span class="pre">text*</span></code></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>Chapter heading</td>
+<td><div class="first last line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">*****************</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Chapter</span> <span class="pre">Heading</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">*****************</span></code></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>Section heading</td>
+<td><div class="first last line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Section</span> <span class="pre">Heading</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">=================</span></code></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>Link to another training document</td>
+<td><div class="first last line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">:doc:`filename_without_extension`</span></code></div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td>Link to a section heading</td>
+<td><p class="first">At the heading you want to link to:</p>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">_your_reference_name:</span></code></div>
+<div class="line"><br /></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Section</span> <span class="pre">Heading</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">=================</span></code></div>
+</div>
+<p>For the link itself:</p>
+<div class="last line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">:ref:`link</span> <span class="pre">text</span> <span class="pre">&lt;your_reference_name&gt;`</span></code></div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td>Link to a web page</td>
+<td><div class="first last line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">`text</span> <span class="pre">of</span> <span class="pre">link</span> <span class="pre">&lt;http://example.com/&gt;`_</span></code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>You can also insert an exercise prompt with this code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>.. admonition:: Exercise
+   :class: note
+
+   Indent your exercise instructions with three spaces, and
+   leave a blank line after the ``admonition`` line but
+   before the instructions
+</pre></div>
+</div>
+<p>Which would look like this:</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p class="last">Indent your exercise instructions with three spaces, and leave a blank line
+after the <code class="docutils literal notranslate"><span class="pre">admonition</span></code> line but before the instructions</p>
+</div>
+<p>To include a code listing (e.g. a snippet of python or terminal output), use the <code class="docutils literal notranslate"><span class="pre">::</span></code> marker at the end of the preceding paragraph, as in the following example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Blah</span> <span class="n">blah</span> <span class="n">preceding</span> <span class="n">paragraph</span> <span class="ow">or</span> <span class="n">sentence</span><span class="o">.</span> <span class="n">Now</span> <span class="n">refer</span> <span class="n">to</span> <span class="n">this</span> <span class="n">code</span><span class="p">::</span>
+
+   <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+       <span class="n">app</span> <span class="o">=</span> <span class="n">Application</span><span class="p">()</span>
+       <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="n">Continuing</span> <span class="n">prose</span> <span class="n">description</span> <span class="n">following</span> <span class="n">after</span> <span class="n">a</span> <span class="n">blank</span> <span class="n">line</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Which would look like this:</p>
+<hr class="docutils" />
+<p>Blah blah preceding paragraph or sentence. Now refer to this code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">Application</span><span class="p">()</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Continuing prose description following after a blank line.</p>
+<hr class="docutils" />
+<p>For more advanced formatting information, there’s a very good <a class="reference external" href="http://sphinx-doc.org/rest.html">syntax quickstart guide</a> maintained by the Sphinx project.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tricks.html" class="btn btn-neutral float-right" title="Tips and Tricks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pysynphot.html" class="btn btn-neutral" title="Using Pysynphot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, AURA / Space Telescope Science Institute. These documents are designed for internal use only, and are not an official AURA/STScI publication. Information may be out of date, irrelevant, or contradict published documentation. Use at your own risk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'published 2018-6-14',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,543 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Using DrizzlePac &mdash; RIA Training Library</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Basic Spectroscopy" href="spectroscopy/index.html" />
+    <link rel="prev" title="Photometry" href="photometry.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Technical Staff Training
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                published 2018-6-14
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="computer_setup.html">Setting Up Your Computer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version_control.html">Version Control with git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="archives.html">Using MAST (a.k.a. the Archive)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python/index.html">Python for Scientific Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apt_etc/index.html">The Astronomer’s Proposal Tool and the Exposure Time Calculator for HST and JWST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="photometry.html">Photometry</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using DrizzlePac</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#geometric-distortion">Geometric Distortion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#detector-artifacts">Detector Artifacts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dithering">Dithering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#drizzle-process">Drizzle Process</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#alignment">Alignment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tweakreg">TweakReg</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#astrodrizzle">AstroDrizzle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#weight-image">Weight Image</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spectroscopy/index.html">Basic Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysynphot.html">Using Pysynphot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="editing_these_documents.html">Editing These Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tricks.html">Tips and Tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainees.html">Past Trainees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boneyard.html">Retired topics</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Technical Staff Training</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Using DrizzlePac</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/drizzle.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="using-drizzlepac">
+<h1>Using DrizzlePac<a class="headerlink" href="#using-drizzlepac" title="Permalink to this headline">¶</a></h1>
+<p><em>Authors: Varun Bajaj, Roberto Avila</em></p>
+<p>Version 1.0 July 2016</p>
+<p>DrizzlePac is a python package used for spatially aligning and combining Hubble Space Telescope (HST) image data.  It was created to replace and improve upon the functionality of MultiDrizzle.  The main workhorse of DrizzlePac is the task AstroDrizzle.  This task provides many improvements to HST images, creating cleaner  images and allowing for much more accurate photometry.  In fact, DrizzlePac/the AstroDrizzle algorithms have been used to create many of your favorite famous HST images!</p>
+<p>This intention of this document is to give a basic overview of the DrizzlePac workflow for HST images.  Over the course of this training, you will find a number of exercises.  Please save any plots/meaningful output so you trainers may review your work.  For more information on AstroDrizzle/DrizzlePac consult the <a class="reference external" href="http://drizzlepac.stsci.edu/">DrizzlePac webpage</a> and the many links presented there.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The original Drizzle algorithm was created to combine the many exposures used to create the Hubble Ultra Deep Field.  Since then the software has gone through many iterations to become DrizzlePac, which offers a wide variety of tools to correct, align, and combine images.</p>
+<p>Until now, you may have only looked at image data processed solely by the calibration pipelines (calwf3, calacs).  AstroDrizzle takes the individual products of these pipelines and makes a final, improved product that may have corrected several things including but not limited to:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Geometric distortion</li>
+<li>Bad Pixels</li>
+<li>Cosmic rays</li>
+<li>Blobs</li>
+<li>Chip gaps</li>
+</ul>
+</div></blockquote>
+<p>Drizzle is able to fill in pixels affected by these artifacts by replacing them with other ‘good’ pixels in your stack.</p>
+<div class="section" id="geometric-distortion">
+<h3>Geometric Distortion<a class="headerlink" href="#geometric-distortion" title="Permalink to this headline">¶</a></h3>
+<p>To correct for the spherical aberration of Hubble’s primary mirror, corrective optics were required to produce usable data.  In the current generation of imagers, this correction causes distortion in the cameras’ field of view, as the detectors are tilted relative to the focal plane.  This, in turn, creates a slight pixel area gradient across the detectors as well as a skewed, non-rectangular field of view.  In this state, astrometric alignments/measurements are near impossible.  DrizzlePac is able to correct for this using distortion correction reference files provided by the instrument teams at STScI.</p>
+<div class="figure align-center" id="id1">
+<a class="reference internal image-reference" href="_images/Visit01-icb701oqq_flt.jpg"><img alt="Distorted image with the chip gap collapsed." src="_images/Visit01-icb701oqq_flt.jpg" style="width: 45%;" /></a>
+<p class="caption"><span class="caption-text">Distorted image with the chip gap collapsed. (Click for full size.)</span></p>
+</div>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="_images/ds9.jpeg"><img alt="Undistorted Drizzled image." src="_images/ds9.jpeg" style="width: 45%;" /></a>
+<p class="caption"><span class="caption-text">Undistorted Drizzled image. Note the shape of the field of view, and the chip gap in the middle. (Click for full size.)</span></p>
+</div>
+</div>
+<div class="section" id="detector-artifacts">
+<h3>Detector Artifacts<a class="headerlink" href="#detector-artifacts" title="Permalink to this headline">¶</a></h3>
+<p>The detectors aboard both ACS and WFC3 feature a small, but non-negligible, number of pixels classified as ‘bad’.  These may be warm/hot pixels, unstable pixels, unbonded pixels, or pixels that are entirely dead.  In the case of WFC3/IR blemishes with lower than expected sensitivity (‘blobs’) are created by issues elsewhere in the optical path.  These pixels are generally detrimental to obtaining good, photometrically accurate images. In addition, cosmic rays are constantly bombarding the detectors.  Due to the high energies of these particles HST images show bright speckles/streaks (which do not correspond to any real source), especially in images with longer exposure times.  Instrument channels featuring multiple detector chips, such as WFC3/UVIS and ACS/WFC, have gaps in-between the chips (chip gaps).  These gaps are the width of several pixels so single exposures from these instrument channels are bisected by a gap in which no data is recorded (as there are no pixels there).</p>
+<p>To fix these issues, dithered exposures are taken in flight and combined later by AstroDrizzle.</p>
+</div>
+<div class="section" id="dithering">
+<h3>Dithering<a class="headerlink" href="#dithering" title="Permalink to this headline">¶</a></h3>
+<p>Dithering is the repointing of the telescope within a single visit to shift targets onto different pixels from exposure to exposure.  This process moves sources that may have been on problematic pixels onto pixels unaffected by detector artifacts (an example of two dithered exposures of NGC-1856 is provided below).</p>
+<a class="reference internal image-reference" href="_images/Visit01-icb701oqq_flt.jpg"><img alt="First exposure" src="_images/Visit01-icb701oqq_flt.jpg" style="width: 45%;" /></a>
+<a class="reference internal image-reference" href="_images/Visit01-icb701p0q_flt.jpg"><img alt="Second exposure, taken after a slight pointing change (dither)" src="_images/Visit01-icb701p0q_flt.jpg" style="width: 45%;" /></a>
+<p>Notice in the example above how the target moves across the chip gap (visible as a thin line through the middle of the image), so the regions of the target placed in the gap in the first exposure can be recorded in the following exposure.  Bad pixels in a single exposure are rejected and filled in with good pixels from other exposures when multiple exposures are ultimately combined in the Drizzle process.</p>
+<p>In addition, dithering subpixel distances can allow for better sampling of the point spread function (PSF).  This PSF subsampling can be used to achieve a higher resolution in the final Drizzled image.</p>
+</div>
+<div class="section" id="drizzle-process">
+<h3>Drizzle Process<a class="headerlink" href="#drizzle-process" title="Permalink to this headline">¶</a></h3>
+<p>The actual process used to ‘drizzle’ and image consists of several steps.  Roughly, they are:</p>
+<ol class="arabic simple" start="0">
+<li>Alignment of input images                        (TweakReg)</li>
+<li>Create bad pixel mask    (AstroDrizzle)</li>
+<li>Sky subtraction (AstroDrizzle)</li>
+<li>Drizzle single undistorted images (AstroDrizzle)</li>
+<li>Create median image (AstroDrizzle)</li>
+<li>Blot median image back to distorted frame (AstroDrizzle)</li>
+<li>Create cosmic ray mask (AstroDrizzle)</li>
+<li><strong>Create final undistorted, combined image</strong> (AstroDrizzle)</li>
+<li>PROFIT! (Science/pretty pictures)</li>
+</ol>
+<p>Before any drizzling is actually done, images must be properly aligned.  The alignment process uses a module in DrizzlePac called TweakReg.</p>
+<p>Steps one through seven are the main steps of the AstroDrizzle process.  Steps one through three remove distortion and reject any permanently ‘bad’ pixels (dead pixels, blobs, etc) whereas steps four through six flag and reject cosmic rays.  Step 7 creates the final optimized Drizzled product which can be used for step 8 at your leisure.</p>
+</div>
+</div>
+<div class="section" id="alignment">
+<h2>Alignment<a class="headerlink" href="#alignment" title="Permalink to this headline">¶</a></h2>
+<p>Images taken within the same visit are usually aligned (registered) to each other and often do not need to be registered.  However, uncertainties in the guide star catalog introduce errors in the pointing of the telescope, so images taken in separate visits should not be assumed to be aligned.  An example of misaligned images is shown below:</p>
+<a class="reference internal image-reference" href="_images/misaligned_source.png"><img alt="Color image showing a red channel misaligned relative to the blue channel." class="align-center" src="_images/misaligned_source.png" style="width: 75%;" /></a>
+<p>The first image (shown in red) is clearly offset from the second (shown in cyan) by nearly 10 pixels (roughly an arcsecond).  In general an alignment within 0.1 pixels is considered good.</p>
+<p>Pixel positions are mapped to positions on the sky (RA/Dec) via the world coordinate system (WCS).  Naturally, the positions of sources <strong>should</strong> have the same sky coordinates between exposures (this obviously isn’t always the case for objects with large proper motions).  Misaligned images like the example above show the same sources having different sky positions- an error that must be rectified before running AstroDrizzle.  To do this, the WCS of the input images must be ‘tweaked’ so the positions of the sources match across all of the images.</p>
+<p>The zeroth step in the drizzle process is making sure the images are aligned.  The next section will guide you through aligning images using TweakReg.  The example images we use feature the open cluster NGC 6791 from program 9815.  Note that these images have many subpixel dithers, which will allow you to subsample the PSF and increase your final resolution!</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p class="last">Copy the <code class="docutils literal notranslate"><span class="pre">*flc.fits</span></code> files from <code class="docutils literal notranslate"><span class="pre">/grp/hst/riab/training/drizzle</span></code> to a directory to use for these training exercises.</p>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="37%" />
+<col width="16%" />
+<col width="20%" />
+<col width="12%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Rootname</th>
+<th class="head">Targname</th>
+<th class="head">Date-obs</th>
+<th class="head">Filter</th>
+<th class="head">Exptime</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>j8ny01svq_flc.fits</td>
+<td>NGC6791</td>
+<td>2003-07-16</td>
+<td>F606W</td>
+<td>1142.0</td>
+</tr>
+<tr class="row-odd"><td>j8ny01szq_flc.fits</td>
+<td>NGC6791</td>
+<td>2003-07-16</td>
+<td>F606W</td>
+<td>1142.0</td>
+</tr>
+<tr class="row-even"><td>j8ny01t5q_flc.fits</td>
+<td>NGC6791</td>
+<td>2003-07-16</td>
+<td>F606W</td>
+<td>1185.0</td>
+</tr>
+<tr class="row-odd"><td>j8ny01t9q_flc.fits</td>
+<td>NGC6791</td>
+<td>2003-07-16</td>
+<td>F606W</td>
+<td>1185.0</td>
+</tr>
+<tr class="row-even"><td>j8ny01tfq_flc.fits</td>
+<td>NGC6791</td>
+<td>2003-07-16</td>
+<td>F606W</td>
+<td>1185.0</td>
+</tr>
+<tr class="row-odd"><td>j8ny01ttq_flc.fits</td>
+<td>NGC6791</td>
+<td>2003-07-16</td>
+<td>F606W</td>
+<td>1185.0</td>
+</tr>
+<tr class="row-even"><td>j8ny02zyq_flc.fits</td>
+<td>NGC6791</td>
+<td>2003-07-17</td>
+<td>F814W</td>
+<td>1185.0</td>
+</tr>
+<tr class="row-odd"><td>j8ny02yvq_flc.fits</td>
+<td>NGC6791</td>
+<td>2003-07-17</td>
+<td>F814W</td>
+<td>1142.0</td>
+</tr>
+<tr class="row-even"><td>j8ny02z1q_flc.fits</td>
+<td>NGC6791</td>
+<td>2003-07-17</td>
+<td>F814W</td>
+<td>1142.0</td>
+</tr>
+<tr class="row-odd"><td>j8ny02zdq_flc.fits</td>
+<td>NGC6791</td>
+<td>2003-07-17</td>
+<td>F814W</td>
+<td>1185.0</td>
+</tr>
+<tr class="row-even"><td>j8ny02zkq_flc.fits</td>
+<td>NGC6791</td>
+<td>2003-07-17</td>
+<td>F814W</td>
+<td>1185.0</td>
+</tr>
+<tr class="row-odd"><td>j8ny02ztq_flc.fits</td>
+<td>NGC6791</td>
+<td>2003-07-17</td>
+<td>F814W</td>
+<td>1185.0</td>
+</tr>
+</tbody>
+</table>
+<p>Open some of the images in ds9 and press <code class="docutils literal notranslate"><span class="pre">Match</span> <span class="pre">-&gt;</span> <span class="pre">Frame</span> <span class="pre">-&gt;</span> <span class="pre">WCS</span></code>.  Notice that images from the Visit 01 (<code class="docutils literal notranslate"><span class="pre">j8ny01*flc.fits</span></code>) are well aligned to one another, but images from the Visit 02 (<code class="docutils literal notranslate"><span class="pre">j8ny02*flc.fits</span></code>) are not aligned with Visit 01.</p>
+<div class="section" id="tweakreg">
+<h3>TweakReg<a class="headerlink" href="#tweakreg" title="Permalink to this headline">¶</a></h3>
+<p>The alignment process via TweakReg consists of a few steps:</p>
+<ol class="arabic simple">
+<li>Make a catalog of point source pixel positions for each input image and reference image via a source finding algorithm similar to IRAF’s <code class="docutils literal notranslate"><span class="pre">DAOFIND</span></code> task</li>
+<li>Convert the pixel position catalogs to sky position catalogs (accounting for geometric distortion)</li>
+<li>Find common source positions between reference and input image catalogs</li>
+<li>Calculate the shifts, rotation and scale needed to align sky positions of sources in the input images</li>
+<li>Update the input image headers with the newly calculated WCS information</li>
+</ol>
+<p>You can run TweakReg through PyRAF or Python, though it’s strongly recommended to stick to Python (as PyRAF/IRAF support is being discontinued by STScI).  Enter your <code class="docutils literal notranslate"><span class="pre">astroconda</span></code> environment and open a Python shell of your choice (IPython/IPython notebook will likely work the best).  Many tasks that originated from IRAF (such as the tasks in DrizzlePac) be run through the <code class="docutils literal notranslate"><span class="pre">teal</span></code> GUI:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">glob</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">stsci.tools</span> <span class="k">import</span> <span class="n">teal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">drizzlepac</span> <span class="k">import</span> <span class="n">tweakreg</span>
+</pre></div>
+</div>
+<p>The <strong>updatewcs</strong> parameter has been removed from some of the Drizzlepac tasks. It may sometimes be necessary to run this task to get the correct geometric distortion headers keywords and file extensions incorporated into the files. To run this task do the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">stwcs</span> <span class="k">import</span> <span class="n">updatewcs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">updatewcs</span><span class="o">.</span><span class="n">updatewcs</span><span class="p">(</span><span class="n">yourfile</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Do this for all of your files and you can continue on to your regularly scheduled TweakReg :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">teal</span><span class="o">.</span><span class="n">teal</span><span class="p">(</span><span class="s1">&#39;tweakreg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Though not practical for scripting, the GUIs are helpful when learning how to use the tasks.  Clearly, there are many parameters to play with, but for now we’ll go over the most important ones.  In the TweakReg parameters window:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Again, set the <strong>input</strong> parameter to <code class="docutils literal notranslate"><span class="pre">*flc.fits</span></code>.</li>
+<li>Set the <strong>updatewcs</strong> parameter to <code class="docutils literal notranslate"><span class="pre">Yes</span></code> so TweakReg can incorporate the geometric distortion into the alignment.</li>
+<li>Set the <strong>refimage</strong> parameter to <code class="docutils literal notranslate"><span class="pre">j8ny01svq_flc.fits</span></code> (or any one of the other input images).  All of the input images will be aligned to the refimage.</li>
+<li>Set <strong>expand_refcat</strong> to <code class="docutils literal notranslate"><span class="pre">No</span></code>.  This allows TweakReg to add unmatched sources from input images to the reference image source catalog on the fly (this is great for mosaicking!).</li>
+<li>Set <strong>enforce_user_order</strong> to <code class="docutils literal notranslate"><span class="pre">No</span></code>.  This lets TweakReg come up with an optimal order of input images when computing alignment transformations.</li>
+<li>Set <strong>reusename</strong> to <code class="docutils literal notranslate"><span class="pre">Yes</span></code>.</li>
+</ul>
+</div></blockquote>
+<p>The first (and probably most important) step of TweakReg is building a catalog of sources in the input and reference images.  The relevant parameters for this step are within the <strong>imagefind Parameters</strong> and <strong>refimagefind Parameters</strong> sections:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Press the <strong>refimagefind Parameters</strong> button and set conv_width to <code class="docutils literal notranslate"><span class="pre">3.5</span></code> for WFC3/UVIS and ACS/WFC (<code class="docutils literal notranslate"><span class="pre">2.5</span></code> for WFC3/IR).  In general, this number should be about twice the FWHM of the PSF in your image.</li>
+<li>For <strong>peakmin</strong> and <strong>peakmax</strong> use an image viewer (such as DS9 or ATV) to inspect the cores of the stars and set these parameters based on the range of values you see.  These parameters set the brightness cutoffs for stars used in alignment.</li>
+<li>For WFC3/UVIS and ACS/WFC set the <strong>threshold</strong> high (try <code class="docutils literal notranslate"><span class="pre">100.0</span></code> for now) to avoid detection of cosmic rays and other spurious sources.  This is the detection threshold for sources in number of standard deviations above the background.</li>
+<li>Press <strong>Save &amp; Quit</strong> then the <strong>imagefind Parameters</strong> button and input the same values from the <strong>refimagefind Parameters</strong> GUI.  This tells TweakReg how to do source finding for the input images.  Note that if your reference image is quite different than your input image (different filter, detector, scale etc) these parameter do not have to match those in the <strong>refimagefind Parameters</strong>.</li>
+</ul>
+</div></blockquote>
+<p>You can now run TweakReg from this GUI by pressing <strong>Execute</strong>, or you can run via Python command.  To do the latter press <strong>Save &amp; Quit</strong> and type in your Python shell:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tweakreg</span><span class="o">.</span><span class="n">TweakReg</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*flc.fits&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The parameter values you populated in the GUI are saved and used when you call TweakReg through the command.  However, if you do not want to use the GUI at all, you can set all of the parameters within the TweakReg call:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">findpars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;threshold&#39;</span><span class="p">:</span><span class="mf">100.</span><span class="p">,</span><span class="s1">&#39;conv_width&#39;</span><span class="p">:</span><span class="mf">3.5</span><span class="p">,</span><span class="s1">&#39;peakmin&#39;</span><span class="p">:</span><span class="mf">1000.</span><span class="p">,</span><span class="s1">&#39;peakmax&#39;</span><span class="p">:</span><span class="mf">40000.</span><span class="p">}</span>
+<span class="go"># Parameters in sub parameter windows are passed as dictionaries</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tweakreg</span><span class="o">.</span><span class="n">TweakReg</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*flc.fits&#39;</span><span class="p">),</span> <span class="n">reusename</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">expand_refcat</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">enforce_user_order</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                  <span class="n">updatewcs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">refimage</span><span class="o">=</span><span class="s1">&#39;j8ny01svq_flc.fits&#39;</span><span class="p">,</span> <span class="n">imagefindcfg</span><span class="o">=</span><span class="n">findpars</span><span class="p">,</span>
+<span class="gp">... </span>                  <span class="n">refimagefindcfg</span><span class="o">=</span><span class="n">findpars</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>TweakReg will then output a number of messages detailing the sources, matches, and shifts that were found and will also make plots that help indicate the quality of alignment solution:</p>
+<div class="figure" id="id3">
+<img alt="Histogram of residuals, residual vectors, and residuals plotted against position." src="_images/combined_tweakreg_plots.png" />
+<p class="caption"><span class="caption-text">(Top left) Two-dimensional histogram showing the offsets found for all of the sources matched.  Nearly all of the sources matches should have the same offsets, which corresponds to the peak of the histogram (hard to spot, but in the center of this example plot).  (Top right) Vector residual plot for the matched sources, showing the residual between the peak of the histogram (the used offset) and calculated offset for each source, plotted by pixel position.  (Bottom) Residuals in X and Y, plotted as functions of X and Y.  The residual and vector residual plots should look fairly random, if any correlation is seen, this is an indicator of a poor alignment solution or issue with the data (i.e. incorrect distortion information, proper motion).</span></p>
+</div>
+<p>If the residuals do not show any systematics and are small enough (&lt;0.1 pixels) to indicate good alignments then TweakReg can be rerun with the parameter <code class="docutils literal notranslate"><span class="pre">updatehdr</span></code> set to <code class="docutils literal notranslate"><span class="pre">Yes</span></code> in the GUI or given as the keyword <code class="docutils literal notranslate"><span class="pre">updatehdr=True</span></code> in the call from Python.  Do the same for the <code class="docutils literal notranslate"><span class="pre">shiftfile</span></code> parameter.  This flag updates the WCS information in the header to a new, aligned WCS.  When all the images are aligned, you can then proceed to run AstroDrizzle.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p class="last">Align your images using TweakReg.  Keep your shiftfile (defaults to <code class="docutils literal notranslate"><span class="pre">shifts.txt</span></code>) and <code class="docutils literal notranslate"><span class="pre">tweakreg.log</span></code> file for submission to your trainer.</p>
+</div>
+</div>
+</div>
+<div class="section" id="astrodrizzle">
+<h2>AstroDrizzle<a class="headerlink" href="#astrodrizzle" title="Permalink to this headline">¶</a></h2>
+<p>To combine the images, you will be using AstroDrizzle, the powerhouse of DrizzlePac. All of the exposures taken in a single filter will contribute to a single, Drizzled end result.  As such you will have one final F606W image, and one final F814W image.  In this example, you’ll first start with the F606W image (this corresponds to the <code class="docutils literal notranslate"><span class="pre">j8ny01*flc.fits</span></code> files).</p>
+<p>AstroDrizzle can be ran similarly to TweakReg, either through a IRAF/PyRAF, a GUI, or directly through Python.  First, take a look at the GUI:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">drizzlepac</span> <span class="k">import</span> <span class="n">astrodrizzle</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">teal</span><span class="o">.</span><span class="n">teal</span><span class="p">(</span><span class="s1">&#39;astrodrizzle&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Clearly there are a lot of parameters, but notice how the interface is broken into sections for each of the drizzle process steps described previously.</p>
+<p>To start, you will create a basic Drizzled image for F606W, without optimizing any parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Set the <strong>input</strong> to <code class="docutils literal notranslate"><span class="pre">j8ny01*flc.fits</span></code>.  Input can either be passed as a string with wildcards, or a list if passing directly from Python.</li>
+<li>Set the <strong>output</strong> to <code class="docutils literal notranslate"><span class="pre">F606W_derp</span></code>, this is what your output file will be named, with the extension <code class="docutils literal notranslate"><span class="pre">_drc.fits</span></code> appended to the end.</li>
+<li>Set <strong>build</strong> to <code class="docutils literal notranslate"><span class="pre">Yes</span></code> or <code class="docutils literal notranslate"><span class="pre">True</span></code> if passing from Python.</li>
+<li>Set <strong>preserve</strong> to <code class="docutils literal notranslate"><span class="pre">No</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>. If set to <code class="docutils literal notranslate"><span class="pre">True</span></code> a copy of the input images would be backed up to a subdirectory, which is unnecessary in this case.</li>
+<li>Press the <code class="docutils literal notranslate"><span class="pre">Update</span> <span class="pre">From</span> <span class="pre">MDRIZTAB</span></code> button or pass <code class="docutils literal notranslate"><span class="pre">mdriztab=False</span></code> in Python.  The mdriztab is a master table of drizzle parameters for a given instrument with the standard set of parameters used by the Archive.  These parameters are okay for getting a general preview image, but are not optimized for getting the best Drizzled product.</li>
+</ul>
+</div></blockquote>
+<p>To run, press <strong>Execute</strong> or run the command in Python similarly to how you ran the TweakReg command. You’ll notice that a large number of new files are put into your directory.  Many of these files are the masks and transformed images that the Drizzle algorithm uses to produce your undistorted, clean image.  Often times the cosmic ray mask files (cr_mask) can be used for other purposes (if you only want to sample the good pixels in the input images).</p>
+<p>Take a look at your output image using ds9 or a viewer of your choice. Compared to the individual FLC images, you should see a much cleaner image without distortion, cosmic rays and other artifacts:</p>
+<a class="reference internal image-reference" href="_images/flt.jpeg"><img alt="Flat fielded, CTE corrected image pre-drizzling." src="_images/flt.jpeg" style="width: 45%;" /></a>
+<a class="reference internal image-reference" href="_images/driz.png"><img alt="Final Drizzled product with distortion and cosmic rays removed." src="_images/driz.png" style="width: 45%;" /></a>
+<p>However, you can do even better!  Depending on what your final goal is, different parameters need to be optimized.  Since we’re looking at a star cluster, let’s assume that you’re trying to get accurate photometric results with a better sampling of the PSF. Some of the relevant parameters are the following (refer to the AstroDrizzle documentation pages to find these ones):</p>
+<blockquote>
+<div><ul class="simple">
+<li>Set <strong>clean</strong> and <strong>in_memory</strong> to <code class="docutils literal notranslate"><span class="pre">True</span></code>. This will get rid of the intermediate masks/images at the end (you wont need them for the remainder of the exercise).</li>
+<li>Set <strong>mdriztab</strong> to <code class="docutils literal notranslate"><span class="pre">False</span></code> (or your optimized parameters will be ignored).</li>
+<li>Keep the  sky subtraction method at <code class="docutils literal notranslate"><span class="pre">localmin</span></code> (don’t change it).  The previous version of this guide wanted you to use <code class="docutils literal notranslate"><span class="pre">match</span></code>, but it just resulted in errors.</li>
+<li>The default WCS drizzle creates should not be used, as you will be specifying the following WCS parameters.</li>
+<li>The image axes should be transformed to have North up (and naturally, East left).</li>
+<li>The output pixel scale should be 0.03’’ per pixel.  Note that this is significantly better than the 0.05’’ per pixel scale of your input image, giving you much better resolution.</li>
+<li>Set the pixel shrinking factor to 0.6. <em>Hint:</em> these last four parameters are under step 7/7a.</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>In general, choosing proper values for last two parameters is crucial, as these are what lay at the heart of the Drizzle algorithm. They dictate how pixels corresponding to the same spatial location are combined, which has direct consequences on the resolution/PSF sampling and quality of the final image.  For brevity, further discussions of the effects of these parameters are not included in this document.</p>
+<p class="last">For further information (especially relevant if drizzling in the future) consult the DrizzlePac homepage, and <a class="reference external" href="http://documents.stsci.edu/hst/HST_overview/documents/DrizzlePac/ch21.html">Chapter 2 of the DrizzlePac Handbook</a>.</p>
+</div>
+<p>Run AstroDrizzle again with these updated parameters (change the output name to something else so it doesn’t overwrite your first image).  Compare your optimized product to your original one (matching the frame WCS and blinking between them in ds9 is a good way to see the differences).  Notice the better spatial resolution, especially when looking at the cores of unsaturated stars:</p>
+<a class="reference internal image-reference" href="_images/lowres.jpeg"><img alt="Lower-resolution Drizzled image" src="_images/lowres.jpeg" style="width: 45%;" /></a>
+<a class="reference internal image-reference" href="_images/hires.jpeg"><img alt="Higher-resolution Drizzled image" src="_images/hires.jpeg" style="width: 45%;" /></a>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p class="last">Create an optimized product for the F814W images.  Use the optimized F606W image as your reference image (look in step 7/7a for the relevant parameter).  Keep both of the optimized products for submission to your trainer.</p>
+</div>
+<div class="section" id="weight-image">
+<h3>Weight Image<a class="headerlink" href="#weight-image" title="Permalink to this headline">¶</a></h3>
+<p>So far, you’ve taken a look at the science image produced by Drizzle.  This is a very basic way to check that Drizzle did an okay job combining the individual exposures.  However, another way to check this is to look at the second extension of the DRC image.  This extension is the weight image, which by default says how much exposure time went into each pixel of the science image (there are other weighting scales to use, with various advantages).</p>
+<div class="figure" id="id4">
+<img alt="The weight image from the drizzling process for the F606W product." src="_images/wht.png" />
+<p class="caption"><span class="caption-text">The weight image from the drizzling process for the F606W product.</span></p>
+</div>
+<p>The darker gray regions show where where Drizzle rejected cosmic rays/bad pixels, so those output image pixels have slightly less exposure time.  The black lines show where Drizzle rejected all of the input pixels (due to saturation), resulting in 0 exposure time used for these pixels.  In a good combination, these spots/lines should only be seen on bad pixels, saturated pixels, cosmic rays, and the other artifacts discussed previously.  If the real sources (an entire PSF, for instance) in the science image appears in the weight image, then the combination incorrectly identified the sources as cosmic rays and rejected those pixels.  Often times, basic statistics on the weight image are used to determine if the parameters used in the combination were suitable or not.</p>
+<hr class="docutils" />
+<p><strong>Congrats! You have finished the essential DrizzlePac training. You’ve taken your first steps onto becoming a Drizzle Wizard… a Drizzard!</strong></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="spectroscopy/index.html" class="btn btn-neutral float-right" title="Basic Spectroscopy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="photometry.html" class="btn btn-neutral" title="Photometry" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, AURA / Space Telescope Science Institute. These documents are designed for internal use only, and are not an official AURA/STScI publication. Information may be out of date, irrelevant, or contradict published documentation. Use at your own risk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'published 2018-6-14',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

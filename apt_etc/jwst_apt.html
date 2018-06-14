@@ -1,0 +1,390 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>JWST APT &mdash; RIA Training Library</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Photometry" href="../photometry.html" />
+    <link rel="prev" title="HST APT and ETC" href="hst_apt_etc.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Technical Staff Training
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                published 2018-6-14
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../computer_setup.html">Setting Up Your Computer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version_control.html">Version Control with git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../archives.html">Using MAST (a.k.a. the Archive)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python for Scientific Data Analysis</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Astronomer’s Proposal Tool and the Exposure Time Calculator for HST and JWST</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="hst_apt_etc.html">HST APT and ETC</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">JWST APT</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#astronomer-s-proposal-tool">Astronomer’s Proposal Tool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../photometry.html">Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drizzle.html">Using DrizzlePac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spectroscopy/index.html">Basic Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pysynphot.html">Using Pysynphot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editing_these_documents.html">Editing These Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tricks.html">Tips and Tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainees.html">Past Trainees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../boneyard.html">Retired topics</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Technical Staff Training</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">The Astronomer’s Proposal Tool and the Exposure Time Calculator for HST and JWST</a> &raquo;</li>
+        
+      <li>JWST APT</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/apt_etc/jwst_apt.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="jwst-apt">
+<h1>JWST APT<a class="headerlink" href="#jwst-apt" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line"><em>Authors: Deepashri Thatte &amp; Bill Blair</em></div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
+</div>
+<div class="section" id="astronomer-s-proposal-tool">
+<h2>Astronomer’s Proposal Tool<a class="headerlink" href="#astronomer-s-proposal-tool" title="Permalink to this headline">¶</a></h2>
+<p>The Astronomer’s Proposal Tool (APT) is an integrated software package for constructing, validating and submitting
+proposals for the Hubble Space Telescope and will also be used for James Webb Space Telescope proposals. Observers
+have the responsibility of creating and submitting proposals that are accurate, feasible and schedulable. The
+computer software used to schedule and execute observations can interpret the proposal information only if it
+is in the proper format. APT helps with this process by providing a  collection of tools with graphical user interface
+(GUI) for the user. APT was first released in 2002.</p>
+<p>HST-APT has two modes that correspond with the two-phase proposal process. Focus of Phase I is to make the case for
+the science to be done. Phase II (details of observations) is only done for accepted proposals. The JWST branch has
+been developed to be consistent with the single-phase (single-stream) proposal approach. For JWST once an instrument
+and observing mode (or template) are selected, the specific parameters that need to be specified for that mode are
+presented to the user. Users specify exposure parameters that provide the necessary S/N for their science requirements.
+Using a set of rules and assumed overhead times APT calculates the total science exposure time being requested in the
+observations.</p>
+<p>APT team has created extensive documentation that can be accessed from the links below. The HST and JWST versions of APT
+are very similar. The differences between the two are highlighted in <a class="reference external" href="http://apst.stsci.edu/apt/external/help/jwst_documentation/Getting-Started.html">JWST What’s New page</a> and
+described in the APT overview slides.</p>
+<hr class="docutils" />
+<p><strong>Helpful Links:</strong></p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.stsci.edu/hst/proposing/apt">APT Webpage</a></li>
+<li><a class="reference external" href="http://www.stsci.edu/hst/proposing/apt/using_apt">APT training materials</a></li>
+<li><a class="reference external" href="https://confluence.stsci.edu/display/INSTraining/New+hire+training?preview=/66357177/69961952/APT_Overview_INS_v3_Sep2016.pptx">APT Overview Slides</a></li>
+<li><a class="reference external" href="http://apst.stsci.edu/apt/external/help/jwst_documentation/Getting-Started.html">Getting Started for JWST</a></li>
+<li><a class="reference external" href="http://apst.stsci.edu/apt/external/help/jwst_whats_new.html">JWST What’s New</a></li>
+<li><a class="reference external" href="http://www.stsci.edu/institute/org/oed/JWST_PPS_Design/proposal_instructions_html">Proposal Instructions for JWST</a></li>
+<li><a class="reference external" href="http://aladin.u-strasbg.fr">ALADIN Tool</a></li>
+</ul>
+<hr class="docutils" />
+<p><strong>How to get the new version: (From periodic APT release notes by Karla Peterson)</strong></p>
+<p>You can install APT on your home machine just as the outside users do (go to
+<a class="reference external" href="http://apt.stsci.edu">http://apt.stsci.edu</a>). But at work, APT is conveniently preinstalled on our
+Mac and Linux clusters. You do not have to do anything but bring it up again.
+No reinstalling with every release. Sorry Windows users - we have to install.</p>
+<p>Mac users can open the /eng/apt/Mac folder in the Finder and launch APT from
+there. Alternatively, you can create an alias to the folder or app right on
+your desk top.</p>
+<p>Linux users can just cd to /eng/apt/Linux64 to find APT preinstalled for them
+and can create aliases as well.</p>
+<hr class="docutils" />
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p>Create a dummy JWST NIRISS AMI (Aperture Masking Interferometry) proposal based on the parameters listed below:
+(Some information in this program is adapted from SODRM program 3051)</p>
+<p>Please refer to the APT overview slides for additional help.</p>
+<blockquote class="last">
+<div><blockquote>
+<div><p><strong>Instrument:</strong> NIRISS</p>
+<p><strong>Template:</strong> NIRISS Aperture Masking Interferometry</p>
+<p><strong>Title:</strong> Long wavelength follow-up of planets found by ground-based observatories.</p>
+<p><strong>Abstract and Proposal Description:</strong> Enter any text (you would enter appropriate text for the real program)</p>
+<p><strong>Scientific Category:</strong> Extrasolar Planets and Planet Formation</p>
+<p><strong>Science Keywords:</strong> Exoplanet Host Stars, Extra-Solar Planets, Giant Planets</p>
+<p><strong>Targets:</strong> HD 231776, HD 229863, HD 215904 (Use ‘Fixed Target Resolver’ and SIMBAD to add these targets), REFSTAR1 (Use ‘New Fixed Target’ and enter coordinates  297.8281093,10.30381967).</p>
+<p><strong>Acq Fluxes</strong> (micro-Jy): 1.47 e6, 1.52e6,  2.34e5, 1e7</p>
+<p><strong>Subarray:</strong> SUB80</p>
+<p><strong>Readout Pattern:</strong> NISRAPID</p>
+<p><strong>Observations:</strong> Create four observations for these targets as shown in the table below.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="8%" />
+<col width="14%" />
+<col width="8%" />
+<col width="14%" />
+<col width="8%" />
+<col width="14%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Targets</th>
+<th class="head" colspan="2">HD231776</th>
+<th class="head" colspan="2">HD229863</th>
+<th class="head" colspan="2">HD215904</th>
+<th class="head" colspan="2">REFSTAR1</th>
+</tr>
+<tr class="row-even"><th class="head">Filters</th>
+<th class="head" colspan="2">Observation 1</th>
+<th class="head" colspan="2">Observation 2</th>
+<th class="head" colspan="2">Observation 3</th>
+<th class="head" colspan="2">Observation 4</th>
+</tr>
+<tr class="row-odd"><th class="head">.</th>
+<th class="head">NGROUPS</th>
+<th class="head">NINT</th>
+<th class="head">NGROUPS</th>
+<th class="head">NINT</th>
+<th class="head">NGROUPS</th>
+<th class="head">NINT</th>
+<th class="head">NGROUPS</th>
+<th class="head">NINT</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>F480M</td>
+<td>47</td>
+<td>55</td>
+<td>45</td>
+<td>55</td>
+<td>298</td>
+<td>54</td>
+<td>27</td>
+<td>54</td>
+</tr>
+<tr class="row-odd"><td>F430M</td>
+<td>34</td>
+<td>66</td>
+<td>33</td>
+<td>66</td>
+<td>218</td>
+<td>64</td>
+<td>19</td>
+<td>67</td>
+</tr>
+<tr class="row-even"><td>F380M</td>
+<td>18</td>
+<td>83</td>
+<td>18</td>
+<td>80</td>
+<td>118</td>
+<td>79</td>
+<td>10</td>
+<td>85</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>After creating the above observations create a Special Requirement to group observations 1, 2, 3 and 4 and choose options Non-interruptible, Exclusive  Use of Instrument.
+Find the meaning of Non-interruptible and Exclusive use of instrument special requirements using JWST Proposal Instructions.
+Create Target Confirmation Charts, run Visit Planner, view one of the observations with Aladin, look at the PDF Preview. Do you think the
+observations are schedulable? Are the coordinates correct for all targets?</p>
+<p>Send the aptx file to your trainer.</p>
+</div></blockquote>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">[1]Do not click the submission button.
+[2]This program uses dummy values for exposure parameters, some of the target coordinates and acquisition fluxes. Do not use these values for a real proposal.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../photometry.html" class="btn btn-neutral float-right" title="Photometry" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="hst_apt_etc.html" class="btn btn-neutral" title="HST APT and ETC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, AURA / Space Telescope Science Institute. These documents are designed for internal use only, and are not an official AURA/STScI publication. Information may be out of date, irrelevant, or contradict published documentation. Use at your own risk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'published 2018-6-14',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

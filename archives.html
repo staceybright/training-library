@@ -1,0 +1,686 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Using MAST (a.k.a. the Archive) &mdash; RIA Training Library</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Python for Scientific Data Analysis" href="python/index.html" />
+    <link rel="prev" title="Version Control with git" href="version_control.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Technical Staff Training
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                published 2018-6-14
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="computer_setup.html">Setting Up Your Computer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version_control.html">Version Control with git</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using MAST (a.k.a. the Archive)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#part-i-searching-the-archive">PART I: Searching the Archive</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#search-for-acs-data-using-the-standard-form">Search for ACS data (using the “Standard Form”)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#search-for-stis-data-using-the-file-upload-form">Search for STIS data (using the “File Upload Form”)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#part-ii-retrieving-data">PART II: Retrieving Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#part-iii-alternative-archive-interfaces">PART III: Alternative Archive Interfaces</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hubble-legacy-archive">Hubble Legacy Archive</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#starview">Starview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mast-data-discovery-portal">MAST Data Discovery Portal</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="python/index.html">Python for Scientific Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apt_etc/index.html">The Astronomer’s Proposal Tool and the Exposure Time Calculator for HST and JWST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="photometry.html">Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="drizzle.html">Using DrizzlePac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spectroscopy/index.html">Basic Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysynphot.html">Using Pysynphot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="editing_these_documents.html">Editing These Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tricks.html">Tips and Tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainees.html">Past Trainees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boneyard.html">Retired topics</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Technical Staff Training</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Using MAST (a.k.a. the Archive)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/archives.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="using-mast-a-k-a-the-archive">
+<h1>Using MAST (a.k.a. the Archive)<a class="headerlink" href="#using-mast-a-k-a-the-archive" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line"><em>Archives: You might use them all the time</em></div>
+<div class="line">Authors: M. Bourque, S. Bright, M. A. Wolfe, S. Ogaz, J. Mack, M. Sosey, J. White</div>
+</div>
+<hr class="docutils" />
+<p>The goal of this training exercise is to familiarize you with:</p>
+<p><strong>Acquiring and Retrieving Data</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>Searching for and Retrieving Data by Accessing the HST Archive
+through MAST</li>
+<li>HLA and Starview</li>
+</ul>
+</div></blockquote>
+<p><strong>Using PyRAF</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li>Understanding Image Headers for Calibrating Data</li>
+<li>Calibrating Data</li>
+<li>Retrieving Kepler Data and Editing Kepler Header Keyword Values
+(Optional)</li>
+<li>Some Additional Information</li>
+</ul>
+</div></blockquote>
+<hr class="docutils" />
+<p><strong>Resources:</strong></p>
+<div class="line-block">
+<div class="line"><em>HST Data Handbook</em></div>
+<div class="line">Please review Chapters 1 and 2.</div>
+<div class="line"><a class="reference external" href="http://www.stsci.edu/hst/HST_overview/documents/datahandbook/hstdh_intro.pdf">http://www.stsci.edu/hst/HST_overview/documents/datahandbook/hstdh_intro.pdf</a></div>
+<div class="line"><br /></div>
+<div class="line"><em>HST File Naming Conventions</em></div>
+<div class="line"><a class="reference external" href="http://archive.stsci.edu/hlsp/ipppssoot.html">http://archive.stsci.edu/hlsp/ipppssoot.html</a></div>
+<div class="line"><br /></div>
+<div class="line"><em>The STIS Data Handbook</em> (for reference)</div>
+<div class="line">Chapters 1, 2, and 3.</div>
+<div class="line"><a class="reference external" href="http://www.stsci.edu/hst/stis/documents/handbooks/currentDHB/ix.html">http://www.stsci.edu/hst/stis/documents/handbooks/currentDHB/ix.html</a></div>
+</div>
+<hr class="docutils" />
+<div class="section" id="part-i-searching-the-archive">
+<h2>PART I: Searching the Archive<a class="headerlink" href="#part-i-searching-the-archive" title="Permalink to this headline">¶</a></h2>
+<p>In your work here at the Space Telescope Science Institute (STScI), you
+will likely use archival data often. So it is important to be able to
+navigate the various archives that can be found in MAST (the Mikulski
+Archive for Space Telescopes), which covers a plethora of space
+telescope missions. We will be using MAST, Hubble Legacy Archive (HLA),
+and Starview to retrieve data from the Hubble Space Telescope (HST). So
+let’s begin! Along the way, I will ask you to answer some questions and
+perform some exercises. <strong>Please keep a record of your answers to show
+when completed.</strong></p>
+<p>The MAST/HST archive can be searched from the following interface found at <a class="reference external" href="http://archive.stsci.edu/hst/search.php">http://archive.stsci.edu/hst/search.php</a>.</p>
+<div class="section" id="search-for-acs-data-using-the-standard-form">
+<h3>Search for ACS data (using the “Standard Form”)<a class="headerlink" href="#search-for-acs-data-using-the-standard-form" title="Permalink to this headline">¶</a></h3>
+<ol class="loweralpha">
+<li><p class="first">Type <em>47Tuc</em> in the <em>Target</em> box, with <em>Resolver</em> set to <em>Resolve</em>. In the <em>Filters/Gratings</em> box, enter <code class="docutils literal notranslate"><span class="pre">*606*</span></code>. The asterisk (<code class="docutils literal notranslate"><span class="pre">*</span></code>) works as a wild card and can be used when you don’t know the exact syntax of the field. To specify the detector, enter <code class="docutils literal notranslate"><span class="pre">*wfc*</span></code> in the <em>Aperture</em> field. Note that you can also click each entry title for more information on the proper syntax. Save a list of these datasets in an <em>HTML_Table</em> (which is the default setting for the <em>Output Format</em>).</p>
+<p>Figure 1 portrays what the MAST search form should look like:</p>
+<div class="figure" id="id2">
+<img alt="_images/mast_standard_form.png" src="_images/mast_standard_form.png" />
+<p class="caption"><span class="caption-text">Figure 1: This is a facsimile of what the “Standard Form” MAST search
+request should look like.</span></p>
+</div>
+<p>Click on the <em>Search</em> button and you should get a new page with <em>HST
+Search Results</em> at the top with the datasets that match your search
+criterion. You will notice in the search results that this target is
+also called <em>NGC104</em>. Figure 2 shows the search results for this query.</p>
+<div class="figure" id="id3">
+<img alt="_images/acs_search_results.png" src="_images/acs_search_results.png" />
+<p class="caption"><span class="caption-text">Figure 2: This figure shows the results from the NGC104 ACS search.</span></p>
+</div>
+<p>Your search should have returned a list containing these Datasets:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">J6LL01YCQ</span>
+<span class="n">J8ISA10E1</span>
+<span class="n">J9L960010</span>
+<span class="n">J8F864020</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Using the same search criteria, change the <em>Target Name</em> field to
+<em>ngc104</em> with <em>Resolver</em> set to <em>Don’t Resolve</em> and <em>Records per Page</em>
+set to <em>500</em>. Please pay attention to the “number of rows returned” at
+the top of the search results page.</p>
+<div class="note admonition">
+<p class="first admonition-title">Question 1</p>
+<p class="last">How many datasets were retrieved from the query in part b?</p>
+</div>
+</li>
+<li><p class="first">Now do the same search, but include wildcards in the target name
+<em>ngc*104*</em>. Notice how many rows were returned and think about why the
+number may be different. Sort the columns by <em>Target Name</em> by clicking
+on the column header. Note that the last dataset (J96G03010) is actually
+a different target that was found because of the wildcard search! So be
+careful!</p>
+<div class="note admonition">
+<p class="first admonition-title">Question 2</p>
+<p class="last">How many datasets were retrieved for the query in part c?</p>
+</div>
+</li>
+<li><p class="first">Modify your search again to include only the observations that
+executed after the ACS repair in 2009 (Start Time = <em>&gt;01-01-2009</em>) that
+have exposure times between 30 and 100 seconds (Exp Time = <em>30 .. 100</em>).</p>
+<div class="note admonition">
+<p class="first admonition-title">Question 3</p>
+<p class="last">How many datasets were retrieved for the query in part d?</p>
+</div>
+</li>
+<li><p class="first">Using the <em>Output Columns</em> selector box, try adjusting the search
+results page columns. Remove output columns so that only the <em>Dataset</em>,
+<em>Target Name</em>, and <em>Start Time</em> will be returned. Additionally sort the
+search results by <em>Start Time</em>, <em>Target Name</em>, and <em>Dataset</em> using the
+<em>Sort By</em> section on the search page. Save this search in an output file
+by using the <em>File: tab-separated values</em> under <em>Output Format</em>. Please
+<strong>save the resulting file</strong> as &lt;your_name&gt;_hst_search.txt, to be
+turned in to your instructor.</p>
+<p>Note that the Datasets returned on the <em>HST Search Results</em> page are
+clickable. The link will open a new page containing a preview image and
+exposure information, which can be quite useful!</p>
+</li>
+</ol>
+</div>
+<div class="section" id="search-for-stis-data-using-the-file-upload-form">
+<h3>Search for STIS data (using the “File Upload Form”)<a class="headerlink" href="#search-for-stis-data-using-the-file-upload-form" title="Permalink to this headline">¶</a></h3>
+<ol class="loweralpha">
+<li><p class="first">Create a text file that contains the following Datasets (one per
+line) to be used as your input list:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">O8J502280</span>
+<span class="n">O8J502290</span>
+<span class="n">O8J5022A0</span>
+<span class="n">O8J5022B0</span>
+<span class="n">O8J5022C0</span>
+<span class="n">O8J5022D0</span>
+<span class="n">O8J5022E0</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">On the HST Search Form, click on the <em>File Upload Form</em>. This will
+bring up the search form as shown in Figure 3.</p>
+</li>
+<li><p class="first">Pay attention to the following: <em>Local File Name</em> (this will point to
+the text file containing the Datasets), the button <em>File Contents</em>,
+which allows for mining MAST using Coordinates, Target Names, and Data
+ID, and the button <em>RA, Target or Data ID Column</em>, which defines what
+kind of data is in the first column or another column (you select on 1
+of 10 columns in the upload text file). Figure 3 shows the parameter
+settings needed for the MAST search that is required for retrieval of
+the STIS data in your text file.</p>
+<div class="figure" id="id4">
+<img alt="_images/mast_file_upload.png" src="_images/mast_file_upload.png" />
+<p class="caption"><span class="caption-text">Figure 3: This is a facsimile of what the “File Upload Form” MAST search request should look like.</span></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="part-ii-retrieving-data">
+<h2>PART II: Retrieving Data<a class="headerlink" href="#part-ii-retrieving-data" title="Permalink to this headline">¶</a></h2>
+<p>Once you are satisfied with your search parameters as shown in Figure 3,
+then click on the <em>Search</em> button. This will result in a new screen with
+<em>HST Search Results</em> at the top of the web page. Figure 4 show the
+results for this STIS query.</p>
+<div class="figure" id="id5">
+<img alt="_images/stis_search_results.png" src="_images/stis_search_results.png" />
+<p class="caption"><span class="caption-text">Figure 4: This figure shows the results from the STIS search.</span></p>
+</div>
+<p>Note that in Figure 4 all of the datasets are marked for retrieval,
+which is done by clicking on the <em>Mark All</em> button. If you are satisfied
+with the datasets that are marked for retrieval, then click on the
+<em>Submit marked data for retrieval from STDADS</em> button. The resulting
+webpage is shown in Figure 5.</p>
+<div class="figure" id="id6">
+<img alt="_images/hst_retrieval_options.png" src="_images/hst_retrieval_options.png" />
+<p class="caption"><span class="caption-text">Figure 5: This is what the “Retrieval Options” web page looks like.</span></p>
+</div>
+<p>There are several options for the type of delivery, the type of data
+requested, and an option for overriding default parameters. For this
+training exercise we want to retrieve the calibrated data and the
+uncalibrated data, which includes the <em>raw</em> and <em>wav</em> extensions (needed
+to reduce STIS data with <code class="docutils literal notranslate"><span class="pre">calstis</span></code> later in the training). You request the
+data by ticking the “<em>Calibrated</em>” and “<em>Uncalibrated</em>” boxes
+under “Science Files Requested” or by entering the specific extensions
+you want in the “or enter a specific extension” box.</p>
+<p>We will review two delivery options, <strong>STAGE</strong> and <strong>SFTP</strong>. The first
+delivery option is to stage the data. For this option, the data will be
+written to the Archive staging disk. You will be able to pull from the
+staging disk using FTP and logging in with your archive username and
+password. The other delivery option is to SFTP the data directly to a
+destination you provide.</p>
+<p><strong>STAGE option:</strong> To get data via the stage option, enter your Archive
+username and password, make your desired science file selections and
+click the “<em>Send retrieval request to ST-DADS”</em> to submit your
+request. After your request is processed by MAST, you should get two
+emails: the first will tell you that your data is being retrieved and
+the second will tell you that your data is staged (once the retrieval is
+complete). The second email will give you instructions on how and where
+to get your data. Because of the options that we chose for retrieval, we
+will have to use ftp to get the data from the MAST servers.</p>
+<p>The following commands show how to do this. Assuming that you are in your
+working directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">ftp</span> <span class="n">stdatu</span><span class="o">.</span><span class="n">stsci</span><span class="o">.</span><span class="n">edu</span>
+<span class="n">Name</span> <span class="p">(</span><span class="n">Enter</span> <span class="n">archive</span> <span class="n">username</span><span class="p">)</span>
+<span class="n">Password</span><span class="p">:</span> <span class="p">(</span><span class="n">Enter</span> <span class="n">archive</span> <span class="n">password</span><span class="p">)</span>
+<span class="n">ftp</span><span class="o">&gt;</span> <span class="n">binary</span>
+<span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">b</span><span class="o">.</span> <span class="k">if</span> <span class="n">binary</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">,</span> <span class="n">the</span> <span class="n">retrieved</span> <span class="n">data</span> <span class="n">will</span> <span class="n">be</span> <span class="n">corrupted</span><span class="p">)</span>
+<span class="n">ftp</span><span class="o">&gt;</span> <span class="n">prompt</span>
+<span class="n">ftp</span><span class="o">&gt;</span> <span class="n">cd</span> <span class="o">/</span><span class="n">stage</span><span class="o">/&lt;</span><span class="n">username</span><span class="o">&gt;/&lt;</span><span class="n">data</span> <span class="n">location</span><span class="o">&gt;</span>
+<span class="n">ftp</span><span class="o">&gt;</span> <span class="n">mget</span> <span class="o">*.</span><span class="n">fits</span>
+</pre></div>
+</div>
+<p>Entering these commands should download all of the raw and wav files
+from the ftp server to your current working directory. To exit the ftp
+connection, simply type, “exit”.</p>
+<p><strong>SFTP option:</strong> Enter your Archive username and password and make your
+science file selections as before. Now select “<em>sftp (OpenSSH v2)</em>”.
+In the “<em>Destination</em>” column, enter your IP address (or, if you know it, <code class="docutils literal notranslate"><span class="pre">yourcomputername.stsci.edu</span></code>)
+next to “<em>Hostname</em>”, the directory you want the data placed, and the
+username and password for the machine where the directory is located.
+Click the “<em>Send retrieval request to ST-DADS</em>” to submit your
+request. A test file will show up in the destination you specified
+(deleted automatically). An email will be sent letting you know your
+request was received and another email is sent when the data has been
+delivered.</p>
+<div class="figure" id="id7">
+<img alt="_images/hst_retrieval_options_sftp.png" src="_images/hst_retrieval_options_sftp.png" />
+<p class="caption"><span class="caption-text">The selections needed to retrieve data over SFTP.</span></p>
+</div>
+<div class="note admonition">
+<p class="first admonition-title">Additional, Useful SFTP Option</p>
+<p>SFTP to a personal computer is not recommended any more, but in
+any case it’s faster to deliver to a server. For example, if you enter
+plhstins1.stsci.edu as a hostname and /user/myusername as the directory,
+it’ll deliver to Central Store and be available from your laptop/desktop for
+copying to local storage with the usual file management tools.</p>
+<p class="last">It’s faster to go from Archive to compute server than from Archive to personal
+machine because the archive and compute servers are connected by speedy ethernet.</p>
+</div>
+<p>You should now be familiar with searching for, and retrieving HST data
+through MAST. Good job! Next, we will explore a few additional ways to
+search for and retrieve HST data.</p>
+</div>
+<div class="section" id="part-iii-alternative-archive-interfaces">
+<h2>PART III: Alternative Archive Interfaces<a class="headerlink" href="#part-iii-alternative-archive-interfaces" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hubble-legacy-archive">
+<h3>Hubble Legacy Archive<a class="headerlink" href="#hubble-legacy-archive" title="Permalink to this headline">¶</a></h3>
+<p>The HLA can be found at
+<a class="reference external" href="http://hla.stsci.edu/">http://hla.stsci.edu/</a>. This archive
+contains all of the same data you can retrieve through MAST, but the
+data has been fully calibrated, aligned and drizzled within the same
+visit, and mosaics have been produced from multiple visits. Preliminary
+photometry and astrometry has also been performed on detections within
+the field of view using DAOphot and SExtractor. There are essentially 6
+product “levels” found within the HLA and they are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>Level 1</em> - data are the individual exposures, projected (“drizzled”) onto a common frame for each visit.</li>
+<li><em>Level 2</em> - data are the combined images (exposures with the same filter, same camera, and within the same visit).</li>
+<li><em>Level 3</em> - images are deep combined images or mosaics creating by combining data taken in different visits to the target.</li>
+<li><em>Level 4</em> - data are false color images (a combination of two or three colors, depending on what is available). They are included with other selections to help users assess data quality.</li>
+<li><em>Level 5</em> - data are the community-contributed high-level science products (HLSP).</li>
+<li><em>Level 0</em> - (calibrated, unprocessed) are not available for direct searches but may often by found using the <em>More…</em> link.</li>
+</ul>
+</div></blockquote>
+<p>A “Frequently Asked Questions” section and instructions on how to search the archive can be found at <a class="reference external" href="http://hla.stsci.edu/hla_helpcenter.html">http://hla.stsci.edu/hla_helpcenter.html</a>.</p>
+<p>What we are going to do now is retrieve source lists from the HLA. These
+source lists contain astrometric and photometric data that has been
+generated using DAOphot and SExtractor. We are going to be searching the
+HLA by using proposal ID numbers (note that there are many ways to
+search the HLA and what we will do is just one of them). These proposal
+IDs are: 9443, 10775, 9662, and 9453.</p>
+<p>Source lists can ultimately be used to make color-magnitude diagrams
+(CMDs). If we were to make CMDs using the source lists, we would need
+data with two different filters within the same visit. Let us retrieve
+such data. The first step is to go to the web page at
+<a class="reference external" href="http://hla.stsci.edu/hlaview.html">http://hla.stsci.edu/hlaview.html</a>
+and click on the “advanced search” button. Enter the proposal ID number
+“10775” next to “Proposal ID”. The web page should look like Figure 6.
+If you are happy with your search parameters, then click on the <em>Search</em>
+button. Note that despite the fact that we have requested a search on
+all the HST instruments, we will only get results that pertain to the
+proposal ID that we have entered and any instrument used within a
+particular proposal.</p>
+<div class="figure" id="id8">
+<img alt="_images/hla_search.png" src="_images/hla_search.png" />
+<p class="caption"><span class="caption-text">Figure 6: This is what the search form should look like before you
+click on the “Search” button.</span></p>
+</div>
+<p>After you click on the <em>Search</em> button, you will get a web page that has
+the same set-up as Figure 6 but with the search results below it. Figure
+7 shows a subset of the search results.</p>
+<div class="figure" id="id9">
+<img alt="_images/hla_search_results.png" src="_images/hla_search_results.png" />
+<p class="caption"><span class="caption-text">Figure 7: This is what the search form should look like after you click on the “Search” button. Note that this is only a lower portion of the actual web page.</span></p>
+</div>
+<p>Since we want two filters from the same visit and within a particular
+proposal, all the columns in Figure 7 (RA, Dec, Level, etc.) must have
+the same values except for Spectral_Elt, Dataset, and StartTime.
+Although it is preferable to have NExposures and ExpTime to be the same
+in making a CMD, this does not have to be the case for our purposes.</p>
+<p>Use the search forms under the column names to located data for Target
+‘NGC6809’ and Spectral_Elt ‘F606W’ and ‘F814W’. For this demonstration, look for four WFPC2 data sets: two F606W and two F814W. When you have found all
+four appropriate datasets, you can retrieve them by clicking on either
+the DAOphot or SExtractor links and these will be put into a shopping
+cart. Figure 8 shows where the shopping cart is located (middle of web page). Your cart should match Figure 9.</p>
+<blockquote>
+<div><div class="note admonition">
+<p class="first admonition-title">Note</p>
+<p class="last">You will need one F606W and one F814W dataset for the photometry section</p>
+</div>
+</div></blockquote>
+<div class="figure" id="id10">
+<img alt="_images/hla_shopping_cart.png" src="_images/hla_shopping_cart.png" />
+<p class="caption"><span class="caption-text">Figure 8: This figure shows the shopping cart in yellow. This can be found in roughly the middle of the web page. Note that this is only a portion of the actual web page.</span></p>
+</div>
+<p>Click on the shopping cart to get Figure 9.</p>
+<div class="figure" id="id11">
+<img alt="_images/hla_shopping_cart2.png" src="_images/hla_shopping_cart2.png" />
+<p class="caption"><span class="caption-text">Figure 9: This figure shows what is in the shopping cart. This can be found in roughly the middle of the web page. Note that this is only a portion of the actual web page.</span></p>
+</div>
+<p>Make sure that you have the data that you want and click on <em>Fetch HLA
+Data</em>. This will be downloaded as a zip. The file should look something
+like this: <code class="docutils literal notranslate"><span class="pre">HLADATA-&lt;numbers&gt;.zip</span></code>. Unzip the data and view the contents.</p>
+<p>You should see some text files (.cat for example) in there that contain the
+source lists. For a quick look, open them in an editor of your
+preference in Terminal.</p>
+<p>After completing this training, please <strong>give one of the source lists
+that you retrieved to your instructor</strong>.</p>
+</div>
+<div class="section" id="starview">
+<h3>Starview<a class="headerlink" href="#starview" title="Permalink to this headline">¶</a></h3>
+<p>Starview is an excellent query tool to search for HST data. This query
+tool allows a user to search on numerous parameters that are not
+available through the HST MAST search form. The basic web page can be
+found in Figure 10, which shows a STIS Instrument search form. The web
+address is:
+<a class="reference external" href="http://starview.stsci.edu/web/">http://starview.stsci.edu/web/</a>.</p>
+<div class="figure" id="id12">
+<img alt="The Starview search form for STIS" src="_images/starview_default.png" />
+<p class="caption"><span class="caption-text">Figure 10: This is the default configuration for Starview with a STIS Instrument search form.</span></p>
+</div>
+<p>Under the STIS folder on the left side of the window, select the <em>STIS
+Instrument</em> search form and make a copy of it by clicking on the button
+<em>Copy</em> button positioned at the top and in the middle of the webpage,
+under <em>Screen Toolbar</em>. This should create a new <em>STIS Instrument
+(Copy)</em> search form. Figure 11 portrays what you will see. Note that the
+copy that we just made is highlighted in blue in the top diagram of
+Figure 11 and this copy is what is shown in the bottom diagram of Figure
+11. Working from the copy search form, we can edit this form to search
+on only certain parameters. We click on the <em>Edit</em> button and get what
+is found in Figure 12.</p>
+<p>You will notice two immediate differences between
+Figures 11 and 12. The first difference can be found in the top diagrams
+of both figures. There are two tabs (<em>Screens</em> and <em>Fields</em>) that can be
+selected. In Figure 11, the <em>Screens</em> tab is chosen, while in Figure 12
+the <em>Fields</em> tab is chosen. This is because we can add fields to the
+search form if they are not in the default settings. The second
+difference can be found in the two bottom diagrams in Figures 11 and 12.
+This second difference is seen in the red “X”s that are found in Figure
+12’s bottom diagram but not in the bottom diagram of Figure 11. These
+red “X”s allow us to delete parameters that we do not want to use in our
+search form.</p>
+<p>What we will do now is to remove any parameters that we do
+not need (note that we do not <em>have to</em> delete parameters that we do not
+want, this example is for illustrative purposes only). We will be
+searching on proposal ID, amplifier, dataset name, and exposure time.
+However, notice that when we have deleted all of the parameters except
+for these four, we find that there is no parameter entry for the
+amplifier.</p>
+<p>This is where the <em>Fields</em> tab becomes useful. Under the
+<em>Fields</em> tab, we find three directories: <em>catalog</em>, <em>cdbs</em>, and
+<em>proposaldb</em>. Click on the sideways triangle to the left of <em>catalog</em>
+and you will get a list of numerous directories. The directory that we
+want is <em>stis_ref_data</em> and look for <em>CCD Amp Readout</em> under the
+<em>label</em> column and <em>CCDAMP</em> under the <em>keyword column</em>, which will be in
+the same row. Now click on the row with the correct label or keyword
+that you are looking for and then drag to the search form at the right.
+You should get what is found in Figure 13.</p>
+<div class="figure" id="id13">
+<img alt="_images/starview_form_view.png" src="_images/starview_form_view.png" />
+<p class="caption"><span class="caption-text">Figure 11: The left pane contains the list of available query “Screens”. The right pane shows the “STIS Instrument (copy)” form we made.</span></p>
+</div>
+<div class="figure" id="id14">
+<img alt="_images/starview_form_edit.png" src="_images/starview_form_edit.png" />
+<p class="caption"><span class="caption-text">Figure 12: The left pane now shows “Fields” you can add to your query form. The right pane has been put in “Edit” mode from the <em>Screen Toolbar</em>, adding red delete buttons for each field.</span></p>
+</div>
+<div class="figure" id="id15">
+<img alt="_images/starview_form_add_field.png" src="_images/starview_form_add_field.png" />
+<p class="caption"><span class="caption-text">Figure 13: This is what the edited search form should look like.</span></p>
+</div>
+<p>Now what we will do is use this abbreviated search form to search HST
+archives for the data that we want. The parameter values that we will
+use are: proposal ID 12769, amplifiers A and C, and exposure times, 0.0,
+0.3, 0.6, 0.9, 2.3, 5.0, 60, and 1100 seconds. Note that we have not
+entered a dataset name in <em>Dataset Name</em>. We need the <em>Dataset Name</em>
+entry so that when the search is done, dataset names are returned. We
+will need the dataset names in order to retrieve the data from the HST
+archive.</p>
+<p>As an example, use amp A and exposure time 0.3. Click on <em>Search</em> and
+subsequently get a web page that looks like what is found in Figure 14.
+We need to be careful here so that we get all of the data that we
+requested. The way to do this is to look in the lower right hand portion
+of the web page (see Figure 14 as well) and click on <em>View All</em> button.
+This will display all of the datasets on one page. Now we will select
+all of the datasets for retrieval by clicking on the first row with
+datasets and then hold the shift key down on the keyboard and select the
+last dataset entry. This will select all of the datasets and the rows
+will have a blue background.</p>
+<div class="figure" id="id16">
+<img alt="_images/starview_search_results.png" src="_images/starview_search_results.png" />
+<p class="caption"><span class="caption-text">Figure 14: This figure shows what datasets are available for download.</span></p>
+</div>
+<p>After the desired datasets have been selected (all of them in this case)
+click on the <em>Download Cart</em> button in the upper right of the web page
+and you will get a drop down menu with various selections. Choose <em>Add
+To Cart</em>. Once you have done this, the menu will disappear and you will
+have to click on <em>Download Cart</em> again. Select <em>View Cart…</em> and then you
+will get a GUI in the top center of the web page. Select <em>Proceed to
+Checkout…</em>.</p>
+<p>From here you can download the data like you normally would from MAST. (Note:
+This was just an exercise showing how Starview works. You do not need to
+actually download the data.)</p>
+</div>
+<div class="section" id="mast-data-discovery-portal">
+<h3>MAST Data Discovery Portal<a class="headerlink" href="#mast-data-discovery-portal" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference external" href="http://mast.stsci.edu/">MAST Data Discovery Portal</a> (<a class="reference external" href="http://mast.stsci.edu/">http://mast.stsci.edu/</a>) is a newer, slicker interface to the Archive optimized for exploring existing archival data. If you’re interested in a part of the sky, and are curious whether any MAST-affiliated missions observed it, this tool will show you.</p>
+<div class="figure" id="id17">
+<img alt="_images/mast_ddp_example.png" src="_images/mast_ddp_example.png" />
+<p class="caption"><span class="caption-text">Here’s an <a class="reference external" href="http://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html?searchQuery=M83">example query</a> showing the galaxy M83 with matching HST data sets selected.</span></p>
+</div>
+<p>There are sophisticated features for faceting (“narrowing-down”) and visualizing (FOV overlays on sky survey imagery, dataset thumbnails) HST, GALEX, SWIFT, and other missions’ archives.</p>
+<p>If that sounds like it might be useful to your work, have a look at their user guide: <a class="reference external" href="http://mast.stsci.edu/portal/Mashup/Clients/Mast/data/html/MastHelp.html">http://mast.stsci.edu/portal/Mashup/Clients/Mast/data/html/MastHelp.html</a>. (There are also video tutorials for common tasks at the bottom of that page.)</p>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>Thank you for completing the Archives Training! Please send your trainer
+the various materials that were asked of you to provide (i.e. answers to
+questions, the tab-separated query results file, and the source list),
+preferably in an email.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="python/index.html" class="btn btn-neutral float-right" title="Python for Scientific Data Analysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="version_control.html" class="btn btn-neutral" title="Version Control with git" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, AURA / Space Telescope Science Institute. These documents are designed for internal use only, and are not an official AURA/STScI publication. Information may be out of date, irrelevant, or contradict published documentation. Use at your own risk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'published 2018-6-14',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

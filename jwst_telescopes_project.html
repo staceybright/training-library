@@ -1,0 +1,338 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction to Gerchberg-Saxton phase retrieval &mdash; RIA Training Library</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Reference Outputs and Pixels with MIRI" href="jwst_reference_output.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Technical Staff Training
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                published 2018-6-14
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="computer_setup.html">Setting Up Your Computer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version_control.html">Version Control with git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="archives.html">Using MAST (a.k.a. the Archive)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python/index.html">Python for Scientific Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apt_etc/index.html">The Astronomer’s Proposal Tool and the Exposure Time Calculator for HST and JWST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="photometry.html">Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="drizzle.html">Using DrizzlePac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spectroscopy/index.html">Basic Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysynphot.html">Using Pysynphot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="editing_these_documents.html">Editing These Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tricks.html">Tips and Tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainees.html">Past Trainees</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="boneyard.html">Retired topics</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pyraf.html">Basic PyRAF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="using_idl.html">Using IDL for astronomical data analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ir_detector_course.html">IR Detectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="up_the_ramp_calwf3.html">Up-the-ramp Sampling with calwf3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jwst_intro.html">JWST General Training (Data Cubes)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jwst_training.html">JWST Training Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jwst_read_modes.html">Infrared Detector Read Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jwst_reference_output.html">Reference Outputs and Pixels with MIRI</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Introduction to Gerchberg-Saxton phase retrieval</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exercises">Exercises</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#problem-1-webbpsf-gui-and-script">Problem 1: WebbPSF GUI and Script</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#problem-2-fourier-transform-and-phase-retrieval">Problem 2: Fourier Transform and Phase Retrieval</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Technical Staff Training</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="boneyard.html">Retired topics</a> &raquo;</li>
+        
+      <li>Introduction to Gerchberg-Saxton phase retrieval</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/jwst_telescopes_project.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction-to-gerchberg-saxton-phase-retrieval">
+<h1>Introduction to Gerchberg-Saxton phase retrieval<a class="headerlink" href="#introduction-to-gerchberg-saxton-phase-retrieval" title="Permalink to this headline">¶</a></h1>
+<p><strong>Research &amp; Instrument Analysis Branch</strong></p>
+<p>Versions:</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">0.2: Joseph Long (June 15 2015, converted to reST)</div>
+<div class="line">0.1: Charles-Philippe Lajoie (August 27 2014)</div>
+</div>
+</div></blockquote>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This training is designed to get you familiar with the WebbPSF tool and
+the underlying principles of numerical Fourier Transforms (at a basic
+level). WebbPSF is written in Python and it is recommended that you also
+use Python for the exercises.</p>
+<p>In particular, the second part of this training is aimed at
+understanding how to perform numerical Fourier Transforms and includes
+an application for phase retrieval. Phase retrieval is key to the JWST
+mission and hopefully this exercise will provide some insights into the
+actual planned process. Note that the algorithms discussed here are
+basic in implementation and do not represent the state-of-the-art
+designs found in the JWST Wavefront Sensing software.</p>
+<p>You can download WebbPSF at: <a class="reference external" href="http://www.stsci.edu/jwst/software/webbpsf">http://www.stsci.edu/jwst/software/webbpsf</a></p>
+<p>For Problem 2, you can download the pupil and an OPD at:
+<code class="docutils literal notranslate"><span class="pre">/grp/jwst/wit/miri/lajoie</span></code></p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="problem-1-webbpsf-gui-and-script">
+<h3>Problem 1: WebbPSF GUI and Script<a class="headerlink" href="#problem-1-webbpsf-gui-and-script" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Install WebbPSF on your computer and make sure all the
+buttons/options/etc are functional.</li>
+<li>Explore its functionalities and create various PSFs for the different
+instruments.</li>
+<li>Basically, how do you think WebbPSF creates PSFs?</li>
+<li>WebbPSF can also be used inside a Python script; try to import the
+module and recreate one of the PSFs you created with the GUI.</li>
+</ol>
+</div>
+<div class="section" id="problem-2-fourier-transform-and-phase-retrieval">
+<h3>Problem 2: Fourier Transform and Phase Retrieval<a class="headerlink" href="#problem-2-fourier-transform-and-phase-retrieval" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Starting from the JWST pupil, calculate its Fourier Transform and
+plot it’s PSF (intensity squared). You will need the NumPy functions
+<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.fft2.html#numpy.fft.fft2" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.fft.fft2()</span></code></a>, <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.fftshift.html#numpy.fft.fftshift" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.fft.fftshift()</span></code></a> and their inverse, as well as
+<a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.pad.html#numpy.pad" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.pad()</span></code></a>.</li>
+<li>Can you explain/show why we can’t simply use <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.fft.fft2.html#numpy.fft.fft2" title="(in NumPy v1.14)"><code class="xref py py-func docutils literal notranslate"><span class="pre">numpy.fft.fft2()</span></code></a>?</li>
+</ol>
+<div class="figure" id="id1">
+<img alt="_images/gerchberg_saxton_cartoon.png" src="_images/gerchberg_saxton_cartoon.png" />
+<p class="caption"><span class="caption-text">Cartoon of Gerchberg-Saxton algorithm. The only pieces of information we have
+are the pupil shape and the image intensity, so we iterate on the phase until
+we converge. Pupil plane is on the left; Image plane is on the right.</span></p>
+</div>
+<ol class="arabic" start="3">
+<li><p class="first">When you are comfortable enough with numerical Fourier
+Transforms, design a Gerchberg-Saxton algorithm to retrieve the phase of
+an image. At this point, do not worry about the angular and wavelength
+scaling (<span class="math notranslate nohighlight">\(\lambda = 1\)</span>).</p>
+<p>Refer to the figure for the steps described
+below.</p>
+<ol class="lowerroman">
+<li><p class="first">Create a PSF (your observable) from the JWST pupil and a given
+wavefront error, from one of the OPD (Optical Path Difference) maps
+provided.</p>
+<p>The electric field in the pupil plane is defined by:
+<span class="math notranslate nohighlight">\(E = Pupil * \exp \left( i*2\pi*\frac{\text{OPD}}{\lambda} \right)\)</span>. You will
+try to recover the phase map from the image created by this pupil.</p>
+</li>
+<li><p class="first">To start the G-S loop, you need an initial guess for the phase map:
+use random numbers from <span class="math notranslate nohighlight">\(-\pi\)</span> to <span class="math notranslate nohighlight">\(+\pi\)</span>.</p>
+</li>
+<li><p class="first">Go back and forth between the pupil plane and the image plane using
+FFT and IFFT, and always fixing the part of the electric field that
+you know is right (i.e. the pupil shape and the image intensity)
+and keeping the calculated phase.</p>
+</li>
+<li><p class="first">You can simply loop over for <em>n</em> iterations and see how well the
+phase map that you get matches the one you used to create your
+initial image (step <strong>1</strong>).</p>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="jwst_reference_output.html" class="btn btn-neutral" title="Reference Outputs and Pixels with MIRI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, AURA / Space Telescope Science Institute. These documents are designed for internal use only, and are not an official AURA/STScI publication. Information may be out of date, irrelevant, or contradict published documentation. Use at your own risk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'published 2018-6-14',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

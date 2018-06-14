@@ -1,0 +1,569 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Python Scripts, Modules, and Packages &mdash; RIA Training Library</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Appendix: Resources and Best Practices" href="resources.html" />
+    <link rel="prev" title="Essential packages for scientific data analysis" href="scientific_packages.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Technical Staff Training
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                published 2018-6-14
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../computer_setup.html">Setting Up Your Computer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version_control.html">Version Control with git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../archives.html">Using MAST (a.k.a. the Archive)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Python for Scientific Data Analysis</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction and setting up the environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basics.html">Basic Python Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scientific_packages.html">Essential packages for scientific data analysis</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Python Scripts, Modules, and Packages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-simplest-script">The simplest script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#a-brief-digression-on-python-2-vs-python-3">A brief digression on Python 2 vs. Python 3</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-you-should-do-about-it">What you should do about it</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scripts-versus-modules-or-packages">Scripts versus modules (or packages)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#best-practices-for-scripts">Best practices for scripts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#preventing-import-side-effects">Preventing “import side-effects”</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#future-proofing-your-code">Future-proofing your code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#best-practices-for-re-usable-functions">Best practices for re-usable functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#best-practices-for-naming-things">Best practices for naming things</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#an-introduction-to-multiprocessing">An introduction to <code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html">Appendix: Resources and Best Practices</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../apt_etc/index.html">The Astronomer’s Proposal Tool and the Exposure Time Calculator for HST and JWST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../photometry.html">Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drizzle.html">Using DrizzlePac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../spectroscopy/index.html">Basic Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pysynphot.html">Using Pysynphot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editing_these_documents.html">Editing These Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tricks.html">Tips and Tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainees.html">Past Trainees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../boneyard.html">Retired topics</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Technical Staff Training</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Python for Scientific Data Analysis</a> &raquo;</li>
+        
+      <li>Python Scripts, Modules, and Packages</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/python/scripting.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="python-scripts-modules-and-packages">
+<h1>Python Scripts, Modules, and Packages<a class="headerlink" href="#python-scripts-modules-and-packages" title="Permalink to this headline">¶</a></h1>
+<p>Up until now, we have limited ourselves to exercises that could be just as easily completed in the IPython (Jupyter) Notebook or an interactive session as in a stand-alone script. In this section, we will build up an understanding of separating functionality into modules, then introduce a powerful tool for parallelizing computations that <strong>only</strong> works with stand-alone scripts and modules. We will also discuss certain stylistic “best practices” that make your code easier to read for others (and which, once you know them, you will recognize in others’ code).</p>
+<div class="section" id="the-simplest-script">
+<h2>The simplest script<a class="headerlink" href="#the-simplest-script" title="Permalink to this headline">¶</a></h2>
+<p>Let’s make a simple stand-alone script. The following is the simplest Python program imaginable:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Save it as <code class="docutils literal notranslate"><span class="pre">hello_world.py</span></code> in your working directory. Try to run it with <code class="docutils literal notranslate"><span class="pre">./hello_world.py</span></code> and see what happens:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./hello_world.py
+-bash: ./hello_world.py: Permission denied
+</pre></div>
+</div>
+<p>The “permission denied” error can be kind of confusing if you weren’t aware that UNIX-like systems consider “whether you can run this” a permission (like ‘read’ or ‘write’). Make your file <strong>executable</strong> with the command <code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">+x</span> <span class="pre">./hello_world.py</span></code>, and try again:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./hello_world.py
+./hello_world.py: line 1: syntax error near unexpected token `&quot;Hello, world!&quot;&#39;
+./hello_world.py: line 1: `print(&quot;Hello, world!&quot;)&#39;
+</pre></div>
+</div>
+<p>What happened? Well, the system doesn’t know your script is written in Python (it doesn’t actually use the <code class="docutils literal notranslate"><span class="pre">.py</span></code> extension to guess). Stand-alone scripts on UNIX-like operating systems start with a line beginning with <code class="docutils literal notranslate"><span class="pre">#!</span></code> (sometimes called a <a class="reference external" href="https://en.wikipedia.org/wiki/Shebang_%28Unix%29">‘shebang’</a> or ‘hash-bang’ line). The line takes the format of <code class="docutils literal notranslate"><span class="pre">#!/path/to/program/that/can/run/this/script</span> <span class="pre">extra_args</span></code>. Of course, Python might be installed in different places on different systems, so there has to be another trick to it.</p>
+<p>To ensure cross-system compatibility, there’s a particular syntax that will find the “right” copy of Python to use. When writing a stand-alone Python script, the first line should be written as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+</pre></div>
+</div>
+<p>That ensures that the ‘current’ version of Python, whether it be the default one bundled with your Mac or the one in your current conda environment, is called to run your script. Update <code class="docutils literal notranslate"><span class="pre">hello_world.py</span></code> accordingly, and you should see this when you run it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./hello_world.py
+Hello, world!
+</pre></div>
+</div>
+</div>
+<div class="section" id="a-brief-digression-on-python-2-vs-python-3">
+<span id="python-3-vs-2"></span><h2>A brief digression on Python 2 vs. Python 3<a class="headerlink" href="#a-brief-digression-on-python-2-vs-python-3" title="Permalink to this headline">¶</a></h2>
+<p>Python is developed by a community of volunteers and distributed for free. In 2008, this community decided to fix some long-standing bugs in the previous major version of Python (the <code class="docutils literal notranslate"><span class="pre">2.x</span></code> branch, which had been developed from 2000 onwards), and call the new version “Python 3”. The nature of these fixes meant that users couldn’t simply install Python 3 and expect everything to work immediately.</p>
+<p>The creators of Python have decreed that Python 2 will no longer be updated, and Python 3 is the way forward. The Institute has started migrating to Python 3, but during this transitional period you should be aware that you may encounter code that works with only Python 2 (or only Python 3).</p>
+<p>New code should be written to be forwards compatible with Python 3, <em>especially</em> if it will be used by other members of your team! There are more comprehensive guides elsewhere, but we want to call your attention to two important things that have changed in Python 3. In Python 2, this code is fine:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s2">&quot;Hello world&quot;</span>
+<span class="go">Hello world</span>
+</pre></div>
+</div>
+<p>In Python 3, <code class="docutils literal notranslate"><span class="pre">print</span></code> is a function, invoked with parentheses like every other. The above syntax won’t work any more.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="s2">&quot;Hello world&quot;</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>
+    <span class="nb">print</span> <span class="s2">&quot;Hello world&quot;</span>
+                      <span class="o">^</span>
+<span class="gr">SyntaxError</span>: <span class="n">Missing parentheses in call to &#39;print&#39;</span>
+</pre></div>
+</div>
+<p>Add parentheses to make Python 3 happy:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello world&quot;</span><span class="p">)</span>
+<span class="go">Hello world</span>
+</pre></div>
+</div>
+<p>Also, in Python 3, division will work less like computer scientists expect, and more like everyone else expects. Python 2 used “integer division”, which truncated any fractional part to make the result of dividing two integers an integer. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">7</span> <span class="o">/</span> <span class="mi">3</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">7.0</span> <span class="o">/</span> <span class="mi">3</span>  <span class="c1"># floating point division used when either operand is a float</span>
+<span class="go">2.3333333333333335</span>
+</pre></div>
+</div>
+<p>In Python 3, the behavior is as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">7</span> <span class="o">/</span> <span class="mi">3</span>
+<span class="go">2.3333333333333335</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">7.0</span> <span class="o">/</span> <span class="mi">3</span>
+<span class="go">2.3333333333333335</span>
+</pre></div>
+</div>
+<p>The old behavior can be used with the new <code class="docutils literal notranslate"><span class="pre">//</span></code> operator:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">7</span> <span class="o">//</span> <span class="mi">3</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mf">7.0</span> <span class="o">//</span> <span class="mi">3</span>
+<span class="go">2.0</span>
+</pre></div>
+</div>
+<div class="section" id="what-you-should-do-about-it">
+<h3>What you should do about it<a class="headerlink" href="#what-you-should-do-about-it" title="Permalink to this headline">¶</a></h3>
+<p>You can make your code future-proof by “importing” functionality from the future. When writing stand-alone scripts (as opposed to snippets in the interactive environment), it is a good idea to include this at the top (after any <code class="docutils literal notranslate"><span class="pre">#!</span></code> line):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+</pre></div>
+</div>
+<p>…and that will give you the new behavior in Python 2. (In Python 3, which already has the new behavior by default, it will have no effect.)</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p class="last">Update your <code class="docutils literal notranslate"><span class="pre">hello_world.py</span></code> to include the future imports, and ensure that runnning <code class="docutils literal notranslate"><span class="pre">./hello_world.py</span></code> still works.</p>
+</div>
+</div>
+</div>
+<div class="section" id="scripts-versus-modules-or-packages">
+<h2>Scripts versus modules (or packages)<a class="headerlink" href="#scripts-versus-modules-or-packages" title="Permalink to this headline">¶</a></h2>
+<p>The words ‘script’, ‘module’, and ‘package’ are used to mean so many different things by different people that it’s probably hopeless to enforce a distinction. However, within the Python community, they <strong>do</strong> mean different things.</p>
+<p>A <strong>module</strong> is a file containing Python source code (or, less commonly, a custom extension to the language). It’s typically not constructed to do anything useful when run on its own; usually they contain function definitions, class definitions, constants, and similar.</p>
+<p>Here’s a very short module, <code class="docutils literal notranslate"><span class="pre">do_something.py</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">say</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you went through the rigamarole described above and tried to run it as a stand-alone script, you’d see:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./do_something.py
+</pre></div>
+</div>
+<p>That’s not a mistake: there’s no output at all! Modules typically <strong>define</strong> functions, classes, and constants to be used later on by scripts. They are useful to group related functionality, and de-duplicate commonly used code among different parts of your program.</p>
+<p>Update your <code class="docutils literal notranslate"><span class="pre">hello_world.py</span></code> to look like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="kn">import</span> <span class="nn">do_something</span>
+<span class="n">do_something</span><span class="o">.</span><span class="n">say</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Here we’ve <strong>imported</strong> the <code class="docutils literal notranslate"><span class="pre">do_something</span></code> module, then <strong>called</strong> the <code class="docutils literal notranslate"><span class="pre">say()</span></code> function within it. Check that it works in your terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./hello_world.py
+Hello, world!
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p>Create a <strong>module</strong> called <code class="docutils literal notranslate"><span class="pre">verbose_math.py</span></code> with a single function <code class="docutils literal notranslate"><span class="pre">square_root(x)</span></code> that does two things:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><strong>prints</strong> a message along the lines of <code class="docutils literal notranslate"><span class="pre">square_root(4)</span> <span class="pre">-&gt;</span> <span class="pre">2.0</span></code> (for <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">4</span></code>)</li>
+<li><strong>returns</strong> the square root of its argument (2.0 in this case).</li>
+</ol>
+</div></blockquote>
+<p>(n.b. No need to algorithmically determine the square root! <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">math</span> <span class="pre">import</span> <span class="pre">sqrt</span></code> gives you what you need.)</p>
+<p>Now, write a stand-alone script to compute the square root of 16 using your <code class="docutils literal notranslate"><span class="pre">square_root()</span></code> function. Ensure the output is what you expect, and save it as <code class="docutils literal notranslate"><span class="pre">sqrt_16.py</span></code>.</p>
+<p class="last">We will add on to this, so keep this version in a folder called <code class="docutils literal notranslate"><span class="pre">scripting_ex1</span></code>.</p>
+</div>
+<p>Let’s relate this back to a less trivial use-case: data pipeline construction. You may painstakingly construct some code that applies a sophisticated correction to a single FITS file, then wish to include it in the pipeline.</p>
+<p>Rather than keep a stand-alone script implementing your calibration <strong>and</strong> have a copy within the pipeline, you could “factor out” your calibration into a function or group of related functions in a module. Then you could use a stand-alone script that applies that single calibration step, imported from the module where you put it, for testing purposes.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">In the next few exercises, you will make copies of your code and add to it in each step.
+You will be sending the code for each of your exercises in this section to your trainer for review, so make a new folder where you will keep each exercise solution. Then, at the end, you will send the trainer a zip file with <code class="docutils literal notranslate"><span class="pre">hello_world.py</span></code>, <code class="docutils literal notranslate"><span class="pre">do_something.py</span></code>, <code class="docutils literal notranslate"><span class="pre">scripting_ex1</span></code>, <code class="docutils literal notranslate"><span class="pre">scripting_ex2</span></code>, and so on.</p>
+</div>
+</div>
+<div class="section" id="best-practices-for-scripts">
+<h2>Best practices for scripts<a class="headerlink" href="#best-practices-for-scripts" title="Permalink to this headline">¶</a></h2>
+<p>As you may have noticed, our script is exceedingly tiny. Real scripts will include functions of their own, typically those specific to the operation of the script and not useful for other purposes.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p class="last">Copy your Python files from the last step into a new folder called <code class="docutils literal notranslate"><span class="pre">scripting_ex2</span></code>. Add a function <code class="docutils literal notranslate"><span class="pre">greet(name)</span></code> to the <code class="docutils literal notranslate"><span class="pre">sqrt_16.py</span></code> file that takes a string <code class="docutils literal notranslate"><span class="pre">name</span></code> as an argument and prints out a greeting addressed to <code class="docutils literal notranslate"><span class="pre">name</span></code>. (It’s not really part of our plan to make verbose versions of all the math functions in <code class="docutils literal notranslate"><span class="pre">verbose_math</span></code>, so it makes sense to group it with our <code class="docutils literal notranslate"><span class="pre">sqrt_16.py</span></code> script.) Have your <code class="docutils literal notranslate"><span class="pre">sqrt_16.py</span></code> script greet a person or thing of your choice by calling <code class="docutils literal notranslate"><span class="pre">greet()</span></code> before <code class="docutils literal notranslate"><span class="pre">square_root</span></code>.</p>
+</div>
+<p>It’s not uncommon for a script to evolve over time, growing new functionality that eventually migrates to a module. We will now look at the preferred technique for making a script file that works as both a stand-alone script <strong>and</strong> a module.</p>
+<div class="section" id="preventing-import-side-effects">
+<h3>Preventing “import side-effects”<a class="headerlink" href="#preventing-import-side-effects" title="Permalink to this headline">¶</a></h3>
+<p>You may hear software engineers or more experienced programmers talk about “import side-effects” with great scorn. Fortunately, you can tell them you learned about those in your Python training. Here’s the deal:</p>
+<p>When you run <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">verbose_math</span></code> (or any of the related family of import statements, such as <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">verbose_math</span> <span class="pre">import</span> <span class="pre">square_root</span></code>), Python actually opens up <code class="docutils literal notranslate"><span class="pre">verbose_math.py</span></code> and runs through it line-by-line, executing each line as it goes. This is why modules should really only <strong>define</strong> things, and not contain program logic outside of <code class="docutils literal notranslate"><span class="pre">def</span></code> or <code class="docutils literal notranslate"><span class="pre">class</span></code> blocks (or defining constants with <code class="docutils literal notranslate"><span class="pre">=</span></code>). Such code will be executed when the module is imported, potentially messing up what you’re trying to do.</p>
+<p>Add a line that says <code class="docutils literal notranslate"><span class="pre">print(&quot;Hey,</span> <span class="pre">it's</span> <span class="pre">verbose_math!&quot;)</span></code> to the bottom of <code class="docutils literal notranslate"><span class="pre">verbose_math.py</span></code>, then open up the interactive Python interpreter. We’re not going to do anything, just import our module.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">verbose_math</span>
+<span class="go">Hey, it&#39;s verbose_math!</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>If you hand your module to a colleague, and they import it, their internal monologue will be: “Woah there, cowboy! I haven’t done anything yet, why are you telling me this?” Go ahead and remove that line from <code class="docutils literal notranslate"><span class="pre">verbose_math.py</span></code> and read on.</p>
+<p>Printing out messages just because someone imported the module is a <strong>side-effect</strong>. Other side effects include loading a website to check for software updates, popping open a graphics window, or similar. Don’t do these things. Just because someone imported your module does <strong>not</strong> mean they’re necessarily using it in a way you expected. Let your user tell you if they want a graphics window opened.</p>
+<p>However, say your stand-alone script has some useful functionality (evolved over time), and you want people to be able to import it from their scripts without kicking off a complete run of whatever else is in there. This is a common enough need that there’s a conventional way to “guard” your code such that it won’t run accidentally on import.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p>Copy your Python files from the last step into a new folder called <code class="docutils literal notranslate"><span class="pre">scripting_ex3</span></code>. Remember the <code class="docutils literal notranslate"><span class="pre">sqrt_16.py</span></code> script? We’re interested in another number now, so make a <code class="docutils literal notranslate"><span class="pre">sqrt_40.py</span></code> with the appropriate shebang line and permissions. Everything should be the same, but we don’t want to write the <code class="docutils literal notranslate"><span class="pre">greet()</span></code> function twice, so add a <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">sqrt_16</span> <span class="pre">import</span> <span class="pre">greet</span></code> line before it’s called. Oh, and change the number from 16 to 40. (But you probably guessed that.)</p>
+<p class="last">What happens when you run it? Why might that not be what you want from a program named <code class="docutils literal notranslate"><span class="pre">sqrt_40.py</span></code>?</p>
+</div>
+<p>The way to guard against accidentally running stand-alone script code on import is a (more-or-less magic) <code class="docutils literal notranslate"><span class="pre">if</span></code> statement. The <code class="docutils literal notranslate"><span class="pre">__name__</span></code> magic variable is set to the name of the module being imported, except when the script is being run on its own, in which case it is set to the special name <code class="docutils literal notranslate"><span class="pre">__main__</span></code>.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p>Copy your Python files from the last step into a new folder called <code class="docutils literal notranslate"><span class="pre">scripting_ex4</span></code>. Your <code class="docutils literal notranslate"><span class="pre">sqrt_16.py</span></code> script should have some imports, followed by a function definition for <code class="docutils literal notranslate"><span class="pre">greet()</span></code>, followed by a call to <code class="docutils literal notranslate"><span class="pre">greet()</span></code> and then a call to <code class="docutils literal notranslate"><span class="pre">square_root()</span></code>.</p>
+<p>After the imports and function definition, but before the function calls, begin a new block with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>Indent your function call lines appropriately such that they’re within the <code class="docutils literal notranslate"><span class="pre">if</span></code> block.</p>
+<p class="last">Now run <code class="docutils literal notranslate"><span class="pre">sqrt_40.py</span></code>. What has changed? How would you want to modify <code class="docutils literal notranslate"><span class="pre">sqrt_40.py</span></code> in the future, if it, too, grew to include some useful functions?</p>
+</div>
+</div>
+<div class="section" id="future-proofing-your-code">
+<h3>Future-proofing your code<a class="headerlink" href="#future-proofing-your-code" title="Permalink to this headline">¶</a></h3>
+<p>As discussed in the section on Python 2 vs. Python 3, it is especially important for modules and stand-alone scripts to specify that they are using the newer syntax (that will remain valid going forward to future versions). The place to put the “future imports” is just after the shebang line. Most of your Python files will start just like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="best-practices-for-re-usable-functions">
+<h2>Best practices for re-usable functions<a class="headerlink" href="#best-practices-for-re-usable-functions" title="Permalink to this headline">¶</a></h2>
+<p>Now we have two functions that could conceivably be used by others, if they can guess how to use them. Python supports the idea of built-in documentation, allowing you to provide hints to others about how a function should be used in the place where the function itself is defined.</p>
+<p>Any string literal (which could be delimited a few different ways, as you may recall from the section on basic data types), when placed at the “top” of a function or class (i.e. on the first line within the block introduced by <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">blah():</span></code> or <code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Bleh:</span></code>) becomes its <strong>docstring</strong>. Docstrings are important because a bunch of Python tools know how to look for them, and they make interfacing with someone else’s code less of a guessing game.</p>
+<p>As an example, open up an IPython session and import the <code class="docutils literal notranslate"><span class="pre">math</span></code> module. There’s a funky function in there named <code class="docutils literal notranslate"><span class="pre">atan2</span></code>, which doesn’t sound like anything they taught me in trigonometry class. In IPython, you can get more information on any function (or class, or module, etc.) by just typing its name followed by a <code class="docutils literal notranslate"><span class="pre">?</span></code> and hitting enter. This prints the function’s <strong>docstring</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>In [1]: import math
+
+In [2]: math.atan2?
+Docstring:
+atan2(y, x)
+
+Return the arc tangent (measured in radians) of y/x.
+Unlike atan(y/x), the signs of both x and y are considered.
+Type:      builtin_function_or_method
+</pre></div>
+</div>
+<p>And now you know. And knowing is half the battle.</p>
+<p>The same <code class="docutils literal notranslate"><span class="pre">?</span></code> shorthand works in the IPython / Jupyter Notebook, but isn’t valid in scripts. (Note that interactive sessions with the plain old <code class="docutils literal notranslate"><span class="pre">python</span></code> command support this too, but you write <code class="docutils literal notranslate"><span class="pre">help(math.atan2)</span></code> instead of a <code class="docutils literal notranslate"><span class="pre">?</span></code>. To get out of that help screen, type <code class="docutils literal notranslate"><span class="pre">q</span></code>.)</p>
+<p>Conventions for formatting the contents of docstrings are as abundant as the stars in the sky, but there are a few important things your users (or your future self) might want to know about a particular function:</p>
+<blockquote>
+<div><ul class="simple">
+<li>What do its arguments mean? (Especially if you’ve given them names like <code class="docutils literal notranslate"><span class="pre">i</span></code>, <code class="docutils literal notranslate"><span class="pre">j</span></code>, <code class="docutils literal notranslate"><span class="pre">k</span></code>!)</li>
+<li>What kinds of values are accepted? (Does it only work with integers? Strings?)</li>
+<li>What does it <strong>do</strong>?</li>
+<li>What does it return, if anything?</li>
+</ul>
+</div></blockquote>
+<p>One common convention for formatting docstrings is the “NumPy style”, extensively documented under <a class="reference external" href="https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt#docstring-standard">Docstring Standard</a> in the NumPy documentation. I find it quite readable without being unnecessarily verbose, but your mileage may vary. When working in a large team, it’s more important that your code follows any documentation conventions they set up. (Unless, of course, they conventionally have no documentation at all.)</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p>Copy your Python files from the last step into a new folder called <code class="docutils literal notranslate"><span class="pre">scripting_ex5</span></code>. Modify your <code class="docutils literal notranslate"><span class="pre">square_root()</span></code> and <code class="docutils literal notranslate"><span class="pre">greet()</span></code> functions to have docstrings. Try to use the NumPy docstring style, but don’t worry if the guidelines contain stuff that goes over your head. (There are also <a class="reference external" href="http://sphinxcontrib-napoleon.readthedocs.org/en/latest/example_numpy.html">examples of good NumPy-style docstrings</a> you can consult.)</p>
+<p class="last">Open an interactive IPython session and ensure that your docstrings are printed out when you import the functions and use the <code class="docutils literal notranslate"><span class="pre">?</span></code> shorthand to view the docstring. Copy your IPython session output into a new text file called <code class="docutils literal notranslate"><span class="pre">ex5_output.txt</span></code> for the trainer.</p>
+</div>
+</div>
+<div class="section" id="best-practices-for-naming-things">
+<h2>Best practices for naming things<a class="headerlink" href="#best-practices-for-naming-things" title="Permalink to this headline">¶</a></h2>
+<p>It is said that there are two hard problems in computing: cache invalidation, naming things, and off-by-one errors. This second problem comes down to trying to convey what a piece of code is all about in a name short enough to type ten times a day. We will leave the more artful aspects of naming things to you, but you should note some more technical constraints on names in Python.</p>
+<p><strong>Names beginning with a single underscore</strong>: Names you encounter that begin with a single underscore, like <code class="docutils literal notranslate"><span class="pre">_reserved</span></code> or <code class="docutils literal notranslate"><span class="pre">_something</span></code> are “hidden” names. In practice, this doesn’t mean anything about how your code interacts with them, but some tools respect this designation to show you, e.g., tab completion suggestions without any hidden names included. It’s a good bet that a single-underscore-prefixed name found as an attribute on an object represents a reference to something considered “internal”, which you should not rely on to be there in future versions (even if using it would make your code simpler!).</p>
+<p><strong>Names beginning with a double underscore</strong>: As mentioned previously, these are reserved for use by the Python language itself. Your code should not create any new variables with double underscore names.</p>
+<p>There is a document called “PEP8” (Python Enhancement Proposal 8) that lays out some common-sense rules for formatting your Python code. (<a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">https://www.python.org/dev/peps/pep-0008/</a>) Not everything in PEP8 is a hard-and-fast rule, and nothing in PEP8 affects whether your code will <strong>run</strong>, but it’s worth familiarizing yourself with. Notably, it lays out some guidelines for naming structures within your program that make it easy to see at a glance what a particular name is referring to. Review the “Prescriptive: Naming Conventions” section here: <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#id30">https://www.python.org/dev/peps/pep-0008/#id30</a>.</p>
+<p>In brief:</p>
+<p><strong>Module names</strong>: Module names should be short, all-lowercase, and (if composed of multiple words) include underscores. Examples: <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">scipy</span></code>, <code class="docutils literal notranslate"><span class="pre">math</span></code>.</p>
+<p><strong>Function names</strong>: Functions (and relatedly, methods on classes) should be <code class="docutils literal notranslate"><span class="pre">lowercase_words_separated_by_underscores</span></code>. This is sometimes called <code class="docutils literal notranslate"><span class="pre">snake_case</span></code>. Yes, this can even apply to acronyms (c.f. <code class="docutils literal notranslate"><span class="pre">numpy.fft.fft</span></code>). Examples: <code class="docutils literal notranslate"><span class="pre">sqrt()</span></code>, <code class="docutils literal notranslate"><span class="pre">write_to()</span></code>, <code class="docutils literal notranslate"><span class="pre">apply_async</span></code>.</p>
+<p><strong>Class names</strong>: Class names are uppercased, and multiple words should each be capitalized to distinguish them from one another. Examples: <code class="docutils literal notranslate"><span class="pre">ThreadedWriter</span></code>, <code class="docutils literal notranslate"><span class="pre">HDUList</span></code>, <code class="docutils literal notranslate"><span class="pre">Instrument</span></code>.</p>
+<p>Regular old variables within your program should be named descriptively, with multiple words separated by underscores (similarly to function and method names).</p>
+</div>
+<div class="section" id="an-introduction-to-multiprocessing">
+<h2>An introduction to <code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code><a class="headerlink" href="#an-introduction-to-multiprocessing" title="Permalink to this headline">¶</a></h2>
+<p>Fair warning, <code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code> is a pretty complex topic, and we’ll only be able to scratch the surface of it here. That said, it’s a complex topic that <strong>definitely</strong> rewards the time invested in it. You’ll probably see it a lot at Space Telescope.</p>
+<p>It’s something of an open secret that Python isn’t actually that good at computationally intensive work. That’s not to say that Python isn’t a good language for scientific computing, but the real workhorses of numeric computation in the Python world are things like like NumPy and SciPy: in other words, external libraries, not part of the language itself. Of course, NumPy and SciPy only know how to use one of your computer’s CPUs, when you might have 4 to 16 in a recent desktop. There’s clearly a place here for a tool that lets you take your moderately-fast Python code and… well… throw more hardware at it.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code> module lets you write your functions just as you would in a normal Python program, but allows you to use additional Python processes to “farm out” work to the other processors in your computer. Think of it as running things four or eight at-a-time instead of one after the other.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p>Copy your Python files from the last step into a new folder called <code class="docutils literal notranslate"><span class="pre">scripting_ex6</span></code>. Make the following modification to <code class="docutils literal notranslate"><span class="pre">square_root()</span></code>: add a line before the <code class="docutils literal notranslate"><span class="pre">print()</span></code> call that sleeps (pauses) for 2 seconds. We’ll use this to simulate a long-running function from a less trivial module, like correlating two data sets or computing a PSF. See <code class="docutils literal notranslate"><span class="pre">time.sleep()</span></code> in the standard library: <a class="reference external" href="https://docs.python.org/2/library/time.html#time.sleep">https://docs.python.org/2/library/time.html#time.sleep</a>.</p>
+<p class="last">Open up a new IPython session, import your <code class="docutils literal notranslate"><span class="pre">square_root</span></code> function, and verify that it now takes a hella long time to compute any square roots.</p>
+</div>
+<p>Now we’re going to build a simple stand-alone script called <code class="docutils literal notranslate"><span class="pre">first_hundred_sqrts.py</span></code> that computes the square roots of numbers 1 to 100. Consider this sample code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">):</span>
+   <span class="n">its_square_root</span> <span class="o">=</span> <span class="n">verbose_math</span><span class="o">.</span><span class="n">square_root</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+   <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">number</span><span class="p">,</span> <span class="n">its_square_root</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If this runs, one number at a time, it’ll take at least 100 x 2 seconds to complete! Who has that kind of time? There has to be a better way.</p>
+<p>For starters, we have to stop thinking in our linear, loop-oriented way. Consider this: does the result of <code class="docutils literal notranslate"><span class="pre">sqrt(4)</span></code> really influence the result of <code class="docutils literal notranslate"><span class="pre">sqrt(5)</span></code> at all? Couldn’t we just as easily go through the numbers 1 to 100 backwards, or in a random order, and sort the results later? (Problems where the inputs to a computation don’t depend directly on the outputs of a previous stage are <em>excellent</em> candidates for parallelization.)</p>
+<p>There’s another way to apply a function to a sequence of numbers that looks a bit different, but also expresses this property of each step in the sequence being computed independently. If you think about it, the result we have in the example above isn’t actually the square root: it’s a 2-tuple of <code class="docutils literal notranslate"><span class="pre">(number,</span> <span class="pre">its_square_root)</span></code>. To make this explicit, let’s “rephrase” that code sample. Add a function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_result</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+    <span class="n">its_square_root</span> <span class="o">=</span> <span class="n">verbose_math</span><span class="o">.</span><span class="n">square_root</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">number</span><span class="p">,</span> <span class="n">its_square_root</span>
+</pre></div>
+</div>
+<p>And change the main block to look like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">compute_result</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">the_number</span><span class="p">,</span> <span class="n">its_sqrt</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The square root of&quot;</span><span class="p">,</span> <span class="n">the_number</span><span class="p">,</span> <span class="s2">&quot;is&quot;</span><span class="p">,</span> <span class="n">its_sqrt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>There’s also a way to eliminate the loop entirely, now that we’ve rearranged the code this way. The <code class="docutils literal notranslate"><span class="pre">map()</span></code> builtin function takes two arguments: a function to use to compute a result, and the sequence which should be passed to that function (one at a time). Rephrasing again, we get a “functional” form (so named for its reliance on functions rather than looping to process a sequence):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">compute_result</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">the_number</span><span class="p">,</span> <span class="n">its_sqrt</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The square root of&quot;</span><span class="p">,</span> <span class="n">the_number</span><span class="p">,</span> <span class="s2">&quot;is&quot;</span><span class="p">,</span> <span class="n">its_sqrt</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p class="last">Also within <code class="docutils literal notranslate"><span class="pre">scripting_ex6</span></code>, create your <code class="docutils literal notranslate"><span class="pre">first_hundred_sqrts.py</span></code> stand-alone script. Use the conventions described above (e.g. the shebang line, future imports, and an <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__&quot;:</span></code> block). Use the last “phrasing” of the main program logic, as this will lend itself well to parallelization in a moment. Ensure your code runs, but don’t feel obligated to wait for three minutes for it to finish!</p>
+</div>
+<p>Now that we’ve clarified the independence of our various tasks, and written a simple function that does exactly what we want when presented with a particular number, we just need to parallelize it.</p>
+<p>Enter the <code class="docutils literal notranslate"><span class="pre">Pool</span></code> object, by far the easiest interface to <code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code>. When using <code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code> this way, a minimal amount of boilerplate code is required to configure the process pool, then methods on the pool are used to call your functions in a parallel fashion. Bring in the <code class="docutils literal notranslate"><span class="pre">Pool</span></code> class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Pool</span>
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p>Copy your Python files from the last step into a new folder called <code class="docutils literal notranslate"><span class="pre">scripting_ex7</span></code>. Within your <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__&quot;:</span></code> block in <code class="docutils literal notranslate"><span class="pre">first_hundred_sqrts.py</span></code>, create a process pool and use its <code class="docutils literal notranslate"><span class="pre">map</span></code> method to parallelize your computation. A good rule of thumb is to use the number of processors in your computer (or server) to figure out how many worker processes to put in the pool. Here we use 8 processes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">compute_result</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">the_number</span><span class="p">,</span> <span class="n">its_sqrt</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The square root of&quot;</span><span class="p">,</span> <span class="n">the_number</span><span class="p">,</span> <span class="s2">&quot;is&quot;</span><span class="p">,</span> <span class="n">its_sqrt</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="last">Compare how long it takes to run with your <code class="docutils literal notranslate"><span class="pre">scripting_ex6</span></code> version. Nice, right?</p>
+</div>
+<p>This is a somewhat contrived example (square roots don’t take long to compute, after all!) but hopefully it gave you some ideas of how to use this to speed up your programs. Multiprocessing is not limited to replacing loops and list-processing constructs with <cite>map()</cite>, though. Consult the Python multiprocessing documentation for the full details: <a class="reference external" href="https://docs.python.org/3.5/library/multiprocessing.html">https://docs.python.org/3.5/library/multiprocessing.html</a></p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p>As a final exercise for this section on parallelization, consider a data pipeline script that does the following:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Queries the archive to retrieve each “dark” (dark current calibration exposures) for an instrument</li>
+<li>Computes a median dark image by taking the median pixel values across the set of exposures</li>
+<li>Queries the archive web service for each data set corresponding to some list of science exposures</li>
+<li>Applies the dark correction to each science exposure and saves a corrected version</li>
+</ol>
+</div></blockquote>
+<p class="last">Which of these steps could be sped up by <cite>multiprocessing</cite>? Which could not? Why? Save your answers in ex7.txt.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Let your trainer know you’ve finished, and send them your exercise solutions. You should have <code class="docutils literal notranslate"><span class="pre">do_something.py</span></code>, <code class="docutils literal notranslate"><span class="pre">hello_world.py</span></code>, and folders for <code class="docutils literal notranslate"><span class="pre">scripting_ex1</span></code>, <code class="docutils literal notranslate"><span class="pre">scripting_ex2</span></code>, etc.</p>
+<p>Once your trainer has reviewed your exercises, they will provide feedback and let you know when you’re done with Python training!</p>
+<p class="last">Review the resources in the following appendix for more in-depth coverage of these topics and more.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="resources.html" class="btn btn-neutral float-right" title="Appendix: Resources and Best Practices" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="scientific_packages.html" class="btn btn-neutral" title="Essential packages for scientific data analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, AURA / Space Telescope Science Institute. These documents are designed for internal use only, and are not an official AURA/STScI publication. Information may be out of date, irrelevant, or contradict published documentation. Use at your own risk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'published 2018-6-14',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,297 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Basic Spectroscopy &mdash; RIA Training Library</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction" href="introduction.html" />
+    <link rel="prev" title="Using DrizzlePac" href="../drizzle.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Technical Staff Training
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                published 2018-6-14
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../computer_setup.html">Setting Up Your Computer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../version_control.html">Version Control with git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../archives.html">Using MAST (a.k.a. the Archive)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python/index.html">Python for Scientific Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../apt_etc/index.html">The Astronomer’s Proposal Tool and the Exposure Time Calculator for HST and JWST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../photometry.html">Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drizzle.html">Using DrizzlePac</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Basic Spectroscopy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html">Working with Spectra: Exercises</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html">Physical Basis of Spectroscopy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignments.html">Extra Assignments</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pysynphot.html">Using Pysynphot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editing_these_documents.html">Editing These Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tricks.html">Tips and Tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trainees.html">Past Trainees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../boneyard.html">Retired topics</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Technical Staff Training</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Basic Spectroscopy</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/spectroscopy/index.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="basic-spectroscopy">
+<h1>Basic Spectroscopy<a class="headerlink" href="#basic-spectroscopy" title="Permalink to this headline">¶</a></h1>
+<p>In this document, we have assumed very little knowledge of spectroscopy. If you are already familiar with the subject you can likely skip directly to the exercises, found in <a class="reference internal" href="exercises.html"><span class="doc">Working with Spectra: Exercises</span></a>. These generally do not require a particular programming language or operating system, so you are free to complete them in whichever language you choose.  The notable exceptions to this rule are the STScI calibration pipelines.  These are written in particular languages, and are most readily available through the Python and IRAF/PyRAF interface.</p>
+<p>The <a class="reference internal" href="assignments.html"><span class="doc">Extra Assignments</span></a> chapter, includes two “science-based” spectroscopy assignments. These assignments are intended as training projects for RIAs being assigned to the COS or STIS teams, and should not be completed unless instructed.</p>
+<p>Note that this is a draft document, and feedback is always appreciated.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#obtaining-spectra">Obtaining Spectra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#uses-of-spectroscopy">Uses of Spectroscopy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction.html#space-based-spectroscopy">Space-Based Spectroscopy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#airglow-lines">Airglow Lines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#uv-instrumentation">UV Instrumentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="introduction.html#differences-between-cos-and-stis">Differences between COS and STIS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="exercises.html">Working with Spectra: Exercises</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html#hst-spectral-data">HST Spectral Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html#calibration">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html#smoothing-convolving">Smoothing/Convolving</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html#signal-to-noise">Signal to Noise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exercises.html#interpolation">Interpolation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">Physical Basis of Spectroscopy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#spectral-lines">Spectral Lines</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#transition-probabilities">Transition Probabilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#local-thermodynamic-equilibrium">Local Thermodynamic Equilibrium</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#measuring-absorption-and-emission-lines">Measuring Absorption and Emission Lines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#the-voigt-profile">The Voigt Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="theory.html#the-curve-of-growth">The Curve of Growth</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#redshift">Redshift</a></li>
+<li class="toctree-l2"><a class="reference internal" href="theory.html#relative-solar-abundances">Relative Solar Abundances</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="assignments.html">Extra Assignments</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="assignments.html#spectroscopy-of-recx-1">Spectroscopy of RECX-1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="assignments.html#chemical-abundances-in-ao-0235-164">Chemical Abundances in AO 0235+164</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr class="docutils" />
+<p>The spectroscopy <a class="reference download internal" href="../_downloads/spectroscopy_training.pdf" download=""><code class="xref download docutils literal notranslate"><span class="pre">training</span> <span class="pre">document</span></code></a> gives an overview of spectrographs in general and the basics of spectroscopy. Also included are exercises that will introduce you to using the data from HST’s spectrographs–COS and STIS.</p>
+<p>There is a <a class="reference download internal" href="../_downloads/Spectroscopy_Training.ipynb" download=""><code class="xref download docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">notebook</span> <span class="pre">version</span></code></a> of the training that is designed to be worked through interactively in group training.</p>
+<p>There are also <a class="reference download internal" href="../_downloads/intro_to_hst_spec_3.2.pdf" download=""><code class="xref download docutils literal notranslate"><span class="pre">slides</span></code></a> that give a high-level overview of COS, STIS, and MAMA detectors.</p>
+<hr class="docutils" />
+<p>Resources</p>
+<p>Instrument and Data Handbooks can be found at the links below.  Note that there is an option to download the PDF at the top of the page.</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.stsci.edu/hst/cos/documents/handbooks/current/cos_cover.html">COS Instrument Handbook</a></li>
+<li><a class="reference external" href="http://www.stsci.edu/hst/cos/documents/handbooks/datahandbook/COS_cover.html">COS Data Handbook</a></li>
+<li><a class="reference external" href="http://www.stsci.edu/hst/stis/documents/handbooks/handbooks/currentIHB/cover.html">STIS Instrument Handbook</a></li>
+<li><a class="reference external" href="http://www.stsci.edu/hst/stis/documents/handbooks/handbooks/currentDHB/stis_cover.html">STIS Data Handbook</a></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="introduction.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../drizzle.html" class="btn btn-neutral" title="Using DrizzlePac" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, AURA / Space Telescope Science Institute. These documents are designed for internal use only, and are not an official AURA/STScI publication. Information may be out of date, irrelevant, or contradict published documentation. Use at your own risk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'published 2018-6-14',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

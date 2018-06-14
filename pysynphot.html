@@ -1,0 +1,489 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Using Pysynphot &mdash; RIA Training Library</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Editing These Documents" href="editing_these_documents.html" />
+    <link rel="prev" title="Extra Assignments" href="spectroscopy/assignments.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Technical Staff Training
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                published 2018-6-14
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="computer_setup.html">Setting Up Your Computer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version_control.html">Version Control with git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="archives.html">Using MAST (a.k.a. the Archive)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python/index.html">Python for Scientific Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apt_etc/index.html">The Astronomer’s Proposal Tool and the Exposure Time Calculator for HST and JWST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="photometry.html">Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="drizzle.html">Using DrizzlePac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spectroscopy/index.html">Basic Spectroscopy</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using Pysynphot</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-environment-variables">Configuring environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#construct-and-plot-a-spectrum">Construct and plot a spectrum</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-target-spectra">Using target spectra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-analytic-spectra">Using analytic spectra</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-bandpass">Creating a bandpass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-observations">Creating observations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-pysynphot-for-jwst">Using Pysynphot for JWST</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#calculate-the-raw-countrate-through-niriss-filter-f430m">Calculate the raw countrate through NIRISS filter F430M</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other-ways-to-get-the-spectrum-and-the-bandpass">Other ways to get the spectrum and the bandpass</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#renormalize-the-spectrum-to-vega-mag-7-5">Renormalize the spectrum to Vega mag = 7.5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calculate-the-zeropoint-of-the-f430m-filter">Calculate the zeropoint of the F430M filter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="editing_these_documents.html">Editing These Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tricks.html">Tips and Tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="trainees.html">Past Trainees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boneyard.html">Retired topics</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Technical Staff Training</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Using Pysynphot</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/pysynphot.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="using-pysynphot">
+<h1>Using Pysynphot<a class="headerlink" href="#using-pysynphot" title="Permalink to this headline">¶</a></h1>
+<p><em>Authors: Deepashri Thatte, Varun Bajaj</em></p>
+<p>Version 1.1 July 2015</p>
+<p>Astrolib PySynphot (referred to as Pysynphot) is a Python package and an object oriented replacement for STSDAS SYNPHOT synthetic photometry package in IRAF. Pysynphot simulates photometric data and spectra as they are observed with the Hubble Space Telescope (HST). It allows for much easier integration with other python code when compared to using Synphot via Pyraf. It can also be used for JWST with user’s own data files (e.g. filter throughputs) and reference data. The current distribution of Pysynphot does not support JWST observing modes in a similar manner as HST because the necessary JWST data files are not yet available for public distribution.</p>
+<p>This tutorial will cover the basics of using Pysynphot to create spectra, bandpasses, and synthetic observations for both Hubble and James Webb instruments. You will encounter a few exercises in this training, please save your plots and record you answers so your trainer(s) can review them. For more technical documentation and installation instructions for Pysynphot please refer to the <a class="reference external" href="http://ssb.stsci.edu/pysynphot/docs/">Pysynphot User Guide</a> , 2015, Lim, P. L., Diaz, R. I., &amp; Laidler, V. (Baltimore, STScI).</p>
+<div class="section" id="configuring-environment-variables">
+<h2>Configuring environment variables<a class="headerlink" href="#configuring-environment-variables" title="Permalink to this headline">¶</a></h2>
+<p>Pysynphot requires access to data files that are distributed separately by <a class="reference external" href="http://www.stsci.edu/hst/observatory/crds/cdbs_throughput.html">Calibration Reference Data System</a> (CRDS). These files are required for calculations involving HST bandpasses. The path to these files is identified by PYSYN_CDBS variable. When connected to the STScI network, you simply have to point <code class="docutils literal notranslate"><span class="pre">PYSYN_CDBS</span></code> to the path.  In your terminal type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">setenv</span> <span class="n">PYSYN_CDBS</span> <span class="o">/</span><span class="n">grp</span><span class="o">/</span><span class="n">hst</span><span class="o">/</span><span class="n">cdbs</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>If you’re using the bash shell instead of the default (tcsh), the appropriate command is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ export PYSYN_CDBS=&quot;/grp/hst/cdbs/&quot;
+</pre></div>
+</div>
+<p>Typing this every time you want to use Pysynphot in your code is rather tedious, so you can add the appropriate line to your <code class="docutils literal notranslate"><span class="pre">.cshrc</span></code> (or <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>) file.</p>
+<p>All the information that Pysynphot needs to compute the throughput of an HST instrument mode, is contained within three types of data files: <code class="docutils literal notranslate"><span class="pre">*_tmg.fits</span></code>, <code class="docutils literal notranslate"><span class="pre">*_tmc.fits</span></code> and <code class="docutils literal notranslate"><span class="pre">*_tmt.fits</span></code>. The master graph table (<code class="docutils literal notranslate"><span class="pre">tmg</span></code>) describes all the possible light paths through the telescope and instruments. It describes which component files should be combined to find the throughput of the instrument configuration. Thermal component lookup table (<code class="docutils literal notranslate"><span class="pre">tmt</span></code>) contains the full directory path and name of each component thermal element to be used: in other words, it is the lookup table for HST component thermal characteristics. Master component lookup table (<code class="docutils literal notranslate"><span class="pre">tmc</span></code>) contains the full directory path and name of each component throughput table to be used. These files get updated when new components are added or  replaced, keywords are edited, or when a new thermal emissivity or throughput table is delivered to the database.</p>
+</div>
+<div class="section" id="construct-and-plot-a-spectrum">
+<h2>Construct and plot a spectrum<a class="headerlink" href="#construct-and-plot-a-spectrum" title="Permalink to this headline">¶</a></h2>
+<p>A spectrum can be read from an existing file containing lists of fluxes as a function of wavelength or can be generated analytically.</p>
+<div class="section" id="using-target-spectra">
+<h3>Using target spectra<a class="headerlink" href="#using-target-spectra" title="Permalink to this headline">¶</a></h3>
+<p>Pysynphot gives user the ability to calculate photometric results from an input spectrum file. CRDS contains the composite stellar spectra that are flux standards on the HST system and are stored in the <em>calspec</em> directory (<code class="docutils literal notranslate"><span class="pre">/grp/hst/crds/calspec</span></code>). Also there are many spectral atlases consisting of both observed and model data that are available for use with Pysynphot. For more details about creating a source spectrum please refer to <a class="reference external" href="http://ssb.stsci.edu/pysynphot/docs/spectrum.html#pysynphot-spectrum">the spectrum documentation for Pysynphot</a>.</p>
+<p>If you are using IPython shell start by typing.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">ipython</span>
+</pre></div>
+</div>
+<p>We will start by acquiring a target spectrum and plotting it.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pysynphot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vega</span> <span class="o">=</span> <span class="n">pysynphot</span><span class="o">.</span><span class="n">FileSpectrum</span><span class="p">(</span><span class="s1">&#39;/grp/hst/cdbs/calspec/alpha_lyr_stis_008.fits&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The variable <code class="docutils literal notranslate"><span class="pre">vega</span></code> is actually an object containing much information, not limited to the actual spectrum itself. To plot it, we simply access the relevant attributes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vega</span><span class="o">.</span><span class="n">wave</span><span class="p">,</span> <span class="n">vega</span><span class="o">.</span><span class="n">flux</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">vega</span><span class="o">.</span><span class="n">waveunits</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">vega</span><span class="o">.</span><span class="n">fluxunits</span><span class="p">)</span>  <span class="c1"># default unit is flam (ergs/s/cm**2/Å)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os.path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">vega</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/vega_spec.png"><img alt="Vega spectrum" src="_images/vega_spec.png" style="width: 653.6px; height: 493.6px;" /></a>
+</div>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<div class="last line-block">
+<div class="line">Make a plot similar to the one above using a different target spectrum.  Include axes labels, units and a title. Plot the spectrum in terms of Jy.</div>
+<div class="line"><strong>Hint:</strong> Look at the <code class="docutils literal notranslate"><span class="pre">.waveunits</span></code>, <code class="docutils literal notranslate"><span class="pre">.fluxunits</span></code>, and <code class="docutils literal notranslate"><span class="pre">.name</span></code> attributes to get the correct labels and the <code class="docutils literal notranslate"><span class="pre">.convert()</span></code> method to change the flux unit to Jansky.</div>
+</div>
+</div>
+</div>
+<div class="section" id="using-analytic-spectra">
+<h3>Using analytic spectra<a class="headerlink" href="#using-analytic-spectra" title="Permalink to this headline">¶</a></h3>
+<p>Pysynphot also gives the user the ability to generate analytic spectra. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bb</span> <span class="o">=</span> <span class="n">pysynphot</span><span class="o">.</span><span class="n">spectrum</span><span class="o">.</span><span class="n">BlackBody</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>  <span class="c1"># Creates a blackbody spectrum at 10000 Kelvin</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">pow</span> <span class="o">=</span> <span class="n">pysynphot</span><span class="o">.</span><span class="n">spectrum</span><span class="o">.</span><span class="n">PowerLaw</span><span class="p">(</span><span class="mi">8000</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Creates a power law spectrum with a reference wavelength of 8000 Å and index of -2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">composite_spec</span> <span class="o">=</span> <span class="n">bb</span> <span class="o">+</span> <span class="nb">pow</span>
+</pre></div>
+</div>
+<p>See the documentation for more details on usage of the various analytic spectrum options.</p>
+</div>
+</div>
+<div class="section" id="creating-a-bandpass">
+<h2>Creating a bandpass<a class="headerlink" href="#creating-a-bandpass" title="Permalink to this headline">¶</a></h2>
+<p>The other main functionality of Pysynphot is creating bandpasses by convolving sensitivities of the various parts of the optical path. The Observation Mode (obsmode) parameter defines the bandpass and is usually given as a string of keyword arguments (e.g. instrument, detector, filter) identifying the light path. For example, to calculate the bandpass of filter F218W in chip one of the WFC3/UVIS detector:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bp1</span> <span class="o">=</span> <span class="n">pysynphot</span><span class="o">.</span><span class="n">ObsBandpass</span><span class="p">(</span><span class="s1">&#39;wfc3,uvis1,f218w&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bp2</span> <span class="o">=</span> <span class="n">pysynphot</span><span class="o">.</span><span class="n">ObsBandpass</span><span class="p">(</span><span class="s1">&#39;wfc3,uvis1,f218w,aper#0.4&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">aper#x</span></code> keyword indicates the bandpass should be calculated with an aperture of size <code class="docutils literal notranslate"><span class="pre">x</span></code> arcseconds.</p>
+<p>Unlike spectra, bandpass objects contain <code class="docutils literal notranslate"><span class="pre">.throughput</span></code> rather than <code class="docutils literal notranslate"><span class="pre">.flux</span></code> attributes. Plotting them is equally straightforward, however:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bp1</span><span class="o">.</span><span class="n">wave</span><span class="p">,</span> <span class="n">bp1</span><span class="o">.</span><span class="n">throughput</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure">
+<a class="reference internal image-reference" href="_images/wfc3uvis1f218w.png"><img alt="F218W Bandpass" src="_images/wfc3uvis1f218w.png" style="width: 653.6px; height: 493.6px;" /></a>
+</div>
+<div class="note admonition">
+<p class="first admonition-title">Note: Obsmode with multiple-chip detectors</p>
+<p class="last">The general format for an obsmode is: <code class="docutils literal notranslate"><span class="pre">'&lt;instrument&gt;,&lt;channel&gt;,&lt;filter&gt;'</span></code>. Some channels, such as WFC3/UVIS and ACS/WFC have multiple CCDs. Since each chip generally has a different sensitivity, you must indicate which chip is used in the obsmode string. For a two-chip detector like WFC3/UVIS, this is done by using <code class="docutils literal notranslate"><span class="pre">'uvis1'</span></code> or <code class="docutils literal notranslate"><span class="pre">'uvis2'</span></code> in the obsmode string. For single chip detectors, the number is not necessary.</p>
+</div>
+<p>You can also extract the bandpasses of specific components in the optical path:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ota_bp</span> <span class="o">=</span> <span class="n">pysynphot</span><span class="o">.</span><span class="n">FileBandpass</span><span class="p">(</span><span class="s1">&#39;/grp/hst/cdbs/comp/ota/hst_ota_007_syn.fits&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p class="last">Plot a bandpass using a different obsmode. Feel free to use whichever instrument/detector/filter you like. Include labels, units, and a title.</p>
+</div>
+</div>
+<div class="section" id="creating-observations">
+<h2>Creating observations<a class="headerlink" href="#creating-observations" title="Permalink to this headline">¶</a></h2>
+<p>The most useful function of Pysynphot is the creation of ‘observations’, which are synthetic photometric measurements.  To create an observation, you need a spectrum and bandpass (observation is source spectrum convolved with the bandpass).  We will use the ones we have calculated in the previous sections.  Creating an observation is rather simple:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">obs</span> <span class="o">=</span> <span class="n">pysynphot</span><span class="o">.</span><span class="n">Observation</span><span class="p">(</span><span class="n">vega</span><span class="p">,</span> <span class="n">bp1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>By default the spectrum and bandpass must overlap completely. Partial overlap is allowed if <code class="docutils literal notranslate"><span class="pre">force</span></code> is set:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">obs</span> <span class="o">=</span> <span class="n">pysynphot</span><span class="o">.</span><span class="n">Observation</span><span class="p">(</span><span class="n">vega</span><span class="p">,</span> <span class="n">bp1</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="s1">&#39;taper&#39;</span><span class="p">)</span>  <span class="c1"># Taper the spectrum by adding zero flux to each end</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obs</span> <span class="o">=</span> <span class="n">pysynphot</span><span class="o">.</span><span class="n">Observation</span><span class="p">(</span><span class="n">vega</span><span class="p">,</span> <span class="n">bp1</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="s1">&#39;extrap&#39;</span><span class="p">)</span>  <span class="c1"># Extrapolate the spectrum</span>
+</pre></div>
+</div>
+<p>The observation object contains several methods, the most often used is the countrate (counts per second) predicted for the detector. It calculates the total counts of a source spectrum, integrated over the bandpass defined by the observation mode. For the above observation the <em>countrate</em> is given by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">obs</span><span class="o">.</span><span class="n">countrate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The default unit for countrate is counts/s for a point source or counts per second per square arcsec for an extended source. Also the count rate is integrated over the area of HST Primary mirror specified in cm<sup>2</sup>.</p>
+<p>To get the countrate in specified units use the <code class="docutils literal notranslate"><span class="pre">effstim()</span></code> method:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">obs</span><span class="o">.</span><span class="n">effstim</span><span class="p">(</span><span class="s1">&#39;counts&#39;</span><span class="p">)</span>  <span class="c1"># counts/sec integrated over the area of HST Primary mirror</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obs</span><span class="o">.</span><span class="n">effstim</span><span class="p">(</span><span class="s1">&#39;flam&#39;</span><span class="p">)</span>  <span class="c1"># ergs/s/cm**2/Å</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obs</span><span class="o">.</span><span class="n">effstim</span><span class="p">(</span><span class="s1">&#39;jy&#39;</span><span class="p">)</span>  <span class="c1"># Jy</span>
+</pre></div>
+</div>
+<p>The observation object also contains the <code class="docutils literal notranslate"><span class="pre">.wave</span></code> and <code class="docutils literal notranslate"><span class="pre">.flux</span></code> attributes, which you can use to see the final overlapped spectrum.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<p class="last">Create an observation using the spectrum and bandpass you created in the previous sections. Plot the final spectrum and record the countrate.</p>
+</div>
+<hr class="docutils" />
+<p><strong>Congrats! You have finished the essential Pysynphot training.  The following section contains additional examples of using Pysynphot for JWST instruments.</strong></p>
+</div>
+<hr class="docutils" />
+<div class="section" id="using-pysynphot-for-jwst">
+<h2>Using Pysynphot for JWST<a class="headerlink" href="#using-pysynphot-for-jwst" title="Permalink to this headline">¶</a></h2>
+<p>In the examples below we will use some functions from the packages POPPY (Physical Optics Propagation in PYthon) and WebbPSF (JWST PSF Simulation Tool) with Pysynphot. As mentioned earlier the current distribution of Pysynphot does not support JWST observing modes in a similar manner as HST. Using some of the WebbPSF functionality makes use of Pysynphot relatively easier.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>As of March 2016, the SSBX software distribution has an out-of-date version of WebbPSF. Before starting the exercises below, you must load the <code class="docutils literal notranslate"><span class="pre">ssbdev</span></code> environment and declare an environment variable to point to the WebbPSF reference data.</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">ssbdev</span>
+<span class="p">[</span><span class="n">ssbdev</span><span class="o">-</span><span class="n">osx</span><span class="p">]</span> <span class="o">%</span> <span class="n">setenv</span> <span class="n">WEBBPSF_PATH</span> <span class="o">/</span><span class="n">grp</span><span class="o">/</span><span class="n">jwst</span><span class="o">/</span><span class="n">ote</span><span class="o">/</span><span class="n">webbpsf</span><span class="o">-</span><span class="n">data</span><span class="o">/</span>
+<span class="p">[</span><span class="n">ssbdev</span><span class="o">-</span><span class="n">osx</span><span class="p">]</span> <span class="o">%</span> <span class="n">ipython</span>
+</pre></div>
+</div>
+</div>
+<p>In your Python session, import necessary modules:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pysynphot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">poppy</span>  <span class="c1"># Physical Optics Propagation in PYthon</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">webbpsf</span>  <span class="c1"># JWST PSF Simulation Tool</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+<p>Import the function to retrieve an appropriate Pysynphot Spectrum object for a given stellar spectral type from the PHOENIX or Castelli &amp; Kurucz model libraries:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">poppy</span> <span class="k">import</span> <span class="n">specFromSpectralType</span>
+</pre></div>
+</div>
+<div class="section" id="calculate-the-raw-countrate-through-niriss-filter-f430m">
+<h3>Calculate the raw countrate through NIRISS filter F430M<a class="headerlink" href="#calculate-the-raw-countrate-through-niriss-filter-f430m" title="Permalink to this headline">¶</a></h3>
+<p>In this example we will use some WebbPSF functions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">niriss</span> <span class="o">=</span> <span class="n">webbpsf</span><span class="o">.</span><span class="n">NIRISS</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">FILTER</span> <span class="o">=</span> <span class="s1">&#39;F430M&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">niriss</span><span class="o">.</span><span class="n">filter</span> <span class="o">=</span> <span class="n">FILTER</span>
+</pre></div>
+</div>
+<p>Set telescope area (JWST primary mirror):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Atel</span> <span class="o">=</span> <span class="mf">25.0</span> <span class="o">*</span> <span class="mi">10000</span>  <span class="c1"># cm^2 -- Area of the telescope has to be in centimeters</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pysynphot</span><span class="o">.</span><span class="n">setref</span><span class="p">(</span><span class="n">area</span><span class="o">=</span><span class="n">Atel</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The folowing two functions from WebbPSF can be used to generate source spectrum and to get bandpass of NIRISS filter 430M:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">src_spectrum</span> <span class="o">=</span> <span class="n">specFromSpectralType</span><span class="p">(</span><span class="s2">&quot;A0V&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bandpass</span> <span class="o">=</span> <span class="n">niriss</span><span class="o">.</span><span class="n">_getSynphotBandpass</span><span class="p">(</span><span class="n">niriss</span><span class="o">.</span><span class="n">filter</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<div class="last line-block">
+<div class="line">Create an observation using the above source spectrum and bandpass and calculate the count rate.</div>
+</div>
+</div>
+</div>
+<div class="section" id="other-ways-to-get-the-spectrum-and-the-bandpass">
+<h3>Other ways to get the spectrum and the bandpass<a class="headerlink" href="#other-ways-to-get-the-spectrum-and-the-bandpass" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">$PYSYN_CDBS/grid/</span></code> directory contains stellar atmosphere models. They are available in FITS table format for use with Pysynphot and can be accessed with class <em>Icat</em>.</p>
+<p>This example generates a spectrum of an A0V star (metallicity log Z = 0.0, effective temperature = 9500 Kelvin, surface gravity log g = 4.0) using a PHOENIX model:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">src_spectrum</span> <span class="o">=</span> <span class="n">pysynphot</span><span class="o">.</span><span class="n">Icat</span><span class="p">(</span><span class="s1">&#39;phoenix&#39;</span><span class="p">,</span> <span class="mi">9500</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To write the spectrum in a FITS file use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">src_spectrum</span><span class="o">.</span><span class="n">writefits</span><span class="p">(</span><span class="s1">&#39;phoenix_a0v.fits&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use the following to read the spectrum from already existing FITS file. Here we are using the file that we created above, so <code class="docutils literal notranslate"><span class="pre">sp_a0v</span></code> and <code class="docutils literal notranslate"><span class="pre">src_spectrum</span></code> are the same. (You can also use full path here.)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sp_a0v</span> <span class="o">=</span> <span class="n">pysynphot</span><span class="o">.</span><span class="n">FileSpectrum</span><span class="p">(</span><span class="s1">&#39;phoenix_a0v.fits&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="note admonition">
+<p class="first admonition-title">Exercise</p>
+<div class="last line-block">
+<div class="line">Using the bandpass of the filter created above create a FITS throughtput table that has wavelength and throughput in two columns. Then using any method of your choice create an ASCII file <code class="docutils literal notranslate"><span class="pre">f430m.txt</span></code> that has wavelength in one column and throughput in the other column. We will use this text file in the example below.</div>
+</div>
+</div>
+<p>You can create a bandpass from an ASCII table file with one column for wavelength in angstroms and one for throughput. You can also use a throughput file provided by your instrument team.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wavelength_ang</span><span class="p">,</span> <span class="n">thrufrac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;f430m.txt&#39;</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">unpack</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># use columns that match your text file.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bandpass</span> <span class="o">=</span> <span class="n">pysynphot</span><span class="o">.</span><span class="n">ArrayBandpass</span><span class="p">(</span><span class="n">wave</span> <span class="o">=</span> <span class="n">wavelength_ang</span><span class="p">,</span> <span class="n">throughput</span><span class="o">=</span><span class="n">thrufrac</span><span class="p">,</span> <span class="n">waveunits</span><span class="o">=</span><span class="s1">&#39;angstrom&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;F430M&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also use NumPy arrays:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wavelength_ang</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">900</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">])</span>  <span class="c1"># Angstroms</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">thrufrac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bandpass</span> <span class="o">=</span> <span class="n">pysynphot</span><span class="o">.</span><span class="n">ArrayBandpass</span><span class="p">(</span><span class="n">wavelength_ang</span><span class="p">,</span> <span class="n">thrufrac</span><span class="p">,</span> <span class="n">waveunits</span><span class="o">=</span><span class="s1">&#39;angstrom&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;F430M&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="renormalize-the-spectrum-to-vega-mag-7-5">
+<h3>Renormalize the spectrum to Vega mag = 7.5<a class="headerlink" href="#renormalize-the-spectrum-to-vega-mag-7-5" title="Permalink to this headline">¶</a></h3>
+<p>We can renormalize the spectrum of A0V star to Vega mag = 7.5 in the given bandpass.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sp</span> <span class="o">=</span> <span class="n">src_spectrum</span><span class="o">.</span><span class="n">renorm</span><span class="p">(</span><span class="mf">7.5</span><span class="p">,</span> <span class="s1">&#39;vegamag&#39;</span><span class="p">,</span> <span class="n">bandpass</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obs</span> <span class="o">=</span> <span class="n">pysynphot</span><span class="o">.</span><span class="n">Observation</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">bandpass</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use this observation to calculate the count rate of 7.5 magnitude A0V star in NIRISS F430M filter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">countrateFullAperture</span> <span class="o">=</span> <span class="n">obs</span><span class="o">.</span><span class="n">countrate</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">countrateFullAperture</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="calculate-the-zeropoint-of-the-f430m-filter">
+<h3>Calculate the zeropoint of the F430M filter<a class="headerlink" href="#calculate-the-zeropoint-of-the-f430m-filter" title="Permalink to this headline">¶</a></h3>
+<p>Normalize the spectrum to 1 count/sec to calculate zeropoint of the filter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sp_zeropoint</span> <span class="o">=</span> <span class="n">src_spectrum</span><span class="o">.</span><span class="n">renorm</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;counts&#39;</span><span class="p">,</span> <span class="n">bandpass</span><span class="p">)</span>  <span class="c1"># renormalize the spectrum to 1 count/sec</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obs_zeropoint</span> <span class="o">=</span> <span class="n">pysynphot</span><span class="o">.</span><span class="n">Observation</span><span class="p">(</span><span class="n">sp_zeropoint</span><span class="p">,</span> <span class="n">bandpass</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The lines below verify that the count rate is 1 count/sec:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">countrateFullAperture_zeropoint</span> <span class="o">=</span> <span class="n">obs_zeropoint</span><span class="o">.</span><span class="n">countrate</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">countrateFullAperture_zeropoint</span>
+<span class="go">0.999911875033</span>
+</pre></div>
+</div>
+<p>Get the magnitude (zero point) that gives 1 count/sec:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">zp</span> <span class="o">=</span> <span class="n">obs_zeropoint</span><span class="o">.</span><span class="n">effstim</span><span class="p">(</span><span class="s1">&#39;vegamag&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">zp</span>
+<span class="go">23.7854821572</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="editing_these_documents.html" class="btn btn-neutral float-right" title="Editing These Documents" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="spectroscopy/assignments.html" class="btn btn-neutral" title="Extra Assignments" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, AURA / Space Telescope Science Institute. These documents are designed for internal use only, and are not an official AURA/STScI publication. Information may be out of date, irrelevant, or contradict published documentation. Use at your own risk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'published 2018-6-14',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

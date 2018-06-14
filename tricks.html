@@ -1,0 +1,316 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tips and Tricks &mdash; RIA Training Library</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Past Trainees" href="trainees.html" />
+    <link rel="prev" title="Editing These Documents" href="editing_these_documents.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Technical Staff Training
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                published 2018-6-14
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="computer_setup.html">Setting Up Your Computer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="version_control.html">Version Control with git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="archives.html">Using MAST (a.k.a. the Archive)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python/index.html">Python for Scientific Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apt_etc/index.html">The Astronomer’s Proposal Tool and the Exposure Time Calculator for HST and JWST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="photometry.html">Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="drizzle.html">Using DrizzlePac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spectroscopy/index.html">Basic Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysynphot.html">Using Pysynphot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="editing_these_documents.html">Editing These Documents</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tips and Tricks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pushing-to-github-or-grit-gitlab-via-ssh">Pushing to GitHub (or Grit/GitLab) via SSH</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="trainees.html">Past Trainees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="boneyard.html">Retired topics</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Technical Staff Training</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Tips and Tricks</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/tricks.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tips-and-tricks">
+<h1>Tips and Tricks<a class="headerlink" href="#tips-and-tricks" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="pushing-to-github-or-grit-gitlab-via-ssh">
+<span id="git-push-ssh"></span><h2>Pushing to GitHub (or Grit/GitLab) via SSH<a class="headerlink" href="#pushing-to-github-or-grit-gitlab-via-ssh" title="Permalink to this headline">¶</a></h2>
+<p>If you haven’t had to generate an SSH key already, the next exercise will be to generate one for use with GitHub. Without getting too detailed, an SSH key is a bit like a password. GitHub uses your SSH key to know who you are when you want to make changes to shared documents, and to check that you have permission to do so. (Usually, you’d want a <em>passphrase</em> on your key, but for this case it’s unnecessary so you can just hit <kbd class="kbd docutils literal notranslate">Enter</kbd> when prompted in the next exercise.) <a class="footnote-reference" href="#passphrase" id="id1">[1]</a></p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise: Create an SSH key</p>
+<p>Open a new terminal and type the <code class="docutils literal notranslate"><span class="pre">ssh-keygen</span></code> command shown below. (Remember to put in your STScI email!)</p>
+<div class="last highlight-default notranslate"><div class="highlight"><pre><span></span>$ ssh-keygen -t rsa -C &quot;your_email@example.com&quot;
+
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
+Enter passphrase (empty for no passphrase): [Press enter]
+Enter same passphrase again: [Press enter]
+Your identification has been saved in /Users/you/.ssh/id_rsa.
+Your public key has been saved in /Users/you/.ssh/id_rsa.pub.
+The key fingerprint is:
+01:0f:f4:3b:ca:85:d6:17:a1:7d:f0:68:9d:f0:a2:db your_email@example.com
+The key&#39;s randomart image is:
++--[ RSA 2048]----+
+|       o+ oo=..  |
+|       . ..+ o . |
+|        .   o .  |
+|       .   o +   |
+|        S   = =  |
+|             * . |
+|              . .|
+|               = |
+|            E.+o+|
++-----------------+
+</pre></div>
+</div>
+</div>
+<p>This makes a two-part key, with a “private” and “public” half. We need to give the “public” half (the file <code class="docutils literal notranslate"><span class="pre">~/.ssh/id_rsa.pub</span></code>) to GitHub so they can match it up with the private part to verify our account later. Now, we need to tell GitHub that this key is connected to the account you just made.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise: Add a new SSH public key to your GitHub account</p>
+<p>First, copy the contents of <code class="docutils literal notranslate"><span class="pre">~/.ssh/id_rsa.pub</span></code> to your clipboard using this command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pbcopy &lt; ~/.ssh/id_rsa.pub
+</pre></div>
+</div>
+<p class="last">Now you want to go to <a class="reference external" href="https://github.com/settings/ssh">https://github.com/settings/ssh</a> and follow these instructions to <a class="reference external" href="https://help.github.com/articles/generating-ssh-keys/#step-3-add-your-ssh-key-to-your-account">add your SSH key to your account</a>.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">It’s worth mentioning that Grit does this slightly differently. You still need to add a key (at <a class="reference external" href="https://grit.stsci.edu/profile/keys/new">https://grit.stsci.edu/profile/keys/new</a>), but you can log in with your AD username and password. You can use the same public key for GitHub and Grit.</p>
+</div>
+<p>If all went well, your computer will now securely identify itself to GitHub automatically. Before we move on, let’s check that everything’s in place.</p>
+<div class="note admonition">
+<p class="first admonition-title">Exercise: Verify that your computer can talk to GitHub</p>
+<p>The following command attempts to connect to GitHub with the key we set up.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ssh -T git@github.com
+</pre></div>
+</div>
+<p>If you’re prompted with <code class="docutils literal notranslate"><span class="pre">Are</span> <span class="pre">you</span> <span class="pre">sure</span> <span class="pre">you</span> <span class="pre">want</span> <span class="pre">to</span> <span class="pre">continue</span> <span class="pre">connecting</span> <span class="pre">(yes/no)?</span></code>, type “yes” and hit <kbd class="kbd docutils literal notranslate">Enter</kbd>.</p>
+<p class="last">You should see a message indicating you have successfully authenticated (and saying GitHub doesn’t provide shell access, which we don’t care about).</p>
+</div>
+<p>Now to use your key to connect with GitHub, you should be sure to clone with the “SSH clone URL”, highlighted in the following figure.</p>
+<div class="figure" id="id2">
+<img alt="Where to find the SSH clone URL on a GitHub Page" src="_images/ssh_clone_url.png" />
+<p class="caption"><span class="caption-text">Where to find the SSH clone URL on a GitHub Page</span></p>
+</div>
+<p>To convert a repository you have already cloned via HTTPS to use SSH, you have to edit the “remotes” for your clone. The command to examine the remotes for a repository is <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span></code>. For a repository cloned from <code class="docutils literal notranslate"><span class="pre">stsci-riab/riatraining</span></code> via HTTPS, the output of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">-v</span></code> is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git remote -v
+origin       https://github.com/stsci-riab/riatraining.git (fetch)
+origin       https://github.com/stsci-riab/riatraining.git (push)
+</pre></div>
+</div>
+<p>Note the <code class="docutils literal notranslate"><span class="pre">https</span></code> in the URL. We want to change that to tell git to use SSH, which takes the form <code class="docutils literal notranslate"><span class="pre">git&#64;github.com:[username]/[reponame].git</span></code>. For the example above, the command would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git remote set-url origin git@github.com:stsci-riab/riatraining.git
+</pre></div>
+</div>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="passphrase" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><p class="first">Passphrases ensure that someone with physical access to your computer still cannot impersonate you online with your SSH key. The down side is that you have to supply a passphrase each time you use the key, or else configure the SSH agent (which can result in additional frustration).</p>
+<p class="last">Since Institute laptops have full-disk encryption, the risk of a malicious actor coming into your office to steal your encryption keys while you’re away from your desk is low, and the keys aren’t protecting anything more sensitive than training documents, you can forgo the passphrase in this case. If your situation is different, you should absolutely generate a new key with a passphrase.</p>
+</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="trainees.html" class="btn btn-neutral float-right" title="Past Trainees" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="editing_these_documents.html" class="btn btn-neutral" title="Editing These Documents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, AURA / Space Telescope Science Institute. These documents are designed for internal use only, and are not an official AURA/STScI publication. Information may be out of date, irrelevant, or contradict published documentation. Use at your own risk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'published 2018-6-14',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
