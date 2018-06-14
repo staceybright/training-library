@@ -6,9 +6,9 @@ Setting Up Your Computer
 
 The Institute provides you a computer when you are hired, and sets it up with a core set of software. (Some new hires get a loaner computer while a new machine is ordered and prepared for them.) They'll buy you a new one every three years, if you're good. Even though ITSD (Information Technology Services Department) is responsible for installing important things like Office and antivirus software for all, it's up to each new member of staff to set their system up the way they want. For science-related uses, most new Institute machines are Macs, so this guide will assume that's what you have.
 
-If you experience issues, you should ask your trainer or ITSD. The ITSD service desk can be reached at extension 4400 or via email at support@stsci.edu.
+If you experience issues, you should ask your trainer or ITSD. To get help from ITSD, visit the ITSD Service Portal at https://stsci.service-now.com/itsd. After you log in, you can search the page for an answer to your problem or you can submit a ticket by clicking on "Something is Broken".
 
-(There's an *external* helpdesk too, help@stsci.edu. For IT issues, you want the internal one. The external helpdesk is for science/instrument support. It is a way for astronomers to ask questions about things like the archive, SSB software, data characteristics, instrument information and the like.)
+(There are *external* help desks too, https://stsci.service-now.com/hst (HST) and https://stsci.service-now.com/jwst (JWST). For IT issues, you want the internal one. The external helpdesk is for science/instrument support. It is a way for astronomers to ask questions about things like the archive, SSB software, data characteristics, instrument information and the like.)
 
 You should now have a computer, an ActiveDirectory (AD) username, and a password from ITSD. Let's get started.
 
@@ -17,23 +17,23 @@ Configuring your email
 
 Space Telescope uses Microsoft Exchange for email. Web-based access is available at https://mail.stsci.edu/. For daily use, you should set up a mail client like Outlook on your computer.
 
-ITSD maintains some `guides for common mail clients <http://www.stsci.edu/institute/itsd/collaboration/exchange/clients>`_.
+ITSD maintains some `guides for common mail clients <https://stsci.service-now.com/itsd?id=kb_article&sys_id=fe398bcddb96360042685434ce961981>`_.
 
 Subscribe to mailing lists
 ===========================
 
 Subscribe to ``sci_tech`` and ``tips_announce`` through the Outlook Web Access interface at http://mail.stsci.edu/. Log in with your AD username and password. The way to subscribe to lists is well hidden; you must log in, choose "Options", then "See all options", select "Groups" from the sidebar, click "Join"  under "Public Groups I Belong To". In the window that pops open, search for the mailing list name and click "Join".
 
-You should already be subscribed to ``ins_staff``, ``ins_aura``, and ``ins_riab`` (if appropriate).
+You should already be subscribed to ``ins_staff``, ``ins_aura``, ``ins_riab`` (if appropriate), and "ins_tech_staff" (if appropriate).
 
 There will probably be other mailing lists for your instrument team, but you will need to be added to those by the team lead. Be sure to ask your team lead whether they need to add you to any lists.
 
-The lists ``pylunch``, ``python-interested`` and ``macx_users`` can also be subscribed to in the same way. ITSD also provides `more information on Exchange <http://www.stsci.edu/institute/itsd/collaboration/exchange/exchangeLists>`_, if you're interested.
+The lists ``pylunch``, ``python-interested`` and ``macx_users`` can also be subscribed to in the same way. ITSD also provides `more information on Exchange <https://stsci.service-now.com/itsd?id=kb_article&sys_id=f6d24767db954740591e79fdae961945>`_, if you're interested.
 
 Adding a printer
 =================
 
-Choose a printer near your office from `this list of printers <http://www.stsci.edu/institute/itsd/hardware/printers/printerlocs/printerlocations>`_. There are `instructions for printer setup <http://www.stsci.edu/institute/itsd/hardware/printers>`_ for different operating systems. The one you want is "Adding a Printer in Mac OS X".
+Choose a printer near your office from `this list of printers <https://stsci.service-now.com/itsd?id=kb_article&sys_id=1012a3cfdbbb36c0fb50f9baae961932>`_. There are `instructions for printer setup <https://stsci.service-now.com/itsd?id=kb_article&sys_id=5f867c29dbb3fe80fb50f9baae961974>`_ for different operating systems. The one you want is "Adding a Printer in Mac OS X".
 
 Disable autocorrect (optional)
 ==============================
@@ -47,7 +47,7 @@ Verify network mounts
 
 New computers set up by ITSD automatically connect certain folders to servers on the Institute network. These are called "Central Storage", and you will use them to exchange large files with coworkers and to make files from your personal machine available on the back-room servers.
 
-Open a terminal and check that you can list the contents of the ``/grp/hst`` and ``/user`` directories, as shown::
+Open a terminal and check that you can list the contents of the ``/grp/hst``, ``/grp/jwst``, and ``/user`` directories, as shown::
 
     $ ls /grp/hst
     HST_Arch_Proj acs_testing   etc           nicmos        tac           wfc3c         wfc3i
@@ -151,7 +151,7 @@ In the terminal, change your shell with the following command::
 
     chsh -s /bin/bash
 
-Close your terminal, and open a new one to finalize this change. 
+Close your terminal, and open a new one to finalize this change.
 
 Now, you need to set the environment variables in the file ``.bash_profile`` in your home directory. This file probably does not exist so you will have to create it.
 
@@ -259,14 +259,14 @@ This should show some usage instructions. If you get a message that the command 
 AstroConda setup
 ----------------
 
-With Anaconda, we get to install all our own programs and packages. We want to use the Institute's AstroConda repository as it includes most of the packages people at the institute will need for their functional work and research. But, we need to tell Anaconda to do this:: 
-    
+With Anaconda, we get to install all our own programs and packages. We want to use the Institute's AstroConda repository as it includes most of the packages people at the institute will need for their functional work and research. But, we need to tell Anaconda to do this::
+
     conda config --add channels http://ssb.stsci.edu/astroconda
-    
+
 We can now checkout our current environment(s) and add some new ones. First, to see the list of environments::
 
     conda info --envs
-    
+
 Or::
 
     conda env list
@@ -278,7 +278,7 @@ You should only see your root environment. For reasons that are a little confusi
 We have called this environment ``astroconda`` because we are installing the main AstroConda packages into it, but you can call this environment whatever you want. This repository includes are your usual Python friends (NumPy, Astropy, matplotlib, etc.) and also makes sure that you have IPython, Jupyter Notebook, and additional Institute-specific Python packages. We can activate this environment and check to see exactly which packages have been added::
 
     source activate astroconda
-    conda list 
+    conda list
 
 To check the version of Python, type::
 
@@ -287,13 +287,13 @@ To check the version of Python, type::
 Some people and systems within the Institute have not upgraded to Python 3.5 yet. When running older code, it helps to have a Python 2.7 environment available, so let's create one. Here we've added IRAF and PyRAF to the package list for installation, as well. (Hopefully, they will soon be retired.) ::
 
    conda create --name astroconda27 python=2.7 stsci iraf pyraf notebook
-    
+
 .. note::
 
     It's impractical to keep the exact same set of extra packages in all your environments, so it's best to just pick one that you will use more often and use other environments for specific tasks.
 
 Lastly, we need to know how to add more packages (and delete them) in the future. The following is how you can do this from ``root`` or a different environment. If you are in the environment you are changing (that is, you have done ``source activate [name of environment]`` already in that terminal), you do not need the ``--name [name of environment]`` part::
-    
+
     conda install --name [name of environment] [name of package]
     conda remove --name [name of environment] [name of package]
 
@@ -307,12 +307,12 @@ If you decide that you don't like/need an environment, you can delete it! ::
 
 .. warning::
 
-    Astroconda is a set of packages that replaces `Ureka <http://ssb.stsci.edu/ureka/>`_, which was one big honking package containing everything and the kitchen sink. You may encounter Ureka, or hear about "SSBx", "SSBdev", and "SSBrel" environments (which were specific Ureka environments, now deprecated). However, you should use conda with Astroconda since Ureka is no longer being updated.
+    Astroconda is a set of packages that replaces Ureka, which was one big honking package containing everything and the kitchen sink. You may encounter Ureka, or hear about "SSBx", "SSBdev", and "SSBrel" environments (which were specific Ureka environments, now deprecated). However, you should use conda with Astroconda since Ureka is no longer being updated.
 
 Using your conda environments
 -----------------------------
 
-When you open a new terminal, the conda system implicitly puts you in a "root" environment. This is rarely the environment you want to use for scientific computing. (In fact, installing STScI packages into the root environment is not supported.) So, before you run your scripts, you must be sure to activate the appropriate environment!
+When you open a new terminal, the Conda system implicitly puts you in a "root" environment. This is rarely the environment you want to use for scientific computing. (In fact, installing STScI packages into the root environment is not supported.) So, before you run your scripts, you must be sure to activate the appropriate environment!
 
 For Python 3.5, this looks like::
 
@@ -354,11 +354,11 @@ Log in to the Confluence wiki
 
 Log in to the Confluence wiki at https://confluence.stsci.edu/ using your AD credentials.
 
-Visit the `New hire training <https://confluence.stsci.edu/display/INSTraining/New+hire+training>`_ page, and select the appropriate schedule from the links there (e.g. "New hire training for technical staff (September 2016)" if that is the most recent).
+Visit the `New hire training <https://confluence.stsci.edu/display/INSTraining/New+hire+training>`_ page, and select the appropriate schedule from the links there (e.g. "New hire training for technical staff (February 2017)" if that is the most recent).
 
 On that page, there is a "Watch" link in the upper right corner below the blue title bar. Click that so that you will receive an email if there are last-minute updates to the schedule (for example, if someone has to reschedule their lecture).
 
-If you are in the Research and Instrument Analysis Branch, you should also bookmark the `RIA branch wiki page <https://confluence.stsci.edu/pages/viewpage.action?pageId=32015091>`_.
+If you are in the Research and Instrument Analysis Branch, you should also bookmark the `INS Technical Staff wiki page <https://confluence.stsci.edu/display/IDWP/INS+Technical+Staff>`_.
 
 Log in to a server
 ==================
@@ -382,6 +382,12 @@ Any commands you run in an ssh session will execute on the server, not on your p
    | plhstins2        | INS HST functional work    |
    +------------------+----------------------------+
    | plhstins3        | INS HST functional work    |
+   +------------------+----------------------------+
+   | witserv1         | INS JWST functional work   |
+   +------------------+----------------------------+
+   | witserv2         | INS JWST functional work   |
+   +------------------+----------------------------+
+   | witserv3         | INS JWST functional work   |
    +------------------+----------------------------+
    | science1         | Science / research use     |
    +------------------+----------------------------+
@@ -459,7 +465,7 @@ Now that you have the ``conda`` command available, follow the :ref:`astroconda-s
 
 .. tip::
 
-   You can have ITSD change your default shell to ``bash`` on the Linux servers. Just send an email to support@stsci.edu with your request. If you opt to stick with the default (tcsh), remember you must start ``bash`` after sshing to the server before the ``conda`` command will be available.
+   You can have ITSD change your default shell to ``bash`` on the Linux servers. Just submit a ticket through the `ITSD Service Portal <https://stsci.service-now.com/itsd>`_ with your request. If you opt to stick with the default (tcsh), remember you must start ``bash`` after sshing to the server before the ``conda`` command will be available.
 
 The ``screen`` utility
 ----------------------
