@@ -24,7 +24,7 @@ Subscribe to mailing lists
 
 Subscribe to ``sci_tech`` and ``tips_announce`` through the Outlook Web Access interface at http://mail.stsci.edu/. Log in with your AD username and password. The way to subscribe to lists is well hidden; you must log in, choose "Options", then "See all options", select "Groups" from the sidebar, click "Join"  under "Public Groups I Belong To". In the window that pops open, search for the mailing list name and click "Join".
 
-You should already be subscribed to ``ins_staff``, ``ins_aura``, ``ins_riab`` (if appropriate), and "ins_tech_staff" (if appropriate).
+You should already be subscribed to ``ins_staff``, ``ins_aura``, ``ins_riab`` (if appropriate), and ``ins_tech_staff`` (if appropriate).
 
 There will probably be other mailing lists for your instrument team, but you will need to be added to those by the team lead. Be sure to ask your team lead whether they need to add you to any lists.
 
@@ -345,7 +345,7 @@ Make sure you can log in to Cisco Jabber
 
 Cisco Jabber should already be installed on your machine. (Contact ITSD if it's not.) Open the Cisco Jabber application and sign in with your AD username and password. Cisco Jabber connects with your calendar and phone, and will tell you if the person you're trying to message is in a meeting or does not want to be disturbed. You can also set it up to receive calls through your computer (for example, for teleworking).
 
-ITSD maintains a guide with more information here: http://www.stsci.edu/institute/itsd/phone/jabber
+ITSD maintains a guide with more information `in their Service Portal <https://stsci.service-now.com/itsd?id=kb_article&sys_id=8910c248db6a47040c0a5595ce9619a9>`_.
 
 .. _confluence-intro:
 
