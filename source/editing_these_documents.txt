@@ -64,10 +64,9 @@ GitHub would not stop you from merging your own edits, but it is considered good
 Once you have pushed to a new branch, when you visit https://github.com/stsci-riab/riatraining you will see a new green icon to "Compare & pull request".
 
 .. figure:: figures/compare_and_pull_request.png
-   :scale: 50 %
-   :alt: GitHub's two buttons for "Compare & pull request"
+   :alt: GitHub's button for "Compare & pull request"
 
-Click the big green "Compare & pull request" button. (The smaller green pull request icon next to the branch selector will also work, but you will have to remember to select the right branch.)
+Click the big green "Compare & pull request" button.
 
 At the bottom of the page, you'll see the changes you're asking to pull in. Ensure you're only pulling in changes you mean to!
 
