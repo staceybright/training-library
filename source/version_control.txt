@@ -2,6 +2,8 @@
 Version Control with git
 *************************
 
+*Authors: Joseph Long, Lauren Chambers*
+
 Version control systems keep track of changes to code, documents, and other files as you work. While this document will discuss one particular version control system, ``git`` [#gitproject]_ , the *concept* of version control shows up everywhere from iCloud to Wikipedia to NASA project management. That's because the simple idea of tracking changes is very powerful, giving authors and programmers great flexibility in their work.
 
 .. image:: figures/version_control/versioncontrol_meme.png
