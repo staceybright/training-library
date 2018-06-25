@@ -43,10 +43,10 @@ PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 class RequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     document_root = os.path.join(PROJECT_DIR, 'build', 'html')
-    
+
     def translate_path(self, path):
         # Borrowed from the Python standard library implementation of SimpleHTTPRequestHandler
-        
+
         # abandon query parameters
         path = path.split('?', 1)[0]
         path = path.split('#', 1)[0]
@@ -73,7 +73,7 @@ def build_docs(target='html'):
     buf = []
     for line in iter(proc.stdout.readline, ''):
         buf.append(line)
-        # print(line, end='')  # uncomment this to enable output
+        print(line, end='')  # uncomment this to enable output
     proc.stdout.close()
     returncode = proc.wait()
     if returncode != 0:
@@ -115,7 +115,7 @@ if __name__ == "__main__":
     observer.schedule(rebuild_handler, path, recursive=True)
     observer.schedule(latex_rebuild_handler, latex_path, recursive=True)
     observer.start()
-    
+
     # Do an initial build, and open a browser window
     build_docs(target='riadocs')
     url = "http://{}:{}/".format(*BIND_TO)
