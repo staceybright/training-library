@@ -21,6 +21,7 @@ from watchdog.events import LoggingEventHandler, FileSystemEventHandler
 import os.path
 import posixpath
 import urllib
+import shlex
 
 try:
     import BaseHTTPServer
@@ -43,10 +44,10 @@ PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 class RequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
     document_root = os.path.join(PROJECT_DIR, 'build', 'html')
-    
+
     def translate_path(self, path):
         # Borrowed from the Python standard library implementation of SimpleHTTPRequestHandler
-        
+
         # abandon query parameters
         path = path.split('?', 1)[0]
         path = path.split('#', 1)[0]
@@ -68,20 +69,14 @@ class RequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
 def build_docs(target='html'):
     print('Building target "{}"...'.format(target))
-    proc = subprocess.Popen(['make', target], stdout=subprocess.PIPE,
-                            bufsize=1, cwd=PROJECT_DIR)
-    buf = []
-    for line in iter(proc.stdout.readline, ''):
-        buf.append(line)
-        # print(line, end='')  # uncomment this to enable output
-    proc.stdout.close()
-    returncode = proc.wait()
-    if returncode != 0:
-        print('*'*72)
-        print('make exited with returncode != 0 (was {})'.format(returncode))
-        print('*'*72)
-        print('\n'.join(buf))
-        print('*'*72)
+    cmd = shlex.split('make {}'.format(target))
+    with subprocess.Popen(cmd, stdout=subprocess.PIPE) as p:
+        while p.poll() is None:
+            out = p.stdout.readline().decode('utf-8')
+            if out == '' and p.poll() is not None:
+                break
+            # if out:    # uncomment to see subprocess output
+            #     print(out)
     print('Build completed.')
 
 class SphinxRebuildHandler(FileSystemEventHandler):
@@ -115,7 +110,7 @@ if __name__ == "__main__":
     observer.schedule(rebuild_handler, path, recursive=True)
     observer.schedule(latex_rebuild_handler, latex_path, recursive=True)
     observer.start()
-    
+
     # Do an initial build, and open a browser window
     build_docs(target='riadocs')
     url = "http://{}:{}/".format(*BIND_TO)
