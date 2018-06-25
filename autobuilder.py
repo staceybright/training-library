@@ -73,7 +73,7 @@ def build_docs(target='html'):
     buf = []
     for line in iter(proc.stdout.readline, ''):
         buf.append(line)
-        print(line, end='')  # uncomment this to enable output
+        # print(line, end='')  # uncomment this to enable output
     proc.stdout.close()
     returncode = proc.wait()
     if returncode != 0:
