@@ -454,6 +454,15 @@ You can also use the handy ``with`` method to open FITS files::
 And just like Python's native ``open`` the file will close when the block
 executes. 
 
+Be warned that opening many FITS files in parallel can wreak havoc. To avoid
+your computer turning into a hissing snake before your very eyes, try opening
+your FITS file with ``.copy()`` -- for example::
+
+   >>> with fits.open(infile) as hdu:
+   ...   hdr = hdu[0].copy()
+   ...   print(hdr['FLSHCORR'])
+
+
 As a word of caution, note that astropy.io.fits reads in FITS images as
 (rows, cols) or (y, x), not (x, y). This is often a 'gotcha' for users
 who are indexing specific areas of the array.
