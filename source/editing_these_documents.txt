@@ -2,11 +2,11 @@
 Editing These Documents
 ***********************
 
-These documents live in a ``git`` repository, making it easy for you to modify them and share your changes with others. GitHub is the service we use to coordinate sharing and reviewing the changes. You can find the web interface to the repository at https://github.com/stsci-riab/riatraining.
+These documents live in a ``git`` repository, making it easy for you to modify them and share your changes with others. GitHub is the service we use to coordinate sharing and reviewing the changes. You can find the web interface to the repository at https://spacetelescope.github.io/training-library/.
 
 .. warning::
 
-   For now, the documents are at https://github.com/stsci-riab/riatraining, and you need someone to add you as a collaborator before you can access them. Follow the instructions in :ref:`getting_started_github` and ask someone to add you as a collaborator.
+   For now, the documents are at https://github.com/spacetelescope/training-library, and you need someone to add you as a collaborator before you can access them. Follow the instructions in :ref:`getting_started_github` and ask someone to add you as a collaborator.
 
 .. _making_and_previewing_changes:
 
@@ -21,9 +21,9 @@ Or if you have an ssh key for GitHub set up (see :ref:`git-push-ssh`)::
 
    git clone git@github.com:spacetelescope/training-library.git
 
-This creates a ``riatraining`` directory in whatever folder you're in. The web pages you're reading now are automatically generated from the ``.txt`` files in the ``source`` subdirectory. To generate them on your computer, you need to install required packages from ``requirements.txt``::
+This creates a ``training-library`` directory in whatever folder you're in. The web pages you're reading now are automatically generated from the ``.txt`` files in the ``source`` subdirectory. To generate them on your computer, you need to install required packages from ``requirements.txt``::
 
-   cd riatraining/
+   cd training-library/
    pip install -r requirements.txt
 
 This installs the program that builds the web pages from the source files, as well as components it depends on. To make a change, edit the ``.txt`` or ``.tex`` source for the document and then run::
@@ -61,7 +61,7 @@ Making a pull request on GitHub
 
 GitHub would not stop you from merging your own edits, but it is considered good practice to give other collaborators a chance to review your changes.
 
-Once you have pushed to a new branch, when you visit https://github.com/stsci-riab/riatraining you will see a new green icon to "Compare & pull request".
+Once you have pushed to a new branch, when you visit https://github.com/spacetelescope/training-library you will see a new green icon to "Compare & pull request".
 
 .. figure:: figures/compare_and_pull_request.png
    :alt: GitHub's button for "Compare & pull request"
@@ -131,7 +131,7 @@ To simplify copying the built HTML pages from one branch to another, there is a 
 
    $ make gh-pages
 
-That will build the latest copy of the docs, copy them to the ``gh-pages`` branch, commit them, and push them to the origin's ``gh-pages`` branch. Within 5-10 minutes, you should see your changes online at http://stsci-riab.github.io/riatraining/.
+That will build the latest copy of the docs, copy them to the ``gh-pages`` branch, commit them, and push them to the origin's ``gh-pages`` branch. Within 5-10 minutes, you should see your changes online at https://spacetelescope.github.io/training-library/.
 
 .. warning::
 

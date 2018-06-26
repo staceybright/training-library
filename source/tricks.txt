@@ -74,15 +74,15 @@ Now to use your key to connect with GitHub, you should be sure to clone with the
 
    Where to find the SSH clone URL on a GitHub Page
 
-To convert a repository you have already cloned via HTTPS to use SSH, you have to edit the "remotes" for your clone. The command to examine the remotes for a repository is ``git remote``. For a repository cloned from ``stsci-riab/riatraining`` via HTTPS, the output of ``git remote -v`` is::
+To convert a repository you have already cloned via HTTPS to use SSH, you have to edit the "remotes" for your clone. The command to examine the remotes for a repository is ``git remote``. For a repository cloned from ``spacetelescope/training-library`` via HTTPS, the output of ``git remote -v`` is::
 
    $ git remote -v
-   origin	https://github.com/stsci-riab/riatraining.git (fetch)
-   origin	https://github.com/stsci-riab/riatraining.git (push)
+   origin	https://github.com/spacetelescope/training-library.git (fetch)
+   origin	https://github.com/spacetelescope/training-library.git (push)
 
 Note the ``https`` in the URL. We want to change that to tell git to use SSH, which takes the form ``git@github.com:[username]/[reponame].git``. For the example above, the command would be::
 
-   $ git remote set-url origin git@github.com:stsci-riab/riatraining.git
+   $ git remote set-url origin git@github.com:spacetelescope/training-library.git
 
 .. rubric:: Footnotes
 
