@@ -132,7 +132,7 @@ Here we've **imported** the ``do_something`` module, then **called** the ``say()
      1. **prints** a message along the lines of ``square_root(4) -> 2.0`` (for ``x = 4``)
      2. **returns** the square root of its argument (2.0 in this case).
 
-   (n.b. No need to algorithmically determine the square root! ``from math import sqrt`` gives you what you need.)
+   (No need to algorithmically determine the square root! ``from math import sqrt`` gives you what you need.)
 
    Now, write a stand-alone script to compute the square root of 16 using your ``square_root()`` function. Ensure the output is what you expect, and save it as ``sqrt_16.py``.
 
@@ -200,14 +200,6 @@ The way to guard against accidentally running stand-alone script code on import 
 
    Now run ``sqrt_40.py``. What has changed? How would you want to modify ``sqrt_40.py`` in the future, if it, too, grew to include some useful functions?
 
-Future-proofing your code
--------------------------
-
-As discussed in the section on Python 2 vs. Python 3, it is especially important for modules and stand-alone scripts to specify that they are using the newer syntax (that will remain valid going forward to future versions). The place to put the "future imports" is just after the shebang line. Most of your Python files will start just like this::
-
-   #!/usr/bin/env python
-   from __future__ import print_function, division
-
 Best practices for re-usable functions
 ======================================
 
@@ -265,6 +257,9 @@ In brief:
 **Function names**: Functions (and relatedly, methods on classes) should be ``lowercase_words_separated_by_underscores``. This is sometimes called ``snake_case``. Yes, this can even apply to acronyms (c.f. ``numpy.fft.fft``). Examples: ``sqrt()``, ``write_to()``, ``apply_async``.
 
 **Class names**: Class names are uppercased, and multiple words should each be capitalized to distinguish them from one another. Examples: ``ThreadedWriter``, ``HDUList``, ``Instrument``.
+
+**Global variables**: Variables made ``global`` and used outside of a single
+function should be all upercase. Examples ``FILE_PATH``, ``BLUE``, ``N_ITER``.
 
 Regular old variables within your program should be named descriptively, with multiple words separated by underscores (similarly to function and method names).
 
@@ -344,7 +339,13 @@ Enter the ``Pool`` object, by far the easiest interface to ``multiprocessing``. 
 
    Compare how long it takes to run with your ``scripting_ex6`` version. Nice, right?
 
-This is a somewhat contrived example (square roots don't take long to compute, after all!) but hopefully it gave you some ideas of how to use this to speed up your programs. Multiprocessing is not limited to replacing loops and list-processing constructs with `map()`, though. Consult the Python multiprocessing documentation for the full details: https://docs.python.org/3.5/library/multiprocessing.html
+This is a somewhat contrived example (square roots don't take long to compute,
+after all!) but hopefully it gave you some ideas of how to use this to speed up
+your programs. Multiprocessing is not limited to replacing loops and
+list-processing constructs with `map()`, though. Consult the `Python
+multiprocessing documentation
+<https://docs.python.org/3.5/library/multiprocessing.html>`_ for the full
+details. 
 
 .. admonition:: Exercise
    :class: note
