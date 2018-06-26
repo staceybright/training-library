@@ -35,3 +35,6 @@ source/downloads/pdf_guides/spectroscopy_training.pdf
 # Jupyter notebook checkpoints
 # (Only track the actual notebooks)
 .ipynb_checkpoints
+
+# PyCharm stuff
+.idea
