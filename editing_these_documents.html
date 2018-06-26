@@ -30,7 +30,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Tips and Tricks" href="tricks.html" />
-    <link rel="prev" title="Using Pysynphot" href="pysynphot.html" /> 
+    <link rel="prev" title="Extra Assignments" href="spectroscopy/assignments.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -92,7 +92,6 @@
 <li class="toctree-l1"><a class="reference internal" href="photometry.html">Photometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="drizzle.html">Using DrizzlePac</a></li>
 <li class="toctree-l1"><a class="reference internal" href="spectroscopy/index.html">Basic Spectroscopy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pysynphot.html">Using Pysynphot</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Editing These Documents</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#making-and-previewing-changes">Making and previewing changes</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#a-simpler-workflow">A simpler workflow</a></li>
@@ -176,19 +175,19 @@
             
   <div class="section" id="editing-these-documents">
 <h1>Editing These Documents<a class="headerlink" href="#editing-these-documents" title="Permalink to this headline">¶</a></h1>
-<p>These documents live in a <code class="docutils literal notranslate"><span class="pre">git</span></code> repository, making it easy for you to modify them and share your changes with others. GitHub is the service we use to coordinate sharing and reviewing the changes. You can find the web interface to the repository at <a class="reference external" href="https://github.com/stsci-riab/riatraining">https://github.com/stsci-riab/riatraining</a>.</p>
+<p>These documents live in a <code class="docutils literal notranslate"><span class="pre">git</span></code> repository, making it easy for you to modify them and share your changes with others. GitHub is the service we use to coordinate sharing and reviewing the changes. You can find the web interface to the repository at <a class="reference external" href="https://spacetelescope.github.io/training-library/">https://spacetelescope.github.io/training-library/</a>.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">For now, the documents are at <a class="reference external" href="https://github.com/stsci-riab/riatraining">https://github.com/stsci-riab/riatraining</a>, and you need someone to add you as a collaborator before you can access them. Follow the instructions in <a class="reference internal" href="version_control.html#getting-started-github"><span class="std std-ref">Getting started with GitHub</span></a> and ask someone to add you as a collaborator.</p>
+<p class="last">For now, the documents are at <a class="reference external" href="https://github.com/spacetelescope/training-library">https://github.com/spacetelescope/training-library</a>, and you need someone to add you as a collaborator before you can access them. Follow the instructions in <a class="reference internal" href="version_control.html#getting-started-github"><span class="std std-ref">Getting started with GitHub</span></a> and ask someone to add you as a collaborator.</p>
 </div>
 <div class="section" id="making-and-previewing-changes">
 <span id="id1"></span><h2>Making and previewing changes<a class="headerlink" href="#making-and-previewing-changes" title="Permalink to this headline">¶</a></h2>
 <p>The first step to making a change is to clone the repository, giving you a local copy to work with. You can do this is two ways:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">stsci</span><span class="o">-</span><span class="n">riab</span><span class="o">/</span><span class="n">riatraining</span><span class="o">.</span><span class="n">git</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">spacetelescope</span><span class="o">/</span><span class="n">training</span><span class="o">-</span><span class="n">library</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
 <p>Or if you have an ssh key for GitHub set up (see <a class="reference internal" href="tricks.html#git-push-ssh"><span class="std std-ref">Pushing to GitHub (or Grit/GitLab) via SSH</span></a>):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">stsci</span><span class="o">-</span><span class="n">riab</span><span class="o">/</span><span class="n">riatraining</span><span class="o">.</span><span class="n">git</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">spacetelescope</span><span class="o">/</span><span class="n">training</span><span class="o">-</span><span class="n">library</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
 <p>This creates a <code class="docutils literal notranslate"><span class="pre">riatraining</span></code> directory in whatever folder you’re in. The web pages you’re reading now are automatically generated from the <code class="docutils literal notranslate"><span class="pre">.txt</span></code> files in the <code class="docutils literal notranslate"><span class="pre">source</span></code> subdirectory. To generate them on your computer, you need to install required packages from <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>:</p>
@@ -218,7 +217,7 @@
 <div class="section" id="making-a-pull-request-on-github">
 <h3>Making a pull request on GitHub<a class="headerlink" href="#making-a-pull-request-on-github" title="Permalink to this headline">¶</a></h3>
 <p>GitHub would not stop you from merging your own edits, but it is considered good practice to give other collaborators a chance to review your changes.</p>
-<p>Once you have pushed to a new branch, when you visit <a class="reference external" href="https://github.com/stsci-riab/riatraining">https://github.com/stsci-riab/riatraining</a> you will see a new green icon to “Compare &amp; pull request”.</p>
+<p>Once you have pushed to a new branch, when you visit <a class="reference external" href="https://github.com/spacetelescope/training-library">https://github.com/spacetelescope/training-library</a> you will see a new green icon to “Compare &amp; pull request”.</p>
 <div class="figure">
 <img alt="GitHub's button for &quot;Compare &amp; pull request&quot;" src="_images/compare_and_pull_request.png" />
 </div>
@@ -278,7 +277,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make gh-pages
 </pre></div>
 </div>
-<p>That will build the latest copy of the docs, copy them to the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch, commit them, and push them to the origin’s <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch. Within 5-10 minutes, you should see your changes online at <a class="reference external" href="http://stsci-riab.github.io/riatraining/">http://stsci-riab.github.io/riatraining/</a>.</p>
+<p>That will build the latest copy of the docs, copy them to the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch, commit them, and push them to the origin’s <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch. Within 5-10 minutes, you should see your changes online at <a class="reference external" href="https://spacetelescope.github.io/training-library/">https://spacetelescope.github.io/training-library/</a>.</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
 <p class="last">If the build fails partway through, you will have to make <code class="docutils literal notranslate"><span class="pre">git</span></code> happy again yourself. That means unstaging everything, removing everything but the <code class="docutils literal notranslate"><span class="pre">.git</span></code> directory, and running <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">master</span></code> before you can try to build again. (It’s kind of a pain, but you shouldn’t typically encounter this.)</p>
@@ -405,7 +404,7 @@ after the <code class="docutils literal notranslate"><span class="pre">admonitio
         <a href="tricks.html" class="btn btn-neutral float-right" title="Tips and Tricks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="pysynphot.html" class="btn btn-neutral" title="Using Pysynphot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="spectroscopy/assignments.html" class="btn btn-neutral" title="Extra Assignments" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

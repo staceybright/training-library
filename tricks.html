@@ -92,7 +92,6 @@
 <li class="toctree-l1"><a class="reference internal" href="photometry.html">Photometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="drizzle.html">Using DrizzlePac</a></li>
 <li class="toctree-l1"><a class="reference internal" href="spectroscopy/index.html">Basic Spectroscopy</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pysynphot.html">Using Pysynphot</a></li>
 <li class="toctree-l1"><a class="reference internal" href="editing_these_documents.html">Editing These Documents</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Tips and Tricks</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#pushing-to-github-or-grit-gitlab-via-ssh">Pushing to GitHub (or Grit/GitLab) via SSH</a></li>
@@ -225,14 +224,14 @@ The key&#39;s randomart image is:
 <img alt="Where to find the SSH clone URL on a GitHub Page" src="_images/ssh_clone_url.png" />
 <p class="caption"><span class="caption-text">Where to find the SSH clone URL on a GitHub Page</span></p>
 </div>
-<p>To convert a repository you have already cloned via HTTPS to use SSH, you have to edit the “remotes” for your clone. The command to examine the remotes for a repository is <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span></code>. For a repository cloned from <code class="docutils literal notranslate"><span class="pre">stsci-riab/riatraining</span></code> via HTTPS, the output of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">-v</span></code> is:</p>
+<p>To convert a repository you have already cloned via HTTPS to use SSH, you have to edit the “remotes” for your clone. The command to examine the remotes for a repository is <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span></code>. For a repository cloned from <code class="docutils literal notranslate"><span class="pre">spacetelescope/training-library</span></code> via HTTPS, the output of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">-v</span></code> is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git remote -v
-origin       https://github.com/stsci-riab/riatraining.git (fetch)
-origin       https://github.com/stsci-riab/riatraining.git (push)
+origin       https://github.com/spacetelescope/training-library.git (fetch)
+origin       https://github.com/spacetelescope/training-library.git (push)
 </pre></div>
 </div>
 <p>Note the <code class="docutils literal notranslate"><span class="pre">https</span></code> in the URL. We want to change that to tell git to use SSH, which takes the form <code class="docutils literal notranslate"><span class="pre">git&#64;github.com:[username]/[reponame].git</span></code>. For the example above, the command would be:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git remote set-url origin git@github.com:stsci-riab/riatraining.git
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git remote set-url origin git@github.com:spacetelescope/training-library.git
 </pre></div>
 </div>
 <p class="rubric">Footnotes</p>
