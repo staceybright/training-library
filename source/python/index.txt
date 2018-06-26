@@ -3,8 +3,8 @@ Python for Scientific Data Analysis
 ***********************************
 
 | **Authors:**  *(in order of most- to least-recent contribution)*
-| Joseph Long, Meredith Durbin, Katie Gosmeyer, Heather Gunning, Matthew Bourque, Justin Ely, Thompson LeBlanc, Rachel Anderson, Sami-Matias Niemi, Alex Viana
-| **Latest revision:** June 2015
+| Jules Fowler, Joseph Long, Meredith Durbin, Katie Gosmeyer, Heather Gunning, Matthew Bourque, Justin Ely, Thompson LeBlanc, Rachel Anderson, Sami-Matias Niemi, Alex Viana
+| **Latest revision:** June 2018
 | **Initial version:** September 2008
 
 \
