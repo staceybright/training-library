@@ -68,6 +68,37 @@ For those who already know a programming language or two, an important part of l
 
    \
 
+   Another way to effectively comment multiple lines is by rendering it a
+   string mid text. This is not technically a comment, but Python won't
+   know the difference. This is the standard for docstrings in functions, 
+   or sometimes used for testing without chunks of code.
+
+   For example::
+    
+      def do_something(param1, param2):
+        """This function does something!
+      
+        Parameters
+        ----------
+        param1 : str
+            Param1 is the first parameter.
+    
+        param2 : int
+            Param2 is the second paramter.
+        """
+    
+   ::
+
+      do_something() # We'll do this thing.
+      """
+      At present we don't
+      Run these lines -- see, we're testing!
+      Plants, plants, plants, plants, plants.
+      """
+      do_something_else()
+
+   \
+    
 -  The line continuation symbol ``\`` can be used to spread an expression
    out over multiple lines. There are constructs in Python that use parentheses,
    square brackets (``[]``), or curly braces (``{}``). Inside those, Python will
@@ -87,12 +118,12 @@ Python packages and environments are managed with ``conda``, as described in :re
    Check which ``python`` you're using with this command::
 
       $ which python
-      /Users/myusername/anaconda/envs/astroconda27/bin/python
+      /Users/myusername/anaconda/envs/astroconda/bin/python
 
    You can also check the version of Python install with::
 
       $ python -V
-      Python 2.7.11 :: Continuum Analytics, Inc.
+      Python 3.6.3 :: Continuum Analytics, Inc.
 
 Using Python interactively
 --------------------------
@@ -102,7 +133,7 @@ Not every piece of Python code you write must be saved in a file. When using Pyt
 The most bare-bones way to use Python interactively is the **interactive interpreter** or **REPL** (Read-Evaluate-Print Loop). You start it by typing ``python`` in a terminal, which gives output like this::
 
    $ python
-   Python 3.5.1 |Continuum Analytics, Inc.| (default, Jun 15 2016, 16:14:02)
+   Python 3.6.3 |Continuum Analytics, Inc.| (default, Jun 15 2016, 16:14:02)
    [GCC 4.2.1 Compatible Apple LLVM 4.2 (clang-425.0.28)] on darwin
    Type "help", "copyright", "credits" or "license" for more information.
    >>>
@@ -114,10 +145,10 @@ Heavy users of Python for interactive data analysis have come up with something 
 Start it from the terminal with the ``ipython`` command::
 
    $ ipython
-   Python 3.5.1 |Continuum Analytics, Inc.| (default, Jun 15 2016, 16:14:02)
+   Python 3.6.3 |Continuum Analytics, Inc.| (default, Jun 15 2016, 16:14:02)
    Type "copyright", "credits" or "license" for more information.
 
-   IPython 4.2.0 -- An enhanced Interactive Python.
+   IPython 6.1.0 -- An enhanced Interactive Python.
    ?         -> Introduction and overview of IPython's features.
    %quickref -> Quick reference.
    help      -> Python's own help system.

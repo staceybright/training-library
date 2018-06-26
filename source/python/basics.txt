@@ -123,8 +123,10 @@ Different kinds of sequences in Python
 
 Python provides three main built-in sequence types: ``tuple``, ``list``, and ``str``. Lists are variable-length collections of entries that need not all be the same data type, and tuples are their immutable (i.e. non-modifiable) cousins. We have seen strings (``str``) in the section on comparisons, but it bears mentioning that they are immutable sequences that support indexing and slicing like tuples.
 
-To make a new tuple, you need parentheses and a comma::
-
+To make a new tuple, all you need is a comma, though parentheses are common
+for clarity: ::
+   >>> 'first element', 'second element'
+   ('first element', 'second element')
    >>> ('first element', 'second element')
    ('first element', 'second element')
    >>> type(('first element', 'second element'))
@@ -221,7 +223,9 @@ That's a bit verbose. As long as we know the number of elements we're getting, P
 
 .. warning::
 
-   In Python 2, the function call ``print(mything)`` would be written as a statement like ``print mything``!
+   For those familiar with Python 2, the function call ``print(mything)`` can
+   also be written as a statement like ``print mything``. This will break in 
+   Python 3, however. 
 
    Refer back to :ref:`python_3_vs_2` for details.
 
@@ -237,7 +241,9 @@ What happens if we try to go the other way, and assign something to the third po
      File "<stdin>", line 1, in <module>
    TypeError: 'tuple' object does not support item assignment
 
-This is what is meant when we say tuples are "immutable". There are good reasons you might want to have immutable data, but when you need to be able to modify a sequence in-place you need a **list**.
+This is what is meant when we say tuples are "immutable". There are good
+reasons you might want to have immutable data, but when you need to be able to
+modify a sequence in-place you need a ``list``.
 
 To write a new list in your code, use a comma-separated sequence of values enclosed in square brackets. For example::
 
@@ -282,7 +288,7 @@ Popping items off a list
 Sorting a list
 ^^^^^^^^^^^^^^
 
-``sort()`` sorts a list in-place, meaning it does not return anything. However, when you access the list again, it will be reordered least-to-greatest. (n.b. This is only meaningful if your list elements are all the same data type.)
+``sort()`` sorts a list in-place, meaning it does not return anything. However, when you access the list again, it will be reordered least-to-greatest. (This is only meaningful if your list elements are all the same data type.)
 
    >>> psf_ee_vals.sort()
    >>> psf_ee_vals
@@ -299,11 +305,16 @@ Deleting is actually *not* a method of a list (surprise!), but rather a language
 
 .. tip::
 
-   You can also use ``del`` on any variable name to clear that reference to it. This is less useful than you might think, since Python manages memory for you and won't actually free the memory until all references have been collected. ::
-
+   You can also use ``del`` on any variable name to clear that reference to it.
+   However, this won't actually free the memory unless you manually call the Python garbage
+   collector to come clean up::
+      
+      >>> import gc # We'll discuss imports shortly!
       >>> a = ['a', 'b']
       >>> b = a
       >>> del a
+      >>> gc.collect()
+      21 
       >>> a
       Traceback (most recent call last):
         File "<stdin>", line 1, in <module>
@@ -311,7 +322,7 @@ Deleting is actually *not* a method of a list (surprise!), but rather a language
       >>> b
       ['a', 'b']
 
-   In practice, you will rarely need to use ``del``, but we include it for completeness' sake.
+   ``del`` is usually only useful when opening many large files in parallel, but we include it for completeness' sake.
 
 .. admonition:: Exercise
    :class: note
@@ -523,7 +534,12 @@ Suppose we only wanted the first two digits after the decimal point. We use a "f
 Dictionaries
 ------------
 
-A dictionary maps keys to values, but unlike lists and tuples it has **no ordering**. You may have seen this data type by another name; they're sometimes called "hashes", "hashmaps", "maps", or "associative arrays".
+A dictionary maps keys to values, but unlike lists and tuples it has **no
+ordering**. You may have seen this data type by another name; they're sometimes
+called "hashes", "hashmaps", "maps", or "associative arrays". (If this seems
+like a deal breaker for a specific use, the `OrderedDict type
+<https://docs.python.org/3/library/collections.html#ordereddict-examples-and-recipes>`_
+may come in handy.)
 
 To write a dictionary in your code, use a sequence of ``key: value`` pairs separated by commas, and enclosed in curly braces (``{}``). Say we want to map filter names to center wavelengths. The "keys" in this case would be the filter names, and the "values" would be the center wavelengths in meters. ::
 
@@ -585,9 +601,13 @@ The last important thing you might want to do with your dictionary is iterate ov
    F110W is 1.1e-06
    F460M is 4.6e-06
 
-(n.b. In this example, we used commas so that multiple arguments to the ``print`` statement would print out with spaces between them.)
+(In this example, we used commas so that multiple arguments to the ``print`` statement would print out with spaces between them.)
 
-One thing that trips up a lot of new Python users is that dictionaries have **no ordering** of their elements. When you loop over ``.items()``, you might get the keys in alphabetical order, order of assignment, or totally randomly! If you need to preserve ordering, use a sequence type like a list or tuple.
+One thing that trips up a lot of new Python users is that dictionaries have
+**no ordering** of their elements. When you loop over ``.items()``, you might
+get the keys in alphabetical order, order of assignment, or totally randomly!
+If you need to preserve ordering, use a sequence type like a list or tuple, or
+perhaps OrderedDict.
 
 .. admonition:: Exercise
    :class: note
@@ -763,8 +783,8 @@ Example::
    dog
    cat
    penguin
-   >>> for index_and_the_item in enumerate(my_list):
-   ...     print(index_and_the_item)
+   >>> for index_and_item in enumerate(my_list):
+   ...     print(index_and_item)
    ...
    (0, 'dog')
    (1, 'cat')
@@ -772,8 +792,8 @@ Example::
 
 These tuples can be "unpacked" in the ``for`` statement as shown below::
 
-   >>> for index, the_item in enumerate(my_list):
-   ...     print("item number", index + 1, " - ", the_item)
+   >>> for index, item in enumerate(my_list):
+   ...     print("item number", index + 1, " - ", item)
    ...
    item number 1  -  dog
    item number 2  -  cat
@@ -836,19 +856,29 @@ try ... except
 Examples: Try this code below. Notice the error message you get. ::
 
    >>> a = [1, 2, 3, 4, 5]
-   >>> for i in xrange(len(a)):
-   ...    a[i + 1] = 100 + a[i]
-   ...    print(a[i], a[i + 1])
+   >>> for i in range(len(a)):
+   ...    a[i+1] = 100 + a[i]
+   ...    print(a[i], a[i+1])
 
 To solve this problem, we put it in a try ... except statement::
 
    >>> a = [1, 2, 3, 4, 5]
-   >>> for i in xrange(len(a)):
+   >>> for i in range(len(a)):
    ...     try:
-   ...         a[i + 1] = 100 + a[i]
-   ...         print(a[i], a[i + 1])
+   ...         a[i+1] = 100 + a[i]
+   ...         print(a[i], a[i+1])
    ...     except IndexError:
    ...         print('This index does not work: ', i + 1)
+
+You can also catch multiple exceptions::
+
+  >>> a = [1, 2, 3, 4, 5, 'b']
+  >>> for i in range(len(a)):
+  ...     try:
+  ...         a[i+1] = 100 + a[i]
+  ...         print(a[i], a[i+1]
+  ...     except (IndexError, TypeError) as e:
+  ...         print('This problem was encountered : {}'.format(e))
 
 .. admonition:: Exercise
    :class: note
@@ -946,7 +976,9 @@ os.getcwd() and os.chdir() functions
 
 **Use:** The os module is for 'Operating System' operations. Examples include
 os.getcwd() which returns the current working directory and os.chdir()
-which changes the current working directory.
+which changes the current working directory. (Note that while these are often
+valuable tools, it is generally more "pythonic" to use non-os operations, for
+example using ``glob.glob`` instead of ``os.listdir``, etc.)  
 
 Examples::
 
