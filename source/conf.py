@@ -33,6 +33,7 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx.ext.mathjax',
+    'nbsphinx'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -83,6 +84,9 @@ release = version
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 exclude_patterns = ['**.ipynb_checkpoints']
+
+# Don't run Jupyter Notebooks on builds
+nbsphinx_execute = 'never'
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
