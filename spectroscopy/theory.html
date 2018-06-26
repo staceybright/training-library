@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                published 2018-6-25
+                published 2018-6-26
               </div>
             
           
@@ -110,6 +110,10 @@
 <li class="toctree-l2"><a class="reference internal" href="assignments.html">Extra Assignments</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../pysynphot.html">Using PySynphot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pysynphot.html#HST-Conclusion"><em>HST</em> Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pysynphot.html#Using-PySynphot-for-JWST-and-Advanced-Topics">Using <code class="docutils literal notranslate"><span class="pre">PySynphot</span></code> for <em>JWST</em> and Advanced Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pysynphot.html#Conclusion">Conclusion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../editing_these_documents.html">Editing These Documents</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tricks.html">Tips and Tricks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../trainees.html">Past Trainees</a></li>
@@ -180,7 +184,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="physical-basis-of-spectroscopy">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="physical-basis-of-spectroscopy">
 <h1>Physical Basis of Spectroscopy<a class="headerlink" href="#physical-basis-of-spectroscopy" title="Permalink to this headline">¶</a></h1>
 <p>Astronomical spectroscopy can be seen as the study of emission and absorption lines against a background continuum. The material provided here omits much of the necessary physics background, but provides at least a basic introduction to spectroscopy.</p>
 <div class="section" id="spectral-lines">
@@ -399,7 +422,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'published 2018-6-25',
+            VERSION:'published 2018-6-26',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

@@ -30,7 +30,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Tips and Tricks" href="tricks.html" />
-    <link rel="prev" title="Extra Assignments" href="spectroscopy/assignments.html" /> 
+    <link rel="prev" title="Using PySynphot" href="pysynphot.html" /> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                published 2018-6-25
+                published 2018-6-26
               </div>
             
           
@@ -92,6 +92,10 @@
 <li class="toctree-l1"><a class="reference internal" href="photometry.html">Photometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="drizzle.html">Using DrizzlePac</a></li>
 <li class="toctree-l1"><a class="reference internal" href="spectroscopy/index.html">Basic Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysynphot.html">Using PySynphot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysynphot.html#HST-Conclusion"><em>HST</em> Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysynphot.html#Using-PySynphot-for-JWST-and-Advanced-Topics">Using <code class="docutils literal notranslate"><span class="pre">PySynphot</span></code> for <em>JWST</em> and Advanced Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysynphot.html#Conclusion">Conclusion</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Editing These Documents</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#making-and-previewing-changes">Making and previewing changes</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#a-simpler-workflow">A simpler workflow</a></li>
@@ -173,7 +177,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="editing-these-documents">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="editing-these-documents">
 <h1>Editing These Documents<a class="headerlink" href="#editing-these-documents" title="Permalink to this headline">¶</a></h1>
 <p>These documents live in a <code class="docutils literal notranslate"><span class="pre">git</span></code> repository, making it easy for you to modify them and share your changes with others. GitHub is the service we use to coordinate sharing and reviewing the changes. You can find the web interface to the repository at <a class="reference external" href="https://spacetelescope.github.io/training-library/">https://spacetelescope.github.io/training-library/</a>.</p>
 <div class="admonition warning">
@@ -190,8 +213,8 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">spacetelescope</span><span class="o">/</span><span class="n">training</span><span class="o">-</span><span class="n">library</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
-<p>This creates a <code class="docutils literal notranslate"><span class="pre">riatraining</span></code> directory in whatever folder you’re in. The web pages you’re reading now are automatically generated from the <code class="docutils literal notranslate"><span class="pre">.txt</span></code> files in the <code class="docutils literal notranslate"><span class="pre">source</span></code> subdirectory. To generate them on your computer, you need to install required packages from <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">riatraining</span><span class="o">/</span>
+<p>This creates a <code class="docutils literal notranslate"><span class="pre">training-library</span></code> directory in whatever folder you’re in. The web pages you’re reading now are automatically generated from the <code class="docutils literal notranslate"><span class="pre">.txt</span></code> files in the <code class="docutils literal notranslate"><span class="pre">source</span></code> subdirectory. To generate them on your computer, you need to install required packages from <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">training</span><span class="o">-</span><span class="n">library</span><span class="o">/</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
 </pre></div>
 </div>
@@ -404,7 +427,7 @@ after the <code class="docutils literal notranslate"><span class="pre">admonitio
         <a href="tricks.html" class="btn btn-neutral float-right" title="Tips and Tricks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="spectroscopy/assignments.html" class="btn btn-neutral" title="Extra Assignments" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="pysynphot.html" class="btn btn-neutral" title="Using PySynphot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -435,7 +458,7 @@ after the <code class="docutils literal notranslate"><span class="pre">admonitio
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'published 2018-6-25',
+            VERSION:'published 2018-6-26',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

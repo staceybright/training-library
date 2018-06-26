@@ -1,0 +1,739 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction &mdash; RIA Training Library</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Technical Staff Training
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                published 2018-6-26
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../computer_setup.html">Setting Up Your Computer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../version_control.html">Version Control with git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../archives.html">Using MAST (a.k.a. the Archive)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python/index.html">Python for Scientific Data Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../apt_etc/index.html">The Astronomer’s Proposal Tool and the Exposure Time Calculator for HST and JWST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../photometry.html">Photometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drizzle.html">Using DrizzlePac</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../spectroscopy/index.html">Basic Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pysynphot.html">Using PySynphot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pysynphot.html#HST-Conclusion"><em>HST</em> Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pysynphot.html#Using-PySynphot-for-JWST-and-Advanced-Topics">Using <code class="docutils literal notranslate"><span class="pre">PySynphot</span></code> for <em>JWST</em> and Advanced Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pysynphot.html#Conclusion">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../editing_these_documents.html">Editing These Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tricks.html">Tips and Tricks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../trainees.html">Past Trainees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../boneyard.html">Retired topics</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Technical Staff Training</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/downloads/notebooks/photometry_exercises.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="Introduction">
+<h1>Introduction<a class="headerlink" href="#Introduction" title="Permalink to this headline">¶</a></h1>
+<p>This notebook will guide you through the mechanical basics of doing
+photometry. For these exercises we will use <em>photutils</em>, but there are
+many different other tools one can use to extract photometry from images
+(DAOPHOT, DOLPHOT, SEXTRACTOR, EPSF). This tutorial is based on the
+<a class="reference external" href="http://http://photutils.readthedocs.io">photutils</a> documentation.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%</span><span class="k">pylab</span> --no-import-all
+<span class="kn">from</span> <span class="nn">photutils</span> <span class="k">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">astropy.visualization</span> <span class="k">import</span> <span class="n">LogStretch</span>
+<span class="kn">from</span> <span class="nn">astropy.visualization.mpl_normalize</span> <span class="k">import</span> <span class="n">ImageNormalize</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Image-Display">
+<h2>Image Display<a class="headerlink" href="#Image-Display" title="Permalink to this headline">¶</a></h2>
+<p>We will now download and display an example image.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">hdu</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_star_image</span><span class="p">()</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">400</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">400</span><span class="p">]</span>
+
+<span class="n">norm</span> <span class="o">=</span> <span class="n">ImageNormalize</span><span class="p">(</span><span class="n">stretch</span><span class="o">=</span><span class="n">LogStretch</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Source-Detection">
+<h2>Source Detection<a class="headerlink" href="#Source-Detection" title="Permalink to this headline">¶</a></h2>
+<p>Before we do photometry we want to find all the sources in the image. We
+first measure some statistics about the image. We are interested in the
+background statistics so we subtract it and also determine which stars
+are 5<span class="math notranslate nohighlight">\(\sigma\)</span> detections.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">astropy.stats</span> <span class="k">import</span> <span class="n">sigma_clipped_stats</span>
+<span class="kn">from</span> <span class="nn">photutils</span> <span class="k">import</span> <span class="n">daofind</span>
+
+<span class="n">mean</span><span class="p">,</span> <span class="n">median</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">sigma_clipped_stats</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">median</span><span class="p">,</span> <span class="n">std</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">sources</span> <span class="o">=</span> <span class="n">daofind</span><span class="p">(</span><span class="n">data</span> <span class="o">-</span> <span class="n">median</span><span class="p">,</span> <span class="n">fwhm</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">5.</span><span class="o">*</span><span class="n">std</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">photutils</span> <span class="k">import</span> <span class="n">CircularAperture</span>
+
+<span class="n">positions</span> <span class="o">=</span> <span class="p">(</span><span class="n">sources</span><span class="p">[</span><span class="s1">&#39;xcentroid&#39;</span><span class="p">],</span> <span class="n">sources</span><span class="p">[</span><span class="s1">&#39;ycentroid&#39;</span><span class="p">])</span>
+<span class="n">apertures</span> <span class="o">=</span> <span class="n">CircularAperture</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mf">5.</span><span class="p">)</span>
+<span class="n">apertures</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Aperture-photometry">
+<h2>Aperture photometry<a class="headerlink" href="#Aperture-photometry" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have the positions of stars, we can proceed with measuring
+their fluxes. When we first measure the fluxes of stars, they include
+the sky background. We will subtract that later.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">photutils</span> <span class="k">import</span> <span class="n">CircularAnnulus</span>
+<span class="kn">from</span> <span class="nn">photutils</span> <span class="k">import</span> <span class="n">aperture_photometry</span>
+
+<span class="n">apertures_r3</span> <span class="o">=</span> <span class="n">CircularAperture</span><span class="p">((</span><span class="n">sources</span><span class="p">[</span><span class="s1">&#39;xcentroid&#39;</span><span class="p">],</span> <span class="n">sources</span><span class="p">[</span><span class="s1">&#39;ycentroid&#39;</span><span class="p">]),</span> <span class="n">r</span><span class="o">=</span><span class="mf">3.</span><span class="p">)</span>
+
+<span class="n">phot_table</span> <span class="o">=</span> <span class="n">aperture_photometry</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">apertures_r3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">phot_table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>In the following cells we create annuli apertures to measure the average
+value of the pixels around each star. We multiply the average sky value
+by the number of pixels under the aperture and then subtract that value
+from the total star flux.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">annulus_apertures</span> <span class="o">=</span> <span class="n">CircularAnnulus</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">r_in</span><span class="o">=</span><span class="mf">9.</span><span class="p">,</span> <span class="n">r_out</span><span class="o">=</span><span class="mf">12.</span><span class="p">)</span>
+<span class="n">rawflux_r3</span> <span class="o">=</span> <span class="n">aperture_photometry</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">apertures_r3</span><span class="p">)</span>
+<span class="n">bkgflux_table</span> <span class="o">=</span> <span class="n">aperture_photometry</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">annulus_apertures</span><span class="p">)</span>
+
+<span class="n">bkg_mean</span> <span class="o">=</span> <span class="n">bkgflux_table</span><span class="p">[</span><span class="s1">&#39;aperture_sum&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">annulus_apertures</span><span class="o">.</span><span class="n">area</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bkg_mean</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">bkg_sum</span> <span class="o">=</span> <span class="n">bkg_mean</span> <span class="o">*</span> <span class="n">apertures_r3</span><span class="o">.</span><span class="n">area</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">bkg_sum</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">final_phot_r3</span> <span class="o">=</span> <span class="n">rawflux_r3</span><span class="p">[</span><span class="s1">&#39;aperture_sum&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">bkg_sum</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">final_phot_r3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Aperture-corrections">
+<h2>Aperture corrections<a class="headerlink" href="#Aperture-corrections" title="Permalink to this headline">¶</a></h2>
+<p>The above photometry was performed with a small aperture to increase the
+signal to noise of our measurement. The problem with that is that we are
+missing some light from each star. To compensate we will do photometry
+with a large radius. The difference in magnitude from the two aperture
+measurements is the aperture correction. This correction is applied to
+all the stars at the end.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">apertures_r5</span> <span class="o">=</span> <span class="n">CircularAperture</span><span class="p">((</span><span class="n">sources</span><span class="p">[</span><span class="s1">&#39;xcentroid&#39;</span><span class="p">],</span> <span class="n">sources</span><span class="p">[</span><span class="s1">&#39;ycentroid&#39;</span><span class="p">]),</span> <span class="n">r</span><span class="o">=</span><span class="mf">5.</span><span class="p">)</span> <span class="c1">#note the larger aperture</span>
+<span class="n">rawflux_r5</span> <span class="o">=</span> <span class="n">aperture_photometry</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">apertures_r5</span><span class="p">)</span>
+
+<span class="n">bkg_sum</span> <span class="o">=</span> <span class="n">bkg_mean</span> <span class="o">*</span> <span class="n">apertures_r5</span><span class="o">.</span><span class="n">area</span><span class="p">()</span>
+<span class="n">final_phot_r5</span> <span class="o">=</span> <span class="n">rawflux_r5</span><span class="p">[</span><span class="s1">&#39;aperture_sum&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">bkg_sum</span>
+</pre></div>
+</div>
+</div>
+<p>Now you need to convert these fluxes into magnitudes:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">mag_r3</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">final_phot_r3</span><span class="p">)</span>
+<span class="n">mag_r5</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">final_phot_r5</span><span class="p">)</span>
+<span class="n">deltamag</span> <span class="o">=</span> <span class="n">mag_r3</span> <span class="o">-</span> <span class="n">mag_r5</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">mag_r5</span><span class="p">,</span><span class="n">deltamag</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">mag_r5</span><span class="p">,</span><span class="n">mag_r3</span><span class="o">-</span><span class="n">mag_r5</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span><span class="o">-</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mag [r=5]&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$\Delta$mag&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">mask</span> <span class="o">=</span> <span class="p">[(</span><span class="n">mag_r5</span><span class="o">&gt;-</span><span class="mf">13.</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">mag_r5</span><span class="o">&lt;-</span><span class="mf">11.</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">deltamag</span><span class="o">&gt;</span><span class="mf">0.</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">deltamag</span><span class="o">&lt;</span><span class="mf">0.4</span><span class="p">)]</span>
+
+<span class="n">mean</span><span class="p">,</span> <span class="n">median</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">sigma_clipped_stats</span><span class="p">(</span><span class="n">deltamag</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">iters</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">apcor</span> <span class="o">=</span> <span class="n">median</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">apcor</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">apcor</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">final_phot</span> <span class="o">=-</span><span class="mf">2.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">final_phot_r3</span><span class="p">)</span> <span class="o">+</span> <span class="n">apcor</span> <span class="o">+</span> <span class="mf">25.</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">final_phot</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Exercise">
+<h2>Exercise<a class="headerlink" href="#Exercise" title="Permalink to this headline">¶</a></h2>
+<p>Use the images you made in the Astrodrizzle exercise to make a color
+magnitude diagram (F606W-F814W vs F814W).</p>
+<ol class="arabic simple">
+<li>You will first have to change the drizzled images back to counts.</li>
+<li>Find sources on one image, use the same catalog for both images.</li>
+<li>Do photometry on each image, including aperture correction plots.</li>
+<li>Match catalogs, and plot CMD.</li>
+</ol>
+<p>Send me three plots: the aperture correction for each band and the CMD.
+Each plot should be clearly labeled.</p>
+<p>Below is some information you might need:</p>
+<div class="math notranslate nohighlight">
+\begin{equation}
+rescale = 0.03/0.049 \\
+counts\_image = cps\_image \times exptime + \frac{\Sigma{mdrizsky}}{2}sky \times rescale^2
+\end{equation}</div><p>The information you need can be found in the image header and in the
+fits table found in the last extension of the image.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">astropy.io</span> <span class="k">import</span> <span class="n">fits</span>
+
+<span class="n">fits</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;F606W_drc.fits&#39;</span><span class="p">)</span>
+<span class="n">hdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;F606W_drc.fits&#39;</span><span class="p">)</span>
+<span class="n">sci</span> <span class="o">=</span> <span class="n">hdu</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+<span class="n">hdr</span> <span class="o">=</span> <span class="n">hdu</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>
+<span class="n">tab</span> <span class="o">=</span> <span class="n">hdu</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+<span class="n">hdu</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">tab</span><span class="p">[</span><span class="s1">&#39;mdrizsky&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="p">(</span><span class="mf">0.03</span><span class="o">/</span><span class="mf">0.05</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">tab</span><span class="p">[</span><span class="s1">&#39;mdrizsky&#39;</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">a</span> <span class="o">=</span> <span class="n">sci</span><span class="o">*</span><span class="n">hdr</span><span class="p">[</span><span class="s1">&#39;texptime&#39;</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="mf">0.03</span><span class="o">/</span><span class="mf">0.05</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">tab</span><span class="p">[</span><span class="s1">&#39;mdrizsky&#39;</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">fits</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;F606W_cts.fits&#39;</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="n">hdr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Tips">
+<h2>Tips<a class="headerlink" href="#Tips" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Remember, on a CMD, the y-axis goes from bright stars at top to faint
+stars on the bottom.</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, AURA / Space Telescope Science Institute. These documents are designed for internal use only, and are not an official AURA/STScI publication. Information may be out of date, irrelevant, or contradict published documentation. Use at your own risk.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'published 2018-6-26',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

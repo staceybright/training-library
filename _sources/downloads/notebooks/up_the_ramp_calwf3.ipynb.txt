@@ -1,0 +1,1161 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Up-the-ramp Sampling with calwf3\n",
+    "\n",
+    "*Author: Massimo Robberto*\n",
+    "\n",
+    "*Contributors: Bryan Hilbert, Megan Sosey, Joseph Long*"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This training is meant to familiarize you with the behavior of IR detectors and the basic corrections that are needed for scientific observations. In this training, you will have an introduction to the pipeline reductions of the HST instrument WFC3 also known as WF3. Helped by Bryan Hilbert and Megan Sosey, I (Massimo Robberto) have put together this IPython notebook to \"x-ray\" the 11 steps performed by CALWF3-IR to extract a count-rate image from a raw ramp. (For comments, suggestions and to share improved versions, e-mail robberto@stsci.edu.)\n",
+    "\n",
+    "This notebook uses example data found in `/grp/hst/riab/training/up_the_ramp_sampling/WFC3_tutorial`, and expects these files to be present in your current directory. (Make sure to copy them over if you have not already.) The notebook runs on an arbitrary image with the associated calibration files; any other image + calibration file downloaded from the archive should work.\n",
+    "\n",
+    "Run through the code cells in the rest of this document, then try the exercise in the box immediately below."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"alert alert-info\">\n",
+    "\n",
+    "**Exercise:** Plot counts vs. total integration time from the IMA file for the pixel in the tutorial. Describe the behavior of the signal. How is the pixel used for the final slope calculation?\n",
+    "\n",
+    "</div>\n",
+    "\n",
+    "<div class=\"alert alert-info\">\n",
+    "\n",
+    "**Tip:** Use header keyword 'SAMPTIME' from each 'SCI' extension of the IMA file. Make sure to check the 'BUNIT' keyword.\n",
+    "\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "%matplotlib inline\n",
+    "import os\n",
+    "from astropy.io import fits\n",
+    "import numpy as np"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Load and check the raw data file"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Filename: icol26k3q_raw.fits\n",
+      "No.    Name         Type      Cards   Dimensions   Format\n",
+      "0    PRIMARY     PrimaryHDU     204   ()              \n",
+      "1    SCI         ImageHDU        83   (1024, 1024)   int16 (rescales to uint16)   \n",
+      "2    ERR         ImageHDU        44   ()              \n",
+      "3    DQ          ImageHDU        36   ()              \n",
+      "4    SAMP        ImageHDU        30   ()              \n",
+      "5    TIME        ImageHDU        30   ()              \n",
+      "6    SCI         ImageHDU        83   (1024, 1024)   int16 (rescales to uint16)   \n",
+      "7    ERR         ImageHDU        44   ()              \n",
+      "8    DQ          ImageHDU        36   ()              \n",
+      "9    SAMP        ImageHDU        30   ()              \n",
+      "10   TIME        ImageHDU        30   ()              \n",
+      "11   SCI         ImageHDU        83   (1024, 1024)   int16 (rescales to uint16)   \n",
+      "12   ERR         ImageHDU        44   ()              \n",
+      "13   DQ          ImageHDU        36   ()              \n",
+      "14   SAMP        ImageHDU        30   ()              \n",
+      "15   TIME        ImageHDU        30   ()              \n",
+      "16   SCI         ImageHDU        83   (1024, 1024)   int16 (rescales to uint16)   \n",
+      "17   ERR         ImageHDU        44   ()              \n",
+      "18   DQ          ImageHDU        36   ()              \n",
+      "19   SAMP        ImageHDU        30   ()              \n",
+      "20   TIME        ImageHDU        30   ()              \n",
+      "21   SCI         ImageHDU        83   (1024, 1024)   int16 (rescales to uint16)   \n",
+      "22   ERR         ImageHDU        44   ()              \n",
+      "23   DQ          ImageHDU        36   ()              \n",
+      "24   SAMP        ImageHDU        30   ()              \n",
+      "25   TIME        ImageHDU        32   ()              \n"
+     ]
+    }
+   ],
+   "source": [
+    "filebase = 'icol26k3q'\n",
+    "file_raw = filebase+'_raw.fits' \n",
+    "hdulist=fits.open(file_raw)\n",
+    "hdulist.info()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Unpack the datacube"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "In this excercise I care about the counts, the error and the data quality "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "cube = np.zeros((5,1024,1024))\n",
+    "error =  np.zeros((5,1024,1024))  #adding error matrix\n",
+    "dq =  np.zeros((5,1024,1024))  #DQ matrix\n",
+    "for i in range(1,25,5): \n",
+    "    cube[int(i/5),:,:] = hdulist[i].data\n",
+    "    error[int(i/5),:,:] = hdulist[i+1].data\n",
+    "    dq[int(i/5),:,:] = hdulist[i+2].data"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Pick up  a pixel to be followed to the end"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "#Good pixels to follow are the weird one, e.g. the those at the peak of a PSF (saturated), CRs, hot pixels etc/\n",
+    "ii=441+5  \n",
+    "jj=716+5\n",
+    "\n",
+    "#If you pick up a pixel inspecting an image with xv, remember that python (like IDL) starts from 0,0, while xv starts from 1,1\n",
+    "#There are also the 5 rows/columns of reference pixels, that will be trimmed out at the end, i.e. the final data product \n",
+    "#is a 1014x1014 image, not a 1024x1024. \n",
+    "#I enter the coordinates after inspecting the final 1014x1014 image, so I add +5"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[ 54657.  54631.  54790.  38868.  25537.]\n",
+      "[ nan  nan  nan  nan  nan]\n",
+      "[ nan  nan  nan  nan  nan]\n"
+     ]
+    }
+   ],
+   "source": [
+    "#check what we have as baseline\n",
+    "print(cube[:,jj,ii])\n",
+    "print(error[:,ii,jj])\n",
+    "print(dq[:,ii,jj])\n",
+    "\n",
+    "#and remember that WFC3 stored the ramp in reverse order last->first. The first counts are higher than the last."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "#Prepare an array storing the results, step by step, for a final plot\n",
+    "listout = np.zeros((13,5))\n",
+    "listout[0,:] = cube[:,jj,ii]\n",
+    "errout = np.zeros((13,5))\n",
+    "errout[0,:] = error[:,jj,ii]\n",
+    "dqout = np.zeros((13,5))\n",
+    "dqout[0,:] = error[:,jj,ii]\n",
+    "stepname = ['RAW']   #this is the flag for the original data."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [],
+   "source": [
+    "#setup and cleanp\n",
+    "os.putenv(\"iref\",\"../calfiles/\")\n",
+    "if os.path.exists('./'+filebase+\"_flt.fits\"):\n",
+    "    os.remove('./'+filebase+\"_flt.fits\")\n",
+    "if os.path.exists('./'+filebase+\"_ima.fits\"):\n",
+    "    os.remove('./'+filebase+\"_ima.fits\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "The following tasks in the wfc3tools package can be run with TEAL:\n",
+      "  calwf3    pstack    pstat     wf32d     wf3ccd    wf3cte    wf3ir     wf3rej\n"
+     ]
+    }
+   ],
+   "source": [
+    "from wfc3tools import calwf3\n",
+    "from wfc3tools import wf3ir\n",
+    "\n",
+    "def calwf3_run(file, stepdict, kw=None, value=True):\n",
+    "    '''\n",
+    "    Run only some of the calwf3 steps.\n",
+    "    stepdict is a dictionary where the keys are the names of the calwf3 steps,\n",
+    "    and the values are True or False\n",
+    "    '''\n",
+    "\n",
+    "    #update the dict if kw isn't NONE\n",
+    "    if kw:\n",
+    "        stepdict[kw]=value\n",
+    "    # make a backup copy of the original file\n",
+    "    os.system(\"cp \"+ file+\" backup_copy_\"+file)\n",
+    "\n",
+    "    #declare which steps are going to be run\n",
+    "    hdulist = fits.open(file, mode='update')\n",
+    "\n",
+    "    #reset all steps to OMIT, then set only those\n",
+    "    #requested to PERFORM\n",
+    "    hdulist[0].header['DQICORR'] = 'OMIT'\n",
+    "    hdulist[0].header['ZSIGCORR'] = 'OMIT'\n",
+    "    hdulist[0].header['ZOFFCORR'] = 'OMIT'\n",
+    "    hdulist[0].header['DARKCORR'] = 'OMIT'\n",
+    "    hdulist[0].header['BLEVCORR'] = 'OMIT'\n",
+    "    hdulist[0].header['NLINCORR'] = 'OMIT'\n",
+    "    hdulist[0].header['FLATCORR'] = 'OMIT'\n",
+    "    hdulist[0].header['DRIZCORR'] = 'OMIT'\n",
+    "    hdulist[0].header['PHOTCORR'] = 'OMIT'\n",
+    "    hdulist[0].header['UNITCORR'] = 'OMIT'\n",
+    "    hdulist[0].header['CRCORR'] = 'OMIT'\n",
+    "\n",
+    "\n",
+    "    if stepdict['dqi']:\n",
+    "        hdulist[0].header['DQICORR'] = 'PERFORM'\n",
+    "\n",
+    "    if stepdict['zsig']:\n",
+    "        hdulist[0].header['ZSIGCORR'] = 'PERFORM'\n",
+    "\n",
+    "    if stepdict['zoff']:\n",
+    "        hdulist[0].header['ZOFFCORR'] = 'PERFORM'\n",
+    "\n",
+    "    if stepdict['dark']:\n",
+    "        hdulist[0].header['DARKCORR'] = 'PERFORM'\n",
+    "\n",
+    "    if stepdict['blev']:\n",
+    "        hdulist[0].header['BLEVCORR'] = 'PERFORM'\n",
+    "\n",
+    "    if stepdict['nlin']:\n",
+    "        hdulist[0].header['NLINCORR'] = 'PERFORM'\n",
+    "\n",
+    "    if stepdict['flat']:\n",
+    "        hdulist[0].header['FLATCORR'] = 'PERFORM'\n",
+    "\n",
+    "    if stepdict['driz']:\n",
+    "        hdulist[0].header['DRIZCORR'] = 'PERFORM'\n",
+    "\n",
+    "    if stepdict['phot']:\n",
+    "        hdulist[0].header['PHOTCORR'] = 'PERFORM'\n",
+    "\n",
+    "    if stepdict['unit']:\n",
+    "        hdulist[0].header['UNITCORR'] = 'PERFORM'\n",
+    "\n",
+    "    if stepdict['cr']:\n",
+    "        hdulist[0].header['CRCORR'] = 'PERFORM'\n",
+    "\n",
+    "    hdulist.flush()\n",
+    "\n",
+    "    #run calwf3\n",
+    "    calwf3(file)\n",
+    "\n",
+    "    imafile = file[0:10] + 'ima.fits'\n",
+    "\n",
+    "    print('calwf3 complete: output saved in %s'%imafile)\n",
+    "    return imafile"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Step 1: DQI – IR Data Quality Array Initialization\n",
+    "\n",
+    "- Header Switch: DQICORR\n",
+    "\n",
+    "- Header Keywords Updated: None\n",
+    "\n",
+    "- Reference Files: BPIXTAB (*_bpx.fits)\n",
+    "\n",
+    "DQICORR populates the data quality (DQ) array in all IR readouts by reading a table of known bad pixels for the detector, stored in the ‘Bad Pixel’ reference table (BPIXTAB). The types of bad pixels that can be flagged are listed in Table 2.5.\n",
+    "The DQ array may already have been populated with some values to flag pixels that were affected by telemetry problems during downlink. Other DQ values will only be marked during further processing (such as cosmic-ray rejection).\n",
+    "The reference file for data quality initialization, BPIXTAB, is selected based on the value of the DETECTOR keyword only."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "calwf3 complete: output saved in icol26k3q_ima.fits\n",
+      "[ 54657.  54631.  54790.  38868.  25537.]\n",
+      "[ 153.07583618  153.03955078  153.26138306  129.16957092  104.82255554]\n",
+      "[ 0.  0.  0.  0.  0.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "# We put the steps in a dictionary, flagging as True those that we want to run. \n",
+    "stepdict = {'dqi':True,'zsig':False,'zoff':None,'dark':None,'blev':None,'nlin':None,'flat':None,'driz':None,'phot':None,'unit':None,'cr':None}\n",
+    "#and GO\n",
+    "calwf3_run(file_raw, stepdict, kw=None, value=False)\n",
+    "#\n",
+    "#Read and print the results of this first calibration step\n",
+    "hdulist=fits.open(filebase+'_ima.fits')\n",
+    "for i in range(1,25,5): \n",
+    "    cube[int(i/5),:,:] = hdulist[i].data\n",
+    "    error[int(i/5),:,:] = hdulist[i+1].data\n",
+    "    dq[int(i/5),:,:] = hdulist[i+2].data\n",
+    "print(cube[:,jj,ii])\n",
+    "print(error[:,jj,ii])\n",
+    "print(dq[:,jj,ii])\n",
+    "#\n",
+    "#store in the summary cubes\n",
+    "listout[1,:] = cube[:,jj,ii]\n",
+    "errout[1,:] = error[:,jj,ii]\n",
+    "dqout[1,:] = dq[:,jj,ii]\n",
+    "stepname.append('DQI')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Step 2: ZSIG – IR Zero-Read Signal Correction\n",
+    "\n",
+    "- Header Switch: ZSIGCORR\n",
+    "\n",
+    "- Header Keywords Updated: None\n",
+    "\n",
+    "- Reference Files: DARKFILE (\\*_drk.fits), NLINFILE (\\*_lin.fits)\n",
+    "\n",
+    "At the beginning of an IR observation the detector pixels are reset to the bias level and then read out to record that bias level. An interval of approximately 2.9 seconds elapses between the time each pixel is reset and then read. Because the IR channel does not have a shutter, signal from external sources starts to accumulate during that 2.9 second interval. When the initial (or ‘zeroth’) read is later subtracted from subsequent readouts, any signal in the zeroth read will also be subtracted. Because linearity correction and saturation checking (described below) both depend on the absolute signal level in a pixel at the time it was read, the signal in the zeroth read from bright sources can be large enough to lead to inaccurate linearity corrections, as well as the failure to detect saturation conditions, in the NLINCORR calibration step.\n",
+    "\n",
+    "The ZSIGCORR step is used to estimate the amount of source signal in the zeroth read and to supply this estimate to the NLINCORR step for linearity corrections and saturation checking. ZSIGCORR estimates the signal in the zeroth read by first measuring the signal in each pixel between the zeroth and first reads, and then scaling that signal to the effective exposure time of the zeroth read (nominally 2.9 seconds). Pixels that have an estimated zeroth read signal greater than 5 times their estimated uncertainty (noise) value are assumed to contain detectable signal; those below this threshold are ignored. The estimated zeroth read signal is then passed, as an in-memory image, to the NLINCORR step, which accounts for that signal when applying linearity corrections and saturation checking on the zeroth-read subtracted images.\n",
+    "\n",
+    "Note that this technique will not work well for pixels covered by targets that are so bright that the signal is already beginning to saturate in either the zeroth or first readouts, because then it is difficult to accurately estimate the zeroth-read signal. ZSIGCORR therefore checks for saturation in the zeroth and first read images and flags those pixels.\n",
+    "\n",
+    "Pixels that are determined to have detectable signal in the zeroth read are flagged in the DQ arrays of the output ima file with a data quality value of 2048.\n",
+    "The reference files used in this step, DARKFILE and NLINFILE, are selected from CDBS based on the values of the DETECTOR, CCDAMP, CCDGAIN, SAMP_SEQ, and SUBTYPE keywords. The DARKFILE file is used to subtract dark current from the first-minus-zero read difference image before using it to estimate incoming signal levels and the NLINFILE is used to perform saturation checking.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "calwf3 complete: output saved in icol26k3q_ima.fits\n",
+      "[ 54657.  54631.  54790.  38868.  40529.]\n",
+      "[ 153.07583618  153.03955078  153.26138306  129.16957092  131.88861084]\n",
+      "[    0.     0.     0.     0.  2048.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "#Everything now repeats the same pattern, adding steps to the dictionary\n",
+    "#\n",
+    "os.remove(filebase+\"_flt.fits\")\n",
+    "os.remove(filebase+\"_ima.fits\")\n",
+    "stepdict = {'dqi':True,'zsig':True,'zoff':None,'dark':None,'blev':None,'nlin':None,'flat':None,'driz':None,'phot':None,'unit':None,'cr':None}\n",
+    "calwf3_run(file_raw, stepdict, kw=None, value=False)\n",
+    "hdulist=fits.open(filebase+'_ima.fits')\n",
+    "for i in range(1,25,5): \n",
+    "    cube[int(i/5),:,:] = hdulist[i].data\n",
+    "    error[int(i/5),:,:] = hdulist[i+1].data\n",
+    "    dq[int(i/5),:,:] = hdulist[i+2].data\n",
+    "print(cube[:,jj,ii])\n",
+    "print(error[:,jj,ii])\n",
+    "print(dq[:,jj,ii])\n",
+    "listout[2,:] = cube[:,jj,ii]\n",
+    "errout[2,:] = error[:,jj,ii]\n",
+    "dqout[2,:] = dq[:,jj,ii]\n",
+    "stepname.append('ZSIG')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "By the way, since we start using them, let's check the values stored in the reference files for our pixel"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[ 54657.  54631.  54790.  38868.  40529.]\n",
+      "33956.9314645\n",
+      "29.2343\n"
+     ]
+    }
+   ],
+   "source": [
+    "nlinfile = hdulist[0].header['NLINFILE']\n",
+    "iref = \"../calfiles/\"\n",
+    "hdulist_nlinfile=fits.open(iref+nlinfile[5:])  #not too elegant, but it works\n",
+    "#\n",
+    "#the \"superbias\" value is at extension 17\n",
+    "bias = hdulist_nlinfile[17].data\n",
+    "print(cube[:,jj,ii])\n",
+    "#\n",
+    "#the \"saturation\" value is at extension 16\n",
+    "saturation = hdulist_nlinfile[16].data\n",
+    "print(saturation[jj,ii])\n",
+    "#\n",
+    "#the \"readnoise\" value is at extension 18\n",
+    "ron = hdulist_nlinfile[18].data\n",
+    "print(ron[jj,ii])\n",
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[ 44112.  44086.  44245.  28323.  29984.]\n",
+      "44501.9314645\n"
+     ]
+    }
+   ],
+   "source": [
+    "#there is something strange in these values: the saturation value is way too low with respect \n",
+    "#to the actual values at the peak of a bright star.\n",
+    "#\n",
+    "#However, if we subtract the bias from the data...\n",
+    "print(cube[:,jj,ii]-bias[jj,ii])\n",
+    "#and add the bias at the saturation value...\n",
+    "print(saturation[jj,ii]+bias[jj,ii])\n",
+    "#we are basically ok. Not transparent, but the pipeline is a black box that takes care of this..."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Step 3: ZOFF – IR Zero-read Image Subtraction"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "- Header Switch: ZOFFCORR\n",
+    "\n",
+    "- Header Keywords Updated: None\n",
+    "\n",
+    "- Reference Files: None\n",
+    "\n",
+    "ZOFFCORR subtracts the zeroth read from all readouts in the exposure, including the zeroth read itself, resulting in a zero-read image that is exactly zero in the remainder of processing. The zeroth-read image is propagated through the remaining processing steps and included in the output products, so that a complete history of error estimates and data quality (DQ) flags is preserved.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "calwf3 complete: output saved in icol26k3q_ima.fits\n",
+      "[ 29120.  29094.  29253.  13331.  14992.]\n",
+      "[ 111.88817596  111.83851624  112.14187622   75.97058105   80.50688171]\n",
+      "[    0.     0.     0.     0.  2048.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "os.remove(filebase+\"_flt.fits\")\n",
+    "os.remove(filebase+\"_ima.fits\")\n",
+    "stepdict = {'dqi':True,'zsig':True,'zoff':True,'dark':None,'blev':None,'nlin':None,'flat':None,'driz':None,'phot':None,'unit':None,'cr':None}\n",
+    "calwf3_run(file_raw, stepdict, kw=None, value=False)\n",
+    "hdulist=fits.open(filebase+'_ima.fits')\n",
+    "for i in range(1,25,5): \n",
+    "    cube[int(i/5),:,:] = hdulist[i].data\n",
+    "    error[int(i/5),:,:] = hdulist[i+1].data\n",
+    "    dq[int(i/5),:,:] = hdulist[i+2].data\n",
+    "print(cube[:,jj,ii])\n",
+    "print(error[:,jj,ii])\n",
+    "print(dq[:,jj,ii])\n",
+    "listout[3,:] = cube[:,jj,ii]\n",
+    "errout[3,:] = error[:,jj,ii]\n",
+    "dqout[3,:] = dq[:,jj,ii]\n",
+    "stepname.append('ZOFF')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Step 4: DARK – IR Dark Image Subtraction"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "- Header Switch: DARKCORR\n",
+    "\n",
+    "- Header Keywords Updated: MEANDARK\n",
+    "\n",
+    "- Reference File: DARKFILE (*_drk.fits)\n",
+    "\n",
+    "DARKCORR subtracts the detector dark current from the science data. Due to potential non-linearities in some of the signal components, such as reset-related effects in the first one or two reads of an exposure, the dark current subtraction is not applied by simply scaling a generic reference dark image to the exposure time and then subtracting it. Instead, a library of dark current images is maintained that includes darks taken in each of the available predefined MultiAccum sample sequences, as well as the available sub-array readout modes. The MultiAccum dark reference file is subtracted read-by-read from the stack of science image readouts. Thus there is an exact match in the timings and other characteristics of the dark image that is subtracted from each science readout.\n",
+    "The DARKFILE reference file must have the same values for the DETECTOR, CCDAMP, CCDGAIN, SAMP_SEQ, and SUBTYPE keywords as the science image."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "calwf3 complete: output saved in icol26k3q_ima.fits\n",
+      "[ 29115.75585938  29093.2890625   29254.41796875  13331.67675781  14992.        ]\n",
+      "[ 111.89044189  111.84100342  112.14394379   75.97402954   80.50688171]\n",
+      "[    0.     0.     0.     0.  2048.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "os.remove(filebase+\"_flt.fits\")\n",
+    "os.remove(filebase+\"_ima.fits\")\n",
+    "stepdict = {'dqi':True,'zsig':True,'zoff':True,'dark':True,'blev':None,'nlin':None,'flat':None,'driz':None,'phot':None,'unit':None,'cr':None}\n",
+    "calwf3_run(file_raw, stepdict, kw=None, value=False)\n",
+    "hdulist=fits.open(filebase+'_ima.fits')\n",
+    "for i in range(1,25,5): \n",
+    "    cube[int(i/5),:,:] = hdulist[i].data\n",
+    "    error[int(i/5),:,:] = hdulist[i+1].data\n",
+    "    dq[int(i/5),:,:] = hdulist[i+2].data\n",
+    "print(cube[:,jj,ii])\n",
+    "print(error[:,jj,ii])\n",
+    "print(dq[:,jj,ii])\n",
+    "listout[4,:] = cube[:,jj,ii]\n",
+    "errout[4,:] = error[:,jj,ii]\n",
+    "dqout[4,:] = dq[:,jj,ii]\n",
+    "stepname.append('DARK')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Step 5: BLEV – IR Bias Level Correction From Reference Pixels"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "- Header Switch: BLEVCORR\n",
+    "\n",
+    "- Header Keywords Updated: MEANBLEV\n",
+    "\n",
+    "- Reference Files: OSCNTAB (*_osc.fits)\n",
+    "\n",
+    "BLEVCORR uses the reference pixels located around the perimeter of the IR detector to track and remove changes in the bias level that occur during an exposure. For each raw readout, the mean signal level of the reference pixels is computed and subtracted from the image, and recorded in the MEANBLEV keyword in the SCI header of each readout.\n",
+    "The reference pixels located at the ends of each image row are used in this computation. Reference pixels are also located along the bottom and top of the image, but these have been found to be less reliable and are not used. As with the UVIS overscan correction, the boundaries of the reference pixel regions that are used in the computation are defined in the OSCNTAB reference table, in the BIASSECT* columns. The BIASSECTA[1,2] values indicate the starting and ending column numbers for the reference pixels on the left edge of the image, and the BIASSECTB[1,2] give the values for the right side of the image.\n",
+    "The reference pixel regions are maintained throughout the remainder of processing, but are usually ignored or skipped over in the actual application of calibration algorithms. They are left in place in the calibrated data stored in the ima file at the end of processing, but are trimmed from the flt image file.\n",
+    "The reference file for bias level correction, OSCNTAB, is selected from CDBS based on the value of the DETECTOR keyword only.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "calwf3 complete: output saved in icol26k3q_ima.fits\n",
+      "[ 29119.53320312  29096.16796875  29255.99609375  13332.16015625\n",
+      "  14991.99902344]\n",
+      "[ 111.8976593   111.84650421  112.1469574    75.97538757   80.50688171]\n",
+      "[    0.     0.     0.     0.  2048.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "os.remove(filebase+\"_flt.fits\")\n",
+    "os.remove(filebase+\"_ima.fits\")\n",
+    "stepdict = {'dqi':True,'zsig':True,'zoff':True,'dark':True,'blev':True,'nlin':None,'flat':None,'driz':None,'phot':None,'unit':None,'cr':None}\n",
+    "calwf3_run(file_raw, stepdict, kw=None, value=False)\n",
+    "hdulist=fits.open(filebase+'_ima.fits')\n",
+    "for i in range(1,25,5): \n",
+    "    cube[int(i/5),:,:] = hdulist[i].data\n",
+    "    error[int(i/5),:,:] = hdulist[i+1].data\n",
+    "    dq[int(i/5),:,:] = hdulist[i+2].data\n",
+    "print(cube[:,jj,ii])\n",
+    "print(error[:,jj,ii])\n",
+    "print(dq[:,jj,ii])\n",
+    "listout[5,:] = cube[:,jj,ii]\n",
+    "errout[5,:] = error[:,jj,ii]\n",
+    "dqout[5,:] = dq[:,jj,ii]\n",
+    "stepname.append('BLEV')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Step 6: NLIN – IR Non-Linearity Correction\n",
+    "\n",
+    "- Header Switch: NLINCORR\n",
+    "\n",
+    "- Header Keywords Updated: None\n",
+    "\n",
+    "- Reference File: NLINFILE (*_lin.fits)\n",
+    "\n",
+    "NLINCORR corrects the integrated counts in the science images for the non-linear response of the detector and flags pixels that go into saturation. The observed response of the detector can be conveniently represented by two regimes:\n",
+    "\n",
+    "1. At low and intermediate signal levels the detector response deviates from the incident flux in a way that is correctable using the following expression:\n",
+    "where c1, c2. c 3 and c4 are the correction coefficients, F is the uncorrected flux (in DN) and Fc is the corrected flux. The current form of the correction uses a third-order polynomial, as shown here, but the algorithm can handle an arbitrary number of coefficients. The number of coefficients and error terms are given by the values of the NCOEF and NERR keywords in the header of the NLINFILE.\n",
+    "\n",
+    "2. At high signal levels as saturation sets in the response becomes highly non-linear and is not correctable to a scientifically useful degree.\n",
+    "This step uses the NLINFILE reference file, which includes a set of images containing the cn correction coefficients and their variances at each pixel. The [NODE,1] image extension in the NLINFILE gives the saturation value for each pixel, in units of DN. Each pixel that has an input value below its defined saturation level is corrected according to the equation above. Pixels at or above their saturation values receive no correction and are flagged as saturated in the DQ array for the readout. Any pixel flagged as saturated in a given readout is also automatically flagged as saturated in all subsequent readouts.\n",
+    "As mentioned in the description of the ZSIGCORR routine, the estimated amount of signal in the zeroth read of the exposure is temporarily added back into the signal of each pixel during the NLINCORR step, before the pixel is checked for saturation or receives the linearity correction. Once the correction has been applied, the zero read signal is again removed. This process only occurs if the ZSIGCORR step is turned on during processing.\n",
+    "The NLINFILE reference files is selected based on the value of the DETECTOR keyword only.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "calwf3 complete: output saved in icol26k3q_ima.fits\n",
+      "[ 29119.53320312  29096.16796875  29255.99609375  13980.02246094\n",
+      "  15081.25097656]\n",
+      "[ 111.8976593   111.84650421  112.1469574    75.97538757   80.50688171]\n",
+      "[ 2304.  2304.  2304.  2048.  2048.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "os.remove(filebase+\"_flt.fits\")\n",
+    "os.remove(filebase+\"_ima.fits\")\n",
+    "stepdict = {'dqi':True,'zsig':True,'zoff':True,'dark':True,'blev':True,'nlin':True,'flat':None,'driz':None,'phot':None,'unit':None,'cr':None}\n",
+    "calwf3_run(file_raw, stepdict, kw=None, value=False)\n",
+    "\n",
+    "hdulist=fits.open(filebase+'_ima.fits')\n",
+    "for i in range(1,25,5): \n",
+    "    cube[int(i/5),:,:] = hdulist[i].data\n",
+    "    error[int(i/5),:,:] = hdulist[i+1].data\n",
+    "    dq[int(i/5),:,:] = hdulist[i+2].data\n",
+    "print(cube[:,jj,ii])\n",
+    "print(error[:,jj,ii])\n",
+    "print(dq[:,jj,ii])\n",
+    "listout[6,:] = cube[:,jj,ii]\n",
+    "errout[6,:] = error[:,jj,ii]\n",
+    "dqout[6,:] = dq[:,jj,ii]\n",
+    "stepname.append('NLIN')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Step 7: FLAT – IR Flat-field Image Correction\n",
+    "\n",
+    "- Header Switch: FLATCORR\n",
+    "\n",
+    "- Header Keywords Updated: None\n",
+    "\n",
+    "- Reference Files:\n",
+    "PFLTFILE(*_pfl.fits),LFLTFILE(*_lfl.fits),DFLTFILE\n",
+    "(*_dfl.fits)\n",
+    "\n",
+    "FLATCORR corrects for pixel-to-pixel and large-scale sensitivity variations across the detector by dividing the science images by one or more flat-field images. A combined flat is created within calwf3 using up to three flat-field reference files: the pixel-to-pixel flat (c), the low-order flat (LFLTFILE), and the delta flat (DFLTFILE). FLATCORR also multiplies the science data by the detector gain so that the calibrated data will be in units of electrons per second (or electrons if UNITCORR is not performed).\n",
+    "\n",
+    "The PFLTFILE is a pixel-to-pixel flat-field correction file containing the small-scale flat-field variations. The PFLTFILE is always used in the calibration pipeline, while the other two flats are optional. The LFLTFILE is a low-order flat that corrects for any large-scale sensitivity variations across the detector. This file can be stored as a binned image, which is then expanded when being applied by calwf3. Finally, the DFLTFILE is a delta-flat containing any needed changes to the small-scale PFLTFILE.\n",
+    "\n",
+    "If the LFLTFILE and DFLTFILE are not specified in the SCI header, only the PFLTFILE is used for the flat-field correction. If two or more reference files are specified, they are read in and multiplied together to form a combined flat-field correction image.\n",
+    "\n",
+    "The flat-field correction is applied to all readouts of the calibrated IR MultiAccum stack, as well as the single image produced by the CRCORR function.\n",
+    "\n",
+    "All flat-field reference images are chosen from CDBS based on the DETECTOR, CCDAMP, and FILTER used for the observation. A sub-array science image uses the same reference file(s) as a full-size image; calwf3 extracts the appropriate region from the reference file(s) and applies it to the sub-array input image.\n",
+    "See the discussion of this step in ‘UVIS Flat-Field Image Correction’ for information regarding corrections for geometric distortion.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "calwf3 complete: output saved in icol26k3q_ima.fits\n",
+      "[ 66578.5234375   66525.1015625   66890.53125     31963.74414062\n",
+      "  34481.578125  ]\n",
+      "[ 319.56039429  319.37469482  320.55462646  196.53363037  209.08392334]\n",
+      "[ 2304.  2304.  2304.  2048.  2048.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "os.remove(filebase+\"_flt.fits\")\n",
+    "os.remove(filebase+\"_ima.fits\")\n",
+    "stepdict = {'dqi':True,'zsig':True,'zoff':True,'dark':True,'blev':True,'nlin':True,'flat':True,'driz':None,'phot':None,'unit':None,'cr':None}\n",
+    "calwf3_run(file_raw, stepdict, kw=None, value=False)\n",
+    "hdulist=fits.open(filebase+'_ima.fits')\n",
+    "for i in range(1,25,5): \n",
+    "    cube[int(i/5),:,:] = hdulist[i].data\n",
+    "    error[int(i/5),:,:] = hdulist[i+1].data\n",
+    "    dq[int(i/5),:,:] = hdulist[i+2].data\n",
+    "print(cube[:,jj,ii])\n",
+    "print(error[:,jj,ii])\n",
+    "print(dq[:,jj,ii])\n",
+    "listout[7,:] = cube[:,jj,ii]\n",
+    "errout[7,:] = error[:,jj,ii]\n",
+    "dqout[7,:] = dq[:,jj,ii]\n",
+    "stepname.append('FLAT')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Step 8: DRIZ – Combine the files in an association by calling [AstroDrizzle](http://drizzlepac.stsci.edu)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "calwf3 complete: output saved in icol26k3q_ima.fits\n",
+      "[ 66578.5234375   66525.1015625   66890.53125     31963.74414062\n",
+      "  34481.578125  ]\n",
+      "[ 319.56039429  319.37469482  320.55462646  196.53363037  209.08392334]\n",
+      "[ 2304.  2304.  2304.  2048.  2048.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "os.remove(filebase+\"_flt.fits\")\n",
+    "os.remove(filebase+\"_ima.fits\")\n",
+    "stepdict = {'dqi':True,'zsig':True,'zoff':True,'dark':True,'blev':True,'nlin':True,'flat':True,'driz':True,'phot':None,'unit':None,'cr':None}\n",
+    "calwf3_run(file_raw, stepdict, kw=None, value=False)\n",
+    "hdulist=fits.open(filebase+'_ima.fits')\n",
+    "for i in range(1,25,5): \n",
+    "    cube[int(i/5),:,:] = hdulist[i].data\n",
+    "    error[int(i/5),:,:] = hdulist[i+1].data\n",
+    "    dq[int(i/5),:,:] = hdulist[i+2].data\n",
+    "print(cube[:,jj,ii])\n",
+    "print(error[:,jj,ii])\n",
+    "print(dq[:,jj,ii])\n",
+    "listout[8,:] = cube[:,jj,ii]\n",
+    "errout[8,:] = error[:,jj,ii]\n",
+    "dqout[8,:] = dq[:,jj,ii]\n",
+    "stepname.append('DRIZ')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Step 9: PHOT – IR Photometry Keyword Calculation\n",
+    "\n",
+    "- Header Switch: PHOTCORR\n",
+    "\n",
+    "- Header Keywords Updated: PHOTMODE, PHOTFLAM, PHOTFNU, PHOTZPT, PHOTPLAM, PHOTBW\n",
+    "\n",
+    "- Reference Files: GRAPHTAB (*_tmg.fits), COMPTAB (*_tmc.fits)\n",
+    "\n",
+    "Before photometry can be derived from WFC3 observations, a transformation to absolute flux units must be done. calwf3 follows the WFPC2 and ACS methodology for calculating the photometry keywords in the calibration pipeline. The calibration reference file IMPHTTAB contains the values of the latest WFC3 photometry keywords as calculated by pysynphot as a function of wavelength for the various WFC3 detector and filter combinations.For further discussion of pysynphot, refer to Chapter 3 of the Introduction to the HST Data Handbooks.\n",
+    "\n",
+    "During this process the keyword PHOTMODE is built to reflect the configuration of the instrument for the exposure (e.g., ‘WFC3,IR,F160W’). calwf3 then uses the PHOTMODE string with pysynphot to compute the total throughput for this instrument mode, based on the optics and filter throughputs and the detector QE. From that information, it computes values for the following photometry keywords.\n",
+    "\n",
+    "PHOTFLAM: the inverse sensitivity in units of erg cm-2 A-1 electron-1\n",
+    "\n",
+    "PHOTFNU: the inverse sensitivity in units of Jy sec-1 electron-1\n",
+    "\n",
+    "PHOTZPT: the Space Telescope magnitude zero point\n",
+    "\n",
+    "PHOTPLAM: the bandpass pivot wavelength\n",
+    "\n",
+    "PHOTBW: the bandpass RMS width\n",
+    "\n",
+    "Users who wish to convert calibrated IR images (which are in units of electrons per second) to flux units can simply multiply the image by the PHOTFNU keyword value."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "calwf3 complete: output saved in icol26k3q_ima.fits\n",
+      "[ 66578.5234375   66525.1015625   66890.53125     31963.74414062\n",
+      "  34481.578125  ]\n",
+      "[ 319.56039429  319.37469482  320.55462646  196.53363037  209.08392334]\n",
+      "[ 2304.  2304.  2304.  2048.  2048.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "os.remove(filebase+\"_flt.fits\")\n",
+    "os.remove(filebase+\"_ima.fits\")\n",
+    "stepdict = {'dqi':True,'zsig':True,'zoff':True,'dark':True,'blev':True,'nlin':True,'flat':True,'driz':True,'phot':True,'unit':None,'cr':None}\n",
+    "calwf3_run(file_raw, stepdict, kw=None, value=False)\n",
+    "\n",
+    "hdulist=fits.open(filebase+'_ima.fits')\n",
+    "for i in range(1,25,5): \n",
+    "    cube[int(i/5),:,:] = hdulist[i].data\n",
+    "    error[int(i/5),:,:] = hdulist[i+1].data\n",
+    "    dq[int(i/5),:,:] = hdulist[i+2].data\n",
+    "print(cube[:,jj,ii])\n",
+    "print(error[:,jj,ii])\n",
+    "print(dq[:,jj,ii])\n",
+    "listout[9,:] = cube[:,jj,ii]\n",
+    "errout[9,:] = error[:,jj,ii]\n",
+    "dqout[9,:] = dq[:,jj,ii]\n",
+    "stepname.append('PHOT')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Step 10: UNIT – IR Unit Conversion\n",
+    "\n",
+    "- Header Switch: UNITCORR\n",
+    "\n",
+    "- Header Keywords Updated: BUNIT\n",
+    "\n",
+    "- Reference Files: None\n",
+    "\n",
+    "This function simply converts the science data from a time-integrated signal to a signal rate, by dividing the science (SCI) and error (ERR) image arrays for each readout by the exposure time (TIME) image data. No reference file is needed.\n",
+    "\n",
+    "Usually, the final units will be electrons per second, but if certain steps in the standard processing are omitted, the final units in the ima and flt files may be electrons, counts, or counts per second, where counts refers to the digitized signal from the FPA. The BUNIT keyword in the output files will always reflect the units of the data.`"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "calwf3 complete: output saved in icol26k3q_ima.fits\n",
+      "[   219.77955627    327.81820679    649.84790039  10900.60449219\n",
+      "  11842.19335938]\n",
+      "[  1.05488718   1.57379448   3.11421871  67.02391052  71.80682373]\n",
+      "[ 2304.  2304.  2304.  2048.  2048.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "os.remove(filebase+\"_flt.fits\")\n",
+    "os.remove(filebase+\"_ima.fits\")\n",
+    "stepdict = {'dqi':True,'zsig':True,'zoff':True,'dark':True,'blev':True,'nlin':True,'flat':True,'driz':True,'phot':None,'unit':True,'cr':None}\n",
+    "calwf3_run(file_raw, stepdict, kw=None, value=False)\n",
+    "hdulist=fits.open(filebase+'_ima.fits')\n",
+    "for i in range(1,25,5): \n",
+    "    cube[int(i/5),:,:] = hdulist[i].data\n",
+    "    error[int(i/5),:,:] = hdulist[i+1].data\n",
+    "    dq[int(i/5),:,:] = hdulist[i+2].data\n",
+    "print(cube[:,jj,ii])\n",
+    "print(error[:,jj,ii])\n",
+    "print(dq[:,jj,ii])\n",
+    "listout[10,:] = cube[:,jj,ii]\n",
+    "errout[10,:] = error[:,jj,ii]\n",
+    "dqout[10,:] = dq[:,jj,ii]\n",
+    "stepname.append('UNIT')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Step 11: CR – IR Up-The-Ramp Fitting and Cosmic-Ray Identification\n",
+    "\n",
+    "- Header Switch: CRCORR\n",
+    "\n",
+    "- Header Keywords Updated: None\n",
+    "\n",
+    "- Reference Files: None\n",
+    "\n",
+    "CRCORR combines the data from all readouts into a single image and in the process identifies and flags pixels suspected of containing cosmic-ray (CR) hits. The data from all readouts are analyzed pixel-by-pixel, iteratively computing a linear fit to the accumulating counts-versus-exposure time relation. Samples flagged as bad in the DQ arrays, such as when saturation occurs midway through the exposure, are rejected from the fitting process. CR hits are identified by searching for outliers from the fit results. The rejection threshold is set by the value in the ‘CRSIGMAS’ column of the Cosmic-Ray Rejection parameters reference table (CRREJTAB), which currently has a default value of 4s. When a CR hit is detected, a linear fit is then performed independently for the sets of readouts before and after the hit. Those fitting results are then again checked for outliers. This process is iterated until no new samples are rejected. Pixel samples identified as containing a CR hit are flagged in the DQ arrays of the intermediate MultiAccum (ima) file, with a DQ value of 8192. The pixel values in the SCI and ERR images of the ima file, however, are left unchanged. These DQ flags are only present in the ima file and do not get carried over into flt products which combine data from all readouts.\n",
+    "\n",
+    "Once all outliers have been identified, a final count rate value, and its uncertainty, are determined for each pixel by computing the weighted mean of the slopes of each segment of non-flagged samples. The result of this operation is stored as a single imset in the output flt file. In the flt file the SCI array contains the final slope computed for each pixel, the ERR array contains the estimated uncertainty in the slope, the SAMP array contains the total number of non-flagged samples used to compute the slope, and the TIME array contains the total exposure time of those samples.\n",
+    "Pixels for which there are no unflagged samples, e.g., permanently hot or cold pixels, still get a slope computed, which is recorded in the SCI array of the output flt file, but they will also have their DQ flags recorded in the DQ array of the flt file. Users should therefore be careful to always check the flt file DQ arrays to help determine whether a given SCI image value is trustworthy for subsequent analysis.\n",
+    "\n",
+    "The basic rule of thumb is that in order for a DQ value to propagate into the flt, it needs to be present in all the reads of the flt. The 8192 flag does not get propagated because it shows where during the ramp the cosmic ray showed up. Nominally, when looking at the flt file, calwf3 has already dealt with the cosmic ray and its effects are gone. If a user really wants to know about those cosmic rays, the ima files are available and contain the complete record of when and where exactly each cosmic ray showed up.\n",
+    "\n",
+    "Another flag that is treated this way is saturation, flag value = 256. If a pixel is saturated in the last two reads of a ramp, then those two reads are flagged with 256 in the ima, calwf3 ignores those reads during line-fitting. The DQ value put into the flt file is 0 because calwf3 has already dealt with the saturation and the effects are not in the flt.\n",
+    "\n",
+    "For pixels where calwf3 finds 4 or more cosmic rays up the ramp, it flags the pixel with flag value = 4 (\"dead\" or bad pixel), which does propagate to the flt. In that case, the thinking is that four large signal jumps for a given pixel in a single ramp means that something is going on with that pixel, and it should be thrown out."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "calwf3 complete: output saved in icol26k3q_ima.fits\n",
+      "[   219.77955627    327.81820679    649.84790039  10900.60449219\n",
+      "  11842.19335938]\n",
+      "[  1.05488718   1.57379448   3.11421871  67.02391052  71.80682373]\n",
+      "[ 2304.  2304.  2304.  2048.  2048.]\n"
+     ]
+    }
+   ],
+   "source": [
+    "os.remove(filebase+\"_flt.fits\")\n",
+    "os.remove(filebase+\"_ima.fits\")\n",
+    "stepdict = {'dqi':True,'zsig':True,'zoff':True,'dark':True,'blev':True,'nlin':True,'flat':True,'driz':True,'phot':True,'unit':True,'cr':True}\n",
+    "calwf3_run(file_raw, stepdict, kw=None, value=False)\n",
+    "hdulist=fits.open(filebase+'_ima.fits')\n",
+    "for i in range(1,25,5): \n",
+    "    cube[int(i/5),:,:] = hdulist[i].data\n",
+    "    error[int(i/5),:,:] = hdulist[i+1].data\n",
+    "    dq[int(i/5),:,:] = hdulist[i+2].data\n",
+    "print(cube[:,jj,ii])\n",
+    "print(error[:,jj,ii])\n",
+    "print(dq[:,jj,ii])\n",
+    "listout[11,:] = cube[:,jj,ii]\n",
+    "errout[11,:] = error[:,jj,ii]\n",
+    "dqout[11,:] = dq[:,jj,ii]\n",
+    "stepname.append('CR')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "collapsed": false
+   },
+   "source": [
+    "## Done!"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      " \n",
+      "('Here is the final summary for pixel', 446, 721)\n",
+      "(0, 'RAW', array([ 54657.,  54631.,  54790.,  38868.,  25537.]))\n",
+      "('   err', array([ nan,  nan,  nan,  nan,  nan]))\n",
+      "('    dq', array([ nan,  nan,  nan,  nan,  nan]))\n",
+      "(1, 'DQI', array([ 54657.,  54631.,  54790.,  38868.,  25537.]))\n",
+      "('   err', array([ 153.076,  153.04 ,  153.261,  129.17 ,  104.823]))\n",
+      "('    dq', array([ 0.,  0.,  0.,  0.,  0.]))\n",
+      "(2, 'ZSIG', array([ 54657.,  54631.,  54790.,  38868.,  40529.]))\n",
+      "('   err', array([ 153.076,  153.04 ,  153.261,  129.17 ,  131.889]))\n",
+      "('    dq', array([    0.,     0.,     0.,     0.,  2048.]))\n",
+      "(3, 'ZOFF', array([ 29120.,  29094.,  29253.,  13331.,  14992.]))\n",
+      "('   err', array([ 111.888,  111.839,  112.142,   75.971,   80.507]))\n",
+      "('    dq', array([    0.,     0.,     0.,     0.,  2048.]))\n",
+      "(4, 'DARK', array([ 29115.756,  29093.289,  29254.418,  13331.677,  14992.   ]))\n",
+      "('   err', array([ 111.89 ,  111.841,  112.144,   75.974,   80.507]))\n",
+      "('    dq', array([    0.,     0.,     0.,     0.,  2048.]))\n",
+      "(5, 'BLEV', array([ 29119.533,  29096.168,  29255.996,  13332.16 ,  14991.999]))\n",
+      "('   err', array([ 111.898,  111.847,  112.147,   75.975,   80.507]))\n",
+      "('    dq', array([    0.,     0.,     0.,     0.,  2048.]))\n",
+      "(6, 'NLIN', array([ 29119.533,  29096.168,  29255.996,  13980.022,  15081.251]))\n",
+      "('   err', array([ 111.898,  111.847,  112.147,   75.975,   80.507]))\n",
+      "('    dq', array([ 2304.,  2304.,  2304.,  2048.,  2048.]))\n",
+      "(7, 'FLAT', array([ 66578.523,  66525.102,  66890.531,  31963.744,  34481.578]))\n",
+      "('   err', array([ 319.56 ,  319.375,  320.555,  196.534,  209.084]))\n",
+      "('    dq', array([ 2304.,  2304.,  2304.,  2048.,  2048.]))\n",
+      "(8, 'DRIZ', array([ 66578.523,  66525.102,  66890.531,  31963.744,  34481.578]))\n",
+      "('   err', array([ 319.56 ,  319.375,  320.555,  196.534,  209.084]))\n",
+      "('    dq', array([ 2304.,  2304.,  2304.,  2048.,  2048.]))\n",
+      "(9, 'PHOT', array([ 66578.523,  66525.102,  66890.531,  31963.744,  34481.578]))\n",
+      "('   err', array([ 319.56 ,  319.375,  320.555,  196.534,  209.084]))\n",
+      "('    dq', array([ 2304.,  2304.,  2304.,  2048.,  2048.]))\n",
+      "(10, 'UNIT', array([   219.78 ,    327.818,    649.848,  10900.604,  11842.193]))\n",
+      "('   err', array([  1.055,   1.574,   3.114,  67.024,  71.807]))\n",
+      "('    dq', array([ 2304.,  2304.,  2304.,  2048.,  2048.]))\n",
+      "(11, 'CR', array([   219.78 ,    327.818,    649.848,  10900.604,  11842.193]))\n",
+      "('   err', array([  1.055,   1.574,   3.114,  67.024,  71.807]))\n",
+      "('    dq', array([ 2304.,  2304.,  2304.,  2048.,  2048.]))\n",
+      "('Here is the final countrate:', 10900.604)\n",
+      "('        the final error    :', 67.023911)\n",
+      "('        the final dq       :', 0)\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(' ')\n",
+    "print('Here is the final summary for pixel',ii,jj)\n",
+    "np.set_printoptions(precision=3)\n",
+    "for i in range(12): \n",
+    "    print(i,stepname[i],listout[i,:])\n",
+    "    print('   err',errout[i,:])\n",
+    "    print('    dq',dqout[i,:])\n",
+    "hdulist=fits.open(filebase+\"_flt.fits\")\n",
+    "countrate = hdulist[1].data\n",
+    "errorrate = hdulist[2].data\n",
+    "dqrate = hdulist[3].data\n",
+    "print('Here is the final countrate:',countrate[jj-5,ii-5])\n",
+    "print('        the final error    :',errorrate[jj-5,ii-5])\n",
+    "print('        the final dq       :',dqrate[jj-5,ii-5])\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "collapsed": true
+   },
+   "source": [
+    "### Notes:\n",
+    "\n",
+    "DQ = 2048 => Signal in Zero Read\n",
+    "\n",
+    "DQ = 256  => Full Well saturation (2048+256=2304)"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.5.2"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 0
+}

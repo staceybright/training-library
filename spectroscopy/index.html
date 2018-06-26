@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                published 2018-6-25
+                published 2018-6-26
               </div>
             
           
@@ -98,6 +98,10 @@
 <li class="toctree-l2"><a class="reference internal" href="assignments.html">Extra Assignments</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../pysynphot.html">Using PySynphot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pysynphot.html#HST-Conclusion"><em>HST</em> Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pysynphot.html#Using-PySynphot-for-JWST-and-Advanced-Topics">Using <code class="docutils literal notranslate"><span class="pre">PySynphot</span></code> for <em>JWST</em> and Advanced Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pysynphot.html#Conclusion">Conclusion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../editing_these_documents.html">Editing These Documents</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tricks.html">Tips and Tricks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../trainees.html">Past Trainees</a></li>
@@ -166,7 +170,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="basic-spectroscopy">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="basic-spectroscopy">
 <h1>Basic Spectroscopy<a class="headerlink" href="#basic-spectroscopy" title="Permalink to this headline">¶</a></h1>
 <p>In this document, we have assumed very little knowledge of spectroscopy. If you are already familiar with the subject you can likely skip directly to the exercises, found in <a class="reference internal" href="exercises.html"><span class="doc">Working with Spectra: Exercises</span></a>. These generally do not require a particular programming language or operating system, so you are free to complete them in whichever language you choose.  The notable exceptions to this rule are the STScI calibration pipelines.  These are written in particular languages, and are most readily available through the Python and IRAF/PyRAF interface.</p>
 <p>The <a class="reference internal" href="assignments.html"><span class="doc">Extra Assignments</span></a> chapter, includes two “science-based” spectroscopy assignments. These assignments are intended as training projects for RIAs being assigned to the COS or STIS teams, and should not be completed unless instructed.</p>
@@ -269,7 +292,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'published 2018-6-25',
+            VERSION:'published 2018-6-26',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

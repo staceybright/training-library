@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                published 2018-6-25
+                published 2018-6-26
               </div>
             
           
@@ -118,6 +118,10 @@
 <li class="toctree-l1"><a class="reference internal" href="photometry.html">Photometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="drizzle.html">Using DrizzlePac</a></li>
 <li class="toctree-l1"><a class="reference internal" href="spectroscopy/index.html">Basic Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysynphot.html">Using PySynphot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysynphot.html#HST-Conclusion"><em>HST</em> Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysynphot.html#Using-PySynphot-for-JWST-and-Advanced-Topics">Using <code class="docutils literal notranslate"><span class="pre">PySynphot</span></code> for <em>JWST</em> and Advanced Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysynphot.html#Conclusion">Conclusion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="editing_these_documents.html">Editing These Documents</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tricks.html">Tips and Tricks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trainees.html">Past Trainees</a></li>
@@ -186,7 +190,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="setting-up-your-computer">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="setting-up-your-computer">
 <h1>Setting Up Your Computer<a class="headerlink" href="#setting-up-your-computer" title="Permalink to this headline">¶</a></h1>
 <p><em>Authors: Keira Brooks, Joseph Long, Matthew Bourque, Sara Ogaz, Dave Borncamp, Amber Armstrong, Michael Dulude, and Tiffany Borders</em></p>
 <p>The Institute provides you a computer when you are hired, and sets it up with a core set of software. (Some new hires get a loaner computer while a new machine is ordered and prepared for them.) They’ll buy you a new one every three years, if you’re good. Even though ITSD (Information Technology Services Department) is responsible for installing important things like Office and antivirus software for all, it’s up to each new member of staff to set their system up the way they want. For science-related uses, most new Institute machines are Macs, so this guide will assume that’s what you have.</p>
@@ -779,7 +802,7 @@ caption always &quot;%?%F%{-b bc}%:%{-b bb}%?%C|%D|%M %d|%H%?%F%{+u wb}%? %L=%-L
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'published 2018-6-25',
+            VERSION:'published 2018-6-26',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

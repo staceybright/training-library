@@ -21,9 +21,9 @@ Or if you have an ssh key for GitHub set up (see :ref:`git-push-ssh`)::
 
    git clone spacetelescope/training-library.git
 
-This creates a ``riatraining`` directory in whatever folder you're in. The web pages you're reading now are automatically generated from the ``.txt`` files in the ``source`` subdirectory. To generate them on your computer, you need to install required packages from ``requirements.txt``::
+This creates a ``training-library`` directory in whatever folder you're in. The web pages you're reading now are automatically generated from the ``.txt`` files in the ``source`` subdirectory. To generate them on your computer, you need to install required packages from ``requirements.txt``::
 
-   cd riatraining/
+   cd training-library/
    pip install -r requirements.txt
 
 This installs the program that builds the web pages from the source files, as well as components it depends on. To make a change, edit the ``.txt`` or ``.tex`` source for the document and then run::

@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                published 2018-6-25
+                published 2018-6-26
               </div>
             
           
@@ -92,6 +92,10 @@
 <li class="toctree-l1"><a class="reference internal" href="photometry.html">Photometry</a></li>
 <li class="toctree-l1"><a class="reference internal" href="drizzle.html">Using DrizzlePac</a></li>
 <li class="toctree-l1"><a class="reference internal" href="spectroscopy/index.html">Basic Spectroscopy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysynphot.html">Using PySynphot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysynphot.html#HST-Conclusion"><em>HST</em> Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysynphot.html#Using-PySynphot-for-JWST-and-Advanced-Topics">Using <code class="docutils literal notranslate"><span class="pre">PySynphot</span></code> for <em>JWST</em> and Advanced Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysynphot.html#Conclusion">Conclusion</a></li>
 <li class="toctree-l1"><a class="reference internal" href="editing_these_documents.html">Editing These Documents</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Tips and Tricks</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#pushing-to-github-or-grit-gitlab-via-ssh">Pushing to GitHub (or Grit/GitLab) via SSH</a></li>
@@ -163,7 +167,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="tips-and-tricks">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast,
+.nboutput.nblast {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast + .nbinput {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+</style>
+<div class="section" id="tips-and-tricks">
 <h1>Tips and Tricks<a class="headerlink" href="#tips-and-tricks" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="pushing-to-github-or-grit-gitlab-via-ssh">
 <span id="git-push-ssh"></span><h2>Pushing to GitHub (or Grit/GitLab) via SSH<a class="headerlink" href="#pushing-to-github-or-grit-gitlab-via-ssh" title="Permalink to this headline">¶</a></h2>
@@ -288,7 +311,7 @@ origin       https://github.com/spacetelescope/training-library.git (push)
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'published 2018-6-25',
+            VERSION:'published 2018-6-26',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
