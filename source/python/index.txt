@@ -9,7 +9,7 @@ Python for Scientific Data Analysis
 
 \
 
-Python is a free, open-source, high-level interpreted scripting language. Python has become very popular for scientific data analysis thanks to:
+Python is a *free*, open-source, high-level interpreted scripting language. Python has become very popular for scientific data analysis thanks to:
 
 * its (relatively) simple syntax without many surprising rules or opaque symbols
 * its ability to serve equally well for quick, exploratory data analysis as for the construction of more complex software (e.g. Web applications, data pipelines)
