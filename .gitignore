@@ -31,7 +31,12 @@ latexdocs/spectroscopy/training.pdf
 # (we're tracking the source files, so we don't need the PDFs)
 source/downloads/pdf_guides/pyraf_training.pdf
 source/downloads/pdf_guides/spectroscopy_training.pdf
+source/downloads/notebooks/photometry_exercises.html
+source/downloads/notebooks/Spectroscopy_Training.html
+source/downloads/notebooks/up_the_ramp_calwf3.html
 
 # Jupyter notebook checkpoints
 # (Only track the actual notebooks)
 .ipynb_checkpoints
+
+*.idea
