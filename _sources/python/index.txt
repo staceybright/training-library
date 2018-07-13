@@ -3,13 +3,13 @@ Python for Scientific Data Analysis
 ***********************************
 
 | **Authors:**  *(in order of most- to least-recent contribution)*
-| Joseph Long, Meredith Durbin, Katie Gosmeyer, Heather Gunning, Matthew Bourque, Justin Ely, Thompson LeBlanc, Rachel Anderson, Sami-Matias Niemi, Alex Viana
-| **Latest revision:** June 2015
+| Jules Fowler, Joseph Long, Meredith Durbin, Katie Gosmeyer, Heather Gunning, Matthew Bourque, Justin Ely, Thompson LeBlanc, Rachel Anderson, Sami-Matias Niemi, Alex Viana
+| **Latest revision:** June 2018
 | **Initial version:** September 2008
 
 \
 
-Python is a free, open-source, high-level interpreted scripting language. Python has become very popular for scientific data analysis thanks to:
+Python is a *free*, open-source, high-level interpreted scripting language. Python has become very popular for scientific data analysis thanks to:
 
 * its (relatively) simple syntax without many surprising rules or opaque symbols
 * its ability to serve equally well for quick, exploratory data analysis as for the construction of more complex software (e.g. Web applications, data pipelines)

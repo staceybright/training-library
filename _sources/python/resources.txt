@@ -65,3 +65,14 @@ These Python themed STScI e-mail lists are available through the Outlook Web App
    fixes, and how to do some outrageous tasks that astronomers come up
    with.
 
+Slack Channels
+--------------
+
+The STScI slack is RIFE with helpful Python discussions:
+
+- **python**: A channel to discuss Python best practices, tools, and bugs.
+
+- **code-review**: Coordinates (predominately Python) code review, posts
+  interesting tutorials, and sometimes trouble-shooting questions.
+
+- **statistics**: Discussions of statistics -- mostly Python tools.

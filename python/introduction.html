@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                published 2018-6-26
+                published 2018-7-13
               </div>
             
           
@@ -260,6 +260,34 @@ begins with the <code class="docutils literal notranslate"><span class="pre">#</
 </pre></div>
 </div>
 <p></p>
+<p>Another way to effectively comment multiple lines is by rendering it a
+string mid text. This is not technically a comment, but Python won’t
+know the difference. This is the standard for docstrings in functions,
+or sometimes used for testing without chunks of code.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">do_something</span><span class="p">(</span><span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;This function does something!</span>
+
+<span class="sd">  Parameters</span>
+<span class="sd">  ----------</span>
+<span class="sd">  param1 : str</span>
+<span class="sd">      Param1 is the first parameter.</span>
+
+<span class="sd">  param2 : int</span>
+<span class="sd">      Param2 is the second paramter.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">do_something</span><span class="p">()</span> <span class="c1"># We&#39;ll do this thing.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">At present we don&#39;t</span>
+<span class="sd">Run these lines -- see, we&#39;re testing!</span>
+<span class="sd">Plants, plants, plants, plants, plants.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">do_something_else</span><span class="p">()</span>
+</pre></div>
+</div>
+<p></p>
 </li>
 <li><p class="first">The line continuation symbol <code class="docutils literal notranslate"><span class="pre">\</span></code> can be used to spread an expression
 out over multiple lines. There are constructs in Python that use parentheses,
@@ -279,12 +307,12 @@ wait for the closing symbol before assuming the end of the line.</p>
 <p class="first admonition-title">Tip</p>
 <p>Check which <code class="docutils literal notranslate"><span class="pre">python</span></code> you’re using with this command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ which python
-/Users/myusername/anaconda/envs/astroconda27/bin/python
+/Users/myusername/anaconda/envs/astroconda/bin/python
 </pre></div>
 </div>
 <p>You can also check the version of Python install with:</p>
 <div class="last highlight-default notranslate"><div class="highlight"><pre><span></span>$ python -V
-Python 2.7.11 :: Continuum Analytics, Inc.
+Python 3.6.3 :: Continuum Analytics, Inc.
 </pre></div>
 </div>
 </div>
@@ -293,7 +321,7 @@ Python 2.7.11 :: Continuum Analytics, Inc.
 <p>Not every piece of Python code you write must be saved in a file. When using Python for data analysis, it is common to try out snippets of code interactively, examine their results, and iterate until you get the code the way you want it.</p>
 <p>The most bare-bones way to use Python interactively is the <strong>interactive interpreter</strong> or <strong>REPL</strong> (Read-Evaluate-Print Loop). You start it by typing <code class="docutils literal notranslate"><span class="pre">python</span></code> in a terminal, which gives output like this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python
-Python 3.5.1 |Continuum Analytics, Inc.| (default, Jun 15 2016, 16:14:02)
+Python 3.6.3 |Continuum Analytics, Inc.| (default, Jun 15 2016, 16:14:02)
 [GCC 4.2.1 Compatible Apple LLVM 4.2 (clang-425.0.28)] on darwin
 Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
 &gt;&gt;&gt;
@@ -303,10 +331,10 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 <p>Heavy users of Python for interactive data analysis have come up with something better: <strong>IPython</strong>. It includes various niceties like syntax highlighting and some helpful <a class="reference external" href="http://ipython.readthedocs.io/en/stable/interactive/magics.html">magic commands</a>.</p>
 <p>Start it from the terminal with the <code class="docutils literal notranslate"><span class="pre">ipython</span></code> command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ipython
-Python 3.5.1 |Continuum Analytics, Inc.| (default, Jun 15 2016, 16:14:02)
+Python 3.6.3 |Continuum Analytics, Inc.| (default, Jun 15 2016, 16:14:02)
 Type &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
 
-IPython 4.2.0 -- An enhanced Interactive Python.
+IPython 6.1.0 -- An enhanced Interactive Python.
 ?         -&gt; Introduction and overview of IPython&#39;s features.
 %quickref -&gt; Quick reference.
 help      -&gt; Python&#39;s own help system.
@@ -382,7 +410,7 @@ In [1]:
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'published 2018-6-26',
+            VERSION:'published 2018-7-13',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

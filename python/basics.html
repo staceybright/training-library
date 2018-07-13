@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                published 2018-6-26
+                published 2018-7-13
               </div>
             
           
@@ -333,8 +333,11 @@ available through importing modules (Example: the datetime module).</p>
 <div class="section" id="different-kinds-of-sequences-in-python">
 <span id="python-different-sequences"></span><h3>Different kinds of sequences in Python<a class="headerlink" href="#different-kinds-of-sequences-in-python" title="Permalink to this headline">¶</a></h3>
 <p>Python provides three main built-in sequence types: <code class="docutils literal notranslate"><span class="pre">tuple</span></code>, <code class="docutils literal notranslate"><span class="pre">list</span></code>, and <code class="docutils literal notranslate"><span class="pre">str</span></code>. Lists are variable-length collections of entries that need not all be the same data type, and tuples are their immutable (i.e. non-modifiable) cousins. We have seen strings (<code class="docutils literal notranslate"><span class="pre">str</span></code>) in the section on comparisons, but it bears mentioning that they are immutable sequences that support indexing and slicing like tuples.</p>
-<p>To make a new tuple, you need parentheses and a comma:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="s1">&#39;first element&#39;</span><span class="p">,</span> <span class="s1">&#39;second element&#39;</span><span class="p">)</span>
+<p>To make a new tuple, all you need is a comma, though parentheses are common
+for clarity:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;first element&#39;</span><span class="p">,</span> <span class="s1">&#39;second element&#39;</span>
+<span class="go">(&#39;first element&#39;, &#39;second element&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="s1">&#39;first element&#39;</span><span class="p">,</span> <span class="s1">&#39;second element&#39;</span><span class="p">)</span>
 <span class="go">(&#39;first element&#39;, &#39;second element&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">((</span><span class="s1">&#39;first element&#39;</span><span class="p">,</span> <span class="s1">&#39;second element&#39;</span><span class="p">))</span>
 <span class="go">&lt;type &#39;tuple&#39;&gt;</span>
@@ -420,7 +423,9 @@ available through importing modules (Example: the datetime module).</p>
 </div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p>In Python 2, the function call <code class="docutils literal notranslate"><span class="pre">print(mything)</span></code> would be written as a statement like <code class="docutils literal notranslate"><span class="pre">print</span> <span class="pre">mything</span></code>!</p>
+<p>For those familiar with Python 2, the function call <code class="docutils literal notranslate"><span class="pre">print(mything)</span></code> can
+also be written as a statement like <code class="docutils literal notranslate"><span class="pre">print</span> <span class="pre">mything</span></code>. This will break in
+Python 3, however.</p>
 <p class="last">Refer back to <a class="reference internal" href="scripting.html#python-3-vs-2"><span class="std std-ref">A brief digression on Python 2 vs. Python 3</span></a> for details.</p>
 </div>
 </div>
@@ -433,7 +438,9 @@ available through importing modules (Example: the datetime module).</p>
 <span class="gr">TypeError</span>: <span class="n">&#39;tuple&#39; object does not support item assignment</span>
 </pre></div>
 </div>
-<p>This is what is meant when we say tuples are “immutable”. There are good reasons you might want to have immutable data, but when you need to be able to modify a sequence in-place you need a <strong>list</strong>.</p>
+<p>This is what is meant when we say tuples are “immutable”. There are good
+reasons you might want to have immutable data, but when you need to be able to
+modify a sequence in-place you need a <code class="docutils literal notranslate"><span class="pre">list</span></code>.</p>
 <p>To write a new list in your code, use a comma-separated sequence of values enclosed in square brackets. For example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mydataset_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;test.fits&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">]</span>
 </pre></div>
@@ -444,7 +451,7 @@ available through importing modules (Example: the datetime module).</p>
 <span class="go">[&#39;test.fits&#39;, 1, 199.9]</span>
 </pre></div>
 </div>
-<p>Lists implement all of the behaviors described above for tuples, but additionally support modification in place with <em>assignment</em> (as shown above) and with <em>methods</em> that manipulate a particular list variable. We’ll look at three of the most commonly used methods, but a full reference is available <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#typesseq-mutable" title="(in Python v3.6)"><span class="xref std std-ref">in the Python reference manual</span></a>.</p>
+<p>Lists implement all of the behaviors described above for tuples, but additionally support modification in place with <em>assignment</em> (as shown above) and with <em>methods</em> that manipulate a particular list variable. We’ll look at three of the most commonly used methods, but a full reference is available <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#typesseq-mutable" title="(in Python v3.7)"><span class="xref std std-ref">in the Python reference manual</span></a>.</p>
 <p>Let’s start with a list of floating point values. Pretend they’re PSF encircled energies, or something.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">psf_ee_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.101</span><span class="p">,</span> <span class="mf">0.413</span><span class="p">,</span> <span class="mf">0.219</span><span class="p">,</span> <span class="mf">0.713</span><span class="p">]</span>
 </pre></div>
@@ -476,7 +483,7 @@ available through importing modules (Example: the datetime module).</p>
 </div>
 <div class="section" id="sorting-a-list">
 <h4>Sorting a list<a class="headerlink" href="#sorting-a-list" title="Permalink to this headline">¶</a></h4>
-<p><code class="docutils literal notranslate"><span class="pre">sort()</span></code> sorts a list in-place, meaning it does not return anything. However, when you access the list again, it will be reordered least-to-greatest. (n.b. This is only meaningful if your list elements are all the same data type.)</p>
+<p><code class="docutils literal notranslate"><span class="pre">sort()</span></code> sorts a list in-place, meaning it does not return anything. However, when you access the list again, it will be reordered least-to-greatest. (This is only meaningful if your list elements are all the same data type.)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">psf_ee_vals</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">psf_ee_vals</span>
 <span class="go">[0.101, 0.219, 0.413, 0.713]</span>
@@ -493,10 +500,15 @@ available through importing modules (Example: the datetime module).</p>
 </div>
 <div class="admonition tip">
 <p class="first admonition-title">Tip</p>
-<p>You can also use <code class="docutils literal notranslate"><span class="pre">del</span></code> on any variable name to clear that reference to it. This is less useful than you might think, since Python manages memory for you and won’t actually free the memory until all references have been collected.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]</span>
+<p>You can also use <code class="docutils literal notranslate"><span class="pre">del</span></code> on any variable name to clear that reference to it.
+However, this won’t actually free the memory unless you manually call the Python garbage
+collector to come clean up:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">gc</span> <span class="c1"># We&#39;ll discuss imports shortly!</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">del</span> <span class="n">a</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gc</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<span class="go">21</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a</span>
 <span class="gt">Traceback (most recent call last):</span>
   File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
@@ -505,7 +517,7 @@ available through importing modules (Example: the datetime module).</p>
 <span class="go">[&#39;a&#39;, &#39;b&#39;]</span>
 </pre></div>
 </div>
-<p class="last">In practice, you will rarely need to use <code class="docutils literal notranslate"><span class="pre">del</span></code>, but we include it for completeness’ sake.</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">del</span></code> is usually only useful when opening many large files in parallel, but we include it for completeness’ sake.</p>
 </div>
 <div class="note admonition">
 <p class="first admonition-title">Exercise</p>
@@ -704,7 +716,11 @@ available through importing modules (Example: the datetime module).</p>
 </div>
 <div class="section" id="dictionaries">
 <span id="python-dictionaries"></span><h3>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h3>
-<p>A dictionary maps keys to values, but unlike lists and tuples it has <strong>no ordering</strong>. You may have seen this data type by another name; they’re sometimes called “hashes”, “hashmaps”, “maps”, or “associative arrays”.</p>
+<p>A dictionary maps keys to values, but unlike lists and tuples it has <strong>no
+ordering</strong>. You may have seen this data type by another name; they’re sometimes
+called “hashes”, “hashmaps”, “maps”, or “associative arrays”. (If this seems
+like a deal breaker for a specific use, the <a class="reference external" href="https://docs.python.org/3/library/collections.html#ordereddict-examples-and-recipes">OrderedDict type</a>
+may come in handy.)</p>
 <p>To write a dictionary in your code, use a sequence of <code class="docutils literal notranslate"><span class="pre">key:</span> <span class="pre">value</span></code> pairs separated by commas, and enclosed in curly braces (<code class="docutils literal notranslate"><span class="pre">{}</span></code>). Say we want to map filter names to center wavelengths. The “keys” in this case would be the filter names, and the “values” would be the center wavelengths in meters.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">filters</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;F212N&quot;</span><span class="p">:</span> <span class="mf">2.12e-6</span><span class="p">,</span> <span class="s2">&quot;F110W&quot;</span><span class="p">:</span> <span class="mf">1.1e-6</span><span class="p">,</span> <span class="s2">&quot;F460M&quot;</span><span class="p">:</span> <span class="mf">4.6e-6</span><span class="p">}</span>
 </pre></div>
@@ -765,8 +781,12 @@ available through importing modules (Example: the datetime module).</p>
 <span class="go">F460M is 4.6e-06</span>
 </pre></div>
 </div>
-<p>(n.b. In this example, we used commas so that multiple arguments to the <code class="docutils literal notranslate"><span class="pre">print</span></code> statement would print out with spaces between them.)</p>
-<p>One thing that trips up a lot of new Python users is that dictionaries have <strong>no ordering</strong> of their elements. When you loop over <code class="docutils literal notranslate"><span class="pre">.items()</span></code>, you might get the keys in alphabetical order, order of assignment, or totally randomly! If you need to preserve ordering, use a sequence type like a list or tuple.</p>
+<p>(In this example, we used commas so that multiple arguments to the <code class="docutils literal notranslate"><span class="pre">print</span></code> statement would print out with spaces between them.)</p>
+<p>One thing that trips up a lot of new Python users is that dictionaries have
+<strong>no ordering</strong> of their elements. When you loop over <code class="docutils literal notranslate"><span class="pre">.items()</span></code>, you might
+get the keys in alphabetical order, order of assignment, or totally randomly!
+If you need to preserve ordering, use a sequence type like a list or tuple, or
+perhaps OrderedDict.</p>
 <div class="note admonition">
 <p class="first admonition-title">Exercise</p>
 <p>You now know about lists, tuples, and dictionaries. Combine what you know to represent this target catalog using dicts and sequences.</p>
@@ -834,7 +854,7 @@ available through importing modules (Example: the datetime module).</p>
 <span class="go">096.488487,17.790980,17.8,J900,j900,202060054</span>
 </pre></div>
 </div>
-<p>Also, it bears mentioning, both <code class="docutils literal notranslate"><span class="pre">.readlines()</span></code> and <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">...</span> <span class="pre">in</span> <span class="pre">fileobject</span></code> will only help you when your file is “plain text” broken up into lines. Reading binary files with <code class="docutils literal notranslate"><span class="pre">open()</span></code> is an advanced topic, but Python can do that just as well. See <a class="reference external" href="https://docs.python.org/3/tutorial/inputoutput.html#tut-filemethods" title="(in Python v3.6)"><span>Methods of File Objects</span></a> in the official Python tutorial for more details on file objects.</p>
+<p>Also, it bears mentioning, both <code class="docutils literal notranslate"><span class="pre">.readlines()</span></code> and <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">...</span> <span class="pre">in</span> <span class="pre">fileobject</span></code> will only help you when your file is “plain text” broken up into lines. Reading binary files with <code class="docutils literal notranslate"><span class="pre">open()</span></code> is an advanced topic, but Python can do that just as well. See <a class="reference external" href="https://docs.python.org/3/tutorial/inputoutput.html#tut-filemethods" title="(in Python v3.7)"><span>Methods of File Objects</span></a> in the official Python tutorial for more details on file objects.</p>
 </div>
 </div>
 </div>
@@ -882,7 +902,7 @@ available through importing modules (Example: the datetime module).</p>
 <li>In <a class="reference internal" href="#python-dictionaries"><span class="std std-ref">Dictionaries</span></a> we used <code class="docutils literal notranslate"><span class="pre">filters</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></code> to create an instance of a dictionary named <code class="docutils literal notranslate"><span class="pre">filters</span></code>. (And as discussed, <code class="docutils literal notranslate"><span class="pre">myfile</span></code> is an instance of a <code class="docutils literal notranslate"><span class="pre">file</span></code>.)</li>
 <li>In <a class="reference internal" href="#python-file-operations"><span class="std std-ref">Lower-level file operations</span></a> we used <code class="docutils literal notranslate"><span class="pre">myfile.closed</span></code> to check if the <code class="docutils literal notranslate"><span class="pre">myfile</span></code> instance had been closed.</li>
 <li><code class="docutils literal notranslate"><span class="pre">len()</span></code> is a function, and in <a class="reference internal" href="#python-different-sequences"><span class="std std-ref">Different kinds of sequences in Python</span></a> we pass it the tuple <code class="docutils literal notranslate"><span class="pre">('first</span> <span class="pre">element',</span> <span class="pre">'second</span> <span class="pre">element')</span></code> and it returns the length (2).</li>
-<li>In <a class="reference internal" href="#python-immutable-tuples-mutable-lists"><span class="std std-ref">Immutable tuples vs. mutable lists</span></a>, after we created the instance <code class="docutils literal notranslate"><span class="pre">psf_ee_vals</span></code>, we append a number to that list using the <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html#tut-morelists" title="(in Python v3.6)"><span class="xref std std-ref">append()</span></a> method with the line <code class="docutils literal notranslate"><span class="pre">psf_ee_vals.append(0.99)</span></code>. Also, in <a class="reference internal" href="#python-file-operations"><span class="std std-ref">Lower-level file operations</span></a> we also used the methods <code class="docutils literal notranslate"><span class="pre">readlines()</span></code> and <code class="docutils literal notranslate"><span class="pre">close()</span></code> which belong to the <code class="docutils literal notranslate"><span class="pre">file</span></code> class.</li>
+<li>In <a class="reference internal" href="#python-immutable-tuples-mutable-lists"><span class="std std-ref">Immutable tuples vs. mutable lists</span></a>, after we created the instance <code class="docutils literal notranslate"><span class="pre">psf_ee_vals</span></code>, we append a number to that list using the <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html#tut-morelists" title="(in Python v3.7)"><span class="xref std std-ref">append()</span></a> method with the line <code class="docutils literal notranslate"><span class="pre">psf_ee_vals.append(0.99)</span></code>. Also, in <a class="reference internal" href="#python-file-operations"><span class="std std-ref">Lower-level file operations</span></a> we also used the methods <code class="docutils literal notranslate"><span class="pre">readlines()</span></code> and <code class="docutils literal notranslate"><span class="pre">close()</span></code> which belong to the <code class="docutils literal notranslate"><span class="pre">file</span></code> class.</li>
 </ul>
 <p>Notice that we use dot notation to refer to an attribute or a method of a particular instance. As we will see in <a class="reference internal" href="#python-modules"><span class="std std-ref">Importing modules, and the Python Standard Library</span></a>, dot notation will also be used to refer to a method or a function from a particular module.</p>
 </div>
@@ -914,8 +934,8 @@ current Python session. Type ‘q’ to quit.</p>
 <span class="go">dog</span>
 <span class="go">cat</span>
 <span class="go">penguin</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">index_and_the_item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">index_and_the_item</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">index_and_item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">index_and_item</span><span class="p">)</span>
 <span class="gp">...</span>
 <span class="go">(0, &#39;dog&#39;)</span>
 <span class="go">(1, &#39;cat&#39;)</span>
@@ -923,8 +943,8 @@ current Python session. Type ‘q’ to quit.</p>
 </pre></div>
 </div>
 <p>These tuples can be “unpacked” in the <code class="docutils literal notranslate"><span class="pre">for</span></code> statement as shown below:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">the_item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;item number&quot;</span><span class="p">,</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot; - &quot;</span><span class="p">,</span> <span class="n">the_item</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;item number&quot;</span><span class="p">,</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot; - &quot;</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
 <span class="gp">...</span>
 <span class="go">item number 1  -  dog</span>
 <span class="go">item number 2  -  cat</span>
@@ -979,19 +999,29 @@ current Python session. Type ‘q’ to quit.</p>
 <p><strong>Use:</strong> The <code class="docutils literal notranslate"><span class="pre">try</span> <span class="pre">...</span> <span class="pre">except</span></code> block is used as an exception (error) handler. It will try whatever we put in the try block, but if an exception occurs, it will go to the except block. As long as the kind of exception that happens matches what the except block says it handles, you can handle the error and your program can continue.</p>
 <p>Examples: Try this code below. Notice the error message you get.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
-<span class="gp">... </span>   <span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-<span class="gp">... </span>   <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+<span class="gp">... </span>   <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="gp">... </span>   <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 <p>To solve this problem, we put it in a try … except statement:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
 <span class="gp">... </span>    <span class="k">try</span><span class="p">:</span>
-<span class="gp">... </span>        <span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">... </span>        <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
 <span class="gp">... </span>    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
 <span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This index does not work: &#39;</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can also catch multiple exceptions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+<span class="gp">... </span>    <span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">... </span>    <span class="k">except</span> <span class="p">(</span><span class="ne">IndexError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This problem was encountered : </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 </pre></div>
 </div>
 <div class="note admonition">
@@ -1073,7 +1103,9 @@ the range [0.0, 1.0).</p>
 <h3>os.getcwd() and os.chdir() functions<a class="headerlink" href="#os-getcwd-and-os-chdir-functions" title="Permalink to this headline">¶</a></h3>
 <p><strong>Use:</strong> The os module is for ‘Operating System’ operations. Examples include
 os.getcwd() which returns the current working directory and os.chdir()
-which changes the current working directory.</p>
+which changes the current working directory. (Note that while these are often
+valuable tools, it is generally more “pythonic” to use non-os operations, for
+example using <code class="docutils literal notranslate"><span class="pre">glob.glob</span></code> instead of <code class="docutils literal notranslate"><span class="pre">os.listdir</span></code>, etc.)</p>
 <p>Examples:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">datadir</span> <span class="o">=</span> <span class="s1">&#39;/Users/username/data/&#39;</span>  <span class="c1">#insert a usable path</span>
@@ -1159,7 +1191,7 @@ the exit attempt.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'published 2018-6-26',
+            VERSION:'published 2018-7-13',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

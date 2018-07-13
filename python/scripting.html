@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                published 2018-6-26
+                published 2018-7-13
               </div>
             
           
@@ -100,7 +100,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#scripts-versus-modules-or-packages">Scripts versus modules (or packages)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#best-practices-for-scripts">Best practices for scripts</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#preventing-import-side-effects">Preventing “import side-effects”</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#future-proofing-your-code">Future-proofing your code</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#best-practices-for-re-usable-functions">Best practices for re-usable functions</a></li>
@@ -329,7 +328,7 @@ Hello, world!
 <li><strong>returns</strong> the square root of its argument (2.0 in this case).</li>
 </ol>
 </div></blockquote>
-<p>(n.b. No need to algorithmically determine the square root! <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">math</span> <span class="pre">import</span> <span class="pre">sqrt</span></code> gives you what you need.)</p>
+<p>(No need to algorithmically determine the square root! <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">math</span> <span class="pre">import</span> <span class="pre">sqrt</span></code> gives you what you need.)</p>
 <p>Now, write a stand-alone script to compute the square root of 16 using your <code class="docutils literal notranslate"><span class="pre">square_root()</span></code> function. Ensure the output is what you expect, and save it as <code class="docutils literal notranslate"><span class="pre">sqrt_16.py</span></code>.</p>
 <p class="last">We will add on to this, so keep this version in a folder called <code class="docutils literal notranslate"><span class="pre">scripting_ex1</span></code>.</p>
 </div>
@@ -379,14 +378,6 @@ You will be sending the code for each of your exercises in this section to your 
 <p class="last">Now run <code class="docutils literal notranslate"><span class="pre">sqrt_40.py</span></code>. What has changed? How would you want to modify <code class="docutils literal notranslate"><span class="pre">sqrt_40.py</span></code> in the future, if it, too, grew to include some useful functions?</p>
 </div>
 </div>
-<div class="section" id="future-proofing-your-code">
-<h3>Future-proofing your code<a class="headerlink" href="#future-proofing-your-code" title="Permalink to this headline">¶</a></h3>
-<p>As discussed in the section on Python 2 vs. Python 3, it is especially important for modules and stand-alone scripts to specify that they are using the newer syntax (that will remain valid going forward to future versions). The place to put the “future imports” is just after the shebang line. Most of your Python files will start just like this:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
-</pre></div>
-</div>
-</div>
 </div>
 <div class="section" id="best-practices-for-re-usable-functions">
 <h2>Best practices for re-usable functions<a class="headerlink" href="#best-practices-for-re-usable-functions" title="Permalink to this headline">¶</a></h2>
@@ -432,6 +423,8 @@ Type:      builtin_function_or_method
 <p><strong>Module names</strong>: Module names should be short, all-lowercase, and (if composed of multiple words) include underscores. Examples: <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">scipy</span></code>, <code class="docutils literal notranslate"><span class="pre">math</span></code>.</p>
 <p><strong>Function names</strong>: Functions (and relatedly, methods on classes) should be <code class="docutils literal notranslate"><span class="pre">lowercase_words_separated_by_underscores</span></code>. This is sometimes called <code class="docutils literal notranslate"><span class="pre">snake_case</span></code>. Yes, this can even apply to acronyms (c.f. <code class="docutils literal notranslate"><span class="pre">numpy.fft.fft</span></code>). Examples: <code class="docutils literal notranslate"><span class="pre">sqrt()</span></code>, <code class="docutils literal notranslate"><span class="pre">write_to()</span></code>, <code class="docutils literal notranslate"><span class="pre">apply_async</span></code>.</p>
 <p><strong>Class names</strong>: Class names are uppercased, and multiple words should each be capitalized to distinguish them from one another. Examples: <code class="docutils literal notranslate"><span class="pre">ThreadedWriter</span></code>, <code class="docutils literal notranslate"><span class="pre">HDUList</span></code>, <code class="docutils literal notranslate"><span class="pre">Instrument</span></code>.</p>
+<p><strong>Global variables</strong>: Variables made <code class="docutils literal notranslate"><span class="pre">global</span></code> and used outside of a single
+function should be all upercase. Examples <code class="docutils literal notranslate"><span class="pre">FILE_PATH</span></code>, <code class="docutils literal notranslate"><span class="pre">BLUE</span></code>, <code class="docutils literal notranslate"><span class="pre">N_ITER</span></code>.</p>
 <p>Regular old variables within your program should be named descriptively, with multiple words separated by underscores (similarly to function and method names).</p>
 </div>
 <div class="section" id="an-introduction-to-multiprocessing">
@@ -499,7 +492,12 @@ Type:      builtin_function_or_method
 </div>
 <p class="last">Compare how long it takes to run with your <code class="docutils literal notranslate"><span class="pre">scripting_ex6</span></code> version. Nice, right?</p>
 </div>
-<p>This is a somewhat contrived example (square roots don’t take long to compute, after all!) but hopefully it gave you some ideas of how to use this to speed up your programs. Multiprocessing is not limited to replacing loops and list-processing constructs with <cite>map()</cite>, though. Consult the Python multiprocessing documentation for the full details: <a class="reference external" href="https://docs.python.org/3.5/library/multiprocessing.html">https://docs.python.org/3.5/library/multiprocessing.html</a></p>
+<p>This is a somewhat contrived example (square roots don’t take long to compute,
+after all!) but hopefully it gave you some ideas of how to use this to speed up
+your programs. Multiprocessing is not limited to replacing loops and
+list-processing constructs with <cite>map()</cite>, though. Consult the <a class="reference external" href="https://docs.python.org/3.5/library/multiprocessing.html">Python
+multiprocessing documentation</a> for the full
+details.</p>
 <div class="note admonition">
 <p class="first admonition-title">Exercise</p>
 <p>As a final exercise for this section on parallelization, consider a data pipeline script that does the following:</p>
@@ -564,7 +562,7 @@ Type:      builtin_function_or_method
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'published 2018-6-26',
+            VERSION:'published 2018-7-13',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

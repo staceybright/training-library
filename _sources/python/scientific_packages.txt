@@ -446,6 +446,23 @@ do the following::
 
    >>> fits.update(infile, data, 1)
 
+You can also use the handy ``with`` method to open FITS files::
+
+   >>> with fits.open(infile) as hdu:
+   ...    print(hdu[0].header['FLSHCORR'])
+
+And just like Python's native ``open`` the file will close when the block
+executes. 
+
+Be warned that opening many FITS files in parallel can wreak havoc. To avoid
+your computer turning into a hissing snake before your very eyes, try opening
+your FITS file with ``.copy()`` -- for example::
+
+   >>> with fits.open(infile) as hdu:
+   ...   hdr = hdu[0].copy()
+   ...   print(hdr['FLSHCORR'])
+
+
 As a word of caution, note that astropy.io.fits reads in FITS images as
 (rows, cols) or (y, x), not (x, y). This is often a 'gotcha' for users
 who are indexing specific areas of the array.
@@ -832,12 +849,37 @@ For a quick reference of all built-in colormaps in Matplotlib, see this `colorma
    Next, apply your favorite colormap to the image. Can you adjust vmin and vmax for this region to get a better dynamic range?
 
 
-Making Attractive Plots
------------------------
+Making Attractive and Inclusive Plots
+-------------------------------------
 
 As you may have noticed, the Matplotlib fonts, colors, and general 
 formatting defaults are rather unattractive. Fortunately, almost 
 everything in Matplotlib is customizable with a little know-how.
+
+Pick Colors that Look Nice and Contrast to the Colorblind
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Many colors that look lovely to you might be difficult for others to see. A
+`report on this very subject <https://personal.sron.nl/~pault/>`_ was prepared
+by Paul Tol, but here's an example optimized color pallet for printing in black
+and white and most color blind viewers (stored in a `Dictionary` -- our new
+favorite Python object!) ::
+
+    colors = {'lblue': '#88CCEE', 'dblue': '#88CCEE', 'lgreen': '#44AA99',
+              'dgreen': '#117733', 'ygreen': '#999933', 'tan': '#DDCC77', 
+              'pank': '#CC6677', 'maroon': '#882255', 'lpurple': '#AA4499'}
+
+You can then feed any item in this dictionary in as a color when you plot::
+
+    x = np.arange(10)
+    for index, color in enumerate(colors):
+        n = index+1
+        plt.scatter(x, n*x**n, color=colors[color], s=25, alpha=.5)
+
+If you are still worried, you can also upload your own figures `here
+<http://www.color-blindness.com/coblis-color-blindness-simulator/>`_ to see if
+they are still readable. 
+
 
 TeXify Your Text
 ^^^^^^^^^^^^^^^^
