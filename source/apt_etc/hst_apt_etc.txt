@@ -2,7 +2,7 @@
 HST APT and ETC
 ***************
 
-| Authors: J. White
+| Authors: J. White, W. Fischer
 |
 | **HST**
 
@@ -71,30 +71,124 @@ proposal. For additional help, see the APT Overview presentation slides.
 Exposure Time Calculator
 ========================
 
-The Exposure Time Calculator (ETC) is a software tool that does exactly what the name implies, and each
-instrument has it's own tool. ETC is a simulator used in helping users of HST or JWST
-instruments figure out what exposure times they need to fulfill certain requirements for
-their science such as Signal to Noise, the type of target they want to observe, background levels, etc.
-It also generates handy plots for understanding the instrument's expected performance under the conditions that are input.
+The Exposure Time Calculator (ETC) is a simulator to help users of HST
+or JWST instruments figure out what exposure time they need to reach a
+particular signal-to-noise ratio (SNR), or, conversely, what
+signal-to-noise ratio they will reach with a particular exposure
+time. It also generates handy plots for understanding the instrument's
+expected performance under the input conditions. Each instrument has
+its own set of tools. Users specify the exact configuration of the
+instrument, and they include details about the source to be observed
+and the expected observing conditions.
+
+STScI staff also use the ETC to estimate whether observations proposed
+by users will violate any of the constraints imposed to protect the
+long-term health of the instrument, such as brightness limits.
+
 
 .. admonition:: Exercise
     :class: note
 
-    In the case of ETC there's not much training that's required. It's a simple form that you
-    fill out based on parameters that you want/expect for your observation.
+    To practice with the ETC, we're going to pretend we're the PI
+    (principal investigator) of HST Program 14729, which used the
+    Cosmic Origins Spectrograph (COS) to obtain far-ultraviolet
+    spectra of quasars. You can get some basic information about this
+    proposal by visiting `its program information page
+    <http://www.stsci.edu/cgi-bin/get-proposal-info?observatory=HST&id=14729>`_. (Change
+    the number at the end of the URL to access similar information
+    about other proposals.)
 
-    Go try it out! Start with the default values. What do you get?
+    Start by going to the `COS spectroscopy ETC
+    <http://etc.stsci.edu/etc/input/cos/spectroscopic/>`_. Note on the
+    side bar that there are four COS ETCs: spectroscopy, imaging, and
+    target acquisition via either spectroscopy or imaging.
 
-    Find your instrument's ETC and submit 3 (default plus two different submissions)
-    different forms with different parameters.
-    Return to your trainer with the following:
+    **First,** select a detector and grating combination and an
+    aperture. COS has a far UV detector with three gratings and a near
+    UV detector with four gratings. Each grating uses a set of
+    predefined central wavelengths (cenwaves). Observers choose a
+    detector, grating, and cenwave to optimize the wavelength range
+    and spectral resolution of their data. For this exercise, select
+    G130M and cenwave 1300. In the dropdown menu, information in
+    parentheses and brackets tells you what wavelengths to expect on
+    detector segments A and B (FUV) or detector stripes A, B, and C
+    (NUV). Make sure the Primary Science Aperture is selected.
 
-        Start with the default values. What do you get?
+    **Second,** specify the exposure parameters. You want to know the
+    SNR reached in an exposure time of 2248 seconds. (After accounting
+    for target acquisition and overheads, the PI concluded he would
+    have about this much time in one HST orbit to observe one of his
+    targets.) Select a wavelength of 1382.64 Å. Use a point source,
+    not an extended source.
 
-        Parameters used (with the fields) for each submission
-        Results page for each submission
-        
-        Any plots that are generated
+    **Third,** choose a spectral distribution. Under "Non-Stellar
+    Objects," choose "QSO (FOS based) [100, 3387 Å (z=0)]." This means
+    the ETC will assume that the object's spectrum resembles that of a
+    generic quasar. Use the default of 0 extinction, but set the
+    redshift to z = 0.114272. Don't add any emission lines.
 
-        OPTIONAL: Note any warnings that you may get. Try to figure out why you got them
-        and how to resolve them
+    **Fourth,** normalize the target flux. Select the second radio
+    button. Enter 17.03918 in the box and change "Vega magnitude" to
+    "AB magnitude." (People routinely forget to choose the right
+    magnitude system.) Select Galex/FUV for the bandpass (next to the
+    words "Typically select AB magnitude above").
+
+    Finally, leave the parts about expected background levels alone.
+
+    Now click "Submit Simulation."
+
+    **Interpreting the Results**
+
+    After submitting the simulation, a results page will load. The
+    most important result is the SNR in the blue box at the
+    top. Version 26.1 of the ETC gives 12.6150. If you are using a
+    more recent version, you may get a slightly different value. This
+    is because the COS sensitivities and dark rates change over time,
+    and the ETC is regularly updated to reflect these changes.
+
+    Below the blue box, there is additional information about the
+    count rate in various regions on the detector. These are of
+    interest in evaluating whether the proposed observation violates
+    any rules designed to prevent COS from observing targets that are
+    bright enough to damage it.
+
+    You can also view plots of different quantities against
+    wavelength. Remember that you requested a signal-to-noise ratio at
+    a specific wavelength. To see the SNR over the entire range, look
+    at the signal-to-noise plot. You should see almost continuous
+    coverage from just below 1150 Å to just below 1450 Å. There is a
+    gap in the middle that corresponds to the gap between the segments
+    of the COS FUV detector. FUVB covers shorter wavelengths, and FUVA
+    covers longer wavelengths. The SNR depends on the input target
+    spectrum (view that plot) and the instrumental throughput (view
+    that plot). Finally, check out the observed target spectrum.
+
+    **Viewing Previous Results**
+
+    Click "Previous calculation results" in the lower left of any ETC
+    page. You'll get a box to enter an exposure ID. Enter 1176351 to
+    view the run we used to create this tutorial. Enter 825911 to view
+    the work of the Program 14729 PI. All the inputs are identical,
+    but, because of time-dependent quantities, the SNR is 12.3849
+    instead of the value given above. This difference is small but
+    worth understanding.
+
+    **A More Advanced Exercise**
+
+    The warmup above was based on Visit 2 of Program 14729. Now look
+    at Visit 3. Obtain the `PDF of the Phase II proposal
+    <http://www.stsci.edu/hst/phase2-public/14729.pdf>`_. This
+    document is a detailed outline of each observation. Scroll to page
+    9. Notice that the grating and cenwave are different for this
+    source, so be sure to update them in the ETC. Find the SNR in the
+    2240 seconds requested by the PI at a wavelength of 1575.61 Å. Use
+    the same spectral model as before, but update the normalization
+    magnitude and the redshift based on information in the PDF table.
+
+    If you get stuck in choosing any of the inputs, view the PI's ETC
+    run. It's number 826065, which you can also see notated in the
+    PDF.
+
+    The SNR you find should be close to the PI's finding of 8.6164,
+    except, again, there may be small differences due to the evolving
+    characteristics of the COS detectors.
