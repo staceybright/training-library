@@ -185,6 +185,11 @@ long-term health of the instrument, such as brightness limits.
     the same spectral model as before, but update the normalization
     magnitude and the redshift based on information in the PDF table.
 
+    You may notice that the redshifts in the table on pages 2 and 3 of
+    their PDF are slightly different from the ones given later in the
+    document. The reason for this is unclear, but the values are close
+    enough for the purpose of this exercise.
+    
     If you get stuck in choosing any of the inputs, view the PI's ETC
     run. It's number 826065, which you can also see notated in the
     PDF.
