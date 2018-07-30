@@ -57,7 +57,7 @@
             
             
               <div class="version">
-                published 2018-7-13
+                published 2018-7-30
               </div>
             
           
@@ -347,34 +347,60 @@ div.nboutput div.output_area.stderr {
 </style>
 <div class="section" id="Using-Python-with-HST-Spectral-Data">
 <h1>Using Python with HST Spectral Data<a class="headerlink" href="#Using-Python-with-HST-Spectral-Data" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="1.-Retrieving-Data-from-MAST">
-<h2>1. Retrieving Data from MAST<a class="headerlink" href="#1.-Retrieving-Data-from-MAST" title="Permalink to this headline">¶</a></h2>
-<p><strong>*First, make a directory in your central store to put your data in.*</strong></p>
-<p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">/user/myname</span> <span class="pre">mkdir</span> <span class="pre">spect_training</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">spect_training</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">mast_data</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">/user/jotaylor/new_hire_training/*fits</span> <span class="pre">.</span></code></p>
-<p>For HST spectral data, there are three types of files: * raw * COS:
+<blockquote>
+<div>A very brief introduction to HST spectral data</div></blockquote>
+<p>For HST spectral data, there are four types of files: * raw * COS:
 <code class="docutils literal notranslate"><span class="pre">rawtag</span></code>, <code class="docutils literal notranslate"><span class="pre">rawaccum</span></code>, <code class="docutils literal notranslate"><span class="pre">rawacq</span></code> * STIS: <code class="docutils literal notranslate"><span class="pre">raw</span></code>, <code class="docutils literal notranslate"><span class="pre">tag</span></code>, <code class="docutils literal notranslate"><span class="pre">wav</span></code>
 * support * <code class="docutils literal notranslate"><span class="pre">asn</span></code>, <code class="docutils literal notranslate"><span class="pre">spt</span></code>, <code class="docutils literal notranslate"><span class="pre">trl</span></code>, and more * intermediate *
 <code class="docutils literal notranslate"><span class="pre">corrtag</span></code>, <code class="docutils literal notranslate"><span class="pre">crj</span></code>, <code class="docutils literal notranslate"><span class="pre">flt</span></code>, and more * products * <code class="docutils literal notranslate"><span class="pre">x1d</span></code>,
 <code class="docutils literal notranslate"><span class="pre">x1dsum</span></code></p>
 <p>Raw data has undergone no processing besides generic conversion from
-spacecraft data to FITS. Intermediate products are files produced by
-each instrument’s calibration pipeline on the way to extracting a
+spacecraft data to FITS. Support files contain information about
+spacecraft telemetry (spt), exposures that should be associated (asn),
+pipeline processing (trl), etc. Intermediate products are files produced
+by each instrument’s calibration pipeline on the way to extracting a
 spectrum. Products are fully calibrated, extracted 1-D spectra and
 typically have <code class="docutils literal notranslate"><span class="pre">x1d</span></code> in the extension. See the Instrument Data
 Handbooks for a full list of all data file types.</p>
+<div class="section" id="1.-Retrieving-the-Required-Data">
+<h2>1. Retrieving the Required Data<a class="headerlink" href="#1.-Retrieving-the-Required-Data" title="Permalink to this headline">¶</a></h2>
+<p><strong>First, make a directory in your central store to put your data in.</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">/user/myname</span> <span class="pre">mkdir</span> <span class="pre">spect_training</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">spect_training</span></code></p>
+<p>There are 2 options for obtaining the data necessary for this tutorial.
+For individuals working through this assignment, we recommend using
+Option 2 to gain some experience working with MAST (the Mikulski Archive
+for Space Telescopes). If you are working through this in a group during
+a 1 hr training session, Option 1 of copying the files from a training
+directory on central store is recommended so that more time is focused
+on the spectroscopy than on resolving any difficulties with MAST.</p>
+<blockquote>
+<div>Option 1: Copy from directory on central store</div></blockquote>
+<p>Note that when using this option it is possible that the file headers
+have become out of date with respect to what the calibration pipelines
+are expecting (particularly calcos, since it is under active
+development). This can cause problems with the portions of this tutorial
+where you run the data through the pipelines.</p>
+<p><code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">/grp/hst/riab/training/spectroscopy/*.fits</span> <span class="pre">.</span></code></p>
+<blockquote>
+<div>Option 2: Download data from MAST</div></blockquote>
 <p>To retrieve STIS data by its filename, simply enter the name in
 “Dataset” field in a <a class="reference external" href="http://archive.stsci.edu/hst/search.php">MAST
 search</a>. For COS data,
 however, you must search by the individual dataset’s association name
 (more info
 <a class="reference external" href="http://www.stsci.edu/hst/cos/documents/handbooks/datahandbook/ch2_cos_data5.html#460268">here</a>).</p>
-<p><strong>*Retrieve two datasets, lbgu17qnq (association lbgu17010) and
-o8k401010 from the archive.*</strong> Be sure to retrieve both un-calibrated
-and calibrated products.</p>
-<p><code class="docutils literal notranslate"><span class="pre">ls</span></code></p>
+<p><strong>Retrieve two datasets, lbgu17qnq (association lbgu17010) and o8k401010
+from the archive.</strong> Be sure to retrieve both un-calibrated and
+calibrated products. Note that each instrument on HST (past and present)
+is assigned a letter of the alphabet, and all data files produced by
+that instrument begin with this letter. These are l for COS and o for
+STIS.</p>
+<p>At this point, we will assume that the data are located in the same
+directory where you are running this notebook. If not, cd into the
+directory where the data are located. Note that this is important for
+later, as trying to run the calstis pipeline from elsewhere can cause
+problems where it cannot find the necessary reference files.</p>
 <p>First, let’s look at the primary headers and identify some important
 parameters.</p>
 <div class="nbinput nblast docutils container">
@@ -393,7 +419,7 @@ parameters.</p>
 </pre></div>
 </div>
 </div>
-<p><strong>*Print the STIS header as well.*</strong></p>
+<p><strong>Print the STIS header as well.</strong></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [ ]:
@@ -401,6 +427,7 @@ parameters.</p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># your code here</span>
+
 </pre></div>
 </div>
 </div>
@@ -418,9 +445,9 @@ in astropy.</p>
 </pre></div>
 </div>
 </div>
-<p>Let’s get some useful information about the datasets. <strong>*Use a loop like
+<p>Let’s get some useful information about the datasets. <strong>Use a loop like
 the one below, but add any other keywords you think should be included.
-Make sure the keywords are identical between instruments.*</strong></p>
+Make sure the keywords are identical between instruments.</strong></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [ ]:
@@ -490,8 +517,10 @@ to set these environment variables now.</p>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Run this cell.</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;oref&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/grp/hst/cdbs/oref/&quot;</span>
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;lref&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/grp/hst/cdbs/lref/&quot;</span>
+<span class="c1">#Note the environment variable names begin with their respective instrument letters</span>
+<span class="c1">#i.e., o and l for STIS and COS, respectively</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;oref&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/grp/crds/hst/references/hst/&#39;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;lref&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;/grp/crds/hst/references/hst/&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -566,13 +595,20 @@ have.</p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Run this cell.</span>
-<span class="c1"># calcos.calcos(cos_asn, outdir=&quot;cos_backcorr_omit&quot;)</span>
-<span class="n">cp</span> <span class="o">/</span><span class="n">user</span><span class="o">/</span><span class="n">jotaylor</span><span class="o">/</span><span class="n">new_hire_training</span><span class="o">/</span><span class="n">cos_backcorr_omit</span><span class="o">/*</span> <span class="o">/</span><span class="n">user</span><span class="o">/</span><span class="n">myname</span><span class="o">/</span><span class="n">spect_training</span><span class="o">/</span><span class="n">cos_backcorr_omit</span>
+<span class="n">cos_asn</span><span class="o">=</span><span class="s1">&#39;lbgu17010_asn.fits&#39;</span>
+<span class="n">calcos</span><span class="o">.</span><span class="n">calcos</span><span class="p">(</span><span class="n">cos_asn</span><span class="p">,</span> <span class="n">outdir</span><span class="o">=</span><span class="s2">&quot;cos_backcorr_omit&quot;</span><span class="p">)</span>
+
+<span class="c1">#If you copied the data files from the central store directory instead of downloading them from MAST, it is possible</span>
+<span class="c1">#that the header keywords are out-of-date with respect to what the current version of calcos expects. You can either</span>
+<span class="c1">#go back and download the datasets from MAST, or use the following command to copy a previously processed data set</span>
+<span class="c1">#from central store</span>
+
+<span class="c1">#cp /grp/hst/riab/training/spectroscopy/cos_backcorr_omit/* /user/myname/spect_training/cos_backcorr_omit</span>
 </pre></div>
 </div>
 </div>
-<p><strong>*Change the BACKCORR switch for the STIS data and calibrate the data.
-You mut first create the output directory for CalSTIS.*</strong></p>
+<p><strong>Change the BACKCORR switch for the STIS data and calibrate the data.
+You mut first create the output directory for CalSTIS.</strong></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [ ]:
@@ -580,6 +616,7 @@ You mut first create the output directory for CalSTIS.*</strong></p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># your code here to change BACKCORR</span>
+
 </pre></div>
 </div>
 </div>
@@ -591,15 +628,21 @@ You mut first create the output directory for CalSTIS.*</strong></p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Calibrate the STIS raw file, and be sure to specify a trailing slash for the output directory.</span>
+
+<span class="c1">#Make sure that you are running this from the same directory where the STIS data files are located</span>
+<span class="c1">#Otherwise, calstis may not be able to find the necessary reference files. An output of &quot;0&quot; means that calstis</span>
+<span class="c1">#succeeded, while an output of &quot;1&quot; means that it failed. The argument verbose=True can be added to print more details.</span>
+
 <span class="n">calstis</span><span class="o">.</span><span class="n">calstis</span><span class="p">(</span><span class="n">stis_raw</span><span class="p">,</span> <span class="n">outroot</span><span class="o">=</span><span class="s2">&quot;stis_backcorr_omit/&quot;</span><span class="p">)</span>
+
+<span class="c1">#cp /grp/hst/riab/training/spectroscopy/stis_backcorr_omit/* /user/myname/spect_training/stis_backcorr_omit</span>
 </pre></div>
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">corrtag</span></code> files are very useful, but they are only produced for COS
 data. Instead, let’s look at the unmodified <code class="docutils literal notranslate"><span class="pre">x1d</span></code> products for both
-COS and STIS. <strong>*Explore the 1st extension data for the original COS and
-STIS ``x1d`` files, looking at the columns and names as we did
-before.*</strong></p>
+COS and STIS. <strong>Explore the 1st extension data for the original COS and
+STIS ``x1d`` files, looking at the columns and names as we did before.</strong></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [ ]:
@@ -621,6 +664,7 @@ before.*</strong></p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># your code here</span>
+
 </pre></div>
 </div>
 </div>
@@ -638,6 +682,11 @@ before.*</strong></p>
 </pre></div>
 </div>
 </div>
+<p>You can see that the COS x1d file contains two spectra, one each for the
+A and B segments of the FUV detector, while the STIS x1d file contains a
+single spectrum. Both files store the wavelength and flux as 2D arrays.
+The following cell will combine the 2 COS spectra, and collapse the
+various arrays to 1D.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [ ]:
@@ -655,8 +704,8 @@ before.*</strong></p>
 </pre></div>
 </div>
 </div>
-<p><strong>*Read in the BACKCORR=OMIT COS and STIS data and assign the wavelength
-and flux to arrays.*</strong></p>
+<p><strong>Read in the BACKCORR=OMIT COS and STIS data and assign the wavelength
+and flux to arrays.</strong></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [ ]:
@@ -664,6 +713,7 @@ and flux to arrays.*</strong></p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># your code here</span>
+
 </pre></div>
 </div>
 </div>
@@ -704,7 +754,7 @@ and flux to arrays.*</strong></p>
 </pre></div>
 </div>
 </div>
-<p><strong>*Now make a similar plot for STIS.*</strong></p>
+<p><strong>Now make a similar plot for STIS.</strong></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [ ]:
@@ -712,13 +762,14 @@ and flux to arrays.*</strong></p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># your code here</span>
+
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="Interpolating-Data">
 <h2>Interpolating Data<a class="headerlink" href="#Interpolating-Data" title="Permalink to this headline">¶</a></h2>
-<p><strong>*Make a very simple plot with both the COS and STIS spectra.*</strong></p>
+<p><strong>Make a very simple plot with both the COS and STIS spectra.</strong></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [ ]:
@@ -726,7 +777,10 @@ and flux to arrays.*</strong></p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Use plt.plot instead of plt.subplots</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">color</span><span class="o">=...</span><span class="p">)</span>
+<span class="c1"># e.g. plt.plot(wl, flux, color=...)</span>
+
+<span class="c1">#your code here</span>
+
 </pre></div>
 </div>
 </div>
@@ -734,9 +788,9 @@ and flux to arrays.*</strong></p>
 quantitatively unless both datasets have the same wavelength scale.
 Interpolating one spectrum onto another’s wavelength scale will allow
 you to do far more useful calculations such as dividing, subtracting,
-etc. <strong>*Follow the example below to perform a linear interpolation of
-the STIS x1d file onto the wavelength scale of the COS x1d (use the
-original files, not the BACKCORR=OMIT files).*</strong></p>
+etc. <strong>Follow the example below to perform a linear interpolation of the
+STIS x1d file onto the wavelength scale of the COS x1d (use the original
+files, not the BACKCORR=OMIT files).</strong></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [ ]:
@@ -755,11 +809,12 @@ original files, not the BACKCORR=OMIT files).*</strong></p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># your code here</span>
+
 </pre></div>
 </div>
 </div>
-<p><strong>*Now divide the two spectra by each other to see where the two differ.
-Make a plot of the product.*</strong></p>
+<p><strong>Now divide the two spectra by each other to see where the two differ.
+Make a plot of the product.</strong></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [ ]:
@@ -767,6 +822,18 @@ Make a plot of the product.*</strong></p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># your code here</span>
+
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># your code here</span>
+
 </pre></div>
 </div>
 </div>
@@ -774,10 +841,10 @@ Make a plot of the product.*</strong></p>
 <div class="section" id="Smoothing-Data">
 <h2>Smoothing Data<a class="headerlink" href="#Smoothing-Data" title="Permalink to this headline">¶</a></h2>
 <p>The COS data we have is at a much higher resolution than that of STIS.
-<strong>*Smooth the original COS data with a boxcar filter. Try 3 different
-box sizes: 6, 11, and 21. Make a plot of the original and all smoothed
+<strong>Smooth the original COS data with a boxcar filter. Try 3 different box
+sizes: 6, 11, and 21. Make a plot of the original and all smoothed
 spectra. (Hint: try a loop) (Double hint: try xlim(1220, 1245) and
-ylim(-0.1e-12, 0.7e-12)*</strong></p>
+ylim(-0.1e-12, 0.7e-12)</strong></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [ ]:
@@ -796,19 +863,23 @@ ylim(-0.1e-12, 0.7e-12)*</strong></p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># your code here</span>
+
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="Computing-SNR">
-<h2>Computing SNR<a class="headerlink" href="#Computing-SNR" title="Permalink to this headline">¶</a></h2>
-<p>The signal-to-noise ratio, SNR, is an important statistic of spectra.
+<div class="section" id="Computing-the-signal-to-noise-ratio-(S/N)">
+<h2>Computing the signal to noise ratio (S/N)<a class="headerlink" href="#Computing-the-signal-to-noise-ratio-(S/N)" title="Permalink to this headline">¶</a></h2>
+<p>The signal-to-noise ratio, S/N or SNR (although SNR is also used for
+supernova remnant in astronomy), is an important statistic of spectra.
 Signal can be approximated with a low-order polynomial fit to a
 continuum region where there are no absorption or emission features.
 Noise can be approximated as the standard deviation of the fit
-subtracted from the data. <strong>*Smooth the COS data using boxcar=6, and
-STIS data using boxcar=2. Then, follow the example below to determine
-the average SNR for the COS and STIS data.*</strong></p>
+subtracted from the data. <strong>Smooth the COS data using boxcar=6, and STIS
+data using boxcar=2. Then, follow the example below to determine the
+average SNR for the COS and STIS data.</strong></p>
+<p>Hint: Make sure to perform your fit and S/N calculation over a line-free
+region.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [ ]:
@@ -831,6 +902,7 @@ the average SNR for the COS and STIS data.*</strong></p>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># your code here</span>
+
 </pre></div>
 </div>
 </div>
@@ -870,7 +942,7 @@ the average SNR for the COS and STIS data.*</strong></p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'published 2018-7-13',
+            VERSION:'published 2018-7-30',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

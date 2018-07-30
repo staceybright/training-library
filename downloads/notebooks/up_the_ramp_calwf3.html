@@ -57,7 +57,7 @@
             
             
               <div class="version">
-                published 2018-7-13
+                published 2018-7-30
               </div>
             
           
@@ -366,7 +366,7 @@ calibration file downloaded from the archive should work.</p>
 <p>Run through the code cells in the rest of this document, then try the
 exercise in the box immediately below.</p>
 <div class="admonition note">
-<strong>Exercise:</strong> Plot counts vs. total integration time from the IMA file
+<strong>Exercise:</strong> Plot counts vs.&nbsp;total integration time from the IMA file
 for the pixel in the tutorial. Describe the behavior of the signal. How
 is the pixel used for the final slope calculation?</div>
 <div class="admonition note">
@@ -633,7 +633,7 @@ The following tasks in the wfc3tools package can be run with TEAL:
 <ul class="simple">
 <li>Header Switch: DQICORR</li>
 <li>Header Keywords Updated: None</li>
-<li>Reference Files: BPIXTAB (*_bpx.fits)</li>
+<li>Reference Files: BPIXTAB (<a href="#id1"><span class="problematic" id="id2">*</span></a>_bpx.fits)</li>
 </ul>
 <p>DQICORR populates the data quality (DQ) array in all IR readouts by
 reading a table of known bad pixels for the detector, stored in the ‘Bad
@@ -690,7 +690,7 @@ calwf3 complete: output saved in icol26k3q_ima.fits
 <ul class="simple">
 <li>Header Switch: ZSIGCORR</li>
 <li>Header Keywords Updated: None</li>
-<li>Reference Files: DARKFILE (*_drk.fits), NLINFILE (*_lin.fits)</li>
+<li>Reference Files: DARKFILE (<a href="#id3"><span class="problematic" id="id4">*</span></a>_drk.fits), NLINFILE (<a href="#id5"><span class="problematic" id="id6">*</span></a>_lin.fits)</li>
 </ul>
 <p>At the beginning of an IR observation the detector pixels are reset to
 the bias level and then read out to record that bias level. An interval
@@ -891,7 +891,7 @@ calwf3 complete: output saved in icol26k3q_ima.fits
 <ul class="simple">
 <li>Header Switch: DARKCORR</li>
 <li>Header Keywords Updated: MEANDARK</li>
-<li>Reference File: DARKFILE (*_drk.fits)</li>
+<li>Reference File: DARKFILE (<a href="#id7"><span class="problematic" id="id8">*</span></a>_drk.fits)</li>
 </ul>
 <p>DARKCORR subtracts the detector dark current from the science data. Due
 to potential non-linearities in some of the signal components, such as
@@ -905,8 +905,8 @@ MultiAccum dark reference file is subtracted read-by-read from the stack
 of science image readouts. Thus there is an exact match in the timings
 and other characteristics of the dark image that is subtracted from each
 science readout. The DARKFILE reference file must have the same values
-for the DETECTOR, CCDAMP, CCDGAIN, SAMP_SEQ, and SUBTYPE keywords as
-the science image.</p>
+for the DETECTOR, CCDAMP, CCDGAIN, SAMP_SEQ, and SUBTYPE keywords as the
+science image.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre>
 <span></span>In [15]:
@@ -949,7 +949,7 @@ calwf3 complete: output saved in icol26k3q_ima.fits
 <ul class="simple">
 <li>Header Switch: BLEVCORR</li>
 <li>Header Keywords Updated: MEANBLEV</li>
-<li>Reference Files: OSCNTAB (*_osc.fits)</li>
+<li>Reference Files: OSCNTAB (<a href="#id9"><span class="problematic" id="id10">*</span></a>_osc.fits)</li>
 </ul>
 <p>BLEVCORR uses the reference pixels located around the perimeter of the
 IR detector to track and remove changes in the bias level that occur
@@ -1015,7 +1015,7 @@ calwf3 complete: output saved in icol26k3q_ima.fits
 <ul class="simple">
 <li>Header Switch: NLINCORR</li>
 <li>Header Keywords Updated: None</li>
-<li>Reference File: NLINFILE (*_lin.fits)</li>
+<li>Reference File: NLINFILE (<a href="#id11"><span class="problematic" id="id12">*</span></a>_lin.fits)</li>
 </ul>
 <p>NLINCORR corrects the integrated counts in the science images for the
 non-linear response of the detector and flags pixels that go into
@@ -1096,8 +1096,8 @@ calwf3 complete: output saved in icol26k3q_ima.fits
 <ul class="simple">
 <li>Header Switch: FLATCORR</li>
 <li>Header Keywords Updated: None</li>
-<li>Reference Files:
-PFLTFILE(*_pfl.fits),LFLTFILE(*_lfl.fits),DFLTFILE (*_dfl.fits)</li>
+<li>Reference Files: PFLTFILE(<a href="#id13"><span class="problematic" id="id14">*</span></a>_pfl.fits),LFLTFILE(<a href="#id15"><span class="problematic" id="id16">*</span></a>_lfl.fits),DFLTFILE
+(<a href="#id17"><span class="problematic" id="id18">*</span></a>_dfl.fits)</li>
 </ul>
 <p>FLATCORR corrects for pixel-to-pixel and large-scale sensitivity
 variations across the detector by dividing the science images by one or
@@ -1213,7 +1213,7 @@ calwf3 complete: output saved in icol26k3q_ima.fits
 <li>Header Switch: PHOTCORR</li>
 <li>Header Keywords Updated: PHOTMODE, PHOTFLAM, PHOTFNU, PHOTZPT,
 PHOTPLAM, PHOTBW</li>
-<li>Reference Files: GRAPHTAB (*_tmg.fits), COMPTAB (*_tmc.fits)</li>
+<li>Reference Files: GRAPHTAB (<a href="#id19"><span class="problematic" id="id20">*</span></a>_tmg.fits), COMPTAB (<a href="#id21"><span class="problematic" id="id22">*</span></a>_tmc.fits)</li>
 </ul>
 <p>Before photometry can be derived from WFC3 observations, a
 transformation to absolute flux units must be done. calwf3 follows the
@@ -1542,7 +1542,7 @@ calwf3 complete: output saved in icol26k3q_ima.fits
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'published 2018-7-13',
+            VERSION:'published 2018-7-30',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

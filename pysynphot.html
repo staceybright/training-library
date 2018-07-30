@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                published 2018-7-13
+                published 2018-7-30
               </div>
             
           
@@ -381,14 +381,14 @@ June 19, 2018</p>
 <div class="section" id="Introduction">
 <h2>Introduction<a class="headerlink" href="#Introduction" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="http://pysynphot.readthedocs.io/">Astrolib PySynphot</a> (hereafter
-referred to as <code class="docutils literal notranslate"><span class="pre">pysynphot</span></code>; Lim et al. 2015) is a Python package and
+referred to as <code class="docutils literal notranslate"><span class="pre">pysynphot</span></code>; Lim et al.&nbsp;2015) is a Python package and
 an object oriented replacement for STSDAS SYNPHOT synthetic photometry
 package in IRAF. <code class="docutils literal notranslate"><span class="pre">pysynphot</span></code> simulates photometric data and spectra as
 they are observed with the <em>Hubble Space Telescope</em> (<em>HST</em>). It allows
 for much easier integration with other Python code when compared to
 using Synphot via PyRAF, which is no longer supported by STScI. It can
 also be used for the <em>James Webb Space Telescope</em> (<em>JWST</em>) with users’
-own data files (e.g. filter throughputs) and reference data. The current
+own data files (e.g.&nbsp;filter throughputs) and reference data. The current
 distribution of <code class="docutils literal notranslate"><span class="pre">pysynphot</span></code> does not support <em>JWST</em> observing modes in
 a similar manner as <em>HST</em> because the necessary <em>JWST</em> data files are
 not yet available for public distribution. This tutorial will cover the
@@ -410,9 +410,9 @@ your solutions to your trainer.</p>
 separately by the Calibration Reference Data System
 (<a class="reference external" href="http://www.stsci.edu/hst/observatory/crds/throughput.html">CRDS</a>).
 These files are required for calculations involving <em>HST</em> bandpasses.
-The path to these files is identified by PYSYN_CDBS variable. Inside
-the STScI firewall, you simply have to point PYSYN_CDBS to the path. In
-a bash shell, this is accomplished with:</p>
+The path to these files is identified by PYSYN_CDBS variable. Inside the
+STScI firewall, you simply have to point PYSYN_CDBS to the path. In a
+bash shell, this is accomplished with:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">PYSYN_CDBS</span><span class="o">=</span><span class="s2">&quot;/grp/hst/cdbs/&quot;</span>
 </pre></div>
 </div>
@@ -424,18 +424,17 @@ Computer</a>
 tutorial for more information.</p>
 <p>All the information that <code class="docutils literal notranslate"><span class="pre">pysynphot</span></code> needs to compute the throughput
 of an <em>HST</em> instrument mode is contained within three types of data
-files: *_tmg.fits, *_tmc.fits, and *_tmt.fits. The master graph
-table (tmg) describes all the possible light paths through the telescope
-and instruments. It describes which component files should be combined
-to find the throughput of the instrument configuration. Thermal
-component lookup table (tmt) contains the full directory path and name
-of each component thermal element to be used: in other words, it is the
-lookup table for <em>HST</em> component thermal characteristics. Master
-component lookup table (tmc) contains the full directory path and name
-of each component throughput table to be used. These files get updated
-when new components are added or replaced, keywords are edited, or when
-a new thermal emissivity or throughput table is delivered to the
-database.</p>
+files: *_tmg.fits, *_tmc.fits, and *_tmt.fits. The master graph table
+(tmg) describes all the possible light paths through the telescope and
+instruments. It describes which component files should be combined to
+find the throughput of the instrument configuration. Thermal component
+lookup table (tmt) contains the full directory path and name of each
+component thermal element to be used: in other words, it is the lookup
+table for <em>HST</em> component thermal characteristics. Master component
+lookup table (tmc) contains the full directory path and name of each
+component throughput table to be used. These files get updated when new
+components are added or replaced, keywords are edited, or when a new
+thermal emissivity or throughput table is delivered to the database.</p>
 </div>
 <div class="section" id="Construct-and-Plot-a-Spectrum">
 <h2>Construct and Plot a Spectrum<a class="headerlink" href="#Construct-and-Plot-a-Spectrum" title="Permalink to this headline">¶</a></h2>
@@ -1038,7 +1037,7 @@ your trainer for evaluation.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'published 2018-7-13',
+            VERSION:'published 2018-7-30',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
