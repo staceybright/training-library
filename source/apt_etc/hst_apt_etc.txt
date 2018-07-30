@@ -96,7 +96,9 @@ long-term health of the instrument, such as brightness limits.
     proposal by visiting `its program information page
     <http://www.stsci.edu/cgi-bin/get-proposal-info?observatory=HST&id=14729>`_. (Change
     the number at the end of the URL to access similar information
-    about other proposals.)
+    about other proposals.) For this exercise, we are going to
+    estimate the SNR obtained in one orbit for the quasar 7C1138,
+    which is Visit 02 of Program 14729.
 
     Start by going to the `COS spectroscopy ETC
     <http://etc.stsci.edu/etc/input/cos/spectroscopic/>`_. Note on the
@@ -108,18 +110,18 @@ long-term health of the instrument, such as brightness limits.
     UV detector with four gratings. Each grating uses a set of
     predefined central wavelengths (cenwaves). Observers choose a
     detector, grating, and cenwave to optimize the wavelength range
-    and spectral resolution of their data. For this exercise, select
-    G130M and cenwave 1300. In the dropdown menu, information in
-    parentheses and brackets tells you what wavelengths to expect on
-    detector segments A and B (FUV) or detector stripes A, B, and C
-    (NUV). Make sure the Primary Science Aperture is selected.
+    and spectral resolution of their data. For this exercise, we are
+    going to select G130M and cenwave 1300. In the dropdown menu,
+    information in parentheses and brackets tells you what wavelengths
+    to expect on detector segments A and B (FUV) or detector stripes
+    A, B, and C (NUV). Make sure the Primary Science Aperture is
+    selected.
 
     **Second,** specify the exposure parameters. You want to know the
-    SNR reached in an exposure time of 2248 seconds. (After accounting
-    for target acquisition and overheads, the PI concluded he would
-    have about this much time in one HST orbit to observe one of his
-    targets.) Select a wavelength of 1382.64 Å. Use a point source,
-    not an extended source.
+    SNR reached in an exposure time of 2176 seconds. (After accounting
+    for target acquisition and overheads, this much time is available
+    in one HST orbit to observe 7C1138.) Enter a wavelength of
+    1382.64 Å. Use a point source, not an extended source.
 
     **Third,** choose a spectral distribution. Under "Non-Stellar
     Objects," choose "QSO (FOS based) [100, 3387 Å (z=0)]." This means
@@ -141,7 +143,7 @@ long-term health of the instrument, such as brightness limits.
 
     After submitting the simulation, a results page will load. The
     most important result is the SNR in the blue box at the
-    top. Version 26.1 of the ETC gives 12.6150. If you are using a
+    top. Version 26.1 of the ETC gives 12.4113. If you are using a
     more recent version, you may get a slightly different value. This
     is because the COS sensitivities and dark rates change over time,
     and the ETC is regularly updated to reflect these changes.
@@ -166,24 +168,23 @@ long-term health of the instrument, such as brightness limits.
     **Viewing Previous Results**
 
     Click "Previous calculation results" in the lower left of any ETC
-    page. You'll get a box to enter an exposure ID. Enter 1176351 to
+    page. You'll get a box to enter an exposure ID. Enter 1179845 to
     view the run we used to create this tutorial. Enter 825911 to view
-    the work of the Program 14729 PI. All the inputs are identical,
-    but, because of time-dependent quantities, the SNR is 12.3849
-    instead of the value given above. This difference is small but
-    worth understanding.
+    the work of the Program 14729 PI. The inputs are identical, except
+    the exposure time is a bit different, and the SNR is 12.3849
+    instead of the value given above.
 
     **A More Advanced Exercise**
 
-    The warmup above was based on Visit 2 of Program 14729. Now look
-    at Visit 3. Obtain the `PDF of the Phase II proposal
+    The warmup above was based on Visit 02 of Program 14729. Now look
+    at Visit 03. Obtain the `PDF of the Phase II proposal
     <http://www.stsci.edu/hst/phase2-public/14729.pdf>`_. This
     document is a detailed outline of each observation. Scroll to page
     9. Notice that the grating and cenwave are different for this
-    source, so be sure to update them in the ETC. Find the SNR in the
-    2240 seconds requested by the PI at a wavelength of 1575.61 Å. Use
-    the same spectral model as before, but update the normalization
-    magnitude and the redshift based on information in the PDF table.
+    source, so be sure to update them in the ETC. Find the SNR in 2072
+    seconds at a wavelength of 1575.61 Å. Use the same spectral model
+    as before, but update the normalization magnitude and the redshift
+    based on information in the PDF table.
 
     You may notice that the redshifts in the table on pages 2 and 3 of
     their PDF are slightly different from the ones given later in the
@@ -195,5 +196,6 @@ long-term health of the instrument, such as brightness limits.
     PDF.
 
     The SNR you find should be close to the PI's finding of 8.6164,
-    except, again, there may be small differences due to the evolving
-    characteristics of the COS detectors.
+    except, again, there may be a small difference due to the slightly
+    different exposure time and the evolving characteristics of the
+    COS detectors.
