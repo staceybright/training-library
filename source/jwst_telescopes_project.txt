@@ -25,7 +25,7 @@ actual planned process. Note that the algorithms discussed here are
 basic in implementation and do not represent the state-of-the-art
 designs found in the JWST Wavefront Sensing software.
 
-You can download WebbPSF at: http://www.stsci.edu/jwst/software/webbpsf
+You can download WebbPSF at: https://jwst.stsci.edu/science-planning/proposal-planning-toolbox/psf-simulation-tool-webbpsf
 
 For Problem 2, you can download the pupil and an OPD at:
 ``/grp/jwst/wit/miri/lajoie``
