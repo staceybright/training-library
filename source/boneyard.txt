@@ -2,7 +2,7 @@
 Retired topics
 ##############
 
-These topics have been retired because there is nobody to actively maintain them, or they are no longer recommended. They may still be useful for your training. 
+These topics have been retired because they are either unsupported, or they are no longer recommended. However, they may still be useful references. 
 .. toctree::
    :maxdepth: 2
 
